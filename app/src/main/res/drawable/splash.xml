@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/themeColor" />
+    <item android:drawable="@drawable/icon_maskable_64" android:gravity="center" />
+    <item android:drawable="@drawable/ic_splash_please_wait" android:gravity="top" />
+</layer-list>
