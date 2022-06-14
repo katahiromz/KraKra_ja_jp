@@ -65,10 +65,6 @@ class MainActivity : AppCompatActivity() {
             return true
         }
 
-        override fun onReceivedSslError(view: WebView?, handler: SslErrorHandler?, error: SslError?) {
-            handler?.proceed()
-        }
-
         override fun onPageFinished(view: WebView?, url: String?) {
             super.onPageFinished(view, url)
             if (!mainActivity.loaded) {
