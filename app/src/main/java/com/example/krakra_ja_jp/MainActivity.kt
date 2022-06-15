@@ -62,11 +62,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
         super.onStart()
     }
 
-    // ValueCallback<String>
-    override fun onReceiveValue(value: String) {
-        resultString = value
-    }
-
     fun showPopup() {
         // TODO:
     }
@@ -141,5 +136,10 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
     fun executeScript(script: String) {
         // onReceiveValue will receive value
         webView?.evaluateJavascript(script, this)
+    }
+
+    // ValueCallback<String>
+    override fun onReceiveValue(value: String) {
+        resultString = value
     }
 }
