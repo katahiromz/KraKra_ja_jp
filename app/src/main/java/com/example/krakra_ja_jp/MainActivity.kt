@@ -15,17 +15,17 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     var loaded : Boolean = false
     var thread : MyThread? = null
     var resultString : String = ""
-    var url : String = "https://katahiromz.github.io/saimin/"
     var tts : TextToSpeech? = null
     var speechReady : Boolean = false
+    val url : String = "https://katahiromz.github.io/saimin/"
 
     fun init() {
         Log.d("MainActivity", "init")
         // get version info
-        var appName : String = this.packageName
+        val appName : String = this.packageName
         var pm : PackageManager = this.packageManager
         var pi : PackageInfo = pm.getPackageInfo(appName, PackageManager.GET_META_DATA)
-        var versionName : String = pi.versionName
+        val versionName : String = pi.versionName
 
         webView = findViewById(R.id.webview)
 
@@ -65,9 +65,9 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     fun speechText(text: String) {
         if (speechReady && tts != null) {
             var params = Bundle()
-            var volume = 0.5f
-            var speed = 0.3f
-            var pitch = 0.8f
+            val volume = 0.5f
+            val speed = 0.3f
+            val pitch = 0.8f
             params.putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME, volume)
             tts!!.setPitch(pitch)
             tts!!.setSpeechRate(speed)
@@ -136,19 +136,21 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
         override fun onConsoleMessage(consoleMessage: ConsoleMessage?): Boolean {
             if (consoleMessage != null) {
-                var msg : String = consoleMessage.message().toString()
+                val msg : String = consoleMessage.message().toString()
                 if (BuildConfig.DEBUG) {
-                    var line = consoleMessage.lineNumber().toString()
-                    var src = consoleMessage.sourceId().toString()
+                    val line = consoleMessage.lineNumber().toString()
+                    val  src = consoleMessage.sourceId().toString()
                     Log.d("console","$msg at Line $line of $src")
                 }
-                if (msg == "{{cancelSpeech}}") {
-                    mainActivity.speechText("")
-                } else {
-                    var regExp : Regex = Regex("""\{\{speechLoop::(.*)\}\}""")
-                    var results = regExp.matchEntire(msg)
-                    if (results != null) {
-                        mainActivity.speechText(results.groupValues[1].repeat(256))
+                if (msg.get(0) == '{') {
+                    if (msg == "{{cancelSpeech}}") {
+                        mainActivity.speechText("")
+                    } else {
+                        val regex1 : Regex = Regex("""\{\{speechLoop::(.*)\}\}""")
+                        var results = regex1.matchEntire(msg)
+                        if (results != null) {
+                            mainActivity.speechText(results.groupValues[1].repeat(256))
+                        }
                     }
                 }
             }
