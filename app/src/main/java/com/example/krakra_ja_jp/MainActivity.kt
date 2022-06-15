@@ -1,24 +1,14 @@
 package com.katahiromz.krakra_ja_jp
 
-import android.annotation.TargetApi;
-import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageInfo
-import androidx.appcompat.app.AppCompatActivity
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
-import android.net.Uri;
-import android.net.http.SslError;
-import android.os.Build;
-import android.util.Log;
-import android.view.View;
-import android.webkit.CookieManager;
-import android.webkit.JavascriptInterface;
-import android.webkit.SslErrorHandler;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.content.pm.PackageManager;
+import android.webkit.WebResourceRequest
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen
 
 class MainActivity : AppCompatActivity() {
     var webView : WebView? = null
