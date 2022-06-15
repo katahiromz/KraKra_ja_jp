@@ -44,9 +44,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         webView?.post {
-            var webClient : WebViewClient = MyWebViewClient(this)
-            webView?.webViewClient = webClient
-            webView?.webChromeClient = WebChromeClient()
+            webView?.webViewClient = MyWebViewClient(this)
+            webView?.webChromeClient = MyWebChromeClient(this)
             webView?.loadUrl("https://katahiromz.github.io/saimin/")
         }
     }
@@ -91,7 +90,27 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    class MyThread(activity: MainActivity) : Thread() {
+    class MyWebChromeClient(activity: MainActivity) : WebChromeClient() {
+        var mainActivity : MainActivity = activity
+
+        override fun onJsAlert(view: WebView?, url: String?, message: String?, result: JsResult?): Boolean {
+            return super.onJsAlert(view, url, message, result)
+        }
+
+        override fun onJsPrompt(view: WebView?, url: String?, message: String?, defaultValue: String?, result: JsPromptResult?): Boolean {
+            return super.onJsPrompt(view, url, message, defaultValue, result)
+        }
+
+        override fun onJsConfirm(view: WebView?, url: String?, message: String?, result: JsResult?): Boolean {
+            return super.onJsConfirm(view, url, message, result)
+        }
+
+        override fun onConsoleMessage(consoleMessage: ConsoleMessage?): Boolean {
+            return super.onConsoleMessage(consoleMessage)
+        }
+    }
+
+        class MyThread(activity: MainActivity) : Thread() {
         var mainActivity : MainActivity = activity
 
         public override fun run() {
@@ -109,7 +128,7 @@ class MainActivity : AppCompatActivity() {
         webView?.onPause()
     }
 
-    fun executeJavascript(script: String) {
+    fun executeScript(script: String) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             webView?.evaluateJavascript(script, null)
         } else {
