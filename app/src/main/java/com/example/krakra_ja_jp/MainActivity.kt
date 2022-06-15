@@ -1,14 +1,13 @@
 package com.katahiromz.krakra_ja_jp
 
-import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.webkit.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import android.speech.tts.TextToSpeech
 import java.util.*
 
 class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.OnInitListener {
@@ -60,13 +59,18 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
-        this.tts = TextToSpeech(this, this)
+        tts = TextToSpeech(this, this)
     }
 
     fun speechText(text: String) {
-        if (speechReady) {
+        if (speechReady && tts != null) {
             var params = Bundle()
-            params.putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME, 0.8f)
+            var volume = 0.5f
+            var speed = 0.3f
+            var pitch = 0.8f
+            params.putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME, volume)
+            tts!!.setPitch(pitch)
+            tts!!.setSpeechRate(speed)
             tts!!.speak(text, TextToSpeech.QUEUE_FLUSH, params, "utteranceId")
         }
     }
@@ -75,7 +79,9 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) {
             speechReady = true
-            val locale = Locale.ENGLISH
+            var locale = Locale.JAPANESE
+            if (BuildConfig.DEBUG)
+                locale = Locale.ENGLISH
             if (tts!!.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
                 tts!!.language = locale
             }
@@ -129,11 +135,22 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         }
 
         override fun onConsoleMessage(consoleMessage: ConsoleMessage?): Boolean {
-            if (BuildConfig.DEBUG && consoleMessage != null) {
-                var msg = consoleMessage.message()
-                var line = consoleMessage.lineNumber()
-                var src = consoleMessage.sourceId()
-                Log.d("console","${msg} at Line ${line} of ${src}")
+            if (consoleMessage != null) {
+                var msg : String = consoleMessage.message().toString()
+                if (BuildConfig.DEBUG) {
+                    var line = consoleMessage.lineNumber().toString()
+                    var src = consoleMessage.sourceId().toString()
+                    Log.d("console","$msg at Line $line of $src")
+                }
+                if (msg == "{{cancelSpeech}}") {
+                    mainActivity.speechText("")
+                } else {
+                    var regExp : Regex = Regex("""\{\{speechLoop::(.*)\}\}""")
+                    var results = regExp.matchEntire(msg)
+                    if (results != null) {
+                        mainActivity.speechText(results.groupValues[1].repeat(256))
+                    }
+                }
             }
             return super.onConsoleMessage(consoleMessage)
         }
