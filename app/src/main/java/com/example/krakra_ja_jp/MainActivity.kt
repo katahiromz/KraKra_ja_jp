@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         var mainActivity : MainActivity = activity
         
         override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
-            return true
+            return false
         }
 
         override fun onPageFinished(view: WebView?, url: String?) {
