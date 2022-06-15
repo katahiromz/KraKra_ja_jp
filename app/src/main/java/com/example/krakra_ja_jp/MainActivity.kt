@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d("MainActivity", "onCreate");
+        Log.d("MainActivity", "onCreate")
         installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onStart() {
-        Log.d("MainActivity","onStart");
+        Log.d("MainActivity","onStart")
         super.onStart()
     }
 
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onAttachedToWindow() {
-        Log.d("MainActivity", "onAttachedToWindow");
+        Log.d("MainActivity", "onAttachedToWindow")
         super.onAttachedToWindow()
         if (!loaded) {
             loaded = true
