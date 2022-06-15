@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     var resultString : String = ""
     var url : String = "https://katahiromz.github.io/saimin/"
     var tts : TextToSpeech? = null
+    var speechReady : Boolean = false
 
     fun init() {
         Log.d("MainActivity", "init")
@@ -62,17 +63,22 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         this.tts = TextToSpeech(this, this)
     }
 
+    fun speechText(text: String) {
+        if (speechReady) {
+            var params = Bundle()
+            params.putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME, 0.8f)
+            tts!!.speak(text, TextToSpeech.QUEUE_FLUSH, params, "utteranceId")
+        }
+    }
+
     // for TextToSpeech
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) {
+            speechReady = true
             val locale = Locale.ENGLISH
             if (tts!!.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
                 tts!!.language = locale
             }
-
-            var params = Bundle()
-            params.putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME, 0.7f)
-            tts!!.speak("Hello", TextToSpeech.QUEUE_FLUSH, params, "utteranceId")
         }
     }
     override fun onStart() {
