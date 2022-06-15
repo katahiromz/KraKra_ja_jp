@@ -106,6 +106,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onConsoleMessage(consoleMessage: ConsoleMessage?): Boolean {
+            if (BuildConfig.DEBUG && consoleMessage != null) {
+                var msg = consoleMessage.message()
+                var line = consoleMessage.lineNumber()
+                var src = consoleMessage.sourceId()
+                Log.d("console","${msg} at Line ${line} of ${src}")
+            }
             return super.onConsoleMessage(consoleMessage)
         }
     }
