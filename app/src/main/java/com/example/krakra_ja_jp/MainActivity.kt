@@ -11,6 +11,8 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import android.net.Uri
 
 class MainActivity : AppCompatActivity(), ValueCallback<String> {
+    var appName : String = this.packageName
+    var pm : PackageManager = this.packageManager
     var webView : WebView? = null
     var loaded : Boolean = false
     var thread : MyThread? = null
@@ -20,8 +22,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
     fun init() {
         Log.d("MainActivity", "init")
         // get version info
-        var appName : String = this.packageName
-        var pm : PackageManager = this.packageManager
         var pi : PackageInfo = pm.getPackageInfo(appName, PackageManager.GET_META_DATA)
         var versionName : String = pi.versionName
 
