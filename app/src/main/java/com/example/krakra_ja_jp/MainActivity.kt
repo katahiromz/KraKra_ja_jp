@@ -8,14 +8,16 @@ import android.util.Log
 import android.webkit.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import android.net.Uri
+import android.speech.tts.TextToSpeech
+import java.util.*
 
-class MainActivity : AppCompatActivity(), ValueCallback<String> {
+class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.OnInitListener {
     var webView : WebView? = null
     var loaded : Boolean = false
     var thread : MyThread? = null
     var resultString : String = ""
     var url : String = "https://katahiromz.github.io/saimin/"
+    var tts : TextToSpeech? = null
 
     fun init() {
         Log.d("MainActivity", "init")
@@ -57,8 +59,22 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
+        this.tts = TextToSpeech(this, this)
     }
 
+    // for TextToSpeech
+    override fun onInit(status: Int) {
+        if (status == TextToSpeech.SUCCESS) {
+            val locale = Locale.ENGLISH
+            if (tts!!.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
+                tts!!.language = locale
+            }
+
+            var params = Bundle()
+            params.putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME, 0.7f)
+            tts!!.speak("Hello", TextToSpeech.QUEUE_FLUSH, params, "utteranceId")
+        }
+    }
     override fun onStart() {
         Log.d("MainActivity","onStart")
         super.onStart()
