@@ -1,20 +1,19 @@
 package com.katahiromz.krakra_ja_jp
 
+import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.webkit.*
-import android.widget.PopupWindow
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ValueCallback<String> {
     var webView : WebView? = null
     var loaded : Boolean = false
     var thread : MyThread? = null
+    var resultString : String = ""
 
     fun init() {
         Log.d("MainActivity", "init")
@@ -54,7 +53,6 @@ class MainActivity : AppCompatActivity() {
         Log.d("MainActivity", "onCreate")
         installSplashScreen()
         super.onCreate(savedInstanceState)
-        var intent : Intent = intent
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
     }
@@ -62,6 +60,11 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         Log.d("MainActivity","onStart")
         super.onStart()
+    }
+
+    // ValueCallback<String>
+    override fun onReceiveValue(value: String) {
+        resultString = value
     }
 
     fun showPopup() {
@@ -136,10 +139,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun executeScript(script: String) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            webView?.evaluateJavascript(script, null)
-        } else {
-            webView?.loadUrl("javascript:" + script)
-        }
+        // onReceiveValue will receive value
+        webView?.evaluateJavascript(script, this)
     }
 }
