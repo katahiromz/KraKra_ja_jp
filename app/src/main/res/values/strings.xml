@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">催眠くらくら</string>
     <string name="web_view">ウェブビュー</string>
+    <string name="now_starting">起動中...</string>
 </resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:id="@+id/time_popup_window" 
+    android:layout_width="match_parent" 
+    android:layout_height="match_parent" 
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/popup_text" 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/now_starting"
+        android:contentDescription="@string/now_starting" />
+
+</LinearLayout>

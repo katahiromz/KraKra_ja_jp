@@ -4,9 +4,10 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.webkit.WebResourceRequest
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.util.Log
+import android.webkit.*
+import android.widget.PopupWindow
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     var thread : MyThread? = null
 
     fun init() {
+        Log.d("MainActivity", "init")
         // get version info
         var appName : String = this.packageName
         var pm : PackageManager = this.packageManager
@@ -42,12 +44,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         webView?.post {
-            webView?.webViewClient = MyWebViewClient(this)
+            var webClient : WebViewClient = MyWebViewClient(this)
+            webView?.webViewClient = webClient
+            webView?.webChromeClient = WebChromeClient()
             webView?.loadUrl("https://katahiromz.github.io/saimin/")
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("MainActivity", "onCreate");
         installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -55,13 +60,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onStart() {
+        Log.d("MainActivity","onStart");
         super.onStart()
     }
 
+    fun showPopup() {
+        // TODO:
+    }
+
     override fun onAttachedToWindow() {
+        Log.d("MainActivity", "onAttachedToWindow");
         super.onAttachedToWindow()
         if (!loaded) {
             loaded = true
+            showPopup()
             thread = MyThread(this)
             thread?.start()
         }
