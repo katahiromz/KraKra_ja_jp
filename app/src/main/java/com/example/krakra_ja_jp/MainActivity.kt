@@ -1,5 +1,6 @@
 package com.katahiromz.krakra_ja_jp
 
+import android.app.Activity
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Build
@@ -8,13 +9,14 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.splashscreen
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 
 class MainActivity : AppCompatActivity() {
     var webView : WebView? = null
     var loaded : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -57,10 +59,7 @@ class MainActivity : AppCompatActivity() {
 
         override fun onPageFinished(view: WebView?, url: String?) {
             super.onPageFinished(view, url)
-            if (!mainActivity.loaded) {
-                mainActivity.loaded = true
-                mainActivity.setTheme(R.style.Theme_KraKra_ja_jp)
-            }
+            mainActivity.loaded = true
         }
     }
 

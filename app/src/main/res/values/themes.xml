@@ -13,4 +13,12 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <!-- Splash theme -->
+    <style name="Theme.KraKra_ja_jp.Splash" parent="Theme.SplashScreen.IconBackground">
+        <item name="windowSplashScreenBackground">@color/themeColor</item>
+        <item name="windowSplashScreenIconBackgroundColor">@color/themeColor</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/icon_maskable_64</item>
+        <item name="windowSplashScreenAnimationDuration">0</item>
+        <item name="postSplashScreenTheme">@style/Theme.KraKra_ja_jp</item>
+    </style>
 </resources>
