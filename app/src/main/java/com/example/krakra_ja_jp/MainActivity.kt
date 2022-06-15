@@ -14,14 +14,9 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 class MainActivity : AppCompatActivity() {
     var webView : WebView? = null
     var loaded : Boolean = false
+    var thread : MyThread? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        installSplashScreen()
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        supportActionBar?.hide()
-
+    fun init() {
         // get version info
         var appName : String = this.packageName
         var pm : PackageManager = this.packageManager
@@ -30,24 +25,37 @@ class MainActivity : AppCompatActivity() {
 
         webView = findViewById(R.id.webview)
 
-        // modify web settings
-        var settings = webView?.settings
-        settings?.javaScriptEnabled = true
-        settings?.domStorageEnabled = true
-        if (BuildConfig.DEBUG) {
-            WebView.setWebContentsDebuggingEnabled(true)
+        webView?.post {
+            // modify web settings
+            var settings = webView?.settings
+            settings?.javaScriptEnabled = true
+            settings?.domStorageEnabled = true
+            if (BuildConfig.DEBUG) {
+                WebView.setWebContentsDebuggingEnabled(true)
+            }
+
+            // modify user-agent string
+            var userAgentString: String? = settings?.userAgentString
+            if (userAgentString != null) {
+                userAgentString += "/KraKra-native-app/" + versionName + "/"
+                settings?.userAgentString = userAgentString
+            }
         }
 
-        // modify user-agent string
-        var userAgentString : String? = settings?.userAgentString
-        if (userAgentString != null) {
-            userAgentString += "/KraKra-native-app/" + versionName + "/"
-            settings?.userAgentString = userAgentString
+        webView?.post {
+            webView?.webViewClient = MyWebViewClient(this)
+            webView?.loadUrl("https://katahiromz.github.io/saimin/")
         }
+    }
 
-        webView?.webViewClient = MyWebViewClient(this)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        supportActionBar?.hide()
 
-        webView?.loadUrl("https://katahiromz.github.io/saimin/")
+        thread = MyThread(this)
+        thread?.start()
     }
 
     class MyWebViewClient(activity: MainActivity) : WebViewClient() {
@@ -60,6 +68,14 @@ class MainActivity : AppCompatActivity() {
         override fun onPageFinished(view: WebView?, url: String?) {
             super.onPageFinished(view, url)
             mainActivity.loaded = true
+        }
+    }
+
+    class MyThread(activity: MainActivity) : Thread() {
+        var mainActivity : MainActivity = activity
+
+        public override fun run() {
+            mainActivity.init()
         }
     }
 
