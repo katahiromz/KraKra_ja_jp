@@ -1,6 +1,5 @@
 package com.katahiromz.krakra_ja_jp
 
-import android.app.Activity
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Build
@@ -53,9 +52,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
+    }
 
-        thread = MyThread(this)
-        thread?.start()
+    override fun onStart() {
+        super.onStart()
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        if (!loaded) {
+            loaded = true
+            thread = MyThread(this)
+            thread?.start()
+        }
     }
 
     class MyWebViewClient(activity: MainActivity) : WebViewClient() {
@@ -67,7 +76,6 @@ class MainActivity : AppCompatActivity() {
 
         override fun onPageFinished(view: WebView?, url: String?) {
             super.onPageFinished(view, url)
-            mainActivity.loaded = true
         }
     }
 
