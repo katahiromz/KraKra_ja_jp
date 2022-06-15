@@ -8,12 +8,14 @@ import android.util.Log
 import android.webkit.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import android.net.Uri
 
 class MainActivity : AppCompatActivity(), ValueCallback<String> {
     var webView : WebView? = null
     var loaded : Boolean = false
     var thread : MyThread? = null
     var resultString : String = ""
+    var url : String = "https://katahiromz.github.io/saimin/"
 
     fun init() {
         Log.d("MainActivity", "init")
@@ -45,7 +47,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
         webView?.post {
             webView?.webViewClient = MyWebViewClient(this)
             webView?.webChromeClient = MyWebChromeClient(this)
-            webView?.loadUrl("https://katahiromz.github.io/saimin/")
+            webView?.loadUrl(url)
         }
     }
 
