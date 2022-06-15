@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         Log.d("MainActivity", "onCreate")
         installSplashScreen()
         super.onCreate(savedInstanceState)
+        var intent : Intent = intent
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
     }
@@ -116,7 +117,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-        class MyThread(activity: MainActivity) : Thread() {
+    class MyThread(activity: MainActivity) : Thread() {
         var mainActivity : MainActivity = activity
 
         public override fun run() {
