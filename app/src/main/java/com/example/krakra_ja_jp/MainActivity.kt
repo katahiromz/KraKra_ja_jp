@@ -1,12 +1,18 @@
 package com.katahiromz.krakra_ja_jp
 
+import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.webkit.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityCompat.*
+import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import java.util.*
 
@@ -18,6 +24,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     var tts : TextToSpeech? = null
     var speechReady : Boolean = false
     val url : String = "https://katahiromz.github.io/saimin/"
+    val REQUEST_CODE_PERMISSION_AUDIO : Int = 1
 
     fun init() {
         Log.d("MainActivity", "init")
@@ -34,6 +41,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             var settings = webView?.settings
             settings?.javaScriptEnabled = true
             settings?.domStorageEnabled = true
+            settings?.mediaPlaybackRequiresUserGesture = false
             if (BuildConfig.DEBUG) {
                 WebView.setWebContentsDebuggingEnabled(true)
             }
@@ -51,6 +59,10 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             webView?.webChromeClient = MyWebChromeClient(this)
             webView?.loadUrl(url)
         }
+    }
+
+    fun checkPermission(permissions: Array<String?>?, request_code: Int) {
+        requestPermissions(this, permissions!!, request_code)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,7 +100,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         }
     }
     override fun onStart() {
-        Log.d("MainActivity","onStart")
+        Log.d("MainActivity", "onStart")
         super.onStart()
     }
 
@@ -107,6 +119,16 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         }
     }
 
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == REQUEST_CODE_PERMISSION_AUDIO) {
+            if (grantResults.size > 0) {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    webView?.reload()
+                }
+            }
+        }
+    }
+
     class MyWebViewClient(activity: MainActivity) : WebViewClient() {
         var mainActivity : MainActivity = activity
         
@@ -121,6 +143,19 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
     class MyWebChromeClient(activity: MainActivity) : WebChromeClient() {
         var mainActivity : MainActivity = activity
+
+        override fun onPermissionRequest(request: PermissionRequest?) {
+            if (request == null)
+                return
+            Log.d("WebChromeClient", "onPermissionRequest")
+            val permissionCheck = checkSelfPermission(mainActivity, Manifest.permission.RECORD_AUDIO)
+            if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(mainActivity, arrayOf(Manifest.permission.RECORD_AUDIO),
+                                   mainActivity.REQUEST_CODE_PERMISSION_AUDIO)
+            } else {
+                request.grant(request.resources)
+            }
+        }
 
         override fun onJsAlert(view: WebView?, url: String?, message: String?, result: JsResult?): Boolean {
             return super.onJsAlert(view, url, message, result)
@@ -140,7 +175,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
                 if (BuildConfig.DEBUG) {
                     val line = consoleMessage.lineNumber().toString()
                     val  src = consoleMessage.sourceId().toString()
-                    Log.d("console","$msg at Line $line of $src")
+                    Log.d("console", "$msg at Line $line of $src")
                 }
                 if (msg.get(0) == '{') {
                     if (msg == "{{cancelSpeech}}") {
