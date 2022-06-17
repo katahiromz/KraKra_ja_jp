@@ -20,7 +20,7 @@ class MyWebChromeClient(activity: MainActivity) : WebChromeClient() {
         if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(
                 mainActivity, arrayOf(Manifest.permission.RECORD_AUDIO),
-                mainActivity.requestCodePermissionAudio
+                MainActivity.requestCodePermissionAudio
             )
         } else {
             request.grant(request.resources)

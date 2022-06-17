@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
     companion object {
         const val url: String = "https://katahiromz.github.io/saimin/"
+        const val requestCodePermissionAudio: Int = 1
     }
 
     private var webView: WebView? = null
@@ -23,7 +24,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     private var resultString: String = ""
     private var tts: TextToSpeech? = null
     private var speechReady: Boolean = false
-    private val requestCodePermissionAudio: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
