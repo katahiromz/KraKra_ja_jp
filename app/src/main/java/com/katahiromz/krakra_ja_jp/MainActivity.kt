@@ -15,17 +15,17 @@ import java.util.*
 class MainActivity : AppCompatActivity(), ValueCallback<String> {
 
     companion object {
-        const val url: String = "https://katahiromz.github.io/saimin/"
-        const val requestCodePermissionAudio: Int = 1
+        const val url = "https://katahiromz.github.io/saimin/"
+        const val requestCodePermissionAudio = 1
     }
 
     private lateinit var webView: WebView
     private lateinit var tts: TextToSpeech
     private lateinit var thread: MyThread
 
-    private var resultString: String = ""
-    private var isLoaded: Boolean = false
-    private var isSpeechReady: Boolean = false
+    private var resultString = ""
+    private var isLoaded = false
+    private var isSpeechReady = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
