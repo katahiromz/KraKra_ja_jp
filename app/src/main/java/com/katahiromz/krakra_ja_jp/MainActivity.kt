@@ -6,9 +6,9 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.util.Log
-import android.webkit.*
+import android.webkit.ValueCallback
+import android.webkit.WebView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat.requestPermissions
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import java.util.*
 
@@ -60,10 +60,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             webView?.webChromeClient = MyWebChromeClient(this)
             webView?.loadUrl(url)
         }
-    }
-
-    fun checkPermission(permissions: Array<String?>?, request_code: Int) {
-        requestPermissions(this, permissions!!, request_code)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -151,11 +147,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     override fun onPause() {
         super.onPause()
         webView?.onPause()
-    }
-
-    fun executeScript(script: String) {
-        // onReceiveValue will receive value
-        webView?.evaluateJavascript(script, this)
     }
 
     // ValueCallback<String>
