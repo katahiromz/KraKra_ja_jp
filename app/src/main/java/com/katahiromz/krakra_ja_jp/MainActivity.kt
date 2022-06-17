@@ -5,7 +5,6 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
-import android.util.Log
 import android.webkit.ValueCallback
 import android.webkit.WebView
 import androidx.appcompat.app.AppCompatActivity
@@ -27,17 +26,11 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     private val requestCodePermissionAudio: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d("MainActivity", "onCreate")
         installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
         tts = TextToSpeech(this, this)
-    }
-
-    override fun onStart() {
-        Log.d("MainActivity", "onStart")
-        super.onStart()
     }
 
     override fun onResume() {
@@ -78,7 +71,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
 
     override fun onAttachedToWindow() {
-        Log.d("MainActivity", "onAttachedToWindow")
         super.onAttachedToWindow()
         if (!loaded) {
             loaded = true
@@ -95,7 +87,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
     @SuppressLint("SetJavaScriptEnabled")
     fun init() {
-        Log.d("MainActivity", "init")
         // get version info
         val appName: String = this.packageName
         val pm: PackageManager = this.packageManager
