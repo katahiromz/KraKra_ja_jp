@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.webkit.ValueCallback
+import android.webkit.WebSettings
 import android.webkit.WebView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -86,39 +87,44 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         resultString = value
     }
 
-    @SuppressLint("SetJavaScriptEnabled")
-    fun init() {
-        // get version info
-        val appName: String = this.packageName
-        val pm: PackageManager = this.packageManager
-        val pi: PackageInfo = pm.getPackageInfo(appName, PackageManager.GET_META_DATA)
-        val versionName: String = pi.versionName
-
+    fun initWebView() {
         webView = findViewById(R.id.webview)
-
         webView.post {
-            // modify web settings
-            val settings = webView.settings
-            settings.javaScriptEnabled = true
-            settings.domStorageEnabled = true
-            settings.mediaPlaybackRequiresUserGesture = false
-            if (BuildConfig.DEBUG) {
-                WebView.setWebContentsDebuggingEnabled(true)
-            }
-
-            // modify user-agent string
-            var userAgentString: String? = settings.userAgentString
-            if (userAgentString != null) {
-                userAgentString += "/KraKra-native-app/$versionName/"
-                settings.userAgentString = userAgentString
-            }
+            initWebSettings()
         }
-
         webView.post {
             webView.webViewClient = MyWebViewClient(this)
             webView.webChromeClient = MyWebChromeClient(this)
             webView.loadUrl(url)
         }
+    }
+
+    @SuppressLint("SetJavaScriptEnabled")
+    private fun initWebSettings() {
+        val settings = webView.settings
+        settings.javaScriptEnabled = true
+        settings.domStorageEnabled = true
+        settings.mediaPlaybackRequiresUserGesture = false
+        if (BuildConfig.DEBUG) {
+            WebView.setWebContentsDebuggingEnabled(true)
+        }
+        val versionName = getVersionName()
+        updateUserAgent(settings, versionName)
+    }
+
+    private fun updateUserAgent(settings: WebSettings, versionName: String) {
+        var userAgent: String? = settings.userAgentString
+        if (userAgent != null) {
+            userAgent += "/KraKra-native-app/$versionName/"
+            settings.userAgentString = userAgent
+        }
+    }
+
+    private fun getVersionName(): String {
+        val appName: String = this.packageName
+        val pm: PackageManager = this.packageManager
+        val pi: PackageInfo = pm.getPackageInfo(appName, PackageManager.GET_META_DATA)
+        return pi.versionName
     }
 
     fun speechText(text: String) {
@@ -142,7 +148,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         private var mainActivity: MainActivity = activity
 
         override fun run() {
-            mainActivity.init()
+            mainActivity.initWebView()
         }
     }
 }
