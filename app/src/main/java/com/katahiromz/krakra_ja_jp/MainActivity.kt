@@ -23,8 +23,8 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     private lateinit var thread: MyThread
 
     private var resultString: String = ""
-    private var loaded: Boolean = false
-    private var speechReady: Boolean = false
+    private var isLoaded: Boolean = false
+    private var isSpeechReady: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     // for TextToSpeech
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) {
-            speechReady = true
+            isSpeechReady = true
             var locale = Locale.JAPANESE
             if (BuildConfig.DEBUG)
                 locale = Locale.ENGLISH
@@ -73,8 +73,8 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        if (!loaded) {
-            loaded = true
+        if (!isLoaded) {
+            isLoaded = true
             showPopup()
             thread = MyThread(this)
             thread.start()
@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
 
     fun speechText(text: String) {
-        if (speechReady) {
+        if (isSpeechReady) {
             val params = Bundle()
             val volume = 0.5f
             val speed = 0.3f
