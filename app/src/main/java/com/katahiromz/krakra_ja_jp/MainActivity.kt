@@ -1,6 +1,7 @@
 package com.katahiromz.krakra_ja_jp
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -16,26 +17,27 @@ import java.util.*
 class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.OnInitListener {
     var webView : WebView? = null
     var loaded : Boolean = false
-    var thread : MyThread? = null
+    private var thread : MyThread? = null
     var resultString : String = ""
     var tts : TextToSpeech? = null
     var speechReady : Boolean = false
-    val url : String = "https://katahiromz.github.io/saimin/"
-    val REQUEST_CODE_PERMISSION_AUDIO : Int = 1
+    private val url : String = "https://katahiromz.github.io/saimin/"
+    val requestCodePermissionAudio : Int = 1
 
+    @SuppressLint("SetJavaScriptEnabled")
     fun init() {
         Log.d("MainActivity", "init")
         // get version info
         val appName : String = this.packageName
-        var pm : PackageManager = this.packageManager
-        var pi : PackageInfo = pm.getPackageInfo(appName, PackageManager.GET_META_DATA)
+        val pm : PackageManager = this.packageManager
+        val pi : PackageInfo = pm.getPackageInfo(appName, PackageManager.GET_META_DATA)
         val versionName : String = pi.versionName
 
         webView = findViewById(R.id.webview)
 
         webView?.post {
             // modify web settings
-            var settings = webView?.settings
+            val settings = webView?.settings
             settings?.javaScriptEnabled = true
             settings?.domStorageEnabled = true
             settings?.mediaPlaybackRequiresUserGesture = false
@@ -46,7 +48,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             // modify user-agent string
             var userAgentString: String? = settings?.userAgentString
             if (userAgentString != null) {
-                userAgentString += "/KraKra-native-app/" + versionName + "/"
+                userAgentString += "/KraKra-native-app/$versionName/"
                 settings?.userAgentString = userAgentString
             }
         }
@@ -73,7 +75,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
     fun speechText(text: String) {
         if (speechReady && tts != null) {
-            var params = Bundle()
+            val params = Bundle()
             val volume = 0.5f
             val speed = 0.3f
             val pitch = 0.8f
@@ -101,7 +103,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         super.onStart()
     }
 
-    fun showPopup() {
+    private fun showPopup() {
         // TODO:
     }
 
@@ -117,8 +119,8 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        if (requestCode == REQUEST_CODE_PERMISSION_AUDIO) {
-            if (grantResults.size > 0) {
+        if (requestCode == requestCodePermissionAudio) {
+            if (grantResults.isNotEmpty()) {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     webView?.reload()
                 }
@@ -127,8 +129,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
 
     class MyWebViewClient(activity: MainActivity) : WebViewClient() {
-        var mainActivity : MainActivity = activity
-        
         override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
             return false
         }
@@ -148,7 +148,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             val permissionCheck = checkSelfPermission(mainActivity, Manifest.permission.RECORD_AUDIO)
             if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(mainActivity, arrayOf(Manifest.permission.RECORD_AUDIO),
-                                   mainActivity.REQUEST_CODE_PERMISSION_AUDIO)
+                                   mainActivity.requestCodePermissionAudio)
             } else {
                 request.grant(request.resources)
             }
@@ -174,12 +174,12 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
                     val  src = consoleMessage.sourceId().toString()
                     Log.d("console", "$msg at Line $line of $src")
                 }
-                if (msg.get(0) == '{') {
+                if (msg[0] == '{') {
                     if (msg == "{{cancelSpeech}}") {
                         mainActivity.speechText("")
                     } else {
-                        val regex1 : Regex = Regex("""\{\{speechLoop::(.*)\}\}""")
-                        var results = regex1.matchEntire(msg)
+                        val regex1 = Regex("""\{\{speechLoop::(.*)}}""")
+                        val results = regex1.matchEntire(msg)
                         if (results != null) {
                             mainActivity.speechText(results.groupValues[1].repeat(256))
                         }
@@ -193,7 +193,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     class MyThread(activity: MainActivity) : Thread() {
         var mainActivity : MainActivity = activity
 
-        public override fun run() {
+        override fun run() {
             mainActivity.init()
         }
     }
