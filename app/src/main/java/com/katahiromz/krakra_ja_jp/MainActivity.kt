@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
         tts = TextToSpeech(this, this)
+        webView = findViewById(R.id.webview)
     }
 
     override fun onResume() {
@@ -88,7 +89,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
 
     fun initWebView() {
-        webView = findViewById(R.id.webview)
         webView.post {
             initWebSettings()
         }
