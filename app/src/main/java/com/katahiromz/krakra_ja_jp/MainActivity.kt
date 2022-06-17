@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
 
     private lateinit var webView: WebView
     private lateinit var tts: TextToSpeech
-    private lateinit var thread: MyThread
+    private lateinit var thread: WebViewThread
 
     private var resultString = ""
     private var isLoaded = false
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
         if (!isLoaded) {
             isLoaded = true
             showPopup()
-            thread = MyThread(this)
+            thread = WebViewThread(this)
             thread.start()
         }
     }
@@ -145,7 +145,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
         // TODO:
     }
 
-    class MyThread(activity: MainActivity) : Thread() {
+    class WebViewThread(activity: MainActivity) : Thread() {
         private var mainActivity: MainActivity = activity
 
         override fun run() {
