@@ -13,14 +13,18 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import java.util.*
 
 class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.OnInitListener {
-    var webView: WebView? = null
-    var loaded: Boolean = false
+
+    companion object {
+        const val url: String = "https://katahiromz.github.io/saimin/"
+    }
+
+    private var webView: WebView? = null
+    private var loaded: Boolean = false
     private var thread: MyThread? = null
-    var resultString: String = ""
-    var tts: TextToSpeech? = null
-    var speechReady: Boolean = false
-    private val url: String = "https://katahiromz.github.io/saimin/"
-    val requestCodePermissionAudio: Int = 1
+    private var resultString: String = ""
+    private var tts: TextToSpeech? = null
+    private var speechReady: Boolean = false
+    private val requestCodePermissionAudio: Int = 1
 
     @SuppressLint("SetJavaScriptEnabled")
     fun init() {
@@ -132,7 +136,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
 
     class MyThread(activity: MainActivity) : Thread() {
-        var mainActivity: MainActivity = activity
+        private var mainActivity: MainActivity = activity
 
         override fun run() {
             mainActivity.init()
