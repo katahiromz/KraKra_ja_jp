@@ -57,10 +57,10 @@ class MyWebChromeClient(activity: MainActivity) : WebChromeClient() {
 
     override fun onConsoleMessage(consoleMessage: ConsoleMessage?): Boolean {
         if (consoleMessage != null) {
-            val msg: String = consoleMessage.message().toString()
+            val msg = consoleMessage.message()
             if (BuildConfig.DEBUG) {
-                val line = consoleMessage.lineNumber().toString()
-                val src = consoleMessage.sourceId().toString()
+                val line = consoleMessage.lineNumber()
+                val src = consoleMessage.sourceId()
                 Log.d("console", "$msg at Line $line of $src")
             }
             if (msg[0] == '{') {
