@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import java.util.*
 
-class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.OnInitListener {
+class MainActivity : AppCompatActivity(), ValueCallback<String> {
 
     companion object {
         const val url: String = "https://katahiromz.github.io/saimin/"
@@ -32,7 +32,9 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
-        tts = TextToSpeech(this, this)
+        tts = TextToSpeech(this) { status ->
+            initTextToSpeech(status)
+        }
         webView = findViewById(R.id.web_view)
     }
 
@@ -60,19 +62,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         }
     }
 
-    // for TextToSpeech
-    override fun onInit(status: Int) {
-        if (status == TextToSpeech.SUCCESS) {
-            isSpeechReady = true
-            var locale = Locale.JAPANESE
-            if (BuildConfig.DEBUG)
-                locale = Locale.ENGLISH
-            if (tts.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
-                tts.language = locale
-            }
-        }
-    }
-
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         if (!isLoaded) {
@@ -96,6 +85,18 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             webView.webViewClient = MyWebViewClient(this)
             webView.webChromeClient = MyWebChromeClient(this)
             webView.loadUrl(url)
+        }
+    }
+
+    private fun initTextToSpeech(status: Int) {
+        if (status == TextToSpeech.SUCCESS) {
+            isSpeechReady = true
+            var locale = Locale.JAPANESE
+            if (BuildConfig.DEBUG)
+                locale = Locale.ENGLISH
+            if (tts.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
+                tts.language = locale
+            }
         }
     }
 
