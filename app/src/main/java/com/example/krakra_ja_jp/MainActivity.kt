@@ -1,18 +1,15 @@
 package com.katahiromz.krakra_ja_jp
 
 import android.Manifest
-import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.webkit.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityCompat.*
-import androidx.core.content.ContextCompat
+import androidx.core.app.ActivityCompat.checkSelfPermission
+import androidx.core.app.ActivityCompat.requestPermissions
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import java.util.*
 
