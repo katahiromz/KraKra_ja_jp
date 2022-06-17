@@ -18,11 +18,12 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         const val requestCodePermissionAudio: Int = 1
     }
 
-    private var webView: WebView? = null
-    private var loaded: Boolean = false
-    private var thread: MyThread? = null
+    private lateinit var webView: WebView
+    private lateinit var tts: TextToSpeech
+    private lateinit var thread: MyThread
+
     private var resultString: String = ""
-    private var tts: TextToSpeech? = null
+    private var loaded: Boolean = false
     private var speechReady: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,12 +36,12 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
     override fun onResume() {
         super.onResume()
-        webView?.onResume()
+        webView.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        webView?.onPause()
+        webView.onPause()
     }
 
     override fun onRequestPermissionsResult(
@@ -51,7 +52,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         if (requestCode == requestCodePermissionAudio) {
             if (grantResults.isNotEmpty()) {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    webView?.reload()
+                    webView.reload()
                 }
             }
         }
@@ -64,8 +65,8 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             var locale = Locale.JAPANESE
             if (BuildConfig.DEBUG)
                 locale = Locale.ENGLISH
-            if (tts!!.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
-                tts!!.language = locale
+            if (tts.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
+                tts.language = locale
             }
         }
     }
@@ -76,7 +77,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             loaded = true
             showPopup()
             thread = MyThread(this)
-            thread?.start()
+            thread.start()
         }
     }
 
@@ -95,41 +96,41 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
         webView = findViewById(R.id.webview)
 
-        webView?.post {
+        webView.post {
             // modify web settings
-            val settings = webView?.settings
-            settings?.javaScriptEnabled = true
-            settings?.domStorageEnabled = true
-            settings?.mediaPlaybackRequiresUserGesture = false
+            val settings = webView.settings
+            settings.javaScriptEnabled = true
+            settings.domStorageEnabled = true
+            settings.mediaPlaybackRequiresUserGesture = false
             if (BuildConfig.DEBUG) {
                 WebView.setWebContentsDebuggingEnabled(true)
             }
 
             // modify user-agent string
-            var userAgentString: String? = settings?.userAgentString
+            var userAgentString: String? = settings.userAgentString
             if (userAgentString != null) {
                 userAgentString += "/KraKra-native-app/$versionName/"
-                settings?.userAgentString = userAgentString
+                settings.userAgentString = userAgentString
             }
         }
 
-        webView?.post {
-            webView?.webViewClient = MyWebViewClient(this)
-            webView?.webChromeClient = MyWebChromeClient(this)
-            webView?.loadUrl(url)
+        webView.post {
+            webView.webViewClient = MyWebViewClient(this)
+            webView.webChromeClient = MyWebChromeClient(this)
+            webView.loadUrl(url)
         }
     }
 
     fun speechText(text: String) {
-        if (speechReady && tts != null) {
+        if (speechReady) {
             val params = Bundle()
             val volume = 0.5f
             val speed = 0.3f
             val pitch = 0.8f
             params.putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME, volume)
-            tts!!.setPitch(pitch)
-            tts!!.setSpeechRate(speed)
-            tts!!.speak(text, TextToSpeech.QUEUE_FLUSH, params, "utteranceId")
+            tts.setPitch(pitch)
+            tts.setSpeechRate(speed)
+            tts.speak(text, TextToSpeech.QUEUE_FLUSH, params, "utteranceId")
         }
     }
 
