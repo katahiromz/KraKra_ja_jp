@@ -26,6 +26,73 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     private var speechReady: Boolean = false
     private val requestCodePermissionAudio: Int = 1
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("MainActivity", "onCreate")
+        installSplashScreen()
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        supportActionBar?.hide()
+        tts = TextToSpeech(this, this)
+    }
+
+    override fun onStart() {
+        Log.d("MainActivity", "onStart")
+        super.onStart()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        webView?.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        webView?.onPause()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == requestCodePermissionAudio) {
+            if (grantResults.isNotEmpty()) {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    webView?.reload()
+                }
+            }
+        }
+    }
+
+    // for TextToSpeech
+    override fun onInit(status: Int) {
+        if (status == TextToSpeech.SUCCESS) {
+            speechReady = true
+            var locale = Locale.JAPANESE
+            if (BuildConfig.DEBUG)
+                locale = Locale.ENGLISH
+            if (tts!!.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
+                tts!!.language = locale
+            }
+        }
+    }
+
+    override fun onAttachedToWindow() {
+        Log.d("MainActivity", "onAttachedToWindow")
+        super.onAttachedToWindow()
+        if (!loaded) {
+            loaded = true
+            showPopup()
+            thread = MyThread(this)
+            thread?.start()
+        }
+    }
+
+    // ValueCallback<String>
+    override fun onReceiveValue(value: String) {
+        resultString = value
+    }
+
     @SuppressLint("SetJavaScriptEnabled")
     fun init() {
         Log.d("MainActivity", "init")
@@ -62,15 +129,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d("MainActivity", "onCreate")
-        installSplashScreen()
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        supportActionBar?.hide()
-        tts = TextToSpeech(this, this)
-    }
-
     fun speechText(text: String) {
         if (speechReady && tts != null) {
             val params = Bundle()
@@ -84,51 +142,8 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         }
     }
 
-    // for TextToSpeech
-    override fun onInit(status: Int) {
-        if (status == TextToSpeech.SUCCESS) {
-            speechReady = true
-            var locale = Locale.JAPANESE
-            if (BuildConfig.DEBUG)
-                locale = Locale.ENGLISH
-            if (tts!!.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
-                tts!!.language = locale
-            }
-        }
-    }
-
-    override fun onStart() {
-        Log.d("MainActivity", "onStart")
-        super.onStart()
-    }
-
     private fun showPopup() {
         // TODO:
-    }
-
-    override fun onAttachedToWindow() {
-        Log.d("MainActivity", "onAttachedToWindow")
-        super.onAttachedToWindow()
-        if (!loaded) {
-            loaded = true
-            showPopup()
-            thread = MyThread(this)
-            thread?.start()
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        if (requestCode == requestCodePermissionAudio) {
-            if (grantResults.isNotEmpty()) {
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    webView?.reload()
-                }
-            }
-        }
     }
 
     class MyThread(activity: MainActivity) : Thread() {
@@ -137,20 +152,5 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         override fun run() {
             mainActivity.init()
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        webView?.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        webView?.onPause()
-    }
-
-    // ValueCallback<String>
-    override fun onReceiveValue(value: String) {
-        resultString = value
     }
 }
