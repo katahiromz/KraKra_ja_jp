@@ -14,7 +14,6 @@ class MyWebChromeClient(activity: MainActivity) : WebChromeClient() {
     override fun onPermissionRequest(request: PermissionRequest?) {
         if (request == null)
             return
-        Log.d("WebChromeClient", "onPermissionRequest")
         val permissionCheck =
             ContextCompat.checkSelfPermission(mainActivity, Manifest.permission.RECORD_AUDIO)
         if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
