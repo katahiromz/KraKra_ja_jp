@@ -17,7 +17,7 @@
     <style name="Theme.KraKra_ja_jp.Splash" parent="Theme.SplashScreen.IconBackground">
         <item name="windowSplashScreenBackground">@color/themeColor</item>
         <item name="windowSplashScreenIconBackgroundColor">@color/themeColor</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_icon_maskable</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_adaptive_icon</item>
         <item name="windowSplashScreenAnimationDuration">0</item>
         <item name="postSplashScreenTheme">@style/Theme.KraKra_ja_jp</item>
     </style>
