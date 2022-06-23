@@ -83,7 +83,11 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
         }
         webView.post {
             webView.webViewClient = MyWebViewClient(this)
-            webView.webChromeClient = MyWebChromeClient(this)
+            webView.webChromeClient = MyWebChromeClient(this, object: MyWebChromeClient.Listener{
+                override fun onSpeech(text: String) {
+                    speechText(text)
+                }
+            })
             webView.loadUrl(url)
         }
     }

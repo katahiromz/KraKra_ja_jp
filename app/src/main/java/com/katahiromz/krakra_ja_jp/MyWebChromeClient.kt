@@ -4,21 +4,25 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.util.Log
 import android.webkit.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
-class MyWebChromeClient(activity: MainActivity) : WebChromeClient() {
+class MyWebChromeClient(private val activity: AppCompatActivity, private val listener: Listener) :
+    WebChromeClient() {
 
-    var mainActivity: MainActivity = activity
+    interface Listener {
+        fun onSpeech(text: String)
+    }
 
     override fun onPermissionRequest(request: PermissionRequest?) {
         if (request == null)
             return
         val permissionCheck =
-            ContextCompat.checkSelfPermission(mainActivity, Manifest.permission.RECORD_AUDIO)
+            ContextCompat.checkSelfPermission(activity, Manifest.permission.RECORD_AUDIO)
         if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(
-                mainActivity, arrayOf(Manifest.permission.RECORD_AUDIO),
+                activity, arrayOf(Manifest.permission.RECORD_AUDIO),
                 MainActivity.requestCodePermissionAudio
             )
         } else {
@@ -64,12 +68,12 @@ class MyWebChromeClient(activity: MainActivity) : WebChromeClient() {
             }
             if (msg[0] == '{') {
                 if (msg == "{{cancelSpeech}}") {
-                    mainActivity.speechText("")
+                    listener.onSpeech("")
                 } else {
                     val regex1 = Regex("""\{\{speechLoop::(.*)}}""")
                     val results = regex1.matchEntire(msg)
                     if (results != null) {
-                        mainActivity.speechText(results.groupValues[1].repeat(256))
+                        listener.onSpeech(results.groupValues[1].repeat(256))
                     }
                 }
             }
