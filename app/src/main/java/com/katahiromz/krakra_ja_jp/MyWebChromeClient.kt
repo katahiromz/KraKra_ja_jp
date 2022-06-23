@@ -1,12 +1,15 @@
 package com.katahiromz.krakra_ja_jp
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.util.Log
 import android.webkit.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.input.input
 
 class MyWebChromeClient(private val activity: AppCompatActivity, private val listener: Listener) :
     WebChromeClient() {
@@ -36,17 +39,13 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         message: String?,
         result: JsResult?
     ): Boolean {
-        return super.onJsAlert(view, url, message, result)
-    }
-
-    override fun onJsPrompt(
-        view: WebView?,
-        url: String?,
-        message: String?,
-        defaultValue: String?,
-        result: JsPromptResult?
-    ): Boolean {
-        return super.onJsPrompt(view, url, message, defaultValue, result)
+        val title = activity.getString(R.string.app_name)
+        MaterialDialog(activity).show {
+            title(text = title)
+            message(text = message)
+            positiveButton(text = "OK") { }
+        }
+        return true
     }
 
     override fun onJsConfirm(
@@ -55,7 +54,43 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         message: String?,
         result: JsResult?
     ): Boolean {
-        return super.onJsConfirm(view, url, message, result)
+        val title = activity.getString(R.string.app_name)
+        MaterialDialog(activity).show {
+            title(text = title)
+            message(text = message)
+            positiveButton(text = "OK") {
+                result?.confirm()
+            }
+            negativeButton(text = "Cancel") {
+                result?.cancel()
+            }
+        }
+        return true
+    }
+
+    @SuppressLint("CheckResult")
+    override fun onJsPrompt(
+        view: WebView?,
+        url: String?,
+        message: String?,
+        defaultValue: String?,
+        result: JsPromptResult?
+    ): Boolean {
+        val title = activity.getString(R.string.app_name)
+        var inputtedText: String? = null
+        MaterialDialog(activity).show {
+            title(text = title)
+            input { _, text ->
+                inputtedText = text.toString()
+            }
+            positiveButton(text = "OK") {
+                result?.confirm(inputtedText ?: "")
+            }
+            negativeButton(text = "Cancel") {
+                result?.cancel()
+            }
+        }
+        return true
     }
 
     override fun onConsoleMessage(consoleMessage: ConsoleMessage?): Boolean {
