@@ -5,11 +5,16 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.util.Log
 import android.webkit.*
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
+import com.afollestad.materialdialogs.customview.getCustomView
 import com.afollestad.materialdialogs.input.input
+import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
+import com.afollestad.materialdialogs.utils.MDUtil.getStringArray
 
 class MyWebChromeClient(private val activity: AppCompatActivity, private val listener: Listener) :
     WebChromeClient() {
@@ -77,6 +82,11 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         result: JsPromptResult?
     ): Boolean {
         val title = activity.getString(R.string.app_name)
+        if (isSelectMessageDialog(message)) {
+            // メッセージ選択ダイアログを表示
+            showSelectMessageDialog(title = title, message = message, result = result)
+            return true
+        }
         var inputtedText: String? = null
         MaterialDialog(activity).show {
             title(text = title)
@@ -92,6 +102,71 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
             }
         }
         return true
+    }
+
+    private fun isSelectMessageDialog(message: String?): Boolean = message == "メッセージ文字列を入力して下さい。"
+
+    private fun showSelectMessageDialog(
+        title: String,
+        message: String?,
+        result: JsPromptResult?
+    ) {
+        val dialog = MaterialDialog(activity).show {
+            title(text = title)
+            message(text = message)
+            customView(R.layout.message_select_dialog, scrollable = true, horizontalPadding = true)
+            positiveButton(text = "OK") {
+                val editText = getCustomView().findViewById<EditText>(R.id.message_edit)
+                result?.confirm(editText.text.toString())
+            }
+            negativeButton(text = "Cancel") {
+                result?.cancel()
+            }
+            lifecycleOwner(activity)
+        }
+
+        // ダイアログのレイアウトを設定
+        val customView = dialog.getCustomView()
+        val listView: ListView = customView.findViewById(R.id.message_list)
+        val messageList = activity.getStringArray(R.array.message_sample_list)
+        val arrayAdapter = ArrayAdapter(activity, android.R.layout.simple_list_item_1, messageList)
+        listView.adapter = arrayAdapter
+
+        val params = listView.layoutParams
+        params.height = getMessageListHeight(listView, arrayAdapter)
+        listView.layoutParams = params
+        listView.onItemClickListener =
+            AdapterView.OnItemClickListener { _, view, _, _ ->
+                val sampleMessage = (view as TextView).text.toString()
+                val editText: EditText = customView.findViewById(R.id.message_edit)
+                editText.setText(sampleMessage)
+            }
+
+        val clearButton = customView.findViewById<Button>(R.id.clear_button)
+        clearButton.setOnClickListener {
+            val editText: EditText = customView.findViewById(R.id.message_edit)
+            editText.setText("")
+        }
+    }
+
+    private fun getMessageListHeight(listView: ListView, arrayAdapter: ArrayAdapter<String>): Int {
+        var totalHeight = 0
+
+        // 個々のアイテムの高さを測り、加算していく
+        for (i in 0 until arrayAdapter.count)
+        {
+            val listItem = arrayAdapter.getView(i, null, listView)
+            listItem.measure(0, 0)
+            totalHeight += listItem.measuredHeight
+        }
+
+        // (区切り線の高さ * 要素数の数)を高さとする
+        val listItemMaxCount = 4
+        return if (arrayAdapter.count <= listItemMaxCount) {
+            totalHeight + (listView.dividerHeight * (arrayAdapter.count - 1))
+        } else {
+            totalHeight + (listView.dividerHeight * listItemMaxCount)
+        }
     }
 
     override fun onConsoleMessage(consoleMessage: ConsoleMessage?): Boolean {

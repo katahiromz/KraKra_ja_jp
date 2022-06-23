@@ -4,4 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="themeColor">#FFFFB5E6</color>
     <color name="themeColorDark">#FFCC65C6</color>
+
+    <color name="promptHintColor">#888888</color>
 </resources>

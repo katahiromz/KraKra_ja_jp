@@ -3,4 +3,9 @@
     <string name="web_view">ウェブビュー</string>
     <string name="now_starting">起動中...</string>
     <string name="prompt_hint">表示したい文字列を入力して下さい</string>
+
+    <!-- message list -->
+    <string name="message_get_sleep">あなたはだんだん眠くなーる</string>
+    <string name="message_want_to_study">勉強して良い成績を取りたくなーる</string>
+    <string name="message_like_to_work">会社で働くのが好きになーる</string>
 </resources>
