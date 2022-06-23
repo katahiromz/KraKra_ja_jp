@@ -80,7 +80,8 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         var inputtedText: String? = null
         MaterialDialog(activity).show {
             title(text = title)
-            input { _, text ->
+            message(text = message)
+            input(hint = activity.getString(R.string.prompt_hint)) { _, text ->
                 inputtedText = text.toString()
             }
             positiveButton(text = "OK") {
