@@ -1,7 +1,7 @@
 <resources>
     <!-- common -->
     <string name="ok">OK</string>
-    <string name="cancel">Cancel</string>
+    <string name="cancel">キャンセル</string>
 
     <!-- main -->
     <string name="app_name">催眠くらくら</string>
@@ -16,7 +16,7 @@
 
     <!-- message select dialog -->
     <string name="message_select_dialog_message">メッセージ文字列を入力して下さい。</string>
-    <string name="message_clear_button">CLEAR</string>
+    <string name="message_clear_button">クリア</string>
 
     <!-- Content Description -->
     <string name="guide_clear_button">クリアボタン</string>
