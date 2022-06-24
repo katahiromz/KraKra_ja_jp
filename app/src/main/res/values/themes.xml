@@ -5,13 +5,19 @@
         <item name="colorPrimary">@color/themeColor</item>
         <item name="colorPrimaryVariant">@color/themeColorDark</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="android:textColorPrimary">@color/themeColor</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/themeColorDark</item>
         <item name="colorSecondaryVariant">@color/themeColor</item>
         <item name="colorOnSecondary">@color/black</item>
+        <item name="android:textColorSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+        <!-- Material Dialog -->
+        <item name="md_background_color">#353434</item>
+        <item name="md_corner_radius">10dp</item>
     </style>
     <!-- Splash theme -->
     <style name="Theme.KraKra_ja_jp.Splash" parent="Theme.SplashScreen.IconBackground">
