@@ -23,6 +23,10 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         fun onSpeech(text: String)
     }
 
+    private fun getResString(resId: Int): String {
+        return activity.getString(resId)
+    }
+
     override fun onPermissionRequest(request: PermissionRequest?) {
         if (request == null)
             return
@@ -44,12 +48,15 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         message: String?,
         result: JsResult?
     ): Boolean {
-        val title = activity.getString(R.string.app_name)
+        val title = getResString(R.string.app_name)
         MaterialDialog(activity).show {
             title(text = title)
             message(text = message)
-            positiveButton(text = "OK") { }
+            positiveButton(text = getResString(R.string.ok)) { }
+            cancelOnTouchOutside(false)
+            lifecycleOwner(activity)
         }
+        result?.confirm()
         return true
     }
 
@@ -59,16 +66,18 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         message: String?,
         result: JsResult?
     ): Boolean {
-        val title = activity.getString(R.string.app_name)
+        val title = getResString(R.string.app_name)
         MaterialDialog(activity).show {
             title(text = title)
             message(text = message)
-            positiveButton(text = "OK") {
+            positiveButton(text = getResString(R.string.ok)) {
                 result?.confirm()
             }
-            negativeButton(text = "Cancel") {
+            negativeButton(text = getResString(R.string.cancel)) {
                 result?.cancel()
             }
+            cancelOnTouchOutside(false)
+            lifecycleOwner(activity)
         }
         return true
     }
@@ -81,47 +90,56 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         defaultValue: String?,
         result: JsPromptResult?
     ): Boolean {
-        val title = activity.getString(R.string.app_name)
+        val title = getResString(R.string.app_name)
         if (isSelectMessageDialog(message)) {
             // メッセージ選択ダイアログを表示
-            showSelectMessageDialog(title = title, message = message, result = result)
+            showSelectMessageDialog(title = title, message = message, defaultValue = defaultValue, result = result)
             return true
         }
         var inputtedText: String? = null
         MaterialDialog(activity).show {
             title(text = title)
             message(text = message)
-            input(hint = activity.getString(R.string.prompt_hint)) { _, text ->
+            input(hint = getResString(R.string.prompt_hint), prefill = defaultValue) { _, text ->
                 inputtedText = text.toString()
             }
-            positiveButton(text = "OK") {
+            positiveButton(text = getResString(R.string.ok)) {
                 result?.confirm(inputtedText ?: "")
             }
-            negativeButton(text = "Cancel") {
+            negativeButton(text = getResString(R.string.cancel)) {
                 result?.cancel()
             }
+            cancelOnTouchOutside(false)
+            lifecycleOwner(activity)
         }
         return true
     }
 
-    private fun isSelectMessageDialog(message: String?): Boolean = message == "メッセージ文字列を入力して下さい。"
+    /**
+     * メッセージ選択ダイアログの表示対象か判定する
+     * @param message メッセージ文字列
+     * @return true: メッセージ選択ダイアログの表示対象、false: それ以外
+     */
+    private fun isSelectMessageDialog(message: String?): Boolean = message == getResString(R.string.message_select_dialog_message)
 
     private fun showSelectMessageDialog(
         title: String,
         message: String?,
+        defaultValue: String?,
         result: JsPromptResult?
     ) {
         val dialog = MaterialDialog(activity).show {
             title(text = title)
             message(text = message)
             customView(R.layout.message_select_dialog, scrollable = true, horizontalPadding = true)
-            positiveButton(text = "OK") {
+            positiveButton(text = getResString(R.string.ok)) {
                 val editText = getCustomView().findViewById<EditText>(R.id.message_edit)
                 result?.confirm(editText.text.toString())
             }
-            negativeButton(text = "Cancel") {
+            negativeButton(text = getResString(R.string.cancel)) {
                 result?.cancel()
             }
+            cancelOnTouchOutside(false)
             lifecycleOwner(activity)
         }
 
@@ -143,8 +161,9 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
             }
 
         val clearButton = customView.findViewById<Button>(R.id.clear_button)
+        val editText: EditText = customView.findViewById(R.id.message_edit)
+        editText.setText(defaultValue)
         clearButton.setOnClickListener {
-            val editText: EditText = customView.findViewById(R.id.message_edit)
             editText.setText("")
         }
     }
@@ -153,8 +172,7 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         var totalHeight = 0
 
         // 個々のアイテムの高さを測り、加算していく
-        for (i in 0 until arrayAdapter.count)
-        {
+        for (i in 0 until arrayAdapter.count) {
             val listItem = arrayAdapter.getView(i, null, listView)
             listItem.measure(0, 0)
             totalHeight += listItem.measuredHeight
