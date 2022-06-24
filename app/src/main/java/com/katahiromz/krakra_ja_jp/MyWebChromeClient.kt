@@ -53,6 +53,7 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
             title(text = title)
             message(text = message)
             positiveButton(text = getResString(R.string.ok)) { }
+            cancelable(false)
             cancelOnTouchOutside(false)
             lifecycleOwner(activity)
         }
@@ -76,6 +77,7 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
             negativeButton(text = getResString(R.string.cancel)) {
                 result?.cancel()
             }
+            cancelable(false)
             cancelOnTouchOutside(false)
             lifecycleOwner(activity)
         }
@@ -109,6 +111,7 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
             negativeButton(text = getResString(R.string.cancel)) {
                 result?.cancel()
             }
+            cancelable(false)
             cancelOnTouchOutside(false)
             lifecycleOwner(activity)
         }
@@ -139,6 +142,7 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
             negativeButton(text = getResString(R.string.cancel)) {
                 result?.cancel()
             }
+            cancelable(false)
             cancelOnTouchOutside(false)
             lifecycleOwner(activity)
         }
