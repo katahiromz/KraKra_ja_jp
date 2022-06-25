@@ -83,11 +83,13 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
         }
         webView.post {
             webView.webViewClient = MyWebViewClient(this)
-            webView.webChromeClient = MyWebChromeClient(this, object: MyWebChromeClient.Listener{
+            var chromeClient = MyWebChromeClient(this, object: MyWebChromeClient.Listener {
                 override fun onSpeech(text: String) {
                     speechText(text)
                 }
             })
+            webView.webChromeClient = chromeClient
+            webView.addJavascriptInterface(chromeClient, "android")
             webView.loadUrl(url)
         }
     }
