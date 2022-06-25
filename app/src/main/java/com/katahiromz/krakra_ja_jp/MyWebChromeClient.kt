@@ -203,7 +203,7 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
                 if (msg == "{{cancelSpeech}}") {
                     listener.onSpeech("")
                 } else {
-                    val regex1 = Regex("""\{\{speechLoop::(.*)}}""")
+                    val regex1 = Regex("""\{\{speechLoop::(.*)\}\}""")
                     val results = regex1.matchEntire(msg)
                     if (results != null) {
                         listener.onSpeech(results.groupValues[1].repeat(256))
