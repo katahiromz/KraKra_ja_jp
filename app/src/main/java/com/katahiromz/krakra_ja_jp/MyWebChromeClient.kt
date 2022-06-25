@@ -202,6 +202,8 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
             if (msg[0] == '{') {
                 if (msg == "{{cancelSpeech}}") {
                     listener.onSpeech("")
+                } else if (msg == "{{clearSettings}}") {
+                    // TODO:
                 } else {
                     val regex1 = Regex("""\{\{speechLoop::(.*)\}\}""")
                     val results = regex1.matchEntire(msg)
