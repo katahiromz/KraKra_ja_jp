@@ -191,6 +191,21 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         }
     }
 
+    @JavascriptInterface
+    fun cancelSpeech() {
+        listener.onSpeech("")
+    }
+
+    @JavascriptInterface
+    fun speechLoop(msg: String) {
+        listener.onSpeech(msg.repeat(256))
+    }
+
+    @JavascriptInterface
+    fun clearSettings() {
+        // TODO:
+    }
+
     override fun onConsoleMessage(consoleMessage: ConsoleMessage?): Boolean {
         if (consoleMessage != null) {
             val msg = consoleMessage.message()
@@ -198,19 +213,6 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
                 val line = consoleMessage.lineNumber()
                 val src = consoleMessage.sourceId()
                 Log.d("console", "$msg at Line $line of $src")
-            }
-            if (msg[0] == '{') {
-                if (msg == "{{cancelSpeech}}") {
-                    listener.onSpeech("")
-                } else if (msg == "{{clearSettings}}") {
-                    // TODO:
-                } else {
-                    val regex1 = Regex("""\{\{speechLoop::(.*)\}\}""")
-                    val results = regex1.matchEntire(msg)
-                    if (results != null) {
-                        listener.onSpeech(results.groupValues[1].repeat(256))
-                    }
-                }
             }
         }
         return super.onConsoleMessage(consoleMessage)
