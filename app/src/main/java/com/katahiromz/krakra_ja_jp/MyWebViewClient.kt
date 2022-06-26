@@ -4,7 +4,11 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 
-class MyWebViewClient(activity: MainActivity) : WebViewClient() {
+class MyWebViewClient(val listener: Listener) : WebViewClient() {
+
+    interface Listener {
+        fun onPageFinished(view: WebView?, url: String?)
+    }
 
     override fun shouldOverrideUrlLoading(
         view: WebView?,
@@ -15,5 +19,6 @@ class MyWebViewClient(activity: MainActivity) : WebViewClient() {
 
     override fun onPageFinished(view: WebView?, url: String?) {
         super.onPageFinished(view, url)
+        listener.onPageFinished(view, url)
     }
 }
