@@ -6,9 +6,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.view.View
-import android.webkit.ValueCallback
-import android.webkit.WebSettings
-import android.webkit.WebView
+import android.webkit.*
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -17,7 +15,6 @@ import java.util.*
 class MainActivity : AppCompatActivity(), ValueCallback<String> {
 
     companion object {
-        const val url = "https://katahiromz.github.io/saimin/"
         const val requestCodePermissionAudio = 1
     }
 
@@ -84,10 +81,21 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
         webView.post {
             initWebSettings()
         }
+        var success: Boolean = true
+        var failed: Boolean = false
         webView.post {
             webView.webViewClient = MyWebViewClient(object: MyWebViewClient.Listener {
+                override fun onReceivedError(view: WebView?, request: WebResourceRequest?,
+                                             error: WebResourceError?)
+                {
+                    success = false
+                }
                 override fun onPageFinished(view: WebView?, url: String?) {
                     findViewById<TextView>(R.id.loading).visibility = View.GONE
+                    if (!success && !failed) {
+                        failed = true
+                        webView.loadUrl(getString(R.string.failed_url))
+                    }
                 }
             })
             val chromeClient = MyWebChromeClient(this, object: MyWebChromeClient.Listener {
@@ -97,7 +105,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
             })
             webView.webChromeClient = chromeClient
             webView.addJavascriptInterface(chromeClient, "android")
-            webView.loadUrl(url)
+            webView.loadUrl(getString(R.string.url))
         }
     }
 
