@@ -85,11 +85,12 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
         var failed: Boolean = false
         webView.post {
             webView.webViewClient = MyWebViewClient(object: MyWebViewClient.Listener {
-                override fun onReceivedError(view: WebView?, request: WebResourceRequest?,
-                                             error: WebResourceError?)
+                override fun onReceivedError(view: WebView?, errorCode: Int, description: String?,
+                                             failingUrl: String?)
                 {
                     success = false
                 }
+
                 override fun onReceivedHttpError(view: WebView?, request: WebResourceRequest?,
                                                  errorResponse: WebResourceResponse?)
                 {
