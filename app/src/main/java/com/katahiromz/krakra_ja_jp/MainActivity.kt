@@ -66,7 +66,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
         super.onAttachedToWindow()
         if (!isLoaded) {
             isLoaded = true
-            showPopup()
             thread = WebViewThread(this)
             thread.start()
         }
@@ -167,10 +166,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
             tts.setSpeechRate(speed)
             tts.speak(text, TextToSpeech.QUEUE_FLUSH, params, "utteranceId")
         }
-    }
-
-    private fun showPopup() {
-        // TODO:
     }
 
     class WebViewThread(activity: MainActivity) : Thread() {
