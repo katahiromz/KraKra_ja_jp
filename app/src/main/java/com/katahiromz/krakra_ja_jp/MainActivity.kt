@@ -85,8 +85,8 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
         var failed: Boolean = false
         webView.post {
             webView.webViewClient = MyWebViewClient(object: MyWebViewClient.Listener {
-                override fun onReceivedError(view: WebView?, errorCode: Int, description: String?,
-                                             failingUrl: String?)
+                override fun onReceivedError(view: WebView?, request: WebResourceRequest?,
+                                             error: WebResourceError?)
                 {
                     success = false
                 }
@@ -96,6 +96,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
                 {
                     success = false
                 }
+
                 override fun onPageFinished(view: WebView?, url: String?) {
                     findViewById<TextView>(R.id.loading).visibility = View.GONE
                     if (!success && !failed) {
