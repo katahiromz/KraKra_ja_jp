@@ -5,9 +5,11 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
+import android.view.View
 import android.webkit.ValueCallback
 import android.webkit.WebSettings
 import android.webkit.WebView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import java.util.*
@@ -36,6 +38,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
             initTextToSpeech(status)
         }
         webView = findViewById(R.id.web_view)
+        webView.setBackgroundColor(0)
     }
 
     override fun onResume() {
@@ -82,8 +85,12 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
             initWebSettings()
         }
         webView.post {
-            webView.webViewClient = MyWebViewClient(this)
-            var chromeClient = MyWebChromeClient(this, object: MyWebChromeClient.Listener {
+            webView.webViewClient = MyWebViewClient(object: MyWebViewClient.Listener {
+                override fun onPageFinished(view: WebView?, url: String?) {
+                    findViewById<TextView>(R.id.loading).visibility = View.GONE
+                }
+            })
+            val chromeClient = MyWebChromeClient(this, object: MyWebChromeClient.Listener {
                 override fun onSpeech(text: String) {
                     speechText(text)
                 }
