@@ -90,6 +90,11 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
                 {
                     success = false
                 }
+                override fun onReceivedHttpError(view: WebView?, request: WebResourceRequest?,
+                                                 errorResponse: WebResourceResponse?)
+                {
+                    success = false
+                }
                 override fun onPageFinished(view: WebView?, url: String?) {
                     findViewById<TextView>(R.id.loading).visibility = View.GONE
                     if (!success && !failed) {
