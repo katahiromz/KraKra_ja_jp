@@ -96,8 +96,8 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
     fun initWebView() {
         webView = findViewById(R.id.web_view)
-        webView.setBackgroundColor(0)
         webView.post {
+            webView.setBackgroundColor(0)
             initWebSettings()
         }
         var success: Boolean = true
