@@ -111,31 +111,23 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             webView.setBackgroundColor(0)
             initWebSettings()
         }
-        var success: Boolean = true
-        var failed: Boolean = false
         webView.post {
             webView.webViewClient = MyWebViewClient(object: MyWebViewClient.Listener {
                 override fun onReceivedError(view: WebView?, request: WebResourceRequest?,
                                              error: WebResourceError?)
                 {
                     logD("onReceivedError")
-                    success = false
                 }
 
                 override fun onReceivedHttpError(view: WebView?, request: WebResourceRequest?,
                                                  errorResponse: WebResourceResponse?)
                 {
                     logD("onReceivedHttpError")
-                    success = false
                 }
 
                 override fun onPageFinished(view: WebView?, url: String?) {
                     logD("onPageFinished")
                     findViewById<TextView>(R.id.loading).visibility = View.GONE
-                    if (!success && !failed) {
-                        failed = true
-                        webView.loadUrl(getString(R.string.failed_url))
-                    }
                 }
             })
 
