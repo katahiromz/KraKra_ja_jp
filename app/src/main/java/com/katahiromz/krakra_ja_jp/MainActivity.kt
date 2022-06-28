@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         if (requestCode == requestCodePermissionAudio) {
             if (grantResults.isNotEmpty()) {
                 if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Log.e("MainActivity", "!PERMISSION_GRANTED")
+                    logD("Not PERMISSION_GRANTED!")
                 }
             }
         }
