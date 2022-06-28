@@ -34,10 +34,15 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
-        webViewThread = WebViewThread(this)
-        webViewThread.start()
-        ttsThread = TtsThread(this)
-        ttsThread.start()
+        if (false) {
+            initWebView()
+            initTextToSpeech()
+        } else {
+            webViewThread = WebViewThread(this)
+            webViewThread.start()
+            ttsThread = TtsThread(this)
+            ttsThread.start()
+        }
     }
 
     override fun onStart() {
@@ -200,7 +205,10 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
 
     fun stopSpeech() {
-        speechText("")
+        if (isSpeechReady) {
+            val params = Bundle()
+            tts.speak("", TextToSpeech.QUEUE_FLUSH, params, "utteranceId")
+        }
     }
 
     class WebViewThread(activity: MainActivity) : Thread() {
