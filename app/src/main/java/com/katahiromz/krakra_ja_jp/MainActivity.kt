@@ -21,10 +21,10 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
 
     private lateinit var webView: WebView
     private lateinit var tts: TextToSpeech
-    private lateinit var thread: WebViewThread
+    private lateinit var webViewThread: WebViewThread
+    private lateinit var ttsThread: TtsThread
 
     private var resultString = ""
-    private var isLoaded = false
     private var isSpeechReady = false
     private var theText = ""
 
@@ -34,11 +34,10 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
-        tts = TextToSpeech(this) { status ->
-            initTextToSpeech(status)
-        }
-        webView = findViewById(R.id.web_view)
-        webView.setBackgroundColor(0)
+        webViewThread = WebViewThread(this)
+        webViewThread.start()
+        ttsThread = TtsThread(this)
+        ttsThread.start()
     }
 
     override fun onStart() {
@@ -83,19 +82,10 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
     ) {
         if (requestCode == requestCodePermissionAudio) {
             if (grantResults.isNotEmpty()) {
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    webView.reload()
+                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Log.e("MainActivity", "!PERMISSION_GRANTED")
                 }
             }
-        }
-    }
-
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-        if (!isLoaded) {
-            isLoaded = true
-            thread = WebViewThread(this)
-            thread.start()
         }
     }
 
@@ -105,6 +95,8 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
     }
 
     fun initWebView() {
+        webView = findViewById(R.id.web_view)
+        webView.setBackgroundColor(0)
         webView.post {
             initWebSettings()
         }
@@ -144,14 +136,16 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
         }
     }
 
-    private fun initTextToSpeech(status: Int) {
-        if (status == TextToSpeech.SUCCESS) {
-            isSpeechReady = true
-            var locale = Locale.JAPANESE
-            if (BuildConfig.DEBUG)
-                locale = Locale.ENGLISH
-            if (tts.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
-                tts.language = locale
+    private fun initTextToSpeech() {
+        tts = TextToSpeech(this) { status ->
+            if (status == TextToSpeech.SUCCESS) {
+                isSpeechReady = true
+                var locale = Locale.JAPANESE
+                if (BuildConfig.DEBUG)
+                    locale = Locale.ENGLISH
+                if (tts.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
+                    tts.language = locale
+                }
             }
         }
     }
@@ -202,6 +196,14 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
 
         override fun run() {
             mainActivity.initWebView()
+        }
+    }
+
+    class TtsThread(activity: MainActivity) : Thread() {
+        private var mainActivity: MainActivity = activity
+
+        override fun run() {
+            mainActivity.initTextToSpeech()
         }
     }
 }
