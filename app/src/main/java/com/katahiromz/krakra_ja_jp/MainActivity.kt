@@ -217,19 +217,15 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         }
     }
 
-    class WebViewThread(activity: MainActivity) : Thread() {
-        private var mainActivity: MainActivity = activity
-
+    class WebViewThread(private val activity: MainActivity) : Thread() {
         override fun run() {
-            mainActivity.initWebView()
+            activity.initWebView()
         }
     }
 
-    class TtsThread(activity: MainActivity) : Thread() {
-        private var mainActivity: MainActivity = activity
-
+    class TtsThread(private val activity: MainActivity) : Thread() {
         override fun run() {
-            mainActivity.initTextToSpeech()
+            activity.initTextToSpeech()
         }
     }
 }
