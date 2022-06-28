@@ -58,14 +58,14 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
         Log.d("MainActivity", "onPause")
         super.onPause()
         webView.onPause()
-        speechText("")
+        stopSpeech()
     }
 
     override fun onStop() {
         Log.d("MainActivity", "onStop")
         super.onStop()
         webView.onPause()
-        speechText("")
+        stopSpeech()
     }
 
     override fun onDestroy() {
@@ -78,8 +78,8 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
+        grantResults: IntArray)
+    {
         if (requestCode == requestCodePermissionAudio) {
             if (grantResults.isNotEmpty()) {
                 if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
@@ -107,16 +107,19 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
                 override fun onReceivedError(view: WebView?, request: WebResourceRequest?,
                                              error: WebResourceError?)
                 {
+                    Log.d("WebViewClient", "onReceivedError")
                     success = false
                 }
 
                 override fun onReceivedHttpError(view: WebView?, request: WebResourceRequest?,
                                                  errorResponse: WebResourceResponse?)
                 {
+                    Log.d("WebViewClient", "onReceivedHttpError")
                     success = false
                 }
 
                 override fun onPageFinished(view: WebView?, url: String?) {
+                    Log.d("WebViewClient", "onPageFinished")
                     findViewById<TextView>(R.id.loading).visibility = View.GONE
                     if (!success && !failed) {
                         failed = true
@@ -124,8 +127,10 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
                     }
                 }
             })
+
             val chromeClient = MyWebChromeClient(this, object: MyWebChromeClient.Listener {
                 override fun onSpeech(text: String) {
+                    Log.d("WebChromeClient", "onSpeech")
                     theText = text
                     speechText(text)
                 }
@@ -189,6 +194,10 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
             tts.setSpeechRate(speed)
             tts.speak(text, TextToSpeech.QUEUE_FLUSH, params, "utteranceId")
         }
+    }
+
+    fun stopSpeech() {
+        speechText("")
     }
 
     class WebViewThread(activity: MainActivity) : Thread() {
