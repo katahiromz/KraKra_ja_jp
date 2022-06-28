@@ -28,8 +28,14 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     private var isSpeechReady = false
     private var theText = ""
 
+    private fun logD(msg: String?, tr: Throwable? = null) {
+        if (BuildConfig.DEBUG) {
+            Log.d("MainActivity", msg, tr)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d("MainActivity", "onCreate")
+        logD("onCreate")
         installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -46,12 +52,12 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
 
     override fun onStart() {
-        Log.d("MainActivity", "onStart")
+        logD("onStart")
         super.onStart()
     }
 
     override fun onResume() {
-        Log.d("MainActivity", "onResume")
+        logD("onResume")
         super.onResume()
         webView.onResume()
         if (theText != "") {
@@ -60,21 +66,21 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
 
     override fun onPause() {
-        Log.d("MainActivity", "onPause")
+        logD("onPause")
         super.onPause()
         webView.onPause()
         stopSpeech()
     }
 
     override fun onStop() {
-        Log.d("MainActivity", "onStop")
+        logD("onStop")
         super.onStop()
         webView.onPause()
         stopSpeech()
     }
 
     override fun onDestroy() {
-        Log.d("MainActivity", "onDestroy")
+        logD("onDestroy")
         webView.destroy()
         tts.shutdown()
         super.onDestroy()
@@ -112,19 +118,19 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
                 override fun onReceivedError(view: WebView?, request: WebResourceRequest?,
                                              error: WebResourceError?)
                 {
-                    Log.d("WebViewClient", "onReceivedError")
+                    logD("onReceivedError")
                     success = false
                 }
 
                 override fun onReceivedHttpError(view: WebView?, request: WebResourceRequest?,
                                                  errorResponse: WebResourceResponse?)
                 {
-                    Log.d("WebViewClient", "onReceivedHttpError")
+                    logD("onReceivedHttpError")
                     success = false
                 }
 
                 override fun onPageFinished(view: WebView?, url: String?) {
-                    Log.d("WebViewClient", "onPageFinished")
+                    logD("onPageFinished")
                     findViewById<TextView>(R.id.loading).visibility = View.GONE
                     if (!success && !failed) {
                         failed = true
@@ -135,7 +141,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
             val chromeClient = MyWebChromeClient(this, object: MyWebChromeClient.Listener {
                 override fun onSpeech(text: String) {
-                    Log.d("WebChromeClient", "onSpeech")
+                    logD("onSpeech")
                     theText = text
                     speechText(text)
                 }
@@ -204,7 +210,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         }
     }
 
-    fun stopSpeech() {
+    private fun stopSpeech() {
         if (isSpeechReady) {
             val params = Bundle()
             tts.speak("", TextToSpeech.QUEUE_FLUSH, params, "utteranceId")
