@@ -23,6 +23,6 @@
     <string name="guide_message_list">メッセージリスト</string>
 
     <!-- URLs -->
-    <string name="url">https://katahiromz.github.io/saimin/</string>
+    <string name="url">file:///android_asset/saimin/index.html</string>
     <string name="failed_url">file:///android_asset/net_fail.html</string>
 </resources>
