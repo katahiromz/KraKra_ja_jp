@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
+import android.util.Log
 import android.view.View
 import android.webkit.*
 import android.widget.TextView
@@ -25,8 +26,10 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
     private var resultString = ""
     private var isLoaded = false
     private var isSpeechReady = false
+    private var theText = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("MainActivity", "onCreate")
         installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -38,14 +41,39 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
         webView.setBackgroundColor(0)
     }
 
+    override fun onStart() {
+        Log.d("MainActivity", "onStart")
+        super.onStart()
+    }
+
     override fun onResume() {
+        Log.d("MainActivity", "onResume")
         super.onResume()
         webView.onResume()
+        if (theText != "") {
+            speechText(theText)
+        }
     }
 
     override fun onPause() {
+        Log.d("MainActivity", "onPause")
         super.onPause()
         webView.onPause()
+        speechText("")
+    }
+
+    override fun onStop() {
+        Log.d("MainActivity", "onStop")
+        super.onStop()
+        webView.onPause()
+        speechText("")
+    }
+
+    override fun onDestroy() {
+        Log.d("MainActivity", "onDestroy")
+        webView.destroy()
+        tts.shutdown()
+        super.onDestroy()
     }
 
     override fun onRequestPermissionsResult(
@@ -106,6 +134,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
             })
             val chromeClient = MyWebChromeClient(this, object: MyWebChromeClient.Listener {
                 override fun onSpeech(text: String) {
+                    theText = text
                     speechText(text)
                 }
             })
