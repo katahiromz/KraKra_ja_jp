@@ -20,14 +20,14 @@ class MyWebViewClient(val listener: Listener) : WebViewClient() {
     override fun onReceivedError(view: WebView?, request: WebResourceRequest?,
                                  error: WebResourceError?)
     {
-        //super.onReceivedError(view, request, error) // No use!
+        super.onReceivedError(view, request, error)
         listener.onReceivedError(view, request, error)
     }
 
     override fun onReceivedHttpError(view: WebView?, request: WebResourceRequest?,
                                      errorResponse: WebResourceResponse?)
     {
-        //super.onReceivedHttpError(view, request, errorResponse) // No use!
+        super.onReceivedHttpError(view, request, errorResponse)
         listener.onReceivedHttpError(view, request, errorResponse)
     }
 
