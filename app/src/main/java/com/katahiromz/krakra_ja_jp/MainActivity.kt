@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import java.util.*
 
-class MainActivity : AppCompatActivity(), ValueCallback<String> {
+class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.OnInitListener {
 
     companion object {
         const val requestCodePermissionAudio = 1
@@ -141,17 +141,20 @@ class MainActivity : AppCompatActivity(), ValueCallback<String> {
         }
     }
 
+    // TextToSpeech.OnInitListener
+    override fun onInit(status: Int) {
+        if (status == TextToSpeech.SUCCESS) {
+            isSpeechReady = true
+        }
+    }
+
     private fun initTextToSpeech() {
-        tts = TextToSpeech(this) { status ->
-            if (status == TextToSpeech.SUCCESS) {
-                isSpeechReady = true
-                var locale = Locale.JAPANESE
-                if (BuildConfig.DEBUG)
-                    locale = Locale.ENGLISH
-                if (tts.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
-                    tts.language = locale
-                }
-            }
+        tts = TextToSpeech(this, this)
+        var locale = Locale.JAPANESE
+        if (BuildConfig.DEBUG)
+            locale = Locale.ENGLISH
+        if (tts.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
+            tts.language = locale
         }
     }
 
