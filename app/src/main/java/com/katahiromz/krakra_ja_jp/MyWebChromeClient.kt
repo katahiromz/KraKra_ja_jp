@@ -95,7 +95,12 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         val title = getResString(R.string.app_name)
         if (isSelectMessageDialog(message)) {
             // メッセージ選択ダイアログを表示
-            showSelectMessageDialog(title = title, message = message, defaultValue = defaultValue, result = result)
+            showSelectMessageDialog(
+                title = title,
+                message = message,
+                defaultValue = defaultValue,
+                result = result
+            )
             return true
         }
         var inputtedText: String? = null
@@ -123,7 +128,8 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
      * @param message メッセージ文字列
      * @return true: メッセージ選択ダイアログの表示対象、false: それ以外
      */
-    private fun isSelectMessageDialog(message: String?): Boolean = message == getResString(R.string.message_select_dialog_message)
+    private fun isSelectMessageDialog(message: String?): Boolean =
+        message == getResString(R.string.message_select_dialog_message)
 
     private fun showSelectMessageDialog(
         title: String,
@@ -137,7 +143,16 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
             customView(R.layout.message_select_dialog, scrollable = true, horizontalPadding = true)
             positiveButton(text = getResString(R.string.ok)) {
                 val editText = getCustomView().findViewById<EditText>(R.id.message_edit)
-                result?.confirm(editText.text.toString())
+                val inputtedText = editText.text.toString()
+                result?.confirm(inputtedText)
+
+                val defaultMessageList = activity.getStringArray(R.array.message_sample_list)
+                MainRepository.getMessageList(activity).apply {
+                    val messageList = defaultMessageList + this
+                    if (!messageList.contains(inputtedText)) {
+                        MainRepository.setMessageList(activity, this + inputtedText)
+                    }
+                }
             }
             negativeButton(text = getResString(R.string.cancel)) {
                 result?.cancel()
@@ -150,8 +165,13 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         // ダイアログのレイアウトを設定
         val customView = dialog.getCustomView()
         val listView: ListView = customView.findViewById(R.id.message_list)
-        val messageList = activity.getStringArray(R.array.message_sample_list)
-        val arrayAdapter = ArrayAdapter(activity, android.R.layout.simple_list_item_1, messageList)
+        val defaultMessageList = activity.getStringArray(R.array.message_sample_list)
+        val inputtedMessageList = MainRepository.getMessageList(activity)
+        val arrayAdapter = ArrayAdapter(
+            activity,
+            android.R.layout.simple_list_item_1,
+            defaultMessageList + inputtedMessageList
+        )
         listView.adapter = arrayAdapter
 
         val params = listView.layoutParams
@@ -176,18 +196,21 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         var totalHeight = 0
 
         // 個々のアイテムの高さを測り、加算していく
+        val listItemHeightCount = 5
         for (i in 0 until arrayAdapter.count) {
             val listItem = arrayAdapter.getView(i, null, listView)
             listItem.measure(0, 0)
             totalHeight += listItem.measuredHeight
+            if (i == listItemHeightCount - 1) {
+                break
+            }
         }
 
         // (区切り線の高さ * 要素数の数)を高さとする
-        val listItemMaxCount = 4
-        return if (arrayAdapter.count <= listItemMaxCount) {
+        return if (arrayAdapter.count < listItemHeightCount) {
             totalHeight + (listView.dividerHeight * (arrayAdapter.count - 1))
         } else {
-            totalHeight + (listView.dividerHeight * listItemMaxCount)
+            totalHeight + (listView.dividerHeight * listItemHeightCount)
         }
     }
 
@@ -203,7 +226,7 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
 
     @JavascriptInterface
     fun clearSettings() {
-        // TODO:
+        MainRepository.clearMessageList(activity)
     }
 
     override fun onConsoleMessage(consoleMessage: ConsoleMessage?): Boolean {
