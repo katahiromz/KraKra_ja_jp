@@ -13,7 +13,7 @@
         android:contentDescription="@string/now_starting"
         android:text="@string/now_starting"
         android:textColor="@color/white"
-        android:textSize="32sp"
+        android:textSize="20sp"
         android:translationZ="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
