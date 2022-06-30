@@ -1,7 +1,7 @@
 /* jshint esversion: 8 */
 
 const NUM_TYPE = 5;
-const VERSION = '3.1.7';
+const VERSION = '3.1.8';
 const DEBUG = true;
 
 // {{language-specific}}
@@ -118,6 +118,8 @@ jQuery(function($){
 		return cx >= 1500 || cy >= 1500;
 	}
 
+	var playing = null;
+
 	function setSoundName(value, test = false){
 		if (value.indexOf('sn') == 0)
 			value = '';
@@ -129,7 +131,17 @@ jQuery(function($){
 			}
 			sound = new Audio('sn/' + soundName + '.mp3');
 			if (test){
-				sound.play();
+				if (playing){
+					try{
+						playing.pause();
+					}catch(error){
+						;
+					}
+				}
+				setTimeout(function(){
+					playing = sound;
+					sound.play();
+				}, 100);
 			}
 		}else{
 			sound = null;
