@@ -153,7 +153,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
     private fun initTextToSpeech() {
         tts = TextToSpeech(this, this)
-        var locale = Locale.JAPANESE
+        var locale = Locale.JAPANESE // {{language-dependent}}
         if (BuildConfig.DEBUG)
             locale = Locale.ENGLISH
         if (tts.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
