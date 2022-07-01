@@ -20,10 +20,10 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         const val requestCodePermissionAudio = 1
     }
 
-    private lateinit var webView: WebView
-    private lateinit var tts: TextToSpeech
-    private lateinit var webViewThread: WebViewThread
-    private lateinit var ttsThread: TtsThread
+    private var webView: WebView? = null
+    private var tts: TextToSpeech? = null
+    private var webViewThread: WebViewThread? = null
+    private var ttsThread: TtsThread? = null
 
     private var resultString = ""
     private var isSpeechReady = false
@@ -44,13 +44,11 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         if (false) {
             initWebView()
             initTextToSpeech()
-            webViewThread = null
-            ttsThread = null
         } else {
             webViewThread = WebViewThread(this)
-            webViewThread.start()
+            webViewThread?.start()
             ttsThread = TtsThread(this)
-            ttsThread.start()
+            ttsThread?.start()
         }
     }
 
@@ -62,7 +60,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     override fun onResume() {
         logD("onResume")
         super.onResume()
-        webView.onResume()
+        webView?.onResume()
         if (theText != "") {
             speechText(theText)
         }
@@ -71,21 +69,21 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     override fun onPause() {
         logD("onPause")
         super.onPause()
-        webView.onPause()
+        webView?.onPause()
         stopSpeech()
     }
 
     override fun onStop() {
         logD("onStop")
         super.onStop()
-        webView.onPause()
+        webView?.onPause()
         stopSpeech()
     }
 
     override fun onDestroy() {
         logD("onDestroy")
-        webView.destroy()
-        tts.shutdown()
+        webView?.destroy()
+        tts?.shutdown()
         super.onDestroy()
     }
 
@@ -110,12 +108,12 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
     fun initWebView() {
         webView = findViewById(R.id.web_view)
-        webView.post {
-            webView.setBackgroundColor(0)
+        webView?.post {
+            webView?.setBackgroundColor(0)
             initWebSettings()
         }
-        webView.post {
-            webView.webViewClient = MyWebViewClient(object: MyWebViewClient.Listener {
+        webView?.post {
+            webView?.webViewClient = MyWebViewClient(object: MyWebViewClient.Listener {
                 override fun onReceivedError(view: WebView?, request: WebResourceRequest?,
                                              error: WebResourceError?)
                 {
@@ -141,9 +139,9 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
                     speechText(text)
                 }
             })
-            webView.webChromeClient = chromeClient
-            webView.addJavascriptInterface(chromeClient, "android")
-            webView.loadUrl(getString(R.string.url))
+            webView?.webChromeClient = chromeClient
+            webView?.addJavascriptInterface(chromeClient, "android")
+            webView?.loadUrl(getString(R.string.url))
         }
     }
 
@@ -159,22 +157,26 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         var locale = Locale.JAPANESE // {{language-dependent}}
         if (BuildConfig.DEBUG)
             locale = Locale.ENGLISH
-        if (tts.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
-            tts.language = locale
+        if (tts != null) {
+            if (tts!!.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
+                tts!!.language = locale
+            }
         }
     }
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun initWebSettings() {
-        val settings = webView.settings
-        settings.javaScriptEnabled = true
-        settings.domStorageEnabled = true
-        settings.mediaPlaybackRequiresUserGesture = false
+        val settings = webView?.settings
+        settings?.javaScriptEnabled = true
+        settings?.domStorageEnabled = true
+        settings?.mediaPlaybackRequiresUserGesture = false
         if (BuildConfig.DEBUG) {
             WebView.setWebContentsDebuggingEnabled(true)
         }
-        val versionName = getVersionName()
-        updateUserAgent(settings, versionName)
+        if (settings != null) {
+            val versionName = getVersionName()
+            updateUserAgent(settings!!, versionName)
+        }
     }
 
     private fun updateUserAgent(settings: WebSettings, versionName: String) {
@@ -199,16 +201,16 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             val speed = 0.3f
             val pitch = 0.8f
             params.putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME, volume)
-            tts.setPitch(pitch)
-            tts.setSpeechRate(speed)
-            tts.speak(text, TextToSpeech.QUEUE_FLUSH, params, "utteranceId")
+            tts?.setPitch(pitch)
+            tts?.setSpeechRate(speed)
+            tts?.speak(text, TextToSpeech.QUEUE_FLUSH, params, "utteranceId")
         }
     }
 
     private fun stopSpeech() {
         if (isSpeechReady) {
             val params = Bundle()
-            tts.speak("", TextToSpeech.QUEUE_FLUSH, params, "utteranceId")
+            tts?.speak("", TextToSpeech.QUEUE_FLUSH, params, "utteranceId")
         }
     }
 
