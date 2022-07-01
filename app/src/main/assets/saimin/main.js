@@ -103,7 +103,7 @@ jQuery(function($){
 			android.speechLoop(text);
 		}catch(error){
 			if (window.speechSynthesis){
-				text = text.repeat(256);
+				text = text.repeat(64);
 				var speech = new SpeechSynthesisUtterance(text);
 				// {{language-specific}}
 				speech.pitch = 0.6;
