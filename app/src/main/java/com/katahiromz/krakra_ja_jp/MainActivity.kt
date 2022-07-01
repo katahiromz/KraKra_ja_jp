@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Process
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
@@ -211,6 +212,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
     class WebViewThread(private val activity: MainActivity) : Thread() {
         override fun run() {
+            Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE)
             activity.initWebView()
         }
     }
