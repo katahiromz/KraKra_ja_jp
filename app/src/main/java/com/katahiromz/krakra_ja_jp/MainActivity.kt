@@ -44,6 +44,8 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         if (false) {
             initWebView()
             initTextToSpeech()
+            webViewThread = null
+            ttsThread = null
         } else {
             webViewThread = WebViewThread(this)
             webViewThread.start()
