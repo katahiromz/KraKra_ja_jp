@@ -24,5 +24,4 @@
 
     <!-- URLs -->
     <string name="url">file:///android_asset/saimin/index.html</string>
-    <string name="failed_url">file:///android_asset/net_fail.html</string>
 </resources>
