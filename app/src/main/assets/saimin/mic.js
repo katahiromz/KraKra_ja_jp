@@ -62,14 +62,21 @@ function mic_connect(){
 }
 
 function mic_disconnect(){
-  mic_biquadFilter.disconnect(0);
-  mic_source.disconnect(0);
-  mic_biquadFilter.disconnect(0);
-  mic_gainNode.disconnect(0);
-  mic_analyser.disconnect(0);
+  if (mic_source){
+    mic_source.disconnect(0);
+    mic_source = null;
+  }
+  if (mic_gainNode){
+    mic_gainNode.disconnect(0);
+    mic_gainNode = null;
+  }
+  if (mic_analyser){
+    mic_analyser.disconnect(0);
+    mic_analyser = null;
+  }
+  if (mic_biquadFilter){
+    mic_biquadFilter.disconnect(0);
+    mic_biquadFilter = null;
+  }
   mic_context = null;
-  mic_gainNode = null;
-  mic_biquadFilter = null;
-  mic_source = null;
-  mic_analyser = null;
 }
