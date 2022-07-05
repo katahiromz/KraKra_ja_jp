@@ -171,6 +171,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         settings?.domStorageEnabled = true
         settings?.mediaPlaybackRequiresUserGesture = false
         if (BuildConfig.DEBUG) {
+            settings?.cacheMode = WebSettings.LOAD_NO_CACHE
             WebView.setWebContentsDebuggingEnabled(true)
         }
         if (settings != null) {
