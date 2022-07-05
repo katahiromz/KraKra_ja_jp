@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
 
     private var webView: WebView? = null
+    private var chromeClient: MyWebChromeClient? = null
     private var tts: TextToSpeech? = null
     private var webViewThread: WebViewThread? = null
     private var ttsThread: TtsThread? = null
@@ -96,6 +97,11 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             if (grantResults.isNotEmpty()) {
                 if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                     logD("Not PERMISSION_GRANTED!")
+                } else {
+                    val myRequest = chromeClient?.myRequest
+                    if (myRequest != null) {
+                        myRequest.grant(myRequest.resources)
+                    }
                 }
             }
         }
@@ -132,7 +138,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
                 }
             })
 
-            val chromeClient = MyWebChromeClient(this, object: MyWebChromeClient.Listener {
+            chromeClient = MyWebChromeClient(this, object: MyWebChromeClient.Listener {
                 override fun onSpeech(text: String) {
                     logD("onSpeech")
                     theText = text
@@ -140,7 +146,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
                 }
             })
             webView?.webChromeClient = chromeClient
-            webView?.addJavascriptInterface(chromeClient, "android")
+            webView?.addJavascriptInterface(chromeClient!!, "android")
             webView?.loadUrl(getString(R.string.url))
         }
     }
@@ -176,7 +182,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         }
         if (settings != null) {
             val versionName = getVersionName()
-            updateUserAgent(settings!!, versionName)
+            updateUserAgent(settings, versionName)
         }
     }
 
