@@ -85,13 +85,12 @@ jQuery(function($){
 	function adjustText(text){
 		// {{language-specific}}
 		text = text.replace(TEXT_FULLWIDTH_SPACE, '  ').trim();
-		if (text == ''){
-			return;
-		}
+		if (text == '')
+			return text;
 		while (text.slice(-1) == TEXT_PERIOD)
 			text = text.slice(0, -1);
 		if (text == '')
-			return;
+			return text;
 		text += TEXT_PERIOD_SPACE;
 		return text;
 	}
