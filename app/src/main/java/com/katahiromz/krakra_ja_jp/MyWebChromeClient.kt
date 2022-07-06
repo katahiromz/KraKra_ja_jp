@@ -45,6 +45,8 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         }
     }
 
+    public var dialog: MaterialDialog? = null
+
     override fun onJsAlert(
         view: WebView?,
         url: String?,
@@ -52,10 +54,12 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         result: JsResult?
     ): Boolean {
         val title = getResString(R.string.app_name)
-        MaterialDialog(activity).show {
+        dialog = MaterialDialog(activity).show {
             title(text = title)
             message(text = message)
-            positiveButton(text = getResString(R.string.ok)) { }
+            positiveButton(text = getResString(R.string.ok)) {
+                dialog = null
+            }
             cancelable(false)
             cancelOnTouchOutside(false)
             lifecycleOwner(activity)
@@ -71,14 +75,16 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         result: JsResult?
     ): Boolean {
         val title = getResString(R.string.app_name)
-        MaterialDialog(activity).show {
+        dialog = MaterialDialog(activity).show {
             title(text = title)
             message(text = message)
             positiveButton(text = getResString(R.string.ok)) {
                 result?.confirm()
+                dialog = null
             }
             negativeButton(text = getResString(R.string.cancel)) {
                 result?.cancel()
+                dialog = null
             }
             cancelable(false)
             cancelOnTouchOutside(false)
@@ -107,7 +113,7 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
             return true
         }
         var inputtedText: String? = null
-        MaterialDialog(activity).show {
+        dialog = MaterialDialog(activity).show {
             title(text = title)
             message(text = message)
             input(hint = getResString(R.string.prompt_hint), prefill = defaultValue) { _, text ->
@@ -115,9 +121,11 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
             }
             positiveButton(text = getResString(R.string.ok)) {
                 result?.confirm(inputtedText ?: "")
+                dialog = null
             }
             negativeButton(text = getResString(R.string.cancel)) {
                 result?.cancel()
+                dialog = null
             }
             cancelable(false)
             cancelOnTouchOutside(false)
@@ -140,7 +148,7 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         defaultValue: String?,
         result: JsPromptResult?
     ) {
-        val dialog = MaterialDialog(activity).show {
+        dialog = MaterialDialog(activity).show {
             title(text = title)
             message(text = message)
             customView(R.layout.message_select_dialog, scrollable = true, horizontalPadding = true)
@@ -148,6 +156,7 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
                 val editText = getCustomView().findViewById<EditText>(R.id.message_edit)
                 val inputtedText = editText.text.toString()
                 result?.confirm(inputtedText)
+                dialog = null
 
                 val defaultMessageList = activity.getStringArray(R.array.message_sample_list)
                 MainRepository.getMessageList(activity).apply {
@@ -159,6 +168,7 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
             }
             negativeButton(text = getResString(R.string.cancel)) {
                 result?.cancel()
+                dialog = null
             }
             cancelable(false)
             cancelOnTouchOutside(false)
@@ -166,7 +176,7 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         }
 
         // ダイアログのレイアウトを設定
-        val customView = dialog.getCustomView()
+        val customView = dialog!!.getCustomView()
         val listView: ListView = customView.findViewById(R.id.message_list)
         val defaultMessageList = activity.getStringArray(R.array.message_sample_list)
         val inputtedMessageList = MainRepository.getMessageList(activity)

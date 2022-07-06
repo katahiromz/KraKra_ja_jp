@@ -65,6 +65,9 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         if (theText != "") {
             speechText(theText)
         }
+        if (chromeClient?.dialog != null) {
+            chromeClient?.dialog?.show()
+        }
     }
 
     override fun onPause() {
