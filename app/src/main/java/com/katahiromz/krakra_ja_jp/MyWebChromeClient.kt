@@ -45,7 +45,12 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         }
     }
 
-    public var dialog: MaterialDialog? = null
+    private var dialog: MaterialDialog? = null
+
+    fun onResume() {
+        if (dialog != null)
+            dialog?.show()
+    }
 
     override fun onJsAlert(
         view: WebView?,
