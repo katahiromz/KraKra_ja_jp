@@ -7,7 +7,7 @@ const DEBUG = true;
 // {{language-specific}}
 const TEXT_PIC = '画';
 const TEXT_OK = 'OK';
-const TEXT_CANCEL = 'Cancel'; // 画面が小さいからこれは英語のままにする。
+const TEXT_CANCEL = 'キャンセル';
 const TEXT_YES = 'はい';
 const TEXT_NO = 'いいえ';
 const TEXT_VERSION_INFO = 'バージョン情報';
