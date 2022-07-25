@@ -1,7 +1,7 @@
 /* jshint esversion: 8 */
 
-const NUM_TYPE = 5;
-const VERSION = '3.1.8';
+const NUM_TYPE = 6;
+const VERSION = '3.1.9';
 const DEBUG = true;
 
 // {{language-specific}}
@@ -41,6 +41,8 @@ jQuery(function($){
 	var touchmoving = false;
 	var theRegistration = null;
 	var speedType = 'normal';
+	var coin = new Image();
+	coin.src = 'images/coin5yen.png';
 
 	function isNativeApp(){
 		return navigator.userAgent.indexOf('/KraKra-native-app/') != -1;
@@ -892,6 +894,69 @@ jQuery(function($){
 		ctx.restore();
 	}
 
+	function drawType6(ctx, px, py, dx, dy, t){
+		ctx.save();
+
+		var qx = px + dx / 2;
+		var qy = py + dy / 2;
+		var dxy = (dx + dy) / 2;
+
+		ctx.beginPath();
+		ctx.moveTo(px, py);
+		ctx.lineTo(px + dx, py);
+		ctx.lineTo(px + dx, py + dy);
+		ctx.lineTo(px, py + dy);
+		ctx.closePath();
+		ctx.clip();
+
+		ctx.fillStyle = '#99F';
+		ctx.fillRect(px, py, dx, dy);
+
+		ctx.fillStyle = '#336';
+		ctx.strokeStyle = '#ccc';
+		ctx.lineWidth = 4;
+
+		let focal = 100;
+		let cx = 8000, cy = 600;
+		for (let z = 0; z <= 1000; z += 100){
+			let w = focal / (focal + z);
+			let x0 = -cx * w;
+			let x1 = +cx * w;
+			let y0 = cy * w;
+			ctx.beginPath();
+			ctx.moveTo(qx + x0, qy + y0);
+			ctx.lineTo(qx + x1, qy + y0);
+			ctx.stroke();
+		}
+		for (let x = -cx; x < cx; x += 400){
+			let z0 = 0;
+			let z1 = 1000;
+			let w0 = focal / (focal + z0);
+			let w1 = focal / (focal + z1);
+			let x0 = x * w0;
+			let x1 = x * w1;
+			let y0 = cy * w0;
+			let y1 = cy * w1;
+			ctx.beginPath();
+			ctx.moveTo(qx + x0, qy + y0);
+			ctx.lineTo(qx + x1, qy + y1);
+			ctx.stroke();
+		}
+
+		if (coin.complete){
+			ctx.translate(qx - coin.width * 0.5, qy - coin.height * 0.75);
+
+			var count2 = getCount();
+			var angle = Math.PI * Math.sin(count2 * 0.1 - 0.05) * 0.078;
+			ctx.rotate(angle);
+
+			let ratio = isLargeDisplay() ? 1.4 : 1;
+			ctx.drawImage(coin, 0, 0, coin.width * ratio, coin.height * ratio);
+		}
+
+		ctx.restore();
+	}
+
 	function drawType(ctx, px, py, cx, cy){
 		switch (type){
 		case 0:
@@ -912,6 +977,9 @@ jQuery(function($){
 			break;
 		case 5:
 			drawType4_5(ctx, px, py, cx, cy, type);
+			break;
+		case 6:
+			drawType6(ctx, px, py, cx, cy, type);
 			break;
 		}
 	}
