@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId "com.katahiromz.krakra_ja_jp"
         minSdkVersion 28
-        targetSdkVersion 31
+        targetSdkVersion 30
         versionCode 315
         versionName "3.1.5"
 
