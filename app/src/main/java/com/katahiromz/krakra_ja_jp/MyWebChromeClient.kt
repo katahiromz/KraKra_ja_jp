@@ -239,7 +239,7 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
 
     @JavascriptInterface
     fun speechLoop(msg: String) {
-        listener.onSpeech(msg.repeat(64))
+        listener.onSpeech(msg.repeat(32))
     }
 
     @JavascriptInterface
