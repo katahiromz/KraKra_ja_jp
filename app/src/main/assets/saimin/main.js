@@ -1,7 +1,7 @@
 /* jshint esversion: 8 */
 
-const NUM_TYPE = 7;
-const VERSION = '3.2.3';
+const NUM_TYPE = 8;
+const VERSION = '3.2.4';
 const DEBUG = true;
 
 // {{language-specific}}
@@ -1018,6 +1018,69 @@ jQuery(function($){
 		ctx.restore();
 	}
 
+	function drawType8(ctx, px, py, dx, dy, t){
+		ctx.save();
+
+		var qx = px + dx / 2;
+		var qy = py + dy / 2;
+		var dxy = (dx + dy) / 2;
+
+		ctx.beginPath();
+		ctx.moveTo(px, py);
+		ctx.lineTo(px + dx, py);
+		ctx.lineTo(px + dx, py + dy);
+		ctx.lineTo(px, py + dy);
+		ctx.closePath();
+		ctx.clip();
+
+		ctx.fillStyle = '#000';
+		ctx.fillRect(px, py, dx, dy);
+
+		let count2 = getCount();
+		if (isLargeDisplay()){
+			qx += 60 * Math.cos(count2 * 0.1);
+			qy += 60 * Math.sin(count2 * 0.1);
+		}else{
+			qx += 40 * Math.cos(count2 * 0.1);
+			qy += 40 * Math.sin(count2 * 0.1);
+		}
+
+		const rotation = 8, width = dxy * 0.1;
+		let calc_point = function(radius, radian){
+			let x = qx + radius * Math.cos(radian);
+			let y = qy + radius * Math.sin(radian);
+			return [x, y];
+		}
+		const colors = ['#f00', '#ff0', '#0f0', '#0ff', '#00f', '#f0f'];
+		const factor = count2 * 0.6;
+		for (let radian0 = -4.5; radian0 < rotation * 2 * Math.PI; radian0 += 0.12){
+			let radian1 = radian0 + 0.15;
+			let radius0 = width * radian0 / (2 * Math.PI);
+			let radius1 = radius0 + width;
+			const [x0, y0] = calc_point(radius0, radian0 - factor);
+			const [x1, y1] = calc_point(radius1, radian0 - factor);
+			const [x2, y2] = calc_point(radius1, radian1 - factor);
+			const [x3, y3] = calc_point(radius0, radian1 - factor);
+			let g = ctx.createLinearGradient(x0, y0, x1, y1);
+			g.addColorStop(0 / 6, colors[0]);
+			g.addColorStop(1 / 6, colors[1]);
+			g.addColorStop(2 / 6, colors[2]);
+			g.addColorStop(3 / 6, colors[3]);
+			g.addColorStop(4 / 6, colors[4]);
+			g.addColorStop(5 / 6, colors[5]);
+			g.addColorStop(6 / 6, colors[0]);
+			ctx.fillStyle = g;
+			ctx.beginPath();
+			ctx.lineTo(x0, y0);
+			ctx.lineTo(x1, y1);
+			ctx.lineTo(x2, y2);
+			ctx.lineTo(x3, y3);
+			ctx.fill();
+		}
+
+		ctx.restore();
+	}
+
 	function drawType(ctx, px, py, cx, cy){
 		switch (type){
 		case 0:
@@ -1044,6 +1107,9 @@ jQuery(function($){
 			break;
 		case 7:
 			drawType7(ctx, px, py, cx, cy, type);
+			break;
+		case 8:
+			drawType8(ctx, px, py, cx, cy, type);
 			break;
 		}
 	}
