@@ -39,8 +39,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         const val LONG_SNACK = 1
         const val ACTION_SNACK_OK = 2
         // TODO: Add more snack
-
-        const val requestCodePermissionAudio = 1
     }
 
     // Display Toast (a messaging control)
@@ -107,7 +105,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
     /////////////////////////////////////////////////////////////////////
     // Permissions-related
-    
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
@@ -231,10 +229,19 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             })
 
             chromeClient = MyWebChromeClient(this, object: MyWebChromeClient.Listener {
+                override fun onChromePermissionRequest(permissions: Array<String>, requestCode: Int) {
+                    requestPermissions(permissions, requestCode)
+                }
                 override fun onSpeech(text: String) {
                     Timber.i("onSpeech")
                     theText = text
                     speechText(text)
+                }
+                override fun showToast(text: String, typeOfToast: Int) {
+                    this.showToast(text, typeOfToast)
+                }
+                override fun showSnackbar(text: String, typeOfSnack: Int) {
+                    this.showSnackbar(text, typeOfSnack)
                 }
             })
             webView?.webChromeClient = chromeClient

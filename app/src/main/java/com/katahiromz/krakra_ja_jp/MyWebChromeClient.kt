@@ -8,13 +8,16 @@ import android.webkit.*
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityCompat.shouldShowRequestPermissionRationale
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.checkSelfPermission
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.afollestad.materialdialogs.input.input
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import com.afollestad.materialdialogs.utils.MDUtil.getStringArray
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class MyWebChromeClient(private val activity: AppCompatActivity, private val listener: Listener) :
     WebChromeClient() {
@@ -22,89 +25,110 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
     // 定数。
     companion object {
         const val MY_WEBVIEW_REQUEST_CODE_01 = 999
+        // TODO: Add more request
     }
 
     // リスナ。
     interface Listener {
+        fun onChromePermissionRequest(permissions: Array<String>, requestCode: Int)
         fun onSpeech(text: String)
+        fun showToast(text: String, typeOfToast: Int)
+        fun showSnackbar(text: String, typeOfSnack: Int)
     }
 
     private fun getResString(resId: Int): String {
         return activity.getString(resId)
     }
 
-    public var myRequest: PermissionRequest? = null
-
     override fun onPermissionRequest(request: PermissionRequest?) {
-        if (request == null)
-            return
-        myRequest = request
-        val permissionCheck =
-            ContextCompat.checkSelfPermission(activity, Manifest.permission.RECORD_AUDIO)
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(
-                activity, arrayOf(Manifest.permission.RECORD_AUDIO),
-                MainActivity.requestCodePermissionAudio
-            )
+        // Audio record request
+        val audioCheck = checkSelfPermission(activity, Manifest.permission.RECORD_AUDIO)
+        if (audioCheck == PackageManager.PERMISSION_GRANTED) {
+            request?.grant(request.resources)
         } else {
-            request.grant(request.resources)
+            val audioRational =
+                shouldShowRequestPermissionRationale(activity, Manifest.permission.RECORD_AUDIO)
+            if (audioRational) {
+                listener.onChromePermissionRequest(
+                    arrayOf(Manifest.permission.RECORD_AUDIO),
+                    MY_WEBVIEW_REQUEST_CODE_01
+                )
+            }
         }
+        // TODO: Add more request
     }
 
-    private var dialog: MaterialDialog? = null
+    /////////////////////////////////////////////////////////////////////
+    // JavaScript interface-related
 
-    fun onResume() {
-        if (dialog != null)
-            dialog?.show()
+    @JavascriptInterface
+    fun cancelSpeech() {
+        listener.onSpeech("")
     }
 
+    @JavascriptInterface
+    fun speechLoop(msg: String) {
+        listener.onSpeech(msg.repeat(32))
+    }
+
+    @JavascriptInterface
+    fun clearSettings() {
+        MainRepository.clearMessageList(activity)
+    }
+
+    // Wrap JavaScript alert function
     override fun onJsAlert(
         view: WebView?,
         url: String?,
         message: String?,
         result: JsResult?
     ): Boolean {
+        // MaterialAlertDialogを使用して実装する。
         val title = getResString(R.string.app_name)
-        dialog = MaterialDialog(activity).show {
-            title(text = title)
-            message(text = message)
-            positiveButton(text = getResString(R.string.ok)) {
-                dialog = null
+        val ok_text = getResString(R.string.ok)
+        MaterialAlertDialogBuilder(activity)
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton(ok_text) { _, _ ->
+                result?.confirm()
             }
-            cancelable(false)
-            cancelOnTouchOutside(false)
-            lifecycleOwner(activity)
-        }
-        result?.confirm()
+            .setCancelable(false)
+            .show()
         return true
     }
 
+    // Wrap JavaScript confirm function
     override fun onJsConfirm(
         view: WebView?,
         url: String?,
         message: String?,
         result: JsResult?
     ): Boolean {
+        // MaterialAlertDialogを使用して実装する。
         val title = getResString(R.string.app_name)
-        dialog = MaterialDialog(activity).show {
-            title(text = title)
-            message(text = message)
-            positiveButton(text = getResString(R.string.ok)) {
+        val ok_text = getResString(R.string.ok)
+        val cancel_text = getResString(R.string.cancel)
+        MaterialAlertDialogBuilder(activity)
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton(ok_text) { _, _ ->
                 result?.confirm()
-                dialog = null
             }
-            negativeButton(text = getResString(R.string.cancel)) {
+            .setNegativeButton(cancel_text) { _, _ ->
                 result?.cancel()
-                dialog = null
             }
-            cancelable(false)
-            cancelOnTouchOutside(false)
-            lifecycleOwner(activity)
-        }
+            .setCancelable(false)
+            .show()
         return true
     }
 
-    @SuppressLint("CheckResult")
+    // アプリ復帰時にモーダルダイアログを再表示する。
+    private var modalDialog: MaterialDialog? = null
+    fun onResume() {
+        if (modalDialog != null)
+            modalDialog?.show()
+    }
+
     override fun onJsPrompt(
         view: WebView?,
         url: String?,
@@ -124,7 +148,7 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
             return true
         }
         var inputtedText: String? = null
-        dialog = MaterialDialog(activity).show {
+        modalDialog = MaterialDialog(activity).show {
             title(text = title)
             message(text = message)
             input(hint = getResString(R.string.prompt_hint), prefill = defaultValue) { _, text ->
@@ -132,11 +156,11 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
             }
             positiveButton(text = getResString(R.string.ok)) {
                 result?.confirm(inputtedText ?: "")
-                dialog = null
+                modalDialog = null
             }
             negativeButton(text = getResString(R.string.cancel)) {
                 result?.cancel()
-                dialog = null
+                modalDialog = null
             }
             cancelable(false)
             cancelOnTouchOutside(false)
@@ -144,6 +168,21 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         }
         return true
     }
+
+    override fun onConsoleMessage(consoleMessage: ConsoleMessage?): Boolean {
+        if (consoleMessage != null) {
+            val msg = consoleMessage.message()
+            if (BuildConfig.DEBUG) {
+                val line = consoleMessage.lineNumber()
+                val src = consoleMessage.sourceId()
+                Log.d("console", "$msg at Line $line of $src")
+            }
+        }
+        return super.onConsoleMessage(consoleMessage)
+    }
+
+    /////////////////////////////////////////////////////////////////////
+    // extension of JavaScript prompt function
 
     /**
      * メッセージ選択ダイアログの表示対象か判定する
@@ -159,7 +198,7 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         defaultValue: String?,
         result: JsPromptResult?
     ) {
-        dialog = MaterialDialog(activity).show {
+        modalDialog = MaterialDialog(activity).show {
             title(text = title)
             message(text = message)
             customView(R.layout.message_select_dialog, scrollable = true, horizontalPadding = true)
@@ -167,7 +206,7 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
                 val editText = getCustomView().findViewById<EditText>(R.id.message_edit)
                 val inputtedText = editText.text.toString()
                 result?.confirm(inputtedText)
-                dialog = null
+                modalDialog = null
 
                 val defaultMessageList = activity.getStringArray(R.array.message_sample_list)
                 MainRepository.getMessageList(activity).apply {
@@ -179,7 +218,7 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
             }
             negativeButton(text = getResString(R.string.cancel)) {
                 result?.cancel()
-                dialog = null
+                modalDialog = null
             }
             cancelable(false)
             cancelOnTouchOutside(false)
@@ -187,7 +226,7 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         }
 
         // ダイアログのレイアウトを設定
-        val customView = dialog!!.getCustomView()
+        val customView = modalDialog!!.getCustomView()
         val listView: ListView = customView.findViewById(R.id.message_list)
         val defaultMessageList = activity.getStringArray(R.array.message_sample_list)
         val inputtedMessageList = MainRepository.getMessageList(activity)
@@ -236,32 +275,5 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         } else {
             totalHeight + (listView.dividerHeight * listItemHeightCount)
         }
-    }
-
-    @JavascriptInterface
-    fun cancelSpeech() {
-        listener.onSpeech("")
-    }
-
-    @JavascriptInterface
-    fun speechLoop(msg: String) {
-        listener.onSpeech(msg.repeat(32))
-    }
-
-    @JavascriptInterface
-    fun clearSettings() {
-        MainRepository.clearMessageList(activity)
-    }
-
-    override fun onConsoleMessage(consoleMessage: ConsoleMessage?): Boolean {
-        if (consoleMessage != null) {
-            val msg = consoleMessage.message()
-            if (BuildConfig.DEBUG) {
-                val line = consoleMessage.lineNumber()
-                val src = consoleMessage.sourceId()
-                Log.d("console", "$msg at Line $line of $src")
-            }
-        }
-        return super.onConsoleMessage(consoleMessage)
     }
 }
