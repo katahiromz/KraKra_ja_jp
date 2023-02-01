@@ -44,16 +44,8 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
 
     // Toast を表示する。空文字列の場合は直前のものをキャンセルする。
-    var lastToast : Toast? = null
     @JavascriptInterface
-    fun showToast(text: String, typeOfToast: Int) {
-        if (text == "") {
-            if (lastToast != null) {
-                lastToast?.cancel()
-                lastToast = null
-            }
-            return
-        }
+    fun makeToast(text: String, typeOfToast: Int) {
         when (typeOfToast) {
             SHORT_TOAST -> {
                 lastToast = Toast.makeText(this, text, Toast.LENGTH_SHORT)
@@ -64,22 +56,22 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
                 lastToast?.show()
             }
             else -> {
-                Timber.e("typeOfToast: $typeOfToast")
+                require(false, { "typeOfToast: $typeOfToast" })
             }
+        }
+    }
+    var lastToast : Toast? = null
+    // Toastをキャンセルする。
+    fun cancelToast() {
+        if (lastToast != null) {
+            lastToast?.cancel()
+            lastToast = null
         }
     }
 
     // Snackbar を表示する。空文字列の場合は直前のものをキャンセルする。
-    var lastSnackbar : Snackbar? = null
     @JavascriptInterface
-    fun showSnackbar(text: String, typeOfSnack: Int) {
-        if (text == "") {
-            if (lastSnackbar != null) {
-                lastSnackbar?.dismiss()
-                lastSnackbar = null
-            }
-            return
-        }
+    fun makeSnackbar(text: String, typeOfSnack: Int) {
         val view = findViewById<View>(android.R.id.content)
         when (typeOfSnack) {
             SHORT_SNACK -> {
@@ -100,8 +92,16 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             }
             // TODO: Add more Snack
             else -> {
-                Timber.e("typeOfSnack: $typeOfSnack")
+                require(false, { "typeOfSnack: $typeOfSnack" })
             }
+        }
+    }
+    var lastSnackbar : Snackbar? = null
+    // Snackbarをキャンセルする。
+    fun cancelSnackbar() {
+        if (lastSnackbar != null) {
+            lastSnackbar?.dismiss()
+            lastSnackbar = null
         }
     }
 
@@ -127,7 +127,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
                 webView?.evaluateJavascript("AndroidMicrophoneOnReload()", null)
             } else {
                 // Permission request was denied.
-                showSnackbar(getString(R.string.no_audio_record), ACTION_SNACK_OK)
+                makeSnackbar(getString(R.string.no_audio_record), ACTION_SNACK_OK)
             }
         }
         // TODO: Add more request
@@ -239,11 +239,11 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
                     theText = text
                     speechText(text)
                 }
-                override fun showToast(text: String, typeOfToast: Int) {
-                    this.showToast(text, typeOfToast)
+                override fun makeToast(text: String, typeOfToast: Int) {
+                    this.makeToast(text, typeOfToast)
                 }
-                override fun showSnackbar(text: String, typeOfSnack: Int) {
-                    this.showSnackbar(text, typeOfSnack)
+                override fun makeSnackbar(text: String, typeOfSnack: Int) {
+                    this.makeSnackbar(text, typeOfSnack)
                 }
             })
             webView?.webChromeClient = chromeClient

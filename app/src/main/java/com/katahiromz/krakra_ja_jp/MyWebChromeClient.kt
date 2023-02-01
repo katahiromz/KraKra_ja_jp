@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityCompat.*
 import androidx.core.content.ContextCompat
+import androidx.core.content.PermissionChecker
 import androidx.core.content.PermissionChecker.checkSelfPermission
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
@@ -33,8 +34,8 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
     interface Listener {
         fun onChromePermissionRequest(permissions: Array<String>, requestCode: Int)
         fun onSpeech(text: String)
-        fun showToast(text: String, typeOfToast: Int)
-        fun showSnackbar(text: String, typeOfSnack: Int)
+        fun makeToast(text: String, typeOfToast: Int)
+        fun makeSnackbar(text: String, typeOfSnack: Int)
     }
 
     private fun getResString(resId: Int): String {
@@ -46,15 +47,25 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
 
     override fun onPermissionRequest(request: PermissionRequest?) {
         // Audio record request
-        val audioCheck = checkSelfPermission(activity, Manifest.permission.RECORD_AUDIO)
-        if (audioCheck == PackageManager.PERMISSION_GRANTED) {
-            request?.grant(request.resources)
-        } else {
-            val audioRational = shouldShowRequestPermissionRationale(activity, Manifest.permission.RECORD_AUDIO)
-            if (audioRational) {
-                listener.onChromePermissionRequest(
-                    arrayOf(Manifest.permission.RECORD_AUDIO),
-                    MY_WEBVIEW_REQUEST_CODE_01)
+        val audioCheck =
+                PermissionChecker.checkSelfPermission(activity, Manifest.permission.RECORD_AUDIO)
+        when (audioCheck) {
+            PermissionChecker.PERMISSION_GRANTED,
+            PermissionChecker.PERMISSION_DENIED_APP_OP -> {
+                request?.grant(request.resources)
+            }
+            PermissionChecker.PERMISSION_DENIED -> {
+                val audioRational =
+                        shouldShowRequestPermissionRationale(
+                                activity, Manifest.permission.RECORD_AUDIO)
+                if (audioRational) {
+                    listener.onChromePermissionRequest(
+                            arrayOf(Manifest.permission.RECORD_AUDIO),
+                            MY_WEBVIEW_REQUEST_CODE_01)
+                }
+            }
+            else -> {
+                require(false, { "PermissionChecker" })
             }
         }
         // TODO: Add more request
