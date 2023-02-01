@@ -32,11 +32,11 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
     // 定数。
     companion object {
-        // トーストの種類 (showToast用)
+        // トーストの種類 (makeToast用)
         const val SHORT_TOAST = 0
         const val LONG_TOAST = 1
 
-        // スナックの種類 (showSnackbar用)
+        // スナックの種類 (makeSnackbar用)
         const val SHORT_SNACK = 0
         const val LONG_SNACK = 1
         const val ACTION_SNACK_OK = 2
