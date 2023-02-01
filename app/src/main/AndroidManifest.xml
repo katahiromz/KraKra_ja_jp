@@ -6,10 +6,10 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.MICROPHONE" />
-    // TODO: Add permission(s)
+    <!-- TODO: Add permission(s) -->
 
     <uses-feature android:name="android.hardware.microphone" android:required="false" />
-    // TODO: Add feature(s)
+    <!-- TODO: Add feature(s) -->
 
     <queries>
         <intent>
