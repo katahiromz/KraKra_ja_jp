@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ListView
+        android:id="@+id/message_list"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:contentDescription="@string/guide_message_list"
+        android:scrollbarThumbVertical="@drawable/scrollbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/message_edit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:hint="@string/prompt_hint"
+        android:inputType="textMultiLine"
+        android:textColor="?android:textColorPrimary"
+        android:textColorHint="@color/promptHintColor"
+        app:layout_constraintEnd_toStartOf="@id/clear_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/message_list"
+        tools:ignore="Autofill,HardcodedText,LabelFor" />
+
+    <Button
+        android:id="@+id/clear_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/guide_clear_button"
+        android:text="@string/message_clear_button"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/message_edit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/message_edit" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

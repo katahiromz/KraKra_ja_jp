@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="message_sample_list">
+        <item>@string/message_get_sleep</item>
+        <item>@string/message_want_to_study</item>
+        <item>@string/message_like_to_work</item>
+    </array>
+</resources>

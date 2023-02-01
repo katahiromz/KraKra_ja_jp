@@ -1,0 +1,27 @@
+<resources>
+    <!-- common -->
+    <string name="ok">OK</string>
+    <string name="cancel">キャンセル</string>
+
+    <!-- main -->
+    <string name="app_name">催眠くらくら</string>
+    <string name="web_view">ウェブビュー</string>
+    <string name="now_starting">くらくら起動中...</string>
+    <string name="prompt_hint">表示したい文字列を入力して下さい</string>
+
+    <!-- message list -->
+    <string name="message_get_sleep">あなたはだんだん眠くなーる</string>
+    <string name="message_want_to_study">勉強して良い成績を取りたくなーる</string>
+    <string name="message_like_to_work">会社で働くのが好きになーる</string>
+
+    <!-- message select dialog -->
+    <string name="message_select_dialog_message">メッセージ文字列を入力して下さい。</string>
+    <string name="message_clear_button">クリア</string>
+
+    <!-- Content Description -->
+    <string name="guide_clear_button">クリアボタン</string>
+    <string name="guide_message_list">メッセージリスト</string>
+
+    <!-- URLs -->
+    <string name="url">file:///android_asset/index.html</string>
+</resources>
