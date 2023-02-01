@@ -13,8 +13,19 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import java.util.*
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.OnInitListener {
+    /////////////////////////////////////////////////////////////////////
+    // 共通
+
+    // デバッグログにTimberを使用する。
+    fun initTimber() {
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
+    }
+
 
     companion object {
         const val requestCodePermissionAudio = 1
@@ -22,22 +33,12 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
     private var webView: WebView? = null
     private var chromeClient: MyWebChromeClient? = null
-    private var tts: TextToSpeech? = null
     private var webViewThread: WebViewThread? = null
-    private var ttsThread: TtsThread? = null
 
     private var resultString = ""
-    private var isSpeechReady = false
-    private var theText = ""
-
-    private fun logD(msg: String?, tr: Throwable? = null) {
-        if (BuildConfig.DEBUG) {
-            Log.d("MainActivity", msg, tr)
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        logD("onCreate")
+        Timber.i("onCreate")
         installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -51,15 +52,18 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             ttsThread = TtsThread(this)
             ttsThread?.start()
         }
+
+        // Initialize Timber
+        initTimber()
     }
 
     override fun onStart() {
-        logD("onStart")
+        Timber.i("onStart")
         super.onStart()
     }
 
     override fun onResume() {
-        logD("onResume")
+        Timber.i("onResume")
         super.onResume()
         webView?.onResume()
         if (theText != "") {
@@ -69,21 +73,21 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
 
     override fun onPause() {
-        logD("onPause")
+        Timber.i("onPause")
         super.onPause()
         webView?.onPause()
         stopSpeech()
     }
 
     override fun onStop() {
-        logD("onStop")
+        Timber.i("onStop")
         super.onStop()
         webView?.onPause()
         stopSpeech()
     }
 
     override fun onDestroy() {
-        logD("onDestroy")
+        Timber.i("onDestroy")
         webView?.destroy()
         tts?.shutdown()
         super.onDestroy()
@@ -97,7 +101,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         if (requestCode == requestCodePermissionAudio) {
             if (grantResults.isNotEmpty()) {
                 if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    logD("Not PERMISSION_GRANTED!")
+                    Timber.i("Not PERMISSION_GRANTED!")
                 } else {
                     val myRequest = chromeClient?.myRequest
                     if (myRequest != null) {
@@ -124,24 +128,24 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
                 override fun onReceivedError(view: WebView?, request: WebResourceRequest?,
                                              error: WebResourceError?)
                 {
-                    logD("onReceivedError")
+                    Timber.i("onReceivedError")
                 }
 
                 override fun onReceivedHttpError(view: WebView?, request: WebResourceRequest?,
                                                  errorResponse: WebResourceResponse?)
                 {
-                    logD("onReceivedHttpError")
+                    Timber.i("onReceivedHttpError")
                 }
 
                 override fun onPageFinished(view: WebView?, url: String?) {
-                    logD("onPageFinished")
+                    Timber.i("onPageFinished")
                     findViewById<TextView>(R.id.loading).visibility = View.GONE
                 }
             })
 
             chromeClient = MyWebChromeClient(this, object: MyWebChromeClient.Listener {
                 override fun onSpeech(text: String) {
-                    logD("onSpeech")
+                    Timber.i("onSpeech")
                     theText = text
                     speechText(text)
                 }
@@ -149,25 +153,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             webView?.webChromeClient = chromeClient
             webView?.addJavascriptInterface(chromeClient!!, "android")
             webView?.loadUrl(getString(R.string.url))
-        }
-    }
-
-    // TextToSpeech.OnInitListener
-    override fun onInit(status: Int) {
-        if (status == TextToSpeech.SUCCESS) {
-            isSpeechReady = true
-        }
-    }
-
-    private fun initTextToSpeech() {
-        tts = TextToSpeech(this, this)
-        var locale = Locale.JAPANESE // {{language-dependent}}
-        if (BuildConfig.DEBUG)
-            locale = Locale.ENGLISH
-        if (tts != null) {
-            if (tts!!.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
-                tts!!.language = locale
-            }
         }
     }
 
@@ -183,15 +168,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         }
         if (settings != null) {
             val versionName = getVersionName()
-            updateUserAgent(settings, versionName)
-        }
-    }
-
-    private fun updateUserAgent(settings: WebSettings, versionName: String) {
-        var userAgent: String? = settings.userAgentString
-        if (userAgent != null) {
-            userAgent += "/KraKra-native-app/$versionName/"
-            settings.userAgentString = userAgent
+            settings.userAgentString += "/KraKra-native-app/$versionName/"
         }
     }
 
@@ -200,6 +177,46 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         val pm: PackageManager = this.packageManager
         val pi: PackageInfo = pm.getPackageInfo(appName, PackageManager.GET_META_DATA)
         return pi.versionName
+    }
+
+    class WebViewThread(private val activity: MainActivity) : Thread() {
+        override fun run() {
+            Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE)
+            activity.initWebView()
+        }
+    }
+
+    /////////////////////////////////////////////////////////////////////
+    // TextToSpeech関連
+    //
+    private var tts: TextToSpeech? = null
+    private var ttsThread: TtsThread? = null
+    private var isSpeechReady = false
+    private var theText = ""
+
+    private fun initTextToSpeech() {
+        tts = TextToSpeech(this, this)
+        var locale = Locale.JAPANESE // {{language-dependent}}
+        if (BuildConfig.DEBUG)
+            locale = Locale.ENGLISH
+        if (tts != null) {
+            if (tts!!.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
+                tts!!.language = locale
+            }
+        }
+    }
+
+    class TtsThread(private val activity: MainActivity) : Thread() {
+        override fun run() {
+            activity.initTextToSpeech()
+        }
+    }
+
+    // TextToSpeech.OnInitListener
+    override fun onInit(status: Int) {
+        if (status == TextToSpeech.SUCCESS) {
+            isSpeechReady = true
+        }
     }
 
     fun speechText(text: String) {
@@ -219,19 +236,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         if (isSpeechReady) {
             val params = Bundle()
             tts?.speak("", TextToSpeech.QUEUE_FLUSH, params, "utteranceId")
-        }
-    }
-
-    class WebViewThread(private val activity: MainActivity) : Thread() {
-        override fun run() {
-            Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE)
-            activity.initWebView()
-        }
-    }
-
-    class TtsThread(private val activity: MainActivity) : Thread() {
-        override fun run() {
-            activity.initTextToSpeech()
         }
     }
 }
