@@ -30,18 +30,18 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
     // 定数。
     companion object {
-        // Toast types
+        // トーストの種類 (showToast用)
         const val SHORT_TOAST = 0
         const val LONG_TOAST = 1
 
-        // Snack types
+        // スナックの種類 (showSnackbar用)
         const val SHORT_SNACK = 0
         const val LONG_SNACK = 1
         const val ACTION_SNACK_OK = 2
         // TODO: Add more snack
     }
 
-    // Display Toast (a messaging control)
+    // Toast を表示する。空文字列の場合は直前のものをキャンセルする。
     var lastToast : Toast? = null
     @JavascriptInterface
     fun showToast(text: String, typeOfToast: Int) {
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         }
     }
 
-    // Display Snackbar (another messaging control)
+    // Snackbar を表示する。空文字列の場合は直前のものをキャンセルする。
     var lastSnackbar : Snackbar? = null
     @JavascriptInterface
     fun showSnackbar(text: String, typeOfSnack: Int) {
@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
 
     /////////////////////////////////////////////////////////////////////
-    // Permissions-related
+    // パーミッション関連
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         var grantedAll = true
-        // Audio request
+        // 音声の要求。
         if (requestCode == MyWebChromeClient.MY_WEBVIEW_REQUEST_CODE_01) {
             for (result in grantResults) {
                 if (result != PackageManager.PERMISSION_GRANTED) {
@@ -132,7 +132,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
 
     /////////////////////////////////////////////////////////////////////
-    // event handlers
+    // イベントハンドラ関連
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Timber.i("onCreate")
@@ -141,15 +141,15 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
 
-        // Initialize WebView
+        // WebViewを初期化。
         webViewThread = WebViewThread(this)
         webViewThread?.start()
 
-        // Initialize TextToSpeech
+        // TextToSpeechを初期化。
         ttsThread = TtsThread(this)
         ttsThread?.start()
 
-        // Initialize Timber
+        // Timberを初期化。
         initTimber()
     }
 
@@ -196,7 +196,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     private var resultString = ""
 
     /////////////////////////////////////////////////////////////////////
-    // WebView-related
+    // WebView関連
 
     private var webView: WebView? = null
     private var chromeClient: MyWebChromeClient? = null
@@ -253,17 +253,17 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     @SuppressLint("SetJavaScriptEnabled")
     private fun initWebSettings() {
         val settings = webView?.settings
-        settings?.javaScriptEnabled = true
-        settings?.domStorageEnabled = true
-        settings?.mediaPlaybackRequiresUserGesture = false
+        if (settings == null)
+            return
+        settings.javaScriptEnabled = true
+        settings.domStorageEnabled = true
+        settings.mediaPlaybackRequiresUserGesture = false
         if (BuildConfig.DEBUG) {
-            settings?.cacheMode = WebSettings.LOAD_NO_CACHE
+            settings.cacheMode = WebSettings.LOAD_NO_CACHE
             WebView.setWebContentsDebuggingEnabled(true)
         }
-        if (settings != null) {
-            val versionName = getVersionName()
-            settings.userAgentString += "/KraKra-native-app/$versionName/"
-        }
+        val versionName = getVersionName()
+        settings.userAgentString += "/KraKra-native-app/$versionName/"
     }
 
     private fun getVersionName(): String {
@@ -293,10 +293,8 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         var locale = Locale.JAPANESE // {{language-dependent}}
         if (BuildConfig.DEBUG)
             locale = Locale.ENGLISH
-        if (tts != null) {
-            if (tts!!.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
-                tts!!.language = locale
-            }
+        if (tts!!.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
+            tts!!.language = locale
         }
     }
 
