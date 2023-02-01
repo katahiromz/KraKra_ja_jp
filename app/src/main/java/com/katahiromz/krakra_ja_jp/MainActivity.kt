@@ -12,12 +12,14 @@ import android.webkit.*
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
 import timber.log.Timber
 
-class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.OnInitListener {
+class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.OnInitListener,
+        ActivityCompat.OnRequestPermissionsResultCallback {
     /////////////////////////////////////////////////////////////////////
     // 共通
 

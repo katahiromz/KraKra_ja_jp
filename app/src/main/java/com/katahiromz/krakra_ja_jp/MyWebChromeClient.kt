@@ -8,9 +8,9 @@ import android.webkit.*
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityCompat.shouldShowRequestPermissionRationale
+import androidx.core.app.ActivityCompat.*
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.checkSelfPermission
+import androidx.core.content.PermissionChecker.checkSelfPermission
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
@@ -18,6 +18,7 @@ import com.afollestad.materialdialogs.input.input
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import com.afollestad.materialdialogs.utils.MDUtil.getStringArray
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import timber.log.Timber
 
 class MyWebChromeClient(private val activity: AppCompatActivity, private val listener: Listener) :
     WebChromeClient() {
@@ -40,19 +41,20 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         return activity.getString(resId)
     }
 
+    /////////////////////////////////////////////////////////////////////
+    // パーミッション関連
+
     override fun onPermissionRequest(request: PermissionRequest?) {
         // Audio record request
         val audioCheck = checkSelfPermission(activity, Manifest.permission.RECORD_AUDIO)
         if (audioCheck == PackageManager.PERMISSION_GRANTED) {
             request?.grant(request.resources)
         } else {
-            val audioRational =
-                shouldShowRequestPermissionRationale(activity, Manifest.permission.RECORD_AUDIO)
+            val audioRational = shouldShowRequestPermissionRationale(activity, Manifest.permission.RECORD_AUDIO)
             if (audioRational) {
                 listener.onChromePermissionRequest(
                     arrayOf(Manifest.permission.RECORD_AUDIO),
-                    MY_WEBVIEW_REQUEST_CODE_01
-                )
+                    MY_WEBVIEW_REQUEST_CODE_01)
             }
         }
         // TODO: Add more request
@@ -76,7 +78,7 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         MainRepository.clearMessageList(activity)
     }
 
-    // Wrap JavaScript alert function
+    // JavaScriptのalert関数をラップする。
     override fun onJsAlert(
         view: WebView?,
         url: String?,
@@ -97,7 +99,7 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         return true
     }
 
-    // Wrap JavaScript confirm function
+    // JavaScriptのconfirm関数をラップする。
     override fun onJsConfirm(
         view: WebView?,
         url: String?,
@@ -129,6 +131,7 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
             modalDialog?.show()
     }
 
+    // JavaScriptのprompt関数をラップする。
     override fun onJsPrompt(
         view: WebView?,
         url: String?,
@@ -170,12 +173,12 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
     }
 
     override fun onConsoleMessage(consoleMessage: ConsoleMessage?): Boolean {
-        if (consoleMessage != null) {
-            val msg = consoleMessage.message()
-            if (BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
+            if (consoleMessage != null) {
+                val msg = consoleMessage.message()
                 val line = consoleMessage.lineNumber()
                 val src = consoleMessage.sourceId()
-                Log.d("console", "$msg at Line $line of $src")
+                Timber.d("console: $msg at Line $line of $src")
             }
         }
         return super.onConsoleMessage(consoleMessage)
