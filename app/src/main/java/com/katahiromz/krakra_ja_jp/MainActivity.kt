@@ -10,8 +10,10 @@ import android.util.Log
 import android.view.View
 import android.webkit.*
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.google.android.material.snackbar.Snackbar
 import java.util.*
 import timber.log.Timber
 
@@ -26,16 +28,113 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         }
     }
 
-
+    // 定数。
     companion object {
+        // Toast types
+        const val SHORT_TOAST = 0
+        const val LONG_TOAST = 1
+
+        // Snack types
+        const val SHORT_SNACK = 0
+        const val LONG_SNACK = 1
+        const val ACTION_SNACK_OK = 2
+        // TODO: Add more snack
+
         const val requestCodePermissionAudio = 1
     }
 
-    private var webView: WebView? = null
-    private var chromeClient: MyWebChromeClient? = null
-    private var webViewThread: WebViewThread? = null
+    // Display Toast (a messaging control)
+    var lastToast : Toast? = null
+    @JavascriptInterface
+    fun showToast(text: String, typeOfToast: Int) {
+        if (text == "") {
+            if (lastToast != null) {
+                lastToast?.cancel()
+                lastToast = null
+            }
+            return
+        }
+        when (typeOfToast) {
+            SHORT_TOAST -> {
+                lastToast = Toast.makeText(this, text, Toast.LENGTH_SHORT)
+                lastToast?.show()
+            }
+            LONG_TOAST -> {
+                lastToast = Toast.makeText(this, text, Toast.LENGTH_LONG)
+                lastToast?.show()
+            }
+            else -> {
+                Timber.e("typeOfToast: $typeOfToast")
+            }
+        }
+    }
 
-    private var resultString = ""
+    // Display Snackbar (another messaging control)
+    var lastSnackbar : Snackbar? = null
+    @JavascriptInterface
+    fun showSnackbar(text: String, typeOfSnack: Int) {
+        if (text == "") {
+            if (lastSnackbar != null) {
+                lastSnackbar?.dismiss()
+                lastSnackbar = null
+            }
+            return
+        }
+        val view = findViewById<View>(android.R.id.content)
+        when (typeOfSnack) {
+            SHORT_SNACK -> {
+                lastSnackbar = Snackbar.make(view, text, Snackbar.LENGTH_SHORT)
+                lastSnackbar?.show()
+            }
+            LONG_SNACK -> {
+                lastSnackbar = Snackbar.make(view, text, Snackbar.LENGTH_LONG)
+                lastSnackbar?.show()
+            }
+            ACTION_SNACK_OK -> {
+                lastSnackbar = Snackbar.make(view, text, Snackbar.LENGTH_INDEFINITE)
+                val buttonText = getString(R.string.ok)
+                lastSnackbar?.setAction(buttonText) {
+                    // TODO: Add action
+                }
+                lastSnackbar?.show()
+            }
+            // TODO: Add more Snack
+            else -> {
+                Timber.e("typeOfSnack: $typeOfSnack")
+            }
+        }
+    }
+
+    /////////////////////////////////////////////////////////////////////
+    // Permissions-related
+    
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        var grantedAll = true
+        // Audio request
+        if (requestCode == MyWebChromeClient.MY_WEBVIEW_REQUEST_CODE_01) {
+            for (result in grantResults) {
+                if (result != PackageManager.PERMISSION_GRANTED) {
+                    grantedAll = false
+                }
+            }
+            if (grantedAll) {
+                // Permission has been granted.
+                webView?.evaluateJavascript("AndroidMicrophoneOnReload()", null)
+            } else {
+                // Permission request was denied.
+                showSnackbar(getString(R.string.no_audio_record), ACTION_SNACK_OK)
+            }
+        }
+        // TODO: Add more request
+    }
+
+    /////////////////////////////////////////////////////////////////////
+    // event handlers
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Timber.i("onCreate")
@@ -43,15 +142,14 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
-        if (false) {
-            initWebView()
-            initTextToSpeech()
-        } else {
-            webViewThread = WebViewThread(this)
-            webViewThread?.start()
-            ttsThread = TtsThread(this)
-            ttsThread?.start()
-        }
+
+        // Initialize WebView
+        webViewThread = WebViewThread(this)
+        webViewThread?.start()
+
+        // Initialize TextToSpeech
+        ttsThread = TtsThread(this)
+        ttsThread?.start()
 
         // Initialize Timber
         initTimber()
@@ -93,29 +191,18 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         super.onDestroy()
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray)
-    {
-        if (requestCode == requestCodePermissionAudio) {
-            if (grantResults.isNotEmpty()) {
-                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Timber.i("Not PERMISSION_GRANTED!")
-                } else {
-                    val myRequest = chromeClient?.myRequest
-                    if (myRequest != null) {
-                        myRequest.grant(myRequest.resources)
-                    }
-                }
-            }
-        }
-    }
-
     // ValueCallback<String>
     override fun onReceiveValue(value: String) {
         resultString = value
     }
+    private var resultString = ""
+
+    /////////////////////////////////////////////////////////////////////
+    // WebView-related
+
+    private var webView: WebView? = null
+    private var chromeClient: MyWebChromeClient? = null
+    private var webViewThread: WebViewThread? = null
 
     fun initWebView() {
         webView = findViewById(R.id.web_view)

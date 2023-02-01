@@ -19,6 +19,12 @@ import com.afollestad.materialdialogs.utils.MDUtil.getStringArray
 class MyWebChromeClient(private val activity: AppCompatActivity, private val listener: Listener) :
     WebChromeClient() {
 
+    // 定数。
+    companion object {
+        const val MY_WEBVIEW_REQUEST_CODE_01 = 999
+    }
+
+    // リスナ。
     interface Listener {
         fun onSpeech(text: String)
     }
