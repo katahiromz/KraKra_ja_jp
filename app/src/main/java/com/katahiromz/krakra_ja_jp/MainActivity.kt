@@ -62,6 +62,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
     var lastToast : Toast? = null
     // Toastをキャンセルする。
+    @JavascriptInterface
     fun cancelToast() {
         if (lastToast != null) {
             lastToast?.cancel()
@@ -98,6 +99,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
     var lastSnackbar : Snackbar? = null
     // Snackbarをキャンセルする。
+    @JavascriptInterface
     fun cancelSnackbar() {
         if (lastSnackbar != null) {
             lastSnackbar?.dismiss()
