@@ -34,8 +34,8 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
     interface Listener {
         fun onChromePermissionRequest(permissions: Array<String>, requestCode: Int)
         fun onSpeech(text: String)
-        fun makeToast(text: String, typeOfToast: Int)
-        fun makeSnackbar(text: String, typeOfSnack: Int)
+        fun showToast(text: String, typeOfToast: Int)
+        fun showSnackbar(text: String, typeOfSnack: Int)
     }
 
     private fun getResString(resId: Int): String {

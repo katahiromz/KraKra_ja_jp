@@ -32,20 +32,20 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
     // 定数。
     companion object {
-        // トーストの種類 (makeToast用)
+        // トーストの種類 (showToast用)
         const val SHORT_TOAST = 0
         const val LONG_TOAST = 1
 
-        // スナックの種類 (makeSnackbar用)
+        // スナックの種類 (showSnackbar用)
         const val SHORT_SNACK = 0
         const val LONG_SNACK = 1
         const val ACTION_SNACK_OK = 2
         // TODO: Add more snack
     }
 
-    // Toast を表示する。空文字列の場合は直前のものをキャンセルする。
+    // Toast を表示する。
     @JavascriptInterface
-    fun makeToast(text: String, typeOfToast: Int) {
+    fun showToast(text: String, typeOfToast: Int) {
         when (typeOfToast) {
             SHORT_TOAST -> {
                 lastToast = Toast.makeText(this, text, Toast.LENGTH_SHORT)
@@ -69,9 +69,9 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         }
     }
 
-    // Snackbar を表示する。空文字列の場合は直前のものをキャンセルする。
+    // Snackbar を表示する。
     @JavascriptInterface
-    fun makeSnackbar(text: String, typeOfSnack: Int) {
+    fun showSnackbar(text: String, typeOfSnack: Int) {
         val view = findViewById<View>(android.R.id.content)
         when (typeOfSnack) {
             SHORT_SNACK -> {
@@ -127,7 +127,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
                 webView?.evaluateJavascript("AndroidMicrophoneOnReload()", null)
             } else {
                 // Permission request was denied.
-                makeSnackbar(getString(R.string.no_audio_record), ACTION_SNACK_OK)
+                showSnackbar(getString(R.string.no_audio_record), ACTION_SNACK_OK)
             }
         }
         // TODO: Add more request
@@ -239,11 +239,11 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
                     theText = text
                     speechText(text)
                 }
-                override fun makeToast(text: String, typeOfToast: Int) {
-                    this.makeToast(text, typeOfToast)
+                override fun showToast(text: String, typeOfToast: Int) {
+                    this.showToast(text, typeOfToast)
                 }
-                override fun makeSnackbar(text: String, typeOfSnack: Int) {
-                    this.makeSnackbar(text, typeOfSnack)
+                override fun showSnackbar(text: String, typeOfSnack: Int) {
+                    this.showSnackbar(text, typeOfSnack)
                 }
             })
             webView?.webChromeClient = chromeClient
