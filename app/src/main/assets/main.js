@@ -1,7 +1,7 @@
 /* jshint esversion: 8 */
 
 const NUM_TYPE = 8;
-const VERSION = '3.2.8';
+const VERSION = '3.2.9';
 const DEBUG = true;
 
 // {{language-specific}}
