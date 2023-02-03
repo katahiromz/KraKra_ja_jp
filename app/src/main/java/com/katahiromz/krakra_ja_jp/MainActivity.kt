@@ -19,6 +19,19 @@ import com.google.android.material.snackbar.Snackbar
 import java.util.*
 import timber.log.Timber
 
+/////////////////////////////////////////////////////////////////////
+// 定数。
+
+// トーストの種類 (showToast用)
+const val SHORT_TOAST = 0
+const val LONG_TOAST = 1
+
+// スナックの種類 (showSnackbar用)
+const val SHORT_SNACK = 0
+const val LONG_SNACK = 1
+const val ACTION_SNACK_OK = 2
+// TODO: Add more snack
+
 class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.OnInitListener,
         ActivityCompat.OnRequestPermissionsResultCallback {
     /////////////////////////////////////////////////////////////////////
@@ -29,19 +42,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
-    }
-
-    // 定数。
-    companion object {
-        // トーストの種類 (showToast用)
-        const val SHORT_TOAST = 0
-        const val LONG_TOAST = 1
-
-        // スナックの種類 (showSnackbar用)
-        const val SHORT_SNACK = 0
-        const val LONG_SNACK = 1
-        const val ACTION_SNACK_OK = 2
-        // TODO: Add more snack
     }
 
     // Toast を表示する。
@@ -119,7 +119,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         var grantedAll = true
         // 音声の要求。
-        if (requestCode == MyWebChromeClient.MY_WEBVIEW_REQUEST_CODE_01) {
+        if (requestCode == MY_WEBVIEW_REQUEST_CODE_01) {
             for (result in grantResults) {
                 if (result != PackageManager.PERMISSION_GRANTED) {
                     grantedAll = false

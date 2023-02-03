@@ -21,14 +21,11 @@ import com.afollestad.materialdialogs.utils.MDUtil.getStringArray
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import timber.log.Timber
 
+// 定数。
+const val MY_WEBVIEW_REQUEST_CODE_01 = 999
+
 class MyWebChromeClient(private val activity: AppCompatActivity, private val listener: Listener) :
     WebChromeClient() {
-
-    // 定数。
-    companion object {
-        const val MY_WEBVIEW_REQUEST_CODE_01 = 999
-        // TODO: Add more request
-    }
 
     // リスナ。
     interface Listener {
