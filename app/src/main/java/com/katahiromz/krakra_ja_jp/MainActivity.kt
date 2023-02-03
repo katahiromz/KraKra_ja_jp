@@ -147,12 +147,10 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         supportActionBar?.hide()
 
         // WebViewを初期化。
-        webViewThread = WebViewThread(this)
-        webViewThread?.start()
+        initWebView()
 
         // TextToSpeechを初期化。
-        ttsThread = TtsThread(this)
-        ttsThread?.start()
+        initTextToSpeech()
 
         // Timberを初期化。
         initTimber()
@@ -205,64 +203,72 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
     private var webView: WebView? = null
     private var chromeClient: MyWebChromeClient? = null
-    private var webViewThread: WebViewThread? = null
 
-    fun initWebView() {
+    private fun initWebView() {
         webView = findViewById(R.id.web_view)
         webView?.post {
-            webView?.setBackgroundColor(0)
             initWebSettings()
         }
         webView?.post {
-            webView?.webViewClient = MyWebViewClient(object: MyWebViewClient.Listener {
-                override fun onReceivedError(view: WebView?, request: WebResourceRequest?,
-                                             error: WebResourceError?)
-                {
-                    Timber.i("onReceivedError")
-                }
-
-                override fun onReceivedHttpError(view: WebView?, request: WebResourceRequest?,
-                                                 errorResponse: WebResourceResponse?)
-                {
-                    Timber.i("onReceivedHttpError")
-                }
-
-                override fun onPageFinished(view: WebView?, url: String?) {
-                    Timber.i("onPageFinished")
-                    findViewById<TextView>(R.id.loading).visibility = View.GONE
-                }
-            })
-
-            chromeClient = MyWebChromeClient(this, object: MyWebChromeClient.Listener {
-                override fun onChromePermissionRequest(permissions: Array<String>, requestCode: Int) {
-                    requestPermissions(permissions, requestCode)
-                }
-                override fun onSpeech(text: String) {
-                    Timber.i("onSpeech")
-                    theText = text
-                    speechText(text)
-                }
-                override fun onShowToast(text: String, typeOfToast: Int) {
-                    showToast(text, typeOfToast)
-                }
-                override fun onShowSnackbar(text: String, typeOfSnack: Int) {
-                    showSnackbar(text, typeOfSnack)
-                }
-                override fun onProgressChanged(view: WebView?, newProgress: Int) {
-                    val bar: ProgressBar = findViewById(R.id.progressBar)
-                    bar.progress = newProgress
-                    if (newProgress == 100)
-                        bar.visibility = View.INVISIBLE
-                }
-            })
-            webView?.webChromeClient = chromeClient
-            webView?.addJavascriptInterface(chromeClient!!, "android")
-            webView?.loadUrl(getString(R.string.url))
+            initWebViewClient()
         }
+        webView?.post {
+            initChromeClient()
+        }
+    }
+
+    private fun initWebViewClient() {
+        webView?.webViewClient = MyWebViewClient(object: MyWebViewClient.Listener {
+            override fun onReceivedError(view: WebView?, request: WebResourceRequest?,
+                                         error: WebResourceError?)
+            {
+                Timber.i("onReceivedError")
+            }
+
+            override fun onReceivedHttpError(view: WebView?, request: WebResourceRequest?,
+                                             errorResponse: WebResourceResponse?)
+            {
+                Timber.i("onReceivedHttpError")
+            }
+
+            override fun onPageFinished(view: WebView?, url: String?) {
+                Timber.i("onPageFinished")
+                findViewById<TextView>(R.id.loading).visibility = View.GONE
+            }
+        })
+    }
+
+    private fun initChromeClient() {
+        chromeClient = MyWebChromeClient(this, object: MyWebChromeClient.Listener {
+            override fun onChromePermissionRequest(permissions: Array<String>, requestCode: Int) {
+                requestPermissions(permissions, requestCode)
+            }
+            override fun onSpeech(text: String) {
+                Timber.i("onSpeech")
+                theText = text
+                speechText(text)
+            }
+            override fun onShowToast(text: String, typeOfToast: Int) {
+                showToast(text, typeOfToast)
+            }
+            override fun onShowSnackbar(text: String, typeOfSnack: Int) {
+                showSnackbar(text, typeOfSnack)
+            }
+            override fun onProgressChanged(view: WebView?, newProgress: Int) {
+                val bar: ProgressBar = findViewById(R.id.progressBar)
+                bar.progress = newProgress
+                if (newProgress == 100)
+                    bar.visibility = View.INVISIBLE
+            }
+        })
+        webView?.webChromeClient = chromeClient
+        webView?.addJavascriptInterface(chromeClient!!, "android")
+        webView?.loadUrl(getString(R.string.url))
     }
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun initWebSettings() {
+        webView?.setBackgroundColor(0)
         val settings = webView?.settings
         if (settings == null)
             return
@@ -284,34 +290,22 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         return pi.versionName
     }
 
-    class WebViewThread(private val activity: MainActivity) : Thread() {
-        override fun run() {
-            Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE)
-            activity.initWebView()
-        }
-    }
-
     /////////////////////////////////////////////////////////////////////
     // TextToSpeech関連
     //
     private var tts: TextToSpeech? = null
-    private var ttsThread: TtsThread? = null
     private var isSpeechReady = false
     private var theText = ""
 
     private fun initTextToSpeech() {
-        tts = TextToSpeech(this, this)
-        var locale = Locale.JAPANESE // {{language-dependent}}
-        if (BuildConfig.DEBUG)
-            locale = Locale.ENGLISH
-        if (tts!!.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
-            tts!!.language = locale
-        }
-    }
-
-    class TtsThread(private val activity: MainActivity) : Thread() {
-        override fun run() {
-            activity.initTextToSpeech()
+        run {
+            tts = TextToSpeech(this, this)
+            var locale = Locale.JAPANESE // {{language-dependent}}
+            if (BuildConfig.DEBUG)
+                locale = Locale.ENGLISH
+            if (tts!!.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
+                tts!!.language = locale
+            }
         }
     }
 
