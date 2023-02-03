@@ -6,6 +6,7 @@
     <!-- main -->
     <string name="app_name">催眠くらくら</string>
     <string name="web_view">ウェブビュー</string>
+    <string name="progress_bar">進捗バー</string>
     <string name="now_starting">くらくら起動中...</string>
     <string name="prompt_hint">表示したい文字列を入力して下さい</string>
     <string name="no_audio_record">音声を入力するには権限が必要です</string>
