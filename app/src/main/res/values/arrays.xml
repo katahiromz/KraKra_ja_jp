@@ -4,5 +4,9 @@
         <item>@string/message_get_sleep</item>
         <item>@string/message_want_to_study</item>
         <item>@string/message_like_to_work</item>
+        <item>@string/message_do_not_overdo</item>
+        <item>@string/message_you_will_love_me</item>
+        <item>@string/message_please_help_me</item>
+        <item>@string/message_please_realize_my_wish</item>
     </array>
 </resources>

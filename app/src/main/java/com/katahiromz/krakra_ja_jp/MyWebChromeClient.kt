@@ -227,7 +227,7 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
                 val defaultMessageList = activity.getStringArray(R.array.message_sample_list)
                 MainRepository.getMessageList(activity).apply {
                     val messageList = defaultMessageList + this
-                    if (!messageList.contains(inputtedText)) {
+                    if (inputtedText.isNotEmpty() && !messageList.contains(inputtedText)) {
                         MainRepository.setMessageList(activity, this + inputtedText)
                     }
                 }
