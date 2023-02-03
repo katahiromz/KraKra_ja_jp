@@ -242,11 +242,11 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
                     theText = text
                     speechText(text)
                 }
-                override fun showToast(text: String, typeOfToast: Int) {
-                    this.showToast(text, typeOfToast)
+                override fun onShowToast(text: String, typeOfToast: Int) {
+                    showToast(text, typeOfToast)
                 }
-                override fun showSnackbar(text: String, typeOfSnack: Int) {
-                    this.showSnackbar(text, typeOfSnack)
+                override fun onShowSnackbar(text: String, typeOfSnack: Int) {
+                    showSnackbar(text, typeOfSnack)
                 }
                 override fun onProgressChanged(view: WebView?, newProgress: Int) {
                     val bar: ProgressBar = findViewById(R.id.progressBar)
