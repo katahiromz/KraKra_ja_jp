@@ -36,10 +36,15 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         fun onSpeech(text: String)
         fun showToast(text: String, typeOfToast: Int)
         fun showSnackbar(text: String, typeOfSnack: Int)
+        fun onProgressChanged(view: WebView?, newProgress: Int)
     }
 
     private fun getResString(resId: Int): String {
         return activity.getString(resId)
+    }
+
+    override fun onProgressChanged(view: WebView?, newProgress: Int) {
+        listener.onProgressChanged(view, newProgress)
     }
 
     /////////////////////////////////////////////////////////////////////

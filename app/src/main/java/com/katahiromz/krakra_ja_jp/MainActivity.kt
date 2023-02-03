@@ -9,6 +9,7 @@ import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
 import android.webkit.*
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -246,6 +247,12 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
                 }
                 override fun showSnackbar(text: String, typeOfSnack: Int) {
                     this.showSnackbar(text, typeOfSnack)
+                }
+                override fun onProgressChanged(view: WebView?, newProgress: Int) {
+                    val bar: ProgressBar = findViewById(R.id.progressBar)
+                    bar.progress = newProgress
+                    if (newProgress == 100)
+                        bar.visibility = View.INVISIBLE
                 }
             })
             webView?.webChromeClient = chromeClient
