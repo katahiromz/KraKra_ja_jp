@@ -4,9 +4,7 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.os.Process
 import android.speech.tts.TextToSpeech
-import android.util.Log
 import android.view.View
 import android.webkit.*
 import android.widget.ProgressBar

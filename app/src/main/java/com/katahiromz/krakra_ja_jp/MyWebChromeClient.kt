@@ -1,17 +1,12 @@
 package com.katahiromz.krakra_ja_jp
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.pm.PackageManager
-import android.util.Log
 import android.webkit.*
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityCompat.*
 import androidx.core.content.ContextCompat
-import androidx.core.content.PermissionChecker
-import androidx.core.content.PermissionChecker.checkSelfPermission
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
@@ -50,13 +45,12 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
     override fun onPermissionRequest(request: PermissionRequest?) {
         // Audio record request
         val audioCheck =
-                PermissionChecker.checkSelfPermission(activity, Manifest.permission.RECORD_AUDIO)
+                ContextCompat.checkSelfPermission(activity, Manifest.permission.RECORD_AUDIO)
         when (audioCheck) {
-            PermissionChecker.PERMISSION_GRANTED,
-            PermissionChecker.PERMISSION_DENIED_APP_OP -> {
+            PackageManager.PERMISSION_GRANTED -> {
                 request?.grant(request.resources)
             }
-            PermissionChecker.PERMISSION_DENIED -> {
+            PackageManager.PERMISSION_DENIED -> {
                 val audioRational =
                         shouldShowRequestPermissionRationale(
                                 activity, Manifest.permission.RECORD_AUDIO)
