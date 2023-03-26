@@ -1,7 +1,7 @@
 /* jshint esversion: 8 */
 
-const NUM_TYPE = 8;
-const VERSION = '3.2.9';
+const NUM_TYPE = 9;
+const VERSION = '3.3.1';
 const DEBUG = true;
 
 // {{language-specific}}
@@ -1135,6 +1135,47 @@ function setMessageSizeType(value){
 		ctx.restore();
 	}
 
+	function drawPic9(ctx, px, py, dx, dy, t){
+		ctx.save();
+
+		let qx = px + dx / 2;
+		let qy = py + dy / 2;
+		let dxy = (dx + dy) / 2;
+
+		let count2 = getCount();
+		let sx = qx + dxy * Math.cos(count2 * 0.01) * 0.0015;
+		let sy = qy + dxy * Math.sin(count2 * 0.01) * 0.0015;
+		let tx = qx + dxy * Math.cos(count2 * 0.01) * 0.0025;
+		let ty = qy + dxy * Math.sin(count2 * 0.01) * 0.0025;
+		let delta1 = dxy / 12;
+		ctx.beginPath();
+		for (let i = 0; i < dxy; i += 2 * delta1){
+			ctx.arc(sx, sy, i, 0, Math.PI * 2, false);
+			ctx.arc(sx, sy, i + delta1, 0, Math.PI * 2, true);
+		}
+		ctx.clip();
+
+		let ratio = 0.01;
+
+		counter = -counter;
+		drawPic1(ctx, px, py, dx, dy, t);
+		counter = -counter;
+
+		ctx.restore();
+		ctx.save();
+
+		ctx.beginPath();
+		for (let i = delta1; i < dxy; i += 2 * delta1){
+			ctx.arc(tx, ty, i, 0, Math.PI * 2, false);
+			ctx.arc(tx, ty, i + delta1, 0, Math.PI * 2, true);
+		}
+		ctx.clip();
+
+		drawPic1(ctx, px, py, dx, dy, t);
+
+		ctx.restore();
+	}
+
 	function drawPic(ctx, px, py, cx, cy){
 		switch (type){
 		case 0:
@@ -1164,6 +1205,9 @@ function setMessageSizeType(value){
 			break;
 		case 8:
 			drawPic8(ctx, px, py, cx, cy, type);
+			break;
+		case 9:
+			drawPic9(ctx, px, py, cx, cy, type);
 			break;
 		}
 	}
