@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.view.View
+import android.view.WindowManager
 import android.webkit.*
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -43,7 +44,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
 
     // Toast を表示する。
-    @JavascriptInterface
     fun showToast(text: String, typeOfToast: Int) {
         when (typeOfToast) {
             SHORT_TOAST -> {
@@ -61,7 +61,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
     var lastToast : Toast? = null
     // Toastをキャンセルする。
-    @JavascriptInterface
     fun cancelToast() {
         if (lastToast != null) {
             lastToast?.cancel()
@@ -70,7 +69,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
 
     // Snackbar を表示する。
-    @JavascriptInterface
     fun showSnackbar(text: String, typeOfSnack: Int) {
         val view = findViewById<View>(android.R.id.content)
         when (typeOfSnack) {
@@ -104,6 +102,17 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             lastSnackbar?.dismiss()
             lastSnackbar = null
         }
+    }
+
+    // 画面の明るさを調整する。
+    var screenBrightness: String = "normal"
+    fun setBrightness(value: String) {
+        if (value == "brighter") {
+            window.attributes.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_FULL
+        } else {
+            window.attributes.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE
+        }
+        screenBrightness = value
     }
 
     /////////////////////////////////////////////////////////////////////
@@ -167,6 +176,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             speechText(theText)
         }
         chromeClient?.onResume()
+        setBrightness(screenBrightness);
     }
 
     override fun onPause() {
@@ -257,6 +267,9 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
                 bar.progress = newProgress
                 if (newProgress == 100)
                     bar.visibility = View.INVISIBLE
+            }
+            override fun onBrightness(value: String) {
+                setBrightness(value)
             }
         })
         webView?.webChromeClient = chromeClient

@@ -29,6 +29,7 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         fun onShowToast(text: String, typeOfToast: Int)
         fun onShowSnackbar(text: String, typeOfSnack: Int)
         fun onProgressChanged(view: WebView?, newProgress: Int)
+        fun onBrightness(value: String)
     }
 
     private fun getResString(resId: Int): String {
@@ -69,6 +70,12 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
 
     /////////////////////////////////////////////////////////////////////
     // JavaScript interface-related
+
+    // 画面の明るさを調整する。
+    @JavascriptInterface
+    fun setBrightness(brightness: String) {
+        listener.onBrightness(brightness);
+    }
 
     @JavascriptInterface
     fun cancelSpeech() {

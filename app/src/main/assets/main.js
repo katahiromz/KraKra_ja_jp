@@ -1,7 +1,7 @@
 /* jshint esversion: 8 */
 
 const NUM_TYPE = 9;
-const VERSION = '3.3.1';
+const VERSION = '3.3.2';
 const DEBUG = true;
 
 // {{language-specific}}
@@ -167,7 +167,17 @@ jQuery(function($){
 		}
 	}
 
-function setMessageSizeType(value){
+	function setScreenBrightness(value){
+		try{
+			android.setBrightness(value);
+		}catch(error){
+			console.log("android.setBrightness(" + value + ") failed: " + error);
+		}
+		screen_brightness.value = value;
+		localStorage.setItem('saiminScreenBrightness', value);
+	}
+
+	function setMessageSizeType(value){
 		floating_text.classList.remove('font_size_small');
 		floating_text.classList.remove('font_size_normal');
 		floating_text.classList.remove('font_size_large');
@@ -423,6 +433,7 @@ function setMessageSizeType(value){
 		let old_message_size_value = message_size_select.value;
 		let old_sound_value = sound_select.value;
 		let old_type_sound_value = type_sound_select.value;
+		let old_screen_brightness = screen_brightness.value;
 		localStorage.setItem('saiminConfigShowing', '1');
 		$('#config_dialog').dialog({
 			dialogClass: 'no-close',
@@ -439,6 +450,7 @@ function setMessageSizeType(value){
 						setMessageSizeType(old_message_size_value);
 						setSoundName(old_sound_value);
 						setTypeSound(old_type_sound_value);
+						setScreenBrightness(old_screen_brightness);
 						$(this).dialog('close');
 					},
 				}
@@ -1344,6 +1356,13 @@ function setMessageSizeType(value){
 			setMessageSizeType('normal');
 		}
 
+		let saiminScreenBrightness = localStorage.getItem('saiminScreenBrightness');
+		if (saiminScreenBrightness){
+			setScreenBrightness(saiminScreenBrightness);
+		}else{
+			setScreenBrightness('normal');
+		}
+
 		text_button.addEventListener('click', function(){
 			let text = prompt(TEXT_INPUT_MESSAGE, theText);
 			if (text !== null){
@@ -1389,6 +1408,12 @@ function setMessageSizeType(value){
 			if (!ready)
 				return;
 			setMessageSizeType(message_size_select.value, true);
+		}, false);
+
+		screen_brightness.addEventListener('change', function(){
+			if (!ready)
+				return;
+			setScreenBrightness(screen_brightness.value, true);
 		}, false);
 
 		sound_select.addEventListener('change', function(){
