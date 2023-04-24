@@ -15,8 +15,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.android.material.snackbar.Snackbar
-import java.util.*
 import timber.log.Timber
+import java.util.*
+
 
 /////////////////////////////////////////////////////////////////////
 // 定数。
@@ -107,11 +108,16 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     // 画面の明るさを調整する。
     var screenBrightness: String = "normal"
     fun setBrightness(value: String) {
-        if (value == "brighter") {
-            window.attributes.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_FULL
-        } else {
-            window.attributes.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE
+        runOnUiThread {
+            val params: WindowManager.LayoutParams = window.attributes
+            if (value == "brighter") {
+                params.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_FULL
+            } else {
+                params.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE
+            }
+            window.attributes = params
         }
+
         screenBrightness = value
     }
 
@@ -119,9 +125,9 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     // パーミッション関連
 
     override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
+            requestCode: Int,
+            permissions: Array<String>,
+            grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         var grantedAll = true
@@ -226,16 +232,14 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
 
     private fun initWebViewClient() {
-        webView?.webViewClient = MyWebViewClient(object: MyWebViewClient.Listener {
+        webView?.webViewClient = MyWebViewClient(object : MyWebViewClient.Listener {
             override fun onReceivedError(view: WebView?, request: WebResourceRequest?,
-                                         error: WebResourceError?)
-            {
+                                         error: WebResourceError?) {
                 Timber.i("onReceivedError")
             }
 
             override fun onReceivedHttpError(view: WebView?, request: WebResourceRequest?,
-                                             errorResponse: WebResourceResponse?)
-            {
+                                             errorResponse: WebResourceResponse?) {
                 Timber.i("onReceivedHttpError")
             }
 
@@ -247,27 +251,32 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
 
     private fun initChromeClient() {
-        chromeClient = MyWebChromeClient(this, object: MyWebChromeClient.Listener {
+        chromeClient = MyWebChromeClient(this, object : MyWebChromeClient.Listener {
             override fun onChromePermissionRequest(permissions: Array<String>, requestCode: Int) {
                 requestPermissions(permissions, requestCode)
             }
+
             override fun onSpeech(text: String) {
                 Timber.i("onSpeech")
                 theText = text
                 speechText(text)
             }
+
             override fun onShowToast(text: String, typeOfToast: Int) {
                 showToast(text, typeOfToast)
             }
+
             override fun onShowSnackbar(text: String, typeOfSnack: Int) {
                 showSnackbar(text, typeOfSnack)
             }
+
             override fun onProgressChanged(view: WebView?, newProgress: Int) {
                 val bar: ProgressBar = findViewById(R.id.progressBar)
                 bar.progress = newProgress
                 if (newProgress == 100)
                     bar.visibility = View.INVISIBLE
             }
+
             override fun onBrightness(value: String) {
                 setBrightness(value)
             }
