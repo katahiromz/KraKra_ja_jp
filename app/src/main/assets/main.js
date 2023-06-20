@@ -995,7 +995,10 @@ jQuery(function($){
 			}],
 		});
 		$('#choose_language_dialog').on('dialogclose', function(event){
-			help();
+			if (first_time) {
+				setLanguage('en');
+				help();
+			}
 		});
 	}
 
