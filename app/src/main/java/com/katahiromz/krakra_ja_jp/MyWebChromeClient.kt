@@ -116,9 +116,10 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
         message: String?,
         result: JsResult?
     ): Boolean {
+        activity!!.currLocaleContext = null
         // MaterialAlertDialogを使用して実装する。
-        val title = getLocString(R.string.app_name)
-        val ok_text = getLocString(R.string.ok)
+        var title = getLocString(R.string.app_name)
+        var ok_text = getLocString(R.string.ok)
         MaterialAlertDialogBuilder(activity)
             .setTitle(title)
             .setMessage(message)
@@ -137,10 +138,11 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
         message: String?,
         result: JsResult?
     ): Boolean {
+        activity!!.currLocaleContext = null
         // MaterialAlertDialogを使用して実装する。
-        val title = getLocString(R.string.app_name)
-        val ok_text = getLocString(R.string.ok)
-        val cancel_text = getLocString(R.string.cancel)
+        var title = getLocString(R.string.app_name)
+        var ok_text = getLocString(R.string.ok)
+        var cancel_text = getLocString(R.string.cancel)
         MaterialAlertDialogBuilder(activity)
             .setTitle(title)
             .setMessage(message)
@@ -170,6 +172,7 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
         defaultValue: String?,
         result: JsPromptResult?
     ): Boolean {
+        activity!!.currLocaleContext = null
         val title = getLocString(R.string.app_name)
         if (isSelectMessageDialog(message)) {
             // メッセージ選択ダイアログを表示
@@ -225,6 +228,7 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
      * @return true: メッセージ選択ダイアログの表示対象、false: それ以外
      */
     private fun isSelectMessageDialog(message: String?): Boolean {
+        activity!!.currLocaleContext = null
         if (getLocString(R.string.message_select_dialog_message) == message)
             return true
         // リソースと現在のロケールの同期ができないので、文字列を埋め込むことにした。
@@ -238,6 +242,7 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
         defaultValue: String?,
         result: JsPromptResult?
     ) {
+        activity!!.currLocaleContext = null
         var defaultMessageList: List<String> = activity!!.getMsgList()
         var userMessageList: List<String> = MainRepository.getMessageList(activity!!)
         var messageList: List<String> = defaultMessageList + userMessageList
@@ -265,6 +270,12 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
             cancelOnTouchOutside(false)
             lifecycleOwner(activity)
         }
+
+        // よくわからないのでもう一度更新する。
+        activity!!.currLocaleContext = null
+        defaultMessageList = activity!!.getMsgList()
+        userMessageList = MainRepository.getMessageList(activity!!)
+        messageList = defaultMessageList + userMessageList
 
         // ダイアログのレイアウトを設定
         val customView = modalDialog!!.getCustomView()

@@ -323,9 +323,10 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         currLocaleContext = null
     }
 
-    fun getLocString(id: Int, locale: Locale = currLocale): String {
+    fun getLocString(id: Int, locale: Locale): String {
         if (currLocaleContext == null) {
             var conf: Configuration = resources.configuration
+            conf = Configuration(conf)
             conf.setLocale(locale)
             conf.setLayoutDirection(locale)
             currLocaleContext = createConfigurationContext(conf)
@@ -333,7 +334,12 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         return currLocaleContext!!.resources.getString(id)
     }
 
+    fun getLocString(id: Int): String {
+        return getLocString(id, currLocale);
+    }
+
     fun getMsgList(): List<String> {
+        currLocaleContext = null
         var ret: List<String> = listOf<String>()
         for (id in R.string.message_000 .. R.string.message_049) {
             ret += getLocString(id)
