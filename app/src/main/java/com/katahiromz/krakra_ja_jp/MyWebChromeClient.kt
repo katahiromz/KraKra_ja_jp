@@ -2,11 +2,16 @@ package com.katahiromz.krakra_ja_jp
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.content.res.Configuration
+import android.content.res.Resources
+import android.media.VolumeShaper
 import android.webkit.*
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat.*
 import androidx.core.content.ContextCompat
+import androidx.core.os.LocaleListCompat
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
@@ -15,11 +20,12 @@ import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import com.afollestad.materialdialogs.utils.MDUtil.getStringArray
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import timber.log.Timber
+import java.util.*
 
 // 定数。
 const val MY_WEBVIEW_REQUEST_CODE_01 = 999
 
-class MyWebChromeClient(private val activity: AppCompatActivity, private val listener: Listener) :
+class MyWebChromeClient(public var activity: MainActivity?, private val listener: Listener) :
     WebChromeClient() {
 
     // リスナ。
@@ -32,8 +38,8 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         fun onBrightness(value: String)
     }
 
-    private fun getResString(resId: Int): String {
-        return activity.getString(resId)
+    private fun getLocString(resId: Int): String {
+        return activity!!.getLocString(resId)
     }
 
     override fun onProgressChanged(view: WebView?, newProgress: Int) {
@@ -46,7 +52,7 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
     override fun onPermissionRequest(request: PermissionRequest?) {
         // Audio record request
         val audioCheck =
-                ContextCompat.checkSelfPermission(activity, Manifest.permission.RECORD_AUDIO)
+                ContextCompat.checkSelfPermission(activity!!, Manifest.permission.RECORD_AUDIO)
         when (audioCheck) {
             PackageManager.PERMISSION_GRANTED -> {
                 request?.grant(request.resources)
@@ -54,7 +60,7 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
             PackageManager.PERMISSION_DENIED -> {
                 val audioRational =
                         shouldShowRequestPermissionRationale(
-                                activity, Manifest.permission.RECORD_AUDIO)
+                                activity!!, Manifest.permission.RECORD_AUDIO)
                 if (audioRational) {
                     listener.onChromePermissionRequest(
                             arrayOf(Manifest.permission.RECORD_AUDIO),
@@ -89,7 +95,18 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
 
     @JavascriptInterface
     fun clearSettings() {
-        MainRepository.clearMessageList(activity)
+        MainRepository.clearMessageList(activity!!)
+    }
+
+    @JavascriptInterface
+    fun setLanguage(lang: String) {
+        var locale : Locale = if (lang == "ja" || lang == "jp") {
+            Locale.JAPANESE
+        } else {
+            Locale.ENGLISH
+        }
+        Locale.setDefault(locale)
+        activity!!.setCurLocale(locale)
     }
 
     // JavaScriptのalert関数をラップする。
@@ -100,8 +117,8 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         result: JsResult?
     ): Boolean {
         // MaterialAlertDialogを使用して実装する。
-        val title = getResString(R.string.app_name)
-        val ok_text = getResString(R.string.ok)
+        val title = getLocString(R.string.app_name)
+        val ok_text = getLocString(R.string.ok)
         MaterialAlertDialogBuilder(activity)
             .setTitle(title)
             .setMessage(message)
@@ -121,9 +138,9 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         result: JsResult?
     ): Boolean {
         // MaterialAlertDialogを使用して実装する。
-        val title = getResString(R.string.app_name)
-        val ok_text = getResString(R.string.ok)
-        val cancel_text = getResString(R.string.cancel)
+        val title = getLocString(R.string.app_name)
+        val ok_text = getLocString(R.string.ok)
+        val cancel_text = getLocString(R.string.cancel)
         MaterialAlertDialogBuilder(activity)
             .setTitle(title)
             .setMessage(message)
@@ -153,7 +170,7 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         defaultValue: String?,
         result: JsPromptResult?
     ): Boolean {
-        val title = getResString(R.string.app_name)
+        val title = getLocString(R.string.app_name)
         if (isSelectMessageDialog(message)) {
             // メッセージ選択ダイアログを表示
             showSelectMessageDialog(
@@ -165,17 +182,17 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
             return true
         }
         var inputtedText: String? = null
-        modalDialog = MaterialDialog(activity).show {
+        modalDialog = MaterialDialog(activity!!).show {
             title(text = title)
             message(text = message)
-            input(hint = getResString(R.string.prompt_hint), prefill = defaultValue) { _, text ->
+            input(hint = getLocString(R.string.prompt_hint), prefill = defaultValue) { _, text ->
                 inputtedText = text.toString()
             }
-            positiveButton(text = getResString(R.string.ok)) {
+            positiveButton(text = getLocString(R.string.ok)) {
                 result?.confirm(inputtedText ?: "")
                 modalDialog = null
             }
-            negativeButton(text = getResString(R.string.cancel)) {
+            negativeButton(text = getLocString(R.string.cancel)) {
                 result?.cancel()
                 modalDialog = null
             }
@@ -207,7 +224,7 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
      * @return true: メッセージ選択ダイアログの表示対象、false: それ以外
      */
     private fun isSelectMessageDialog(message: String?): Boolean =
-        message == getResString(R.string.message_select_dialog_message)
+        message == getLocString(R.string.message_select_dialog_message)
 
     private fun showSelectMessageDialog(
         title: String,
@@ -215,25 +232,25 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         defaultValue: String?,
         result: JsPromptResult?
     ) {
-        modalDialog = MaterialDialog(activity).show {
+        modalDialog = MaterialDialog(activity!!).show {
             title(text = title)
             message(text = message)
             customView(R.layout.message_select_dialog, scrollable = true, horizontalPadding = true)
-            positiveButton(text = getResString(R.string.ok)) {
+            positiveButton(text = getLocString(R.string.ok)) {
                 val editText = getCustomView().findViewById<EditText>(R.id.message_edit)
                 val inputtedText = editText.text.toString()
                 result?.confirm(inputtedText)
                 modalDialog = null
 
-                val defaultMessageList = activity.getStringArray(R.array.message_sample_list)
-                MainRepository.getMessageList(activity).apply {
+                val defaultMessageList = activity!!.getMsgArray()
+                MainRepository.getMessageList(activity!!).apply {
                     val messageList = defaultMessageList + this
                     if (inputtedText.isNotEmpty() && !messageList.contains(inputtedText)) {
-                        MainRepository.setMessageList(activity, this + inputtedText)
+                        MainRepository.setMessageList(activity!!, this + inputtedText)
                     }
                 }
             }
-            negativeButton(text = getResString(R.string.cancel)) {
+            negativeButton(text = getLocString(R.string.cancel)) {
                 result?.cancel()
                 modalDialog = null
             }
@@ -245,10 +262,10 @@ class MyWebChromeClient(private val activity: AppCompatActivity, private val lis
         // ダイアログのレイアウトを設定
         val customView = modalDialog!!.getCustomView()
         val listView: ListView = customView.findViewById(R.id.message_list)
-        val defaultMessageList = activity.getStringArray(R.array.message_sample_list)
-        val inputtedMessageList = MainRepository.getMessageList(activity)
+        val defaultMessageList = activity!!.getMsgArray()
+        val inputtedMessageList = MainRepository.getMessageList(activity!!)
         val arrayAdapter = ArrayAdapter(
-            activity,
+            activity!!,
             android.R.layout.simple_list_item_1,
             defaultMessageList + inputtedMessageList
         )

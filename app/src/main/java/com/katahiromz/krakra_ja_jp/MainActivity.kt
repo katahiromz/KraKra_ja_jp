@@ -1,8 +1,10 @@
 package com.katahiromz.krakra_ja_jp
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.view.View
@@ -83,7 +85,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             }
             ACTION_SNACK_OK -> {
                 lastSnackbar = Snackbar.make(view, text, Snackbar.LENGTH_INDEFINITE)
-                val buttonText = getString(R.string.ok)
+                val buttonText = getLocString(R.string.ok)
                 lastSnackbar?.setAction(buttonText) {
                     // TODO: Add action
                 }
@@ -143,7 +145,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
                 webView?.evaluateJavascript("AndroidMicrophoneOnReload()", null)
             } else {
                 // Permission request was denied.
-                showSnackbar(getString(R.string.no_audio_record), ACTION_SNACK_OK)
+                showSnackbar(getLocString(R.string.no_audio_record), ACTION_SNACK_OK)
             }
         }
         // TODO: Add more request
@@ -283,7 +285,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         })
         webView?.webChromeClient = chromeClient
         webView?.addJavascriptInterface(chromeClient!!, "android")
-        webView?.loadUrl(getString(R.string.url))
+        webView?.loadUrl(getLocString(R.string.url))
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -308,6 +310,35 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         val pm: PackageManager = this.packageManager
         val pi: PackageInfo = pm.getPackageInfo(appName, PackageManager.GET_META_DATA)
         return pi.versionName
+    }
+
+    /////////////////////////////////////////////////////////////////////
+    // ロケール関連
+    //
+    var currLocale: Locale = Locale.ENGLISH
+    var currLocaleContext: Context? = null
+
+    fun setCurLocale(locale: Locale) {
+        currLocale = locale
+        currLocaleContext = null
+    }
+
+    fun getLocString(id: Int, locale: Locale = currLocale): String {
+        if (currLocaleContext == null) {
+            var conf: Configuration = resources.configuration
+            conf.setLocale(locale)
+            conf.setLayoutDirection(locale)
+            currLocaleContext = createConfigurationContext(conf)
+        }
+        return currLocaleContext!!.resources.getString(id)
+    }
+
+    fun getMsgArray(): Array<String> {
+        var ret = arrayOf<String>()
+        for (id in R.string.message_000 .. R.string.message_049) {
+            ret += getLocString(id)
+        }
+        return ret
     }
 
     /////////////////////////////////////////////////////////////////////

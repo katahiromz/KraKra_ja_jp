@@ -1,26 +1,488 @@
 /* jshint esversion: 8 */
 
 const NUM_TYPE = 9;
-const VERSION = '3.3.2';
+const VERSION = '3.2.7';
 const DEBUG = true;
 
-// {{language-specific}}
-const TEXT_PIC = '画';
-const TEXT_OK = 'OK';
-const TEXT_CANCEL = 'キャンセル';
-const TEXT_YES = 'はい';
-const TEXT_NO = 'いいえ';
-const TEXT_VERSION_INFO = 'バージョン情報';
-const TEXT_INIT_APP = 'アプリの初期化';
-const TEXT_INITTED_APP = 'アプリを初期化しました。';
-const TEXT_ADULT_CHECK = '成人チェック';
-const TEXT_CONFIGURATION = '全般設定';
-const TEXT_APPEARANCE = '見た目の設定';
-const TEXT_INPUT_MESSAGE = 'メッセージ文字列を入力して下さい。';
-const TEXT_FORBIDDEN = '使用禁止';
-const TEXT_FULLWIDTH_SPACE = '　';
-const TEXT_PERIOD = '。';
-const TEXT_PERIOD_SPACE = '。';
+const NOTICE_EN = `This software is an application to enjoy hypnotic moving pictures.
+It generates hypnosis video in real time without using any video files.
+How you use it is up to you.
+
+* Source: https://github.com/katahiromz/KraKra_en_us
+* Some OtoLogic audio material is used.
+* You can modify this software under the Apache 2.0 License.
+
+[(Precautions for use)]
+
+- This software is a joke application and its operation is not guaranteed.
+- Do not use this software if you have epilepsy symptoms.
+- If your country, school, religion or region prohibits hypnosis, do not use this application.
+- Acute schizophrenic patients should not use this software.
+- Avoid driving a car immediately after using this software.
+- People with trypophobia should not use this software.
+- If you experience symptoms such as headache, dizzy, hyperpnea, nausea, gastrointestinal problems, or abnormal emotions, discontinue use immediately and consult a specialist.
+- The Operator may terminate the Service at any time if any reason arises that makes it difficult to continue the Service.
+
+[(How to use)]
+
+- Basically, it is an application to enjoy looking at the screen.
+- Tap/click on the screen to switch pictures.
+- The 'pic' button allows you to set the video settings.
+- Tap the 'microphone' button to use the microphone.
+- Tapping the 'note' button makes a sound.
+- The 'Aa' button allows you to set the message to be displayed.
+- The 'bubble' button will speak the message.
+- The 'gear' button allows for general settings.
+- When you trace the screen, a sparkle appears to attract one's attention.
+
+Copyright (c) 2022 Katayama Hirofumi MZ
+Copyright (c) 2018 Robert Eisele
+Copyright (c) 2007-2022 Akshay Nair
+Copyright 2022 OpenJS Foundation and jQuery contributors.
+
+---
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner that is granting the License.
+
+      "Legal Entity" shall mean the union of the acting entity and all
+      other entities that control, are controlled by, or are under common
+      control with that entity. For the purposes of this definition,
+      "control" means (i) the power, direct or indirect, to cause the
+      direction or management of such entity, whether by contract or
+      otherwise, or (ii) ownership of fifty percent (50%) or more of the
+      outstanding shares, or (iii) beneficial ownership of such entity.
+
+      "You" (or "Your") shall mean an individual or Legal Entity
+      exercising permissions granted by this License.
+
+      "Source" form shall mean the preferred form for making modifications,
+      including but not limited to software source code, documentation
+      source, and configuration files.
+
+      "Object" form shall mean any form resulting from mechanical
+      transformation or translation of a Source form, including but
+      not limited to compiled object code, generated documentation,
+      and conversions to other media types.
+
+      "Work" shall mean the work of authorship, whether in Source or
+      Object form, made available under the License, as indicated by a
+      copyright notice that is included in or attached to the work
+      (an example is provided in the Appendix below).
+
+      "Derivative Works" shall mean any work, whether in Source or Object
+      form, that is based on (or derived from) the Work and for which the
+      editorial revisions, annotations, elaborations, or other modifications
+      represent, as a whole, an original work of authorship. For the purposes
+      of this License, Derivative Works shall not include works that remain
+      separable from, or merely link (or bind by name) to the interfaces of,
+      the Work and Derivative Works thereof.
+
+      "Contribution" shall mean any work of authorship, including
+      the original version of the Work and any modifications or additions
+      to that Work or Derivative Works thereof, that is intentionally
+      submitted to Licensor for inclusion in the Work by the copyright owner
+      or by an individual or Legal Entity authorized to submit on behalf of
+      the copyright owner. For the purposes of this definition, "submitted"
+      means any form of electronic, verbal, or written communication sent
+      to the Licensor or its representatives, including but not limited to
+      communication on electronic mailing lists, source code control systems,
+      and issue tracking systems that are managed by, or on behalf of, the
+      Licensor for the purpose of discussing and improving the Work, but
+      excluding communication that is conspicuously marked or otherwise
+      designated in writing by the copyright owner as "Not a Contribution."
+
+      "Contributor" shall mean Licensor and any individual or Legal Entity
+      on behalf of whom a Contribution has been received by Licensor and
+      subsequently incorporated within the Work.
+
+   2. Grant of Copyright License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      copyright license to reproduce, prepare Derivative Works of,
+      publicly display, publicly perform, sublicense, and distribute the
+      Work and such Derivative Works in Source or Object form.
+
+   3. Grant of Patent License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      (except as stated in this section) patent license to make, have made,
+      use, offer to sell, sell, import, and otherwise transfer the Work,
+      where such license applies only to those patent claims licensable
+      by such Contributor that are necessarily infringed by their
+      Contribution(s) alone or by combination of their Contribution(s)
+      with the Work to which such Contribution(s) was submitted. If You
+      institute patent litigation against any entity (including a
+      cross-claim or counterclaim in a lawsuit) alleging that the Work
+      or a Contribution incorporated within the Work constitutes direct
+      or contributory patent infringement, then any patent licenses
+      granted to You under this License for that Work shall terminate
+      as of the date such litigation is filed.
+
+   4. Redistribution. You may reproduce and distribute copies of the
+      Work or Derivative Works thereof in any medium, with or without
+      modifications, and in Source or Object form, provided that You
+      meet the following conditions:
+
+      (a) You must give any other recipients of the Work or
+          Derivative Works a copy of this License; and
+
+      (b) You must cause any modified files to carry prominent notices
+          stating that You changed the files; and
+
+      (c) You must retain, in the Source form of any Derivative Works
+          that You distribute, all copyright, patent, trademark, and
+          attribution notices from the Source form of the Work,
+          excluding those notices that do not pertain to any part of
+          the Derivative Works; and
+
+      (d) If the Work includes a "NOTICE" text file as part of its
+          distribution, then any Derivative Works that You distribute must
+          include a readable copy of the attribution notices contained
+          within such NOTICE file, excluding those notices that do not
+          pertain to any part of the Derivative Works, in at least one
+          of the following places: within a NOTICE text file distributed
+          as part of the Derivative Works; within the Source form or
+          documentation, if provided along with the Derivative Works; or,
+          within a display generated by the Derivative Works, if and
+          wherever such third-party notices normally appear. The contents
+          of the NOTICE file are for informational purposes only and
+          do not modify the License. You may add Your own attribution
+          notices within Derivative Works that You distribute, alongside
+          or as an addendum to the NOTICE text from the Work, provided
+          that such additional attribution notices cannot be construed
+          as modifying the License.
+
+      You may add Your own copyright statement to Your modifications and
+      may provide additional or different license terms and conditions
+      for use, reproduction, or distribution of Your modifications, or
+      for any such Derivative Works as a whole, provided Your use,
+      reproduction, and distribution of the Work otherwise complies with
+      the conditions stated in this License.
+
+   5. Submission of Contributions. Unless You explicitly state otherwise,
+      any Contribution intentionally submitted for inclusion in the Work
+      by You to the Licensor shall be under the terms and conditions of
+      this License, without any additional terms or conditions.
+      Notwithstanding the above, nothing herein shall supersede or modify
+      the terms of any separate license agreement you may have executed
+      with Licensor regarding such Contributions.
+
+   6. Trademarks. This License does not grant permission to use the trade
+      names, trademarks, service marks, or product names of the Licensor,
+      except as required for reasonable and customary use in describing the
+      origin of the Work and reproducing the content of the NOTICE file.
+
+   7. Disclaimer of Warranty. Unless required by applicable law or
+      agreed to in writing, Licensor provides the Work (and each
+      Contributor provides its Contributions) on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+      implied, including, without limitation, any warranties or conditions
+      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+      PARTICULAR PURPOSE. You are solely responsible for determining the
+      appropriateness of using or redistributing the Work and assume any
+      risks associated with Your exercise of permissions under this License.
+
+   8. Limitation of Liability. In no event and under no legal theory,
+      whether in tort (including negligence), contract, or otherwise,
+      unless required by applicable law (such as deliberate and grossly
+      negligent acts) or agreed to in writing, shall any Contributor be
+      liable to You for damages, including any direct, indirect, special,
+      incidental, or consequential damages of any character arising as a
+      result of this License or out of the use or inability to use the
+      Work (including but not limited to damages for loss of goodwill,
+      work stoppage, computer failure or malfunction, or any and all
+      other commercial damages or losses), even if such Contributor
+      has been advised of the possibility of such damages.
+
+   9. Accepting Warranty or Additional Liability. While redistributing
+      the Work or Derivative Works thereof, You may choose to offer,
+      and charge a fee for, acceptance of support, warranty, indemnity,
+      or other liability obligations and/or rights consistent with this
+      License. However, in accepting such obligations, You may act only
+      on Your own behalf and on Your sole responsibility, not on behalf
+      of any other Contributor, and only if You agree to indemnify,
+      defend, and hold each Contributor harmless for any liability
+      incurred by, or claims asserted against, such Contributor by reason
+      of your accepting any such warranty or additional liability.
+
+   END OF TERMS AND CONDITIONS
+
+   APPENDIX: How to apply the Apache License to your work.
+
+      To apply the Apache License to your work, attach the following
+      boilerplate notice, with the fields enclosed by brackets "{}"
+      replaced with your own identifying information. (Don't include
+      the brackets!)  The text should be enclosed in the appropriate
+      comment syntax for the file format. We also recommend that a
+      file or class name and description of purpose be included on the
+      same "printed page" as the copyright notice for easier
+      identification within third-party archives.
+
+   Copyright {yyyy} {name of copyright owner}
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+`;
+
+const NOTICE_JA = `本ソフトウェアは、催眠っぽい映像を楽しむアプリです。
+動画ファイルを一切使わず、リアルタイムで催眠映像を生成します。
+使い方はあなた次第。
+
+※ ソース: https://github.com/katahiromz/KraKra_ja_jp
+※ 一部、OtoLogicの音声素材を使用。
+※ 改造はApache 2.0ライセンスの下で自由に行えます。
+
+【使用上の注意】
+
+- 本ソフトウェアはジョークアプリであり、動作は無保証です。
+- てんかんの症状のある方は使用しないで下さい。
+- あなたの国・学校・宗教・地域が催眠を禁じている場合は、本アプリを使用しないで下さい。
+- 急性期の統合失調症患者は使用禁止です。
+- 使用直後は、自動車の運転を避けて下さい。
+- 集合体恐怖症の人は使用しないで下さい。
+- 頭痛、めまい、過呼吸、吐き気、胃腸の不具合、異常な感情などの症状が生じた場合は、速やかに使用を中止し、専門医の診断を受けて下さい。
+- 運営者は、本サービスの継続が困難となる事由が生じた場合、いつでも本サービスを終了することができるものとします。
+
+【使い方】
+
+- 基本的に画面を見て楽しむためのアプリです。
+- 画面をタップ／クリックすると映像が切り替わります。
+- 「画」ボタンで映像の設定ができます。
+- 「マイク」ボタンでマイクが使えます。
+- 「音符」ボタンで音が鳴ります。
+- 「字」ボタンで表示するメッセージを設定できます。
+- 「ふきだし」ボタンでメッセージを自動音声でしゃべります。
+- 「歯車」ボタンで全般設定ができます。
+- 画面をなぞると、きらめきが表示され、相手の注意を引くことができます。
+
+Copyright (c) 2022-2023 Katayama Hirofumi MZ
+Copyright (c) 2018 Robert Eisele
+Copyright (c) 2007-2022 Akshay Nair
+Copyright 2022 OpenJS Foundation and jQuery contributors.
+
+---
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner that is granting the License.
+
+      "Legal Entity" shall mean the union of the acting entity and all
+      other entities that control, are controlled by, or are under common
+      control with that entity. For the purposes of this definition,
+      "control" means (i) the power, direct or indirect, to cause the
+      direction or management of such entity, whether by contract or
+      otherwise, or (ii) ownership of fifty percent (50%) or more of the
+      outstanding shares, or (iii) beneficial ownership of such entity.
+
+      "You" (or "Your") shall mean an individual or Legal Entity
+      exercising permissions granted by this License.
+
+      "Source" form shall mean the preferred form for making modifications,
+      including but not limited to software source code, documentation
+      source, and configuration files.
+
+      "Object" form shall mean any form resulting from mechanical
+      transformation or translation of a Source form, including but
+      not limited to compiled object code, generated documentation,
+      and conversions to other media types.
+
+      "Work" shall mean the work of authorship, whether in Source or
+      Object form, made available under the License, as indicated by a
+      copyright notice that is included in or attached to the work
+      (an example is provided in the Appendix below).
+
+      "Derivative Works" shall mean any work, whether in Source or Object
+      form, that is based on (or derived from) the Work and for which the
+      editorial revisions, annotations, elaborations, or other modifications
+      represent, as a whole, an original work of authorship. For the purposes
+      of this License, Derivative Works shall not include works that remain
+      separable from, or merely link (or bind by name) to the interfaces of,
+      the Work and Derivative Works thereof.
+
+      "Contribution" shall mean any work of authorship, including
+      the original version of the Work and any modifications or additions
+      to that Work or Derivative Works thereof, that is intentionally
+      submitted to Licensor for inclusion in the Work by the copyright owner
+      or by an individual or Legal Entity authorized to submit on behalf of
+      the copyright owner. For the purposes of this definition, "submitted"
+      means any form of electronic, verbal, or written communication sent
+      to the Licensor or its representatives, including but not limited to
+      communication on electronic mailing lists, source code control systems,
+      and issue tracking systems that are managed by, or on behalf of, the
+      Licensor for the purpose of discussing and improving the Work, but
+      excluding communication that is conspicuously marked or otherwise
+      designated in writing by the copyright owner as "Not a Contribution."
+
+      "Contributor" shall mean Licensor and any individual or Legal Entity
+      on behalf of whom a Contribution has been received by Licensor and
+      subsequently incorporated within the Work.
+
+   2. Grant of Copyright License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      copyright license to reproduce, prepare Derivative Works of,
+      publicly display, publicly perform, sublicense, and distribute the
+      Work and such Derivative Works in Source or Object form.
+
+   3. Grant of Patent License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      (except as stated in this section) patent license to make, have made,
+      use, offer to sell, sell, import, and otherwise transfer the Work,
+      where such license applies only to those patent claims licensable
+      by such Contributor that are necessarily infringed by their
+      Contribution(s) alone or by combination of their Contribution(s)
+      with the Work to which such Contribution(s) was submitted. If You
+      institute patent litigation against any entity (including a
+      cross-claim or counterclaim in a lawsuit) alleging that the Work
+      or a Contribution incorporated within the Work constitutes direct
+      or contributory patent infringement, then any patent licenses
+      granted to You under this License for that Work shall terminate
+      as of the date such litigation is filed.
+
+   4. Redistribution. You may reproduce and distribute copies of the
+      Work or Derivative Works thereof in any medium, with or without
+      modifications, and in Source or Object form, provided that You
+      meet the following conditions:
+
+      (a) You must give any other recipients of the Work or
+          Derivative Works a copy of this License; and
+
+      (b) You must cause any modified files to carry prominent notices
+          stating that You changed the files; and
+
+      (c) You must retain, in the Source form of any Derivative Works
+          that You distribute, all copyright, patent, trademark, and
+          attribution notices from the Source form of the Work,
+          excluding those notices that do not pertain to any part of
+          the Derivative Works; and
+
+      (d) If the Work includes a "NOTICE" text file as part of its
+          distribution, then any Derivative Works that You distribute must
+          include a readable copy of the attribution notices contained
+          within such NOTICE file, excluding those notices that do not
+          pertain to any part of the Derivative Works, in at least one
+          of the following places: within a NOTICE text file distributed
+          as part of the Derivative Works; within the Source form or
+          documentation, if provided along with the Derivative Works; or,
+          within a display generated by the Derivative Works, if and
+          wherever such third-party notices normally appear. The contents
+          of the NOTICE file are for informational purposes only and
+          do not modify the License. You may add Your own attribution
+          notices within Derivative Works that You distribute, alongside
+          or as an addendum to the NOTICE text from the Work, provided
+          that such additional attribution notices cannot be construed
+          as modifying the License.
+
+      You may add Your own copyright statement to Your modifications and
+      may provide additional or different license terms and conditions
+      for use, reproduction, or distribution of Your modifications, or
+      for any such Derivative Works as a whole, provided Your use,
+      reproduction, and distribution of the Work otherwise complies with
+      the conditions stated in this License.
+
+   5. Submission of Contributions. Unless You explicitly state otherwise,
+      any Contribution intentionally submitted for inclusion in the Work
+      by You to the Licensor shall be under the terms and conditions of
+      this License, without any additional terms or conditions.
+      Notwithstanding the above, nothing herein shall supersede or modify
+      the terms of any separate license agreement you may have executed
+      with Licensor regarding such Contributions.
+
+   6. Trademarks. This License does not grant permission to use the trade
+      names, trademarks, service marks, or product names of the Licensor,
+      except as required for reasonable and customary use in describing the
+      origin of the Work and reproducing the content of the NOTICE file.
+
+   7. Disclaimer of Warranty. Unless required by applicable law or
+      agreed to in writing, Licensor provides the Work (and each
+      Contributor provides its Contributions) on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+      implied, including, without limitation, any warranties or conditions
+      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+      PARTICULAR PURPOSE. You are solely responsible for determining the
+      appropriateness of using or redistributing the Work and assume any
+      risks associated with Your exercise of permissions under this License.
+
+   8. Limitation of Liability. In no event and under no legal theory,
+      whether in tort (including negligence), contract, or otherwise,
+      unless required by applicable law (such as deliberate and grossly
+      negligent acts) or agreed to in writing, shall any Contributor be
+      liable to You for damages, including any direct, indirect, special,
+      incidental, or consequential damages of any character arising as a
+      result of this License or out of the use or inability to use the
+      Work (including but not limited to damages for loss of goodwill,
+      work stoppage, computer failure or malfunction, or any and all
+      other commercial damages or losses), even if such Contributor
+      has been advised of the possibility of such damages.
+
+   9. Accepting Warranty or Additional Liability. While redistributing
+      the Work or Derivative Works thereof, You may choose to offer,
+      and charge a fee for, acceptance of support, warranty, indemnity,
+      or other liability obligations and/or rights consistent with this
+      License. However, in accepting such obligations, You may act only
+      on Your own behalf and on Your sole responsibility, not on behalf
+      of any other Contributor, and only if You agree to indemnify,
+      defend, and hold each Contributor harmless for any liability
+      incurred by, or claims asserted against, such Contributor by reason
+      of your accepting any such warranty or additional liability.
+
+   END OF TERMS AND CONDITIONS
+
+   APPENDIX: How to apply the Apache License to your work.
+
+      To apply the Apache License to your work, attach the following
+      boilerplate notice, with the fields enclosed by brackets "{}"
+      replaced with your own identifying information. (Don't include
+      the brackets!)  The text should be enclosed in the appropriate
+      comment syntax for the file format. We also recommend that a
+      file or class name and description of purpose be included on the
+      same "printed page" as the copyright notice for easier
+      identification within third-party archives.
+
+   Copyright {yyyy} {name of copyright owner}
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+`;
 
 function AndroidMicrophoneOnReload(){
 	localStorage.setItem('AndroidMicrophoneOnReload', '1');
@@ -91,16 +553,202 @@ jQuery(function($){
 		}
 	}
 
+	function getStr(str_id){
+		let lang = localStorage.getItem('saiminLanguage3');
+		if (!lang)
+			lang = 'en';
+		if (lang == 'ja' || lang == 'jp') {
+			switch(str_id){
+			case 'TEXT_PIC': return '画';
+			case 'TEXT_OK': return 'OK';
+			case 'TEXT_CANCEL': return 'キャンセル';
+			case 'TEXT_YES': return 'はい';
+			case 'TEXT_NO': return 'いいえ';
+			case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a Language';
+			case 'TEXT_VERSION_INFO': return 'バージョン情報';
+			case 'TEXT_INIT_APP': return 'アプリの初期化';
+			case 'TEXT_INITTED_APP': return 'アプリを初期化しました。';
+			case 'TEXT_CONFIGURATION': return '全般設定';
+			case 'TEXT_APPEARANCE': return '見た目の設定';
+			case 'TEXT_INPUT_MESSAGE': return 'メッセージ文字列を入力して下さい。';
+			case 'TEXT_FULLWIDTH_SPACE': return '　';
+			case 'TEXT_PERIOD': return '。';
+			case 'TEXT_PERIOD_SPACE': return '。';
+			}
+		} else {
+			switch(str_id){
+			case 'TEXT_PIC': return 'pic';
+			case 'TEXT_OK': return 'OK';
+			case 'TEXT_CANCEL': return 'Cancel';
+			case 'TEXT_YES': return 'Yes';
+			case 'TEXT_NO': return 'No';
+			case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a Language';
+			case 'TEXT_VERSION_INFO': return 'Version Info';
+			case 'TEXT_INIT_APP': return 'Initialize app';
+			case 'TEXT_INITTED_APP': return 'Initialized the app.';
+			case 'TEXT_CONFIGURATION': return 'Configuration';
+			case 'TEXT_APPEARANCE': return 'Appearance';
+			case 'TEXT_INPUT_MESSAGE': return 'Please enter a message text.';
+			case 'TEXT_FULLWIDTH_SPACE': return '　';
+			case 'TEXT_PERIOD': return '.';
+			case 'TEXT_PERIOD_SPACE': return '. ';
+			}
+		}
+	}
+
+	function localizeSaimin(lang){
+		if (lang == 'ja' || lang == 'jp'){
+			$('#mic_img').attr('src', 'images/mic.png');
+			$('#type_select_button').text(getStr('TEXT_PIC') + type_select.value);
+			$('#sound_img').attr('src', 'images/sound.png');
+			$('#char_img').attr('src', 'images/char.png');
+			$('#speech_img').attr('src', 'images/speak.png');
+			$('#gear_img').attr('src', 'images/gear.png');
+			$('#question_img').attr('src', 'images/question.png');
+			$('#config_language').text('Language (言語):');
+			$('#language_select option[value="en"]').text('English (英語)');
+			$('#language_select option[value="ja"]').text('Japanese (日本語)');
+			$('#config_language2').text('Language (言語):');
+			$('#language_select2 option[value="en"]').text('English (英語)');
+			$('#language_select2 option[value="ja"]').text('Japanese (日本語)');
+			$('#appearance_type').text('映像の種類:');
+			$('#type_select option[value="0"]').text('画0');
+			$('#type_select option[value="1"]').text('画1');
+			$('#type_select option[value="2"]').text('画2');
+			$('#type_select option[value="3"]').text('画3');
+			$('#type_select option[value="4"]').text('画4');
+			$('#type_select option[value="5"]').text('画5');
+			$('#type_select option[value="6"]').text('画6');
+			$('#type_select option[value="7"]').text('画7');
+			$('#type_select option[value="8"]').text('画8');
+			$('#type_select option[value="9"]').text('画9');
+			$('#appearance_division').text('分割:');
+			$('#division_select option[value="-1"]').text('自動');
+			$('#division_select option[value="1"]').text('分割なし');
+			$('#division_select option[value="2"]').text('2分割');
+			$('#appearance_speed').text('スピード:');
+			$('#speed_type_select option[value="slow"]').text('遅い');
+			$('#speed_type_select option[value="normal"]').text('普通');
+			$('#speed_type_select option[value="fast"]').text('速い');
+			$('#speed_type_select option[value="irregular"]').text('不規則');
+			$('#appearance_rotation').text('回転の向き:');
+			$('#rotation_select option[value="normal"]').text('普通');
+			$('#rotation_select option[value="counter"]').text('逆回転');
+			$('#config_size').text('メッセージの大きさ:');
+			$('#message_size_select option[value="small"]').text('小さい');
+			$('#message_size_select option[value="normal"]').text('普通');
+			$('#message_size_select option[value="large"]').text('大きい');
+			$('#message_size_select option[value="huge"]').text('特大');
+			$('#config_note').text('音符ボタン:');
+			$('#sound_select option[value=""]').text('(なし)');
+			$('#sound_select option[value="Robot"]').text('Robot');
+			$('#sound_select option[value="Keen"]').text('Keen');
+			$('#sound_select option[value="Horror"]').text('Horror');
+			$('#sound_select option[value="Hunting"]').text('Hunting');
+			$('#sound_select option[value="Lonely"]').text('Lonely');
+			$('#sound_select option[value="Longing"]').text('Longing');
+			$('#sound_select option[value="Lovely"]').text('Lovely');
+			$('#sound_select option[value="Magic"]').text('Magic');
+			$('#sound_select option[value="Miracle"]').text('Miracle');
+			$('#config_switch_sound').text('切り替え音:');
+			$('#type_sound_select option[value="0"]').text('なし');
+			$('#type_sound_select option[value="1"]').text('あり');
+			$('#config_brightness').text('画面の明るさ:');
+			$('#screen_brightness option[value="normal"]').text('普通');
+			$('#screen_brightness option[value="brighter"]').text('明るくする');
+			$('#please_tap_here').text('(ここをタップして下さい)');
+			$('#version_text').text('催眠くらくら Version ' + VERSION);
+			$('#notice_text').text(NOTICE_JA);
+			$('#heart_img').attr('src', 'images/heart.png');
+		}else{
+			$('#mic_img').attr('src', 'images/mic.png');
+			$('#type_select_button').text(getStr('TEXT_PIC') + type_select.value);
+			$('#sound_img').attr('src', 'images/sound.png');
+			$('#char_img').attr('src', 'images/char-en.png');
+			$('#speech_img').attr('src', 'images/speak.png');
+			$('#gear_img').attr('src', 'images/gear.png');
+			$('#question_img').attr('src', 'images/question.png');
+			$('#config_language').text('Language (言語):');
+			$('#language_select option[value="en"]').text('English (英語)');
+			$('#language_select option[value="ja"]').text('Japanese');
+			$('#config_language2').text('Language (言語):');
+			$('#language_select2 option[value="en"]').text('English (英語)');
+			$('#language_select2 option[value="ja"]').text('Japanese (日本語)');
+			$('#appearance_type').text('The type of picture:');
+			$('#type_select option[value="0"]').text('pic0');
+			$('#type_select option[value="1"]').text('pic1');
+			$('#type_select option[value="2"]').text('pic2');
+			$('#type_select option[value="3"]').text('pic3');
+			$('#type_select option[value="4"]').text('pic4');
+			$('#type_select option[value="5"]').text('pic5');
+			$('#type_select option[value="6"]').text('pic6');
+			$('#type_select option[value="7"]').text('pic7');
+			$('#type_select option[value="8"]').text('pic8');
+			$('#type_select option[value="9"]').text('pic9');
+			$('#appearance_division').text('Splitting:');
+			$('#division_select option[value="-1"]').text('Auto');
+			$('#division_select option[value="1"]').text('No split');
+			$('#division_select option[value="2"]').text('Splitted into 2');
+			$('#appearance_speed').text('Speed:');
+			$('#speed_type_select option[value="slow"]').text('Slow');
+			$('#speed_type_select option[value="normal"]').text('Normal');
+			$('#speed_type_select option[value="fast"]').text('Fast');
+			$('#speed_type_select option[value="irregular"]').text('Irregular');
+			$('#appearance_rotation').text('Rotation:');
+			$('#rotation_select option[value="normal"]').text('Normal');
+			$('#rotation_select option[value="counter"]').text('Counterrotation');
+			$('#config_size').text('Size of message:');
+			$('#message_size_select option[value="small"]').text('Small');
+			$('#message_size_select option[value="normal"]').text('Normal');
+			$('#message_size_select option[value="large"]').text('Large');
+			$('#message_size_select option[value="huge"]').text('Huge');
+			$('#config_note').text('Note button:');
+			$('#sound_select option[value=""]').text('(None)');
+			$('#sound_select option[value="Robot"]').text('Robot');
+			$('#sound_select option[value="Keen"]').text('Keen');
+			$('#sound_select option[value="Horror"]').text('Horror');
+			$('#sound_select option[value="Hunting"]').text('Hunting');
+			$('#sound_select option[value="Lonely"]').text('Lonely');
+			$('#sound_select option[value="Longing"]').text('Longing');
+			$('#sound_select option[value="Lovely"]').text('Lovely');
+			$('#sound_select option[value="Magic"]').text('Magic');
+			$('#sound_select option[value="Miracle"]').text('Miracle');
+			$('#config_switch_sound').text('Pic change sound:');
+			$('#type_sound_select option[value="0"]').text('No');
+			$('#type_sound_select option[value="1"]').text('Yes');
+			$('#config_brightness').text('Brightness:');
+			$('#screen_brightness option[value="normal"]').text('Normal');
+			$('#screen_brightness option[value="brighter"]').text('Brighter');
+			$('#please_tap_here').text('(Please tap here)');
+			$('#version_text').text('Hyponosis KraKra Version ' + VERSION);
+			$('#notice_text').text(NOTICE_EN);
+			$('#heart_img').attr('src', 'images/heart-en.png');
+		}
+	}
+
+	function setLanguage(lang){
+		if (!lang)
+			lang = 'en';
+		localStorage.setItem('saiminLanguage3', lang);
+		localizeSaimin(lang);
+		language_select.value = lang;
+		try{
+			android.setLanguage(lang);
+		}catch(error){
+			;
+		}
+	}
+
 	function adjustText(text){
 		// {{language-specific}}
-		text = text.replace(TEXT_FULLWIDTH_SPACE, '  ').trim();
+		text = text.replace(getStr('TEXT_FULLWIDTH_SPACE'), '  ').trim();
 		if (text == '')
 			return text;
-		while (text.slice(-1) == TEXT_PERIOD)
+		while (text.slice(-1) == getStr('TEXT_PERIOD'))
 			text = text.slice(0, -1);
 		if (text == '')
 			return text;
-		text += TEXT_PERIOD_SPACE;
+		text += getStr('TEXT_PERIOD_SPACE');
 		return text;
 	}
 
@@ -243,7 +891,7 @@ jQuery(function($){
 			heart_block.classList.add('invisible');
 		}
 		type_select.value = type.toString();
-		type_select_button.innerText = TEXT_PIC + type.toString();
+		type_select_button.innerText = getStr('TEXT_PIC') + type.toString();
 		localStorage.setItem('saiminType', type.toString());
 	}
 
@@ -280,21 +928,6 @@ jQuery(function($){
 		}
 	}
 
-	function forbidden(){
-		$('#child_dialog').dialog({
-			dialogClass: 'no-close',
-			title: TEXT_FORBIDDEN,
-			buttons: [{
-				text: TEXT_OK,
-				click: function(){
-					$(this).dialog('close');
-					location.href = 'https://google.co.jp';
-					return false;
-				},
-			}],
-		});
-	}
-
 	function updateVersionDisplay(){
 		let nativeVersion = getNativeAppVersion();
 		let text = version_text.innerText;
@@ -308,7 +941,7 @@ jQuery(function($){
 
 	function accepted(){
 		ready = true;
-		localStorage.setItem('saiminAdultCheck', '1');
+		localStorage.setItem('saiminAdultCheck3', '1');
 		let saiminType = localStorage.getItem('saiminType');
 		if (saiminType){
 			setType(parseInt(saiminType));
@@ -331,14 +964,49 @@ jQuery(function($){
 		window.requestAnimationFrame(draw);
 	}
 
+	function chooseLanguage(){
+		let lang = localStorage.getItem('saiminLanguage3');
+		let first_time = false;
+		if (!lang) {
+			lang = 'en';
+			first_time = true;
+		}
+		language_select2.value = lang;
+		$('#choose_language_dialog').dialog({
+			dialogClass: 'no-close',
+			title: getStr('TEXT_CHOOSE_LANGUAGE'),
+			buttons: [{
+				text: getStr('TEXT_OK'),
+				click: function(){
+					setLanguage(language_select2.value);
+					$(this).dialog('close');
+					if (first_time)
+						help();
+				},
+			},{
+				text: getStr('TEXT_CANCEL'),
+				click: function(){
+					$(this).dialog('close');
+					if (first_time) {
+						setLanguage('en');
+						help();
+					}
+				},
+			}],
+		});
+		$('#choose_language_dialog').on('dialogclose', function(event){
+			help();
+		});
+	}
+
 	function help(){
 		$('#notice_text').width(window.innerWidth * 2 / 3).height(window.innerHeight * 2 / 5).scrollTop(0);
 		localStorage.setItem('saiminHelpShowing', '1');
 		$('#about_dialog').dialog({
 			dialogClass: 'no-close',
-			title: TEXT_VERSION_INFO,
+			title: getStr('TEXT_VERSION_INFO'),
 			buttons: [{
-				text: TEXT_INIT_APP,
+				text: getStr('TEXT_INIT_APP'),
 				click: function(){
 					try{
 						android.clearSettings();
@@ -346,55 +1014,28 @@ jQuery(function($){
 						;
 					}
 					localStorage.clear();
-					localStorage.setItem('saiminAdultCheck', '1');
+					localStorage.setItem('saiminAdultCheck3', '1');
 					if (theRegistration){
 						theRegistration.unregister();
 					}
-					alert(TEXT_INITTED_APP);
+					alert(getStr('TEXT_INITTED_APP'));
 					$(this).dialog('close');
+					accepted();
 					location.reload();
 				},
 			},{
-				text: TEXT_OK,
+				text: getStr('TEXT_OK'),
 				click: function(){
 					$(this).dialog('close');
+					accepted();
 				},
 			}],
 			width: window.innerWidth * 4 / 5,
 		});
 		$('#about_dialog').on('dialogclose', function(event){
 			localStorage.removeItem('saiminHelpShowing');
-		});
-	}
-
-	function doAdultCheck(){
-		if (true){ // We don't do adult check any more
 			accepted();
-			help();
-		}else{
-			$('#adult_check_dialog').dialog({
-				dialogClass: 'no-close',
-				title: TEXT_ADULT_CHECK,
-				buttons: [
-					{
-						text: TEXT_YES,
-						click: function(){
-							$(this).dialog('close');
-							accepted();
-							help();
-						},
-					},
-					{
-						text: TEXT_NO,
-						click: function(){
-							localStorage.setItem('saiminAdultCheck', '-1');
-							$(this).dialog('close');
-							forbidden();
-						},
-					},
-				],
-			});
-		}
+		});
 	}
 
 	function apperance(){
@@ -405,15 +1046,15 @@ jQuery(function($){
 		localStorage.setItem('saiminAppearanceShowing', '1');
 		$('#appearance_dialog').dialog({
 			dialogClass: 'no-close',
-			title: TEXT_APPEARANCE,
+			title: getStr('TEXT_APPEARANCE'),
 			buttons: [
 				{
-					text: TEXT_OK,
+					text: getStr('TEXT_OK'),
 					click: function(){
 						$(this).dialog('close');
 					},
 				},{
-					text: TEXT_CANCEL,
+					text: getStr('TEXT_CANCEL'),
 					click: function(){
 						setType(old_type_value);
 						setDivision(old_division_value);
@@ -430,6 +1071,7 @@ jQuery(function($){
 	}
 
 	function config(){
+		let old_language = localStorage.getItem('saiminLanguage3');
 		let old_message_size_value = message_size_select.value;
 		let old_sound_value = sound_select.value;
 		let old_type_sound_value = type_sound_select.value;
@@ -437,16 +1079,17 @@ jQuery(function($){
 		localStorage.setItem('saiminConfigShowing', '1');
 		$('#config_dialog').dialog({
 			dialogClass: 'no-close',
-			title: TEXT_CONFIGURATION,
+			title: getStr('TEXT_CONFIGURATION'),
 			buttons: [
 				{
-					text: TEXT_OK,
+					text: getStr('TEXT_OK'),
 					click: function(){
 						$(this).dialog('close');
 					},
 				},{
-					text: TEXT_CANCEL,
+					text: getStr('TEXT_CANCEL'),
 					click: function(){
+						setLanguage(old_language);
 						setMessageSizeType(old_message_size_value);
 						setSoundName(old_sound_value);
 						setTypeSound(old_type_sound_value);
@@ -1364,7 +2007,7 @@ jQuery(function($){
 		}
 
 		text_button.addEventListener('click', function(){
-			let text = prompt(TEXT_INPUT_MESSAGE, theText);
+			let text = prompt(getStr('TEXT_INPUT_MESSAGE'), theText);
 			if (text !== null){
 				setText(text);
 			}
@@ -1402,6 +2045,12 @@ jQuery(function($){
 			if (!ready)
 				return;
 			setType(parseInt(type_select.value));
+		}, false);
+
+		language_select.addEventListener('change', function(){
+			if (!ready)
+				return;
+			setLanguage(language_select.value);
 		}, false);
 
 		message_size_select.addEventListener('change', function(){
@@ -1544,13 +2193,20 @@ jQuery(function($){
 			}
 		}, { passive: false });
 
-		let saiminAdultCheck = localStorage.getItem('saiminAdultCheck');
-		if (!saiminAdultCheck){
-			doAdultCheck();
-		} else if (saiminAdultCheck == '1'){
+		let saiminAdultCheck3 = localStorage.getItem('saiminAdultCheck3');
+		let saiminLanguage3 = localStorage.getItem('saiminLanguage3');
+		if (saiminAdultCheck3 && saiminLanguage3){
+			setLanguage(saiminLanguage3);
 			accepted();
-		} else if (saiminAdultCheck == '-1'){
-			forbidden();
+		}else{
+			if (!saiminLanguage3){
+				chooseLanguage();
+			} else {
+				setLanguage(saiminLanguage3);
+				if (!saiminAdultCheck3){
+					help();
+				}
+			}
 		}
 
 		speech_checkbox.addEventListener('click', function(e){
