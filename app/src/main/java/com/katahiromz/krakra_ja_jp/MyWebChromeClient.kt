@@ -224,8 +224,9 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
      * @param message メッセージ文字列
      * @return true: メッセージ選択ダイアログの表示対象、false: それ以外
      */
-    private fun isSelectMessageDialog(message: String?): Boolean =
-        message == getLocString(R.string.message_select_dialog_message)
+    private fun isSelectMessageDialog(message: String?): Boolean {
+        return message == getLocString(R.string.message_select_dialog_message)
+    }
 
     private fun showSelectMessageDialog(
         title: String,

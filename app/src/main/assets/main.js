@@ -1,7 +1,7 @@
 /* jshint esversion: 8 */
 
 const NUM_TYPE = 9;
-const VERSION = '3.2.8';
+const VERSION = '3.2.9';
 const DEBUG = true;
 
 const NOTICE_EN = `=================================
@@ -500,7 +500,7 @@ jQuery(function($){
 	}
 
 	function setText(txt){
-		theText = txt.replace(TEXT_FULLWIDTH_SPACE, '  ').trim();
+		theText = txt.replace(getStr('TEXT_FULLWIDTH_SPACE'), '  ').trim();
 		localStorage.setItem('saiminText', theText);
 		if (speech_checkbox.checked){
 			playSpeech(theText);
