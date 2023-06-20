@@ -1,7 +1,7 @@
 /* jshint esversion: 8 */
 
 const NUM_TYPE = 9;
-const VERSION = '3.2.7';
+const VERSION = '3.2.8';
 const DEBUG = true;
 
 const NOTICE_EN = `This software is an application to enjoy hypnotic moving pictures.
@@ -987,7 +987,7 @@ jQuery(function($){
 				text: getStr('TEXT_CANCEL'),
 				click: function(){
 					$(this).dialog('close');
-					if (first_time) {
+					if (first_time && !localStorage.getItem('saiminLanguage3')) {
 						setLanguage('en');
 						help();
 					}
@@ -995,7 +995,7 @@ jQuery(function($){
 			}],
 		});
 		$('#choose_language_dialog').on('dialogclose', function(event){
-			if (first_time) {
+			if (first_time && !localStorage.getItem('saiminLanguage3')) {
 				setLanguage('en');
 				help();
 			}
