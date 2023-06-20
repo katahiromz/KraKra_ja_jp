@@ -225,7 +225,11 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
      * @return true: メッセージ選択ダイアログの表示対象、false: それ以外
      */
     private fun isSelectMessageDialog(message: String?): Boolean {
-        return message == getLocString(R.string.message_select_dialog_message)
+        if (getLocString(R.string.message_select_dialog_message) == message)
+            return true
+        // リソースと現在のロケールの同期ができないので、文字列を埋め込むことにした。
+        return message == "Please enter a message text." ||
+               message == "メッセージ文字列を入力して下さい。"
     }
 
     private fun showSelectMessageDialog(
