@@ -2,6 +2,7 @@
     <!-- common -->
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="clear">Clear</string>
 
     <!-- main -->
     <string name="app_name">KraKra</string>

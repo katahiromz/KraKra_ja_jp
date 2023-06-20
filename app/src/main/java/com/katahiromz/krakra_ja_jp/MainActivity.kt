@@ -333,8 +333,8 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         return currLocaleContext!!.resources.getString(id)
     }
 
-    fun getMsgArray(): Array<String> {
-        var ret = arrayOf<String>()
+    fun getMsgList(): List<String> {
+        var ret: List<String> = listOf<String>()
         for (id in R.string.message_000 .. R.string.message_049) {
             ret += getLocString(id)
         }

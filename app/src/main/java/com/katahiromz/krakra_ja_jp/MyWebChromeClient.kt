@@ -182,10 +182,11 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
             return true
         }
         var inputtedText: String? = null
+        var hintStr = getLocString(R.string.prompt_hint)
         modalDialog = MaterialDialog(activity!!).show {
             title(text = title)
             message(text = message)
-            input(hint = getLocString(R.string.prompt_hint), prefill = defaultValue) { _, text ->
+            input(hint = hintStr, prefill = defaultValue) { _, text ->
                 inputtedText = text.toString()
             }
             positiveButton(text = getLocString(R.string.ok)) {
@@ -232,22 +233,23 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
         defaultValue: String?,
         result: JsPromptResult?
     ) {
+        var defaultMessageList: List<String> = activity!!.getMsgList()
+        var userMessageList: List<String> = MainRepository.getMessageList(activity!!)
+        var messageList: List<String> = defaultMessageList + userMessageList
+
         modalDialog = MaterialDialog(activity!!).show {
             title(text = title)
             message(text = message)
             customView(R.layout.message_select_dialog, scrollable = true, horizontalPadding = true)
             positiveButton(text = getLocString(R.string.ok)) {
-                val editText = getCustomView().findViewById<EditText>(R.id.message_edit)
-                val inputtedText = editText.text.toString()
+                var editText = getCustomView().findViewById<EditText>(R.id.message_edit)
+                var inputtedText = editText.text.toString()
                 result?.confirm(inputtedText)
                 modalDialog = null
 
-                val defaultMessageList = activity!!.getMsgArray()
-                MainRepository.getMessageList(activity!!).apply {
-                    val messageList = defaultMessageList + this
-                    if (inputtedText.isNotEmpty() && !messageList.contains(inputtedText)) {
-                        MainRepository.setMessageList(activity!!, this + inputtedText)
-                    }
+                if (inputtedText.isNotEmpty() && !messageList.contains(inputtedText)) {
+                    messageList += inputtedText
+                    MainRepository.setMessageList(activity!!, messageList)
                 }
             }
             negativeButton(text = getLocString(R.string.cancel)) {
@@ -262,12 +264,10 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
         // ダイアログのレイアウトを設定
         val customView = modalDialog!!.getCustomView()
         val listView: ListView = customView.findViewById(R.id.message_list)
-        val defaultMessageList = activity!!.getMsgArray()
-        val inputtedMessageList = MainRepository.getMessageList(activity!!)
-        val arrayAdapter = ArrayAdapter(
+        var arrayAdapter = ArrayAdapter(
             activity!!,
             android.R.layout.simple_list_item_1,
-            defaultMessageList + inputtedMessageList
+            messageList
         )
         listView.adapter = arrayAdapter
 
@@ -281,9 +281,13 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
                 editText.setText(sampleMessage)
             }
 
-        val clearButton = customView.findViewById<Button>(R.id.clear_button)
-        val editText: EditText = customView.findViewById(R.id.message_edit)
+        var clearButton = customView.findViewById<Button>(R.id.clear_button)
+        clearButton.setText(getLocString(R.string.clear))
+
+        var editText: EditText = customView.findViewById(R.id.message_edit)
         editText.setText(defaultValue)
+        editText.hint = getLocString(R.string.prompt_hint)
+
         clearButton.setOnClickListener {
             editText.setText("")
         }
