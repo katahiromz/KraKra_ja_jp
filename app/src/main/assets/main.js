@@ -1,7 +1,7 @@
 /* jshint esversion: 8 */
 
 const NUM_TYPE = 9;
-const VERSION = '3.3.2';
+const VERSION = '3.3.3';
 const DEBUG = true;
 
 const NOTICE_EN = `=================================
@@ -33,7 +33,7 @@ How you use it is up to you.
 - Basically, it is an application to enjoy looking at the screen.
 - Tap/click on the screen to switch pictures.
 - The 'pic' button allows you to set the video settings.
-- Tap the 'microphone' button to use the microphone.
+- Tap the 'microphone' button to use the microphone (it needs permission).
 - Tapping the 'note' button makes a sound.
 - The 'Aa' button allows you to set the message to be displayed.
 - The 'bubble' button will speak the message.
@@ -74,7 +74,7 @@ Hypnosis KraKra Hybrid
 - 基本的に画面を見て楽しむためのアプリです。
 - 画面をタップ／クリックすると映像が切り替わります。
 - 「画」ボタンで映像の設定ができます。
-- 「マイク」ボタンでマイクが使えます。
+- 「マイク」ボタンでマイクが使えます(権限が必要です)。
 - 「音符」ボタンで音が鳴ります。
 - 「字」ボタンで表示するメッセージを設定できます。
 - 「ふきだし」ボタンでメッセージを自動音声でしゃべります。
@@ -167,8 +167,8 @@ jQuery(function($){
 			case 'TEXT_CANCEL': return 'キャンセル';
 			case 'TEXT_YES': return 'はい';
 			case 'TEXT_NO': return 'いいえ';
-			case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a Language';
-			case 'TEXT_VERSION_INFO': return 'バージョン情報';
+			case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a Language (言語選択)';
+			case 'TEXT_ABOUT_APP': return 'バージョン情報';
 			case 'TEXT_INIT_APP': return 'アプリの初期化';
 			case 'TEXT_INITTED_APP': return 'アプリを初期化しました。';
 			case 'TEXT_CONFIGURATION': return '全般設定';
@@ -185,8 +185,8 @@ jQuery(function($){
 			case 'TEXT_CANCEL': return 'Cancel';
 			case 'TEXT_YES': return 'Yes';
 			case 'TEXT_NO': return 'No';
-			case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a Language';
-			case 'TEXT_VERSION_INFO': return 'Version Info';
+			case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a Language (言語選択)';
+			case 'TEXT_ABOUT_APP': return 'About this app';
 			case 'TEXT_INIT_APP': return 'Initialize app';
 			case 'TEXT_INITTED_APP': return 'Initialized the app.';
 			case 'TEXT_CONFIGURATION': return 'Configuration';
@@ -544,7 +544,6 @@ jQuery(function($){
 	}
 
 	function accepted(){
-		ready = true;
 		localStorage.setItem('saiminAdultCheck3', '1');
 		let saiminType = localStorage.getItem('saiminType');
 		if (saiminType){
@@ -565,7 +564,10 @@ jQuery(function($){
 			please_tap_here.classList.add('invisible');
 		}
 		updateVersionDisplay();
-		window.requestAnimationFrame(draw);
+		if (!ready) {
+			window.requestAnimationFrame(draw);
+			ready = true;
+		}
 	}
 
 	function chooseLanguage(){
@@ -576,27 +578,31 @@ jQuery(function($){
 			first_time = true;
 		}
 		language_select2.value = lang;
-		$('#choose_language_dialog').dialog({
+		let dialogContainer = $('#choose_language_dialog');
+		dialogContainer.dialog({
 			dialogClass: 'no-close',
 			title: getStr('TEXT_CHOOSE_LANGUAGE'),
 			buttons: [{
 				text: getStr('TEXT_OK'),
 				click: function(){
 					setLanguage(language_select2.value);
-					$(this).dialog('close');
+					dialogContainer.dialog('close');
 					if (first_time)
 						help();
 				},
 			},{
 				text: getStr('TEXT_CANCEL'),
 				click: function(){
-					$(this).dialog('close');
+					dialogContainer.dialog('close');
 					if (first_time && !localStorage.getItem('saiminLanguage3')) {
 						setLanguage('en');
 						help();
 					}
 				},
 			}],
+			// Workaround against slowness
+			draggable: false,
+			resizable: false,
 		});
 		$('#choose_language_dialog').on('dialogclose', function(event){
 			if (first_time && !localStorage.getItem('saiminLanguage3')) {
@@ -612,9 +618,10 @@ jQuery(function($){
 			$('#notice_text').scrollTop(0);
 		}, 200);
 		localStorage.setItem('saiminHelpShowing', '1');
-		$('#about_dialog').dialog({
+		let dialogContainer = $('#about_dialog');
+		dialogContainer.dialog({
 			dialogClass: 'no-close',
-			title: getStr('TEXT_VERSION_INFO'),
+			title: getStr('TEXT_ABOUT_APP'),
 			buttons: [{
 				text: getStr('TEXT_INIT_APP'),
 				click: function(){
@@ -629,20 +636,23 @@ jQuery(function($){
 						theRegistration.unregister();
 					}
 					alert(getStr('TEXT_INITTED_APP'));
-					$(this).dialog('close');
+					dialogContainer.dialog('close');
 					accepted();
 					location.reload();
 				},
 			},{
 				text: getStr('TEXT_OK'),
 				click: function(){
-					$(this).dialog('close');
+					dialogContainer.dialog('close');
 					accepted();
 				},
 			}],
 			width: window.innerWidth * 4 / 5,
+			// Workaround against slowness
+			draggable: false,
+			resizable: false,
 		});
-		$('#about_dialog').on('dialogclose', function(event){
+		dialogContainer.on('dialogclose', function(event){
 			localStorage.removeItem('saiminHelpShowing');
 			accepted();
 		});
@@ -654,14 +664,15 @@ jQuery(function($){
 		let old_speed_type_value = speed_type_select.value;
 		let old_rotation_value = rotation_select.value;
 		localStorage.setItem('saiminAppearanceShowing', '1');
-		$('#appearance_dialog').dialog({
+		let dialogContainer = $('#appearance_dialog');
+		dialogContainer.dialog({
 			dialogClass: 'no-close',
 			title: getStr('TEXT_APPEARANCE'),
 			buttons: [
 				{
 					text: getStr('TEXT_OK'),
 					click: function(){
-						$(this).dialog('close');
+						dialogContainer.dialog('close');
 					},
 				},{
 					text: getStr('TEXT_CANCEL'),
@@ -670,12 +681,15 @@ jQuery(function($){
 						setDivision(old_division_value);
 						setSpeedType(old_speed_type_value);
 						setRotation(old_rotation_value);
-						$(this).dialog('close');
+						dialogContainer.dialog('close');
 					},
 				}
 			],
+			// Workaround against slowness
+			draggable: false,
+			resizable: false,
 		});
-		$('#appearance_dialog').on('dialogclose', function(event){
+		dialogContainer.on('dialogclose', function(event){
 			localStorage.removeItem('saiminAppearanceShowing');
 		});
 	}
@@ -687,14 +701,15 @@ jQuery(function($){
 		let old_type_sound_value = type_sound_select.value;
 		let old_screen_brightness = screen_brightness.value;
 		localStorage.setItem('saiminConfigShowing', '1');
-		$('#config_dialog').dialog({
+		let dialogContainer = $('#config_dialog');
+		dialogContainer.dialog({
 			dialogClass: 'no-close',
 			title: getStr('TEXT_CONFIGURATION'),
 			buttons: [
 				{
 					text: getStr('TEXT_OK'),
 					click: function(){
-						$(this).dialog('close');
+						dialogContainer.dialog('close');
 					},
 				},{
 					text: getStr('TEXT_CANCEL'),
@@ -704,12 +719,15 @@ jQuery(function($){
 						setSoundName(old_sound_value);
 						setTypeSound(old_type_sound_value);
 						setScreenBrightness(old_screen_brightness);
-						$(this).dialog('close');
+						dialogContainer.dialog('close');
 					},
 				}
 			],
+			// Workaround against slowness
+			draggable: false,
+			resizable: false,
 		});
-		$('#config_dialog').on('dialogclose', function(event){
+		dialogContainer.on('dialogclose', function(event){
 			localStorage.removeItem('saiminConfigShowing');
 		});
 	}
