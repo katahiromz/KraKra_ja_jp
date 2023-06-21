@@ -5,9 +5,7 @@ import android.content.SharedPreferences
 import org.json.JSONArray
 
 class MainRepository {
-
     companion object {
-
         private const val MainPrefFileKey = "MAIN_PREF_FILE"
         private const val MessageListKey = "MESSAGE_LIST"
 
@@ -15,9 +13,9 @@ class MainRepository {
             return context.getSharedPreferences(MainPrefFileKey, Context.MODE_PRIVATE)
         }
 
-        fun getMessageList(context: Context): List<String> {
+        fun getMessageList(context: Context): MutableList<String> {
             val prefs = getPrefs(context)
-            val json = prefs.getString(MessageListKey, null) ?: return listOf()
+            val json = prefs.getString(MessageListKey, null) ?: return mutableListOf()
             val messageList = mutableListOf<String>()
             val jsonArray = JSONArray(json)
             for (i in 0 until jsonArray.length()) {

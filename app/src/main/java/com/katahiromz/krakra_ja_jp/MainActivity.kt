@@ -5,7 +5,9 @@ import android.content.Context
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
+import android.os.LocaleList
 import android.speech.tts.TextToSpeech
 import android.view.View
 import android.view.WindowManager
@@ -17,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.android.material.snackbar.Snackbar
+import createLocalizedContext
 import timber.log.Timber
 import java.util.*
 
@@ -325,24 +328,20 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
     fun getLocString(id: Int, locale: Locale): String {
         if (currLocaleContext == null) {
-            var conf: Configuration = resources.configuration
-            conf = Configuration(conf)
-            conf.setLocale(locale)
-            conf.setLayoutDirection(locale)
-            currLocaleContext = createConfigurationContext(conf)
+            currLocaleContext = applicationContext.createLocalizedContext(locale)
         }
-        return currLocaleContext!!.resources.getString(id)
+        return currLocaleContext!!.getString(id)
     }
 
     fun getLocString(id: Int): String {
         return getLocString(id, currLocale);
     }
 
-    fun getMsgList(): List<String> {
+    fun getMsgList(): MutableList<String> {
         currLocaleContext = null
-        var ret: List<String> = listOf<String>()
+        var ret: MutableList<String> = mutableListOf<String>()
         for (id in R.string.message_000 .. R.string.message_049) {
-            ret += getLocString(id)
+            ret.add(getLocString(id))
         }
         return ret
     }
