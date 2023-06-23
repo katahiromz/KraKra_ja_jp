@@ -1,13 +1,13 @@
 /* jshint esversion: 8 */
 
 const NUM_TYPE = 9;
-const VERSION = '3.3.3';
-const DEBUG = true;
+const VERSION = '3.3.4';
+const DEBUGGING = false;
 
-const NOTICE_EN = `=================================
-催眠くらくら ハイブリッド
-Hypnosis KraKra Hybrid
-=================================
+const NOTICE_EN = `=========================
+催眠くらくら
+Hypnosis KraKra
+=========================
 
 This software is an application to enjoy hypnotic moving pictures.
 It generates hypnosis video in real time without using any video files.
@@ -40,15 +40,29 @@ How you use it is up to you.
 - The 'gear' button allows for general settings.
 - When you trace the screen, a sparkle appears to attract one's attention.
 
+[(Keyboard Operation)]
+
+When a keyboard is connected, the following operations are available.
+
+- Press "0" to "9" to switch pictures.
+- Press "G" to open the general settings.
+- Press "H" to open the version information.
+- Press "P" to open appearance settings.
+- Press "N" to play sound.
+- Press "M" to turn on/off the microphone (it needs permission).
+- Press "T" to open the message settings.
+- Press "S" to speak the current message automatically.
+- Press "X" to pause.
+
 Copyright (c) 2022 Katayama Hirofumi MZ
 Copyright (c) 2018 Robert Eisele
 Copyright (c) 2007-2022 Akshay Nair
 Copyright 2022 OpenJS Foundation and jQuery contributors.`;
 
-const NOTICE_JA = `=================================
-催眠くらくら ハイブリッド
-Hypnosis KraKra Hybrid
-=================================
+const NOTICE_JA = `=========================
+催眠くらくら
+Hypnosis KraKra
+=========================
 
 本ソフトウェアは、催眠っぽい映像を楽しむアプリです。
 動画ファイルを一切使わず、リアルタイムで催眠映像を生成します。
@@ -81,6 +95,20 @@ Hypnosis KraKra Hybrid
 - 「歯車」ボタンで全般設定ができます。
 - 画面をなぞると、きらめきが表示され、相手の注意を引くことができます。
 
+【キーボード操作】
+
+キーボードを接続すると次のような操作ができます。
+
+- 「0」～「9」を押すと、映像が切り替わります。
+- 「G」を押すと全般設定が開きます。
+- 「H」を押すとバージョン情報を開きます。
+- 「P」を押すと見た目の設定を開きます。
+- 「N」を押すと音を鳴らします。
+- 「M」を押すとマイクのON/OFFを切り替えます(権限が必要です)。
+- 「T」を押すとメッセージの設定を開きます。
+- 「S」を押すと現在のメッセージを自動音声でしゃべります。
+- 「X」を押すと一時停止します。
+
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
 Copyright (c) 2018 Robert Eisele
 Copyright (c) 2007-2022 Akshay Nair
@@ -112,6 +140,8 @@ jQuery(function($){
 	let speedType = 'normal';
 	let coin = new Image();
 	let rotationType = 'normal';
+	let stopping = false;
+	let released = false;
 
 	coin.src = 'images/coin5yen.png';
 
@@ -177,6 +207,11 @@ jQuery(function($){
 			case 'TEXT_FULLWIDTH_SPACE': return '　';
 			case 'TEXT_PERIOD': return '。';
 			case 'TEXT_PERIOD_SPACE': return '。';
+			case 'TEXT_RELEASE_HYPNOSIS': return '催眠解除';
+			case 'TEXT_RELEASING_HYPNOSIS': return '催眠解除中...';
+			case 'TEXT_RELEASING_HYPNOSIS2': return '催眠を解除しています...';
+			case 'TEXT_RELEASED_HYPNOSIS': return '催眠解除。';
+			case 'TEXT_RELEASED_HYPNOSIS2': return 'すべての催眠を解除しました。';
 			}
 		} else {
 			switch(str_id){
@@ -195,6 +230,11 @@ jQuery(function($){
 			case 'TEXT_FULLWIDTH_SPACE': return '　';
 			case 'TEXT_PERIOD': return '.';
 			case 'TEXT_PERIOD_SPACE': return '. ';
+			case 'TEXT_RELEASE_HYPNOSIS': return 'Release Hypnosis';
+			case 'TEXT_RELEASING_HYPNOSIS': return 'Releasing Hypnosis...';
+			case 'TEXT_RELEASING_HYPNOSIS2': return 'Now releasing hypnosis...';
+			case 'TEXT_RELEASED_HYPNOSIS': return 'Released Hypnosis.';
+			case 'TEXT_RELEASED_HYPNOSIS2': return 'All hypnosis has been released.';
 			}
 		}
 	}
@@ -216,16 +256,17 @@ jQuery(function($){
 			$('#language_select2 option[value="en"]').text('English (英語)');
 			$('#language_select2 option[value="ja"]').text('Japanese (日本語)');
 			$('#appearance_type').text('映像の種類:');
-			$('#type_select option[value="0"]').text('画0');
-			$('#type_select option[value="1"]').text('画1');
-			$('#type_select option[value="2"]').text('画2');
-			$('#type_select option[value="3"]').text('画3');
-			$('#type_select option[value="4"]').text('画4');
-			$('#type_select option[value="5"]').text('画5');
-			$('#type_select option[value="6"]').text('画6');
-			$('#type_select option[value="7"]').text('画7');
-			$('#type_select option[value="8"]').text('画8');
-			$('#type_select option[value="9"]').text('画9');
+			$('#type_select option[value="-1"]').text('画-1: 催眠解除');
+			$('#type_select option[value="0"]').text('画0: 初期画面');
+			$('#type_select option[value="1"]').text('画1: ピンク色の渦巻き');
+			$('#type_select option[value="2"]').text('画2: 同心円状');
+			$('#type_select option[value="3"]').text('画3: 回る目玉');
+			$('#type_select option[value="4"]').text('画4: 白黒の渦巻き');
+			$('#type_select option[value="5"]').text('画5: 広がる虹色(ハート)');
+			$('#type_select option[value="6"]').text('画6: 五円玉');
+			$('#type_select option[value="7"]').text('画7: ぼわんぼわん');
+			$('#type_select option[value="8"]').text('画8: 狂気の色');
+			$('#type_select option[value="9"]').text('画9: ミックス渦巻き');
 			$('#appearance_division').text('分割:');
 			$('#division_select option[value="-1"]').text('自動');
 			$('#division_select option[value="1"]').text('分割なし');
@@ -274,21 +315,22 @@ jQuery(function($){
 			$('#question_img').attr('src', 'images/question.png');
 			$('#config_language').text('Language (言語):');
 			$('#language_select option[value="en"]').text('English (英語)');
-			$('#language_select option[value="ja"]').text('Japanese');
+			$('#language_select option[value="ja"]').text('Japanese (日本語)');
 			$('#config_language2').text('Language (言語):');
 			$('#language_select2 option[value="en"]').text('English (英語)');
 			$('#language_select2 option[value="ja"]').text('Japanese (日本語)');
 			$('#appearance_type').text('The type of picture:');
-			$('#type_select option[value="0"]').text('pic0');
-			$('#type_select option[value="1"]').text('pic1');
-			$('#type_select option[value="2"]').text('pic2');
-			$('#type_select option[value="3"]').text('pic3');
-			$('#type_select option[value="4"]').text('pic4');
-			$('#type_select option[value="5"]').text('pic5');
-			$('#type_select option[value="6"]').text('pic6');
-			$('#type_select option[value="7"]').text('pic7');
-			$('#type_select option[value="8"]').text('pic8');
-			$('#type_select option[value="9"]').text('pic9');
+			$('#type_select option[value="-1"]').text('pic-1: Release Hypnosis');
+			$('#type_select option[value="0"]').text('pic0: Initial Screen');
+			$('#type_select option[value="1"]').text('pic1: Pink Spiral');
+			$('#type_select option[value="2"]').text('pic2: Concentric Circles');
+			$('#type_select option[value="3"]').text('pic3: The Eyes');
+			$('#type_select option[value="4"]').text('pic4: Black and White Spiral');
+			$('#type_select option[value="5"]').text('pic5: Spreading Rainbow (Hearts)');
+			$('#type_select option[value="6"]').text('pic6: 5-Yen Coin');
+			$('#type_select option[value="7"]').text('pic7: Clamor Clamor');
+			$('#type_select option[value="8"]').text('pic8: Crazy Colors');
+			$('#type_select option[value="9"]').text('pic9: Mixed Spirals');
 			$('#appearance_division').text('Splitting:');
 			$('#division_select option[value="-1"]').text('Auto');
 			$('#division_select option[value="1"]').text('No split');
@@ -484,8 +526,6 @@ jQuery(function($){
 	}
 
 	function setType(value){
-		if (!ready)
-			return;
 		type = parseInt(value);
 		if (type == 0){
 			please_tap_here.classList.remove('invisible');
@@ -493,6 +533,30 @@ jQuery(function($){
 		}else{
 			please_tap_here.classList.add('invisible');
 			heart_block.classList.add('invisible');
+		}
+		if (type == -1){
+			cancelSpeech();
+			speech_checkbox.checked = false;
+			speech_label.classList.remove('checked');
+			released = false;
+			released_hypnosis.classList.remove('invisible');
+			released_hypnosis2.classList.remove('invisible');
+			sound_button.classList.add('releasing');
+			text_button.classList.add('releasing');
+			speech_label.classList.add('releasing');
+			released_hypnosis.innerText = getStr('TEXT_RELEASING_HYPNOSIS');
+			released_hypnosis2.innerText = getStr('TEXT_RELEASING_HYPNOSIS2');
+			setTimeout(function(){
+				released_hypnosis.innerText = getStr('TEXT_RELEASED_HYPNOSIS');
+				released_hypnosis2.innerText = getStr('TEXT_RELEASED_HYPNOSIS2');
+				released = true;
+			}, 3000);
+		} else {
+			released_hypnosis.classList.add('invisible');
+			released_hypnosis2.classList.add('invisible');
+			sound_button.classList.remove('releasing');
+			text_button.classList.remove('releasing');
+			speech_label.classList.remove('releasing');
 		}
 		type_select.value = type.toString();
 		type_select_button.innerText = getStr('TEXT_PIC') + type.toString();
@@ -545,12 +609,6 @@ jQuery(function($){
 
 	function accepted(){
 		localStorage.setItem('saiminAdultCheck3', '1');
-		let saiminType = localStorage.getItem('saiminType');
-		if (saiminType){
-			setType(parseInt(saiminType));
-		}else{
-			setType(0);
-		}
 		microphone_label.classList.remove('invisible');
 		type_select_button.classList.remove('invisible');
 		sound_button.classList.remove('invisible');
@@ -558,13 +616,9 @@ jQuery(function($){
 		config_button.classList.remove('invisible');
 		about_button.classList.remove('invisible');
 		text_button.classList.remove('invisible');
-		if (type == 0){
-			please_tap_here.classList.remove('invisible');
-		}else{
-			please_tap_here.classList.add('invisible');
-		}
 		updateVersionDisplay();
 		if (!ready) {
+			setType(0);
 			window.requestAnimationFrame(draw);
 			ready = true;
 		}
@@ -574,7 +628,10 @@ jQuery(function($){
 		let lang = localStorage.getItem('saiminLanguage3');
 		let first_time = false;
 		if (!lang) {
-			lang = 'en';
+			if (navigator.language == 'ja' || navigator.language == 'ja-JP')
+				lang = 'ja';
+			else
+				lang = 'en';
 			first_time = true;
 		}
 		language_select2.value = lang;
@@ -670,6 +727,12 @@ jQuery(function($){
 			title: getStr('TEXT_APPEARANCE'),
 			buttons: [
 				{
+					text: getStr('TEXT_RELEASE_HYPNOSIS'),
+					click: function(){
+						dialogContainer.dialog('close');
+						setType(-1);
+					},
+				},{
 					text: getStr('TEXT_OK'),
 					click: function(){
 						dialogContainer.dialog('close');
@@ -742,12 +805,44 @@ jQuery(function($){
 			ctx.stroke();
 	}
 
+	function circle2(ctx, x, y, radius, is_fill = true, N = 16){
+		ctx.beginPath();
+		for (let i = 0; i < N; ++i){
+			let x0 = x + radius * Math.cos(2 * Math.PI * i / N);
+			let y0 = y + radius * Math.sin(2 * Math.PI * i / N);
+			if (i == 0){
+				ctx.moveTo(x0, y0);
+			}else{
+				ctx.lineTo(x0, y0);
+			}
+		}
+		ctx.closePath();
+		if (is_fill)
+			ctx.fill();
+		else
+			ctx.stroke();
+	}
+
 	function line(ctx, x0, y0, x1, y1, lineWidth){
 		ctx.lineWidth = lineWidth;
 		ctx.beginPath();
 		ctx.moveTo(x0, y0);
 		ctx.lineTo(x1, y1);
 		ctx.stroke();
+	}
+
+	function line2(ctx, x0, y0, x1, y1, lineWidth){
+		let dx = x1 - x0, dy = y1 - y0;
+		let len = Math.sqrt(dx * dx + dy * dy);
+		let ux = dx / len, uy = dy / len;
+		let udx = uy * lineWidth / 2, udy = -ux * lineWidth / 2;
+		ctx.beginPath();
+		ctx.moveTo(x0 - udx, y0 - udy);
+		ctx.lineTo(x0 + udx, y0 + udy);
+		ctx.lineTo(x1 + udx, y1 + udy);
+		ctx.lineTo(x1 - udx, y1 - udy);
+		ctx.fill();
+		circle2(ctx, x0, y0, lineWidth / 2, true, 15);
 	}
 
 	function heart(ctx, x0, y0, x1, y1){
@@ -774,8 +869,31 @@ jQuery(function($){
 		ctx.bezierCurveTo(x0 - r025, y0 - r05, x0 + r025, y0 - r05, x0 + r, y0);
 		ctx.bezierCurveTo(x0 + r025, y0 + r05, x0 - r025, y0 + r05, x0 - r, y0);
 		ctx.closePath();
+		ctx.strokeStyle = "#000";
+		ctx.lineWidth = r * 0.15;
 		ctx.stroke();
 
+		ctx.fillStyle = "#000";
+		ctx.save();
+		circle(ctx, x0, y0, r / 3 * opened, true);
+		ctx.restore();
+	}
+
+	function eye2(ctx, x0, y0, r, opened = 1.0){
+		ctx.beginPath();
+		ctx.moveTo(x0, y0 - r * 1.3);
+		const r025 = r * 0.25;
+		const r05 = r025 * 2 * opened;
+		ctx.bezierCurveTo(x0 - r05, y0 - r025, x0 - r05, y0 + r025, x0, y0 + r * 1.3);
+		ctx.bezierCurveTo(x0 + r05, y0 + r025, x0 + r05, y0 - r025, x0, y0 - r * 1.3);
+		ctx.closePath();
+		ctx.fillStyle = "#fcc";
+		ctx.fill();
+		ctx.strokeStyle = "#c66";
+		ctx.lineWidth = r * 0.15;
+		ctx.stroke();
+
+		ctx.fillStyle = "#000";
 		ctx.save();
 		circle(ctx, x0, y0, r / 3 * opened, true);
 		ctx.restore();
@@ -799,6 +917,37 @@ jQuery(function($){
 		ctx.fill();
 	}
 
+	// pic-1: Release Hyponosis
+	function drawPicMinusOne(ctx, px, py, dx, dy){
+		ctx.save();
+
+		let qx = px + dx / 2;
+		let qy = py + dy / 2;
+		let dxy = (dx + dy) / 2;
+
+		ctx.fillStyle = 'black';
+		ctx.fillRect(px, py, dx, dy);
+
+		let count2 = -getCount();
+		let factor = 1.2 * Math.abs(Math.sin(count2 * 0.05));
+
+		if (released)
+			factor = 1.0;
+
+		let grd = ctx.createRadialGradient(qx, qy, 0, qx, qy, dxy * factor);
+		grd.addColorStop(0, 'rgba(255, 255, 0, 1.0)');
+		grd.addColorStop(1, 'rgba(255, 255, 255, 1.0)');
+		ctx.fillStyle = grd;
+		circle(ctx, qx, qy, dxy, true);
+
+		ctx.strokeStyle = "black";
+		ctx.lineWidth = 10;
+		circle(ctx, qx, qy, (dx + dy + 10) / 5 * factor + dxy * 0.2, false);
+
+		ctx.restore();
+	}
+
+	// pic0: Initial Screen
 	function drawPic0(ctx, px, py, dx, dy){
 		ctx.save();
 
@@ -818,6 +967,7 @@ jQuery(function($){
 		ctx.restore();
 	}
 
+	// pic1: Spiral
 	function drawPic1(ctx, px, py, dx, dy){
 		ctx.save();
 
@@ -832,11 +982,11 @@ jQuery(function($){
 		ctx.closePath();
 		ctx.clip();
 
-		ctx.fillStyle = '#f6f';
+		ctx.fillStyle = '#f0f';
 		ctx.fillRect(px, py, dx, dy);
 
 		let size = (dx + dy) * 2 / 5;
-		let count2 = getCount();
+		let count2 = -getCount();
 		if (isLargeDisplay()){
 			qx += 60 * Math.cos(count2 * 0.1);
 			qy += 60 * Math.sin(count2 * 0.1);
@@ -877,6 +1027,7 @@ jQuery(function($){
 		ctx.restore();
 	}
 
+	// pic2: Concentric Circles
 	function drawPic2(ctx, px, py, dx, dy, flag=true){
 		ctx.save();
 
@@ -900,7 +1051,7 @@ jQuery(function($){
 		ctx.closePath();
 		ctx.clip();
 
-		ctx.fillStyle = '#f3c';
+		ctx.fillStyle = '#fff';
 		ctx.fillRect(px, py, dx, dy);
 
 		let size = (cx + cy) * 0.4;
@@ -918,8 +1069,7 @@ jQuery(function($){
 		if (flag)
 			radius = dr0 - radius;
 
-		for (; radius < size; radius += dr0)
-		{
+		for (; radius < size; radius += dr0){
 			circle(ctx, qx, qy, radius, false);
 		}
 
@@ -967,6 +1117,7 @@ jQuery(function($){
 		return [r, g, b];
 	}
 
+	// pic3: The eyes
 	function drawPic3(ctx, px, py, dx, dy){
 		ctx.save();
 
@@ -982,107 +1133,55 @@ jQuery(function($){
 		ctx.closePath();
 		ctx.clip();
 
-		//ctx.fillStyle = 'white';
-		//ctx.fillRect(px, py, dx, dy);
+		ctx.fillStyle = 'white';
+		ctx.fillRect(px, py, dx, dy);
 
 		let count2 = getCount();
 		let factor = count2 * 0.03;
 
-		let size = 32;
-		if (isLargeDisplay())
-			size *= 2;
-		let nCount2 = 0;
 		let cxy = ((cx >= cy) ? cy : cx) * 1.2;
-		let xy0 = (cxy + size) - (cxy + size) % size;
-		let comp0 = new Complex({abs:1.0, arg:factor * 1.0});
-		for (let y = -xy0; y < cxy + size; y += size){
-			let nCount = nCount2 % 3;
-			for (let x = -xy0; x < cxy + size; x += size){
-				let h, s = 1.0, v = 1.0;
-				switch (nCount % 3){
-				case 0:
-					h = (0.2 + factor * 1.2) % 1.0;
-					break;
-				case 1:
-					h = (0.4 + factor * 1.2) % 1.0;
-					break;
-				case 2:
-					h = (0.8 + factor * 1.2) % 1.0;
-					break;
-				}
-				if (h < 0)
-					h += 1.0;
-				let r, g, b;
-				[r, g, b] = hsv2rgb(h, s, v);
+		const colors = ['#f0f', '#ff0', '#0f0', '#0ff', '#00c', '#f0f'];
 
-				if (r > 0.8)
-					r = 1.0;
-				if (g > 0.8)
-					g = 1.0;
-				if (b > 0.8)
-					b = 1.0;
-
-				ctx.fillStyle = `rgb(${r * 255},${g * 255},${b * 255})`;
-
-				let x0 = x - size / 2;
-				let y0 = y - size / 2;
-				let x1 = x0 + size;
-				let y1 = y0 + size;
-				ctx.beginPath();
-				let comp1 = new Complex({re:x0, im:y0});
-				comp1 = comp1.mul(comp0);
-				ctx.moveTo(qx + comp1.re, qy + comp1.im);
-				let comp2 = new Complex({re:x0, im:y1});
-				comp2 = comp2.mul(comp0);
-				ctx.lineTo(qx + comp2.re, qy + comp2.im);
-				let comp3 = new Complex({re:x1, im:y1});
-				comp3 = comp3.mul(comp0);
-				ctx.lineTo(qx + comp3.re, qy + comp3.im);
-				let comp4 = new Complex({re:x1, im:y0});
-				comp4 = comp4.mul(comp0);
-				ctx.lineTo(qx + comp4.re, qy + comp4.im);
-				ctx.fill();
-
-				if (x >= 0)
-					nCount = (nCount + 2) % 3;
-				else
-					++nCount;
+		let k = factor * 5;
+		let r_delta = 30;
+		let flag = (factor % 10) / 0.5;
+		let flag2 = Math.sin(factor * 0.7) > -0.4;
+		for (let r = 0; r < 360;){
+			let radian = r * Math.PI / 180 + factor;
+			ctx.beginPath();
+			ctx.moveTo(qx, qy);
+			let x0 = qx + cxy * Math.cos(radian);
+			let y0 = qy + cxy * Math.sin(radian);
+			ctx.lineTo(x0, y0);
+			r += r_delta;
+			radian = r * Math.PI / 180 + factor;
+			let x1 = qx + cxy * Math.cos(radian);
+			let y1 = qy + cxy * Math.sin(radian);
+			ctx.lineTo(x1, y1);
+			let factor2 = Math.abs(1 - Math.sin(factor * 8));
+			if (flag2){
+				ctx.fillStyle = `rgb(255, ${factor2 * 50 + 55}, ${factor2 * 200 + 55})`;
+			}else{
+				ctx.fillStyle = `hsl(${(k * 60) % 360}, 100%, 50%)`
 			}
-			if (y >= 0)
-				nCount2 = (nCount2 + 2) % 3;
-			else
-				++nCount2;
+			ctx.fill();
+			ctx.moveTo(qx, qy);
+			ctx.lineTo((x0 + x1) / 2, (y0 + y1) / 2);
+			ctx.strokeStyle = `rgb(255, 200, ${factor2 * 192}`;
+			ctx.lineWidth = 10;
+			ctx.stroke();
+			++k;
 		}
 
 		dxy = (dx >= dy) ? dx : dy;
 
-		let grd = ctx.createRadialGradient(qx, qy, dxy * 0.25, qx, qy, dxy * 0.6);
-		grd.addColorStop(0, 'rgba(255, 255, 255, 0.0)');
-		grd.addColorStop(1, 'rgba(255, 255, 255, 1.0)');
-		ctx.fillStyle = grd;
-		circle(ctx, qx, qy, dxy, true);
-
 		ctx.lineWidth = 10;
 		let i = 0;
+		ctx.strokeStyle = 'rgba(255, 0, 0, 50%)';
 		for (let r = neg_mod(count2 * 2, 100); r < cxy; r += 100){
-			if (i < 3){
-				ctx.strokeStyle = 'rgba(255, 20, 29, 0.9)';
-			} else {
-				ctx.strokeStyle = 'rgba(255, 20, 29, 0.4)';
-			}
 			circle(ctx, qx, qy, r, false);
 			++i;
 		}
-
-		ctx.strokeStyle = '#633';
-		if (isLargeDisplay())
-			ctx.lineWidth = 16;
-		else
-			ctx.lineWidth = 8;
-		ctx.fillStyle = '#633';
-		eye(ctx, qx, qy, cxy / 10, 1.0);
-		ctx.fillStyle = '#f66';
-		heart(ctx, qx, qy - cxy / 50, qx, qy + cxy / 50);
 
 		let opened = 1.0;
 		let f = Math.sin(Math.abs(count2 * 0.1));
@@ -1090,15 +1189,20 @@ jQuery(function($){
 			opened = 0.6 + 0.4 * Math.abs(Math.sin(f * Math.PI));
 		}
 
+		let factor3 = (0.3 + Math.sin(count2 * 0.05) * 0.3);
+		eye2(ctx, qx, qy, cxy / 8, (1.0 + factor3));
+		ctx.fillStyle = '#f00';
+		factor3 = 0.5 + Math.abs(factor3);
+		heart(ctx, qx, qy - cxy / 25 * factor3, qx, qy + cxy / 25 * factor3);
+
 		const N = 4;
 		const delta = (2 * Math.PI) / N;
-		let radian = factor;
+		let radian = factor * 1.3;
 		for (i = 0; i < N; ++i){
 			let x = qx + cxy * Math.cos(radian) * 0.3;
 			let y = qy + cxy * Math.sin(radian) * 0.3;
-			ctx.fillStyle = '#633';
 			eye(ctx, x, y, cxy / 10, opened);
-			ctx.fillStyle = '#f66';
+			ctx.fillStyle = '#f00';
 			heart(ctx, x, y - cxy * opened / 50, x, y + cxy * opened / 50);
 			radian += delta;
 		}
@@ -1106,7 +1210,46 @@ jQuery(function($){
 		ctx.restore();
 	}
 
-	function drawPic4_5(ctx, px, py, dx, dy, t){
+	// pic4: Black and White Spiral
+	function drawPic4(ctx, px, py, dx, dy, t){
+		ctx.save();
+
+		let qx = px + dx / 2;
+		let qy = py + dy / 2;
+		let dxy = (dx + dy) / 2;
+
+		ctx.beginPath();
+		ctx.moveTo(px, py);
+		ctx.lineTo(px + dx, py);
+		ctx.lineTo(px + dx, py + dy);
+		ctx.lineTo(px, py + dy);
+		ctx.closePath();
+		ctx.clip();
+
+		ctx.fillStyle = 'black';
+		ctx.fillRect(px, py, dx, dy);
+
+		let factor = getCount() * 0.5;
+
+		let radius = 1;
+		ctx.fillStyle = 'white';
+		for (let radian = 0; radian < 60;){
+			const radian2 = radian - factor;
+			const x0 = qx + radius * Math.cos(radian2);
+			const y0 = qy + radius * Math.sin(radian2);
+			radius *= 1.009;
+			radian += 0.08;
+			const radian3 = radian - factor;
+			const x1 = qx + radius * Math.cos(radian3);
+			const y1 = qy + radius * Math.sin(radian3);
+			line2(ctx, x0, y0, x1, y1, radius * 0.3);
+		}
+
+		ctx.restore();
+	}
+
+	// pic5: Spreading Rainbow
+	function drawPic5(ctx, px, py, dx, dy, t){
 		ctx.save();
 
 		let qx = px + dx / 2;
@@ -1205,6 +1348,7 @@ jQuery(function($){
 		ctx.restore();
 	}
 
+	// pic6: 5-yen coin
 	function drawPic6(ctx, px, py, dx, dy, t){
 		ctx.save();
 
@@ -1291,6 +1435,7 @@ jQuery(function($){
 		ctx.restore();
 	}
 
+	// pic7: Clamor Clamor
 	function drawPic7(ctx, px, py, dx, dy, t){
 		ctx.save();
 
@@ -1355,6 +1500,7 @@ jQuery(function($){
 		ctx.restore();
 	}
 
+	// pic8: Crazy Colors
 	function drawPic8(ctx, px, py, dx, dy, t){
 		ctx.save();
 
@@ -1382,14 +1528,14 @@ jQuery(function($){
 			qy += 40 * Math.sin(count2 * 0.1);
 		}
 
-		const rotation = 8, width = dxy * 0.1;
+		const rotation = 7.8, width = dxy * 0.1;
 		let calc_point = function(radius, radian){
 			let x = qx + radius * Math.cos(radian);
 			let y = qy + radius * Math.sin(radian);
 			return [x, y];
 		}
-		const colors = ['#f00', '#ff0', '#0f0', '#0ff', '#00f', '#f0f'];
-		const factor = count2 * 0.6;
+		const colors = ['#f00', '#ff0', '#0f0', '#0ff', '#00c', '#f0f'];
+		const factor = count2 * 0.5;
 		for (let radian0 = -4.5; radian0 < rotation * 2 * Math.PI; radian0 += 0.12){
 			const radian1 = radian0 + 0.15;
 			const radius0 = width * radian0 / (2 * Math.PI);
@@ -1399,13 +1545,13 @@ jQuery(function($){
 			const [x2, y2] = calc_point(radius1, radian1 - factor);
 			const [x3, y3] = calc_point(radius0, radian1 - factor);
 			let g = ctx.createLinearGradient(x0, y0, x1, y1);
-			g.addColorStop(0 / 6, colors[0]);
-			g.addColorStop(1 / 6, colors[1]);
-			g.addColorStop(2 / 6, colors[2]);
-			g.addColorStop(3 / 6, colors[3]);
-			g.addColorStop(4 / 6, colors[4]);
-			g.addColorStop(5 / 6, colors[5]);
-			g.addColorStop(6 / 6, colors[0]);
+			g.addColorStop(0 / 7, colors[0]);
+			g.addColorStop(1 / 7, colors[1]);
+			g.addColorStop(2 / 7, colors[2]);
+			g.addColorStop(3 / 7, colors[3]);
+			g.addColorStop(4 / 7, colors[4]);
+			g.addColorStop(5 / 7, colors[5]);
+			g.addColorStop(6 / 7, colors[0]);
 			ctx.fillStyle = g;
 			ctx.beginPath();
 			ctx.lineTo(x0, y0);
@@ -1418,6 +1564,7 @@ jQuery(function($){
 		ctx.restore();
 	}
 
+	// pic9: Mixed Spirals
 	function drawPic9(ctx, px, py, dx, dy, t){
 		ctx.save();
 
@@ -1461,6 +1608,9 @@ jQuery(function($){
 
 	function drawPic(ctx, px, py, cx, cy){
 		switch (type){
+		case -1:
+			drawPicMinusOne(ctx, px, py, cx, cy);
+			break;
 		case 0:
 			drawPic0(ctx, px, py, cx, cy);
 			break;
@@ -1475,10 +1625,10 @@ jQuery(function($){
 			drawPic3(ctx, px, py, cx, cy);
 			break;
 		case 4:
-			drawPic4_5(ctx, px, py, cx, cy, type);
+			drawPic4(ctx, px, py, cx, cy, type);
 			break;
 		case 5:
-			drawPic4_5(ctx, px, py, cx, cy, type);
+			drawPic5(ctx, px, py, cx, cy, type);
 			break;
 		case 6:
 			drawPic6(ctx, px, py, cx, cy, type);
@@ -1494,6 +1644,8 @@ jQuery(function($){
 			break;
 		}
 	}
+
+	let FPS = 0;
 
 	function draw(){
 		let ctx = saimin_canvas.getContext('2d');
@@ -1526,7 +1678,9 @@ jQuery(function($){
 			}
 		}
 
-		if (theText != ''){
+		if (type == -1){
+			floating_text.classList.add('invisible');
+		}else if (theText != ''){
 			floating_text.classList.remove('invisible');
 			let top = (50 + 5 * Math.sin(counter * 0.1) + delta_percent) + '%';
 			floating_text.style.top = top;
@@ -1559,6 +1713,8 @@ jQuery(function($){
 		let diff = (new_time - old_time) / 1000.0;
 		if (rotationType == 'counter')
 			diff = -diff;
+		if (stopping)
+			diff = 0;
 		counter += diff * speed;
 		old_time = new_time;
 
@@ -1576,9 +1732,22 @@ jQuery(function($){
 			}
 		}
 
+		if (DEBUGGING){
+			if (diff != 0) {
+				FPS = 1 / Math.abs(diff);
+				FPS = Math.round(FPS * 10) / 10;
+			}
+			let text = Math.round(FPS).toString() + '.' + (FPS * 10 % 10).toString();
+			ctx.font = '32px san-serif';
+			let measure = ctx.measureText(text);
+			let width = measure.width;
+			let height = measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent;
+			ctx.fillStyle = "red";
+			ctx.fillText(text, (cx - width) / 2, height);
+		}
+
 		window.requestAnimationFrame(draw);
 	}
-
 
 	function init(){
 		cancelSpeech();
@@ -1635,6 +1804,8 @@ jQuery(function($){
 		}
 
 		text_button.addEventListener('click', function(){
+			if (type == -1)
+				return;
 			let text = prompt(getStr('TEXT_INPUT_MESSAGE'), theText);
 			if (text !== null){
 				setText(text);
@@ -1650,6 +1821,16 @@ jQuery(function($){
 		});
 
 		sound_button.addEventListener('click', function(){
+			if (type == -1) {
+				let releasing_sound = null;
+				if (localStorage.getItem('saiminLanguage3') == 'ja'){
+					releasing_sound = new Audio('sn/ReleasedHypnosis_ja.mp3');
+				}else{
+					releasing_sound = new Audio('sn/ReleasedHypnosis_en.mp3');
+				}
+				releasing_sound.play();
+				return;
+			}
 			if (soundName != ''){
 				if (sound){
 					let s = new Audio('sn/' + soundName + '.mp3');
@@ -1838,6 +2019,8 @@ jQuery(function($){
 		}
 
 		speech_checkbox.addEventListener('click', function(e){
+			if (type == -1)
+				return;
 			if (speech_checkbox.checked){
 				playSpeech(theText);
 				speech_label.classList.add('checked');
@@ -1899,6 +2082,48 @@ jQuery(function($){
 			mic_connect();
 			microphone_label.classList.add('checked');
 		}
+
+		document.body.addEventListener('keydown', function(e){
+			if (!ready || e.ctrlKey)
+				return;
+			if ('0' <= e.key && e.key <= '9') {
+				setType(e.key);
+				return;
+			}
+			if (e.key == 'g' || e.key == 'G') {
+				config_button.click();
+				return;
+			}
+			if (e.key == 'h' || e.key == 'H') {
+				about_button.click();
+				return;
+			}
+			if (e.key == 'p' || e.key == 'P') {
+				type_select_button.click();
+				return;
+			}
+			if (e.key == 'n' || e.key == 'N') {
+				sound_button.click();
+				return;
+			}
+			if (e.key == 'm' || e.key == 'M') {
+				microphone.click();
+				return;
+			}
+			if (e.key == 't' || e.key == 'T') {
+				text_button.click();
+				return;
+			}
+			if (e.key == 's' || e.key == 'S') {
+				speech_checkbox.click();
+				return;
+			}
+			if (e.key == 'x' || e.key == 'X') {
+				stopping = !stopping;
+				return;
+			}
+			//alert(e.key);
+		});
 	}
 
 	init();

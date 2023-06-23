@@ -78,6 +78,10 @@ input[type='checkbox'] {
 	bottom: 0;
 	width: calc(100% / 5 - 5px);
 }
+.releasing {
+	background-color: red !important;
+	text-align: center;
+}
 #text_button {
 	position: absolute;
 	left: calc(100% / 5 * 3);
@@ -150,7 +154,7 @@ button.navigate-button {
 	background-color: rgba(255, 210, 230, 85%);
 }
 .checked {
-	background-color: rgba(204, 101, 198, 90%) !important;
+	background-color: rgba(204, 101, 198, 90%);
 }
 #heart_block {
 	position: absolute;
@@ -163,6 +167,22 @@ button.navigate-button {
 #heart_block img {
 	width: 100%;
 	height: 100%;
+}
+#released_hypnosis {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: auto;
+	height: auto;
+}
+#released_hypnosis2 {
+	position: absolute;
+	top: 75%;
+	left: 50%;
+	transform: translate(-50%, -75%);
+	width: auto;
+	height: auto;
 }
 .ui-dialog-content div {
 	margin-top: 4px;
