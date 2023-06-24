@@ -1,7 +1,7 @@
 /* jshint esversion: 8 */
 
 const NUM_TYPE = 9;
-const VERSION = '3.3.5';
+const VERSION = '3.3.6';
 const DEBUGGING = false;
 
 const NOTICE_EN = `=========================
@@ -13,7 +13,7 @@ This software is an application to enjoy hypnotic moving pictures.
 It generates hypnosis video in real time without using any video files.
 How you use it is up to you.
 
-* Source: https://github.com/katahiromz/KraKra_en_us
+* Source: https://github.com/katahiromz/KraKra_ja_jp
 * Some OtoLogic audio material is used.
 * You can modify this software under the Apache 2.0 License.
 
