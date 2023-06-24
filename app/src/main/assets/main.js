@@ -368,7 +368,7 @@ jQuery(function($){
 			$('#appearance_division').text('Splitting:');
 			$('#division_select option[value="-1"]').text('Auto');
 			$('#division_select option[value="1"]').text('No split');
-			$('#division_select option[value="2"]').text('Splitted into 2');
+			$('#division_select option[value="2"]').text('Split in 2');
 			$('#appearance_speed').text('Speed:');
 			$('#speed_type_select option[value="slow"]').text('Slow');
 			$('#speed_type_select option[value="normal"]').text('Normal');
@@ -745,13 +745,11 @@ jQuery(function($){
 						;
 					}
 					localStorage.clear();
-					localStorage.setItem('saiminAdultCheck3', '1');
 					if (theRegistration){
 						theRegistration.unregister();
 					}
 					alert(getStr('TEXT_INITTED_APP'));
-					dialogContainer.dialog('close');
-					accepted();
+					location.reload();
 				},
 			},{
 				text: getStr('TEXT_OK'),

@@ -138,11 +138,11 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         webView?.post {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) { // API 30以上の場合
                 if (show) {
-                    window.decorView.windowInsetsController?.hide(
+                    window.decorView.windowInsetsController?.show(
                             WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars()
                     )
                 } else {
-                    window.decorView.windowInsetsController?.show(
+                    window.decorView.windowInsetsController?.hide(
                             WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars()
                     )
                 }
