@@ -84,6 +84,11 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
     }
 
     @JavascriptInterface
+    fun showNaviBar(show: Boolean) {
+        activity!!.showNaviBar(show);
+    }
+
+    @JavascriptInterface
     fun cancelSpeech() {
         listener.onSpeech("")
     }

@@ -10,6 +10,9 @@ import android.os.Bundle
 import android.os.LocaleList
 import android.speech.tts.TextToSpeech
 import android.view.View
+import android.view.WindowInsets
+import android.view.WindowInsetsController.BEHAVIOR_SHOW_BARS_BY_SWIPE
+import android.view.WindowInsetsController.BEHAVIOR_SHOW_BARS_BY_TOUCH
 import android.view.WindowManager
 import android.webkit.*
 import android.widget.ProgressBar
@@ -124,6 +127,44 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         }
 
         screenBrightness = value
+    }
+
+    // ナビゲーションバーの表示・非表示。
+    var showingNaviBar: Boolean = true
+
+    // ナビゲーションバーの表示の切り替え。
+    @Suppress("DEPRECATION")
+    fun showNaviBar(show: Boolean) {
+        webView?.post {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) { // API 30以上の場合
+                if (show) {
+                    window.decorView.windowInsetsController?.hide(
+                            WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars()
+                    )
+                } else {
+                    window.decorView.windowInsetsController?.show(
+                            WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars()
+                    )
+                }
+            } else { // API 30未満の場合
+                if (show) {
+                    window.decorView.systemUiVisibility = 0
+                } else {
+                    window.decorView.systemUiVisibility = (
+                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or
+                        View.SYSTEM_UI_FLAG_FULLSCREEN or
+                        View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
+                }
+            }
+        }
+        showingNaviBar = show
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        showNaviBar(showingNaviBar)
     }
 
     /////////////////////////////////////////////////////////////////////
@@ -356,9 +397,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     private fun initTextToSpeech() {
         run {
             tts = TextToSpeech(this, this)
-            var locale = Locale.JAPANESE // {{language-dependent}}
-            if (BuildConfig.DEBUG)
-                locale = Locale.ENGLISH
+            var locale = currLocale
             if (tts!!.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
                 tts!!.language = locale
             }

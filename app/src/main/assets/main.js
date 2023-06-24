@@ -1,7 +1,7 @@
 /* jshint esversion: 8 */
 
 const NUM_TYPE = 9;
-const VERSION = '3.3.4';
+const VERSION = '3.3.5';
 const DEBUGGING = false;
 
 const NOTICE_EN = `=========================
@@ -37,22 +37,32 @@ How you use it is up to you.
 - Tapping the 'note' button makes a sound.
 - The 'Aa' button allows you to set the message to be displayed.
 - The 'bubble' button will speak the message.
-- The 'gear' button allows for general settings.
+- The 'gear' button will open Configuration.
 - When you trace the screen, a sparkle appears to attract one's attention.
 
 [(Keyboard Operation)]
 
-When a keyboard is connected, the following operations are available.
+When a keyboard is connected, the following operations are available:
 
-- Press "0" to "9" to switch pictures.
-- Press "G" to open the general settings.
-- Press "H" to open the version information.
-- Press "P" to open appearance settings.
-- Press "N" to play sound.
-- Press "M" to turn on/off the microphone (it needs permission).
-- Press "T" to open the message settings.
-- Press "S" to speak the current message automatically.
-- Press "X" to pause.
+- Press [0] to [9] keys to switch pictures.
+- Press [C] key to open the configuration.
+- Press [H] key to open the version information.
+- Press [A] key to open appearance settings.
+- Press [P] key to play sound.
+- Press [M] key to turn on/off the microphone (it needs permission).
+- Press [T] key to open the message settings.
+- Press [S] key to speak the current message automatically.
+- Press [X] key to pause.
+- Press [-] or [K] keys to kill hypnosis.
+- Press [D] key to split the screen.
+- Press [B] key to toggle display of the buttons.
+- Press [G] key to turn on/off of Goggle Mode.
+
+[(Goggle Mode)]
+
+Goggle Mode is available with a connectable keyboard and goggles.
+Goggle Mode can be toggled on and off by pressing [G] key.
+Goggle Mode splits the screen in two and hides the control buttons.
 
 Copyright (c) 2022 Katayama Hirofumi MZ
 Copyright (c) 2018 Robert Eisele
@@ -99,15 +109,25 @@ Hypnosis KraKra
 
 キーボードを接続すると次のような操作ができます。
 
-- 「0」～「9」を押すと、映像が切り替わります。
-- 「G」を押すと全般設定が開きます。
-- 「H」を押すとバージョン情報を開きます。
-- 「P」を押すと見た目の設定を開きます。
-- 「N」を押すと音を鳴らします。
-- 「M」を押すとマイクのON/OFFを切り替えます(権限が必要です)。
-- 「T」を押すとメッセージの設定を開きます。
-- 「S」を押すと現在のメッセージを自動音声でしゃべります。
-- 「X」を押すと一時停止します。
+- 「0」～「9」キーを押すと、映像が切り替わります。
+- 「C」キーを押すと全般設定が開きます。
+- 「H」キーを押すとバージョン情報を開きます。
+- 「A」キーを押すと見た目の設定を開きます。
+- 「P」キーを押すと音を鳴らします。
+- 「M」キーを押すとマイクのON/OFFを切り替えます(権限が必要です)。
+- 「T」キーを押すとメッセージの設定を開きます。
+- 「S」キーを押すと現在のメッセージを自動音声でしゃべります。
+- 「X」キーを押すと一時停止します。
+- 「-」キーか「K」キーを押すと催眠を消します。
+- 「D」キーを押すと画面分割が切り替わります。
+- 「B」キーを押すとボタンの表示が切り替わります。
+- 「G」キーを押すとゴーグルモードが切り替わります。
+
+【ゴーグルモード】
+
+接続可能なキーボードとゴーグルがあれば、ゴーグルモードを利用できます。
+「G」キーを押すとゴーグルモードのON/OFFの切り替えが可能です。
+ゴーグルモードは、画面を２分割し、操作ボタンを隠します。
 
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
 Copyright (c) 2018 Robert Eisele
@@ -121,10 +141,10 @@ function AndroidMicrophoneOnReload(){
 }
 
 jQuery(function($){
-	let cx = 0, cy = 0;
-	let old_cx = null, old_cy = null;
+	let cxScreen = 0, cyScreen = 0;
+	let old_cxScreen = null, old_cyScreen = null;
 	let old_time = (new Date()).getTime();
-	let type = 0;
+	let picType = 0;
 	let counter = 0, clock = 0;
 	let ready = false;
 	let theText = '';
@@ -138,12 +158,16 @@ jQuery(function($){
 	let touchmoving = false;
 	let theRegistration = null;
 	let speedType = 'normal';
-	let coin = new Image();
+	let coin_img = new Image();
 	let rotationType = 'normal';
 	let stopping = false;
 	let released = false;
+	let logo_img = new Image();
+	let please_tap_here_img = new Image();
+	let hypnosis_releasing_img = new Image();
+	let all_released_img = new Image();
 
-	coin.src = 'images/coin5yen.png';
+	coin_img.src = 'images/coin5yen.png';
 
 	function isNativeApp(){
 		return navigator.userAgent.indexOf('/KraKra-native-app/') != -1;
@@ -190,7 +214,7 @@ jQuery(function($){
 		let lang = localStorage.getItem('saiminLanguage3');
 		if (!lang)
 			lang = 'en';
-		if (lang == 'ja' || lang == 'jp') {
+		if (lang == 'ja' || lang == 'jp'){
 			switch(str_id){
 			case 'TEXT_PIC': return '画';
 			case 'TEXT_OK': return 'OK';
@@ -208,10 +232,10 @@ jQuery(function($){
 			case 'TEXT_PERIOD': return '。';
 			case 'TEXT_PERIOD_SPACE': return '。';
 			case 'TEXT_RELEASE_HYPNOSIS': return '催眠解除';
-			case 'TEXT_RELEASING_HYPNOSIS': return '催眠解除中...';
-			case 'TEXT_RELEASING_HYPNOSIS2': return '催眠を解除しています...';
-			case 'TEXT_RELEASED_HYPNOSIS': return '催眠解除。';
-			case 'TEXT_RELEASED_HYPNOSIS2': return 'すべての催眠を解除しました。';
+			case 'TEXT_HYPNOSIS_RELEASED': return '催眠解除。';
+			case 'TEXT_KILLING_HYPNOSIS_IMG': return 'images/killing-hypnosis_ja.svg';
+			case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'images/hypnosis-released_ja.svg';
+			case 'TEXT_ALL_RELEASED_IMG': return 'images/all-released_ja.svg';
 			}
 		} else {
 			switch(str_id){
@@ -230,22 +254,25 @@ jQuery(function($){
 			case 'TEXT_FULLWIDTH_SPACE': return '　';
 			case 'TEXT_PERIOD': return '.';
 			case 'TEXT_PERIOD_SPACE': return '. ';
-			case 'TEXT_RELEASE_HYPNOSIS': return 'Release Hypnosis';
-			case 'TEXT_RELEASING_HYPNOSIS': return 'Releasing Hypnosis...';
-			case 'TEXT_RELEASING_HYPNOSIS2': return 'Now releasing hypnosis...';
-			case 'TEXT_RELEASED_HYPNOSIS': return 'Released Hypnosis.';
-			case 'TEXT_RELEASED_HYPNOSIS2': return 'All hypnosis has been released.';
+			case 'TEXT_RELEASE_HYPNOSIS': return 'Kill hypnosis';
+			case 'TEXT_HYPNOSIS_RELEASED': return 'Hypnosis released.';
+			case 'TEXT_KILLING_HYPNOSIS_IMG': return 'images/killing-hypnosis_en.svg';
+			case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'images/hypnosis-released_en.svg';
+			case 'TEXT_ALL_RELEASED_IMG': return 'images/all-released_en.svg';
 			}
 		}
 	}
 
+	let currentLanguage = 'en';
+
 	function localizeSaimin(lang){
+		currentLanguage = lang;
 		if (lang == 'ja' || lang == 'jp'){
 			$('#notice_text').text(NOTICE_JA);
 			$('#mic_img').attr('src', 'images/mic.png');
 			$('#type_select_button').text(getStr('TEXT_PIC') + type_select.value);
 			$('#sound_img').attr('src', 'images/sound.png');
-			$('#char_img').attr('src', 'images/char.png');
+			$('#char_img').attr('src', 'images/text_ja.png');
 			$('#speech_img').attr('src', 'images/speak.png');
 			$('#gear_img').attr('src', 'images/gear.png');
 			$('#question_img').attr('src', 'images/question.png');
@@ -301,15 +328,22 @@ jQuery(function($){
 			$('#config_brightness').text('画面の明るさ:');
 			$('#screen_brightness option[value="normal"]').text('普通');
 			$('#screen_brightness option[value="brighter"]').text('明るくする');
-			$('#please_tap_here').text('(ここをタップして下さい)');
 			$('#version_text').text('催眠くらくら Version ' + VERSION);
-			$('#heart_img').attr('src', 'images/heart.png');
+			logo_img = new Image();
+			logo_img.src = 'images/logo_ja.png';
+			please_tap_here_img = new Image();
+			please_tap_here_img.src = 'images/please-tap-here_ja.svg';
+			if (released){
+				hypnosis_releasing_img.src = getStr('TEXT_HYPNOSIS_RELEASED_IMG');
+			}else{
+				hypnosis_releasing_img.src = getStr('TEXT_KILLING_HYPNOSIS_IMG');
+			}
 		}else{
 			$('#notice_text').text(NOTICE_EN);
 			$('#mic_img').attr('src', 'images/mic.png');
 			$('#type_select_button').text(getStr('TEXT_PIC') + type_select.value);
 			$('#sound_img').attr('src', 'images/sound.png');
-			$('#char_img').attr('src', 'images/char-en.png');
+			$('#char_img').attr('src', 'images/text_en.png');
 			$('#speech_img').attr('src', 'images/speak.png');
 			$('#gear_img').attr('src', 'images/gear.png');
 			$('#question_img').attr('src', 'images/question.png');
@@ -365,10 +399,19 @@ jQuery(function($){
 			$('#config_brightness').text('Brightness:');
 			$('#screen_brightness option[value="normal"]').text('Normal');
 			$('#screen_brightness option[value="brighter"]').text('Brighter');
-			$('#please_tap_here').text('(Please tap here)');
 			$('#version_text').text('Hyponosis KraKra Version ' + VERSION);
-			$('#heart_img').attr('src', 'images/heart-en.png');
+			logo_img = new Image();
+			logo_img.src = 'images/logo_en.png';
+			please_tap_here_img = new Image();
+			please_tap_here_img.src = 'images/please-tap-here_en.svg';
+			if (released){
+				hypnosis_releasing_img.src = getStr('TEXT_HYPNOSIS_RELEASED_IMG');
+			}else{
+				hypnosis_releasing_img.src = getStr('TEXT_KILLING_HYPNOSIS_IMG');
+			}
 		}
+		all_released_img = new Image();
+		all_released_img.src = getStr('TEXT_ALL_RELEASED_IMG');
 		$('#notice_text').scrollTop(0);
 	}
 
@@ -407,17 +450,19 @@ jQuery(function($){
 			if (window.speechSynthesis){
 				text = text.repeat(32);
 				let speech = new SpeechSynthesisUtterance(text);
-				// {{language-specific}}
 				speech.pitch = 0.6;
 				speech.rate = 0.4;
-				speech.lang = 'ja-JP';
+				if (currentLanguage == 'ja')
+					speech.lang = 'ja-JP';
+				else
+					speech.lang = 'en-US';
 				window.speechSynthesis.speak(speech);
 			}
 		}
 	}
 
 	function isLargeDisplay(){
-		return cx >= 1500 || cy >= 1500;
+		return cxScreen >= 1500 || cyScreen >= 1500;
 	}
 
 	let playing = null;
@@ -472,23 +517,31 @@ jQuery(function($){
 	}
 
 	function setMessageSizeType(value){
-		floating_text.classList.remove('font_size_small');
-		floating_text.classList.remove('font_size_normal');
-		floating_text.classList.remove('font_size_large');
-		floating_text.classList.remove('font_size_huge');
+		floating_text1.classList.remove('font_size_small');
+		floating_text1.classList.remove('font_size_normal');
+		floating_text1.classList.remove('font_size_large');
+		floating_text1.classList.remove('font_size_huge');
+		floating_text2.classList.remove('font_size_small');
+		floating_text2.classList.remove('font_size_normal');
+		floating_text2.classList.remove('font_size_large');
+		floating_text2.classList.remove('font_size_huge');
 		switch (value){
 		case 'small':
-			floating_text.classList.add('font_size_small');
+			floating_text1.classList.add('font_size_small');
+			floating_text2.classList.add('font_size_small');
 			break;
 		case 'normal':
 		default:
-			floating_text.classList.add('font_size_normal');
+			floating_text1.classList.add('font_size_normal');
+			floating_text2.classList.add('font_size_normal');
 			break;
 		case 'large':
-			floating_text.classList.add('font_size_large');
+			floating_text1.classList.add('font_size_large');
+			floating_text2.classList.add('font_size_large');
 			break;
 		case 'huge':
-			floating_text.classList.add('font_size_huge');
+			floating_text1.classList.add('font_size_huge');
+			floating_text2.classList.add('font_size_huge');
 			break;
 		}
 		message_size_select.value = value;
@@ -525,42 +578,39 @@ jQuery(function($){
 		return counter;
 	}
 
-	function setType(value){
-		type = parseInt(value);
-		if (type == 0){
-			please_tap_here.classList.remove('invisible');
-			heart_block.classList.remove('invisible');
-		}else{
-			please_tap_here.classList.add('invisible');
-			heart_block.classList.add('invisible');
-		}
-		if (type == -1){
+	let oldPicType = 0;
+
+	function setPicType(value){
+		picType = parseInt(value);
+		if (picType == -1){
 			cancelSpeech();
 			speech_checkbox.checked = false;
 			speech_label.classList.remove('checked');
 			released = false;
-			released_hypnosis.classList.remove('invisible');
-			released_hypnosis2.classList.remove('invisible');
 			sound_button.classList.add('releasing');
 			text_button.classList.add('releasing');
 			speech_label.classList.add('releasing');
-			released_hypnosis.innerText = getStr('TEXT_RELEASING_HYPNOSIS');
-			released_hypnosis2.innerText = getStr('TEXT_RELEASING_HYPNOSIS2');
+			hypnosis_releasing_img.src = getStr('TEXT_KILLING_HYPNOSIS_IMG');
 			setTimeout(function(){
-				released_hypnosis.innerText = getStr('TEXT_RELEASED_HYPNOSIS');
-				released_hypnosis2.innerText = getStr('TEXT_RELEASED_HYPNOSIS2');
+				hypnosis_releasing_img.src = getStr('TEXT_HYPNOSIS_RELEASED_IMG');
+				all_released_img.src = getStr('TEXT_ALL_RELEASED_IMG');
 				released = true;
 			}, 3000);
 		} else {
-			released_hypnosis.classList.add('invisible');
-			released_hypnosis2.classList.add('invisible');
+			if (oldPicType == -1){
+				theText = '';
+				speech_checkbox.checked = false;
+				speech_label.classList.remove('checked');
+				cancelSpeech();
+			}
 			sound_button.classList.remove('releasing');
 			text_button.classList.remove('releasing');
 			speech_label.classList.remove('releasing');
 		}
-		type_select.value = type.toString();
-		type_select_button.innerText = getStr('TEXT_PIC') + type.toString();
-		localStorage.setItem('saiminType', type.toString());
+		type_select.value = picType.toString();
+		type_select_button.innerText = getStr('TEXT_PIC') + picType.toString();
+		localStorage.setItem('saiminType', picType.toString());
+		oldPicType = picType;
 	}
 
 	function setText(txt){
@@ -569,7 +619,8 @@ jQuery(function($){
 		if (speech_checkbox.checked){
 			playSpeech(theText);
 		}
-		floating_text.innerText = theText;
+		floating_text1.innerText = theText;
+		floating_text2.innerText = theText;
 	}
 
 	function setRotation(value){
@@ -580,8 +631,8 @@ jQuery(function($){
 
 	function fitCanvas(){
 		let ctx = saimin_canvas.getContext('2d');
-		cx = ctx.canvas.width = window.innerWidth;
-		cy = ctx.canvas.height = window.innerHeight;
+		cxScreen = ctx.canvas.width = window.innerWidth;
+		cyScreen = ctx.canvas.height = window.innerHeight;
 	}
 
 	function fit(){
@@ -591,7 +642,7 @@ jQuery(function($){
 			$('#about_dialog').dialog('option', 'position', position);
 		}else if (localStorage.getItem('saiminAppearanceShowing')){
 			$('#appearance_dialog').dialog('option', 'position', position);
-		}else if (localStorage.getItem('saiminConfigShowing')) {
+		}else if (localStorage.getItem('saiminConfigShowing')){
 			$('#config_dialog').dialog('option', 'position', position);
 		}
 	}
@@ -617,9 +668,15 @@ jQuery(function($){
 		about_button.classList.remove('invisible');
 		text_button.classList.remove('invisible');
 		updateVersionDisplay();
-		if (!ready) {
-			setType(0);
-			window.requestAnimationFrame(draw);
+		if (!ready){
+			let reset = localStorage.getItem('saiminReset');
+			if (reset){
+				localStorage.removeItem('saiminReset');
+				setPicType(reset);
+			}else{
+				setPicType(0);
+			}
+			window.requestAnimationFrame(draw_all);
 			ready = true;
 		}
 	}
@@ -627,7 +684,7 @@ jQuery(function($){
 	function chooseLanguage(){
 		let lang = localStorage.getItem('saiminLanguage3');
 		let first_time = false;
-		if (!lang) {
+		if (!lang){
 			if (navigator.language == 'ja' || navigator.language == 'ja-JP')
 				lang = 'ja';
 			else
@@ -651,7 +708,7 @@ jQuery(function($){
 				text: getStr('TEXT_CANCEL'),
 				click: function(){
 					dialogContainer.dialog('close');
-					if (first_time && !localStorage.getItem('saiminLanguage3')) {
+					if (first_time && !localStorage.getItem('saiminLanguage3')){
 						setLanguage('en');
 						help();
 					}
@@ -662,7 +719,7 @@ jQuery(function($){
 			resizable: false,
 		});
 		$('#choose_language_dialog').on('dialogclose', function(event){
-			if (first_time && !localStorage.getItem('saiminLanguage3')) {
+			if (first_time && !localStorage.getItem('saiminLanguage3')){
 				setLanguage('en');
 				help();
 			}
@@ -695,7 +752,6 @@ jQuery(function($){
 					alert(getStr('TEXT_INITTED_APP'));
 					dialogContainer.dialog('close');
 					accepted();
-					location.reload();
 				},
 			},{
 				text: getStr('TEXT_OK'),
@@ -730,17 +786,19 @@ jQuery(function($){
 					text: getStr('TEXT_RELEASE_HYPNOSIS'),
 					click: function(){
 						dialogContainer.dialog('close');
-						setType(-1);
+						setPicType(-1);
 					},
 				},{
 					text: getStr('TEXT_OK'),
 					click: function(){
 						dialogContainer.dialog('close');
+						if (picType == -1)
+							setPicType(picType);
 					},
 				},{
 					text: getStr('TEXT_CANCEL'),
 					click: function(){
-						setType(old_type_value);
+						setPicType(old_type_value);
 						setDivision(old_division_value);
 						setSpeedType(old_speed_type_value);
 						setRotation(old_rotation_value);
@@ -921,6 +979,14 @@ jQuery(function($){
 	function drawPicMinusOne(ctx, px, py, dx, dy){
 		ctx.save();
 
+		ctx.beginPath();
+		ctx.moveTo(px, py);
+		ctx.lineTo(px + dx, py);
+		ctx.lineTo(px + dx, py + dy);
+		ctx.lineTo(px, py + dy);
+		ctx.closePath();
+		ctx.clip();
+
 		let qx = px + dx / 2;
 		let qy = py + dy / 2;
 		let dxy = (dx + dy) / 2;
@@ -944,12 +1010,32 @@ jQuery(function($){
 		ctx.lineWidth = 10;
 		circle(ctx, qx, qy, (dx + dy + 10) / 5 * factor + dxy * 0.2, false);
 
+		if (hypnosis_releasing_img.complete){
+			let x = px + (dx - hypnosis_releasing_img.width) / 2;
+			let y = py + (dy - hypnosis_releasing_img.height) / 2 - dy * 0.1;
+			ctx.drawImage(hypnosis_releasing_img, x, y);
+		}
+
+		if (released && all_released_img.complete){
+			let x = px + (dx - all_released_img.width) / 2;
+			let y = py + (dy - all_released_img.height) / 2 + dy * 0.2;
+			ctx.drawImage(all_released_img, x, y);
+		}
+
 		ctx.restore();
 	}
 
 	// pic0: Initial Screen
 	function drawPic0(ctx, px, py, dx, dy){
 		ctx.save();
+
+		ctx.beginPath();
+		ctx.moveTo(px, py);
+		ctx.lineTo(px + dx, py);
+		ctx.lineTo(px + dx, py + dy);
+		ctx.lineTo(px, py + dy);
+		ctx.closePath();
+		ctx.clip();
 
 		let qx = px + dx / 2;
 		let qy = py + dy / 2;
@@ -963,6 +1049,18 @@ jQuery(function($){
 		grd.addColorStop(1, 'rgba(255, 0, 255, 1.0)');
 		ctx.fillStyle = grd;
 		circle(ctx, qx, qy, dxy, true);
+
+		if (logo_img.complete){
+			let x = px + (dx - logo_img.width) / 2;
+			let y = py + (dy - logo_img.height) / 2 - dy * 0.1;
+			ctx.drawImage(logo_img, x, y);
+		}
+
+		if (please_tap_here_img.complete){
+			let x = qx - please_tap_here_img.width / 2;
+			let y = py + dy * 0.7;
+			ctx.drawImage(please_tap_here_img, x, y);
+		}
 
 		ctx.restore();
 	}
@@ -1054,7 +1152,7 @@ jQuery(function($){
 		ctx.fillStyle = '#fff';
 		ctx.fillRect(px, py, dx, dy);
 
-		let size = (cx + cy) * 0.4;
+		let size = (dx + dy) * 0.4;
 
 		let dr0 = 30;
 		if (isLargeDisplay()){
@@ -1117,7 +1215,7 @@ jQuery(function($){
 		return [r, g, b];
 	}
 
-	// pic3: The eyes
+	// pic3: The Eyes
 	function drawPic3(ctx, px, py, dx, dy){
 		ctx.save();
 
@@ -1139,7 +1237,7 @@ jQuery(function($){
 		let count2 = getCount();
 		let factor = count2 * 0.03;
 
-		let cxy = ((cx >= cy) ? cy : cx) * 1.2;
+		let cxy = ((dx >= dy) ? dy : dx) * 1.2;
 		const colors = ['#f0f', '#ff0', '#0f0', '#0ff', '#00c', '#f0f'];
 
 		let k = factor * 5;
@@ -1165,11 +1263,21 @@ jQuery(function($){
 				ctx.fillStyle = `hsl(${(k * 60) % 360}, 100%, 50%)`
 			}
 			ctx.fill();
+			++k;
+		}
+		k = factor * 5;
+		for (let r = 0; r < 360;){
+			let radian = r * Math.PI / 180 + factor;
+			let x0 = qx + cxy * Math.cos(radian);
+			let y0 = qy + cxy * Math.sin(radian);
+			let factor2 = Math.abs(1 - Math.sin(factor * 8));
+			ctx.beginPath();
 			ctx.moveTo(qx, qy);
-			ctx.lineTo((x0 + x1) / 2, (y0 + y1) / 2);
+			ctx.lineTo(x0, y0);
 			ctx.strokeStyle = `rgb(255, 200, ${factor2 * 192}`;
 			ctx.lineWidth = 10;
 			ctx.stroke();
+			r += r_delta / 2;
 			++k;
 		}
 
@@ -1207,11 +1315,17 @@ jQuery(function($){
 			radian += delta;
 		}
 
+		let grd = ctx.createRadialGradient(qx, qy, dxy * 0.25, qx, qy, dxy * 0.5);
+		grd.addColorStop(0, 'rgba(255, 255, 255, 0.0)');
+		grd.addColorStop(1, 'rgba(255, 255, 0, 0.8)');
+		ctx.fillStyle = grd;
+		circle(ctx, qx, qy, dxy, true);
+
 		ctx.restore();
 	}
 
 	// pic4: Black and White Spiral
-	function drawPic4(ctx, px, py, dx, dy, t){
+	function drawPic4(ctx, px, py, dx, dy){
 		ctx.save();
 
 		let qx = px + dx / 2;
@@ -1249,7 +1363,7 @@ jQuery(function($){
 	}
 
 	// pic5: Spreading Rainbow
-	function drawPic5(ctx, px, py, dx, dy, t){
+	function drawPic5(ctx, px, py, dx, dy){
 		ctx.save();
 
 		let qx = px + dx / 2;
@@ -1317,39 +1431,26 @@ jQuery(function($){
 		ctx.fillStyle = grd;
 		circle(ctx, qx, qy, dxy, true);
 
-		if (t == 4){
-			ctx.fillStyle = `rgb(255, 255, ${(factor * 10) % 255}, 0.8)`;
-			let M = 5;
-			for (let radius = neg_mod(factor * 10, 100); radius < dxy; radius += 100){
-				for (let angle = 0; angle < 360; angle += 360 / M){
-					let radian = angle * (Math.PI / 180.0);
-					let x0 = qx + radius * Math.cos(radian + factor * 0.1 + radius / 100);
-					let y0 = qy + radius * Math.sin(radian + factor * 0.1 + radius / 100);
-					light(ctx, x0, y0, neg_mod(radius * 0.1, 30) + 10);
-				}
+		let value = factor * 25 + 10;
+		let value2 = neg_mod(value, 191);
+		ctx.fillStyle = `rgb(255,${value2},${value2})`;
+		let M = 5;
+		let heartSize = 30;
+		for (let radius = neg_mod((factor * 10), 100) + 30; radius < dxy; radius += 100){
+			for (let angle = 0; angle < 360; angle += 360 / M){
+				let radian = angle * (Math.PI / 180.0);
+				let x0 = qx + radius * Math.cos(radian + factor * 0.1 + radius / 100);
+				let y0 = qy + radius * Math.sin(radian + factor * 0.1 + radius / 100);
+				heart(ctx, x0, y0, x0, y0 + heartSize + neg_mod(value, 191) / 12);
 			}
-		} else if (t == 5){
-			let value = factor * 25 + 10;
-			let value2 = neg_mod(value, 191);
-			ctx.fillStyle = `rgb(255,${value2},${value2})`;
-			let M = 5;
-			let heartSize = 30;
-			for (let radius = neg_mod((factor * 10), 100) + 30; radius < dxy; radius += 100){
-				for (let angle = 0; angle < 360; angle += 360 / M){
-					let radian = angle * (Math.PI / 180.0);
-					let x0 = qx + radius * Math.cos(radian + factor * 0.1 + radius / 100);
-					let y0 = qy + radius * Math.sin(radian + factor * 0.1 + radius / 100);
-					heart(ctx, x0, y0, x0, y0 + heartSize + neg_mod(value, 191) / 12);
-				}
-				heartSize += 5;
-			}
+			heartSize += 5;
 		}
 
 		ctx.restore();
 	}
 
 	// pic6: 5-yen coin
-	function drawPic6(ctx, px, py, dx, dy, t){
+	function drawPic6(ctx, px, py, dx, dy){
 		ctx.save();
 
 		let qx = px + dx / 2;
@@ -1422,21 +1523,21 @@ jQuery(function($){
 			++iz;
 		}
 
-		if (coin.complete){
-			ctx.translate(qx - coin.width * 0.5, qy - coin.height * 0.75);
+		if (coin_img.complete){
+			ctx.translate(qx - coin_img.width * 0.5, qy - coin_img.height * 0.75);
 
 			let angle = Math.PI * Math.sin(count2 * 0.1 - 0.05) * 0.078;
 			ctx.rotate(angle);
 
 			let ratio = isLargeDisplay() ? 1.4 : 1;
-			ctx.drawImage(coin, 0, 0, coin.width * ratio, coin.height * ratio);
+			ctx.drawImage(coin_img, 0, 0, coin_img.width * ratio, coin_img.height * ratio);
 		}
 
 		ctx.restore();
 	}
 
 	// pic7: Clamor Clamor
-	function drawPic7(ctx, px, py, dx, dy, t){
+	function drawPic7(ctx, px, py, dx, dy){
 		ctx.save();
 
 		let qx = px + dx / 2;
@@ -1501,7 +1602,7 @@ jQuery(function($){
 	}
 
 	// pic8: Crazy Colors
-	function drawPic8(ctx, px, py, dx, dy, t){
+	function drawPic8(ctx, px, py, dx, dy){
 		ctx.save();
 
 		let qx = px + dx / 2;
@@ -1565,7 +1666,7 @@ jQuery(function($){
 	}
 
 	// pic9: Mixed Spirals
-	function drawPic9(ctx, px, py, dx, dy, t){
+	function drawPic9(ctx, px, py, dx, dy){
 		ctx.save();
 
 		let qx = px + dx / 2;
@@ -1588,7 +1689,7 @@ jQuery(function($){
 		let ratio = 0.01;
 
 		counter = -counter;
-		drawPic1(ctx, px, py, dx, dy, t);
+		drawPic1(ctx, px, py, dx, dy);
 		counter = -counter;
 
 		ctx.restore();
@@ -1601,91 +1702,117 @@ jQuery(function($){
 		}
 		ctx.clip();
 
-		drawPic1(ctx, px, py, dx, dy, t);
+		drawPic1(ctx, px, py, dx, dy);
 
 		ctx.restore();
 	}
 
-	function drawPic(ctx, px, py, cx, cy){
-		switch (type){
+	function drawPic(ctx, px, py, dx, dy){
+		switch (picType){
 		case -1:
-			drawPicMinusOne(ctx, px, py, cx, cy);
+			drawPicMinusOne(ctx, px, py, dx, dy);
 			break;
 		case 0:
-			drawPic0(ctx, px, py, cx, cy);
+			drawPic0(ctx, px, py, dx, dy);
 			break;
 		case 1:
-			drawPic1(ctx, px, py, cx, cy);
+			drawPic1(ctx, px, py, dx, dy);
 			break;
 		case 2:
-			drawPic2(ctx, px, py, cx, cy, true);
-			drawPic2(ctx, px, py, cx, cy, false);
+			drawPic2(ctx, px, py, dx, dy, true);
+			drawPic2(ctx, px, py, dx, dy, false);
 			break;
 		case 3:
-			drawPic3(ctx, px, py, cx, cy);
+			drawPic3(ctx, px, py, dx, dy);
 			break;
 		case 4:
-			drawPic4(ctx, px, py, cx, cy, type);
+			drawPic4(ctx, px, py, dx, dy);
 			break;
 		case 5:
-			drawPic5(ctx, px, py, cx, cy, type);
+			drawPic5(ctx, px, py, dx, dy);
 			break;
 		case 6:
-			drawPic6(ctx, px, py, cx, cy, type);
+			drawPic6(ctx, px, py, dx, dy);
 			break;
 		case 7:
-			drawPic7(ctx, px, py, cx, cy, type);
+			drawPic7(ctx, px, py, dx, dy);
 			break;
 		case 8:
-			drawPic8(ctx, px, py, cx, cy, type);
+			drawPic8(ctx, px, py, dx, dy);
 			break;
 		case 9:
-			drawPic9(ctx, px, py, cx, cy, type);
+			drawPic9(ctx, px, py, dx, dy);
 			break;
 		}
 	}
 
+	function setTextPos(id, px, py, dx, dy, counter){
+		let x = px + dx / 2 - id.clientWidth / 2;
+		let y = py + dy * 0.7 - id.clientHeight / 2 + (1 + 0.4 * Math.sin(counter * 0.1)) * dy * 0.1;
+		id.style.left = x + 'px';
+		id.style.top = y + 'px';
+	}
+
 	let FPS = 0;
 
-	function draw(){
+	function draw_all(){
 		let ctx = saimin_canvas.getContext('2d');
 
-		let x = cx / 2, y = cy / 2, delta_percent = 0;
+		let cx = cxScreen, cy = cyScreen;
+		let x = cxScreen / 2, y = cyScreen / 2;
 
-		if (type == 0 || division == 1){
+		let splitted = false;
+		if (division == 1){
 			drawPic(ctx, 0, 0, cx, cy);
+			setTextPos(floating_text1, 0, 0, cx, cy, counter);
 			y += cy / 4;
-			delta_percent = 25;
 		} else if (division == -1){
 			if (cx >= cy * 1.75){
 				drawPic(ctx, 0, 0, cx / 2, cy);
 				drawPic(ctx, cx / 2, 0, cx / 2, cy);
+				setTextPos(floating_text1, 0, 0, cx / 2, cy, counter);
+				setTextPos(floating_text2, cx / 2, 0, cx / 2, cy, counter);
+				splitted = true;
 			}else if (cy >= cx * 1.75){
 				drawPic(ctx, 0, 0, cx, cy / 2);
 				drawPic(ctx, 0, cy / 2, cx, cy / 2);
+				setTextPos(floating_text1, 0, 0, cx, cy / 2, counter);
+				setTextPos(floating_text2, 0, cy / 2, cx, cy / 2, counter);
+				splitted = true;
 			}else{
 				drawPic(ctx, 0, 0, cx, cy);
+				setTextPos(floating_text1, 0, 0, cx, cy, counter);
 				y += cy / 4;
-				delta_percent = 25;
 			}
 		} else {
 			if (cx >= cy){
 				drawPic(ctx, 0, 0, cx / 2, cy);
 				drawPic(ctx, cx / 2, 0, cx / 2, cy);
+				setTextPos(floating_text1, 0, 0, cx / 2, cy, counter);
+				setTextPos(floating_text2, cx / 2, 0, cx / 2, cy, counter);
 			}else{
 				drawPic(ctx, 0, 0, cx, cy / 2);
 				drawPic(ctx, 0, cy / 2, cx, cy / 2);
+				setTextPos(floating_text1, 0, 0, cx, cy / 2, counter);
+				setTextPos(floating_text2, 0, cy / 2, cx, cy / 2, counter);
 			}
+			splitted = true;
 		}
 
-		if (type == -1){
-			floating_text.classList.add('invisible');
+		if (picType == -1){
+			floating_text1.classList.add('invisible');
+			floating_text2.classList.add('invisible');
 		}else if (theText != ''){
-			floating_text.classList.remove('invisible');
-			let top = (50 + 5 * Math.sin(counter * 0.1) + delta_percent) + '%';
-			floating_text.style.top = top;
+			if (splitted){
+				floating_text1.classList.remove('invisible');
+				floating_text2.classList.remove('invisible');
+			}else{
+				floating_text1.classList.remove('invisible');
+				floating_text2.classList.add('invisible');
+			}
 		}else{
-			floating_text.classList.add('invisible');
+			floating_text1.classList.add('invisible');
+			floating_text2.classList.add('invisible');
 		}
 
 		for (let iStar = 0; iStar < stars.length; ++iStar){
@@ -1701,13 +1828,13 @@ jQuery(function($){
 		stars.shift();
 		stars.push(null);
 
-		if (old_cx !== null && old_cy !== null){
-			if (window.innerWidth != old_cx || window.innerHeight != old_cy){
+		if (old_cxScreen !== null && old_cyScreen !== null){
+			if (window.innerWidth != old_cxScreen || window.innerHeight != old_cyScreen){
 				fit();
 			}
 		}
-		old_cx = window.innerWidth;
-		old_cy = window.innerHeight;
+		old_cxScreen = window.innerWidth;
+		old_cyScreen = window.innerHeight;
 
 		let new_time = (new Date()).getTime();
 		let diff = (new_time - old_time) / 1000.0;
@@ -1733,7 +1860,7 @@ jQuery(function($){
 		}
 
 		if (DEBUGGING){
-			if (diff != 0) {
+			if (diff != 0){
 				FPS = 1 / Math.abs(diff);
 				FPS = Math.round(FPS * 10) / 10;
 			}
@@ -1743,10 +1870,10 @@ jQuery(function($){
 			let width = measure.width;
 			let height = measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent;
 			ctx.fillStyle = "red";
-			ctx.fillText(text, (cx - width) / 2, height);
+			ctx.fillText(text, (cxScreen - width) / 2, height);
 		}
 
-		window.requestAnimationFrame(draw);
+		window.requestAnimationFrame(draw_all);
 	}
 
 	function init(){
@@ -1804,7 +1931,7 @@ jQuery(function($){
 		}
 
 		text_button.addEventListener('click', function(){
-			if (type == -1)
+			if (picType == -1)
 				return;
 			let text = prompt(getStr('TEXT_INPUT_MESSAGE'), theText);
 			if (text !== null){
@@ -1816,12 +1943,13 @@ jQuery(function($){
 			help();
 		});
 
-		type_select_button.addEventListener('click', function(){
+		type_select_button.addEventListener('click', function(e){
+			e.preventDefault();
 			apperance();
 		});
 
 		sound_button.addEventListener('click', function(){
-			if (type == -1) {
+			if (picType == -1){
 				let releasing_sound = null;
 				if (localStorage.getItem('saiminLanguage3') == 'ja'){
 					releasing_sound = new Audio('sn/ReleasedHypnosis_ja.mp3');
@@ -1848,12 +1976,12 @@ jQuery(function($){
 		type_select.addEventListener('change', function(){
 			if (!ready)
 				return;
-			setType(parseInt(type_select.value));
+			setPicType(parseInt(type_select.value));
 		}, false);
 		type_select.addEventListener('click', function(){
 			if (!ready)
 				return;
-			setType(parseInt(type_select.value));
+			setPicType(parseInt(type_select.value));
 		}, false);
 
 		language_select.addEventListener('change', function(){
@@ -1923,11 +2051,11 @@ jQuery(function($){
 			if (!ready)
 				return;
 			if (e.shiftKey){
-				setType((type + (NUM_TYPE + 1) - 1) % (NUM_TYPE + 1));
+				setPicType((picType + (NUM_TYPE + 1) - 1) % (NUM_TYPE + 1));
 			}else{
-				setType((type + 1) % (NUM_TYPE + 1));
+				setPicType((picType + 1) % (NUM_TYPE + 1));
 			}
-			type_select.value = type.toString();
+			type_select.value = picType.toString();
 			if (typeSound == 1){
 				if (kirakira_sound){
 					let kirakira = new Audio('sn/kirakira.mp3');
@@ -1936,18 +2064,14 @@ jQuery(function($){
 			}
 		}
 
-		floating_text.addEventListener('click', function(e){
+		floating_text1.addEventListener('click', function(e){
+			canvasClick(e);
+		}, false);
+		floating_text2.addEventListener('click', function(e){
 			canvasClick(e);
 		}, false);
 
 		saimin_canvas.addEventListener('click', function(e){
-			canvasClick(e);
-		}, false);
-
-		please_tap_here.addEventListener('click', function(e){
-			canvasClick(e);
-		}, false);
-		heart_block.addEventListener('click', function(e){
 			canvasClick(e);
 		}, false);
 
@@ -2019,8 +2143,16 @@ jQuery(function($){
 		}
 
 		speech_checkbox.addEventListener('click', function(e){
-			if (type == -1)
+			if (picType == -1) {
+				if (speech_checkbox.checked){
+					playSpeech(getStr('TEXT_HYPNOSIS_RELEASED'));
+					speech_label.classList.add('checked');
+				}else{
+					cancelSpeech();
+					speech_label.classList.remove('checked');
+				}
 				return;
+			}
 			if (speech_checkbox.checked){
 				playSpeech(theText);
 				speech_label.classList.add('checked');
@@ -2068,11 +2200,13 @@ jQuery(function($){
 		window.addEventListener('resize', function(){
 			if (location.hostname == '' || isNativeApp()){
 				if (localStorage.getItem('saiminHelpShowing')){
+					localStorage.setItem('saiminReset', picType);
 					location.reload();
 				}else{
 					fit();
 				}
 			} else {
+				localStorage.setItem('saiminReset', picType);
 				location.reload();
 			}
 		}, false);
@@ -2083,43 +2217,104 @@ jQuery(function($){
 			microphone_label.classList.add('checked');
 		}
 
+		function showButtons(enabled){
+			if (enabled){
+				microphone_label.classList.remove('invisible');
+				type_select_button.classList.remove('invisible');
+				sound_button.classList.remove('invisible');
+				speech_label.classList.remove('invisible');
+				config_button.classList.remove('invisible');
+				about_button.classList.remove('invisible');
+				text_button.classList.remove('invisible');
+			}else{
+				microphone_label.classList.add('invisible');
+				type_select_button.classList.add('invisible');
+				sound_button.classList.add('invisible');
+				speech_label.classList.add('invisible');
+				config_button.classList.add('invisible');
+				about_button.classList.add('invisible');
+				text_button.classList.add('invisible');
+			}
+			try{
+				android.showNaviBar(enabled);
+			}catch(error){
+				;
+			}
+		}
+
 		document.body.addEventListener('keydown', function(e){
 			if (!ready || e.ctrlKey)
 				return;
-			if ('0' <= e.key && e.key <= '9') {
-				setType(e.key);
+			if ('0' <= e.key && e.key <= '9'){ // pic0...pic9
+				setPicType(e.key);
 				return;
 			}
-			if (e.key == 'g' || e.key == 'G') {
+			if (e.key == 'c' || e.key == 'C'){ // Configuration
 				config_button.click();
 				return;
 			}
-			if (e.key == 'h' || e.key == 'H') {
+			if (e.key == 'h' || e.key == 'H'){ // Help
 				about_button.click();
 				return;
 			}
-			if (e.key == 'p' || e.key == 'P') {
+			if (e.key == 'a' || e.key == 'A'){ // Appearance
+				e.preventDefault();
 				type_select_button.click();
 				return;
 			}
-			if (e.key == 'n' || e.key == 'N') {
+			if (e.key == 'p' || e.key == 'P'){ // Play/Pause
 				sound_button.click();
 				return;
 			}
-			if (e.key == 'm' || e.key == 'M') {
+			if (e.key == 'm' || e.key == 'M'){ // Microphone
 				microphone.click();
 				return;
 			}
-			if (e.key == 't' || e.key == 'T') {
+			if (e.key == 't' || e.key == 'T'){ // Text
 				text_button.click();
 				return;
 			}
-			if (e.key == 's' || e.key == 'S') {
+			if (e.key == 's' || e.key == 'S'){ // Speech
 				speech_checkbox.click();
 				return;
 			}
-			if (e.key == 'x' || e.key == 'X') {
+			if (e.key == 'x' || e.key == 'X'){ // Pause
 				stopping = !stopping;
+				return;
+			}
+			if (e.key == '-' || e.key == 'k' || e.key == 'K'){ // Kill hypnosis
+				setPicType(-1);
+				return;
+			}
+			if (e.key == 'd' || e.key == 'D'){ // Division (screen split)
+				if(division == 1){
+					setDivision(2);
+				}else if(division == 2){
+					setDivision(1);
+				}else{
+					setDivision(1);
+				}
+				return;
+			}
+			if (e.key == 'g' || e.key == 'G'){ // Goggle Mode
+				if (division == 1){
+					setDivision(2);
+				}else{
+					setDivision(1);
+				}
+				showButtons(division == 1);
+				return;
+			}
+			if (e.key == 'b' || e.key == 'B'){ // buttons
+				showButtons(microphone_label.classList.contains('invisible'));
+				return;
+			}
+			if (e.key == 'e' || e.key == 'E'){ // English
+				setLanguage('en');
+				return;
+			}
+			if (e.key == 'j' || e.key == 'J'){ // Japanese
+				setLanguage('ja');
 				return;
 			}
 			//alert(e.key);

@@ -13,8 +13,9 @@
         <item name="android:textColorSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Navigation bar color. -->
+        <item name="android:navigationBarColor">@color/black</item>
         <!-- Customize your theme here. -->
-
         <!-- Material Dialog -->
         <item name="md_background_color">#353434</item>
         <item name="md_corner_radius">10dp</item>
@@ -26,5 +27,7 @@
         <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
         <!-- <item name="windowSplashScreenAnimationDuration">0</item> -->
         <item name="postSplashScreenTheme">@style/Theme.KraKra_ja_jp</item>
+        <!-- Navigation bar color. -->
+        <item name="android:navigationBarColor">@color/black</item>
     </style>
 </resources>

@@ -17,7 +17,7 @@
 	<script defer src="mic.js"></script>
 	<script defer src="main.js"></script>
 	<link rel="icon" href="favicon.ico" />
-	<link rel="manifest" href="manifest.json" />
+	<link rel="manifest" href="manifest.webmanifest" />
 	<meta name="theme-color" content="#FFB5E6" />
 	<link rel="apple-touch-icon" href="https:./icons/apple-touch-icon.png" />
 	<link rel="stylesheet" href="style.css" type="text/css" />
@@ -39,28 +39,28 @@
 <label for="microphone" id="microphone_label" class="invisible navigate-button"><input type="checkbox" id="microphone" class="invisible" /><img id="mic_img" src="images/mic.png" alt="mic" /></label>
 
 <!-- 「画#」ボタン-->
-<button id="type_select_button" class="invisible navigate-button">画0</button>
+<button type="button" id="type_select_button" class="invisible navigate-button">画0</button>
 
 <!-- 「音!」ボタン-->
-<button id="sound_button" class="invisible navigate-button"><img id="sound_img" src="images/sound.png" alt="音!" /></button>
+<button type="button" id="sound_button" class="invisible navigate-button"><img id="sound_img" src="images/sound.png" alt="音!" /></button>
 
 <!-- 「字」ボタン-->
-<button id="text_button" class="invisible navigate-button"><img id="char_img" src="images/char.png" alt="字" /></button>
+<button type="button" id="text_button" class="invisible navigate-button"><img id="char_img" src="images/text_ja.png" alt="字" /></button>
 
 <!-- 「話」チェックボックス -->
 <label for="speech_checkbox" id="speech_label" class="invisible navigate-button"><input type="checkbox" id="speech_checkbox" class="invisible" /><img id="speech_img" src="images/speak.png" alt="話" /></label>
 
 <!-- 「設」ボタン -->
-<button id="config_button" class="invisible round-button"><img id="gear_img" src="images/gear.png" alt="設" /></button>
+<button type="button" id="config_button" class="invisible round-button"><img id="gear_img" src="images/gear.png" alt="設" /></button>
 
 <!-- 「？」ボタン -->
-<button id="about_button" class="invisible round-button"><img id="question_img" src="images/question.png" alt="？" /></button>
+<button type="button" id="about_button" class="invisible round-button"><img id="question_img" src="images/question.png" alt="？" /></button>
 
 <!-- 「見た目の設定」ダイアログ -->
 <div id="appearance_dialog" class="invisible">
 	<div>
 		<span id="appearance_type">映像の種類:</span>
-		<select id="type_select">
+		<select id="type_select" title="type_select">
 			<option value="-1">画-1</option>
 			<option value="0" selected>画0</option>
 			<option value="1">画1</option>
@@ -76,7 +76,7 @@
 	</div>
 	<div>
 		<span id="appearance_division">分割:</span>
-		<select id="division_select">
+		<select id="division_select" title="division_select">
 			<option value="-1">自動</option>
 			<option value="1" selected>分割なし</option>
 			<option value="2">2分割</option>
@@ -84,7 +84,7 @@
 	</div>
 	<div>
 		<span id="appearance_speed">スピード:</span>
-		<select id="speed_type_select">
+		<select id="speed_type_select" title="speed_type_select">
 			<option value="slow">遅い</option>
 			<option value="normal" selected>普通</option>
 			<option value="fast">速い</option>
@@ -93,7 +93,7 @@
 	</div>
 	<div>
 		<span id="appearance_rotation">回転の向き:</span>
-		<select id="rotation_select">
+		<select id="rotation_select" title="rotation_select">
 			<option value="normal">普通</option>
 			<option value="counter">逆回転</option>
 		</select>
@@ -104,14 +104,14 @@
 <div id="config_dialog" class="invisible">
 	<div>
 		<span id="config_language">Language:</span>
-		<select id="language_select">
+		<select id="language_select" title="language_select">
 			<option value="en" selected>English</option>
 			<option value="ja">Japanese</option>
 		</select>
 	</div>
 	<div>
 		<span id="config_size">メッセージの大きさ:</span>
-		<select id="message_size_select">
+		<select id="message_size_select" title="message_size_select">
 			<option value="small">小さい</option>
 			<option value="normal" selected>普通</option>
 			<option value="large">大きい</option>
@@ -120,7 +120,7 @@
 	</div>
 	<div>
 		<span id="config_note">音符ボタン:</span>
-		<select id="sound_select">
+		<select id="sound_select" title="sound_select">
 			<option value="" selected>(なし)</option>
 			<option value="Robot">Robot</option>
 			<option value="Keen">Keen</option>
@@ -135,14 +135,14 @@
 	</div>
 	<div>
 		<span id="config_switch_sound">切り替え音:</span>
-		<select id="type_sound_select">
+		<select id="type_sound_select" title="type_sound_select">
 			<option value="0">なし</option>
 			<option value="1" selected>あり</option>
 		</select>
 	</div>
 	<div>
 		<span id="config_brightness">画面の明るさ:</span>
-		<select id="screen_brightness">
+		<select id="screen_brightness" title="screen_brightness">
 			<option value="normal" selected>変更しない</option>
 			<option value="brighter">明るくする</option>
 		</select>
@@ -153,35 +153,22 @@
 <div id="choose_language_dialog" class="invisible">
 	<div>
 		<span id="config_language2">Language:</span>
-		<select id="language_select2">
+		<select id="language_select2" title="language_select2">
 			<option value="en" selected>English (英語)</option>
 			<option value="ja">Japanese (日本語)</option>
 		</select>
 	</div>
 </div>
 
-<!-- 「ここをタップして下さい」 -->
-<div id="please_tap_here" class="invisible">
-	(ここをタップして下さい)
-</div>
-
 <!-- 浮かび上がるテキスト -->
-<div id="floating_text" class="invisible font_size_normal"></div>
-
-<!-- 催眠解除 -->
-<div id="released_hypnosis" class="invisible font_size_normal">催眠解除！</div>
-
-<!-- すべての催眠を解除しました。 -->
-<div id="released_hypnosis2" class="invisible font_size_small">すべての催眠を解除しました。</div>
-
-<!-- 中央のハート -->
-<div id="heart_block" class="invisible"><img id="heart_img" src="images/heart.png" alt="" /></div>
+<div id="floating_text1" class="invisible font_size_normal"></div>
+<div id="floating_text2" class="invisible font_size_normal"></div>
 
 <!-- 「バージョン情報」ダイアログ -->
 <div id="about_dialog" class="invisible">
 	<div id="version_text">催眠くらくら Version [[VERSION]]</div>
 	<div>
-<textarea id="notice_text" rows="8" style="width: 90%;" readonly></textarea>
+<textarea id="notice_text" rows="8" readonly></textarea>
 	</div>
 </div>
 
