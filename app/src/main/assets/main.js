@@ -1427,7 +1427,7 @@ jQuery(function($){
 
 		let grd = ctx.createRadialGradient(qx, qy, dxy * 0.25, qx, qy, dxy * 0.5);
 		grd.addColorStop(0, 'rgba(255, 255, 255, 0.0)');
-		grd.addColorStop(1, 'rgba(255, 255, 255, 1.0)');
+		grd.addColorStop(1, 'rgba(255, 255, 255, 0.7)');
 		ctx.fillStyle = grd;
 		circle(ctx, qx, qy, dxy, true);
 
