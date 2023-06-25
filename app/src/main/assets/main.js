@@ -1,7 +1,7 @@
 /* jshint esversion: 8 */
 
 const NUM_TYPE = 9;
-const VERSION = '3.3.6';
+const VERSION = '3.3.7';
 const DEBUGGING = false;
 
 const NOTICE_EN = `=========================
@@ -294,7 +294,7 @@ jQuery(function($){
 			$('#type_select option[value="7"]').text('画7: ぼわんぼわん');
 			$('#type_select option[value="8"]').text('画8: 狂気の色');
 			$('#type_select option[value="9"]').text('画9: ミックス渦巻き');
-			$('#appearance_division').text('分割:');
+			$('#appearance_division').text('画面分割:');
 			$('#division_select option[value="-1"]').text('自動');
 			$('#division_select option[value="1"]').text('分割なし');
 			$('#division_select option[value="2"]').text('2分割');
@@ -365,7 +365,7 @@ jQuery(function($){
 			$('#type_select option[value="7"]').text('pic7: Clamor Clamor');
 			$('#type_select option[value="8"]').text('pic8: Crazy Colors');
 			$('#type_select option[value="9"]').text('pic9: Mixed Spirals');
-			$('#appearance_division').text('Splitting:');
+			$('#appearance_division').text('Screen Splitting:');
 			$('#division_select option[value="-1"]').text('Auto');
 			$('#division_select option[value="1"]').text('No split');
 			$('#division_select option[value="2"]').text('Split in 2');
