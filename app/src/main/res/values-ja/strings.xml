@@ -1,3 +1,4 @@
+<!-- {{LANGUAGE_SPECIFIC}} -->
 <resources>
     <!-- common -->
     <string name="ok">OK</string>
@@ -66,7 +67,6 @@
 
     <!-- message select dialog -->
     <string name="message_select_dialog_message">メッセージ文字列を入力して下さい。</string>
-    <string name="message_clear_button">クリア</string>
 
     <!-- Content Description -->
     <string name="guide_clear_button">クリアボタン</string>

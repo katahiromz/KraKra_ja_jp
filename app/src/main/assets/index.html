@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head prefix="og: http://ogp.me/ns#">
 	<meta charset="UTF-8" />
-	<title>催眠くらくら</title>
+	<title>Hypnosis KraKra</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="keywords" content="催眠くらくら,催眠アプリ,片山博文MZ,katahiromz" />
+	<meta name="keywords" content="Hypnosis KraKra,Hypnotic app,katahiromz" />
 	<!--
 		<script defer src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 		<script defer src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" crossorigin="anonymous"></script>
@@ -22,87 +22,88 @@
 	<link rel="apple-touch-icon" href="https:./icons/apple-touch-icon.png" />
 	<link rel="stylesheet" href="style.css" type="text/css" />
 	<!-- Open Graph Protocol -->
-	<meta property="og:title" content="催眠アプリ【くらくら】" />
+	<meta property="og:title" content="Hypnosis KraKra" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://katahiromz.github.io/saimin/" />
 	<meta property="og:image" content="https://katahiromz.github.io/saimin/icons/icon-192.png" />
-	<meta property="og:site_name" content="催眠くらくら" />
-	<meta property="og:description" content="催眠っぽいアプリです。" />
+	<meta property="og:site_name" content="Hypnosis KraKra" />
+	<meta property="og:description" content="A hypnotic application." />
 	<meta name="twitter:card" content="summary" />
 </head>
 <body>
 
-<!-- キャンバス -->
+<!-- The canvas -->
 <canvas id="saimin_canvas"></canvas>
 
-<!-- 「mic」チェックボックス -->
+<!-- The "microphone" button -->
 <label for="microphone" id="microphone_label" class="invisible navigate-button"><input type="checkbox" id="microphone" class="invisible" /><img id="mic_img" src="images/mic.png" alt="mic" /></label>
 
-<!-- 「画#」ボタン-->
-<button type="button" id="type_select_button" class="invisible navigate-button">画0</button>
+<!-- The "pic#" button -->
+<button type="button" id="type_select_button" class="invisible navigate-button">pic0</button>
 
-<!-- 「音!」ボタン-->
-<button type="button" id="sound_button" class="invisible navigate-button"><img id="sound_img" src="images/sound.png" alt="音!" /></button>
+<!-- The "note" button -->
+<button type="button" id="sound_button" class="invisible navigate-button"><img id="sound_img" src="images/sound.png" alt="play!" /></button>
 
-<!-- 「字」ボタン-->
-<button type="button" id="text_button" class="invisible navigate-button"><img id="char_img" src="images/text_ja.png" alt="字" /></button>
+<!-- The "text" button -->
+<button type="button" id="text_button" class="invisible navigate-button"><img id="char_img" src="images/text_en.png" alt="msg" /></button>
 
-<!-- 「話」チェックボックス -->
-<label for="speech_checkbox" id="speech_label" class="invisible navigate-button"><input type="checkbox" id="speech_checkbox" class="invisible" /><img id="speech_img" src="images/speak.png" alt="話" /></label>
+<!-- The "speech" button -->
+<label for="speech_checkbox" id="speech_label" class="invisible navigate-button"><input type="checkbox" id="speech_checkbox" class="invisible" /><img id="speech_img" src="images/speak.png" alt="spch" /></label>
 
-<!-- 「設」ボタン -->
-<button type="button" id="config_button" class="invisible round-button"><img id="gear_img" src="images/gear.png" alt="設" /></button>
+<!-- The "configuration" button -->
+<button type="button" id="config_button" class="invisible round-button"><img id="gear_img" src="images/gear.png" alt="cfg" /></button>
 
-<!-- 「？」ボタン -->
-<button type="button" id="about_button" class="invisible round-button"><img id="question_img" src="images/question.png" alt="？" /></button>
+<!-- The help button -->
+<button type="button" id="about_button" class="invisible round-button"><img id="question_img" src="images/question.png" alt="?" /></button>
 
-<!-- 「見た目の設定」ダイアログ -->
+<!-- The appearance dialog -->
 <div id="appearance_dialog" class="invisible">
 	<div>
-		<span id="appearance_type">映像の種類:</span>
+		<span id="appearance_type">The type of picture:</span>
 		<select id="type_select" title="type_select">
-			<option value="-1">画-1</option>
-			<option value="0" selected>画0</option>
-			<option value="1">画1</option>
-			<option value="2">画2</option>
-			<option value="3">画3</option>
-			<option value="4">画4</option>
-			<option value="5">画5</option>
-			<option value="6">画6</option>
-			<option value="7">画7</option>
-			<option value="8">画8</option>
-			<option value="9">画9</option>
+			<option value="-1">pic-1</option>
+			<option value="0" selected>pic0</option>
+			<option value="1">pic1</option>
+			<option value="2">pic2</option>
+			<option value="3">pic3</option>
+			<option value="4">pic4</option>
+			<option value="5">pic5</option>
+			<option value="6">pic6</option>
+			<option value="7">pic7</option>
+			<option value="8">pic8</option>
+			<option value="9">pic9</option>
 		</select>
 	</div>
 	<div>
-		<span id="appearance_division">画面分割:</span>
+		<span id="appearance_division">Screen splitting:</span>
 		<select id="division_select" title="division_select">
-			<option value="-1">自動</option>
-			<option value="1" selected>分割なし</option>
-			<option value="2">2分割</option>
+			<option value="-1">Auto</option>
+			<option value="1" selected>No splitting</option>
+			<option value="2">Split in 2</option>
 		</select>
 	</div>
 	<div>
-		<span id="appearance_speed">スピード:</span>
+		<span id="appearance_speed">Speed:</span>
 		<select id="speed_type_select" title="speed_type_select">
-			<option value="slow">遅い</option>
-			<option value="normal" selected>普通</option>
-			<option value="fast">速い</option>
-			<option value="irregular">不規則</option>
+			<option value="slow">Slow</option>
+			<option value="normal" selected>Normal</option>
+			<option value="fast">Fast</option>
+			<option value="irregular">Irregular</option>
 		</select>
 	</div>
 	<div>
-		<span id="appearance_rotation">回転の向き:</span>
+		<span id="appearance_rotation">Rotation:</span>
 		<select id="rotation_select" title="rotation_select">
-			<option value="normal">普通</option>
-			<option value="counter">逆回転</option>
+			<option value="normal">Normal</option>
+			<option value="counter">Counterrotation</option>
 		</select>
 	</div>
 </div>
 
-<!-- 「全般設定」ダイアログ -->
+<!-- The configuration dialog -->
 <div id="config_dialog" class="invisible">
 	<div>
+		<!-- {{LANGUAGE_SPECIFIC}} -->
 		<span id="config_language">Language:</span>
 		<select id="language_select" title="language_select">
 			<option value="en" selected>English</option>
@@ -110,18 +111,18 @@
 		</select>
 	</div>
 	<div>
-		<span id="config_size">メッセージの大きさ:</span>
+		<span id="config_size">Size of message:</span>
 		<select id="message_size_select" title="message_size_select">
-			<option value="small">小さい</option>
-			<option value="normal" selected>普通</option>
-			<option value="large">大きい</option>
-			<option value="huge">特大</option>
+			<option value="small">Small</option>
+			<option value="normal" selected>Normal</option>
+			<option value="large">Large</option>
+			<option value="huge">Huge</option>
 		</select>
 	</div>
 	<div>
-		<span id="config_note">音符ボタン:</span>
+		<span id="config_note">Note button:</span>
 		<select id="sound_select" title="sound_select">
-			<option value="" selected>(なし)</option>
+			<option value="" selected>(None)</option>
 			<option value="Robot">Robot</option>
 			<option value="Keen">Keen</option>
 			<option value="Horror">Horror</option>
@@ -134,24 +135,25 @@
 		</select>
 	</div>
 	<div>
-		<span id="config_switch_sound">切り替え音:</span>
+		<span id="config_switch_sound">Pic change sound:</span>
 		<select id="type_sound_select" title="type_sound_select">
-			<option value="0">なし</option>
-			<option value="1" selected>あり</option>
+			<option value="0">No</option>
+			<option value="1" selected>Yes</option>
 		</select>
 	</div>
 	<div>
-		<span id="config_brightness">画面の明るさ:</span>
+		<span id="config_brightness">Brightness:</span>
 		<select id="screen_brightness" title="screen_brightness">
-			<option value="normal" selected>変更しない</option>
-			<option value="brighter">明るくする</option>
+			<option value="normal" selected>Normal</option>
+			<option value="brighter">Brighter</option>
 		</select>
 	</div>
 </div>
 
-<!-- 「言語選択」ダイアログ -->
+<!-- The "Choose a language" dialog -->
 <div id="choose_language_dialog" class="invisible">
 	<div>
+		<!-- {{LANGUAGE_SPECIFIC}} -->
 		<span id="config_language2">Language:</span>
 		<select id="language_select2" title="language_select2">
 			<option value="en" selected>English (英語)</option>
@@ -160,13 +162,13 @@
 	</div>
 </div>
 
-<!-- 浮かび上がるテキスト -->
+<!-- The floating texts -->
 <div id="floating_text1" class="invisible font_size_normal"></div>
 <div id="floating_text2" class="invisible font_size_normal"></div>
 
-<!-- 「バージョン情報」ダイアログ -->
+<!-- The "help" dialog -->
 <div id="about_dialog" class="invisible">
-	<div id="version_text">催眠くらくら Version [[VERSION]]</div>
+	<div id="version_text">Hyponosis KraKra Version [[VERSION]]</div>
 	<div>
 <textarea id="notice_text" rows="8" readonly></textarea>
 	</div>

@@ -4,6 +4,7 @@ const NUM_TYPE = 9;
 const VERSION = '3.3.7';
 const DEBUGGING = false;
 
+// {{LANGUAGE_SPECIFIC}}
 const NOTICE_EN = `=========================
 催眠くらくら
 Hypnosis KraKra
@@ -69,6 +70,7 @@ Copyright (c) 2018 Robert Eisele
 Copyright (c) 2007-2022 Akshay Nair
 Copyright 2022 OpenJS Foundation and jQuery contributors.`;
 
+// {{LANGUAGE_SPECIFIC}}
 const NOTICE_JA = `=========================
 催眠くらくら
 Hypnosis KraKra
@@ -210,18 +212,19 @@ jQuery(function($){
 		}
 	}
 
+	// {{LANGUAGE_SPECIFIC}}
 	function getStr(str_id){
 		let lang = localStorage.getItem('saiminLanguage3');
 		if (!lang)
 			lang = 'en';
-		if (lang == 'ja' || lang == 'jp'){
+		if (lang == 'ja' || lang == 'jp'){ // Japanese
 			switch(str_id){
 			case 'TEXT_PIC': return '画';
 			case 'TEXT_OK': return 'OK';
 			case 'TEXT_CANCEL': return 'キャンセル';
 			case 'TEXT_YES': return 'はい';
 			case 'TEXT_NO': return 'いいえ';
-			case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a Language (言語選択)';
+			case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a language (言語選択)';
 			case 'TEXT_ABOUT_APP': return 'バージョン情報';
 			case 'TEXT_INIT_APP': return 'アプリの初期化';
 			case 'TEXT_INITTED_APP': return 'アプリを初期化しました。';
@@ -237,14 +240,14 @@ jQuery(function($){
 			case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'images/hypnosis-released_ja.svg';
 			case 'TEXT_ALL_RELEASED_IMG': return 'images/all-released_ja.svg';
 			}
-		} else {
+		} else { // English is default
 			switch(str_id){
 			case 'TEXT_PIC': return 'pic';
 			case 'TEXT_OK': return 'OK';
 			case 'TEXT_CANCEL': return 'Cancel';
 			case 'TEXT_YES': return 'Yes';
 			case 'TEXT_NO': return 'No';
-			case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a Language (言語選択)';
+			case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a language (言語選択)';
 			case 'TEXT_ABOUT_APP': return 'About this app';
 			case 'TEXT_INIT_APP': return 'Initialize app';
 			case 'TEXT_INITTED_APP': return 'Initialized the app.';
@@ -265,9 +268,10 @@ jQuery(function($){
 
 	let currentLanguage = 'en';
 
+	// {{LANGUAGE_SPECIFIC}}
 	function localizeSaimin(lang){
 		currentLanguage = lang;
-		if (lang == 'ja' || lang == 'jp'){
+		if (lang == 'ja' || lang == 'jp'){ // Japanese
 			$('#notice_text').text(NOTICE_JA);
 			$('#mic_img').attr('src', 'images/mic.png');
 			$('#type_select_button').text(getStr('TEXT_PIC') + type_select.value);
@@ -338,7 +342,7 @@ jQuery(function($){
 			}else{
 				hypnosis_releasing_img.src = getStr('TEXT_KILLING_HYPNOSIS_IMG');
 			}
-		}else{
+		}else{ // English is default
 			$('#notice_text').text(NOTICE_EN);
 			$('#mic_img').attr('src', 'images/mic.png');
 			$('#type_select_button').text(getStr('TEXT_PIC') + type_select.value);
@@ -365,9 +369,9 @@ jQuery(function($){
 			$('#type_select option[value="7"]').text('pic7: Clamor Clamor');
 			$('#type_select option[value="8"]').text('pic8: Crazy Colors');
 			$('#type_select option[value="9"]').text('pic9: Mixed Spirals');
-			$('#appearance_division').text('Screen Splitting:');
+			$('#appearance_division').text('Screen splitting:');
 			$('#division_select option[value="-1"]').text('Auto');
-			$('#division_select option[value="1"]').text('No split');
+			$('#division_select option[value="1"]').text('No splitting');
 			$('#division_select option[value="2"]').text('Split in 2');
 			$('#appearance_speed').text('Speed:');
 			$('#speed_type_select option[value="slow"]').text('Slow');
@@ -452,9 +456,10 @@ jQuery(function($){
 				let speech = new SpeechSynthesisUtterance(text);
 				speech.pitch = 0.6;
 				speech.rate = 0.4;
-				if (currentLanguage == 'ja')
+				// {{LANGUAGE_SPECIFIC}}
+				if (currentLanguage == 'ja') // Japanese
 					speech.lang = 'ja-JP';
-				else
+				else // English is default
 					speech.lang = 'en-US';
 				window.speechSynthesis.speak(speech);
 			}
@@ -685,9 +690,10 @@ jQuery(function($){
 		let lang = localStorage.getItem('saiminLanguage3');
 		let first_time = false;
 		if (!lang){
-			if (navigator.language == 'ja' || navigator.language == 'ja-JP')
+			// {{LANGUAGE_SPECIFIC}}
+			if (navigator.language == 'ja' || navigator.language == 'ja-JP') // Japanese
 				lang = 'ja';
-			else
+			else // English is default
 				lang = 'en';
 			first_time = true;
 		}
@@ -1949,9 +1955,10 @@ jQuery(function($){
 		sound_button.addEventListener('click', function(){
 			if (picType == -1){
 				let releasing_sound = null;
-				if (localStorage.getItem('saiminLanguage3') == 'ja'){
+				// {{LANGUAGE_SPECIFIC}}
+				if (localStorage.getItem('saiminLanguage3') == 'ja'){ // Japanese
 					releasing_sound = new Audio('sn/ReleasedHypnosis_ja.mp3');
-				}else{
+				}else{ // English is default
 					releasing_sound = new Audio('sn/ReleasedHypnosis_en.mp3');
 				}
 				releasing_sound.play();
@@ -2307,6 +2314,7 @@ jQuery(function($){
 				showButtons(microphone_label.classList.contains('invisible'));
 				return;
 			}
+			// {{LANGUAGE_SPECIFIC}}
 			if (e.key == 'e' || e.key == 'E'){ // English
 				setLanguage('en');
 				return;
