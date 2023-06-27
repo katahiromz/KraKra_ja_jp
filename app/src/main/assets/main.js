@@ -457,7 +457,7 @@ jQuery(function($){
 			$('#speech_img').attr('src', 'images/speak.png');
 			$('#gear_img').attr('src', 'images/gear.png');
 			$('#question_img').attr('src', 'images/question.png');
-			$('#config_language').text('Language (言語):');
+			$('#config_language').text('Language:');
 			$('#language_select option[value="en"]').text('English');
 			$('#language_select option[value="ja"]').text('Japanese');
 			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified)');
@@ -607,7 +607,7 @@ jQuery(function($){
 			$('#speech_img').attr('src', 'images/speak.png');
 			$('#gear_img').attr('src', 'images/gear.png');
 			$('#question_img').attr('src', 'images/question.png');
-			$('#config_language').text('Language (言語):');
+			$('#config_language').text('Language:');
 			$('#language_select option[value="en"]').text('English');
 			$('#language_select option[value="ja"]').text('Japanese');
 			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified)');
