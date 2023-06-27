@@ -606,7 +606,7 @@ jQuery(function($){
 			$('#screen_brightness option[value="brighter"]').text('明るくする');
 			$('#version_text').text('催眠くらくら Version ' + VERSION);
 			logo_img = new Image();
-			logo_img.src = 'images/logo_ja.png';
+			logo_img.src = 'images/logo_ja.svg';
 			please_tap_here_img = new Image();
 			please_tap_here_img.src = 'images/please-tap-here_ja.svg';
 			if (released){
@@ -912,7 +912,7 @@ jQuery(function($){
 			$('#screen_brightness option[value="brighter"]').text('Brighter');
 			$('#version_text').text('Hyponosis KraKra Version ' + VERSION);
 			logo_img = new Image();
-			logo_img.src = 'images/logo_en.png';
+			logo_img.src = 'images/logo_en.svg';
 			please_tap_here_img = new Image();
 			please_tap_here_img.src = 'images/please-tap-here_en.svg';
 			if (released){
