@@ -1,0 +1,77 @@
+<!-- {{LANGUAGE_SPECIFIC}} -->
+<resources>
+    <!-- common -->
+    <string name="ok">確定</string>
+    <string name="cancel">取消</string>
+    <string name="clear">清除</string>
+
+    <!-- main -->
+    <string name="app_name">克拉克拉</string>
+    <string name="web_view">网页浏览</string>
+    <string name="progress_bar">进度条</string>
+    <string name="now_starting">开始克拉克拉...</string>
+    <string name="prompt_hint">请输入一个字符串来显示</string>
+    <string name="no_audio_record">不允许使用音频记录。</string>
+
+    <!-- message list -->
+    <string name="message_000">你越来越困了...</string>
+    <string name="message_001">我想学习并取得好成绩...</string>
+    <string name="message_002">你会喜欢为公司工作...</string>
+    <string name="message_003">我很高兴见到你。</string>
+    <string name="message_004">早晨好!</string>
+    <string name="message_005">你好。</string>
+    <string name="message_006">晚上好!</string>
+    <string name="message_007">谢谢你。</string>
+    <string name="message_008">已经有一段时间了。</string>
+    <string name="message_009">我现在要去办公室了。</string>
+    <string name="message_010">我要去上学了。</string>
+    <string name="message_011">祝你有个愉快的一天。</string>
+    <string name="message_012">我回来了!</string>
+    <string name="message_013">我很抱歉。</string>
+    <string name="message_014">请您原谅。</string>
+    <string name="message_015">我可以帮你吗？</string>
+    <string name="message_016">你在担心什么吗？</string>
+    <string name="message_017">请不要过度...</string>
+    <string name="message_018">不要紧张。</string>
+    <string name="message_019">不要害羞。</string>
+    <string name="message_020">我不会欺负你。</string>
+    <string name="message_021">不要害怕。</string>
+    <string name="message_022">冷静下来，请。</string>
+    <string name="message_023">来和我谈谈吧。</string>
+    <string name="message_024">我们将与你一起工作。</string>
+    <string name="message_025">你有什么抱怨吗？</string>
+    <string name="message_026">请帮助我，请...</string>
+    <string name="message_027">让我的愿望成真...</string>
+    <string name="message_028">你将会爱上我...</string>
+    <string name="message_029">这没什么。</string>
+    <string name="message_030">我们现在出去吃饭吧。</string>
+    <string name="message_031">我给你买一罐果汁。</string>
+    <string name="message_032">我们去餐厅吧。</string>
+    <string name="message_033">我给你这个。</string>
+    <string name="message_034">这很美味。</string>
+    <string name="message_035">这是很有趣的。</string>
+    <string name="message_036">这是非常好的。</string>
+    <string name="message_037">你需要学习更多。</string>
+    <string name="message_038">更加努力工作，取得更好的成绩。</string>
+    <string name="message_039">这很好。</string>
+    <string name="message_040">你很美。</string>
+    <string name="message_041">你是我的朋友。</string>
+    <string name="message_042">你的拉链已经打开。</string>
+    <string name="message_043">今天让我们玩得开心点。</string>
+    <string name="message_044">桌子上有食物。</string>
+    <string name="message_045">冰箱里有食物。</string>
+    <string name="message_046">帮我做家务。</string>
+    <string name="message_047">我很累了，所以我要休息了。</string>
+    <string name="message_048">我现在要去睡觉了。</string>
+    <string name="message_049">今晚怎么样？</string>
+
+    <!-- message select dialog -->
+    <string name="message_select_dialog_message">请输入消息文本。</string>
+
+    <!-- Content Description -->
+    <string name="guide_clear_button">清除按钮</string>
+    <string name="guide_message_list">留言列表</string>
+
+    <!-- URLs -->
+    <string name="url">file:///android_asset/index.html</string>
+</resources>

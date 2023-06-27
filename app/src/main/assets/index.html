@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head prefix="og: http://ogp.me/ns#">
 	<meta charset="UTF-8" />
 	<title>Hypnosis KraKra</title>
@@ -34,6 +34,8 @@
 
 <!-- The canvas -->
 <canvas id="saimin_canvas"></canvas>
+<!-- The canvas #2 -->
+<canvas id="blurring_canvas" class="invisible"></canvas>
 
 <!-- The "microphone" button -->
 <label for="microphone" id="microphone_label" class="invisible navigate-button"><input type="checkbox" id="microphone" class="invisible" /><img id="mic_img" src="images/mic.png" alt="mic" /></label>
@@ -108,6 +110,7 @@
 		<select id="language_select" title="language_select">
 			<option value="en" selected>English</option>
 			<option value="ja">Japanese</option>
+			<option value="zw-CN">Chinese (PRC)</option>
 		</select>
 	</div>
 	<div>
@@ -156,8 +159,9 @@
 		<!-- {{LANGUAGE_SPECIFIC}} -->
 		<span id="config_language2">Language:</span>
 		<select id="language_select2" title="language_select2">
-			<option value="en" selected>English (英語)</option>
-			<option value="ja">Japanese (日本語)</option>
+			<option value="en" selected>English</option>
+			<option value="ja">Japanese</option>
+			<option value="zw-CN">Chinese (PRC)</option>
 		</select>
 	</div>
 </div>

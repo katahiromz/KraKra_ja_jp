@@ -365,6 +365,11 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     fun setCurLocale(locale: Locale) {
         currLocale = locale
         currLocaleContext = null
+        if (tts != null) {
+            if (tts!!.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
+                tts!!.language = locale
+            }
+        }
     }
 
     fun getLocString(id: Int, locale: Locale): String {
