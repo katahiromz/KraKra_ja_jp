@@ -106,10 +106,12 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
     @JavascriptInterface
     fun setLanguage(lang: String) {
         // {{LANGUAGE_SPECIFIC}}
-        var locale : Locale = if (lang == "ja" || lang == "jp") { // Japanese
+        var locale : Locale = if (lang == "ja" || lang == "jp" || lang == "ja-JP") { // Japanese
             Locale.JAPANESE
         } else if (lang == "zw-CN") { // Chinese (Simplified)
             Locale.SIMPLIFIED_CHINESE
+        } else if (lang == "zw-TW") { // Chinese (Traditional)
+            Locale.TRADITIONAL_CHINESE
         } else { // English is default
             Locale.ENGLISH
         }
