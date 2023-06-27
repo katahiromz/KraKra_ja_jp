@@ -71,6 +71,72 @@ Copyright (c) 2007-2022 Akshay Nair
 Copyright 2022 OpenJS Foundation and jQuery contributors.`;
 
 // {{LANGUAGE_SPECIFIC}}
+const NOTICE_KO_KR = `=========================
+최면 크라크라
+Hypnosis KraKra
+=========================
+
+이 소프트웨어는 최면 같은 영상을 즐기는 응용 프로그램입니다.
+동영상 파일을 일절 사용하지 않고 실시간으로 최면 영상을 생성합니다.
+사용법은 당신에게 달려 있습니다.
+
+※ 소스 코드: https://github.com/katahiromz/KraKra_ja_jp
+※ 일부, OtoLogic의 음성 소재를 사용.
+※ 개조는 Apache 2.0 라이센스하에 자유롭게 할 수 있습니다.
+
+【사용상의 주의】
+
+- 본 소프트웨어는 농담 앱이며 동작은 무보증입니다.
+- 간질 증상이 있는 분은 사용하지 마십시오.
+- 귀하의 국가, 학교, 종교 및 지역이 최면을 금지하는 경우이 응용 프로그램을 사용하지 마십시오.
+- 급성기 정신분열증 환자는 사용 금지입니다.
+- 사용 직후에는 자동차 운전을 피하십시오.
+- 집합체 공포증을 가진 사람은 사용하지 마십시오.
+- 두통, 현기증, 과호흡, 메스꺼움, 위장 장애, 이상한 감정 등의 증상이 발생한 경우에는 신속하게 사용을 중지하고 전문의의 진단을 받으십시오.
+- 운영자는 본 서비스의 계속이 곤란해지는 사유가 발생한 경우 언제든지 본 서비스를 종료할 수 있는 것으로 합니다.
+
+【사용법】
+
+- 기본적으로 화면을보고 즐길 수있는 응용 프로그램입니다.
+- 화면을 탭/클릭하면 영상이 전환됩니다.
+- "pic"버튼으로 영상을 설정할 수 있습니다.
+- "마이크" 버튼으로 마이크를 사용할 수 있습니다 (권한이 필요합니다).
+- 「♪」버튼으로 소리가 울립니다.
+- "글자" 버튼으로 표시할 메시지를 설정할 수 있습니다.
+- "후키다시"버튼으로 메시지를 자동 음성으로 말합니다.
+- '기어' 버튼으로 일반 설정을 할 수 있습니다.
+- 화면을 손가락으로 추적하면 반짝임이 표시되어 상대방의 주의를 끌 수 있습니다.
+
+【키보드 조작】
+
+키보드를 연결하면 다음과 같은 조작을 할 수 있습니다.
+
+- "0"~"9" 키를 누르면 영상이 전환됩니다.
+- "C" 키를 누르면 일반 설정이 열립니다.
+- "H" 키를 누르면 버전 정보가 열립니다.
+- "A" 키를 누르면 외형 설정을 엽니다.
+- "P" 키를 누르면 소리가 납니다.
+- 「M」키를 누르면 마이크의 ON/OFF를 전환합니다(권한이 필요합니다).
+- "T" 키를 누르면 메시지 설정이 열립니다.
+- "S" 키를 누르면 현재 메시지를 자동 음성으로 말합니다.
+- “X” 키를 누르면 일시정지됩니다.
+- "-" 키 또는 "K" 키를 누르면 최면을 끕니다.
+- "D" 키를 누르면 화면 분할이 전환됩니다.
+- "B" 키를 누르면 버튼 표시가 전환됩니다.
+- "G" 키를 누르면 고글 모드가 전환됩니다.
+
+【고글 모드】
+
+연결 가능한 키보드와 고글이 있으면 고글 모드를 사용할 수 있습니다.
+「G」키를 누르면 고글 모드의 ON/OFF의 전환이 가능합니다.
+고글 모드는 화면을 2분할하고 조작 버튼을 숨깁니다.
+
+Copyright (c) 2022-2023 Katayama Hirofumi MZ
+Copyright (c) 2018 Robert Eisele
+Copyright (c) 2007-2022 Akshay Nair
+Copyright 2022 OpenJS Foundation and jQuery contributors.`;
+
+// {{LANGUAGE_SPECIFIC}}
 const NOTICE_JA = `=========================
 催眠くらくら
 Hypnosis KraKra
@@ -417,6 +483,29 @@ jQuery(function($){
 			case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'images/hypnosis-released_zh-CN.svg';
 			case 'TEXT_ALL_RELEASED_IMG': return 'images/all-released_zh-CN.svg';
 			}
+		}else if (lang == 'ko' || lang == 'kr' || lang == 'ko-KR'){ // Korean
+			switch(str_id){
+			case 'TEXT_PIC': return 'pic';
+			case 'TEXT_OK': return 'OK';
+			case 'TEXT_CANCEL': return '취소';
+			case 'TEXT_YES': return '예';
+			case 'TEXT_NO': return '아니오';
+			case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a language (语言)';
+			case 'TEXT_ABOUT_APP': return '버전 정보';
+			case 'TEXT_INIT_APP': return '앱 초기화';
+			case 'TEXT_INITTED_APP': return '앱을 초기화했습니다.';
+			case 'TEXT_CONFIGURATION': return '구성';
+			case 'TEXT_APPEARANCE': return '모습';
+			case 'TEXT_INPUT_MESSAGE': return '메시지 문자열을 입력하십시오.';
+			case 'TEXT_FULLWIDTH_SPACE': return '　';
+			case 'TEXT_PERIOD': return '. ';
+			case 'TEXT_PERIOD_SPACE': return '. ';
+			case 'TEXT_RELEASE_HYPNOSIS': return '최면 해제';
+			case 'TEXT_HYPNOSIS_RELEASED': return '최면 해제.';
+			case 'TEXT_KILLING_HYPNOSIS_IMG': return 'images/killing-hypnosis_ko-KR.svg';
+			case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'images/hypnosis-released_ko-KR.svg';
+			case 'TEXT_ALL_RELEASED_IMG': return 'images/all-released_ko-KR.svg';
+			}
 		} else { // English is default
 			switch(str_id){
 			case 'TEXT_PIC': return 'pic';
@@ -462,11 +551,13 @@ jQuery(function($){
 			$('#language_select option[value="ja"]').text('Japanese');
 			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional)');
+			$('#language_select option[value="ko-KR"]').text('Korean');
 			$('#config_language2').text('Language:');
 			$('#language_select2 option[value="en"]').text('English');
 			$('#language_select2 option[value="ja"]').text('Japanese');
 			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional)');
+			$('#language_select2 option[value="ko-KR"]').text('Korean');
 			$('#appearance_type').text('映像の種類:');
 			$('#type_select option[value="-1"]').text('画-1: 催眠解除');
 			$('#type_select option[value="0"]').text('画0: 初期画面');
@@ -537,11 +628,13 @@ jQuery(function($){
 			$('#language_select option[value="ja"]').text('Japanese');
 			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional)');
+			$('#language_select option[value="ko-KR"]').text('Korean');
 			$('#config_language2').text('Language:');
 			$('#language_select2 option[value="en"]').text('English');
 			$('#language_select2 option[value="ja"]').text('Japanese');
 			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional)');
+			$('#language_select2 option[value="ko-KR"]').text('Korean');
 			$('#appearance_type').text('视频类型：');
 			$('#type_select option[value="-1"]').text('图-1: 释放催眠');
 			$('#type_select option[value="0"]').text('图0: 初始屏幕');
@@ -673,6 +766,83 @@ jQuery(function($){
 			}else{
 				hypnosis_releasing_img.src = getStr('TEXT_KILLING_HYPNOSIS_IMG');
 			}
+		}else if (lang == 'kr' || lang == 'ko' || lang == 'ko-KR'){ // Korean
+			$('#notice_text').text(NOTICE_KO_KR);
+			$('#mic_img').attr('src', 'images/mic.png');
+			$('#type_select_button').text(getStr('TEXT_PIC') + type_select.value);
+			$('#sound_img').attr('src', 'images/sound.png');
+			$('#char_img').attr('src', 'images/text_ko-KR.png');
+			$('#speech_img').attr('src', 'images/speak.png');
+			$('#gear_img').attr('src', 'images/gear.png');
+			$('#question_img').attr('src', 'images/question.png');
+			$('#config_language').text('Language:');
+			$('#language_select option[value="en"]').text('English');
+			$('#language_select option[value="ja"]').text('Japanese');
+			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified)');
+			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional)');
+			$('#language_select option[value="ko-KR"]').text('Korean');
+			$('#config_language2').text('Language:');
+			$('#language_select2 option[value="en"]').text('English');
+			$('#language_select2 option[value="ja"]').text('Japanese');
+			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified)');
+			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional)');
+			$('#language_select2 option[value="ko-KR"]').text('Korean');
+			$('#appearance_type').text('그림 유형:');
+			$('#type_select option[value="-1"]').text('pic-1: 최면 해제');
+			$('#type_select option[value="0"]').text('pic0: 초기 화면');
+			$('#type_select option[value="1"]').text('pic1: 핑크색 소용돌이');
+			$('#type_select option[value="2"]').text('pic2: 동심원형');
+			$('#type_select option[value="3"]').text('pic3: 회전하는 눈');
+			$('#type_select option[value="4"]').text('pic4: 흑백 소용돌이');
+			$('#type_select option[value="5"]').text('pic5: 퍼지는 무지개 색 (하트)');
+			$('#type_select option[value="6"]').text('pic6: 오엔 구슬');
+			$('#type_select option[value="7"]').text('pic7: 보완 보완');
+			$('#type_select option[value="8"]').text('pic8: 미친 색');
+			$('#type_select option[value="9"]').text('pic9: 믹스 소용돌이');
+			$('#appearance_division').text('화면 분할:');
+			$('#division_select option[value="-1"]').text('자동');
+			$('#division_select option[value="1"]').text('분할 없음');
+			$('#division_select option[value="2"]').text('2분할');
+			$('#appearance_speed').text('속도:');
+			$('#speed_type_select option[value="slow"]').text('느린');
+			$('#speed_type_select option[value="normal"]').text('보통 속도');
+			$('#speed_type_select option[value="fast"]').text('빠른');
+			$('#speed_type_select option[value="irregular"]').text('불규칙');
+			$('#appearance_rotation').text('회전 방향:');
+			$('#rotation_select option[value="normal"]').text('보통 회전');
+			$('#rotation_select option[value="counter"]').text('역회전');
+			$('#config_size').text('메시지 크기:');
+			$('#message_size_select option[value="small"]').text('작은');
+			$('#message_size_select option[value="normal"]').text('보통 크기');
+			$('#message_size_select option[value="large"]').text('큰');
+			$('#message_size_select option[value="huge"]').text('특대');
+			$('#config_note').text('사운드 버튼:');
+			$('#sound_select option[value=""]').text('(없음)');
+			$('#sound_select option[value="Robot"]').text('Robot');
+			$('#sound_select option[value="Keen"]').text('Keen');
+			$('#sound_select option[value="Horror"]').text('Horror');
+			$('#sound_select option[value="Hunting"]').text('Hunting');
+			$('#sound_select option[value="Lonely"]').text('Lonely');
+			$('#sound_select option[value="Longing"]').text('Longing');
+			$('#sound_select option[value="Lovely"]').text('Lovely');
+			$('#sound_select option[value="Magic"]').text('Magic');
+			$('#sound_select option[value="Miracle"]').text('Miracle');
+			$('#config_switch_sound').text('전환 사운드:');
+			$('#type_sound_select option[value="0"]').text('없음');
+			$('#type_sound_select option[value="1"]').text('있음');
+			$('#config_brightness').text('화면 밝기:');
+			$('#screen_brightness option[value="normal"]').text('일반 밝기');
+			$('#screen_brightness option[value="brighter"]').text('밝게 하다');
+			$('#version_text').text('최면 크라크라 Version ' + VERSION);
+			logo_img = new Image();
+			logo_img.src = 'images/logo_ko-KR.svg';
+			please_tap_here_img = new Image();
+			please_tap_here_img.src = 'images/please-tap-here_ko-KR.svg';
+			if (released){
+				hypnosis_releasing_img.src = getStr('TEXT_HYPNOSIS_RELEASED_IMG');
+			}else{
+				hypnosis_releasing_img.src = getStr('TEXT_KILLING_HYPNOSIS_IMG');
+			}
 		}else{ // English is default
 			$('#notice_text').text(NOTICE_EN);
 			$('#mic_img').attr('src', 'images/mic.png');
@@ -687,11 +857,13 @@ jQuery(function($){
 			$('#language_select option[value="ja"]').text('Japanese');
 			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional)');
+			$('#language_select option[value="ko-KR"]').text('Korean');
 			$('#config_language2').text('Language:');
 			$('#language_select2 option[value="en"]').text('English');
 			$('#language_select2 option[value="ja"]').text('Japanese');
 			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional)');
+			$('#language_select2 option[value="ko-KR"]').text('Korean');
 			$('#appearance_type').text('The type of picture:');
 			$('#type_select option[value="-1"]').text('pic-1: Release Hypnosis');
 			$('#type_select option[value="0"]').text('pic0: Initial Screen');
@@ -798,6 +970,8 @@ jQuery(function($){
 					speech.lang = 'zh-CN';
 				else if (currentLanguage == 'zh-TW') // Chinese (Traditional)
 					speech.lang = 'zh-TW';
+				else if (currentLanguage == 'ko-KR') // Korean
+					speech.lang = 'ko-KR';
 				else // English is default
 					speech.lang = 'en-US';
 				window.speechSynthesis.speak(speech);
@@ -1053,6 +1227,13 @@ jQuery(function($){
 			case 'zh-mo':
 				// Chinese (Traditional)
 				lang = 'zh-TW';
+				break;
+			case 'ko':
+			case 'kr':
+			case 'ko-KR':
+			case 'ko-kr':
+				// Korean
+				lang = 'ko-KR';
 				break;
 			default:
 				// English
@@ -2349,6 +2530,8 @@ jQuery(function($){
 					releasing_sound = new Audio('sn/ReleasedHypnosis_zh-CN.mp3');
 				}else if (localStorage.getItem('saiminLanguage3') == 'zh-TW'){ // Chinese (Traditional)
 					releasing_sound = new Audio('sn/ReleasedHypnosis_zh-TW.mp3');
+				}else if (localStorage.getItem('saiminLanguage3') == 'ko-KR'){ // Korean
+					releasing_sound = new Audio('sn/ReleasedHypnosis_ko-KR.mp3');
 				}else{ // English is default
 					releasing_sound = new Audio('sn/ReleasedHypnosis_en.mp3');
 				}
