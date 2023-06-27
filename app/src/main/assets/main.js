@@ -289,7 +289,7 @@ jQuery(function($){
 			case 'TEXT_CANCEL': return 'キャンセル';
 			case 'TEXT_YES': return 'はい';
 			case 'TEXT_NO': return 'いいえ';
-			case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a language (言語・语言)';
+			case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a language (语言)';
 			case 'TEXT_ABOUT_APP': return 'バージョン情報';
 			case 'TEXT_INIT_APP': return 'アプリの初期化';
 			case 'TEXT_INITTED_APP': return 'アプリを初期化しました。';
@@ -312,7 +312,7 @@ jQuery(function($){
 			case 'TEXT_CANCEL': return '取消';
 			case 'TEXT_YES': return '是';
 			case 'TEXT_NO': return '否';
-			case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a language (言語・语言)';
+			case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a language (语言)';
 			case 'TEXT_ABOUT_APP': return '关于这个应用程序';
 			case 'TEXT_INIT_APP': return '初始化应用程序';
 			case 'TEXT_INITTED_APP': return '初始化了应用程序。';
@@ -335,7 +335,7 @@ jQuery(function($){
 			case 'TEXT_CANCEL': return 'Cancel';
 			case 'TEXT_YES': return 'Yes';
 			case 'TEXT_NO': return 'No';
-			case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a language (言語・语言)';
+			case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a language (语言)';
 			case 'TEXT_ABOUT_APP': return 'About this app';
 			case 'TEXT_INIT_APP': return 'Initialize app';
 			case 'TEXT_INITTED_APP': return 'Initialized the app.';
@@ -858,20 +858,26 @@ jQuery(function($){
 		let first_time = false;
 		if (!lang){
 			// {{LANGUAGE_SPECIFIC}}
-			if (navigator.language == 'ja' ||
-				navigator.language == 'ja-JP' ||
-				navigator.language == 'ja-jp') // Japanese
-			{
+			switch (navigator.language){
+			case 'ja':
+			case 'ja-JP':
+			case 'ja-jp':
+				// Japanese
 				lang = 'ja';
-			}
-			else if (
-				navigator.language == 'zh-CN' ||
-				navigator.language == 'zh-cn') // Chinese (Simplified)
-			{
+				break;
+			case 'zh':
+			case 'zh-CN':
+			case 'zh-SG':
+			case 'zh-cn':
+			case 'zh-sg':
+				// Chinese (Simplified)
 				lang = 'zh-CN';
-			}
-			else // English is default
+				break;
+			default:
+				// English
 				lang = 'en';
+				break;
+			}
 			first_time = true;
 		}
 		language_select2.value = lang;
