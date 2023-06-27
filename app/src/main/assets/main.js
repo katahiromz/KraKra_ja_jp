@@ -35,7 +35,7 @@ How you use it is up to you.
 - Tap/click on the screen to switch pictures.
 - The 'pic' button allows you to set the video settings.
 - Tap the 'microphone' button to use the microphone (it needs permission).
-- Tapping the 'note' button makes a sound.
+- Tapping the '♪' button makes a sound.
 - The 'Aa' button allows you to set the message to be displayed.
 - The 'bubble' button will speak the message.
 - The 'gear' button will open Configuration.
@@ -101,7 +101,7 @@ Hypnosis KraKra
 - 画面をタップ／クリックすると映像が切り替わります。
 - 「画」ボタンで映像の設定ができます。
 - 「マイク」ボタンでマイクが使えます(権限が必要です)。
-- 「音符」ボタンで音が鳴ります。
+- 「♪」ボタンで音が鳴ります。
 - 「字」ボタンで表示するメッセージを設定できます。
 - 「ふきだし」ボタンでメッセージを自動音声でしゃべります。
 - 「歯車」ボタンで全般設定ができます。
@@ -167,7 +167,7 @@ Hypnosis KraKra
 - 点击/单击屏幕来切换图片。
 - “图”按钮允许您设置视频设置。
 - 点击“麦克风”按钮使用麦克风（需要许可）。
-- 点击“笔记”按钮会发出声音。
+- 点击“♪”按钮会发出声音。
 - “Aa”按钮允许您设置要显示的消息。
 - “气泡”按钮将说出该消息。
 - “齿轮”按钮将打开配置。
@@ -231,9 +231,9 @@ Hypnosis KraKra
 
 - 它基本上是一個欣賞屏幕的應用程序。
 - 點擊/單擊屏幕切換視頻。
-- 您可以使用“圖片”按鈕設置圖像。
+- 您可以使用“圖”按鈕設置圖像。
 - 您可以通過“麥克風”按鈕使用麥克風（需要許可）。
-- “注意”按鈕會發出聲音。
+- “♪”按鈕會發出聲音。
 - 您可以設置要使用“字母”按鈕顯示的消息。
 - 使用“語音氣泡”按鈕通過自動語音說出消息。
 - 用於常規設置的“齒輪”按鈕。
