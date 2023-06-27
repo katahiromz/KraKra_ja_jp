@@ -660,7 +660,7 @@ jQuery(function($){
 			$('#type_select option[value="2"]').text('画2: 同心円状');
 			$('#type_select option[value="3"]').text('画3: 回る目玉');
 			$('#type_select option[value="4"]').text('画4: 白黒の渦巻き');
-			$('#type_select option[value="5"]').text('画5: 広がる虹色(ハート)');
+			$('#type_select option[value="5"]').text('画5: 広がるハート');
 			$('#type_select option[value="6"]').text('画6: 五円玉');
 			$('#type_select option[value="7"]').text('画7: ぼわんぼわん');
 			$('#type_select option[value="8"]').text('画8: 狂気の色');
@@ -739,7 +739,7 @@ jQuery(function($){
 			$('#type_select option[value="2"]').text('图2: 同心圆');
 			$('#type_select option[value="3"]').text('图3: 旋转的眼');
 			$('#type_select option[value="4"]').text('图4: 黑色和白色的漩涡');
-			$('#type_select option[value="5"]').text('图5: 传播彩虹色（心）');
+			$('#type_select option[value="5"]').text('图5: 扩展的心');
 			$('#type_select option[value="6"]').text('图6: 5日元硬币');
 			$('#type_select option[value="7"]').text('图7: 头晕 头晕');
 			$('#type_select option[value="8"]').text('图8: 疯狂的颜色');
@@ -818,7 +818,7 @@ jQuery(function($){
 			$('#type_select option[value="2"]').text('圖2: 同心圆');
 			$('#type_select option[value="3"]').text('圖3: 旋轉的眼');
 			$('#type_select option[value="4"]').text('圖4: 黑色和白色漩渦');
-			$('#type_select option[value="5"]').text('圖5: 傳播彩虹色（心）');
+			$('#type_select option[value="5"]').text('圖5: 擴展的心');
 			$('#type_select option[value="6"]').text('圖6: 5日元硬幣');
 			$('#type_select option[value="7"]').text('圖7: 頭暈 頭暈');
 			$('#type_select option[value="8"]').text('圖8: 瘋狂的顏色');
@@ -897,7 +897,7 @@ jQuery(function($){
 			$('#type_select option[value="2"]').text('pic2: 동심원형');
 			$('#type_select option[value="3"]').text('pic3: 회전하는 눈');
 			$('#type_select option[value="4"]').text('pic4: 흑백 소용돌이');
-			$('#type_select option[value="5"]').text('pic5: 퍼지는 무지개 색 (하트)');
+			$('#type_select option[value="5"]').text('pic5: 퍼지는 하트들');
 			$('#type_select option[value="6"]').text('pic6: 오엔 구슬');
 			$('#type_select option[value="7"]').text('pic7: 보완 보완');
 			$('#type_select option[value="8"]').text('pic8: 미친 색');
@@ -976,7 +976,7 @@ jQuery(function($){
 			$('#type_select option[value="2"]').text('pic2: Cerchi concentrici');
 			$('#type_select option[value="3"]').text('pic3: Gli occhi');
 			$('#type_select option[value="4"]').text('pic4: Spirale in bianco e nero');
-			$('#type_select option[value="5"]').text('pic5: Arcobaleno in espansione');
+			$('#type_select option[value="5"]').text('pic5: Cuori che si diffondono');
 			$('#type_select option[value="6"]').text('pic6: Moneta da 5 Yen');
 			$('#type_select option[value="7"]').text('pic7: Clamore Clamore');
 			$('#type_select option[value="8"]').text('pic8: Colori pazzi');
@@ -1055,7 +1055,7 @@ jQuery(function($){
 			$('#type_select option[value="2"]').text('pic2: Concentric Circles');
 			$('#type_select option[value="3"]').text('pic3: The Eyes');
 			$('#type_select option[value="4"]').text('pic4: Black and White Spiral');
-			$('#type_select option[value="5"]').text('pic5: Spreading Rainbow (Hearts)');
+			$('#type_select option[value="5"]').text('pic5: Spreading Hearts');
 			$('#type_select option[value="6"]').text('pic6: 5-Yen Coin');
 			$('#type_select option[value="7"]').text('pic7: Clamor Clamor');
 			$('#type_select option[value="8"]').text('pic8: Crazy Colors');
