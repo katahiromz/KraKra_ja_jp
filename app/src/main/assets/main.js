@@ -479,9 +479,9 @@ jQuery(function($){
 			case 'TEXT_PERIOD_SPACE': return '。';
 			case 'TEXT_RELEASE_HYPNOSIS': return '催眠釋放';
 			case 'TEXT_HYPNOSIS_RELEASED': return '催眠釋放。';
-			case 'TEXT_KILLING_HYPNOSIS_IMG': return 'images/killing-hypnosis_zh-CN.svg';
-			case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'images/hypnosis-released_zh-CN.svg';
-			case 'TEXT_ALL_RELEASED_IMG': return 'images/all-released_zh-CN.svg';
+			case 'TEXT_KILLING_HYPNOSIS_IMG': return 'images/killing-hypnosis_zh-TW.svg';
+			case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'images/hypnosis-released_zh-TW.svg';
+			case 'TEXT_ALL_RELEASED_IMG': return 'images/all-released_zh-TW.svg';
 			}
 		}else if (lang == 'ko' || lang == 'kr' || lang == 'ko-KR'){ // Korean
 			switch(str_id){
