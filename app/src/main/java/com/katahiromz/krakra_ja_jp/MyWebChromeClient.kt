@@ -115,9 +115,9 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
         // {{LANGUAGE_SPECIFIC}}
         var locale : Locale = if (lang == "ja" || lang == "jp" || lang == "ja-JP") { // Japanese
             Locale.JAPANESE
-        } else if (lang == "zw-CN") { // Chinese (Simplified)
+        } else if (lang == "zh-CN") { // Chinese (Simplified)
             Locale.SIMPLIFIED_CHINESE
-        } else if (lang == "zw-TW") { // Chinese (Traditional)
+        } else if (lang == "zh-TW") { // Chinese (Traditional)
             Locale.TRADITIONAL_CHINESE
         } else if (lang == "ko-KR") { // Korean
             Locale.KOREAN
@@ -245,11 +245,16 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
      * @return true: メッセージ選択ダイアログの表示対象、false: それ以外
      */
     private fun isSelectMessageDialog(message: String?): Boolean {
-        if (getLocString(R.string.message_select_dialog_message) == message)
+        var msg: String = getLocString(R.string.message_select_dialog_message)
+        if (msg == message)
             return true
+        // {{LANGUAGE_SPECIFIC}}
         // リソースと現在のロケールの同期ができないので、文字列を埋め込むことにした。
-        return message == "Please enter a message text." ||
-               message == "メッセージ文字列を入力して下さい。"
+        return (message == "Please enter a message text." ||
+                message == "メッセージ文字列を入力して下さい。" ||
+                message == "请输入消息文本。" ||
+                message == "請輸入消息字符串。" ||
+                message == "메시지 문자열을 입력하십시오.")
     }
 
     private fun showSelectMessageDialog(
