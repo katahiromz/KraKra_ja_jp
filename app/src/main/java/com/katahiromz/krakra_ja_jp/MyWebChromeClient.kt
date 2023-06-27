@@ -108,7 +108,7 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
         // {{LANGUAGE_SPECIFIC}}
         var locale : Locale = if (lang == "ja" || lang == "jp") { // Japanese
             Locale.JAPANESE
-        } else if (lang == "zw-CN") { // Chinese (PRC)
+        } else if (lang == "zw-CN") { // Chinese (Simplified)
             Locale.SIMPLIFIED_CHINESE
         } else { // English is default
             Locale.ENGLISH
