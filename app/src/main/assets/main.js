@@ -339,6 +339,72 @@ Copyright (c) 2018 Robert Eisele
 Copyright (c) 2007-2022 Akshay Nair
 Copyright 2022 OpenJS Foundation and jQuery contributors.`;
 
+// {{LANGUAGE_SPECIFIC}}
+const NOTICE_IT = `=========================
+Ipnosi KraKra
+Hypnosis KraKra
+=========================
+
+Questo software è un'applicazione per godere di immagini in movimento ipnotiche.
+Genera video di ipnosi in tempo reale senza utilizzare alcun file video.
+Come lo usi dipende da te.
+
+* Codice sorgente: https://github.com/katahiromz/KraKra_ja_jp
+* Viene utilizzato del materiale audio OtoLogic.
+* È possibile modificare questo software con la licenza Apache 2.0.
+
+[(Precauzioni per l'uso)]
+
+- Questo software è un'applicazione scherzosa e il suo funzionamento non è garantito.
+- Non utilizzare questo software se si hanno sintomi di epilessia.
+- Se il tuo paese, scuola, religione o regione vieta l'ipnosi, non utilizzare questa applicazione.
+- I pazienti schizofrenici acuti non dovrebbero utilizzare questo software.
+- Evita di guidare un'auto subito dopo aver utilizzato questo software.
+- Le persone con tripofobia non dovrebbero usare questo software.
+- Se si verificano sintomi come mal di testa, vertigini, iperpnea, nausea, problemi gastrointestinali o emozioni anormali, interrompere immediatamente l'uso e consultare uno specialista.
+- L'Operatore può interrompere il Servizio in qualsiasi momento se si verifica un motivo che rende difficile continuare il Servizio.
+
+[(Come usare)]
+
+- Fondamentalmente, è un'applicazione per divertirsi guardando lo schermo.
+- Tocca / fai clic sullo schermo per cambiare le immagini.
+- Il pulsante 'pic' consente di configurare le impostazioni video.
+- Tocca il pulsante "microfono" per utilizzare il microfono (è necessaria l'autorizzazione).
+- Toccando il pulsante '♪' si emette un suono.
+- Il pulsante 'Aa' consente di impostare il messaggio da visualizzare.
+- Il pulsante "bolla" pronuncerà il messaggio.
+- Il pulsante "ingranaggio" aprirà Configurazione.
+- Quando fai scorrere il dito sullo schermo, lo schermo si illumina per attirare la loro attenzione.
+
+[(Funzionamento della tastiera)]
+
+Quando è collegata una tastiera, sono disponibili le seguenti operazioni:
+
+- Premere i tasti da [0] a [9] per cambiare immagine.
+- Premere il tasto [C] per aprire la configurazione.
+- Premere il tasto [H] per aprire le informazioni sulla versione.
+- Premere il tasto [A] per aprire le impostazioni dell'aspetto.
+- Premere il tasto [P] per riprodurre il suono.
+- Premere il tasto [M] per accendere/spegnere il microfono (è necessario il permesso).
+- Premere il tasto [T] per aprire le impostazioni del messaggio.
+- Premere il tasto [S] per pronunciare automaticamente il messaggio corrente.
+- Premere il tasto [X] per mettere in pausa.
+- Premi i tasti [-] o [K] per eliminare l'ipnosi.
+- Premere il tasto [D] per dividere lo schermo.
+- Premere il tasto [B] per alternare la visualizzazione dei pulsanti.
+- Premere il tasto [G] per attivare/disattivare la modalità Goggle.
+
+[(Modalità occhiali)]
+
+La modalità Goggle è disponibile con tastiera e occhiali collegabili.
+La modalità Goggle può essere attivata e disattivata premendo il tasto [G].
+La modalità Goggle divide lo schermo in due e nasconde i pulsanti di controllo.
+
+Copyright (c) 2022-2023 Katayama Hirofumi MZ
+Copyright (c) 2018 Robert Eisele
+Copyright (c) 2007-2022 Akshay Nair
+Copyright 2022 OpenJS Foundation and jQuery contributors.`;
+
 function AndroidMicrophoneOnReload(){
 	localStorage.setItem('AndroidMicrophoneOnReload', '1');
 	location.reload();
@@ -510,7 +576,30 @@ jQuery(function($){
 			case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'images/hypnosis-released_ko-KR.svg';
 			case 'TEXT_ALL_RELEASED_IMG': return 'images/all-released_ko-KR.svg';
 			}
-		} else { // English is default
+		}else if(lang == 'it' || lang == 'it-IT'){ // Italian
+			switch(str_id){
+			case 'TEXT_PIC': return 'pic';
+			case 'TEXT_OK': return 'OK';
+			case 'TEXT_CANCEL': return 'Annulla';
+			case 'TEXT_YES': return 'SÌ';
+			case 'TEXT_NO': return 'No';
+			case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a language (语言)';
+			case 'TEXT_ABOUT_APP': return 'Informazioni su questa app';
+			case 'TEXT_INIT_APP': return 'Inizializza l\'app';
+			case 'TEXT_INITTED_APP': return 'Inizializzata l\'app.';
+			case 'TEXT_CONFIGURATION': return 'Configurazione';
+			case 'TEXT_APPEARANCE': return 'Aspetto';
+			case 'TEXT_INPUT_MESSAGE': return 'Inserisci il testo del messaggio.';
+			case 'TEXT_FULLWIDTH_SPACE': return '　';
+			case 'TEXT_PERIOD': return '.';
+			case 'TEXT_PERIOD_SPACE': return '. ';
+			case 'TEXT_RELEASE_HYPNOSIS': return 'Uccidi l\'ipnosi';
+			case 'TEXT_HYPNOSIS_RELEASED': return 'Ipnosi liberata.';
+			case 'TEXT_KILLING_HYPNOSIS_IMG': return 'images/killing-hypnosis_it.svg';
+			case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'images/hypnosis-released_it.svg';
+			case 'TEXT_ALL_RELEASED_IMG': return 'images/all-released_it.svg';
+			}
+		}else{ // English is default
 			switch(str_id){
 			case 'TEXT_PIC': return 'pic';
 			case 'TEXT_OK': return 'OK';
@@ -551,16 +640,18 @@ jQuery(function($){
 			$('#gear_img').attr('src', 'images/gear.png');
 			$('#question_img').attr('src', 'images/question.png');
 			$('#config_language').text('Language:');
-			$('#language_select option[value="en"]').text('English');
-			$('#language_select option[value="ja"]').text('Japanese');
 			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional)');
+			$('#language_select option[value="en"]').text('English');
+			$('#language_select option[value="it"]').text('Italian');
+			$('#language_select option[value="ja"]').text('Japanese');
 			$('#language_select option[value="ko-KR"]').text('Korean');
 			$('#config_language2').text('Language:');
-			$('#language_select2 option[value="en"]').text('English');
-			$('#language_select2 option[value="ja"]').text('Japanese');
 			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional)');
+			$('#language_select2 option[value="en"]').text('English');
+			$('#language_select2 option[value="it"]').text('Italian');
+			$('#language_select2 option[value="ja"]').text('Japanese');
 			$('#language_select2 option[value="ko-KR"]').text('Korean');
 			$('#appearance_type').text('映像の種類:');
 			$('#type_select option[value="-1"]').text('画-1: 催眠解除');
@@ -628,16 +719,18 @@ jQuery(function($){
 			$('#gear_img').attr('src', 'images/gear.png');
 			$('#question_img').attr('src', 'images/question.png');
 			$('#config_language').text('Language:');
-			$('#language_select option[value="en"]').text('English');
-			$('#language_select option[value="ja"]').text('Japanese');
 			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional)');
+			$('#language_select option[value="en"]').text('English');
+			$('#language_select option[value="it"]').text('Italian');
+			$('#language_select option[value="ja"]').text('Japanese');
 			$('#language_select option[value="ko-KR"]').text('Korean');
 			$('#config_language2').text('Language:');
-			$('#language_select2 option[value="en"]').text('English');
-			$('#language_select2 option[value="ja"]').text('Japanese');
 			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional)');
+			$('#language_select2 option[value="en"]').text('English');
+			$('#language_select2 option[value="it"]').text('Italian');
+			$('#language_select2 option[value="ja"]').text('Japanese');
 			$('#language_select2 option[value="ko-KR"]').text('Korean');
 			$('#appearance_type').text('视频类型：');
 			$('#type_select option[value="-1"]').text('图-1: 释放催眠');
@@ -705,15 +798,19 @@ jQuery(function($){
 			$('#gear_img').attr('src', 'images/gear.png');
 			$('#question_img').attr('src', 'images/question.png');
 			$('#config_language').text('Language:');
-			$('#language_select option[value="en"]').text('English');
-			$('#language_select option[value="ja"]').text('Japanese');
 			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional)');
+			$('#language_select option[value="en"]').text('English');
+			$('#language_select option[value="it"]').text('Italian');
+			$('#language_select option[value="ja"]').text('Japanese');
+			$('#language_select option[value="ko-KR"]').text('Korean');
 			$('#config_language2').text('Language:');
-			$('#language_select2 option[value="en"]').text('English');
-			$('#language_select2 option[value="ja"]').text('Japanese');
 			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional)');
+			$('#language_select2 option[value="en"]').text('English');
+			$('#language_select2 option[value="it"]').text('Italian');
+			$('#language_select2 option[value="ja"]').text('Japanese');
+			$('#language_select2 option[value="ko-KR"]').text('Korean');
 			$('#appearance_type').text('視頻類型：');
 			$('#type_select option[value="-1"]').text('圖-1: 催眠釋放');
 			$('#type_select option[value="0"]').text('圖0: 初始屏幕');
@@ -780,16 +877,18 @@ jQuery(function($){
 			$('#gear_img').attr('src', 'images/gear.png');
 			$('#question_img').attr('src', 'images/question.png');
 			$('#config_language').text('Language:');
-			$('#language_select option[value="en"]').text('English');
-			$('#language_select option[value="ja"]').text('Japanese');
 			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional)');
+			$('#language_select option[value="en"]').text('English');
+			$('#language_select option[value="it"]').text('Italian');
+			$('#language_select option[value="ja"]').text('Japanese');
 			$('#language_select option[value="ko-KR"]').text('Korean');
 			$('#config_language2').text('Language:');
-			$('#language_select2 option[value="en"]').text('English');
-			$('#language_select2 option[value="ja"]').text('Japanese');
 			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional)');
+			$('#language_select2 option[value="en"]').text('English');
+			$('#language_select2 option[value="it"]').text('Italian');
+			$('#language_select2 option[value="ja"]').text('Japanese');
 			$('#language_select2 option[value="ko-KR"]').text('Korean');
 			$('#appearance_type').text('그림 유형:');
 			$('#type_select option[value="-1"]').text('pic-1: 최면 해제');
@@ -847,6 +946,85 @@ jQuery(function($){
 			}else{
 				hypnosis_releasing_img.src = getStr('TEXT_KILLING_HYPNOSIS_IMG');
 			}
+		}else if(lang == 'it' || lang == 'it-IT'){ // Italian
+			$('#notice_text').text(NOTICE_IT);
+			$('#mic_img').attr('src', 'images/mic.png');
+			$('#type_select_button').text(getStr('TEXT_PIC') + type_select.value);
+			$('#sound_img').attr('src', 'images/sound.png');
+			$('#char_img').attr('src', 'images/text_it.png');
+			$('#speech_img').attr('src', 'images/speak.png');
+			$('#gear_img').attr('src', 'images/gear.png');
+			$('#question_img').attr('src', 'images/question.png');
+			$('#config_language').text('Language:');
+			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified)');
+			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional)');
+			$('#language_select option[value="en"]').text('English');
+			$('#language_select option[value="it"]').text('Italian');
+			$('#language_select option[value="ja"]').text('Japanese');
+			$('#language_select option[value="ko-KR"]').text('Korean');
+			$('#config_language2').text('Language:');
+			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified)');
+			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional)');
+			$('#language_select2 option[value="en"]').text('English');
+			$('#language_select2 option[value="it"]').text('Italian');
+			$('#language_select2 option[value="ja"]').text('Japanese');
+			$('#language_select2 option[value="ko-KR"]').text('Korean');
+			$('#appearance_type').text('Il tipo di immagine:');
+			$('#type_select option[value="-1"]').text('pic-1: Liberare l\'ipnosi');
+			$('#type_select option[value="0"]').text('pic0: Schermata iniziale');
+			$('#type_select option[value="1"]').text('pic1: Spirale Rosa');
+			$('#type_select option[value="2"]').text('pic2: Cerchi concentrici');
+			$('#type_select option[value="3"]').text('pic3: Gli occhi');
+			$('#type_select option[value="4"]').text('pic4: Spirale in bianco e nero');
+			$('#type_select option[value="5"]').text('pic5: Arcobaleno in espansione');
+			$('#type_select option[value="6"]').text('pic6: Moneta da 5 Yen');
+			$('#type_select option[value="7"]').text('pic7: Clamore Clamore');
+			$('#type_select option[value="8"]').text('pic8: Colori pazzi');
+			$('#type_select option[value="9"]').text('pic9: Spirali miste');
+			$('#appearance_division').text('Divisione dello schermo:');
+			$('#division_select option[value="-1"]').text('Auto');
+			$('#division_select option[value="1"]').text('Nessuna scissione');
+			$('#division_select option[value="2"]').text('Diviso in 2');
+			$('#appearance_speed').text('Velocità:');
+			$('#speed_type_select option[value="slow"]').text('Lento');
+			$('#speed_type_select option[value="normal"]').text('Velocità normale');
+			$('#speed_type_select option[value="fast"]').text('Veloce');
+			$('#speed_type_select option[value="irregular"]').text('Irregolare');
+			$('#appearance_rotation').text('Rotazione:');
+			$('#rotation_select option[value="normal"]').text('Rotazione normale');
+			$('#rotation_select option[value="counter"]').text('Controrotazione');
+			$('#config_size').text('Dimensione del messaggio:');
+			$('#message_size_select option[value="small"]').text('Piccola');
+			$('#message_size_select option[value="normal"]').text('Normale');
+			$('#message_size_select option[value="large"]').text('Grande');
+			$('#message_size_select option[value="huge"]').text('Enorme');
+			$('#config_note').text('Pulsante audio:');
+			$('#sound_select option[value=""]').text('(Nessuno)');
+			$('#sound_select option[value="Robot"]').text('Robot');
+			$('#sound_select option[value="Keen"]').text('Keen');
+			$('#sound_select option[value="Horror"]').text('Horror');
+			$('#sound_select option[value="Hunting"]').text('Hunting');
+			$('#sound_select option[value="Lonely"]').text('Lonely');
+			$('#sound_select option[value="Longing"]').text('Longing');
+			$('#sound_select option[value="Lovely"]').text('Lovely');
+			$('#sound_select option[value="Magic"]').text('Magic');
+			$('#sound_select option[value="Miracle"]').text('Miracle');
+			$('#config_switch_sound').text('Suono cambio foto:');
+			$('#type_sound_select option[value="0"]').text('No');
+			$('#type_sound_select option[value="1"]').text('Sì');
+			$('#config_brightness').text('Luminosità:');
+			$('#screen_brightness option[value="normal"]').text('Normale');
+			$('#screen_brightness option[value="brighter"]').text('Più luminoso');
+			$('#version_text').text('Ipnosi KraKra Version ' + VERSION);
+			logo_img = new Image();
+			logo_img.src = 'images/logo_it.svg';
+			please_tap_here_img = new Image();
+			please_tap_here_img.src = 'images/please-tap-here_it.svg';
+			if (released){
+				hypnosis_releasing_img.src = getStr('TEXT_HYPNOSIS_RELEASED_IMG');
+			}else{
+				hypnosis_releasing_img.src = getStr('TEXT_KILLING_HYPNOSIS_IMG');
+			}
 		}else{ // English is default
 			$('#notice_text').text(NOTICE_EN);
 			$('#mic_img').attr('src', 'images/mic.png');
@@ -857,16 +1035,18 @@ jQuery(function($){
 			$('#gear_img').attr('src', 'images/gear.png');
 			$('#question_img').attr('src', 'images/question.png');
 			$('#config_language').text('Language:');
-			$('#language_select option[value="en"]').text('English');
-			$('#language_select option[value="ja"]').text('Japanese');
 			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional)');
+			$('#language_select option[value="en"]').text('English');
+			$('#language_select option[value="it"]').text('Italian');
+			$('#language_select option[value="ja"]').text('Japanese');
 			$('#language_select option[value="ko-KR"]').text('Korean');
 			$('#config_language2').text('Language:');
-			$('#language_select2 option[value="en"]').text('English');
-			$('#language_select2 option[value="ja"]').text('Japanese');
 			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional)');
+			$('#language_select2 option[value="en"]').text('English');
+			$('#language_select2 option[value="it"]').text('Italian');
+			$('#language_select2 option[value="ja"]').text('Japanese');
 			$('#language_select2 option[value="ko-KR"]').text('Korean');
 			$('#appearance_type').text('The type of picture:');
 			$('#type_select option[value="-1"]').text('pic-1: Release Hypnosis');
@@ -976,6 +1156,8 @@ jQuery(function($){
 					speech.lang = 'zh-TW';
 				else if (currentLanguage == 'ko-KR') // Korean
 					speech.lang = 'ko-KR';
+				else if (currentLanguage == 'it-IT') // Italian
+					speech.lang = 'it-IT';
 				else // English is default
 					speech.lang = 'en-US';
 				window.speechSynthesis.speak(speech);
@@ -1218,12 +1400,6 @@ jQuery(function($){
 		if (!lang){
 			// {{LANGUAGE_SPECIFIC}}
 			switch (navigator.language){
-			case 'ja':
-			case 'ja-JP':
-			case 'ja-jp':
-				// Japanese
-				lang = 'ja';
-				break;
 			case 'zh':
 			case 'zh-CN':
 			case 'zh-SG':
@@ -1240,6 +1416,18 @@ jQuery(function($){
 			case 'zh-mo':
 				// Chinese (Traditional)
 				lang = 'zh-TW';
+				break;
+			case 'it':
+			case 'it-IT':
+			case 'it-it':
+				// Italian
+				lang = 'it-IT';
+				break;
+			case 'ja':
+			case 'ja-JP':
+			case 'ja-jp':
+				// Japanese
+				lang = 'ja';
 				break;
 			case 'ko':
 			case 'kr':
@@ -2545,6 +2733,8 @@ jQuery(function($){
 					releasing_sound = new Audio('sn/ReleasedHypnosis_zh-TW.mp3');
 				}else if (localStorage.getItem('saiminLanguage3') == 'ko-KR'){ // Korean
 					releasing_sound = new Audio('sn/ReleasedHypnosis_ko-KR.mp3');
+				}else if (localStorage.getItem('saiminLanguage3') == 'it-IT'){ // Italian
+					releasing_sound = new Audio('sn/ReleasedHypnosis_it.mp3');
 				}else{ // English is default
 					releasing_sound = new Audio('sn/ReleasedHypnosis_en.mp3');
 				}
