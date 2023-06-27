@@ -112,6 +112,8 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
             Locale.SIMPLIFIED_CHINESE
         } else if (lang == "zw-TW") { // Chinese (Traditional)
             Locale.TRADITIONAL_CHINESE
+        } else if (lang == "ko-KR") { // Korean
+            Locale.KOREAN
         } else { // English is default
             Locale.ENGLISH
         }

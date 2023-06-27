@@ -1,0 +1,77 @@
+<!-- {{LANGUAGE_SPECIFIC}} -->
+<resources>
+    <!-- common -->
+    <string name="ok">OK</string>
+    <string name="cancel">취소</string>
+    <string name="clear">클리어</string>
+
+    <!-- main -->
+    <string name="app_name">최면 크라크라</string>
+    <string name="web_view">웹뷰</string>
+    <string name="progress_bar">진척 바</string>
+    <string name="now_starting">크라크라 시동 중...</string>
+    <string name="prompt_hint">보려는 문자열을 입력하십시오.</string>
+    <string name="no_audio_record">음성을 입력하려면 권한이 필요합니다.</string>
+
+    <!-- message list -->
+    <string name="message_000">너는 점점 졸린다</string>
+    <string name="message_001">공부하고 좋은 성적을 얻고 싶어진다</string>
+    <string name="message_002">회사에서 일하는 것을 좋아한다</string>
+    <string name="message_003">만나서 반갑습니다</string>
+    <string name="message_004">좋은 아침</string>
+    <string name="message_005">안녕하세요</string>
+    <string name="message_006">안녕하세요</string>
+    <string name="message_007">고마워요</string>
+    <string name="message_008">오랜만입니다</string>
+    <string name="message_009">지금부터 회사로 이동</string>
+    <string name="message_010">학교에 갈거야</string>
+    <string name="message_011">가자</string>
+    <string name="message_012">지금</string>
+    <string name="message_013">미안해, 반성해</string>
+    <string name="message_014">그것은 무례했습니다</string>
+    <string name="message_015">뭔가 곤란해도?</string>
+    <string name="message_016">뭔가 불안해?</string>
+    <string name="message_017">무리하지 마십시오</string>
+    <string name="message_018">긴장하지 마십시오</string>
+    <string name="message_019">부끄러워하지 마라</string>
+    <string name="message_020">괴롭히지 마라</string>
+    <string name="message_021">두려워하지 마라</string>
+    <string name="message_022">진정하십시오</string>
+    <string name="message_023">나와 토론하자</string>
+    <string name="message_024">그 문제는 함께 생각합시다</string>
+    <string name="message_025">뭔가 불만이 있습니까?</string>
+    <string name="message_026">저를 도와주세요</string>
+    <string name="message_027">내 소원을 실현하십시오</string>
+    <string name="message_028">나를 좋아해</string>
+    <string name="message_029">아무것도 아니야</string>
+    <string name="message_030">지금부터 식사하러 가자</string>
+    <string name="message_031">캔 주스를 사주세요</string>
+    <string name="message_032">레스토랑에 가자</string>
+    <string name="message_033">이거 줘</string>
+    <string name="message_034">맛있었습니다</string>
+    <string name="message_035">매우 재미있었습니다</string>
+    <string name="message_036">매우 좋았습니다</string>
+    <string name="message_037">더 공부하고 성적을 올려주세요</string>
+    <string name="message_038">더 많은 일을하고 성적을 올리십시오</string>
+    <string name="message_039">멋지다</string>
+    <string name="message_040">너는 아름답다</string>
+    <string name="message_041">너는 친구야</string>
+    <string name="message_042">척이 열려 있습니다</string>
+    <string name="message_043">오늘은 즐기자</string>
+    <string name="message_044">테이블에 요리가 있습니다</string>
+    <string name="message_045">냉장고에 요리가 있습니다</string>
+    <string name="message_046">가사를 도와주세요</string>
+    <string name="message_047">피곤해서 쉬고</string>
+    <string name="message_048">지금부터 침대에서 자고</string>
+    <string name="message_049">오늘 밤은 어때?</string>
+
+    <!-- message select dialog -->
+    <string name="message_select_dialog_message">메시지 문자열을 입력하십시오.</string>
+
+    <!-- Content Description -->
+    <string name="guide_clear_button">클리어 버튼</string>
+    <string name="guide_message_list">메시지 목록</string>
+
+    <!-- URLs -->
+    <string name="url">file:///android_asset/index.html</string>
+</resources>
