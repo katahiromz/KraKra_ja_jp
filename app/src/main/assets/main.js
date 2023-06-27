@@ -3,6 +3,11 @@
 const NUM_TYPE = 9;
 const VERSION = '3.3.8';
 let DEBUGGING = false;
+let picType = 0;
+
+function savePicType(type){
+    localStorage.setItem('saiminReset', type);
+}
 
 // {{LANGUAGE_SPECIFIC}}
 const NOTICE_EN = `=========================
@@ -343,7 +348,6 @@ jQuery(function($){
 	let cxScreen = 0, cyScreen = 0;
 	let old_cxScreen = null, old_cyScreen = null;
 	let old_time = (new Date()).getTime();
-	let picType = 0;
 	let counter = 0, clock = 0;
 	let ready = false;
 	let theText = '';
@@ -1098,6 +1102,10 @@ jQuery(function($){
 
 	let oldPicType = 0;
 
+	function getPicType(){
+		return picType;
+	};
+
 	function setPicType(value){
 		picType = parseInt(value);
 		if (picType == -1){
@@ -1128,8 +1136,13 @@ jQuery(function($){
 		type_select.value = picType.toString();
 		type_select_button.innerText = getStr('TEXT_PIC') + picType.toString();
 		localStorage.setItem('saiminType', picType.toString());
+		try{
+			android.setPicType(picType);
+		}catch(error){
+			;
+		}
 		oldPicType = picType;
-	}
+	};
 
 	function setText(txt){
 		theText = txt.replace(getStr('TEXT_FULLWIDTH_SPACE'), '  ').trim();

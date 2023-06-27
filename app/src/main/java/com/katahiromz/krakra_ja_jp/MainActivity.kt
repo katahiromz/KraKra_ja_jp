@@ -167,6 +167,18 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         showNaviBar(showingNaviBar)
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        if (webView != null && chromeClient != null) {
+            val strJS: String = "savePicType(" + chromeClient!!.currPicType + ");"
+            webView!!.evaluateJavascript(strJS, null)
+        }
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+    }
+
     /////////////////////////////////////////////////////////////////////
     // パーミッション関連
 

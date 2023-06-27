@@ -103,6 +103,13 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
         MainRepository.clearMessageList(activity!!)
     }
 
+    var currPicType: Int = 0
+
+    @JavascriptInterface
+    fun setPicType(picType: Int) {
+        currPicType = picType
+    }
+
     @JavascriptInterface
     fun setLanguage(lang: String) {
         // {{LANGUAGE_SPECIFIC}}
