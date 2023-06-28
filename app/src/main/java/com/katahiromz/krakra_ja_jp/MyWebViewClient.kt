@@ -14,7 +14,14 @@ class MyWebViewClient(val listener: Listener) : WebViewClient() {
         view: WebView?,
         request: WebResourceRequest?
     ): Boolean {
-        return false
+        if (view != null && request != null) {
+            var url: String = request!!.url.toString()
+            var index:Int = url.indexOf("file:///android_asset/")
+            if (index == 0) {
+                view!!.loadUrl(url)
+            }
+        }
+        return true
     }
 
     override fun onReceivedError(view: WebView?, request: WebResourceRequest?,
