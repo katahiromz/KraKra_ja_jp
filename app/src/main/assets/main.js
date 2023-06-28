@@ -405,6 +405,72 @@ Copyright (c) 2018 Robert Eisele
 Copyright (c) 2007-2022 Akshay Nair
 Copyright 2022 OpenJS Foundation and jQuery contributors.`;
 
+// {{LANGUAGE_SPECIFIC}}
+const NOTICE_DE = `=========================
+Hypnose KraKra
+Hypnosis KraKra
+=========================
+
+Diese Software ist eine Anwendung zum Genießen hypnotischer bewegter Bilder.
+Es generiert Hypnosevideos in Echtzeit, ohne dass Videodateien verwendet werden müssen.
+Wie Sie es nutzen, bleibt Ihnen überlassen.
+
+* Quellcode: https://github.com/katahiromz/KraKra_ja_jp
+* Es wird teilweise Audiomaterial von OtoLogic verwendet.
+* Sie können diese Software unter der Apache 2.0-Lizenz ändern.
+
+[(Vorsichtsmaßnahmen für den Gebrauch)]
+
+- Bei dieser Software handelt es sich um eine Scherzanwendung, für deren Funktionsfähigkeit keine Garantie übernommen wird.
+- Verwenden Sie diese Software nicht, wenn Sie Epilepsiesymptome haben.
+- Wenn Ihr Land, Ihre Schule, Religion oder Region Hypnose verbietet, verwenden Sie diese Anwendung nicht.
+- Patienten mit akuter Schizophrenie sollten diese Software nicht verwenden.
+- Vermeiden Sie es, unmittelbar nach der Verwendung dieser Software Auto zu fahren.
+- Personen mit Trypophobie sollten diese Software nicht verwenden.
+- Wenn bei Ihnen Symptome wie Kopfschmerzen, Schwindel, Hyperpnoe, Übelkeit, Magen-Darm-Probleme oder abnormale Emotionen auftreten, brechen Sie die Anwendung sofort ab und konsultieren Sie einen Spezialisten.
+- Der Betreiber kann den Dienst jederzeit beenden, wenn ein Grund vorliegt, der die Fortsetzung des Dienstes erschwert.
+
+[(Wie benutzt man)]
+
+- Im Grunde handelt es sich um eine Anwendung, mit der man gerne auf den Bildschirm schaut.
+- Tippen/klicken Sie auf den Bildschirm, um die Bilder zu wechseln.
+- Mit der Schaltfläche „pic“ können Sie die Videoeinstellungen festlegen.
+- Tippen Sie auf die Schaltfläche „Mikrofon“, um das Mikrofon zu verwenden (es erfordert eine Genehmigung).
+- Durch Tippen auf die Schaltfläche „♪“ ertönt ein Ton.
+- Mit der Schaltfläche „Aa“ können Sie die anzuzeigende Meldung festlegen.
+- Mit der „Sprechblase“-Taste wird die Nachricht vorgelesen.
+- Die Schaltfläche „Zahnrad“ öffnet die Konfiguration.
+- Wenn Sie mit dem Finger über den Bildschirm fahren, erzeugt der Bildschirm Funken, um ihre Aufmerksamkeit zu erregen.
+
+[(Tastaturbedienung)]
+
+Wenn eine Tastatur angeschlossen ist, stehen folgende Vorgänge zur Verfügung:
+
+- Drücken Sie die Tasten [0] bis [9], um zwischen den Bildern zu wechseln.
+- Drücken Sie die Taste [C], um die Konfiguration zu öffnen.
+- Drücken Sie die Taste [H], um die Versionsinformationen zu öffnen.
+- Drücken Sie die Taste [A], um die Darstellungseinstellungen zu öffnen.
+- Drücken Sie die Taste [P], um den Ton abzuspielen.
+- Drücken Sie die Taste [M], um das Mikrofon ein-/auszuschalten (es erfordert eine Genehmigung).
+- Drücken Sie die Taste [T], um die Nachrichteneinstellungen zu öffnen.
+- Drücken Sie die Taste [S], um die aktuelle Nachricht automatisch vorzulesen.
+- Drücken Sie die Taste [X], um zu pausieren.
+- Drücken Sie die Tasten [-] oder [K], um die Hypnose zu beenden.
+- Drücken Sie die Taste [D], um den Bildschirm zu teilen.
+- Drücken Sie die Taste [B], um die Anzeige der Schaltflächen umzuschalten.
+- Drücken Sie die Taste [G], um den Brillenmodus ein-/auszuschalten.
+
+[(Brillenmodus)]
+
+Der Goggle-Modus ist mit einer anschließbaren Tastatur und einer Schutzbrille verfügbar.
+Der Brillenmodus kann durch Drücken der Taste [G] ein- und ausgeschaltet werden.
+Der Goggle-Modus teilt den Bildschirm in zwei Teile und verbirgt die Steuertasten.
+
+Copyright (c) 2022-2023 Katayama Hirofumi MZ
+Copyright (c) 2018 Robert Eisele
+Copyright (c) 2007-2022 Akshay Nair
+Copyright 2022 OpenJS Foundation and jQuery contributors.`;
+
 function AndroidMicrophoneOnReload(){
 	localStorage.setItem('AndroidMicrophoneOnReload', '1');
 	location.reload();
@@ -444,19 +510,19 @@ jQuery(function($){
 
 	function getNativeAppVersion(){
 		let results = navigator.userAgent.match(/\/KraKra-native-app\/([\d\.]+)\//);
-		if (results)
+		if(results)
 			return results[1];
 		return false;
 	}
 
 	function neg_mod(x, y){
-		if (x > 0) return x % y;
+		if(x > 0) return x % y;
 		return neg_mod(x + 99999 * y, y);
 	}
 
 	function addStar(x, y){
 		stars.shift();
-		if (isLargeDisplay()){
+		if(isLargeDisplay()){
 			x += (Math.random() - 0.5) * 2 * 20 * 2;
 			y += (Math.random() - 0.5) * 2 * 20 * 2;
 			let size = 5 + Math.random() * 10 * 2;
@@ -473,7 +539,7 @@ jQuery(function($){
 		try{
 			android.cancelSpeech();
 		}catch(error){
-			if (window.speechSynthesis){
+			if(window.speechSynthesis){
 				window.speechSynthesis.cancel();
 			}
 		}
@@ -482,9 +548,9 @@ jQuery(function($){
 	// {{LANGUAGE_SPECIFIC}}
 	function getStr(str_id){
 		let lang = localStorage.getItem('saiminLanguage3');
-		if (!lang)
+		if(!lang)
 			lang = 'en';
-		if (lang == 'ja' || lang == 'jp'){ // Japanese
+		if(lang == 'ja' || lang == 'jp'){ // Japanese
 			switch(str_id){
 			case 'TEXT_PIC': return '画';
 			case 'TEXT_OK': return 'OK';
@@ -507,7 +573,7 @@ jQuery(function($){
 			case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'images/hypnosis-released_ja.svg';
 			case 'TEXT_ALL_RELEASED_IMG': return 'images/all-released_ja.svg';
 			}
-		}else if (lang == 'zh-CN' || lang == 'cn'){ // Chinese (Simplified)
+		}else if(lang == 'zh-CN' || lang == 'cn'){ // Chinese (Simplified)
 			switch(str_id){
 			case 'TEXT_PIC': return '图';
 			case 'TEXT_OK': return '確定';
@@ -530,7 +596,7 @@ jQuery(function($){
 			case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'images/hypnosis-released_zh-CN.svg';
 			case 'TEXT_ALL_RELEASED_IMG': return 'images/all-released_zh-CN.svg';
 			}
-		}else if (lang == 'zh-TW'){ // Chinese (Traditional)
+		}else if(lang == 'zh-TW'){ // Chinese (Traditional)
 			switch(str_id){
 			case 'TEXT_PIC': return '圖';
 			case 'TEXT_OK': return '確定';
@@ -553,7 +619,7 @@ jQuery(function($){
 			case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'images/hypnosis-released_zh-TW.svg';
 			case 'TEXT_ALL_RELEASED_IMG': return 'images/all-released_zh-TW.svg';
 			}
-		}else if (lang == 'ko' || lang == 'kr' || lang == 'ko-KR'){ // Korean
+		}else if(lang == 'ko' || lang == 'kr' || lang == 'ko-KR'){ // Korean
 			switch(str_id){
 			case 'TEXT_PIC': return 'pic';
 			case 'TEXT_OK': return 'OK';
@@ -599,6 +665,29 @@ jQuery(function($){
 			case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'images/hypnosis-released_it.svg';
 			case 'TEXT_ALL_RELEASED_IMG': return 'images/all-released_it.svg';
 			}
+		}else if(lang == 'de' || lang == 'de-DE'){ // German
+			switch(str_id){
+			case 'TEXT_PIC': return 'pic';
+			case 'TEXT_OK': return 'OK';
+			case 'TEXT_CANCEL': return 'Abbrechen';
+			case 'TEXT_YES': return 'Ja';
+			case 'TEXT_NO': return 'Nein';
+			case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a language (语言)';
+			case 'TEXT_ABOUT_APP': return 'Über diese App';
+			case 'TEXT_INIT_APP': return 'App initialisieren';
+			case 'TEXT_INITTED_APP': return 'Initialisierte die App.';
+			case 'TEXT_CONFIGURATION': return 'Aufbau';
+			case 'TEXT_APPEARANCE': return 'Aussehen';
+			case 'TEXT_INPUT_MESSAGE': return 'Bitte geben Sie einen Nachrichtentext ein.';
+			case 'TEXT_FULLWIDTH_SPACE': return '　';
+			case 'TEXT_PERIOD': return '.';
+			case 'TEXT_PERIOD_SPACE': return '. ';
+			case 'TEXT_RELEASE_HYPNOSIS': return 'Töte Hypnose';
+			case 'TEXT_HYPNOSIS_RELEASED': return 'Hypnose freigegeben.';
+			case 'TEXT_KILLING_HYPNOSIS_IMG': return 'images/killing-hypnosis_de.svg';
+			case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'images/hypnosis-released_de.svg';
+			case 'TEXT_ALL_RELEASED_IMG': return 'images/all-released_de.svg';
+			}
 		}else{ // English is default
 			switch(str_id){
 			case 'TEXT_PIC': return 'pic';
@@ -630,7 +719,7 @@ jQuery(function($){
 	// {{LANGUAGE_SPECIFIC}}
 	function localizeSaimin(lang){
 		currentLanguage = lang;
-		if (lang == 'ja' || lang == 'jp'){ // Japanese
+		if(lang == 'ja' || lang == 'jp'){ // Japanese
 			$('#notice_text').text(NOTICE_JA);
 			$('#mic_img').attr('src', 'images/mic.png');
 			$('#type_select_button').text(getStr('TEXT_PIC') + type_select.value);
@@ -643,6 +732,7 @@ jQuery(function($){
 			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional)');
 			$('#language_select option[value="en"]').text('English');
+			$('#language_select option[value="de"]').text('German');
 			$('#language_select option[value="it"]').text('Italian');
 			$('#language_select option[value="ja"]').text('Japanese');
 			$('#language_select option[value="ko-KR"]').text('Korean');
@@ -650,6 +740,7 @@ jQuery(function($){
 			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional)');
 			$('#language_select2 option[value="en"]').text('English');
+			$('#language_select2 option[value="de"]').text('German');
 			$('#language_select2 option[value="it"]').text('Italian');
 			$('#language_select2 option[value="ja"]').text('Japanese');
 			$('#language_select2 option[value="ko-KR"]').text('Korean');
@@ -704,12 +795,12 @@ jQuery(function($){
 			logo_img.src = 'images/logo_ja.svg';
 			please_tap_here_img = new Image();
 			please_tap_here_img.src = 'images/please-tap-here_ja.svg';
-			if (released){
+			if(released){
 				hypnosis_releasing_img.src = getStr('TEXT_HYPNOSIS_RELEASED_IMG');
 			}else{
 				hypnosis_releasing_img.src = getStr('TEXT_KILLING_HYPNOSIS_IMG');
 			}
-		}else if (lang == 'zh-CN' || lang == 'cn'){ // Chinese (Simplified)
+		}else if(lang == 'zh-CN' || lang == 'cn'){ // Chinese (Simplified)
 			$('#notice_text').text(NOTICE_ZW_CN);
 			$('#mic_img').attr('src', 'images/mic.png');
 			$('#type_select_button').text(getStr('TEXT_PIC') + type_select.value);
@@ -722,6 +813,7 @@ jQuery(function($){
 			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional)');
 			$('#language_select option[value="en"]').text('English');
+			$('#language_select option[value="de"]').text('German');
 			$('#language_select option[value="it"]').text('Italian');
 			$('#language_select option[value="ja"]').text('Japanese');
 			$('#language_select option[value="ko-KR"]').text('Korean');
@@ -729,6 +821,7 @@ jQuery(function($){
 			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional)');
 			$('#language_select2 option[value="en"]').text('English');
+			$('#language_select2 option[value="de"]').text('German');
 			$('#language_select2 option[value="it"]').text('Italian');
 			$('#language_select2 option[value="ja"]').text('Japanese');
 			$('#language_select2 option[value="ko-KR"]').text('Korean');
@@ -783,12 +876,12 @@ jQuery(function($){
 			logo_img.src = 'images/logo_zh-CN.svg';
 			please_tap_here_img = new Image();
 			please_tap_here_img.src = 'images/please-tap-here_zh-CN.svg';
-			if (released){
+			if(released){
 				hypnosis_releasing_img.src = getStr('TEXT_HYPNOSIS_RELEASED_IMG');
 			}else{
 				hypnosis_releasing_img.src = getStr('TEXT_KILLING_HYPNOSIS_IMG');
 			}
-		}else if (lang == 'zh-TW'){ // Chinese (Traditional)
+		}else if(lang == 'zh-TW'){ // Chinese (Traditional)
 			$('#notice_text').text(NOTICE_TW_CN);
 			$('#mic_img').attr('src', 'images/mic.png');
 			$('#type_select_button').text(getStr('TEXT_PIC') + type_select.value);
@@ -801,6 +894,7 @@ jQuery(function($){
 			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional)');
 			$('#language_select option[value="en"]').text('English');
+			$('#language_select option[value="de"]').text('German');
 			$('#language_select option[value="it"]').text('Italian');
 			$('#language_select option[value="ja"]').text('Japanese');
 			$('#language_select option[value="ko-KR"]').text('Korean');
@@ -808,6 +902,7 @@ jQuery(function($){
 			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional)');
 			$('#language_select2 option[value="en"]').text('English');
+			$('#language_select2 option[value="de"]').text('German');
 			$('#language_select2 option[value="it"]').text('Italian');
 			$('#language_select2 option[value="ja"]').text('Japanese');
 			$('#language_select2 option[value="ko-KR"]').text('Korean');
@@ -862,12 +957,12 @@ jQuery(function($){
 			logo_img.src = 'images/logo_zh-TW.svg';
 			please_tap_here_img = new Image();
 			please_tap_here_img.src = 'images/please-tap-here_zh-TW.svg';
-			if (released){
+			if(released){
 				hypnosis_releasing_img.src = getStr('TEXT_HYPNOSIS_RELEASED_IMG');
 			}else{
 				hypnosis_releasing_img.src = getStr('TEXT_KILLING_HYPNOSIS_IMG');
 			}
-		}else if (lang == 'kr' || lang == 'ko' || lang == 'ko-KR'){ // Korean
+		}else if(lang == 'kr' || lang == 'ko' || lang == 'ko-KR'){ // Korean
 			$('#notice_text').text(NOTICE_KO_KR);
 			$('#mic_img').attr('src', 'images/mic.png');
 			$('#type_select_button').text(getStr('TEXT_PIC') + type_select.value);
@@ -880,6 +975,7 @@ jQuery(function($){
 			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional)');
 			$('#language_select option[value="en"]').text('English');
+			$('#language_select option[value="de"]').text('German');
 			$('#language_select option[value="it"]').text('Italian');
 			$('#language_select option[value="ja"]').text('Japanese');
 			$('#language_select option[value="ko-KR"]').text('Korean');
@@ -887,6 +983,7 @@ jQuery(function($){
 			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional)');
 			$('#language_select2 option[value="en"]').text('English');
+			$('#language_select2 option[value="de"]').text('German');
 			$('#language_select2 option[value="it"]').text('Italian');
 			$('#language_select2 option[value="ja"]').text('Japanese');
 			$('#language_select2 option[value="ko-KR"]').text('Korean');
@@ -941,7 +1038,7 @@ jQuery(function($){
 			logo_img.src = 'images/logo_ko-KR.svg';
 			please_tap_here_img = new Image();
 			please_tap_here_img.src = 'images/please-tap-here_ko-KR.svg';
-			if (released){
+			if(released){
 				hypnosis_releasing_img.src = getStr('TEXT_HYPNOSIS_RELEASED_IMG');
 			}else{
 				hypnosis_releasing_img.src = getStr('TEXT_KILLING_HYPNOSIS_IMG');
@@ -959,6 +1056,7 @@ jQuery(function($){
 			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional)');
 			$('#language_select option[value="en"]').text('English');
+			$('#language_select option[value="de"]').text('German');
 			$('#language_select option[value="it"]').text('Italian');
 			$('#language_select option[value="ja"]').text('Japanese');
 			$('#language_select option[value="ko-KR"]').text('Korean');
@@ -966,6 +1064,7 @@ jQuery(function($){
 			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional)');
 			$('#language_select2 option[value="en"]').text('English');
+			$('#language_select2 option[value="de"]').text('German');
 			$('#language_select2 option[value="it"]').text('Italian');
 			$('#language_select2 option[value="ja"]').text('Japanese');
 			$('#language_select2 option[value="ko-KR"]').text('Korean');
@@ -1020,7 +1119,88 @@ jQuery(function($){
 			logo_img.src = 'images/logo_it.svg';
 			please_tap_here_img = new Image();
 			please_tap_here_img.src = 'images/please-tap-here_it.svg';
-			if (released){
+			if(released){
+				hypnosis_releasing_img.src = getStr('TEXT_HYPNOSIS_RELEASED_IMG');
+			}else{
+				hypnosis_releasing_img.src = getStr('TEXT_KILLING_HYPNOSIS_IMG');
+			}
+		}else if(lang == 'de' || lang == 'de-DE'){ // German
+			$('#notice_text').text(NOTICE_DE);
+			$('#mic_img').attr('src', 'images/mic.png');
+			$('#type_select_button').text(getStr('TEXT_PIC') + type_select.value);
+			$('#sound_img').attr('src', 'images/sound.png');
+			$('#char_img').attr('src', 'images/text_de.png');
+			$('#speech_img').attr('src', 'images/speak.png');
+			$('#gear_img').attr('src', 'images/gear.png');
+			$('#question_img').attr('src', 'images/question.png');
+			$('#config_language').text('Language:');
+			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified)');
+			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional)');
+			$('#language_select option[value="en"]').text('English');
+			$('#language_select option[value="de"]').text('German');
+			$('#language_select option[value="it"]').text('Italian');
+			$('#language_select option[value="ja"]').text('Japanese');
+			$('#language_select option[value="ko-KR"]').text('Korean');
+			$('#config_language2').text('Language:');
+			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified)');
+			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional)');
+			$('#language_select2 option[value="en"]').text('English');
+			$('#language_select2 option[value="de"]').text('German');
+			$('#language_select2 option[value="it"]').text('Italian');
+			$('#language_select2 option[value="ja"]').text('Japanese');
+			$('#language_select2 option[value="ko-KR"]').text('Korean');
+			$('#appearance_type').text('Die Art des Bildes:');
+			$('#type_select option[value="-1"]').text('pic-1: Hypnose loslassen');
+			$('#type_select option[value="0"]').text('pic0: Einstiegsbild');
+			$('#type_select option[value="1"]').text('pic1: Rosa Spirale');
+			$('#type_select option[value="2"]').text('pic2: Konzentrische Kreise');
+			$('#type_select option[value="3"]').text('pic3: Die Augen');
+			$('#type_select option[value="4"]').text('pic4: Schwarz-Weiß-Spirale');
+			$('#type_select option[value="5"]').text('pic5: Herzen verbreiten');
+			$('#type_select option[value="6"]').text('pic6: 5-Yen-Münze');
+			$('#type_select option[value="7"]').text('pic7: Lärm, Lärm');
+			$('#type_select option[value="8"]').text('pic8: Verrückte Farben');
+			$('#type_select option[value="9"]').text('pic9: Gemischte Spiralen');
+			$('#appearance_division').text('Bildschirmaufteilung:');
+			$('#division_select option[value="-1"]').text('Auto');
+			$('#division_select option[value="1"]').text('Keine Aufteilung');
+			$('#division_select option[value="2"]').text('In 2 Teile geteilt');
+			$('#appearance_speed').text('Geschwindigkeit:');
+			$('#speed_type_select option[value="slow"]').text('Langsam');
+			$('#speed_type_select option[value="normal"]').text('Normal');
+			$('#speed_type_select option[value="fast"]').text('Schnell');
+			$('#speed_type_select option[value="irregular"]').text('Irregulär');
+			$('#appearance_rotation').text('Drehung:');
+			$('#rotation_select option[value="normal"]').text('Normale Drehung');
+			$('#rotation_select option[value="counter"]').text('Gegenrotation');
+			$('#config_size').text('Größe der Nachricht:');
+			$('#message_size_select option[value="small"]').text('Klein');
+			$('#message_size_select option[value="normal"]').text('Normal');
+			$('#message_size_select option[value="large"]').text('Groß');
+			$('#message_size_select option[value="huge"]').text('Riesig');
+			$('#config_note').text('Sound-Taste:');
+			$('#sound_select option[value=""]').text('(Kein)');
+			$('#sound_select option[value="Robot"]').text('Robot');
+			$('#sound_select option[value="Keen"]').text('Keen');
+			$('#sound_select option[value="Horror"]').text('Horror');
+			$('#sound_select option[value="Hunting"]').text('Hunting');
+			$('#sound_select option[value="Lonely"]').text('Lonely');
+			$('#sound_select option[value="Longing"]').text('Longing');
+			$('#sound_select option[value="Lovely"]').text('Lovely');
+			$('#sound_select option[value="Magic"]').text('Magic');
+			$('#sound_select option[value="Miracle"]').text('Miracle');
+			$('#config_switch_sound').text('Bildwechselton:');
+			$('#type_sound_select option[value="0"]').text('Nein');
+			$('#type_sound_select option[value="1"]').text('Ja');
+			$('#config_brightness').text('Helligkeit:');
+			$('#screen_brightness option[value="normal"]').text('Normal');
+			$('#screen_brightness option[value="brighter"]').text('Heller');
+			$('#version_text').text('Hypnose KraKra Version ' + VERSION);
+			logo_img = new Image();
+			logo_img.src = 'images/logo_de.svg';
+			please_tap_here_img = new Image();
+			please_tap_here_img.src = 'images/please-tap-here_de.svg';
+			if(released){
 				hypnosis_releasing_img.src = getStr('TEXT_HYPNOSIS_RELEASED_IMG');
 			}else{
 				hypnosis_releasing_img.src = getStr('TEXT_KILLING_HYPNOSIS_IMG');
@@ -1038,6 +1218,7 @@ jQuery(function($){
 			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional)');
 			$('#language_select option[value="en"]').text('English');
+			$('#language_select option[value="de"]').text('German');
 			$('#language_select option[value="it"]').text('Italian');
 			$('#language_select option[value="ja"]').text('Japanese');
 			$('#language_select option[value="ko-KR"]').text('Korean');
@@ -1045,6 +1226,7 @@ jQuery(function($){
 			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified)');
 			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional)');
 			$('#language_select2 option[value="en"]').text('English');
+			$('#language_select2 option[value="de"]').text('German');
 			$('#language_select2 option[value="it"]').text('Italian');
 			$('#language_select2 option[value="ja"]').text('Japanese');
 			$('#language_select2 option[value="ko-KR"]').text('Korean');
@@ -1099,7 +1281,7 @@ jQuery(function($){
 			logo_img.src = 'images/logo_en.svg';
 			please_tap_here_img = new Image();
 			please_tap_here_img.src = 'images/please-tap-here_en.svg';
-			if (released){
+			if(released){
 				hypnosis_releasing_img.src = getStr('TEXT_HYPNOSIS_RELEASED_IMG');
 			}else{
 				hypnosis_releasing_img.src = getStr('TEXT_KILLING_HYPNOSIS_IMG');
@@ -1111,7 +1293,7 @@ jQuery(function($){
 	}
 
 	function setLanguage(lang){
-		if (!lang)
+		if(!lang)
 			lang = 'en';
 		localStorage.setItem('saiminLanguage3', lang);
 		localizeSaimin(lang);
@@ -1126,11 +1308,11 @@ jQuery(function($){
 	function adjustText(text){
 		// {{language-specific}}
 		text = text.replace(getStr('TEXT_FULLWIDTH_SPACE'), '  ').trim();
-		if (text == '')
+		if(text == '')
 			return text;
 		while (text.slice(-1) == getStr('TEXT_PERIOD'))
 			text = text.slice(0, -1);
-		if (text == '')
+		if(text == '')
 			return text;
 		text += getStr('TEXT_PERIOD_SPACE');
 		return text;
@@ -1142,22 +1324,24 @@ jQuery(function($){
 		try{
 			android.speechLoop(text);
 		}catch(error){
-			if (window.speechSynthesis){
+			if(window.speechSynthesis){
 				text = text.repeat(32);
 				let speech = new SpeechSynthesisUtterance(text);
 				speech.pitch = 0.6;
 				speech.rate = 0.4;
 				// {{LANGUAGE_SPECIFIC}}
-				if (currentLanguage == 'ja' || currentLanguage == 'ja-JP') // Japanese
+				if(currentLanguage == 'ja' || currentLanguage == 'ja-JP') // Japanese
 					speech.lang = 'ja-JP';
-				else if (currentLanguage == 'zh-CN') // Chinese (Simplified)
+				else if(currentLanguage == 'zh-CN') // Chinese (Simplified)
 					speech.lang = 'zh-CN';
-				else if (currentLanguage == 'zh-TW') // Chinese (Traditional)
+				else if(currentLanguage == 'zh-TW') // Chinese (Traditional)
 					speech.lang = 'zh-TW';
-				else if (currentLanguage == 'ko-KR') // Korean
+				else if(currentLanguage == 'ko-KR') // Korean
 					speech.lang = 'ko-KR';
-				else if (currentLanguage == 'it-IT') // Italian
+				else if(currentLanguage == 'it' || currentLanguage == 'it-IT') // Italian
 					speech.lang = 'it-IT';
+				else if(currentLanguage == 'de' || currentLanguage == 'de-DE') // German
+					speech.lang = 'de-DE';
 				else // English is default
 					speech.lang = 'en-US';
 				window.speechSynthesis.speak(speech);
@@ -1172,17 +1356,17 @@ jQuery(function($){
 	let playing = null;
 
 	function setSoundName(value, test = false){
-		if (value.indexOf('sn') == 0)
+		if(value.indexOf('sn') == 0)
 			value = '';
 		soundName = value;
-		if (soundName != ''){
+		if(soundName != ''){
 			console.log('sn/' + soundName + '.mp3, ' + test);
-			if (test){
+			if(test){
 				sound = null;
 			}
 			sound = new Audio('sn/' + soundName + '.mp3');
-			if (test){
-				if (playing){
+			if(test){
+				if(playing){
 					try{
 						playing.pause();
 					}catch(error){
@@ -1205,7 +1389,7 @@ jQuery(function($){
 		typeSound = parseInt(value);
 		type_sound_select.value = value;
 		localStorage.setItem('saiminTypeSound', value);
-		if (test && typeSound == 1 && kirakira_sound){
+		if(test && typeSound == 1 && kirakira_sound){
 			kirakira_sound.play();
 		}
 	}
@@ -1290,7 +1474,7 @@ jQuery(function($){
 
 	function setPicType(value){
 		picType = parseInt(value);
-		if (picType == -1){
+		if(picType == -1){
 			cancelSpeech();
 			speech_checkbox.checked = false;
 			speech_label.classList.remove('checked');
@@ -1305,7 +1489,7 @@ jQuery(function($){
 				released = true;
 			}, 3000);
 		} else {
-			if (oldPicType == -1){
+			if(oldPicType == -1){
 				theText = '';
 				speech_checkbox.checked = false;
 				speech_label.classList.remove('checked');
@@ -1329,7 +1513,7 @@ jQuery(function($){
 	function setText(txt){
 		theText = txt.replace(getStr('TEXT_FULLWIDTH_SPACE'), '  ').trim();
 		localStorage.setItem('saiminText', theText);
-		if (speech_checkbox.checked){
+		if(speech_checkbox.checked){
 			playSpeech(theText);
 		}
 		floating_text1.innerText = theText;
@@ -1351,11 +1535,11 @@ jQuery(function($){
 	function fit(){
 		fitCanvas();
 		let position = { my: 'center', at: 'center', of: window };
-		if (localStorage.getItem('saiminHelpShowing')){
+		if(localStorage.getItem('saiminHelpShowing')){
 			$('#about_dialog').dialog('option', 'position', position);
-		}else if (localStorage.getItem('saiminAppearanceShowing')){
+		}else if(localStorage.getItem('saiminAppearanceShowing')){
 			$('#appearance_dialog').dialog('option', 'position', position);
-		}else if (localStorage.getItem('saiminConfigShowing')){
+		}else if(localStorage.getItem('saiminConfigShowing')){
 			$('#config_dialog').dialog('option', 'position', position);
 		}
 	}
@@ -1363,7 +1547,7 @@ jQuery(function($){
 	function updateVersionDisplay(){
 		let nativeVersion = getNativeAppVersion();
 		let text = version_text.innerText;
-		if (nativeVersion){
+		if(nativeVersion){
 			text = text.replace('[[VERSION]]', nativeVersion + '(native) / ' + VERSION + '(web)');
 		}else{
 			text = text.replace('[[VERSION]]', VERSION + '(web)');
@@ -1381,9 +1565,9 @@ jQuery(function($){
 		about_button.classList.remove('invisible');
 		text_button.classList.remove('invisible');
 		updateVersionDisplay();
-		if (!ready){
+		if(!ready){
 			let reset = localStorage.getItem('saiminReset');
-			if (reset){
+			if(reset){
 				localStorage.removeItem('saiminReset');
 				setPicType(reset);
 			}else{
@@ -1397,7 +1581,7 @@ jQuery(function($){
 	function chooseLanguage(){
 		let lang = localStorage.getItem('saiminLanguage3');
 		let first_time = false;
-		if (!lang){
+		if(!lang){
 			// {{LANGUAGE_SPECIFIC}}
 			switch (navigator.language){
 			case 'zh':
@@ -1416,6 +1600,12 @@ jQuery(function($){
 			case 'zh-mo':
 				// Chinese (Traditional)
 				lang = 'zh-TW';
+				break;
+			case 'de':
+			case 'de-DE':
+			case 'de-de':
+				// German
+				lang = 'de-DE';
 				break;
 			case 'it':
 			case 'it-IT':
@@ -1453,14 +1643,14 @@ jQuery(function($){
 				click: function(){
 					setLanguage(language_select2.value);
 					dialogContainer.dialog('close');
-					if (first_time)
+					if(first_time)
 						help();
 				},
 			},{
 				text: getStr('TEXT_CANCEL'),
 				click: function(){
 					dialogContainer.dialog('close');
-					if (first_time && !localStorage.getItem('saiminLanguage3')){
+					if(first_time && !localStorage.getItem('saiminLanguage3')){
 						setLanguage('en');
 						help();
 					}
@@ -1471,7 +1661,7 @@ jQuery(function($){
 			resizable: false,
 		});
 		$('#choose_language_dialog').on('dialogclose', function(event){
-			if (first_time && !localStorage.getItem('saiminLanguage3')){
+			if(first_time && !localStorage.getItem('saiminLanguage3')){
 				setLanguage('en');
 				help();
 			}
@@ -1497,7 +1687,7 @@ jQuery(function($){
 						;
 					}
 					localStorage.clear();
-					if (theRegistration){
+					if(theRegistration){
 						theRegistration.unregister();
 					}
 					alert(getStr('TEXT_INITTED_APP'));
@@ -1542,7 +1732,7 @@ jQuery(function($){
 					text: getStr('TEXT_OK'),
 					click: function(){
 						dialogContainer.dialog('close');
-						if (picType == -1)
+						if(picType == -1)
 							setPicType(picType);
 					},
 				},{
@@ -1607,7 +1797,7 @@ jQuery(function($){
 		ctx.beginPath();
 		ctx.arc(x, y, Math.abs(radius), 0, 2 * Math.PI);
 		ctx.closePath();
-		if (is_fill)
+		if(is_fill)
 			ctx.fill();
 		else
 			ctx.stroke();
@@ -1618,14 +1808,14 @@ jQuery(function($){
 		for (let i = 0; i < N; ++i){
 			let x0 = x + radius * Math.cos(2 * Math.PI * i / N);
 			let y0 = y + radius * Math.sin(2 * Math.PI * i / N);
-			if (i == 0){
+			if(i == 0){
 				ctx.moveTo(x0, y0);
 			}else{
 				ctx.lineTo(x0, y0);
 			}
 		}
 		ctx.closePath();
-		if (is_fill)
+		if(is_fill)
 			ctx.fill();
 		else
 			ctx.stroke();
@@ -1747,7 +1937,7 @@ jQuery(function($){
 		let count2 = -getCount();
 		let factor = 1.2 * Math.abs(Math.sin(count2 * 0.05));
 
-		if (released)
+		if(released)
 			factor = 1.0;
 
 		let grd = ctx.createRadialGradient(qx, qy, 0, qx, qy, dxy * factor);
@@ -1760,13 +1950,13 @@ jQuery(function($){
 		ctx.lineWidth = 10;
 		circle(ctx, qx, qy, (dx + dy + 10) / 5 * factor + dxy * 0.2, false);
 
-		if (hypnosis_releasing_img.complete){
+		if(hypnosis_releasing_img.complete){
 			let x = px + (dx - hypnosis_releasing_img.width) / 2;
 			let y = py + (dy - hypnosis_releasing_img.height) / 2 - dy * 0.1;
 			ctx.drawImage(hypnosis_releasing_img, x, y);
 		}
 
-		if (released && all_released_img.complete){
+		if(released && all_released_img.complete){
 			let x = px + (dx - all_released_img.width) / 2;
 			let y = py + (dy - all_released_img.height) / 2 + dy * 0.2;
 			ctx.drawImage(all_released_img, x, y);
@@ -1800,13 +1990,13 @@ jQuery(function($){
 		ctx.fillStyle = grd;
 		circle(ctx, qx, qy, dxy, true);
 
-		if (logo_img.complete){
+		if(logo_img.complete){
 			let x = px + (dx - logo_img.width) / 2;
 			let y = py + (dy - logo_img.height) / 2 - dy * 0.1;
 			ctx.drawImage(logo_img, x, y);
 		}
 
-		if (please_tap_here_img.complete){
+		if(please_tap_here_img.complete){
 			let x = qx - please_tap_here_img.width / 2;
 			let y = py + dy * 0.7;
 			ctx.drawImage(please_tap_here_img, x, y);
@@ -1835,7 +2025,7 @@ jQuery(function($){
 
 		let size = (dx + dy) * 2 / 5;
 		let count2 = -getCount();
-		if (isLargeDisplay()){
+		if(isLargeDisplay()){
 			qx += 40 * Math.cos(count2 * 0.15);
 			qy += 40 * Math.sin(count2 * 0.15);
 		}else{
@@ -1887,7 +2077,7 @@ jQuery(function($){
 		let factor = (0.99 + Math.abs(Math.sin(count2 * 0.2)) * 0.01);
 
 		ctx.beginPath();
-		if (flag){
+		if(flag){
 			ctx.moveTo(px, py);
 			ctx.lineTo(px + dx, py);
 			ctx.lineTo(px + dx, py + dy);
@@ -1905,7 +2095,7 @@ jQuery(function($){
 		let size = (dx + dy) * 0.4;
 
 		let dr0 = 30;
-		if (isLargeDisplay()){
+		if(isLargeDisplay()){
 			dr0 *= 2;
 			count2 *= 2;
 			ctx.lineWidth = 30;
@@ -1914,7 +2104,7 @@ jQuery(function($){
 		}
 		let dr = dr0 / 2 * factor;
 		let radius = neg_mod(count2 * 4, dr0);
-		if (flag)
+		if(flag)
 			radius = dr0 - radius;
 
 		for (; radius < size; radius += dr0){
@@ -1928,7 +2118,7 @@ jQuery(function($){
 	{
 		let r, g, b;
 		r = g = b = v;
-		if (s > 0)
+		if(s > 0)
 		{
 			h *= 6;
 			let i = Math.floor(h);
@@ -2007,7 +2197,7 @@ jQuery(function($){
 			let y1 = qy + cxy * Math.sin(radian);
 			ctx.lineTo(x1, y1);
 			let factor2 = Math.abs(1 - Math.sin(factor * 8));
-			if (flag2){
+			if(flag2){
 				ctx.fillStyle = `rgb(255, ${factor2 * 50 + 55}, ${factor2 * 200 + 55})`;
 			}else{
 				ctx.fillStyle = `hsl(${(k * 60) % 360}, 100%, 50%)`
@@ -2043,7 +2233,7 @@ jQuery(function($){
 
 		let opened = 1.0;
 		let f = Math.sin(Math.abs(count2 * 0.1));
-		if (f >= 0.8){
+		if(f >= 0.8){
 			opened = 0.6 + 0.4 * Math.abs(Math.sin(f * Math.PI));
 		}
 
@@ -2134,7 +2324,7 @@ jQuery(function($){
 		let count2 = getCount();
 		let factor = count2 * 0.16;
 
-		if (isLargeDisplay()){
+		if(isLargeDisplay()){
 			qx += 60 * Math.cos(factor * 0.8);
 			qy += 60 * Math.sin(factor * 0.8);
 		}else{
@@ -2154,15 +2344,15 @@ jQuery(function($){
 			for (let angle = 0; angle <= 360; angle += 360 / N0){
 				let radian = (angle + count2 * 2) * (Math.PI / 180.0);
 				let factor2 = radius * (1 + 0.7 * Math.abs(Math.sin(N1 * i * Math.PI / N0)));
-				if (isLarge)
+				if(isLarge)
 					factor2 *= 2;
 				let x = qx + factor2 * Math.cos(radian);
 				let y = qy + factor2 * Math.sin(radian);
-				if (angle == 0){
+				if(angle == 0){
 					ctx.beginPath();
 					ctx.moveTo(x, y);
 				}else{
-					if ((i % 2) == 0){
+					if((i % 2) == 0){
 						ctx.bezierCurveTo(oldx, oldy, (x + oldx) / 2, (y + oldy) / 2, x, y);
 					}
 				}
@@ -2273,7 +2463,7 @@ jQuery(function($){
 			++iz;
 		}
 
-		if (coin_img.complete){
+		if(coin_img.complete){
 			ctx.translate(qx - coin_img.width * 0.5, qy - coin_img.height * 0.75);
 
 			let angle = Math.PI * Math.sin(count2 * 0.1 - 0.05) * 0.078;
@@ -2303,7 +2493,7 @@ jQuery(function($){
 		ctx.clip();
 
 		let count2 = getCount();
-		if (isLargeDisplay()){
+		if(isLargeDisplay()){
 			qx += 60 * Math.cos(count2 * 0.1);
 			qy += 60 * Math.sin(count2 * 0.1);
 		}else{
@@ -2332,7 +2522,7 @@ jQuery(function($){
 				let zoom = (1.0 * Math.abs(Math.sin(radian * 3)) + Math.cos(factor1) + 2);
 				let x = (radius + 2) * Math.cos(radian + factor2) * zoom;
 				let y = (radius + 2) * Math.sin(radian + factor2) * zoom;
-				if (angle == 0){
+				if(angle == 0){
 					ctx.moveTo(qx + x, qy + y);
 				}else{
 					ctx.lineTo(qx + x, qy + y);
@@ -2371,7 +2561,7 @@ jQuery(function($){
 		ctx.fillRect(px, py, dx, dy);
 
 		let count2 = getCount();
-		if (isLargeDisplay()){
+		if(isLargeDisplay()){
 			qx += 40 * Math.cos(count2 * 0.08);
 			qy += 40 * Math.sin(count2 * 0.08);
 		}else{
@@ -2531,19 +2721,19 @@ jQuery(function($){
 		let x = cxScreen / 2, y = cyScreen / 2;
 
 		let splitted = false;
-		if (division == 1){
+		if(division == 1){
 			drawPicBlur(ctx, 0, 0, cx, cy);
 			setTextPos(floating_text1, 0, 0, cx, cy, counter);
 			y += cy / 4;
-		} else if (division == -1){
-			if (cx >= cy * 1.75){
+		} else if(division == -1){
+			if(cx >= cy * 1.75){
 				drawPicBlur(ctx, 0, 0, cx / 2, cy);
 				//drawPicBlur(ctx, cx / 2, 0, cx / 2, cy);
 				ctx.drawImage(saimin_canvas, 0, 0, cx / 2, cy, cx / 2, 0, cx / 2, cy);
 				setTextPos(floating_text1, 0, 0, cx / 2, cy, counter);
 				setTextPos(floating_text2, cx / 2, 0, cx / 2, cy, counter);
 				splitted = true;
-			}else if (cy >= cx * 1.75){
+			}else if(cy >= cx * 1.75){
 				drawPicBlur(ctx, 0, 0, cx, cy / 2);
 				//drawPicBlur(ctx, 0, cy / 2, cx, cy / 2);
 				ctx.drawImage(saimin_canvas, 0, 0, cx, cy / 2, 0, cy / 2, cx, cy / 2);
@@ -2556,7 +2746,7 @@ jQuery(function($){
 				y += cy / 4;
 			}
 		} else {
-			if (cx >= cy){
+			if(cx >= cy){
 				drawPicBlur(ctx, 0, 0, cx / 2, cy);
 				//drawPicBlur(ctx, cx / 2, 0, cx / 2, cy);
 				ctx.drawImage(saimin_canvas, 0, 0, cx / 2, cy, cx / 2, 0, cx / 2, cy);
@@ -2572,11 +2762,11 @@ jQuery(function($){
 			splitted = true;
 		}
 
-		if (picType == -1){
+		if(picType == -1){
 			floating_text1.classList.add('invisible');
 			floating_text2.classList.add('invisible');
-		}else if (theText != ''){
-			if (splitted){
+		}else if(theText != ''){
+			if(splitted){
 				floating_text1.classList.remove('invisible');
 				floating_text2.classList.remove('invisible');
 			}else{
@@ -2590,10 +2780,10 @@ jQuery(function($){
 
 		for (let iStar = 0; iStar < stars.length; ++iStar){
 			let star = stars[iStar];
-			if (star){
+			if(star){
 				ctx.fillStyle = `rgb(255, 255, 0, 0.8)`;
 				light(ctx, star[0], star[1], star[2]);
-				if (star[2] > 1.0){
+				if(star[2] > 1.0){
 					star[2] *= 0.98;
 				}
 			}
@@ -2601,8 +2791,8 @@ jQuery(function($){
 		stars.shift();
 		stars.push(null);
 
-		if (old_cxScreen !== null && old_cyScreen !== null){
-			if (window.innerWidth != old_cxScreen || window.innerHeight != old_cyScreen){
+		if(old_cxScreen !== null && old_cyScreen !== null){
+			if(window.innerWidth != old_cxScreen || window.innerHeight != old_cyScreen){
 				fit();
 			}
 		}
@@ -2611,29 +2801,29 @@ jQuery(function($){
 
 		let new_time = (new Date()).getTime();
 		let diff = (new_time - old_time) / 1000.0;
-		if (rotationType == 'counter')
+		if(rotationType == 'counter')
 			diff = -diff;
-		if (stopping)
+		if(stopping)
 			diff = 0;
 		counter += diff * speed;
 		old_time = new_time;
 
-		if (speedType == 'irregular'){
+		if(speedType == 'irregular'){
 			clock += diff;
-			if (clock >= speed / 30.0){
+			if(clock >= speed / 30.0){
 				clock = 0;
 				const MIN_VALUE = 35.0;
 				const MAX_VALUE = 70.0;
 				const MIDDLE = (MIN_VALUE + MAX_VALUE) * 0.5;
-				if (speed < MIDDLE)
+				if(speed < MIDDLE)
 					speed = MIDDLE + (MAX_VALUE - MIDDLE) * Math.random();
 				else
 					speed = MIN_VALUE + (MIDDLE - MIN_VALUE) * Math.random();
 			}
 		}
 
-		if (DEBUGGING){
-			if (diff != 0){
+		if(DEBUGGING){
+			if(diff != 0){
 				FPS = 1 / Math.abs(diff);
 				FPS = Math.round(FPS * 10) / 10;
 			}
@@ -2654,60 +2844,60 @@ jQuery(function($){
 		fitCanvas();
 
 		let saiminText = localStorage.getItem('saiminText');
-		if (saiminText){
+		if(saiminText){
 			setText(saiminText);
 		}
 
 		let saiminDivision = localStorage.getItem('saiminDivision');
-		if (saiminDivision){
+		if(saiminDivision){
 			setDivision(saiminDivision);
 		}
 
 		let saiminSoundName = localStorage.getItem('saiminSoundName');
-		if (saiminSoundName){
+		if(saiminSoundName){
 			setSoundName(saiminSoundName);
 		}else{
 			setSoundName('Magic');
 		}
 
 		let saiminTypeSound = localStorage.getItem('saiminTypeSound');
-		if (saiminTypeSound){
+		if(saiminTypeSound){
 			setTypeSound(saiminTypeSound);
 		}
 
 		let saiminSpeedType = localStorage.getItem('saiminSpeedType');
-		if (saiminSpeedType){
+		if(saiminSpeedType){
 			setSpeedType(saiminSpeedType);
 		}else{
 			setSpeedType('normal');
 		}
 
 		let saiminRotation = localStorage.getItem('saiminRotation');
-		if (saiminRotation){
+		if(saiminRotation){
 			setRotation(saiminRotation);
 		}else{
 			setRotation('normal');
 		}
 
 		let saiminMessageSize = localStorage.getItem('saiminMessageSize');
-		if (saiminMessageSize){
+		if(saiminMessageSize){
 			setMessageSizeType(saiminMessageSize);
 		}else{
 			setMessageSizeType('normal');
 		}
 
 		let saiminScreenBrightness = localStorage.getItem('saiminScreenBrightness');
-		if (saiminScreenBrightness){
+		if(saiminScreenBrightness){
 			setScreenBrightness(saiminScreenBrightness);
 		}else{
 			setScreenBrightness('normal');
 		}
 
 		text_button.addEventListener('click', function(){
-			if (picType == -1)
+			if(picType == -1)
 				return;
 			let text = prompt(getStr('TEXT_INPUT_MESSAGE'), theText);
-			if (text !== null){
+			if(text !== null){
 				setText(text);
 			}
 		});
@@ -2722,27 +2912,30 @@ jQuery(function($){
 		});
 
 		sound_button.addEventListener('click', function(){
-			if (picType == -1){
+			if(picType == -1){
 				let releasing_sound = null;
+				let lang = localStorage.getItem('saiminLanguage3');
 				// {{LANGUAGE_SPECIFIC}}
-				if (localStorage.getItem('saiminLanguage3') == 'ja'){ // Japanese
+				if(lang == 'ja' || lang == 'ja-JP'){ // Japanese
 					releasing_sound = new Audio('sn/ReleasedHypnosis_ja.mp3');
-				}else if (localStorage.getItem('saiminLanguage3') == 'zh-CN'){ // Chinese (Simplified)
+				}else if(lang == 'zh-CN'){ // Chinese (Simplified)
 					releasing_sound = new Audio('sn/ReleasedHypnosis_zh-CN.mp3');
-				}else if (localStorage.getItem('saiminLanguage3') == 'zh-TW'){ // Chinese (Traditional)
+				}else if(lang == 'zh-TW'){ // Chinese (Traditional)
 					releasing_sound = new Audio('sn/ReleasedHypnosis_zh-TW.mp3');
-				}else if (localStorage.getItem('saiminLanguage3') == 'ko-KR'){ // Korean
+				}else if(lang == 'ko-KR'){ // Korean
 					releasing_sound = new Audio('sn/ReleasedHypnosis_ko-KR.mp3');
-				}else if (localStorage.getItem('saiminLanguage3') == 'it-IT'){ // Italian
+				}else if(lang == 'it' || lang == 'it-IT'){ // Italian
 					releasing_sound = new Audio('sn/ReleasedHypnosis_it.mp3');
+				}else if(lang == 'de' || lang == 'de-DE'){ // German
+					releasing_sound = new Audio('sn/ReleasedHypnosis_de.mp3');
 				}else{ // English is default
 					releasing_sound = new Audio('sn/ReleasedHypnosis_en.mp3');
 				}
 				releasing_sound.play();
 				return;
 			}
-			if (soundName != ''){
-				if (sound){
+			if(soundName != ''){
+				if(sound){
 					let s = new Audio('sn/' + soundName + '.mp3');
 					s.play();
 				}
@@ -2756,90 +2949,90 @@ jQuery(function($){
 		});
 
 		type_select.addEventListener('change', function(){
-			if (!ready)
+			if(!ready)
 				return;
 			setPicType(parseInt(type_select.value));
 		}, false);
 		type_select.addEventListener('click', function(){
-			if (!ready)
+			if(!ready)
 				return;
 			setPicType(parseInt(type_select.value));
 		}, false);
 
 		language_select.addEventListener('change', function(){
-			if (!ready)
+			if(!ready)
 				return;
 			setLanguage(language_select.value);
 		}, false);
 
 		message_size_select.addEventListener('change', function(){
-			if (!ready)
+			if(!ready)
 				return;
 			setMessageSizeType(message_size_select.value, true);
 		}, false);
 
 		screen_brightness.addEventListener('change', function(){
-			if (!ready)
+			if(!ready)
 				return;
 			setScreenBrightness(screen_brightness.value, true);
 		}, false);
 
 		sound_select.addEventListener('change', function(){
-			if (!ready)
+			if(!ready)
 				return;
 			setSoundName(sound_select.value, true);
 		}, false);
 		sound_select.addEventListener('click', function(){
-			if (!ready)
+			if(!ready)
 				return;
 			setSoundName(sound_select.value, true);
 		}, false);
 
 		type_sound_select.addEventListener('change', function(){
-			if (!ready)
+			if(!ready)
 				return;
 			setTypeSound(type_sound_select.value, true);
 		}, false);
 		type_sound_select.addEventListener('click', function(){
-			if (!ready)
+			if(!ready)
 				return;
 			setTypeSound(type_sound_select.value, true);
 		}, false);
 
 		division_select.addEventListener('change', function(){
-			if (!ready)
+			if(!ready)
 				return;
 			setDivision(parseInt(division_select.value));
 		}, false);
 		division_select.addEventListener('click', function(){
-			if (!ready)
+			if(!ready)
 				return;
 			setDivision(parseInt(division_select.value));
 		}, false);
 
 		speed_type_select.addEventListener('change', function(){
-			if (!ready)
+			if(!ready)
 				return;
 			setSpeedType(speed_type_select.value);
 		}, false);
 
 		rotation_select.addEventListener('change', function(){
-			if (!ready)
+			if(!ready)
 				return;
 			setRotation(rotation_select.value);
 		}, false);
 
 		function canvasClick(e){
-			if (!ready)
+			if(!ready)
 				return;
-			if (e.shiftKey){
+			if(e.shiftKey){
 				setPicType((picType + (NUM_TYPE + 1) - 1) % (NUM_TYPE + 1));
 			}else{
 				setPicType((picType + 1) % (NUM_TYPE + 1));
 			}
 			type_select.value = picType.toString();
-			if (typeSound == 1){
-				if (kirakira_sound){
+			if(typeSound == 1){
+				if(kirakira_sound){
 					let kirakira = new Audio('sn/kirakira.mp3');
 					kirakira.play();
 				}
@@ -2858,50 +3051,50 @@ jQuery(function($){
 		}, false);
 
 		saimin_canvas.addEventListener('mousemove', function(e){
-			if (!ready)
+			if(!ready)
 				return;
 			addStar(e.clientX, e.clientY);
 		}, false);
 
 		saimin_canvas.addEventListener('touchstart', function(e){
-			if (!ready)
+			if(!ready)
 				return;
 			touchmoving = true;
 		}, {passive: true});
 		saimin_canvas.addEventListener('touchmove', function(e){
-			if (!ready)
+			if(!ready)
 				return;
-			if (touchmoving){
+			if(touchmoving){
 				let touches = e.touches;
-				if (touches && touches.length == 1){
+				if(touches && touches.length == 1){
 					addStar(touches[0].clientX, touches[0].clientY);
 				}
 			}
 		}, {passive: true});
 		saimin_canvas.addEventListener('touchend', function(e){
-			if (!ready)
+			if(!ready)
 				return;
 			touchmoving = false;
 		}, {passive: true});
 		saimin_canvas.addEventListener('touchcancel', function(e){
-			if (!ready)
+			if(!ready)
 				return;
 			touchmoving = false;
 		}, {passive: true});
 
 		saimin_canvas.addEventListener('wheel', function(e){
 			e.preventDefault();
-			if (!ready)
+			if(!ready)
 				return;
-			if (e.ctrlKey)
+			if(e.ctrlKey)
 				return;
-			if (e.deltaY < 0){
-				if (speed < 80.0)
+			if(e.deltaY < 0){
+				if(speed < 80.0)
 					speed += 5.0;
 				else
 					speed = 80.0;
-			} else if (e.deltaY > 0){
-				if (speed > 0.0)
+			} else if(e.deltaY > 0){
+				if(speed > 0.0)
 					speed -= 5.0;
 				else
 					speed = 0.0;
@@ -2910,23 +3103,23 @@ jQuery(function($){
 
 		let saiminAdultCheck3 = localStorage.getItem('saiminAdultCheck3');
 		let saiminLanguage3 = localStorage.getItem('saiminLanguage3');
-		if (saiminAdultCheck3 && saiminLanguage3){
+		if(saiminAdultCheck3 && saiminLanguage3){
 			setLanguage(saiminLanguage3);
 			accepted();
 		}else{
-			if (!saiminLanguage3){
+			if(!saiminLanguage3){
 				chooseLanguage();
 			} else {
 				setLanguage(saiminLanguage3);
-				if (!saiminAdultCheck3){
+				if(!saiminAdultCheck3){
 					help();
 				}
 			}
 		}
 
 		speech_checkbox.addEventListener('click', function(e){
-			if (picType == -1) {
-				if (speech_checkbox.checked){
+			if(picType == -1) {
+				if(speech_checkbox.checked){
 					playSpeech(getStr('TEXT_HYPNOSIS_RELEASED'));
 					speech_label.classList.add('checked');
 				}else{
@@ -2935,7 +3128,7 @@ jQuery(function($){
 				}
 				return;
 			}
-			if (speech_checkbox.checked){
+			if(speech_checkbox.checked){
 				playSpeech(theText);
 				speech_label.classList.add('checked');
 			} else {
@@ -2946,8 +3139,8 @@ jQuery(function($){
 
 		let mic_isInited = false;
 		microphone.addEventListener('click', function(e){
-			if (microphone.checked){
-				if (!mic_isInited){
+			if(microphone.checked){
+				if(!mic_isInited){
 					mic_setup();
 					mic_isInited = true;
 				}
@@ -2962,16 +3155,16 @@ jQuery(function($){
 		// make kirakira sound quickly playable
 		kirakira_sound = new Audio('sn/kirakira.mp3');
 
-		if (localStorage.getItem('saiminHelpShowing')){
+		if(localStorage.getItem('saiminHelpShowing')){
 			help();
-		}else if (localStorage.getItem('saiminAppearanceShowing')){
+		}else if(localStorage.getItem('saiminAppearanceShowing')){
 			apperance();
-		}else if (localStorage.getItem('saiminConfigShowing')){
+		}else if(localStorage.getItem('saiminConfigShowing')){
 			config();
 		}
 
 		// service worker
-		if (location.host != '' && 'serviceWorker' in navigator){
+		if(location.host != '' && 'serviceWorker' in navigator){
 			navigator.serviceWorker.register('./sw.js', {scope: './'})
 			.then((registration) => {
 				theRegistration = registration;
@@ -2980,8 +3173,8 @@ jQuery(function($){
 		}
 
 		window.addEventListener('resize', function(){
-			if (location.hostname == '' || isNativeApp()){
-				if (localStorage.getItem('saiminHelpShowing')){
+			if(location.hostname == '' || isNativeApp()){
+				if(localStorage.getItem('saiminHelpShowing')){
 					localStorage.setItem('saiminReset', picType);
 					location.reload();
 				}else{
@@ -2993,14 +3186,14 @@ jQuery(function($){
 			}
 		}, false);
 
-		if (localStorage.getItem('AndroidMicrophoneOnReload')){
+		if(localStorage.getItem('AndroidMicrophoneOnReload')){
 			localStorage.removeItem('AndroidMicrophoneOnReload');
 			mic_connect();
 			microphone_label.classList.add('checked');
 		}
 
 		function showButtons(enabled){
-			if (enabled){
+			if(enabled){
 				microphone_label.classList.remove('invisible');
 				type_select_button.classList.remove('invisible');
 				sound_button.classList.remove('invisible');
@@ -3025,50 +3218,50 @@ jQuery(function($){
 		}
 
 		document.body.addEventListener('keydown', function(e){
-			if (!ready || e.ctrlKey)
+			if(!ready || e.ctrlKey)
 				return;
-			if ('0' <= e.key && e.key <= '9'){ // pic0...pic9
+			if('0' <= e.key && e.key <= '9'){ // pic0...pic9
 				setPicType(e.key);
 				return;
 			}
-			if (e.key == 'c' || e.key == 'C'){ // Configuration
+			if(e.key == 'c' || e.key == 'C'){ // Configuration
 				config_button.click();
 				return;
 			}
-			if (e.key == 'h' || e.key == 'H'){ // Help
+			if(e.key == 'h' || e.key == 'H'){ // Help
 				about_button.click();
 				return;
 			}
-			if (e.key == 'a' || e.key == 'A'){ // Appearance
+			if(e.key == 'a' || e.key == 'A'){ // Appearance
 				e.preventDefault();
 				type_select_button.click();
 				return;
 			}
-			if (e.key == 'p' || e.key == 'P'){ // Play/Pause
+			if(e.key == 'p' || e.key == 'P'){ // Play/Pause
 				sound_button.click();
 				return;
 			}
-			if (e.key == 'm' || e.key == 'M'){ // Microphone
+			if(e.key == 'm' || e.key == 'M'){ // Microphone
 				microphone.click();
 				return;
 			}
-			if (e.key == 't' || e.key == 'T'){ // Text
+			if(e.key == 't' || e.key == 'T'){ // Text
 				text_button.click();
 				return;
 			}
-			if (e.key == 's' || e.key == 'S'){ // Speech
+			if(e.key == 's' || e.key == 'S'){ // Speech
 				speech_checkbox.click();
 				return;
 			}
-			if (e.key == 'x' || e.key == 'X'){ // Pause
+			if(e.key == 'x' || e.key == 'X'){ // Pause
 				stopping = !stopping;
 				return;
 			}
-			if (e.key == '-' || e.key == 'k' || e.key == 'K'){ // Kill hypnosis
+			if(e.key == '-' || e.key == 'k' || e.key == 'K'){ // Kill hypnosis
 				setPicType(-1);
 				return;
 			}
-			if (e.key == 'd' || e.key == 'D'){ // Division (screen split)
+			if(e.key == 'd' || e.key == 'D'){ // Division (screen split)
 				if(division == 1){
 					setDivision(2);
 				}else if(division == 2){
@@ -3078,8 +3271,8 @@ jQuery(function($){
 				}
 				return;
 			}
-			if (e.key == 'g' || e.key == 'G'){ // Goggle Mode
-				if (division == 1){
+			if(e.key == 'g' || e.key == 'G'){ // Goggle Mode
+				if(division == 1){
 					setDivision(2);
 				}else{
 					setDivision(1);
@@ -3087,45 +3280,45 @@ jQuery(function($){
 				showButtons(division == 1);
 				return;
 			}
-			if (e.key == 'b' || e.key == 'B'){ // buttons
+			if(e.key == 'b' || e.key == 'B'){ // buttons
 				showButtons(microphone_label.classList.contains('invisible'));
 				return;
 			}
-			if (e.key == 'w' || e.key == 'W'){ // Speed Slow
+			if(e.key == 'w' || e.key == 'W'){ // Speed Slow
 				setSpeedType('slow');
 				return;
 			}
-			if (e.key == 'n' || e.key == 'N'){ // Speed Normal
+			if(e.key == 'n' || e.key == 'N'){ // Speed Normal
 				setSpeedType('normal');
 				return;
 			}
-			if (e.key == 'f' || e.key == 'F'){ // Speed Fast
+			if(e.key == 'f' || e.key == 'F'){ // Speed Fast
 				setSpeedType('fast');
 				return;
 			}
-			if (e.key == 'i' || e.key == 'I'){ // Speed Irregular
+			if(e.key == 'i' || e.key == 'I'){ // Speed Irregular
 				setSpeedType('irregular');
 				return;
 			}
-			if (e.key == 'u' || e.key == 'U'){ // Debugging
+			if(e.key == 'u' || e.key == 'U'){ // Debugging
 				DEBUGGING = !DEBUGGING;
 				return;
 			}
-			if (e.key == 'r' || e.key == 'R'){ // Reload
+			if(e.key == 'r' || e.key == 'R'){ // Reload
 				localStorage.setItem('saiminReset', picType);
 				location.reload();
 				return;
 			}
 			// {{LANGUAGE_SPECIFIC}}
-			if (e.key == 'e' || e.key == 'E'){ // English
+			if(e.key == 'e' || e.key == 'E'){ // English
 				setLanguage('en');
 				return;
 			}
-			if (e.key == 'z' || e.key == 'Z'){ // Chinese (Simplified)
+			if(e.key == 'z' || e.key == 'Z'){ // Chinese (Simplified)
 				setLanguage('zh-CN');
 				return;
 			}
-			if (e.key == 'j' || e.key == 'J'){ // Japanese
+			if(e.key == 'j' || e.key == 'J'){ // Japanese
 				setLanguage('ja');
 				return;
 			}
