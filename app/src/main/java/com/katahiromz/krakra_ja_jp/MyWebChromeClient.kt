@@ -123,6 +123,8 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
             Locale.KOREAN
         } else if (lang == "it" || lang == "it-IT") { // Italian
             Locale.ITALIAN
+        } else if (lang == "de" || lang == "de-DE") { // German
+            Locale.GERMAN
         } else { // English is default
             Locale.ENGLISH
         }
@@ -257,7 +259,8 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
                 message == "请输入消息文本。" ||
                 message == "請輸入消息字符串。" ||
                 message == "메시지 문자열을 입력하십시오." ||
-                message == "Inserisci il testo del messaggio.")
+                message == "Inserisci il testo del messaggio." ||
+                message == "Bitte geben Sie einen Nachrichtentext ein.")
     }
 
     private fun showSelectMessageDialog(
