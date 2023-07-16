@@ -76,35 +76,35 @@
 			<option value="9">pic9</option>
 		</select>
 	</div>
-	<div>
+	<div class="ui_line">
 		<span id="appearance_division">Screen splitting:</span>
-		<select id="division_select" title="division_select">
-			<option value="-1">Auto</option>
-			<option value="1" selected>No splitting</option>
-			<option value="2">Split in 2</option>
-		</select>
+		<label class="toggle">
+			<input type="checkbox" id="division_select">
+			<span class="slider"></span>
+			<span class="labels" data-on="ON" data-off="OFF"></span>
+		</label>
 	</div>
-	<div>
+	<div class="ui_line nobr">
 		<span id="appearance_speed">Speed:</span>
-		<select id="speed_type_select" title="speed_type_select">
-			<option value="slow">Slow</option>
-			<option value="normal" selected>Normal</option>
-			<option value="fast">Fast</option>
-			<option value="irregular">Irregular</option>
-		</select>
+		<input type="range" id="speed_type_value" name="speed_type_value" min="0" max="100" value="45.0" step="1" />
+		<label for="speed_irregular" class="nobr">
+			<input type="checkbox" id="speed_irregular" name="speed_irregular" />
+			<span id="speed_irregular_label"></span>
+		</label>
 	</div>
-	<div>
+	<div class="ui_line">
 		<span id="appearance_rotation">Rotation:</span>
-		<select id="rotation_select" title="rotation_select">
-			<option value="normal">Normal</option>
-			<option value="counter">Counterrotation</option>
-		</select>
+		<label class="toggle">
+			<input type="checkbox" id="rotation_select">
+			<span class="slider"></span>
+			<span class="labels" data-on="ON" data-off="OFF"></span>
+		</label>
 	</div>
 </div>
 
 <!-- The configuration dialog -->
 <div id="config_dialog" class="invisible">
-	<div>
+	<div class="ui_line">
 		<!-- {{LANGUAGE_SPECIFIC}} -->
 		<span id="config_language">Language:</span>
 		<select id="language_select" title="language_select">
@@ -117,7 +117,7 @@
 			<option value="ko-KR">Korean</option>
 		</select>
 	</div>
-	<div>
+	<div class="ui_line">
 		<span id="config_size">Size of message:</span>
 		<select id="message_size_select" title="message_size_select">
 			<option value="small">Small</option>
@@ -126,7 +126,7 @@
 			<option value="huge">Huge</option>
 		</select>
 	</div>
-	<div>
+	<div class="ui_line">
 		<span id="config_note">Note button:</span>
 		<select id="sound_select" title="sound_select">
 			<option value="" selected>(None)</option>
@@ -141,14 +141,15 @@
 			<option value="Miracle">Miracle</option>
 		</select>
 	</div>
-	<div>
+	<div class="ui_line">
 		<span id="config_switch_sound">Pic change sound:</span>
-		<select id="type_sound_select" title="type_sound_select">
-			<option value="0">No</option>
-			<option value="1" selected>Yes</option>
-		</select>
+		<label class="toggle">
+			<input type="checkbox" id="type_sound_select">
+			<span class="slider"></span>
+			<span class="labels" data-on="ON" data-off="OFF"></span>
+		</label>
 	</div>
-	<div>
+	<div class="ui_line">
 		<span id="config_brightness">Brightness:</span>
 		<select id="screen_brightness" title="screen_brightness">
 			<option value="normal" selected>Normal</option>

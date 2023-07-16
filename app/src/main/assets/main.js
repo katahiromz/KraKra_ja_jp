@@ -1,7 +1,7 @@
 /* jshint esversion: 8 */
 
 const NUM_TYPE = 9;
-const VERSION = '3.3.8';
+const VERSION = '3.3.9';
 let DEBUGGING = false;
 let picType = 0;
 
@@ -492,7 +492,6 @@ jQuery(function($){
 	let stars = new Array(32);
 	let touchmoving = false;
 	let theRegistration = null;
-	let speedType = 'normal';
 	let coin_img = new Image();
 	let rotationType = 'normal';
 	let stopping = false;
@@ -501,6 +500,7 @@ jQuery(function($){
 	let please_tap_here_img = new Image();
 	let hypnosis_releasing_img = new Image();
 	let all_released_img = new Image();
+	let speedIrregular = false;
 
 	coin_img.src = 'images/coin5yen.png';
 
@@ -757,17 +757,9 @@ jQuery(function($){
 			$('#type_select option[value="8"]').text('画8: 狂気の色');
 			$('#type_select option[value="9"]').text('画9: ミックス渦巻き');
 			$('#appearance_division').text('画面分割:');
-			$('#division_select option[value="-1"]').text('自動');
-			$('#division_select option[value="1"]').text('分割なし');
-			$('#division_select option[value="2"]').text('2分割');
 			$('#appearance_speed').text('スピード:');
-			$('#speed_type_select option[value="slow"]').text('遅い');
-			$('#speed_type_select option[value="normal"]').text('普通');
-			$('#speed_type_select option[value="fast"]').text('速い');
-			$('#speed_type_select option[value="irregular"]').text('不規則');
-			$('#appearance_rotation').text('回転の向き:');
-			$('#rotation_select option[value="normal"]').text('普通');
-			$('#rotation_select option[value="counter"]').text('逆回転');
+			$('#speed_irregular_label').text('不規則');
+			$('#appearance_rotation').text('逆回転:');
 			$('#config_size').text('メッセージの大きさ:');
 			$('#message_size_select option[value="small"]').text('小さい');
 			$('#message_size_select option[value="normal"]').text('普通');
@@ -785,8 +777,6 @@ jQuery(function($){
 			$('#sound_select option[value="Magic"]').text('Magic');
 			$('#sound_select option[value="Miracle"]').text('Miracle');
 			$('#config_switch_sound').text('切り替え音:');
-			$('#type_sound_select option[value="0"]').text('なし');
-			$('#type_sound_select option[value="1"]').text('あり');
 			$('#config_brightness').text('画面の明るさ:');
 			$('#screen_brightness option[value="normal"]').text('普通');
 			$('#screen_brightness option[value="brighter"]').text('明るくする');
@@ -838,17 +828,9 @@ jQuery(function($){
 			$('#type_select option[value="8"]').text('图8: 疯狂的颜色');
 			$('#type_select option[value="9"]').text('图9: 混合漩涡');
 			$('#appearance_division').text('分屏：');
-			$('#division_select option[value="-1"]').text('自动的');
-			$('#division_select option[value="1"]').text('没有分屏');
-			$('#division_select option[value="2"]').text('分屏');
 			$('#appearance_speed').text('速度：');
-			$('#speed_type_select option[value="slow"]').text('慢的');
-			$('#speed_type_select option[value="normal"]').text('正常速度');
-			$('#speed_type_select option[value="fast"]').text('快速');
-			$('#speed_type_select option[value="irregular"]').text('不规律的');
-			$('#appearance_rotation').text('旋转方向：');
-			$('#rotation_select option[value="normal"]').text('正常旋转');
-			$('#rotation_select option[value="counter"]').text('反向旋转');
+			$('#speed_irregular_label').text('不规律的');
+			$('#appearance_rotation').text('反向旋转：');
 			$('#config_size').text('消息大小：');
 			$('#message_size_select option[value="small"]').text('小的');
 			$('#message_size_select option[value="normal"]').text('正常尺寸');
@@ -866,8 +848,6 @@ jQuery(function($){
 			$('#sound_select option[value="Magic"]').text('Magic');
 			$('#sound_select option[value="Miracle"]').text('Miracle');
 			$('#config_switch_sound').text('开关声音：');
-			$('#type_sound_select option[value="0"]').text('无');
-			$('#type_sound_select option[value="1"]').text('有');
 			$('#config_brightness').text('屏幕亮度：');
 			$('#screen_brightness option[value="normal"]').text('通常');
 			$('#screen_brightness option[value="brighter"]').text('明亮');
@@ -919,17 +899,9 @@ jQuery(function($){
 			$('#type_select option[value="8"]').text('圖8: 瘋狂的顏色');
 			$('#type_select option[value="9"]').text('圖9: 混合漩渦');
 			$('#appearance_division').text('分屏：');
-			$('#division_select option[value="-1"]').text('自動的');
-			$('#division_select option[value="1"]').text('沒有劃分');
-			$('#division_select option[value="2"]').text('分成兩部分');
 			$('#appearance_speed').text('速度：');
-			$('#speed_type_select option[value="slow"]').text('慢的');
-			$('#speed_type_select option[value="normal"]').text('正常的速度');
-			$('#speed_type_select option[value="fast"]').text('快速');
-			$('#speed_type_select option[value="irregular"]').text('不規律的');
-			$('#appearance_rotation').text('旋轉方向：');
-			$('#rotation_select option[value="normal"]').text('正常旋轉');
-			$('#rotation_select option[value="counter"]').text('反向旋轉');
+			$('#speed_irregular_label').text('不規律的');
+			$('#appearance_rotation').text('反向旋轉：');
 			$('#config_size').text('消息大小：');
 			$('#message_size_select option[value="small"]').text('小的');
 			$('#message_size_select option[value="normal"]').text('正常尺寸');
@@ -947,8 +919,6 @@ jQuery(function($){
 			$('#sound_select option[value="Magic"]').text('Magic');
 			$('#sound_select option[value="Miracle"]').text('Miracle');
 			$('#config_switch_sound').text('開關聲音：');
-			$('#type_sound_select option[value="0"]').text('無');
-			$('#type_sound_select option[value="1"]').text('有');
 			$('#config_brightness').text('屏幕亮度：');
 			$('#screen_brightness option[value="normal"]').text('正常亮度');
 			$('#screen_brightness option[value="brighter"]').text('提亮');
@@ -1000,17 +970,9 @@ jQuery(function($){
 			$('#type_select option[value="8"]').text('pic8: 미친 색');
 			$('#type_select option[value="9"]').text('pic9: 믹스 소용돌이');
 			$('#appearance_division').text('화면 분할:');
-			$('#division_select option[value="-1"]').text('자동');
-			$('#division_select option[value="1"]').text('분할 없음');
-			$('#division_select option[value="2"]').text('2분할');
 			$('#appearance_speed').text('속도:');
-			$('#speed_type_select option[value="slow"]').text('느린');
-			$('#speed_type_select option[value="normal"]').text('보통 속도');
-			$('#speed_type_select option[value="fast"]').text('빠른');
-			$('#speed_type_select option[value="irregular"]').text('불규칙');
-			$('#appearance_rotation').text('회전 방향:');
-			$('#rotation_select option[value="normal"]').text('보통 회전');
-			$('#rotation_select option[value="counter"]').text('역회전');
+			$('#speed_irregular_label').text('불규칙');
+			$('#appearance_rotation').text('역회전:');
 			$('#config_size').text('메시지 크기:');
 			$('#message_size_select option[value="small"]').text('작은');
 			$('#message_size_select option[value="normal"]').text('보통 크기');
@@ -1028,8 +990,6 @@ jQuery(function($){
 			$('#sound_select option[value="Magic"]').text('Magic');
 			$('#sound_select option[value="Miracle"]').text('Miracle');
 			$('#config_switch_sound').text('전환 사운드:');
-			$('#type_sound_select option[value="0"]').text('없음');
-			$('#type_sound_select option[value="1"]').text('있음');
 			$('#config_brightness').text('화면 밝기:');
 			$('#screen_brightness option[value="normal"]').text('일반 밝기');
 			$('#screen_brightness option[value="brighter"]').text('밝게 하다');
@@ -1081,17 +1041,9 @@ jQuery(function($){
 			$('#type_select option[value="8"]').text('pic8: Colori pazzi');
 			$('#type_select option[value="9"]').text('pic9: Spirali miste');
 			$('#appearance_division').text('Divisione dello schermo:');
-			$('#division_select option[value="-1"]').text('Auto');
-			$('#division_select option[value="1"]').text('Nessuna scissione');
-			$('#division_select option[value="2"]').text('Diviso in 2');
 			$('#appearance_speed').text('Velocità:');
-			$('#speed_type_select option[value="slow"]').text('Lento');
-			$('#speed_type_select option[value="normal"]').text('Velocità normale');
-			$('#speed_type_select option[value="fast"]').text('Veloce');
-			$('#speed_type_select option[value="irregular"]').text('Irregolare');
-			$('#appearance_rotation').text('Rotazione:');
-			$('#rotation_select option[value="normal"]').text('Rotazione normale');
-			$('#rotation_select option[value="counter"]').text('Controrotazione');
+			$('#speed_irregular_label').text('Irregolare');
+			$('#appearance_rotation').text('Controrotazione:');
 			$('#config_size').text('Dimensione del messaggio:');
 			$('#message_size_select option[value="small"]').text('Piccola');
 			$('#message_size_select option[value="normal"]').text('Normale');
@@ -1109,8 +1061,6 @@ jQuery(function($){
 			$('#sound_select option[value="Magic"]').text('Magic');
 			$('#sound_select option[value="Miracle"]').text('Miracle');
 			$('#config_switch_sound').text('Suono cambio foto:');
-			$('#type_sound_select option[value="0"]').text('No');
-			$('#type_sound_select option[value="1"]').text('Sì');
 			$('#config_brightness').text('Luminosità:');
 			$('#screen_brightness option[value="normal"]').text('Normale');
 			$('#screen_brightness option[value="brighter"]').text('Più luminoso');
@@ -1162,17 +1112,9 @@ jQuery(function($){
 			$('#type_select option[value="8"]').text('pic8: Verrückte Farben');
 			$('#type_select option[value="9"]').text('pic9: Gemischte Spiralen');
 			$('#appearance_division').text('Bildschirmaufteilung:');
-			$('#division_select option[value="-1"]').text('Auto');
-			$('#division_select option[value="1"]').text('Keine Aufteilung');
-			$('#division_select option[value="2"]').text('In 2 Teile geteilt');
 			$('#appearance_speed').text('Geschwindigkeit:');
-			$('#speed_type_select option[value="slow"]').text('Langsam');
-			$('#speed_type_select option[value="normal"]').text('Normal');
-			$('#speed_type_select option[value="fast"]').text('Schnell');
-			$('#speed_type_select option[value="irregular"]').text('Irregulär');
-			$('#appearance_rotation').text('Drehung:');
-			$('#rotation_select option[value="normal"]').text('Normale Drehung');
-			$('#rotation_select option[value="counter"]').text('Gegenrotation');
+			$('#speed_irregular_label').text('Irregulär');
+			$('#appearance_rotation').text('Gegenrotation:');
 			$('#config_size').text('Größe der Nachricht:');
 			$('#message_size_select option[value="small"]').text('Klein');
 			$('#message_size_select option[value="normal"]').text('Normal');
@@ -1190,8 +1132,6 @@ jQuery(function($){
 			$('#sound_select option[value="Magic"]').text('Magic');
 			$('#sound_select option[value="Miracle"]').text('Miracle');
 			$('#config_switch_sound').text('Bildwechselton:');
-			$('#type_sound_select option[value="0"]').text('Nein');
-			$('#type_sound_select option[value="1"]').text('Ja');
 			$('#config_brightness').text('Helligkeit:');
 			$('#screen_brightness option[value="normal"]').text('Normal');
 			$('#screen_brightness option[value="brighter"]').text('Heller');
@@ -1243,17 +1183,9 @@ jQuery(function($){
 			$('#type_select option[value="8"]').text('pic8: Crazy Colors');
 			$('#type_select option[value="9"]').text('pic9: Mixed Spirals');
 			$('#appearance_division').text('Screen splitting:');
-			$('#division_select option[value="-1"]').text('Auto');
-			$('#division_select option[value="1"]').text('No splitting');
-			$('#division_select option[value="2"]').text('Split in 2');
 			$('#appearance_speed').text('Speed:');
-			$('#speed_type_select option[value="slow"]').text('Slow');
-			$('#speed_type_select option[value="normal"]').text('Normal');
-			$('#speed_type_select option[value="fast"]').text('Fast');
-			$('#speed_type_select option[value="irregular"]').text('Irregular');
-			$('#appearance_rotation').text('Rotation:');
-			$('#rotation_select option[value="normal"]').text('Normal');
-			$('#rotation_select option[value="counter"]').text('Counterrotation');
+			$('#speed_irregular_label').text('Irregular');
+			$('#appearance_rotation').text('Counterrotation:');
 			$('#config_size').text('Size of message:');
 			$('#message_size_select option[value="small"]').text('Small');
 			$('#message_size_select option[value="normal"]').text('Normal');
@@ -1271,8 +1203,6 @@ jQuery(function($){
 			$('#sound_select option[value="Magic"]').text('Magic');
 			$('#sound_select option[value="Miracle"]').text('Miracle');
 			$('#config_switch_sound').text('Pic change sound:');
-			$('#type_sound_select option[value="0"]').text('No');
-			$('#type_sound_select option[value="1"]').text('Yes');
 			$('#config_brightness').text('Brightness:');
 			$('#screen_brightness option[value="normal"]').text('Normal');
 			$('#screen_brightness option[value="brighter"]').text('Brighter');
@@ -1386,8 +1316,12 @@ jQuery(function($){
 	}
 
 	function setTypeSound(value, test = false){
+		if (value === true)
+			value = 1;
+		if (value === false)
+			value = 0;
 		typeSound = parseInt(value);
-		type_sound_select.value = value;
+		type_sound_select.checked = !!value;
 		localStorage.setItem('saiminTypeSound', value);
 		if(test && typeSound == 1 && kirakira_sound){
 			kirakira_sound.play();
@@ -1437,28 +1371,54 @@ jQuery(function($){
 	}
 
 	function setSpeedType(value){
+		speedIrregular = false;
 		switch (value){
 		case 'slow':
 			speed = 27.5;
 			break;
 		case 'normal':
-		case 'irregular':
 			speed = 45.0;
+			break;
+		case 'irregular':
+			speed = 70.0;
+			speedIrregular = true;
 			break;
 		case 'fast':
 			speed = 70.0;
 			break;
 		default:
-			return;
+			speed = parseFloat(value);
+			break;
 		}
-		speedType = value;
-		speed_type_select.value = value;
-		localStorage.setItem('saiminSpeedType', value);
+		if(speed != parseFloat(speed_type_value.value)){
+			if(speedIrregular)
+				speed_type_value.value = speed;
+			else
+				speed_type_value.value = speed;
+		}
+		if(speed_type_value.disabled != speedIrregular){
+			speed_type_value.disabled = speedIrregular;
+		}
+		if(speed_irregular.checked != speedIrregular){
+			speed_irregular.checked = speedIrregular;
+		}
+		localStorage.setItem('saiminSpeedType', speed);
 	}
 
 	function setDivision(value){
-		division = parseInt(value);
-		division_select.value = division;
+		switch(value){
+		case -1:
+		case true:
+		case 2:
+			division_select.checked = true;
+			division = 2;
+			break;
+		case false:
+		case 1:
+			division_select.checked = false;
+			division = 1;
+			break;
+		}
 		localStorage.setItem('saiminDivision', division.toString());
 	}
 
@@ -1521,9 +1481,20 @@ jQuery(function($){
 	}
 
 	function setRotation(value){
-		rotation_select.value = value.toString();
-		localStorage.setItem('saiminRotation', value.toString());
-		rotationType = value.toString();
+		switch(value){
+		case 'normal':
+		case false:
+		default:
+			rotation_select.checked = false;
+			rotationType = 'normal';
+			break;
+		case 'counter':
+		case true:
+			rotation_select.checked = true;
+			rotationType = 'counter';
+			break;
+		}
+		localStorage.setItem('saiminRotation', rotationType.toString());
 	}
 
 	function fitCanvas(){
@@ -1713,9 +1684,9 @@ jQuery(function($){
 
 	function apperance(){
 		let old_type_value = type_select.value;
-		let old_division_value = division_select.value;
-		let old_speed_type_value = speed_type_select.value;
-		let old_rotation_value = rotation_select.value;
+		let old_division_value = division_select.checked;
+		let old_speed_type_value = speed_type_value.value;
+		let old_rotation_value = rotation_select.checked;
 		localStorage.setItem('saiminAppearanceShowing', '1');
 		let dialogContainer = $('#appearance_dialog');
 		dialogContainer.dialog({
@@ -1759,7 +1730,7 @@ jQuery(function($){
 		let old_language = localStorage.getItem('saiminLanguage3');
 		let old_message_size_value = message_size_select.value;
 		let old_sound_value = sound_select.value;
-		let old_type_sound_value = type_sound_select.value;
+		let old_type_sound_value = type_sound_select.checked;
 		let old_screen_brightness = screen_brightness.value;
 		localStorage.setItem('saiminConfigShowing', '1');
 		let dialogContainer = $('#config_dialog');
@@ -2808,7 +2779,7 @@ jQuery(function($){
 		counter += diff * speed;
 		old_time = new_time;
 
-		if(speedType == 'irregular'){
+		if(speedIrregular){
 			clock += diff;
 			if(clock >= speed / 30.0){
 				clock = 0;
@@ -2991,35 +2962,45 @@ jQuery(function($){
 		type_sound_select.addEventListener('change', function(){
 			if(!ready)
 				return;
-			setTypeSound(type_sound_select.value, true);
+			setTypeSound(type_sound_select.checked, true);
 		}, false);
 		type_sound_select.addEventListener('click', function(){
 			if(!ready)
 				return;
-			setTypeSound(type_sound_select.value, true);
+			setTypeSound(type_sound_select.checked, true);
 		}, false);
 
 		division_select.addEventListener('change', function(){
 			if(!ready)
 				return;
-			setDivision(parseInt(division_select.value));
+			setDivision(division_select.checked);
 		}, false);
 		division_select.addEventListener('click', function(){
 			if(!ready)
 				return;
-			setDivision(parseInt(division_select.value));
+			setDivision(division_select.checked);
 		}, false);
 
-		speed_type_select.addEventListener('change', function(){
+		speed_type_value.addEventListener('input', function(){
 			if(!ready)
 				return;
-			setSpeedType(speed_type_select.value);
+			setSpeedType(speed_type_value.value);
+		}, false);
+
+		speed_irregular.addEventListener('change', function(){
+			if(!ready)
+				return;
+			if(speed_irregular.checked){
+				setSpeedType('irregular');
+			}else{
+				setSpeedType('normal');
+			}
 		}, false);
 
 		rotation_select.addEventListener('change', function(){
 			if(!ready)
 				return;
-			setRotation(rotation_select.value);
+			setRotation(rotation_select.checked);
 		}, false);
 
 		function canvasClick(e){
