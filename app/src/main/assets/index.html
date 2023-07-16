@@ -84,13 +84,15 @@
 			<span class="labels" data-on="ON" data-off="OFF"></span>
 		</label>
 	</div>
-	<div class="ui_line nobr">
+	<div class="ui_line">
 		<span id="appearance_speed">Speed:</span>
-		<input type="range" id="speed_type_value" name="speed_type_value" min="0" max="100" value="45.0" step="1" />
-		<label for="speed_irregular" class="nobr">
-			<input type="checkbox" id="speed_irregular" name="speed_irregular" />
-			<span id="speed_irregular_label"></span>
-		</label>
+		<span class="nobr">
+			<input type="range" id="speed_type_value" name="speed_type_value" min="0" max="100" value="45.0" step="1" />
+			<label for="speed_irregular" class="nobr">
+				<input type="checkbox" id="speed_irregular" name="speed_irregular" />
+				<span id="speed_irregular_label"></span>
+			</label>
+		</span>
 	</div>
 	<div class="ui_line">
 		<span id="appearance_rotation">Rotation:</span>
@@ -119,12 +121,7 @@
 	</div>
 	<div class="ui_line">
 		<span id="config_size">Size of message:</span>
-		<select id="message_size_select" title="message_size_select">
-			<option value="small">Small</option>
-			<option value="normal" selected>Normal</option>
-			<option value="large">Large</option>
-			<option value="huge">Huge</option>
-		</select>
+		<input id="message_size_select" type="range" min="1" max="4" step="1" value="2" />
 	</div>
 	<div class="ui_line">
 		<span id="config_note">Note button:</span>

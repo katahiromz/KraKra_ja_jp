@@ -749,7 +749,7 @@ jQuery(function($){
 			$('#type_select option[value="0"]').text('画0: 初期画面');
 			$('#type_select option[value="1"]').text('画1: ピンク色の渦巻き');
 			$('#type_select option[value="2"]').text('画2: 同心円状');
-			$('#type_select option[value="3"]').text('画3: 回る目玉');
+			$('#type_select option[value="3"]').text('画3: 目が回る');
 			$('#type_select option[value="4"]').text('画4: 白黒の渦巻き');
 			$('#type_select option[value="5"]').text('画5: 広がるハート');
 			$('#type_select option[value="6"]').text('画6: 五円玉');
@@ -761,10 +761,6 @@ jQuery(function($){
 			$('#speed_irregular_label').text('不規則');
 			$('#appearance_rotation').text('逆回転:');
 			$('#config_size').text('メッセージの大きさ:');
-			$('#message_size_select option[value="small"]').text('小さい');
-			$('#message_size_select option[value="normal"]').text('普通');
-			$('#message_size_select option[value="large"]').text('大きい');
-			$('#message_size_select option[value="huge"]').text('特大');
 			$('#config_note').text('音符ボタン:');
 			$('#sound_select option[value=""]').text('(なし)');
 			$('#sound_select option[value="Robot"]').text('Robot');
@@ -832,10 +828,6 @@ jQuery(function($){
 			$('#speed_irregular_label').text('不规律的');
 			$('#appearance_rotation').text('反向旋转：');
 			$('#config_size').text('消息大小：');
-			$('#message_size_select option[value="small"]').text('小的');
-			$('#message_size_select option[value="normal"]').text('正常尺寸');
-			$('#message_size_select option[value="large"]').text('大的');
-			$('#message_size_select option[value="huge"]').text('超大的');
 			$('#config_note').text('声音按钮：');
 			$('#sound_select option[value=""]').text('(无)');
 			$('#sound_select option[value="Robot"]').text('Robot');
@@ -903,10 +895,6 @@ jQuery(function($){
 			$('#speed_irregular_label').text('不規律的');
 			$('#appearance_rotation').text('反向旋轉：');
 			$('#config_size').text('消息大小：');
-			$('#message_size_select option[value="small"]').text('小的');
-			$('#message_size_select option[value="normal"]').text('正常尺寸');
-			$('#message_size_select option[value="large"]').text('大的');
-			$('#message_size_select option[value="huge"]').text('超大的');
 			$('#config_note').text('聲音按鈕：');
 			$('#sound_select option[value=""]').text('(無)');
 			$('#sound_select option[value="Robot"]').text('Robot');
@@ -974,10 +962,6 @@ jQuery(function($){
 			$('#speed_irregular_label').text('불규칙');
 			$('#appearance_rotation').text('역회전:');
 			$('#config_size').text('메시지 크기:');
-			$('#message_size_select option[value="small"]').text('작은');
-			$('#message_size_select option[value="normal"]').text('보통 크기');
-			$('#message_size_select option[value="large"]').text('큰');
-			$('#message_size_select option[value="huge"]').text('특대');
 			$('#config_note').text('사운드 버튼:');
 			$('#sound_select option[value=""]').text('(없음)');
 			$('#sound_select option[value="Robot"]').text('Robot');
@@ -1045,10 +1029,6 @@ jQuery(function($){
 			$('#speed_irregular_label').text('Irregolare');
 			$('#appearance_rotation').text('Controrotazione:');
 			$('#config_size').text('Dimensione del messaggio:');
-			$('#message_size_select option[value="small"]').text('Piccola');
-			$('#message_size_select option[value="normal"]').text('Normale');
-			$('#message_size_select option[value="large"]').text('Grande');
-			$('#message_size_select option[value="huge"]').text('Enorme');
 			$('#config_note').text('Pulsante audio:');
 			$('#sound_select option[value=""]').text('(Nessuno)');
 			$('#sound_select option[value="Robot"]').text('Robot');
@@ -1116,10 +1096,6 @@ jQuery(function($){
 			$('#speed_irregular_label').text('Irregulär');
 			$('#appearance_rotation').text('Gegenrotation:');
 			$('#config_size').text('Größe der Nachricht:');
-			$('#message_size_select option[value="small"]').text('Klein');
-			$('#message_size_select option[value="normal"]').text('Normal');
-			$('#message_size_select option[value="large"]').text('Groß');
-			$('#message_size_select option[value="huge"]').text('Riesig');
 			$('#config_note').text('Sound-Taste:');
 			$('#sound_select option[value=""]').text('(Kein)');
 			$('#sound_select option[value="Robot"]').text('Robot');
@@ -1187,11 +1163,7 @@ jQuery(function($){
 			$('#speed_irregular_label').text('Irregular');
 			$('#appearance_rotation').text('Counterrotation:');
 			$('#config_size').text('Size of message:');
-			$('#message_size_select option[value="small"]').text('Small');
-			$('#message_size_select option[value="normal"]').text('Normal');
-			$('#message_size_select option[value="large"]').text('Large');
-			$('#message_size_select option[value="huge"]').text('Huge');
-			$('#config_note').text('Note button:');
+			$('#config_note').text('Sound button:');
 			$('#sound_select option[value=""]').text('(None)');
 			$('#sound_select option[value="Robot"]').text('Robot');
 			$('#sound_select option[value="Keen"]').text('Keen');
@@ -1347,26 +1319,36 @@ jQuery(function($){
 		floating_text2.classList.remove('font_size_normal');
 		floating_text2.classList.remove('font_size_large');
 		floating_text2.classList.remove('font_size_huge');
+		value = value.toString();
 		switch (value){
 		case 'small':
+		case '1':
 			floating_text1.classList.add('font_size_small');
 			floating_text2.classList.add('font_size_small');
+			value = '1';
 			break;
 		case 'normal':
+		case '2':
 		default:
 			floating_text1.classList.add('font_size_normal');
 			floating_text2.classList.add('font_size_normal');
+			value = '2';
 			break;
 		case 'large':
+		case '3':
 			floating_text1.classList.add('font_size_large');
 			floating_text2.classList.add('font_size_large');
+			value = '3';
 			break;
 		case 'huge':
+		case '4':
 			floating_text1.classList.add('font_size_huge');
 			floating_text2.classList.add('font_size_huge');
+			value = '4';
 			break;
 		}
-		message_size_select.value = value;
+		if (value != message_size_select.value)
+			message_size_select.value = value;
 		localStorage.setItem('saiminMessageSize', value);
 	}
 
@@ -2936,7 +2918,7 @@ jQuery(function($){
 			setLanguage(language_select.value);
 		}, false);
 
-		message_size_select.addEventListener('change', function(){
+		message_size_select.addEventListener('input', function(){
 			if(!ready)
 				return;
 			setMessageSizeType(message_size_select.value, true);
