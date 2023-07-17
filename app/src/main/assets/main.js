@@ -1748,7 +1748,7 @@ jQuery(function($){
 		ctx.fill();
 	}
 
-	function eye(ctx, x0, y0, r, opened = 1.0){
+	function eye(ctx, x0, y0, r, opened = 1.0, alpha = 1.0){
 		ctx.beginPath();
 		ctx.moveTo(x0 - r, y0);
 		const r025 = r * 0.25;
@@ -1756,11 +1756,19 @@ jQuery(function($){
 		ctx.bezierCurveTo(x0 - r025, y0 - r05, x0 + r025, y0 - r05, x0 + r, y0);
 		ctx.bezierCurveTo(x0 + r025, y0 + r05, x0 - r025, y0 + r05, x0 - r, y0);
 		ctx.closePath();
-		ctx.strokeStyle = "#000";
+		if (alpha == 1.0){
+			ctx.strokeStyle = "#000";
+		}else{
+			ctx.strokeStyle = `rgba(0, 0, 0, ${alpha * 100.0}%)`;
+		}
 		ctx.lineWidth = r * 0.15;
 		ctx.stroke();
 
-		ctx.fillStyle = "#000";
+		if (alpha == 1.0){
+			ctx.fillStyle = "#000";
+		}else{
+			ctx.fillStyle = `rgba(0, 0, 0, ${alpha * 100.0}%)`;
+		}
 		ctx.save();
 		circle(ctx, x0, y0, r / 3 * opened, true);
 		ctx.restore();
@@ -2141,6 +2149,15 @@ jQuery(function($){
 			eye(ctx, x, y, cxy / 10, opened);
 			ctx.fillStyle = '#f00';
 			heart(ctx, x, y - cxy * opened / 50, x, y + cxy * opened / 50);
+
+			x = qx + cxy * Math.cos(radian - 0.1) * 0.3;
+			y = qy + cxy * Math.sin(radian - 0.1) * 0.3;
+			eye(ctx, x, y, cxy / 10, opened, 0.5);
+
+			x = qx + cxy * Math.cos(radian - 0.2) * 0.3;
+			y = qy + cxy * Math.sin(radian - 0.2) * 0.3;
+			eye(ctx, x, y, cxy / 10, opened, 0.25);
+
 			radian += delta;
 		}
 
@@ -2322,7 +2339,7 @@ jQuery(function($){
 			let x1 = x + r2 * Math.cos(count2 / 20 + Math.PI * 0.25);
 			let y1 = y + r2 * Math.sin(count2 / 20 + Math.PI * 0.25);
 			line(ctx, x0, y0, x1, y1, 5);
-		} while(0);
+		}while(0);
 
 		const focal = 100;
 		function perspective(x, y, z){
@@ -3017,7 +3034,7 @@ jQuery(function($){
 		}
 
 		speech_checkbox.addEventListener('click', function(e){
-			if(picType == -1) {
+			if(picType == -1){
 				if(speech_checkbox.checked){
 					playSpeech(getStr('TEXT_HYPNOSIS_RELEASED'));
 					speech_label.classList.add('checked');
