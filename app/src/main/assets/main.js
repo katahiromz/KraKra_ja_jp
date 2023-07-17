@@ -2150,12 +2150,12 @@ jQuery(function($){
 			ctx.fillStyle = '#f00';
 			heart(ctx, x, y - cxy * opened / 50, x, y + cxy * opened / 50);
 
-			x = qx + cxy * Math.cos(radian - 0.1) * 0.3;
-			y = qy + cxy * Math.sin(radian - 0.1) * 0.3;
-			eye(ctx, x, y, cxy / 10, opened, 0.5);
+			x = qx + cxy * Math.cos(radian + 0.2) * 0.3;
+			y = qy + cxy * Math.sin(radian + 0.2) * 0.3;
+			eye(ctx, x, y, cxy / 10, opened, 0.65);
 
-			x = qx + cxy * Math.cos(radian - 0.2) * 0.3;
-			y = qy + cxy * Math.sin(radian - 0.2) * 0.3;
+			x = qx + cxy * Math.cos(radian + 0.4) * 0.3;
+			y = qy + cxy * Math.sin(radian + 0.4) * 0.3;
 			eye(ctx, x, y, cxy / 10, opened, 0.25);
 
 			radian += delta;
