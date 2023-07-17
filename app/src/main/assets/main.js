@@ -2144,19 +2144,22 @@ jQuery(function($){
 		const delta = (2 * Math.PI) / N;
 		let radian = factor * 1.3;
 		for (i = 0; i < N; ++i){
-			let x = qx + cxy * Math.cos(radian) * 0.3;
-			let y = qy + cxy * Math.sin(radian) * 0.3;
-			eye(ctx, x, y, cxy / 10, opened);
-			ctx.fillStyle = '#f00';
-			heart(ctx, x, y - cxy * opened / 50, x, y + cxy * opened / 50);
+			let x, y;
+
+			x = qx + cxy * Math.cos(radian + 0.4) * 0.3;
+			y = qy + cxy * Math.sin(radian + 0.4) * 0.3;
+			eye(ctx, x, y, cxy / 10, opened, 0.25);
 
 			x = qx + cxy * Math.cos(radian + 0.2) * 0.3;
 			y = qy + cxy * Math.sin(radian + 0.2) * 0.3;
 			eye(ctx, x, y, cxy / 10, opened, 0.65);
 
-			x = qx + cxy * Math.cos(radian + 0.4) * 0.3;
-			y = qy + cxy * Math.sin(radian + 0.4) * 0.3;
-			eye(ctx, x, y, cxy / 10, opened, 0.25);
+			x = qx + cxy * Math.cos(radian) * 0.3;
+			y = qy + cxy * Math.sin(radian) * 0.3;
+			eye(ctx, x, y, cxy / 10, opened);
+
+			ctx.fillStyle = '#f00';
+			heart(ctx, x, y - cxy * opened / 50, x, y + cxy * opened / 50);
 
 			radian += delta;
 		}
