@@ -3,10 +3,9 @@
 const NUM_TYPE = 9;
 const VERSION = '3.3.9';
 let DEBUGGING = false;
-let picType = 0;
 
 function savePicType(type){
-    localStorage.setItem('saiminReset', type);
+    // Do nothing
 }
 
 // {{LANGUAGE_SPECIFIC}}
@@ -501,6 +500,7 @@ jQuery(function($){
 	let hypnosis_releasing_img = new Image();
 	let all_released_img = new Image();
 	let speedIrregular = false;
+	let picType = 0;
 
 	coin_img.src = 'images/coin5yen.png';
 
@@ -1367,7 +1367,7 @@ jQuery(function($){
 				all_released_img.src = getStr('TEXT_ALL_RELEASED_IMG');
 				released = true;
 			}, 3000);
-		} else {
+		}else{
 			if(oldPicType == -1){
 				theText = '';
 				speech_checkbox.checked = false;
@@ -1456,10 +1456,9 @@ jQuery(function($){
 		text_button.classList.remove('invisible');
 		updateVersionDisplay();
 		if(!ready){
-			let reset = localStorage.getItem('saiminReset');
-			if(reset){
-				localStorage.removeItem('saiminReset');
-				setPicType(reset);
+			let theType = localStorage.getItem('saiminType');
+			if(theType){
+				setPicType(theType);
 			}else{
 				setPicType(0);
 			}
@@ -1972,7 +1971,7 @@ jQuery(function($){
 			ctx.lineTo(px + dx, py);
 			ctx.lineTo(px + dx, py + dy);
 			ctx.lineTo(px, py + dy);
-		} else {
+		}else{
 			let value = 0.2 + 0.2 * Math.abs(Math.sin(count2 * 0.02));
 			ctx.arc(qx, qy, Math.abs(dxy) * value, 0, 2 * Math.PI);
 		}
@@ -1989,7 +1988,7 @@ jQuery(function($){
 			dr0 *= 2;
 			count2 *= 2;
 			ctx.lineWidth = 30;
-		} else {
+		}else{
 			ctx.lineWidth = 15;
 		}
 		let dr = dr0 / 2 * factor;
@@ -2615,7 +2614,7 @@ jQuery(function($){
 			drawPicBlur(ctx, 0, 0, cx, cy);
 			setTextPos(floating_text1, 0, 0, cx, cy, counter);
 			y += cy / 4;
-		} else if(division == -1){
+		}else if(division == -1){
 			if(cx >= cy * 1.75){
 				drawPicBlur(ctx, 0, 0, cx / 2, cy);
 				//drawPicBlur(ctx, cx / 2, 0, cx / 2, cy);
@@ -2635,7 +2634,7 @@ jQuery(function($){
 				setTextPos(floating_text1, 0, 0, cx, cy, counter);
 				y += cy / 4;
 			}
-		} else {
+		}else{
 			if(cx >= cy){
 				drawPicBlur(ctx, 0, 0, cx / 2, cy);
 				//drawPicBlur(ctx, cx / 2, 0, cx / 2, cy);
@@ -2993,7 +2992,7 @@ jQuery(function($){
 					speed += 5.0;
 				else
 					speed = 80.0;
-			} else if(e.deltaY > 0){
+			}else if(e.deltaY > 0){
 				if(speed > 0.0)
 					speed -= 5.0;
 				else
@@ -3009,7 +3008,7 @@ jQuery(function($){
 		}else{
 			if(!saiminLanguage3){
 				chooseLanguage();
-			} else {
+			}else{
 				setLanguage(saiminLanguage3);
 				if(!saiminAdultCheck3){
 					help();
@@ -3031,7 +3030,7 @@ jQuery(function($){
 			if(speech_checkbox.checked){
 				playSpeech(theText);
 				speech_label.classList.add('checked');
-			} else {
+			}else{
 				cancelSpeech();
 				speech_label.classList.remove('checked');
 			}
@@ -3046,7 +3045,7 @@ jQuery(function($){
 				}
 				mic_connect();
 				microphone_label.classList.add('checked');
-			} else {
+			}else{
 				mic_disconnect();
 				microphone_label.classList.remove('checked');
 			}
@@ -3075,13 +3074,13 @@ jQuery(function($){
 		window.addEventListener('resize', function(){
 			if(location.hostname == '' || isNativeApp()){
 				if(localStorage.getItem('saiminHelpShowing')){
-					localStorage.setItem('saiminReset', picType);
+					localStorage.setItem('saiminType', picType);
 					location.reload();
 				}else{
 					fit();
 				}
-			} else {
-				localStorage.setItem('saiminReset', picType);
+			}else{
+				localStorage.setItem('saiminType', picType);
 				location.reload();
 			}
 		}, false);
@@ -3205,7 +3204,7 @@ jQuery(function($){
 				return;
 			}
 			if(e.key == 'r' || e.key == 'R'){ // Reload
-				localStorage.setItem('saiminReset', picType);
+				localStorage.setItem('saiminType', picType);
 				location.reload();
 				return;
 			}
