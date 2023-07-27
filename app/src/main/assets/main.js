@@ -557,7 +557,7 @@ jQuery(function($){
 			case 'TEXT_CANCEL': return 'キャンセル';
 			case 'TEXT_YES': return 'はい';
 			case 'TEXT_NO': return 'いいえ';
-			case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a language (语言)';
+			case 'TEXT_CHOOSE_LANGUAGE': return '言語選択 (Choose a language)';
 			case 'TEXT_ABOUT_APP': return 'バージョン情報';
 			case 'TEXT_INIT_APP': return 'アプリの初期化';
 			case 'TEXT_INITTED_APP': return 'アプリを初期化しました。';
@@ -581,7 +581,7 @@ jQuery(function($){
 			case 'TEXT_CANCEL': return '取消';
 			case 'TEXT_YES': return '是';
 			case 'TEXT_NO': return '否';
-			case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a language (语言)';
+			case 'TEXT_CHOOSE_LANGUAGE': return '语言选择 (Choose a language)';
 			case 'TEXT_ABOUT_APP': return '关于这个应用程序';
 			case 'TEXT_INIT_APP': return '初始化应用程序';
 			case 'TEXT_INITTED_APP': return '初始化了应用程序。';
@@ -605,7 +605,7 @@ jQuery(function($){
 			case 'TEXT_CANCEL': return '取消';
 			case 'TEXT_YES': return '是';
 			case 'TEXT_NO': return '否';
-			case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a language (语言)';
+			case 'TEXT_CHOOSE_LANGUAGE': return '語言選擇 (Choose a language)';
 			case 'TEXT_ABOUT_APP': return '版本信息';
 			case 'TEXT_INIT_APP': return '應用程序初始化';
 			case 'TEXT_INITTED_APP': return '初始化了應用程序。';
@@ -629,7 +629,7 @@ jQuery(function($){
 			case 'TEXT_CANCEL': return '취소';
 			case 'TEXT_YES': return '예';
 			case 'TEXT_NO': return '아니오';
-			case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a language (语言)';
+			case 'TEXT_CHOOSE_LANGUAGE': return '언어 선택 (Choose a language)';
 			case 'TEXT_ABOUT_APP': return '버전 정보';
 			case 'TEXT_INIT_APP': return '앱 초기화';
 			case 'TEXT_INITTED_APP': return '앱을 초기화했습니다.';
@@ -653,7 +653,7 @@ jQuery(function($){
 			case 'TEXT_CANCEL': return 'Annulla';
 			case 'TEXT_YES': return 'SÌ';
 			case 'TEXT_NO': return 'No';
-			case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a language (语言)';
+			case 'TEXT_CHOOSE_LANGUAGE': return 'Scegli una lingua (Choose a language)';
 			case 'TEXT_ABOUT_APP': return 'Informazioni su questa app';
 			case 'TEXT_INIT_APP': return 'Inizializza l\'app';
 			case 'TEXT_INITTED_APP': return 'Inizializzata l\'app.';
@@ -677,7 +677,7 @@ jQuery(function($){
 			case 'TEXT_CANCEL': return 'Abbrechen';
 			case 'TEXT_YES': return 'Ja';
 			case 'TEXT_NO': return 'Nein';
-			case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a language (语言)';
+			case 'TEXT_CHOOSE_LANGUAGE': return 'Wähle eine Sprache (Choose a language)';
 			case 'TEXT_ABOUT_APP': return 'Über diese App';
 			case 'TEXT_INIT_APP': return 'App initialisieren';
 			case 'TEXT_INITTED_APP': return 'Initialisierte die App.';
@@ -701,7 +701,7 @@ jQuery(function($){
 			case 'TEXT_CANCEL': return 'Cancel';
 			case 'TEXT_YES': return 'Yes';
 			case 'TEXT_NO': return 'No';
-			case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a language (语言)';
+			case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a language (言語選択)';
 			case 'TEXT_ABOUT_APP': return 'About this app';
 			case 'TEXT_INIT_APP': return 'Initialize app';
 			case 'TEXT_INITTED_APP': return 'Initialized the app.';
@@ -735,7 +735,7 @@ jQuery(function($){
 			$('#speech_img').attr('src', 'images/speak.png');
 			$('#gear_img').attr('src', 'images/gear.png');
 			$('#question_img').attr('src', 'images/question.png');
-			$('#config_language').text('Language:');
+			$('#config_language').text('言語 (Language):');
 			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
 			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
 			$('#language_select option[value="en"]').text('English (英語)');
@@ -743,7 +743,7 @@ jQuery(function($){
 			$('#language_select option[value="it"]').text('Italian (Italiano)');
 			$('#language_select option[value="ja"]').text('Japanese (日本語)');
 			$('#language_select option[value="ko-KR"]').text('Korean (한국어)');
-			$('#config_language2').text('Language:');
+			$('#config_language2').text('言語 (Language):');
 			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
 			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
 			$('#language_select2 option[value="en"]').text('English (英語)');
@@ -803,7 +803,7 @@ jQuery(function($){
 			$('#speech_img').attr('src', 'images/speak.png');
 			$('#gear_img').attr('src', 'images/gear.png');
 			$('#question_img').attr('src', 'images/question.png');
-			$('#config_language').text('Language:');
+			$('#config_language').text('语言 (Language):');
 			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
 			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
 			$('#language_select option[value="en"]').text('English (英语)');
@@ -811,7 +811,7 @@ jQuery(function($){
 			$('#language_select option[value="it"]').text('Italian (Italiano)');
 			$('#language_select option[value="ja"]').text('Japanese (日本語)');
 			$('#language_select option[value="ko-KR"]').text('Korean (한국어)');
-			$('#config_language2').text('Language:');
+			$('#config_language2').text('语言 (Language):');
 			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
 			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
 			$('#language_select2 option[value="en"]').text('English (英语)');
@@ -871,7 +871,7 @@ jQuery(function($){
 			$('#speech_img').attr('src', 'images/speak.png');
 			$('#gear_img').attr('src', 'images/gear.png');
 			$('#question_img').attr('src', 'images/question.png');
-			$('#config_language').text('Language:');
+			$('#config_language').text('語言 (Language):');
 			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
 			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
 			$('#language_select option[value="en"]').text('English (英語)');
@@ -879,7 +879,7 @@ jQuery(function($){
 			$('#language_select option[value="it"]').text('Italian (Italiano)');
 			$('#language_select option[value="ja"]').text('Japanese (日本語)');
 			$('#language_select option[value="ko-KR"]').text('Korean (한국어)');
-			$('#config_language2').text('Language:');
+			$('#config_language2').text('語言 (Language):');
 			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
 			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
 			$('#language_select2 option[value="en"]').text('English (英語)');
@@ -939,7 +939,7 @@ jQuery(function($){
 			$('#speech_img').attr('src', 'images/speak.png');
 			$('#gear_img').attr('src', 'images/gear.png');
 			$('#question_img').attr('src', 'images/question.png');
-			$('#config_language').text('Language:');
+			$('#config_language').text('언어 (Language):');
 			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
 			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
 			$('#language_select option[value="en"]').text('English (영어)');
@@ -947,7 +947,7 @@ jQuery(function($){
 			$('#language_select option[value="it"]').text('Italian (Italiano)');
 			$('#language_select option[value="ja"]').text('Japanese (日本語)');
 			$('#language_select option[value="ko-KR"]').text('Korean (한국어)');
-			$('#config_language2').text('Language:');
+			$('#config_language2').text('언어 (Language):');
 			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
 			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
 			$('#language_select2 option[value="en"]').text('English (영어)');
@@ -1007,7 +1007,7 @@ jQuery(function($){
 			$('#speech_img').attr('src', 'images/speak.png');
 			$('#gear_img').attr('src', 'images/gear.png');
 			$('#question_img').attr('src', 'images/question.png');
-			$('#config_language').text('Language:');
+			$('#config_language').text('Lingua (Language):');
 			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
 			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
 			$('#language_select option[value="en"]').text('English (Inglese)');
@@ -1015,7 +1015,7 @@ jQuery(function($){
 			$('#language_select option[value="it"]').text('Italian (Italiano)');
 			$('#language_select option[value="ja"]').text('Japanese (日本語)');
 			$('#language_select option[value="ko-KR"]').text('Korean (한국어)');
-			$('#config_language2').text('Language:');
+			$('#config_language2').text('Lingua (Language):');
 			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
 			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
 			$('#language_select2 option[value="en"]').text('English (Inglese)');
@@ -1075,7 +1075,7 @@ jQuery(function($){
 			$('#speech_img').attr('src', 'images/speak.png');
 			$('#gear_img').attr('src', 'images/gear.png');
 			$('#question_img').attr('src', 'images/question.png');
-			$('#config_language').text('Language:');
+			$('#config_language').text('Sprache (Language):');
 			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
 			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
 			$('#language_select option[value="en"]').text('English (Englisch)');
@@ -1083,7 +1083,7 @@ jQuery(function($){
 			$('#language_select option[value="it"]').text('Italian (Italiano)');
 			$('#language_select option[value="ja"]').text('Japanese (日本語)');
 			$('#language_select option[value="ko-KR"]').text('Korean (한국어)');
-			$('#config_language2').text('Language:');
+			$('#config_language2').text('Sprache (Language):');
 			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
 			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
 			$('#language_select2 option[value="en"]').text('English (Englisch)');
@@ -1143,7 +1143,7 @@ jQuery(function($){
 			$('#speech_img').attr('src', 'images/speak.png');
 			$('#gear_img').attr('src', 'images/gear.png');
 			$('#question_img').attr('src', 'images/question.png');
-			$('#config_language').text('Language:');
+			$('#config_language').text('Language (言語):');
 			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
 			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
 			$('#language_select option[value="en"]').text('English');
@@ -1151,7 +1151,7 @@ jQuery(function($){
 			$('#language_select option[value="it"]').text('Italian (Italiano)');
 			$('#language_select option[value="ja"]').text('Japanese (日本語)');
 			$('#language_select option[value="ko-KR"]').text('Korean (한국어)');
-			$('#config_language2').text('Language:');
+			$('#config_language2').text('Language (言語):');
 			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
 			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
 			$('#language_select2 option[value="en"]').text('English');
