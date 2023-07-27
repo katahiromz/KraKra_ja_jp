@@ -1,7 +1,7 @@
 /* jshint esversion: 8 */
 
 const NUM_TYPE = 9;
-const VERSION = '3.3.9';
+const VERSION = '3.4.0';
 let DEBUGGING = false;
 
 function savePicType(type){
@@ -501,6 +501,7 @@ jQuery(function($){
 	let all_released_img = new Image();
 	let speedIrregular = false;
 	let picType = 0;
+	let blinking_interval = 0;
 
 	coin_img.src = 'images/coin5yen.png';
 
@@ -515,9 +516,8 @@ jQuery(function($){
 		return false;
 	}
 
-	function neg_mod(x, y){
-		if(x > 0) return x % y;
-		return neg_mod(x + 99999 * y, y);
+	function mod(x, y){
+		return (x*y < 0) * y + x % y;
 	}
 
 	function addStar(x, y){
@@ -572,6 +572,7 @@ jQuery(function($){
 			case 'TEXT_KILLING_HYPNOSIS_IMG': return 'images/killing-hypnosis_ja.svg';
 			case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'images/hypnosis-released_ja.svg';
 			case 'TEXT_ALL_RELEASED_IMG': return 'images/all-released_ja.svg';
+			case 'TEXT_NO_BLINKING': return '点滅なし';
 			}
 		}else if(lang == 'zh-CN' || lang == 'cn'){ // Chinese (Simplified)
 			switch(str_id){
@@ -595,6 +596,7 @@ jQuery(function($){
 			case 'TEXT_KILLING_HYPNOSIS_IMG': return 'images/killing-hypnosis_zh-CN.svg';
 			case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'images/hypnosis-released_zh-CN.svg';
 			case 'TEXT_ALL_RELEASED_IMG': return 'images/all-released_zh-CN.svg';
+			case 'TEXT_NO_BLINKING': return '无闪光灯';
 			}
 		}else if(lang == 'zh-TW'){ // Chinese (Traditional)
 			switch(str_id){
@@ -618,6 +620,7 @@ jQuery(function($){
 			case 'TEXT_KILLING_HYPNOSIS_IMG': return 'images/killing-hypnosis_zh-TW.svg';
 			case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'images/hypnosis-released_zh-TW.svg';
 			case 'TEXT_ALL_RELEASED_IMG': return 'images/all-released_zh-TW.svg';
+			case 'TEXT_NO_BLINKING': return '無閃光燈';
 			}
 		}else if(lang == 'ko' || lang == 'kr' || lang == 'ko-KR'){ // Korean
 			switch(str_id){
@@ -641,6 +644,7 @@ jQuery(function($){
 			case 'TEXT_KILLING_HYPNOSIS_IMG': return 'images/killing-hypnosis_ko-KR.svg';
 			case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'images/hypnosis-released_ko-KR.svg';
 			case 'TEXT_ALL_RELEASED_IMG': return 'images/all-released_ko-KR.svg';
+			case 'TEXT_NO_BLINKING': return '깜박임 없음';
 			}
 		}else if(lang == 'it' || lang == 'it-IT'){ // Italian
 			switch(str_id){
@@ -664,6 +668,7 @@ jQuery(function($){
 			case 'TEXT_KILLING_HYPNOSIS_IMG': return 'images/killing-hypnosis_it.svg';
 			case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'images/hypnosis-released_it.svg';
 			case 'TEXT_ALL_RELEASED_IMG': return 'images/all-released_it.svg';
+			case 'TEXT_NO_BLINKING': return 'Senza il flash';
 			}
 		}else if(lang == 'de' || lang == 'de-DE'){ // German
 			switch(str_id){
@@ -687,6 +692,7 @@ jQuery(function($){
 			case 'TEXT_KILLING_HYPNOSIS_IMG': return 'images/killing-hypnosis_de.svg';
 			case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'images/hypnosis-released_de.svg';
 			case 'TEXT_ALL_RELEASED_IMG': return 'images/all-released_de.svg';
+			case 'TEXT_NO_BLINKING': return 'Kein Blitz';
 			}
 		}else{ // English is default
 			switch(str_id){
@@ -710,6 +716,7 @@ jQuery(function($){
 			case 'TEXT_KILLING_HYPNOSIS_IMG': return 'images/killing-hypnosis_en.svg';
 			case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'images/hypnosis-released_en.svg';
 			case 'TEXT_ALL_RELEASED_IMG': return 'images/all-released_en.svg';
+			case 'TEXT_NO_BLINKING': return 'No blinking';
 			}
 		}
 	}
@@ -729,21 +736,21 @@ jQuery(function($){
 			$('#gear_img').attr('src', 'images/gear.png');
 			$('#question_img').attr('src', 'images/question.png');
 			$('#config_language').text('Language:');
-			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified)');
-			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional)');
-			$('#language_select option[value="en"]').text('English');
-			$('#language_select option[value="de"]').text('German');
-			$('#language_select option[value="it"]').text('Italian');
-			$('#language_select option[value="ja"]').text('Japanese');
-			$('#language_select option[value="ko-KR"]').text('Korean');
+			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
+			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
+			$('#language_select option[value="en"]').text('English (英語)');
+			$('#language_select option[value="de"]').text('German (Deutsch)');
+			$('#language_select option[value="it"]').text('Italian (Italiano)');
+			$('#language_select option[value="ja"]').text('Japanese (日本語)');
+			$('#language_select option[value="ko-KR"]').text('Korean (한국어)');
 			$('#config_language2').text('Language:');
-			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified)');
-			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional)');
-			$('#language_select2 option[value="en"]').text('English');
-			$('#language_select2 option[value="de"]').text('German');
-			$('#language_select2 option[value="it"]').text('Italian');
-			$('#language_select2 option[value="ja"]').text('Japanese');
-			$('#language_select2 option[value="ko-KR"]').text('Korean');
+			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
+			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
+			$('#language_select2 option[value="en"]').text('English (英語)');
+			$('#language_select2 option[value="de"]').text('German (Deutsch)');
+			$('#language_select2 option[value="it"]').text('Italian (Italiano)');
+			$('#language_select2 option[value="ja"]').text('Japanese (日本語)');
+			$('#language_select2 option[value="ko-KR"]').text('Korean (한국어)');
 			$('#appearance_type').text('映像の種類:');
 			$('#type_select option[value="-1"]').text('画-1: 催眠解除');
 			$('#type_select option[value="0"]').text('画0: 初期画面');
@@ -760,9 +767,19 @@ jQuery(function($){
 			$('#appearance_speed').text('スピード:');
 			$('#speed_irregular_label').text('不規則');
 			$('#appearance_rotation').text('逆回転:');
+			$('#appearance_blinking').text('点滅:');
 			$('#config_size').text('メッセージの大きさ:');
 			$('#config_note').text('音符ボタン:');
 			$('#sound_select option[value=""]').text('(なし)');
+			$('#sound_select option[value="Cattish"]').text('ネコっぽい');
+			$('#sound_select option[value="Drill"]').text('ドリル');
+			$('#sound_select option[value="Horror"]').text('恐怖');
+			$('#sound_select option[value="Hunting"]').text('狩人');
+			$('#sound_select option[value="Keen"]').text('するどい音');
+			$('#sound_select option[value="Lonely"]').text('さびしさ');
+			$('#sound_select option[value="Longing"]').text('あこがれ');
+			$('#sound_select option[value="Lovely"]').text('愛らしい');
+			$('#sound_select option[value="Magic"]').text('魔術');
 			$('#config_switch_sound').text('切り替え音:');
 			$('#config_brightness').text('画面の明るさ:');
 			$('#screen_brightness option[value="normal"]').text('普通');
@@ -787,21 +804,21 @@ jQuery(function($){
 			$('#gear_img').attr('src', 'images/gear.png');
 			$('#question_img').attr('src', 'images/question.png');
 			$('#config_language').text('Language:');
-			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified)');
-			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional)');
-			$('#language_select option[value="en"]').text('English');
-			$('#language_select option[value="de"]').text('German');
-			$('#language_select option[value="it"]').text('Italian');
-			$('#language_select option[value="ja"]').text('Japanese');
-			$('#language_select option[value="ko-KR"]').text('Korean');
+			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
+			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
+			$('#language_select option[value="en"]').text('English (英语)');
+			$('#language_select option[value="de"]').text('German (Deutsch)');
+			$('#language_select option[value="it"]').text('Italian (Italiano)');
+			$('#language_select option[value="ja"]').text('Japanese (日本語)');
+			$('#language_select option[value="ko-KR"]').text('Korean (한국어)');
 			$('#config_language2').text('Language:');
-			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified)');
-			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional)');
-			$('#language_select2 option[value="en"]').text('English');
-			$('#language_select2 option[value="de"]').text('German');
-			$('#language_select2 option[value="it"]').text('Italian');
-			$('#language_select2 option[value="ja"]').text('Japanese');
-			$('#language_select2 option[value="ko-KR"]').text('Korean');
+			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
+			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
+			$('#language_select2 option[value="en"]').text('English (英语)');
+			$('#language_select2 option[value="de"]').text('German (Deutsch)');
+			$('#language_select2 option[value="it"]').text('Italian (Italiano)');
+			$('#language_select2 option[value="ja"]').text('Japanese (日本語)');
+			$('#language_select2 option[value="ko-KR"]').text('Korean (한국어)');
 			$('#appearance_type').text('视频类型：');
 			$('#type_select option[value="-1"]').text('图-1: 释放催眠');
 			$('#type_select option[value="0"]').text('图0: 初始屏幕');
@@ -818,9 +835,19 @@ jQuery(function($){
 			$('#appearance_speed').text('速度：');
 			$('#speed_irregular_label').text('不规律的');
 			$('#appearance_rotation').text('反向旋转：');
+			$('#appearance_blinking').text('闪烁：');
 			$('#config_size').text('消息大小：');
 			$('#config_note').text('声音按钮：');
 			$('#sound_select option[value=""]').text('(无)');
+			$('#sound_select option[value="Cattish"]').text('像猫一样');
+			$('#sound_select option[value="Drill"]').text('钻头');
+			$('#sound_select option[value="Horror"]').text('害怕');
+			$('#sound_select option[value="Hunting"]').text('猎人');
+			$('#sound_select option[value="Keen"]').text('尖锐的声音');
+			$('#sound_select option[value="Lonely"]').text('孤独');
+			$('#sound_select option[value="Longing"]').text('渴望');
+			$('#sound_select option[value="Lovely"]').text('可爱的');
+			$('#sound_select option[value="Magic"]').text('巫术');
 			$('#config_switch_sound').text('开关声音：');
 			$('#config_brightness').text('屏幕亮度：');
 			$('#screen_brightness option[value="normal"]').text('通常');
@@ -845,21 +872,21 @@ jQuery(function($){
 			$('#gear_img').attr('src', 'images/gear.png');
 			$('#question_img').attr('src', 'images/question.png');
 			$('#config_language').text('Language:');
-			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified)');
-			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional)');
-			$('#language_select option[value="en"]').text('English');
-			$('#language_select option[value="de"]').text('German');
-			$('#language_select option[value="it"]').text('Italian');
-			$('#language_select option[value="ja"]').text('Japanese');
-			$('#language_select option[value="ko-KR"]').text('Korean');
+			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
+			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
+			$('#language_select option[value="en"]').text('English (英語)');
+			$('#language_select option[value="de"]').text('German (Deutsch)');
+			$('#language_select option[value="it"]').text('Italian (Italiano)');
+			$('#language_select option[value="ja"]').text('Japanese (日本語)');
+			$('#language_select option[value="ko-KR"]').text('Korean (한국어)');
 			$('#config_language2').text('Language:');
-			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified)');
-			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional)');
-			$('#language_select2 option[value="en"]').text('English');
-			$('#language_select2 option[value="de"]').text('German');
-			$('#language_select2 option[value="it"]').text('Italian');
-			$('#language_select2 option[value="ja"]').text('Japanese');
-			$('#language_select2 option[value="ko-KR"]').text('Korean');
+			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
+			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
+			$('#language_select2 option[value="en"]').text('English (英語)');
+			$('#language_select2 option[value="de"]').text('German (Deutsch)');
+			$('#language_select2 option[value="it"]').text('Italian (Italiano)');
+			$('#language_select2 option[value="ja"]').text('Japanese (日本語)');
+			$('#language_select2 option[value="ko-KR"]').text('Korean (한국어)');
 			$('#appearance_type').text('視頻類型：');
 			$('#type_select option[value="-1"]').text('圖-1: 催眠釋放');
 			$('#type_select option[value="0"]').text('圖0: 初始屏幕');
@@ -876,9 +903,19 @@ jQuery(function($){
 			$('#appearance_speed').text('速度：');
 			$('#speed_irregular_label').text('不規律的');
 			$('#appearance_rotation').text('反向旋轉：');
+			$('#appearance_blinking').text('閃爍：');
 			$('#config_size').text('消息大小：');
 			$('#config_note').text('聲音按鈕：');
 			$('#sound_select option[value=""]').text('(無)');
+			$('#sound_select option[value="Cattish"]').text('像貓一樣');
+			$('#sound_select option[value="Drill"]').text('鑽頭');
+			$('#sound_select option[value="Horror"]').text('害怕');
+			$('#sound_select option[value="Hunting"]').text('獵人');
+			$('#sound_select option[value="Keen"]').text('尖銳的聲音');
+			$('#sound_select option[value="Lonely"]').text('孤獨');
+			$('#sound_select option[value="Longing"]').text('渴望');
+			$('#sound_select option[value="Lovely"]').text('可愛的');
+			$('#sound_select option[value="Magic"]').text('巫術');
 			$('#config_switch_sound').text('開關聲音：');
 			$('#config_brightness').text('屏幕亮度：');
 			$('#screen_brightness option[value="normal"]').text('正常亮度');
@@ -903,21 +940,21 @@ jQuery(function($){
 			$('#gear_img').attr('src', 'images/gear.png');
 			$('#question_img').attr('src', 'images/question.png');
 			$('#config_language').text('Language:');
-			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified)');
-			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional)');
-			$('#language_select option[value="en"]').text('English');
-			$('#language_select option[value="de"]').text('German');
-			$('#language_select option[value="it"]').text('Italian');
-			$('#language_select option[value="ja"]').text('Japanese');
-			$('#language_select option[value="ko-KR"]').text('Korean');
+			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
+			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
+			$('#language_select option[value="en"]').text('English (영어)');
+			$('#language_select option[value="de"]').text('German (Deutsch)');
+			$('#language_select option[value="it"]').text('Italian (Italiano)');
+			$('#language_select option[value="ja"]').text('Japanese (日本語)');
+			$('#language_select option[value="ko-KR"]').text('Korean (한국어)');
 			$('#config_language2').text('Language:');
-			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified)');
-			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional)');
-			$('#language_select2 option[value="en"]').text('English');
-			$('#language_select2 option[value="de"]').text('German');
-			$('#language_select2 option[value="it"]').text('Italian');
-			$('#language_select2 option[value="ja"]').text('Japanese');
-			$('#language_select2 option[value="ko-KR"]').text('Korean');
+			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
+			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
+			$('#language_select2 option[value="en"]').text('English (영어)');
+			$('#language_select2 option[value="de"]').text('German (Deutsch)');
+			$('#language_select2 option[value="it"]').text('Italian (Italiano)');
+			$('#language_select2 option[value="ja"]').text('Japanese (日本語)');
+			$('#language_select2 option[value="ko-KR"]').text('Korean (한국어)');
 			$('#appearance_type').text('그림 유형:');
 			$('#type_select option[value="-1"]').text('pic-1: 최면 해제');
 			$('#type_select option[value="0"]').text('pic0: 초기 화면');
@@ -934,9 +971,19 @@ jQuery(function($){
 			$('#appearance_speed').text('속도:');
 			$('#speed_irregular_label').text('불규칙');
 			$('#appearance_rotation').text('역회전:');
+			$('#appearance_blinking').text('깜박임:');
 			$('#config_size').text('메시지 크기:');
 			$('#config_note').text('사운드 버튼:');
 			$('#sound_select option[value=""]').text('(없음)');
+			$('#sound_select option[value="Cattish"]').text('고양이 같은');
+			$('#sound_select option[value="Drill"]').text('드릴');
+			$('#sound_select option[value="Horror"]').text('공포');
+			$('#sound_select option[value="Hunting"]').text('사냥꾼');
+			$('#sound_select option[value="Keen"]').text('어리석은 소리');
+			$('#sound_select option[value="Lonely"]').text('녹슬다');
+			$('#sound_select option[value="Longing"]').text('동경');
+			$('#sound_select option[value="Lovely"]').text('사랑스러운');
+			$('#sound_select option[value="Magic"]').text('마술');
 			$('#config_switch_sound').text('전환 사운드:');
 			$('#config_brightness').text('화면 밝기:');
 			$('#screen_brightness option[value="normal"]').text('일반 밝기');
@@ -961,21 +1008,21 @@ jQuery(function($){
 			$('#gear_img').attr('src', 'images/gear.png');
 			$('#question_img').attr('src', 'images/question.png');
 			$('#config_language').text('Language:');
-			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified)');
-			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional)');
-			$('#language_select option[value="en"]').text('English');
-			$('#language_select option[value="de"]').text('German');
-			$('#language_select option[value="it"]').text('Italian');
-			$('#language_select option[value="ja"]').text('Japanese');
-			$('#language_select option[value="ko-KR"]').text('Korean');
+			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
+			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
+			$('#language_select option[value="en"]').text('English (Inglese)');
+			$('#language_select option[value="de"]').text('German (Deutsch)');
+			$('#language_select option[value="it"]').text('Italian (Italiano)');
+			$('#language_select option[value="ja"]').text('Japanese (日本語)');
+			$('#language_select option[value="ko-KR"]').text('Korean (한국어)');
 			$('#config_language2').text('Language:');
-			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified)');
-			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional)');
-			$('#language_select2 option[value="en"]').text('English');
-			$('#language_select2 option[value="de"]').text('German');
-			$('#language_select2 option[value="it"]').text('Italian');
-			$('#language_select2 option[value="ja"]').text('Japanese');
-			$('#language_select2 option[value="ko-KR"]').text('Korean');
+			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
+			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
+			$('#language_select2 option[value="en"]').text('English (Inglese)');
+			$('#language_select2 option[value="de"]').text('German (Deutsch)');
+			$('#language_select2 option[value="it"]').text('Italian (Italiano)');
+			$('#language_select2 option[value="ja"]').text('Japanese (日本語)');
+			$('#language_select2 option[value="ko-KR"]').text('Korean (한국어)');
 			$('#appearance_type').text('Il tipo di immagine:');
 			$('#type_select option[value="-1"]').text('pic-1: Liberare l\'ipnosi');
 			$('#type_select option[value="0"]').text('pic0: Schermata iniziale');
@@ -992,9 +1039,19 @@ jQuery(function($){
 			$('#appearance_speed').text('Velocità:');
 			$('#speed_irregular_label').text('Irregolare');
 			$('#appearance_rotation').text('Controrotazione:');
+			$('#appearance_blinking').text('Lampeggiante:');
 			$('#config_size').text('Dimensione del messaggio:');
 			$('#config_note').text('Pulsante audio:');
 			$('#sound_select option[value=""]').text('(Nessuno)');
+			$('#sound_select option[value="Cattish"]').text('Simile a un gatto');
+			$('#sound_select option[value="Drill"]').text('Trapano');
+			$('#sound_select option[value="Horror"]').text('Paura');
+			$('#sound_select option[value="Hunting"]').text('A caccia');
+			$('#sound_select option[value="Keen"]').text('Suono acuto');
+			$('#sound_select option[value="Lonely"]').text('Solitudine');
+			$('#sound_select option[value="Longing"]').text('Desiderio');
+			$('#sound_select option[value="Lovely"]').text('Adorabile');
+			$('#sound_select option[value="Magic"]').text('Stregoneria');
 			$('#config_switch_sound').text('Suono cambio foto:');
 			$('#config_brightness').text('Luminosità:');
 			$('#screen_brightness option[value="normal"]').text('Normale');
@@ -1019,21 +1076,21 @@ jQuery(function($){
 			$('#gear_img').attr('src', 'images/gear.png');
 			$('#question_img').attr('src', 'images/question.png');
 			$('#config_language').text('Language:');
-			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified)');
-			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional)');
-			$('#language_select option[value="en"]').text('English');
-			$('#language_select option[value="de"]').text('German');
-			$('#language_select option[value="it"]').text('Italian');
-			$('#language_select option[value="ja"]').text('Japanese');
-			$('#language_select option[value="ko-KR"]').text('Korean');
+			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
+			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
+			$('#language_select option[value="en"]').text('English (Englisch)');
+			$('#language_select option[value="de"]').text('German (Deutsch)');
+			$('#language_select option[value="it"]').text('Italian (Italiano)');
+			$('#language_select option[value="ja"]').text('Japanese (日本語)');
+			$('#language_select option[value="ko-KR"]').text('Korean (한국어)');
 			$('#config_language2').text('Language:');
-			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified)');
-			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional)');
-			$('#language_select2 option[value="en"]').text('English');
-			$('#language_select2 option[value="de"]').text('German');
-			$('#language_select2 option[value="it"]').text('Italian');
-			$('#language_select2 option[value="ja"]').text('Japanese');
-			$('#language_select2 option[value="ko-KR"]').text('Korean');
+			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
+			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
+			$('#language_select2 option[value="en"]').text('English (Englisch)');
+			$('#language_select2 option[value="de"]').text('German (Deutsch)');
+			$('#language_select2 option[value="it"]').text('Italian (Italiano)');
+			$('#language_select2 option[value="ja"]').text('Japanese (日本語)');
+			$('#language_select2 option[value="ko-KR"]').text('Korean (한국어)');
 			$('#appearance_type').text('Die Art des Bildes:');
 			$('#type_select option[value="-1"]').text('pic-1: Hypnose loslassen');
 			$('#type_select option[value="0"]').text('pic0: Einstiegsbild');
@@ -1050,9 +1107,19 @@ jQuery(function($){
 			$('#appearance_speed').text('Geschwindigkeit:');
 			$('#speed_irregular_label').text('Irregulär');
 			$('#appearance_rotation').text('Gegenrotation:');
+			$('#appearance_blinking').text('Blinken:');
 			$('#config_size').text('Größe der Nachricht:');
 			$('#config_note').text('Sound-Taste:');
 			$('#sound_select option[value=""]').text('(Kein)');
+			$('#sound_select option[value="Cattish"]').text('Katzenartig');
+			$('#sound_select option[value="Drill"]').text('Bohren');
+			$('#sound_select option[value="Horror"]').text('Furcht');
+			$('#sound_select option[value="Hunting"]').text('Jagd');
+			$('#sound_select option[value="Keen"]').text('Scharfer Ton');
+			$('#sound_select option[value="Lonely"]').text('Einsamkeit');
+			$('#sound_select option[value="Longing"]').text('Sehnsucht');
+			$('#sound_select option[value="Lovely"]').text('Liebenswert');
+			$('#sound_select option[value="Magic"]').text('Hexerei');
 			$('#config_switch_sound').text('Bildwechselton:');
 			$('#config_brightness').text('Helligkeit:');
 			$('#screen_brightness option[value="normal"]').text('Normal');
@@ -1077,21 +1144,21 @@ jQuery(function($){
 			$('#gear_img').attr('src', 'images/gear.png');
 			$('#question_img').attr('src', 'images/question.png');
 			$('#config_language').text('Language:');
-			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified)');
-			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional)');
+			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
+			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
 			$('#language_select option[value="en"]').text('English');
-			$('#language_select option[value="de"]').text('German');
-			$('#language_select option[value="it"]').text('Italian');
-			$('#language_select option[value="ja"]').text('Japanese');
-			$('#language_select option[value="ko-KR"]').text('Korean');
+			$('#language_select option[value="de"]').text('German (Deutsch)');
+			$('#language_select option[value="it"]').text('Italian (Italiano)');
+			$('#language_select option[value="ja"]').text('Japanese (日本語)');
+			$('#language_select option[value="ko-KR"]').text('Korean (한국어)');
 			$('#config_language2').text('Language:');
-			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified)');
-			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional)');
+			$('#language_select2 option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
+			$('#language_select2 option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
 			$('#language_select2 option[value="en"]').text('English');
-			$('#language_select2 option[value="de"]').text('German');
-			$('#language_select2 option[value="it"]').text('Italian');
-			$('#language_select2 option[value="ja"]').text('Japanese');
-			$('#language_select2 option[value="ko-KR"]').text('Korean');
+			$('#language_select2 option[value="de"]').text('German (Deutsch)');
+			$('#language_select2 option[value="it"]').text('Italian (Italiano)');
+			$('#language_select2 option[value="ja"]').text('Japanese (日本語)');
+			$('#language_select2 option[value="ko-KR"]').text('Korean (한국어)');
 			$('#appearance_type').text('The type of picture:');
 			$('#type_select option[value="-1"]').text('pic-1: Release Hypnosis');
 			$('#type_select option[value="0"]').text('pic0: Initial Screen');
@@ -1108,9 +1175,19 @@ jQuery(function($){
 			$('#appearance_speed').text('Speed:');
 			$('#speed_irregular_label').text('Irregular');
 			$('#appearance_rotation').text('Counterrotation:');
+			$('#appearance_blinking').text('Blinking:');
 			$('#config_size').text('Size of message:');
 			$('#config_note').text('Sound button:');
 			$('#sound_select option[value=""]').text('(None)');
+			$('#sound_select option[value="Cattish"]').text('Cattish');
+			$('#sound_select option[value="Drill"]').text('Drill');
+			$('#sound_select option[value="Horror"]').text('Horror');
+			$('#sound_select option[value="Hunting"]').text('Hunting');
+			$('#sound_select option[value="Keen"]').text('Keen');
+			$('#sound_select option[value="Lonely"]').text('Lonely');
+			$('#sound_select option[value="Longing"]').text('Longing');
+			$('#sound_select option[value="Lovely"]').text('Lovely');
+			$('#sound_select option[value="Magic"]').text('Magic');
 			$('#config_switch_sound').text('Pic change sound:');
 			$('#config_brightness').text('Brightness:');
 			$('#screen_brightness option[value="normal"]').text('Normal');
@@ -1324,16 +1401,60 @@ jQuery(function($){
 		localStorage.setItem('saiminSpeedType', speed);
 	}
 
-	function setDivision(value){
+	function setBlinkingType(value){
+		value = parseInt(value);
+		let text, hz;
 		switch(value){
-		case -1:
-		case true:
+		case 0:
+		default:
+			text = getStr('TEXT_NO_BLINKING');
+			hz = 0;
+			break;
+		case 1:
+			hz = 4.0;
+			text = "4.0Hz";
+			break;
+		case 2:
+			hz = 5.0;
+			text = "5.0Hz";
+			break;
+		case 3:
+			hz = 6.0;
+			text = "6.0Hz";
+			break;
+		case 4:
+			hz = 7.0;
+			text = "7.0Hz";
+			break;
+		case 5:
+			hz = 8.0;
+			text = "8.0Hz";
+			break;
+		case 6:
+			hz = 9.0;
+			text = "9.0Hz";
+			break;
+		case 7:
+			hz = 10.0;
+			text = "10Hz";
+			break;
+		}
+		blinking_interval = (hz > 0) ? (1.0 / hz) : 0;
+		if (blinking_type.value != value.toString())
+			blinking_type.value = value.toString();
+		blinking_output.innerText = text;
+		localStorage.setItem('saiminBlinkType', value);
+	}
+
+	function setDivision(value){
+		value = parseInt(value);
+		switch(value){
 		case 2:
 			division_select.checked = true;
 			division = 2;
 			break;
-		case false:
 		case 1:
+		default:
 			division_select.checked = false;
 			division = 1;
 			break;
@@ -1602,9 +1723,10 @@ jQuery(function($){
 
 	function apperance(){
 		let old_type_value = type_select.value;
-		let old_division_value = division_select.checked;
+		let old_division_value = division_select.checked ? 2 : 1;
 		let old_speed_type_value = speed_type_value.value;
 		let old_rotation_value = rotation_select.checked;
+		let old_blinking_value = blinking_type.value;
 		localStorage.setItem('saiminAppearanceShowing', '1');
 		let dialogContainer = $('#appearance_dialog');
 		dialogContainer.dialog({
@@ -1631,6 +1753,7 @@ jQuery(function($){
 						setDivision(old_division_value);
 						setSpeedType(old_speed_type_value);
 						setRotation(old_rotation_value);
+						setBlinkingType(old_blinking_value);
 						dialogContainer.dialog('close');
 					},
 				}
@@ -1782,9 +1905,9 @@ jQuery(function($){
 		ctx.bezierCurveTo(x0 - r05, y0 - r025, x0 - r05, y0 + r025, x0, y0 + r * 1.3);
 		ctx.bezierCurveTo(x0 + r05, y0 + r025, x0 + r05, y0 - r025, x0, y0 - r * 1.3);
 		ctx.closePath();
-		ctx.fillStyle = "#fcc";
+		ctx.fillStyle = "#faa";
 		ctx.fill();
-		ctx.strokeStyle = "#c66";
+		ctx.strokeStyle = "#c00";
 		ctx.lineWidth = r * 0.15;
 		ctx.stroke();
 
@@ -1810,6 +1933,23 @@ jQuery(function($){
 		ctx.lineTo(x0, y0 + r0);
 		ctx.lineTo(x0 - rmid, y0);
 		ctx.fill();
+	}
+
+	function fillBlack(ctx, px, py, dx, dy){
+		ctx.save();
+
+		ctx.beginPath();
+		ctx.moveTo(px, py);
+		ctx.lineTo(px + dx, py);
+		ctx.lineTo(px + dx, py + dy);
+		ctx.lineTo(px, py + dy);
+		ctx.closePath();
+		ctx.clip();
+
+		ctx.fillStyle = 'black';
+		ctx.fillRect(px, py, dx, dy);
+
+		ctx.restore();
 	}
 
 	// pic-1: Release Hyponosis
@@ -2000,7 +2140,7 @@ jQuery(function($){
 			ctx.lineWidth = 15;
 		}
 		let dr = dr0 / 2 * factor;
-		let radius = neg_mod(count2 * 4, dr0);
+		let radius = mod(count2 * 4, dr0);
 		if(flag)
 			radius = dr0 - radius;
 
@@ -2011,8 +2151,7 @@ jQuery(function($){
 		ctx.restore();
 	}
 
-	function hsv2rgb(h, s, v)
-	{
+	function hsv2rgb(h, s, v){
 		let r, g, b;
 		r = g = b = v;
 		if(s > 0)
@@ -2123,7 +2262,7 @@ jQuery(function($){
 		ctx.lineWidth = 10;
 		let i = 0;
 		ctx.strokeStyle = 'rgba(255, 0, 0, 50%)';
-		for (let r = neg_mod(count2 * 2, 100); r < cxy; r += 100){
+		for (let r = mod(count2 * 2, 100); r < cxy; r += 100){
 			circle(ctx, qx, qy, r, false);
 			++i;
 		}
@@ -2281,16 +2420,16 @@ jQuery(function($){
 		circle(ctx, qx, qy, dxy, true);
 
 		let value = factor * 25 + 10;
-		let value2 = neg_mod(value, 191);
+		let value2 = mod(value, 191);
 		ctx.fillStyle = `rgb(255,${value2},${value2})`;
 		let M = 5;
 		let heartSize = 30;
-		for (let radius = neg_mod((factor * 10), 100) + 30; radius < dxy; radius += 100){
+		for (let radius = mod((factor * 10), 100) + 30; radius < dxy; radius += 100){
 			for (let angle = 0; angle < 360; angle += 360 / M){
 				let radian = angle * (Math.PI / 180.0);
 				let x0 = qx + radius * Math.cos(radian + factor * 0.1 + radius / 100);
 				let y0 = qy + radius * Math.sin(radian + factor * 0.1 + radius / 100);
-				heart(ctx, x0, y0, x0, y0 + heartSize + neg_mod(value, 191) / 12);
+				heart(ctx, x0, y0, x0, y0 + heartSize + mod(value, 191) / 12);
 			}
 			heartSize += 5;
 		}
@@ -2598,6 +2737,12 @@ jQuery(function($){
 	}
 
 	function drawPicBlur(ctx, px, py, dx, dy){
+		if(blinking_interval != 0 && picType != -1){
+			if(mod(old_time / 1000, blinking_interval) > (blinking_interval / 2)){
+				fillBlack(ctx, px, py, dx, dy);
+				return;
+			}
+		}
 		switch (picType){
 		case 8:
 		case 9:
@@ -2781,6 +2926,13 @@ jQuery(function($){
 			setSpeedType('normal');
 		}
 
+		let saiminBlinkType = localStorage.getItem('saiminBlinkType');
+		if(saiminBlinkType){
+			setBlinkingType(saiminBlinkType);
+		}else{
+			setBlinkingType(0);
+		}
+
 		let saiminRotation = localStorage.getItem('saiminRotation');
 		if(saiminRotation){
 			setRotation(saiminRotation);
@@ -2911,12 +3063,12 @@ jQuery(function($){
 		division_select.addEventListener('change', function(){
 			if(!ready)
 				return;
-			setDivision(division_select.checked);
+			setDivision(division_select.checked ? 2 : 1);
 		}, false);
 		division_select.addEventListener('click', function(){
 			if(!ready)
 				return;
-			setDivision(division_select.checked);
+			setDivision(division_select.checked ? 2 : 1);
 		}, false);
 
 		speed_type_value.addEventListener('input', function(){
@@ -2939,6 +3091,12 @@ jQuery(function($){
 			if(!ready)
 				return;
 			setRotation(rotation_select.checked);
+		}, false);
+
+		blinking_type.addEventListener('input', function(){
+			if(!ready)
+				return;
+			setBlinkingType(blinking_type.value);
 		}, false);
 
 		function canvasClick(e){
@@ -3221,6 +3379,10 @@ jQuery(function($){
 			}
 			if(e.key == 'u' || e.key == 'U'){ // Debugging
 				DEBUGGING = !DEBUGGING;
+				return;
+			}
+			if(e.key == 'l' || e.key == 'L'){ // Blinking
+				setBlinkingType((parseInt(blinking_type.value) + 1) % 8);
 				return;
 			}
 			if(e.key == 'r' || e.key == 'R'){ // Reload

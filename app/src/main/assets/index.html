@@ -102,6 +102,13 @@
 			<span class="labels" data-on="ON" data-off="OFF"></span>
 		</label>
 	</div>
+	<div class="ui_line">
+		<span id="appearance_blinking">Blinking:</span>
+		<span class="nobr">
+			<input type="range" id="blinking_type" name="blinking_type" min="0" max="7" value="0" step="1" />
+			<output id="blinking_output" name="blinking_output" for="blinking_type">No blinking</output>
+		</span>
+	</div>
 </div>
 
 <!-- The configuration dialog -->
@@ -127,15 +134,15 @@
 		<span id="config_note">Note button:</span>
 		<select id="sound_select" title="sound_select">
 			<option value="" selected>(None)</option>
-			<option value="Robot">Robot</option>
-			<option value="Keen">Keen</option>
+			<option value="Cattish">Cattish</option>
+			<option value="Drill">Drill</option>
 			<option value="Horror">Horror</option>
 			<option value="Hunting">Hunting</option>
+			<option value="Keen">Keen</option>
 			<option value="Lonely">Lonely</option>
 			<option value="Longing">Longing</option>
 			<option value="Lovely">Lovely</option>
 			<option value="Magic">Magic</option>
-			<option value="Cattish">Cattish</option>
 		</select>
 	</div>
 	<div class="ui_line">
