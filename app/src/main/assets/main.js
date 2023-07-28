@@ -2731,7 +2731,7 @@ jQuery(function($){
 
 	function drawPicBlur(ctx, px, py, dx, dy){
 		if(blinking_interval != 0 && picType != -1){
-			if(mod(old_time / 1000, blinking_interval) > (blinking_interval / 2)){
+			if(mod(old_time / 1000, blinking_interval) > (blinking_interval * 2 / 3)){
 				fillBlack(ctx, px, py, dx, dy);
 				return;
 			}
