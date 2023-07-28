@@ -772,6 +772,7 @@ jQuery(function($){
 			$('#sound_select option[value=""]').text('(なし)');
 			$('#sound_select option[value="Cattish"]').text('ネコっぽい');
 			$('#sound_select option[value="Drill"]').text('ドリル');
+			$('#sound_select option[value="Drill2"]').text('ドリル 2');
 			$('#sound_select option[value="Horror"]').text('恐怖');
 			$('#sound_select option[value="Hunting"]').text('狩人');
 			$('#sound_select option[value="Lonely"]').text('さびしさ');
@@ -838,6 +839,7 @@ jQuery(function($){
 			$('#sound_select option[value=""]').text('(无)');
 			$('#sound_select option[value="Cattish"]').text('像猫一样');
 			$('#sound_select option[value="Drill"]').text('钻头');
+			$('#sound_select option[value="Drill2"]').text('钻头 2');
 			$('#sound_select option[value="Horror"]').text('害怕');
 			$('#sound_select option[value="Hunting"]').text('猎人');
 			$('#sound_select option[value="Lonely"]').text('孤独');
@@ -904,6 +906,7 @@ jQuery(function($){
 			$('#sound_select option[value=""]').text('(無)');
 			$('#sound_select option[value="Cattish"]').text('像貓一樣');
 			$('#sound_select option[value="Drill"]').text('鑽頭');
+			$('#sound_select option[value="Drill2"]').text('鑽頭 2');
 			$('#sound_select option[value="Horror"]').text('害怕');
 			$('#sound_select option[value="Hunting"]').text('獵人');
 			$('#sound_select option[value="Lonely"]').text('孤獨');
@@ -970,6 +973,7 @@ jQuery(function($){
 			$('#sound_select option[value=""]').text('(없음)');
 			$('#sound_select option[value="Cattish"]').text('고양이 같은');
 			$('#sound_select option[value="Drill"]').text('드릴');
+			$('#sound_select option[value="Drill2"]').text('드릴 2');
 			$('#sound_select option[value="Horror"]').text('공포');
 			$('#sound_select option[value="Hunting"]').text('사냥꾼');
 			$('#sound_select option[value="Lonely"]').text('녹슬다');
@@ -1036,6 +1040,7 @@ jQuery(function($){
 			$('#sound_select option[value=""]').text('(Nessuno)');
 			$('#sound_select option[value="Cattish"]').text('Simile a un gatto');
 			$('#sound_select option[value="Drill"]').text('Trapano');
+			$('#sound_select option[value="Drill2"]').text('Trapano 2');
 			$('#sound_select option[value="Horror"]').text('Paura');
 			$('#sound_select option[value="Hunting"]').text('A caccia');
 			$('#sound_select option[value="Lonely"]').text('Solitudine');
@@ -1102,6 +1107,7 @@ jQuery(function($){
 			$('#sound_select option[value=""]').text('(Kein)');
 			$('#sound_select option[value="Cattish"]').text('Katzenartig');
 			$('#sound_select option[value="Drill"]').text('Bohren');
+			$('#sound_select option[value="Drill2"]').text('Bohren 2');
 			$('#sound_select option[value="Horror"]').text('Furcht');
 			$('#sound_select option[value="Hunting"]').text('Jagd');
 			$('#sound_select option[value="Lonely"]').text('Einsamkeit');
@@ -1168,6 +1174,7 @@ jQuery(function($){
 			$('#sound_select option[value=""]').text('(None)');
 			$('#sound_select option[value="Cattish"]').text('Cattish');
 			$('#sound_select option[value="Drill"]').text('Drill');
+			$('#sound_select option[value="Drill2"]').text('Drill 2');
 			$('#sound_select option[value="Horror"]').text('Horror');
 			$('#sound_select option[value="Hunting"]').text('Hunting');
 			$('#sound_select option[value="Lonely"]').text('Lonely');
