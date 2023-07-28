@@ -1140,7 +1140,7 @@ jQuery(function($){
 			$('#config_language').text('Language (言語):');
 			$('#language_select option[value="zh-CN"]').text('Chinese (Simplified) (简体中文)');
 			$('#language_select option[value="zh-TW"]').text('Chinese (Traditional) (繁體中文)');
-			$('#language_select option[value="en"]').text('English');
+			$('#language_select option[value="en"]').text('English (英語)');
 			$('#language_select option[value="de"]').text('German (Deutsch)');
 			$('#language_select option[value="it"]').text('Italian (Italiano)');
 			$('#language_select option[value="ja"]').text('Japanese (日本語)');
