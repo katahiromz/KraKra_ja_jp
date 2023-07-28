@@ -1201,12 +1201,58 @@ jQuery(function($){
 		$('#notice_text').scrollTop(0);
 	}
 
+	function setBlinkingType(value){
+		value = parseInt(value);
+		let text, hz;
+		switch(value){
+		case 0:
+		default:
+			text = getStr('TEXT_NO_BLINKING');
+			hz = 0;
+			break;
+		case 1:
+			hz = 4.0;
+			text = "4.0Hz";
+			break;
+		case 2:
+			hz = 5.0;
+			text = "5.0Hz";
+			break;
+		case 3:
+			hz = 6.0;
+			text = "6.0Hz";
+			break;
+		case 4:
+			hz = 7.0;
+			text = "7.0Hz";
+			break;
+		case 5:
+			hz = 8.0;
+			text = "8.0Hz";
+			break;
+		case 6:
+			hz = 9.0;
+			text = "9.0Hz";
+			break;
+		case 7:
+			hz = 10.0;
+			text = "10Hz";
+			break;
+		}
+		blinking_interval = (hz > 0) ? (1.0 / hz) : 0;
+		if (blinking_type.value != value.toString())
+			blinking_type.value = value.toString();
+		blinking_output.innerText = text;
+		localStorage.setItem('saiminBlinkType', value);
+	}
+
 	function setLanguage(lang){
 		if(!lang)
 			lang = 'en';
 		localStorage.setItem('saiminLanguage3', lang);
 		localizeSaimin(lang);
 		language_select.value = lang;
+		setBlinkingType(blinking_type.value);
 		try{
 			android.setLanguage(lang);
 		}catch(error){
@@ -1392,51 +1438,6 @@ jQuery(function($){
 			speed_irregular.checked = speedIrregular;
 		}
 		localStorage.setItem('saiminSpeedType', speed);
-	}
-
-	function setBlinkingType(value){
-		value = parseInt(value);
-		let text, hz;
-		switch(value){
-		case 0:
-		default:
-			text = getStr('TEXT_NO_BLINKING');
-			hz = 0;
-			break;
-		case 1:
-			hz = 4.0;
-			text = "4.0Hz";
-			break;
-		case 2:
-			hz = 5.0;
-			text = "5.0Hz";
-			break;
-		case 3:
-			hz = 6.0;
-			text = "6.0Hz";
-			break;
-		case 4:
-			hz = 7.0;
-			text = "7.0Hz";
-			break;
-		case 5:
-			hz = 8.0;
-			text = "8.0Hz";
-			break;
-		case 6:
-			hz = 9.0;
-			text = "9.0Hz";
-			break;
-		case 7:
-			hz = 10.0;
-			text = "10Hz";
-			break;
-		}
-		blinking_interval = (hz > 0) ? (1.0 / hz) : 0;
-		if (blinking_type.value != value.toString())
-			blinking_type.value = value.toString();
-		blinking_output.innerText = text;
-		localStorage.setItem('saiminBlinkType', value);
 	}
 
 	function setDivision(value){
