@@ -87,7 +87,7 @@ input[type='checkbox'] {
 }
 #config_play_button {
 	width: 35pt;
-	height: 24pt;
+	height: 25pt;
 }
 .releasing {
 	background-color: red !important;
