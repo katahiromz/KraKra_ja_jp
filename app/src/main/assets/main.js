@@ -1275,6 +1275,7 @@ jQuery(function($){
 	}
 
 	function adjustText(text){
+		text = text.replace('～', 'ー');
 		// {{language-specific}}
 		text = text.replace(getStr('TEXT_FULLWIDTH_SPACE'), '  ').trim();
 		if(text == '')
