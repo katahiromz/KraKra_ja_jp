@@ -91,6 +91,7 @@ input[type='checkbox'] {
 	position: relative;
 	top: -1pt;
 	vertical-align: middle;
+	background-color: #333;
 }
 #config_play_button img {
 	position: relative;
