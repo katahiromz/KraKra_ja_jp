@@ -4,10 +4,6 @@ const NUM_TYPE = 9;
 const VERSION = '3.4.0';
 let DEBUGGING = false;
 
-function savePicType(type){
-    // Do nothing
-}
-
 // {{LANGUAGE_SPECIFIC}}
 const NOTICE_EN = `=========================
 催眠くらくら
@@ -2755,7 +2751,7 @@ jQuery(function($){
 
 	function drawPicBlur(ctx, px, py, dx, dy){
 		if(blinking_interval != 0 && picType != -1){
-			if(mod(old_time / 1000, blinking_interval) > (blinking_interval * 2 / 3)){
+			if(mod(old_time / 1000, blinking_interval) < (blinking_interval / 3)){
 				fillBlack(ctx, px, py, dx, dy);
 				return;
 			}

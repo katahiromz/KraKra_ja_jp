@@ -169,10 +169,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        if (webView != null && chromeClient != null) {
-            val strJS: String = "savePicType(" + chromeClient!!.currPicType + ");"
-            webView!!.evaluateJavascript(strJS, null)
-        }
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
