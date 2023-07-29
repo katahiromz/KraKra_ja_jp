@@ -760,7 +760,7 @@ jQuery(function($){
 			$('#type_select option[value="5"]').text('画5: 広がるハート');
 			$('#type_select option[value="6"]').text('画6: 五円玉');
 			$('#type_select option[value="7"]').text('画7: ぼわんぼわん');
-			$('#type_select option[value="8"]').text('画8: 狂気の色');
+			$('#type_select option[value="8"]').text('画8: クレージーな色');
 			$('#type_select option[value="9"]').text('画9: ミックス渦巻き');
 			$('#appearance_division').text('画面分割:');
 			$('#appearance_speed').text('スピード:');
