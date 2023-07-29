@@ -1663,6 +1663,12 @@ jQuery(function($){
 			draggable: false,
 			resizable: false,
 		});
+		dialogContainer.keydown(function(e){
+			if (e.keyCode == 13){
+				$(this).parent().find('button:nth-child(1)').trigger('click');
+				return false;
+			}
+		});
 		$('#choose_language_dialog').on('dialogclose', function(event){
 			if(first_time && !localStorage.getItem('saiminLanguage3')){
 				setLanguage('en');
@@ -1707,6 +1713,12 @@ jQuery(function($){
 			// Workaround against slowness
 			draggable: false,
 			resizable: false,
+		});
+		dialogContainer.keydown(function(e){
+			if (e.keyCode == 13){
+				$(this).parent().find('button:nth-child(2)').trigger('click');
+				return false;
+			}
 		});
 		dialogContainer.on('dialogclose', function(event){
 			localStorage.removeItem('saiminHelpShowing');
@@ -1755,6 +1767,12 @@ jQuery(function($){
 			draggable: false,
 			resizable: false,
 		});
+		dialogContainer.keydown(function(e){
+			if (e.keyCode == 13){
+				$(this).parent().find('button:nth-child(2)').trigger('click');
+				return false;
+			}
+		});
 		dialogContainer.on('dialogclose', function(event){
 			localStorage.removeItem('saiminAppearanceShowing');
 		});
@@ -1792,6 +1810,12 @@ jQuery(function($){
 			// Workaround against slowness
 			draggable: false,
 			resizable: false,
+		});
+		dialogContainer.keydown(function(e){
+			if (e.keyCode == 13){
+				$(this).parent().find('button:nth-child(1)').trigger('click');
+				return false;
+			}
 		});
 		dialogContainer.on('dialogclose', function(event){
 			localStorage.removeItem('saiminConfigShowing');
