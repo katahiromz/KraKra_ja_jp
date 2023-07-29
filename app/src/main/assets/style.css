@@ -21,6 +21,8 @@ label {
 }
 .nobr {
 	white-space:nowrap;
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
 	hyphens: none;
 }
 input[type='checkbox'] {
@@ -84,7 +86,7 @@ input[type='checkbox'] {
 	width: calc(100% / 5 - 5px);
 }
 #config_play_button {
-	width: 24pt;
+	width: 35pt;
 	height: 24pt;
 }
 .releasing {

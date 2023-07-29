@@ -17,7 +17,7 @@
 	<script defer src="mic.js"></script>
 	<script defer src="main.js"></script>
 	<link rel="icon" href="favicon.ico" />
-	<link rel="manifest" href="manifest.webmanifest" />
+	<link rel="manifest" href="manifest.json" />
 	<meta name="theme-color" content="#FFB5E6" />
 	<link rel="apple-touch-icon" href="https:./icons/apple-touch-icon.png" />
 	<link rel="stylesheet" href="style.css" type="text/css" />
@@ -78,8 +78,8 @@
 	</div>
 	<div class="ui_line">
 		<span id="appearance_division">Screen splitting:</span>
-		<label class="toggle">
-			<input type="checkbox" id="division_select">
+		<label class="toggle" title="Splitting">
+			<input type="checkbox" id="division_select" />
 			<span class="slider"></span>
 			<span class="labels" data-on="ON" data-off="OFF"></span>
 		</label>
@@ -87,7 +87,7 @@
 	<div class="ui_line">
 		<span id="appearance_speed">Speed:</span>
 		<span class="nobr">
-			<input type="range" id="speed_type_value" name="speed_type_value" min="0" max="100" value="45.0" step="1" />
+			<input type="range" id="speed_type_value" name="speed_type_value" min="0" max="100" value="45.0" step="1" title="Speed" />
 			<label for="speed_irregular" class="nobr">
 				<input type="checkbox" id="speed_irregular" name="speed_irregular" />
 				<span id="speed_irregular_label"></span>
@@ -97,7 +97,7 @@
 	<div class="ui_line">
 		<span id="appearance_rotation">Rotation:</span>
 		<label class="toggle">
-			<input type="checkbox" id="rotation_select">
+			<input type="checkbox" id="rotation_select" title="Rotation" />
 			<span class="slider"></span>
 			<span class="labels" data-on="ON" data-off="OFF"></span>
 		</label>
@@ -105,7 +105,7 @@
 	<div class="ui_line">
 		<span id="appearance_blinking">Blinking:</span>
 		<span class="nobr">
-			<input type="range" id="blinking_type" name="blinking_type" min="0" max="7" value="0" step="1" />
+			<input type="range" id="blinking_type" name="blinking_type" min="0" max="7" value="0" step="1" title="Blinking" />
 			<output id="blinking_output" name="blinking_output" for="blinking_type">No blinking</output>
 		</span>
 	</div>
@@ -128,7 +128,7 @@
 	</div>
 	<div class="ui_line">
 		<span id="config_size">Size of message:</span>
-		<input id="message_size_select" type="range" min="1" max="4" step="1" value="2" />
+		<input id="message_size_select" type="range" min="1" max="4" step="1" value="2" title="Message Size" />
 	</div>
 	<div class="ui_line">
 		<span id="config_note">Note button:</span>
@@ -147,13 +147,13 @@
 				<option value="OraSaimin">Ora! Saimin!</option>
 				<option value="Zako">Zako</option>
 			</select>
-			<button id="config_play_button"><img src="images/play.png" alt="[Play]"/></button>
+			<button id="config_play_button" type="button"><img src="images/play.png" alt="[Play]"/></button>
 		</span>
 	</div>
 	<div class="ui_line">
 		<span id="config_switch_sound">Pic change sound:</span>
 		<label class="toggle">
-			<input type="checkbox" id="type_sound_select">
+			<input type="checkbox" id="type_sound_select" title="Pic Change Sound" />
 			<span class="slider"></span>
 			<span class="labels" data-on="ON" data-off="OFF"></span>
 		</label>
@@ -192,7 +192,7 @@
 <div id="about_dialog" class="invisible">
 	<div id="version_text">Hyponosis KraKra Version [[VERSION]]</div>
 	<div>
-<textarea id="notice_text" rows="8" readonly></textarea>
+<textarea id="notice_text" rows="8" title="Notice" readonly></textarea>
 	</div>
 </div>
 
