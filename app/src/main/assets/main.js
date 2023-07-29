@@ -1324,29 +1324,13 @@ jQuery(function($){
 
 	let playing = null;
 
-	function setSoundName(value, test = false){
+	function setSoundName(value){
 		if(value.indexOf('sn') == 0)
 			value = '';
 		soundName = value;
 		if(soundName != ''){
-			console.log('sn/' + soundName + '.mp3, ' + test);
-			if(test){
-				sound = null;
-			}
+			console.log('sn/' + soundName + '.mp3');
 			sound = new Audio('sn/' + soundName + '.mp3');
-			if(test){
-				if(playing){
-					try{
-						playing.pause();
-					}catch(error){
-						;
-					}
-				}
-				setTimeout(function(){
-					playing = sound;
-					sound.play();
-				}, 100);
-			}
 		}else{
 			sound = null;
 		}
@@ -3049,12 +3033,20 @@ jQuery(function($){
 		sound_select.addEventListener('change', function(){
 			if(!ready)
 				return;
-			setSoundName(sound_select.value, true);
+			setSoundName(sound_select.value);
 		}, false);
 		sound_select.addEventListener('click', function(){
 			if(!ready)
 				return;
-			setSoundName(sound_select.value, true);
+			setSoundName(sound_select.value);
+		}, false);
+		config_play_button.addEventListener('click', function(){
+			if(!ready)
+				return;
+			if(soundName != '' && sound){
+				let s = new Audio('sn/' + soundName + '.mp3');
+				s.play();
+			}
 		}, false);
 
 		type_sound_select.addEventListener('change', function(){

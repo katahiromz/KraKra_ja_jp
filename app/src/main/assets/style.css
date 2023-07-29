@@ -83,6 +83,10 @@ input[type='checkbox'] {
 	bottom: 0;
 	width: calc(100% / 5 - 5px);
 }
+#config_play_button {
+	width: 24pt;
+	height: 24pt;
+}
 .releasing {
 	background-color: red !important;
 	text-align: center;
