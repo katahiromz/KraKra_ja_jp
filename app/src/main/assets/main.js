@@ -1,7 +1,7 @@
 /* jshint esversion: 8 */
 
 const NUM_TYPE = 9;
-const VERSION = '3.4.0';
+const VERSION = '3.4.1';
 let DEBUGGING = false;
 
 // {{LANGUAGE_SPECIFIC}}
@@ -776,7 +776,6 @@ jQuery(function($){
 			$('#sound_select option[value="Lovely"]').text('愛らしい');
 			$('#sound_select option[value="Magic"]').text('魔術');
 			$('#sound_select option[value="OraSaimin"]').text('おら! 催眠!');
-			$('#sound_select option[value="Zako"]').text('雑魚');
 			$('#config_switch_sound').text('切り替え音:');
 			$('#config_brightness').text('画面の明るさ:');
 			$('#screen_brightness option[value="normal"]').text('普通');
@@ -845,7 +844,6 @@ jQuery(function($){
 			$('#sound_select option[value="Lovely"]').text('可爱的');
 			$('#sound_select option[value="Magic"]').text('巫术');
 			$('#sound_select option[value="OraSaimin"]').text('天啊！ 催眠！');
-			$('#sound_select option[value="Zako"]').text('小人物');
 			$('#config_switch_sound').text('开关声音：');
 			$('#config_brightness').text('屏幕亮度：');
 			$('#screen_brightness option[value="normal"]').text('通常');
@@ -914,7 +912,6 @@ jQuery(function($){
 			$('#sound_select option[value="Lovely"]').text('可愛的');
 			$('#sound_select option[value="Magic"]').text('巫術');
 			$('#sound_select option[value="OraSaimin"]').text('天啊！ 催眠！');
-			$('#sound_select option[value="Zako"]').text('小人物');
 			$('#config_switch_sound').text('開關聲音：');
 			$('#config_brightness').text('屏幕亮度：');
 			$('#screen_brightness option[value="normal"]').text('正常亮度');
@@ -983,7 +980,6 @@ jQuery(function($){
 			$('#sound_select option[value="Lovely"]').text('사랑스러운');
 			$('#sound_select option[value="Magic"]').text('마술');
 			$('#sound_select option[value="OraSaimin"]').text('오! 최면!');
-			$('#sound_select option[value="Zako"]').text('조금');
 			$('#config_switch_sound').text('전환 사운드:');
 			$('#config_brightness').text('화면 밝기:');
 			$('#screen_brightness option[value="normal"]').text('일반 밝기');
@@ -1052,7 +1048,6 @@ jQuery(function($){
 			$('#sound_select option[value="Lovely"]').text('Adorabile');
 			$('#sound_select option[value="Magic"]').text('Stregoneria');
 			$('#sound_select option[value="OraSaimin"]').text('Ora! Saimin!');
-			$('#sound_select option[value="Zako"]').text('Un po\'');
 			$('#config_switch_sound').text('Suono cambio foto:');
 			$('#config_brightness').text('Luminosità:');
 			$('#screen_brightness option[value="normal"]').text('Normale');
@@ -1121,7 +1116,6 @@ jQuery(function($){
 			$('#sound_select option[value="Lovely"]').text('Liebenswert');
 			$('#sound_select option[value="Magic"]').text('Hexerei');
 			$('#sound_select option[value="OraSaimin"]').text('Ora! Saimin!');
-			$('#sound_select option[value="Zako"]').text('Klein');
 			$('#config_switch_sound').text('Bildwechselton:');
 			$('#config_brightness').text('Helligkeit:');
 			$('#screen_brightness option[value="normal"]').text('Normal');
@@ -1190,7 +1184,6 @@ jQuery(function($){
 			$('#sound_select option[value="Lovely"]').text('Lovely');
 			$('#sound_select option[value="Magic"]').text('Magic');
 			$('#sound_select option[value="OraSaimin"]').text('Ora! Saimin!');
-			$('#sound_select option[value="Zako"]').text('Little');
 			$('#config_switch_sound').text('Pic change sound:');
 			$('#config_brightness').text('Brightness:');
 			$('#screen_brightness option[value="normal"]').text('Normal');
@@ -1341,7 +1334,8 @@ jQuery(function($){
 		if (value === false)
 			value = 0;
 		typeSound = parseInt(value);
-		type_sound_select.checked = !!value;
+		if (type_sound_select.checked != !!value)
+			type_sound_select.checked = !!value;
 		localStorage.setItem('saiminTypeSound', value);
 		if(test && typeSound == 1 && kirakira_sound){
 			kirakira_sound.play();
@@ -1948,7 +1942,7 @@ jQuery(function($){
 		ctx.fill();
 	}
 
-	function fillBlack(ctx, px, py, dx, dy){
+	function drawSubliminal(ctx, px, py, dx, dy){
 		ctx.save();
 
 		ctx.beginPath();
@@ -1959,8 +1953,19 @@ jQuery(function($){
 		ctx.closePath();
 		ctx.clip();
 
-		ctx.fillStyle = 'black';
+		let count = getCount();
+		let factor1 = Math.sin(count * 0.1);
+		let factor2 = Math.abs(Math.cos(count * 0.03));
+
+		ctx.fillStyle = `rgb(${factor2 * 30 + 40}%, 20%, ${40}%)`;
 		ctx.fillRect(px, py, dx, dy);
+
+		let mxy = Math.min(dx, dy) * (0.7 + 0.2 * factor1);
+		let cx = px + dx / 2;
+		let cy = py + dy / 2;
+
+		ctx.fillStyle = '#f03';
+		heart(ctx, cx, cy - mxy / 2, cx, cy + mxy / 2);
 
 		ctx.restore();
 	}
@@ -2751,8 +2756,8 @@ jQuery(function($){
 
 	function drawPicBlur(ctx, px, py, dx, dy){
 		if(blinking_interval != 0 && picType != -1){
-			if(mod(old_time / 1000, blinking_interval) < (blinking_interval / 3)){
-				fillBlack(ctx, px, py, dx, dy);
+			if(mod(old_time / 1000, blinking_interval) < (blinking_interval * 0.3)){
+				drawSubliminal(ctx, px, py, dx, dy);
 				return;
 			}
 		}
@@ -3129,11 +3134,9 @@ jQuery(function($){
 				setPicType((picType + 1) % (NUM_TYPE + 1));
 			}
 			type_select.value = picType.toString();
-			if(typeSound == 1){
-				if(kirakira_sound){
-					let kirakira = new Audio('sn/kirakira.mp3');
-					kirakira.play();
-				}
+			if(typeSound == 1 && kirakira_sound && type_sound_select.checked){
+				let kirakira = new Audio('sn/kirakira.mp3');
+				kirakira.play();
 			}
 		}
 
