@@ -1,7 +1,7 @@
 /* jshint esversion: 8 */
 
 const NUM_TYPE = 9;
-const VERSION = '3.4.1';
+const VERSION = '3.4.2';
 let DEBUGGING = false;
 
 // {{LANGUAGE_SPECIFIC}}
@@ -1243,7 +1243,7 @@ jQuery(function($){
 			break;
 		}
 		blinking_interval = (hz > 0) ? (1.0 / hz) : 0;
-		if (blinking_type.value != value.toString())
+		if(blinking_type.value != value.toString())
 			blinking_type.value = value.toString();
 		blinking_output.innerText = text;
 		localStorage.setItem('saiminBlinkType', value);
@@ -1329,12 +1329,12 @@ jQuery(function($){
 	}
 
 	function setTypeSound(value, test = false){
-		if (value === true)
+		if(value === true || value == "true")
 			value = 1;
-		if (value === false)
+		if(value === false || value == "false")
 			value = 0;
 		typeSound = parseInt(value);
-		if (type_sound_select.checked != !!value)
+		if(type_sound_select.checked != !!value)
 			type_sound_select.checked = !!value;
 		localStorage.setItem('saiminTypeSound', value);
 		if(test && typeSound == 1 && kirakira_sound){
@@ -1389,7 +1389,7 @@ jQuery(function($){
 			value = '4';
 			break;
 		}
-		if (value != message_size_select.value)
+		if(value != message_size_select.value)
 			message_size_select.value = value;
 		localStorage.setItem('saiminMessageSize', value);
 	}
@@ -1654,7 +1654,7 @@ jQuery(function($){
 			resizable: false,
 		});
 		dialogContainer.keydown(function(e){
-			if (e.keyCode == 13){
+			if(e.keyCode == 13){
 				$(this).parent().find('button:nth-child(1)').trigger('click');
 				return false;
 			}
@@ -1705,7 +1705,7 @@ jQuery(function($){
 			resizable: false,
 		});
 		dialogContainer.keydown(function(e){
-			if (e.keyCode == 13){
+			if(e.keyCode == 13){
 				$(this).parent().find('button:nth-child(2)').trigger('click');
 				return false;
 			}
@@ -1758,7 +1758,7 @@ jQuery(function($){
 			resizable: false,
 		});
 		dialogContainer.keydown(function(e){
-			if (e.keyCode == 13){
+			if(e.keyCode == 13){
 				$(this).parent().find('button:nth-child(2)').trigger('click');
 				return false;
 			}
@@ -1802,7 +1802,7 @@ jQuery(function($){
 			resizable: false,
 		});
 		dialogContainer.keydown(function(e){
-			if (e.keyCode == 13){
+			if(e.keyCode == 13){
 				$(this).parent().find('button:nth-child(1)').trigger('click');
 				return false;
 			}
@@ -1886,7 +1886,7 @@ jQuery(function($){
 		ctx.bezierCurveTo(x0 - r025, y0 - r05, x0 + r025, y0 - r05, x0 + r, y0);
 		ctx.bezierCurveTo(x0 + r025, y0 + r05, x0 - r025, y0 + r05, x0 - r, y0);
 		ctx.closePath();
-		if (alpha == 1.0){
+		if(alpha == 1.0){
 			ctx.strokeStyle = "#000";
 		}else{
 			ctx.strokeStyle = `rgba(0, 0, 0, ${alpha * 100.0}%)`;
@@ -1894,7 +1894,7 @@ jQuery(function($){
 		ctx.lineWidth = r * 0.15;
 		ctx.stroke();
 
-		if (alpha == 1.0){
+		if(alpha == 1.0){
 			ctx.fillStyle = "#000";
 		}else{
 			ctx.fillStyle = `rgba(0, 0, 0, ${alpha * 100.0}%)`;
