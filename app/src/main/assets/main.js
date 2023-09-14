@@ -1889,22 +1889,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			if(picType == -1){
 				let releasing_sound = null;
 				let lang = localStorage.getItem('saiminLanguage3');
-				// {{LANGUAGE_SPECIFIC}}
-				if(lang == 'ja' || lang == 'ja-JP'){ // Japanese
-					releasing_sound = new Audio('sn/ReleasedHypnosis_ja.mp3');
-				}else if(lang == 'zh-CN'){ // Chinese (Simplified)
-					releasing_sound = new Audio('sn/ReleasedHypnosis_zh-CN.mp3');
-				}else if(lang == 'zh-TW'){ // Chinese (Traditional)
-					releasing_sound = new Audio('sn/ReleasedHypnosis_zh-TW.mp3');
-				}else if(lang == 'ko-KR'){ // Korean
-					releasing_sound = new Audio('sn/ReleasedHypnosis_ko-KR.mp3');
-				}else if(lang == 'it' || lang == 'it-IT'){ // Italian
-					releasing_sound = new Audio('sn/ReleasedHypnosis_it.mp3');
-				}else if(lang == 'de' || lang == 'de-DE'){ // German
-					releasing_sound = new Audio('sn/ReleasedHypnosis_de.mp3');
-				}else{ // English is default
-					releasing_sound = new Audio('sn/ReleasedHypnosis_en.mp3');
-				}
+				releasing_sound = new Audio(trans_getText('TEXT_MP3_RELEASED_HYPNOSIS'));
 				releasing_sound.play();
 				return;
 			}

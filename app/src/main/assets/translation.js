@@ -494,6 +494,7 @@ function trans_getText(str_id){
 		case 'TEXT_NO_BLINKING': return '点滅なし';
 		case 'TEXT_LOGO': return 'images/logo_ja.svg';
 		case 'TEXT_TAP_HERE': return 'images/please-tap-here_ja.svg';
+		case 'TEXT_MP3_RELEASED_HYPNOSIS': return 'sn/ReleasedHypnosis_ja.mp3';
 		}
 	}else if(lang == 'zh-CN' || lang == 'cn'){ // Chinese (Simplified)
 		switch(str_id){
@@ -520,6 +521,7 @@ function trans_getText(str_id){
 		case 'TEXT_NO_BLINKING': return '无闪光灯';
 		case 'TEXT_LOGO': return 'images/logo_zh-CN.svg';
 		case 'TEXT_TAP_HERE': return 'images/please-tap-here_zh-CN.svg';
+		case 'TEXT_MP3_RELEASED_HYPNOSIS': return 'sn/ReleasedHypnosis_zh-CN.mp3';
 		}
 	}else if(lang == 'zh-TW'){ // Chinese (Traditional)
 		switch(str_id){
@@ -546,6 +548,7 @@ function trans_getText(str_id){
 		case 'TEXT_NO_BLINKING': return '無閃光燈';
 		case 'TEXT_LOGO': return 'images/logo_zh-TW.svg';
 		case 'TEXT_TAP_HERE': return 'images/please-tap-here_zh-TW.svg';
+		case 'TEXT_MP3_RELEASED_HYPNOSIS': return 'sn/ReleasedHypnosis_zh-TW.mp3';
 		}
 	}else if(lang == 'ko' || lang == 'kr' || lang == 'ko-KR'){ // Korean
 		switch(str_id){
@@ -572,6 +575,7 @@ function trans_getText(str_id){
 		case 'TEXT_NO_BLINKING': return '깜박임 없음';
 		case 'TEXT_LOGO': return 'images/logo_ko-KR.svg';
 		case 'TEXT_TAP_HERE': return 'images/please-tap-here_ko-KR.svg';
+		case 'TEXT_MP3_RELEASED_HYPNOSIS': return 'sn/ReleasedHypnosis_ko-KR.mp3';
 		}
 	}else if(lang == 'it' || lang == 'it-IT'){ // Italian
 		switch(str_id){
@@ -598,6 +602,7 @@ function trans_getText(str_id){
 		case 'TEXT_NO_BLINKING': return 'Senza il flash';
 		case 'TEXT_LOGO': return 'images/logo_it.svg';
 		case 'TEXT_TAP_HERE': return 'images/please-tap-here_it.svg';
+		case 'TEXT_MP3_RELEASED_HYPNOSIS': return 'sn/ReleasedHypnosis_it.mp3';
 		}
 	}else if(lang == 'de' || lang == 'de-DE'){ // German
 		switch(str_id){
@@ -624,6 +629,7 @@ function trans_getText(str_id){
 		case 'TEXT_NO_BLINKING': return 'Kein Blitz';
 		case 'TEXT_LOGO': return 'images/logo_de.svg';
 		case 'TEXT_TAP_HERE': return 'images/please-tap-here_de.svg';
+		case 'TEXT_MP3_RELEASED_HYPNOSIS': return 'sn/ReleasedHypnosis_de.mp3';
 		}
 	}else{ // English is default
 		switch(str_id){
@@ -650,6 +656,7 @@ function trans_getText(str_id){
 		case 'TEXT_NO_BLINKING': return 'No blinking';
 		case 'TEXT_LOGO': return 'images/logo_en.svg';
 		case 'TEXT_TAP_HERE': return 'images/please-tap-here_en.svg';
+		case 'TEXT_MP3_RELEASED_HYPNOSIS': return 'sn/ReleasedHypnosis_en.mp3';
 		}
 	}
 }
