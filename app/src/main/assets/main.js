@@ -9,7 +9,7 @@ function AndroidMicrophoneOnReload(){
 	location.reload();
 }
 
-jQuery(function($){
+document.addEventListener('DOMContentLoaded', function(){
 	let cxScreen = 0, cyScreen = 0;
 	let old_cxScreen = null, old_cyScreen = null;
 	let old_time = (new Date()).getTime();
@@ -1804,7 +1804,9 @@ jQuery(function($){
 		window.requestAnimationFrame(draw_all);
 	}
 
-	function init(){
+	function main(){
+		const argc = arguments.length, argv = arguments;
+
 		cancelSpeech();
 		fitCanvas();
 
@@ -2324,5 +2326,5 @@ jQuery(function($){
 		});
 	}
 
-	init();
+	main();
 });
