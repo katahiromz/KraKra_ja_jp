@@ -1,9 +1,9 @@
 // translation.js --- Hypnosis KraKra tranlation
 
-let currentLanguage = 'en';
+let trans_currentLanguage = 'en';
 
 // {{LANGUAGE_SPECIFIC}}
-const NOTICE_EN = `=========================
+const trans_NOTICE_EN = `=========================
 催眠くらくら
 Hypnosis KraKra
 =========================
@@ -69,7 +69,7 @@ Copyright (c) 2007-2022 Akshay Nair
 Copyright 2022 OpenJS Foundation and jQuery contributors.`;
 
 // {{LANGUAGE_SPECIFIC}}
-const NOTICE_KO_KR = `=========================
+const trans_NOTICE_KO_KR = `=========================
 최면 크라크라
 Hypnosis KraKra
 =========================
@@ -135,7 +135,7 @@ Copyright (c) 2007-2022 Akshay Nair
 Copyright 2022 OpenJS Foundation and jQuery contributors.`;
 
 // {{LANGUAGE_SPECIFIC}}
-const NOTICE_JA = `=========================
+const trans_NOTICE_JA = `=========================
 催眠くらくら
 Hypnosis KraKra
 =========================
@@ -201,7 +201,7 @@ Copyright (c) 2007-2022 Akshay Nair
 Copyright 2022 OpenJS Foundation and jQuery contributors.`;
 
 // {{LANGUAGE_SPECIFIC}}
-const NOTICE_ZW_CN = `=========================
+const trans_NOTICE_ZW_CN = `=========================
 催眠克拉克拉
 Hypnosis KraKra
 =========================
@@ -267,7 +267,7 @@ Copyright (c) 2007-2022 Akshay Nair
 Copyright 2022 OpenJS Foundation and jQuery contributors.`;
 
 // {{LANGUAGE_SPECIFIC}}
-const NOTICE_TW_CN = `=========================
+const trans_NOTICE_TW_CN = `=========================
 催眠克拉克拉
 Hypnosis KraKra
 =========================
@@ -333,7 +333,7 @@ Copyright (c) 2007-2022 Akshay Nair
 Copyright 2022 OpenJS Foundation and jQuery contributors.`;
 
 // {{LANGUAGE_SPECIFIC}}
-const NOTICE_IT = `=========================
+const trans_NOTICE_IT = `=========================
 Ipnosi KraKra
 Hypnosis KraKra
 =========================
@@ -399,7 +399,7 @@ Copyright (c) 2007-2022 Akshay Nair
 Copyright 2022 OpenJS Foundation and jQuery contributors.`;
 
 // {{LANGUAGE_SPECIFIC}}
-const NOTICE_DE = `=========================
+const trans_NOTICE_DE = `=========================
 Hypnose KraKra
 Hypnosis KraKra
 =========================
@@ -465,7 +465,7 @@ Copyright (c) 2007-2022 Akshay Nair
 Copyright 2022 OpenJS Foundation and jQuery contributors.`;
 
 // {{LANGUAGE_SPECIFIC}}
-function getStr(str_id){
+function trans_getText(str_id){
 	let lang = localStorage.getItem('saiminLanguage3');
 	if(!lang)
 		lang = 'en';
@@ -655,13 +655,13 @@ function getStr(str_id){
 }
 
 // {{LANGUAGE_SPECIFIC}}
-function localizeSaimin(lang){
+function trans_localize(lang){
 	localStorage.setItem('saiminLanguage3', lang);
-	currentLanguage = lang;
+	trans_currentLanguage = lang;
 	if(lang == 'ja' || lang == 'jp'){ // Japanese
-		$('#notice_text').text(NOTICE_JA);
+		$('#notice_text').text(trans_NOTICE_JA);
 		$('#mic_img').attr('src', 'images/mic.png');
-		$('#type_select_button').text(getStr('TEXT_PIC') + type_select.value);
+		$('#type_select_button').text(trans_getText('TEXT_PIC') + type_select.value);
 		$('#sound_img').attr('src', 'images/sound.png');
 		$('#char_img').attr('src', 'images/text_ja.png');
 		$('#speech_img').attr('src', 'images/speak.png');
@@ -718,9 +718,9 @@ function localizeSaimin(lang){
 		$('#screen_brightness option[value="brighter"]').text('明るくする');
 		$('#version_text').text('催眠くらくら Version ' + VERSION);
 	}else if(lang == 'zh-CN' || lang == 'cn'){ // Chinese (Simplified)
-		$('#notice_text').text(NOTICE_ZW_CN);
+		$('#notice_text').text(trans_NOTICE_ZW_CN);
 		$('#mic_img').attr('src', 'images/mic.png');
-		$('#type_select_button').text(getStr('TEXT_PIC') + type_select.value);
+		$('#type_select_button').text(trans_getText('TEXT_PIC') + type_select.value);
 		$('#sound_img').attr('src', 'images/sound.png');
 		$('#char_img').attr('src', 'images/text_zh-CN.png');
 		$('#speech_img').attr('src', 'images/speak.png');
@@ -777,9 +777,9 @@ function localizeSaimin(lang){
 		$('#screen_brightness option[value="brighter"]').text('明亮');
 		$('#version_text').text('催眠克拉克拉 Version ' + VERSION);
 	}else if(lang == 'zh-TW'){ // Chinese (Traditional)
-		$('#notice_text').text(NOTICE_TW_CN);
+		$('#notice_text').text(trans_NOTICE_TW_CN);
 		$('#mic_img').attr('src', 'images/mic.png');
-		$('#type_select_button').text(getStr('TEXT_PIC') + type_select.value);
+		$('#type_select_button').text(trans_getText('TEXT_PIC') + type_select.value);
 		$('#sound_img').attr('src', 'images/sound.png');
 		$('#char_img').attr('src', 'images/text_zh-TW.png');
 		$('#speech_img').attr('src', 'images/speak.png');
@@ -836,9 +836,9 @@ function localizeSaimin(lang){
 		$('#screen_brightness option[value="brighter"]').text('提亮');
 		$('#version_text').text('催眠克拉克拉 Version ' + VERSION);
 	}else if(lang == 'kr' || lang == 'ko' || lang == 'ko-KR'){ // Korean
-		$('#notice_text').text(NOTICE_KO_KR);
+		$('#notice_text').text(trans_NOTICE_KO_KR);
 		$('#mic_img').attr('src', 'images/mic.png');
-		$('#type_select_button').text(getStr('TEXT_PIC') + type_select.value);
+		$('#type_select_button').text(trans_getText('TEXT_PIC') + type_select.value);
 		$('#sound_img').attr('src', 'images/sound.png');
 		$('#char_img').attr('src', 'images/text_ko-KR.png');
 		$('#speech_img').attr('src', 'images/speak.png');
@@ -895,9 +895,9 @@ function localizeSaimin(lang){
 		$('#screen_brightness option[value="brighter"]').text('밝게 하다');
 		$('#version_text').text('최면 크라크라 Version ' + VERSION);
 	}else if(lang == 'it' || lang == 'it-IT'){ // Italian
-		$('#notice_text').text(NOTICE_IT);
+		$('#notice_text').text(trans_NOTICE_IT);
 		$('#mic_img').attr('src', 'images/mic.png');
-		$('#type_select_button').text(getStr('TEXT_PIC') + type_select.value);
+		$('#type_select_button').text(trans_getText('TEXT_PIC') + type_select.value);
 		$('#sound_img').attr('src', 'images/sound.png');
 		$('#char_img').attr('src', 'images/text_it.png');
 		$('#speech_img').attr('src', 'images/speak.png');
@@ -954,9 +954,9 @@ function localizeSaimin(lang){
 		$('#screen_brightness option[value="brighter"]').text('Più luminoso');
 		$('#version_text').text('Ipnosi KraKra Version ' + VERSION);
 	}else if(lang == 'de' || lang == 'de-DE'){ // German
-		$('#notice_text').text(NOTICE_DE);
+		$('#notice_text').text(trans_NOTICE_DE);
 		$('#mic_img').attr('src', 'images/mic.png');
-		$('#type_select_button').text(getStr('TEXT_PIC') + type_select.value);
+		$('#type_select_button').text(trans_getText('TEXT_PIC') + type_select.value);
 		$('#sound_img').attr('src', 'images/sound.png');
 		$('#char_img').attr('src', 'images/text_de.png');
 		$('#speech_img').attr('src', 'images/speak.png');
@@ -1013,9 +1013,9 @@ function localizeSaimin(lang){
 		$('#screen_brightness option[value="brighter"]').text('Heller');
 		$('#version_text').text('Hypnose KraKra Version ' + VERSION);
 	}else{ // English is default
-		$('#notice_text').text(NOTICE_EN);
+		$('#notice_text').text(trans_NOTICE_EN);
 		$('#mic_img').attr('src', 'images/mic.png');
-		$('#type_select_button').text(getStr('TEXT_PIC') + type_select.value);
+		$('#type_select_button').text(trans_getText('TEXT_PIC') + type_select.value);
 		$('#sound_img').attr('src', 'images/sound.png');
 		$('#char_img').attr('src', 'images/text_en.png');
 		$('#speech_img').attr('src', 'images/speak.png');

@@ -85,7 +85,7 @@ jQuery(function($){
 		switch(value){
 		case 0:
 		default:
-			text = getStr('TEXT_NO_BLINKING');
+			text = trans_getText('TEXT_NO_BLINKING');
 			hz = 0;
 			break;
 		case 1:
@@ -128,23 +128,23 @@ jQuery(function($){
 		if(!lang)
 			lang = 'en';
 
-		localizeSaimin(lang);
+		trans_localize(lang);
 
 		hypnosis_releasing_img = new Image();
 		if(released){
-			hypnosis_releasing_img.src = getStr('TEXT_HYPNOSIS_RELEASED_IMG');
+			hypnosis_releasing_img.src = trans_getText('TEXT_HYPNOSIS_RELEASED_IMG');
 		}else{
-			hypnosis_releasing_img.src = getStr('TEXT_KILLING_HYPNOSIS_IMG');
+			hypnosis_releasing_img.src = trans_getText('TEXT_KILLING_HYPNOSIS_IMG');
 		}
 
 		logo_img = new Image();
-		logo_img.src = getStr('TEXT_LOGO');
+		logo_img.src = trans_getText('TEXT_LOGO');
 
 		please_tap_here_img = new Image();
-		please_tap_here_img.src = getStr('TEXT_TAP_HERE');
+		please_tap_here_img.src = trans_getText('TEXT_TAP_HERE');
 
 		all_released_img = new Image();
-		all_released_img.src = getStr('TEXT_ALL_RELEASED_IMG');
+		all_released_img.src = trans_getText('TEXT_ALL_RELEASED_IMG');
 
 		language_select.value = lang;
 
@@ -159,14 +159,14 @@ jQuery(function($){
 	function adjustText(text){
 		text = text.replace('～', 'ー');
 		// {{language-specific}}
-		text = text.replace(getStr('TEXT_FULLWIDTH_SPACE'), '  ').trim();
+		text = text.replace(trans_getText('TEXT_FULLWIDTH_SPACE'), '  ').trim();
 		if(text == '')
 			return text;
-		while (text.slice(-1) == getStr('TEXT_PERIOD'))
+		while (text.slice(-1) == trans_getText('TEXT_PERIOD'))
 			text = text.slice(0, -1);
 		if(text == '')
 			return text;
-		text += getStr('TEXT_PERIOD_SPACE');
+		text += trans_getText('TEXT_PERIOD_SPACE');
 		return text;
 	}
 
@@ -182,17 +182,17 @@ jQuery(function($){
 				speech.pitch = 0.6;
 				speech.rate = 0.4;
 				// {{LANGUAGE_SPECIFIC}}
-				if(currentLanguage == 'ja' || currentLanguage == 'ja-JP') // Japanese
+				if(trans_currentLanguage == 'ja' || trans_currentLanguage == 'ja-JP') // Japanese
 					speech.lang = 'ja-JP';
-				else if(currentLanguage == 'zh-CN') // Chinese (Simplified)
+				else if(trans_currentLanguage == 'zh-CN') // Chinese (Simplified)
 					speech.lang = 'zh-CN';
-				else if(currentLanguage == 'zh-TW') // Chinese (Traditional)
+				else if(trans_currentLanguage == 'zh-TW') // Chinese (Traditional)
 					speech.lang = 'zh-TW';
-				else if(currentLanguage == 'ko-KR') // Korean
+				else if(trans_currentLanguage == 'ko-KR') // Korean
 					speech.lang = 'ko-KR';
-				else if(currentLanguage == 'it' || currentLanguage == 'it-IT') // Italian
+				else if(trans_currentLanguage == 'it' || trans_currentLanguage == 'it-IT') // Italian
 					speech.lang = 'it-IT';
-				else if(currentLanguage == 'de' || currentLanguage == 'de-DE') // German
+				else if(trans_currentLanguage == 'de' || trans_currentLanguage == 'de-DE') // German
 					speech.lang = 'de-DE';
 				else // English is default
 					speech.lang = 'en-US';
@@ -358,10 +358,10 @@ jQuery(function($){
 			sound_button.classList.add('releasing');
 			text_button.classList.add('releasing');
 			speech_label.classList.add('releasing');
-			hypnosis_releasing_img.src = getStr('TEXT_KILLING_HYPNOSIS_IMG');
+			hypnosis_releasing_img.src = trans_getText('TEXT_KILLING_HYPNOSIS_IMG');
 			setTimeout(function(){
-				hypnosis_releasing_img.src = getStr('TEXT_HYPNOSIS_RELEASED_IMG');
-				all_released_img.src = getStr('TEXT_ALL_RELEASED_IMG');
+				hypnosis_releasing_img.src = trans_getText('TEXT_HYPNOSIS_RELEASED_IMG');
+				all_released_img.src = trans_getText('TEXT_ALL_RELEASED_IMG');
 				released = true;
 			}, 3000);
 		}else{
@@ -376,7 +376,7 @@ jQuery(function($){
 			speech_label.classList.remove('releasing');
 		}
 		type_select.value = picType.toString();
-		type_select_button.innerText = getStr('TEXT_PIC') + picType.toString();
+		type_select_button.innerText = trans_getText('TEXT_PIC') + picType.toString();
 		localStorage.setItem('saiminType', picType.toString());
 		try{
 			android.setPicType(picType);
@@ -387,7 +387,7 @@ jQuery(function($){
 	};
 
 	function setText(txt){
-		theText = txt.replace(getStr('TEXT_FULLWIDTH_SPACE'), '  ').trim();
+		theText = txt.replace(trans_getText('TEXT_FULLWIDTH_SPACE'), '  ').trim();
 		localStorage.setItem('saiminText', theText);
 		if(speech_checkbox.checked){
 			playSpeech(theText);
@@ -523,9 +523,9 @@ jQuery(function($){
 		let dialogContainer = $('#choose_language_dialog');
 		dialogContainer.dialog({
 			dialogClass: 'no-close',
-			title: getStr('TEXT_CHOOSE_LANGUAGE'),
+			title: trans_getText('TEXT_CHOOSE_LANGUAGE'),
 			buttons: [{
-				text: getStr('TEXT_OK'),
+				text: trans_getText('TEXT_OK'),
 				click: function(){
 					setLanguage(language_select2.value);
 					dialogContainer.dialog('close');
@@ -533,7 +533,7 @@ jQuery(function($){
 						help();
 				},
 			},{
-				text: getStr('TEXT_CANCEL'),
+				text: trans_getText('TEXT_CANCEL'),
 				click: function(){
 					dialogContainer.dialog('close');
 					if(first_time && !localStorage.getItem('saiminLanguage3')){
@@ -569,9 +569,9 @@ jQuery(function($){
 		let dialogContainer = $('#about_dialog');
 		dialogContainer.dialog({
 			dialogClass: 'no-close',
-			title: getStr('TEXT_ABOUT_APP'),
+			title: trans_getText('TEXT_ABOUT_APP'),
 			buttons: [{
-				text: getStr('TEXT_INIT_APP'),
+				text: trans_getText('TEXT_INIT_APP'),
 				click: function(){
 					try{
 						android.clearSettings();
@@ -582,11 +582,11 @@ jQuery(function($){
 					if(theRegistration){
 						theRegistration.unregister();
 					}
-					alert(getStr('TEXT_INITTED_APP'));
+					alert(trans_getText('TEXT_INITTED_APP'));
 					location.reload();
 				},
 			},{
-				text: getStr('TEXT_OK'),
+				text: trans_getText('TEXT_OK'),
 				click: function(){
 					dialogContainer.dialog('close');
 					accepted();
@@ -619,23 +619,23 @@ jQuery(function($){
 		let dialogContainer = $('#appearance_dialog');
 		dialogContainer.dialog({
 			dialogClass: 'no-close',
-			title: getStr('TEXT_APPEARANCE'),
+			title: trans_getText('TEXT_APPEARANCE'),
 			buttons: [
 				{
-					text: getStr('TEXT_RELEASE_HYPNOSIS'),
+					text: trans_getText('TEXT_RELEASE_HYPNOSIS'),
 					click: function(){
 						dialogContainer.dialog('close');
 						setPicType(-1);
 					},
 				},{
-					text: getStr('TEXT_OK'),
+					text: trans_getText('TEXT_OK'),
 					click: function(){
 						dialogContainer.dialog('close');
 						if(picType == -1)
 							setPicType(picType);
 					},
 				},{
-					text: getStr('TEXT_CANCEL'),
+					text: trans_getText('TEXT_CANCEL'),
 					click: function(){
 						setPicType(old_type_value);
 						setDivision(old_division_value);
@@ -671,15 +671,15 @@ jQuery(function($){
 		let dialogContainer = $('#config_dialog');
 		dialogContainer.dialog({
 			dialogClass: 'no-close',
-			title: getStr('TEXT_CONFIGURATION'),
+			title: trans_getText('TEXT_CONFIGURATION'),
 			buttons: [
 				{
-					text: getStr('TEXT_OK'),
+					text: trans_getText('TEXT_OK'),
 					click: function(){
 						dialogContainer.dialog('close');
 					},
 				},{
-					text: getStr('TEXT_CANCEL'),
+					text: trans_getText('TEXT_CANCEL'),
 					click: function(){
 						setLanguage(old_language);
 						setMessageSizeType(old_message_size_value);
@@ -1868,7 +1868,7 @@ jQuery(function($){
 		text_button.addEventListener('click', function(){
 			if(picType == -1)
 				return;
-			let text = prompt(getStr('TEXT_INPUT_MESSAGE'), theText);
+			let text = prompt(trans_getText('TEXT_INPUT_MESSAGE'), theText);
 			if(text !== null){
 				setText(text);
 			}
@@ -2114,7 +2114,7 @@ jQuery(function($){
 		speech_checkbox.addEventListener('click', function(e){
 			if(picType == -1){
 				if(speech_checkbox.checked){
-					playSpeech(getStr('TEXT_HYPNOSIS_RELEASED'));
+					playSpeech(trans_getText('TEXT_HYPNOSIS_RELEASED'));
 					speech_label.classList.add('checked');
 				}else{
 					cancelSpeech();
