@@ -1,7 +1,7 @@
 /* jshint esversion: 8 */
 
 const NUM_TYPE = 9;
-const VERSION = '3.4.2';
+const VERSION = '3.4.3';
 let DEBUGGING = false;
 
 function AndroidMicrophoneOnReload(){
