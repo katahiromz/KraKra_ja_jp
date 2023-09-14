@@ -130,6 +130,7 @@ jQuery(function($){
 
 		localizeSaimin(lang);
 
+		hypnosis_releasing_img = new Image();
 		if(released){
 			hypnosis_releasing_img.src = getStr('TEXT_HYPNOSIS_RELEASED_IMG');
 		}else{
