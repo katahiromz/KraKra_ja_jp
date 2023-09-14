@@ -1097,5 +1097,5 @@ function trans_localize(lang){
 		trans_setSelectOptionText(screen_brightness, 'brighter', 'Brighter');
 		trans_setHtmlText(version_text, 'Hyponosis KraKra Version ' + VERSION);
 	}
-	$('#notice_text').scrollTop(0);
+	notice_text.scrollLeft = notice_text.scrollTop = 0;
 }
