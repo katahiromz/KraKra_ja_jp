@@ -391,7 +391,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         return getLocString(id, currLocale);
     }
 
-    fun getMsgList(): MutableList<String> {
+    fun getDefaultMessageList(): MutableList<String> {
         currLocaleContext = null
         var ret: MutableList<String> = mutableListOf<String>()
         for (id in R.string.message_000 .. R.string.message_049) {

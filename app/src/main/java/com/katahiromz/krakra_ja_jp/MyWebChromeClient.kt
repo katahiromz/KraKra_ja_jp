@@ -269,7 +269,7 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
         defaultValue: String?,
         result: JsPromptResult?
     ) {
-        var defaultMessageList: MutableList<String> = activity!!.getMsgList()
+        var defaultMessageList: MutableList<String> = activity!!.getDefaultMessageList()
         var messageList: MutableList<String> = MainRepository.getMessageList(activity!!)
 
         if (messageList.isEmpty())
@@ -282,8 +282,6 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
             positiveButton(text = getLocString(R.string.ok)) {
                 var editText = getCustomView().findViewById<EditText>(R.id.message_edit)
                 var inputtedText = editText.text.toString()
-                result?.confirm(inputtedText)
-                modalDialog = null
 
                 if (inputtedText.isNotEmpty()) {
                     var index = messageList.indexOf(inputtedText)
@@ -292,6 +290,9 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
                     messageList.add(0, inputtedText)
                     MainRepository.setMessageList(activity!!, messageList)
                 }
+
+                result?.confirm(inputtedText)
+                modalDialog = null
             }
             negativeButton(text = getLocString(R.string.cancel)) {
                 result?.cancel()
