@@ -270,7 +270,7 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
         result: JsPromptResult?
     ) {
         var defaultMessageList: MutableList<String> = activity!!.getDefaultMessageList()
-        var messageList: MutableList<String> = MainRepository.getMessageList(activity!!)
+        var messageList: MutableList<String> = MainRepository.loadMessageList(activity!!)
 
         if (messageList.isEmpty())
             messageList.addAll(defaultMessageList)
@@ -288,7 +288,7 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
                     if (index != -1)
                         messageList.removeAt(index)
                     messageList.add(0, inputtedText)
-                    MainRepository.setMessageList(activity!!, messageList)
+                    MainRepository.saveMessageList(activity!!, messageList)
                 }
 
                 result?.confirm(inputtedText)
@@ -301,7 +301,8 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
             neutralButton(text = getLocString(R.string.reset)) {
                 messageList.clear()
                 messageList.addAll(defaultMessageList)
-                MainRepository.setMessageList(activity!!, messageList)
+                MainRepository.saveMessageList(activity!!, messageList)
+
                 result?.confirm("")
                 modalDialog = null
             }

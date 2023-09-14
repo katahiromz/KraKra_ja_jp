@@ -13,7 +13,7 @@ class MainRepository {
             return context.getSharedPreferences(MainPrefFileKey, Context.MODE_PRIVATE)
         }
 
-        fun getMessageList(context: Context): MutableList<String> {
+        fun loadMessageList(context: Context): MutableList<String> {
             val prefs = getPrefs(context)
             val json = prefs.getString(MessageListKey, null) ?: return mutableListOf()
             val messageList = mutableListOf<String>()
@@ -25,7 +25,7 @@ class MainRepository {
             return messageList
         }
 
-        fun setMessageList(context: Context, list: List<String>) {
+        fun saveMessageList(context: Context, list: List<String>) {
             val prefs = getPrefs(context)
             if (list.isNotEmpty()) {
                 val jsonArray = JSONArray()
