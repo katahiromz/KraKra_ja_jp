@@ -673,19 +673,25 @@ function trans_setSelectOptionText(id, value, text){
 	}
 }
 
+function trans_setImageSrc(id, src){
+	if(typeof(id) == 'string')
+		id = document.getElementById(id);
+	id.src = src;
+}
+
 // {{LANGUAGE_SPECIFIC}}
 function trans_localize(lang){
 	localStorage.setItem('saiminLanguage3', lang);
 	trans_currentLanguage = lang;
 	if(lang == 'ja' || lang == 'jp'){ // Japanese
 		trans_setHtmlText(notice_text, trans_NOTICE_JA);
-		$('#mic_img').attr('src', 'images/mic.png');
+		trans_setImageSrc(mic_img, 'images/mic.png');
 		trans_setHtmlText(type_select_button, trans_getText('TEXT_PIC') + type_select.value);
-		$('#sound_img').attr('src', 'images/sound.png');
-		$('#char_img').attr('src', 'images/text_ja.png');
-		$('#speech_img').attr('src', 'images/speak.png');
-		$('#gear_img').attr('src', 'images/gear.png');
-		$('#question_img').attr('src', 'images/question.png');
+		trans_setImageSrc(sound_img, 'images/sound.png');
+		trans_setImageSrc(char_img, 'images/text_ja.png');
+		trans_setImageSrc(speech_img, 'images/speak.png');
+		trans_setImageSrc(gear_img, 'images/gear.png');
+		trans_setImageSrc(question_img, 'images/question.png');
 		trans_setHtmlText(config_language, '言語 (Language):');
 		trans_setSelectOptionText(language_select, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(language_select, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
@@ -738,13 +744,13 @@ function trans_localize(lang){
 		trans_setHtmlText(version_text, '催眠くらくら Version ' + VERSION);
 	}else if(lang == 'zh-CN' || lang == 'cn'){ // Chinese (Simplified)
 		trans_setHtmlText(notice_text, trans_NOTICE_ZW_CN);
-		$('#mic_img').attr('src', 'images/mic.png');
+		trans_setImageSrc(mic_img, 'images/mic.png');
 		trans_setHtmlText(type_select_button, trans_getText('TEXT_PIC') + type_select.value);
-		$('#sound_img').attr('src', 'images/sound.png');
-		$('#char_img').attr('src', 'images/text_zh-CN.png');
-		$('#speech_img').attr('src', 'images/speak.png');
-		$('#gear_img').attr('src', 'images/gear.png');
-		$('#question_img').attr('src', 'images/question.png');
+		trans_setImageSrc(sound_img, 'images/sound.png');
+		trans_setImageSrc(char_img, 'images/text_zh-CN.png');
+		trans_setImageSrc(speech_img, 'images/speak.png');
+		trans_setImageSrc(gear_img, 'images/gear.png');
+		trans_setImageSrc(question_img, 'images/question.png');
 		trans_setHtmlText(config_language, '语言 (Language):');
 		trans_setSelectOptionText(language_select, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(language_select, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
@@ -797,13 +803,13 @@ function trans_localize(lang){
 		trans_setHtmlText(version_text, '催眠克拉克拉 Version ' + VERSION);
 	}else if(lang == 'zh-TW'){ // Chinese (Traditional)
 		trans_setHtmlText(notice_text, trans_NOTICE_TW_CN);
-		$('#mic_img').attr('src', 'images/mic.png');
+		trans_setImageSrc(mic_img, 'images/mic.png');
 		trans_setHtmlText(type_select_button, trans_getText('TEXT_PIC') + type_select.value);
-		$('#sound_img').attr('src', 'images/sound.png');
-		$('#char_img').attr('src', 'images/text_zh-TW.png');
-		$('#speech_img').attr('src', 'images/speak.png');
-		$('#gear_img').attr('src', 'images/gear.png');
-		$('#question_img').attr('src', 'images/question.png');
+		trans_setImageSrc(sound_img, 'images/sound.png');
+		trans_setImageSrc(char_img, 'images/text_zh-TW.png');
+		trans_setImageSrc(speech_img, 'images/speak.png');
+		trans_setImageSrc(gear_img, 'images/gear.png');
+		trans_setImageSrc(question_img, 'images/question.png');
 		trans_setHtmlText(config_language, '語言 (Language):');
 		trans_setSelectOptionText(language_select, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(language_select, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
@@ -856,13 +862,13 @@ function trans_localize(lang){
 		trans_setHtmlText(version_text, '催眠克拉克拉 Version ' + VERSION);
 	}else if(lang == 'kr' || lang == 'ko' || lang == 'ko-KR'){ // Korean
 		trans_setHtmlText(notice_text, trans_NOTICE_KO_KR);
-		$('#mic_img').attr('src', 'images/mic.png');
+		trans_setImageSrc(mic_img, 'images/mic.png');
 		trans_setHtmlText(type_select_button, trans_getText('TEXT_PIC') + type_select.value);
-		$('#sound_img').attr('src', 'images/sound.png');
-		$('#char_img').attr('src', 'images/text_ko-KR.png');
-		$('#speech_img').attr('src', 'images/speak.png');
-		$('#gear_img').attr('src', 'images/gear.png');
-		$('#question_img').attr('src', 'images/question.png');
+		trans_setImageSrc(sound_img, 'images/sound.png');
+		trans_setImageSrc(char_img, 'images/text_ko-KR.png');
+		trans_setImageSrc(speech_img, 'images/speak.png');
+		trans_setImageSrc(gear_img, 'images/gear.png');
+		trans_setImageSrc(question_img, 'images/question.png');
 		trans_setHtmlText(config_language, '언어 (Language):');
 		trans_setSelectOptionText(language_select, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(language_select, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
@@ -915,13 +921,13 @@ function trans_localize(lang){
 		trans_setHtmlText(version_text, '최면 크라크라 Version ' + VERSION);
 	}else if(lang == 'it' || lang == 'it-IT'){ // Italian
 		trans_setHtmlText(notice_text, trans_NOTICE_IT);
-		$('#mic_img').attr('src', 'images/mic.png');
+		trans_setImageSrc(mic_img, 'images/mic.png');
 		trans_setHtmlText(type_select_button, trans_getText('TEXT_PIC') + type_select.value);
-		$('#sound_img').attr('src', 'images/sound.png');
-		$('#char_img').attr('src', 'images/text_it.png');
-		$('#speech_img').attr('src', 'images/speak.png');
-		$('#gear_img').attr('src', 'images/gear.png');
-		$('#question_img').attr('src', 'images/question.png');
+		trans_setImageSrc(sound_img, 'images/sound.png');
+		trans_setImageSrc(char_img, 'images/text_it.png');
+		trans_setImageSrc(speech_img, 'images/speak.png');
+		trans_setImageSrc(gear_img, 'images/gear.png');
+		trans_setImageSrc(question_img, 'images/question.png');
 		trans_setHtmlText(config_language, 'Lingua (Language):');
 		trans_setSelectOptionText(language_select, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(language_select, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
@@ -974,13 +980,13 @@ function trans_localize(lang){
 		trans_setHtmlText(version_text, 'Ipnosi KraKra Version ' + VERSION);
 	}else if(lang == 'de' || lang == 'de-DE'){ // German
 		trans_setHtmlText(notice_text, trans_NOTICE_DE);
-		$('#mic_img').attr('src', 'images/mic.png');
+		trans_setImageSrc(mic_img, 'images/mic.png');
 		trans_setHtmlText(type_select_button, trans_getText('TEXT_PIC') + type_select.value);
-		$('#sound_img').attr('src', 'images/sound.png');
-		$('#char_img').attr('src', 'images/text_de.png');
-		$('#speech_img').attr('src', 'images/speak.png');
-		$('#gear_img').attr('src', 'images/gear.png');
-		$('#question_img').attr('src', 'images/question.png');
+		trans_setImageSrc(sound_img, 'images/sound.png');
+		trans_setImageSrc(char_img, 'images/text_de.png');
+		trans_setImageSrc(speech_img, 'images/speak.png');
+		trans_setImageSrc(gear_img, 'images/gear.png');
+		trans_setImageSrc(question_img, 'images/question.png');
 		trans_setHtmlText(config_language, 'Sprache (Language):');
 		trans_setSelectOptionText(language_select, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(language_select, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
@@ -1033,13 +1039,13 @@ function trans_localize(lang){
 		trans_setHtmlText(version_text, 'Hypnose KraKra Version ' + VERSION);
 	}else{ // English is default
 		trans_setHtmlText(notice_text, trans_NOTICE_EN);
-		$('#mic_img').attr('src', 'images/mic.png');
+		trans_setImageSrc(mic_img, 'images/mic.png');
 		trans_setHtmlText(type_select_button, trans_getText('TEXT_PIC') + type_select.value);
-		$('#sound_img').attr('src', 'images/sound.png');
-		$('#char_img').attr('src', 'images/text_en.png');
-		$('#speech_img').attr('src', 'images/speak.png');
-		$('#gear_img').attr('src', 'images/gear.png');
-		$('#question_img').attr('src', 'images/question.png');
+		trans_setImageSrc(sound_img, 'images/sound.png');
+		trans_setImageSrc(char_img, 'images/text_en.png');
+		trans_setImageSrc(speech_img, 'images/speak.png');
+		trans_setImageSrc(gear_img, 'images/gear.png');
+		trans_setImageSrc(question_img, 'images/question.png');
 		trans_setHtmlText(config_language, 'Language (言語):');
 		trans_setSelectOptionText(language_select, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(language_select, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
