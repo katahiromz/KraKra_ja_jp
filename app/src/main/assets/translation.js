@@ -687,6 +687,44 @@ function trans_setImageSrc(id, src){
 }
 
 // {{LANGUAGE_SPECIFIC}}
+function trans_getDefaultLanguage(){
+	switch (navigator.language){
+	case 'zh':
+	case 'zh-CN':
+	case 'zh-SG':
+	case 'zh-cn':
+	case 'zh-sg':
+		return 'zh-CN'; // Chinese (Simplified)
+	case 'zh-TW':
+	case 'zh-HK':
+	case 'zh-MO':
+	case 'zh-tw':
+	case 'zh-hk':
+	case 'zh-mo':
+		return 'zh-TW'; // Chinese (Traditional)
+	case 'de':
+	case 'de-DE':
+	case 'de-de':
+		return 'de-DE'; // German
+	case 'it':
+	case 'it-IT':
+	case 'it-it':
+		return 'it-IT'; // Italian
+	case 'ja':
+	case 'ja-JP':
+	case 'ja-jp':
+		return 'ja'; // Japanese
+	case 'ko':
+	case 'kr':
+	case 'ko-KR':
+	case 'ko-kr':
+		return 'ko-KR'; // Korean
+	default:
+		return 'en'; // English
+	}
+}
+
+// {{LANGUAGE_SPECIFIC}}
 function trans_localize(lang){
 	localStorage.setItem('saiminLanguage3', lang);
 	trans_currentLanguage = lang;
@@ -1104,5 +1142,4 @@ function trans_localize(lang){
 		trans_setSelectOptionText(screen_brightness, 'brighter', 'Brighter');
 		trans_setHtmlText(version_text, 'Hyponosis KraKra Version ' + VERSION);
 	}
-	notice_text.scrollLeft = notice_text.scrollTop = 0;
 }

@@ -130,6 +130,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		trans_localize(lang);
 
+		notice_text.scrollLeft = notice_text.scrollTop = 0;
+
 		hypnosis_releasing_img = new Image();
 		if(released){
 			hypnosis_releasing_img.src = trans_getText('TEXT_HYPNOSIS_RELEASED_IMG');
@@ -468,55 +470,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let lang = localStorage.getItem('saiminLanguage3');
 		let first_time = false;
 		if(!lang){
-			// {{LANGUAGE_SPECIFIC}}
-			switch (navigator.language){
-			case 'zh':
-			case 'zh-CN':
-			case 'zh-SG':
-			case 'zh-cn':
-			case 'zh-sg':
-				// Chinese (Simplified)
-				lang = 'zh-CN';
-				break;
-			case 'zh-TW':
-			case 'zh-HK':
-			case 'zh-MO':
-			case 'zh-tw':
-			case 'zh-hk':
-			case 'zh-mo':
-				// Chinese (Traditional)
-				lang = 'zh-TW';
-				break;
-			case 'de':
-			case 'de-DE':
-			case 'de-de':
-				// German
-				lang = 'de-DE';
-				break;
-			case 'it':
-			case 'it-IT':
-			case 'it-it':
-				// Italian
-				lang = 'it-IT';
-				break;
-			case 'ja':
-			case 'ja-JP':
-			case 'ja-jp':
-				// Japanese
-				lang = 'ja';
-				break;
-			case 'ko':
-			case 'kr':
-			case 'ko-KR':
-			case 'ko-kr':
-				// Korean
-				lang = 'ko-KR';
-				break;
-			default:
-				// English
-				lang = 'en';
-				break;
-			}
+			lang = trans_getDefaultLanguage();
 			first_time = true;
 		}
 		language_select2.value = lang;
@@ -563,7 +517,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	function help(){
 		$('#notice_text').width(window.innerWidth * 2 / 3).height(window.innerHeight * 2 / 5);
 		setTimeout(function(){
-			$('#notice_text').scrollTop(0);
+			notice_text.scrollLeft = notice_text.scrollTop = 0;
 		}, 200);
 		localStorage.setItem('saiminHelpShowing', '1');
 		let dialogContainer = $('#about_dialog');
