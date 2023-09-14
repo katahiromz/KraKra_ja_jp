@@ -4,6 +4,7 @@
     <string name="ok">OK</string>
     <string name="cancel">Annulla</string>
     <string name="clear">Chiara</string>
+    <string name="reset">Ripristina</string>
 
     <!-- main -->
     <string name="app_name">KraKra</string>

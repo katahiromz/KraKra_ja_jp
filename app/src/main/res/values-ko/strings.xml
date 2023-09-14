@@ -4,6 +4,7 @@
     <string name="ok">OK</string>
     <string name="cancel">취소</string>
     <string name="clear">클리어</string>
+    <string name="reset">초기화</string>
 
     <!-- main -->
     <string name="app_name">최면 크라크라</string>

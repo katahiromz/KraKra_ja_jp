@@ -270,10 +270,10 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
         result: JsPromptResult?
     ) {
         var defaultMessageList: MutableList<String> = activity!!.getMsgList()
-        var userMessageList: MutableList<String> = MainRepository.getMessageList(activity!!)
-        var messageList: MutableList<String> = mutableListOf<String>()
-        messageList.addAll(defaultMessageList)
-        messageList.addAll(userMessageList)
+        var messageList: MutableList<String> = MainRepository.getMessageList(activity!!)
+
+        if (messageList.isEmpty())
+            messageList.addAll(defaultMessageList)
 
         modalDialog = MaterialDialog(activity!!).show {
             title(text = title)
@@ -285,8 +285,11 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
                 result?.confirm(inputtedText)
                 modalDialog = null
 
-                if (inputtedText.isNotEmpty() && !messageList.contains(inputtedText)) {
-                    messageList.add(inputtedText)
+                if (inputtedText.isNotEmpty()) {
+                    var index = messageList.indexOf(inputtedText)
+                    if (index != -1)
+                        messageList.removeAt(index)
+                    messageList.add(0, inputtedText)
                     MainRepository.setMessageList(activity!!, messageList)
                 }
             }
@@ -294,17 +297,17 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
                 result?.cancel()
                 modalDialog = null
             }
+            neutralButton(text = getLocString(R.string.reset)) {
+                messageList.clear()
+                messageList.addAll(defaultMessageList)
+                MainRepository.setMessageList(activity!!, messageList)
+                result?.confirm("")
+                modalDialog = null
+            }
             cancelable(false)
             cancelOnTouchOutside(false)
             lifecycleOwner(activity)
         }
-
-        // よくわからないのでもう一度更新する。
-        defaultMessageList = activity!!.getMsgList()
-        userMessageList = MainRepository.getMessageList(activity!!)
-        messageList.clear()
-        messageList.addAll(defaultMessageList)
-        messageList.addAll(userMessageList)
 
         // ダイアログのレイアウトを設定
         val customView = modalDialog!!.getCustomView()

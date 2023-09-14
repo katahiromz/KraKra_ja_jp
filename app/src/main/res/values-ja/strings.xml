@@ -4,6 +4,7 @@
     <string name="ok">OK</string>
     <string name="cancel">キャンセル</string>
     <string name="clear">クリア</string>
+    <string name="reset">リセット</string>
 
     <!-- main -->
     <string name="app_name">催眠くらくら</string>
