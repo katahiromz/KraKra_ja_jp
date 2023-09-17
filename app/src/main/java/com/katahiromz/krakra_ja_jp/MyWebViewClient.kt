@@ -15,10 +15,10 @@ class MyWebViewClient(val listener: Listener) : WebViewClient() {
         request: WebResourceRequest?
     ): Boolean {
         if (view != null && request != null) {
-            var url: String = request!!.url.toString()
+            var url: String = request.url.toString()
             var index:Int = url.indexOf("file:///android_asset/")
             if (index == 0) {
-                view!!.loadUrl(url)
+                view.loadUrl(url)
             }
         }
         return true
