@@ -142,7 +142,7 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
         // MaterialAlertDialogを使用して実装する。
         var title = getLocString(R.string.app_name)
         var ok_text = getLocString(R.string.ok)
-        MaterialAlertDialogBuilder(activity!!)
+        MaterialAlertDialogBuilder(activity!!, R.style.AlertDialogTheme)
             .setTitle(title)
             .setMessage(message)
             .setPositiveButton(ok_text) { _, _ ->
@@ -164,7 +164,7 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
         var title = getLocString(R.string.app_name)
         var ok_text = getLocString(R.string.ok)
         var cancel_text = getLocString(R.string.cancel)
-        MaterialAlertDialogBuilder(activity!!)
+        MaterialAlertDialogBuilder(activity!!, R.style.AlertDialogTheme)
             .setTitle(title)
             .setMessage(message)
             .setPositiveButton(ok_text) { _, _ ->
