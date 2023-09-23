@@ -2,24 +2,12 @@ package com.katahiromz.krakra_ja_jp
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.content.res.Configuration
-import android.content.res.Resources
-import android.media.VolumeShaper
 import android.text.InputType
 import android.view.View
 import android.webkit.*
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat.*
 import androidx.core.content.ContextCompat
-import androidx.core.os.LocaleListCompat
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.customview.customView
-import com.afollestad.materialdialogs.customview.getCustomView
-import com.afollestad.materialdialogs.input.input
-import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
-import com.afollestad.materialdialogs.utils.MDUtil.getStringArray
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import timber.log.Timber
 import java.util.*
@@ -180,11 +168,8 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
         return true
     }
 
-    // アプリ復帰時にモーダルダイアログを再表示する。
-    private var modalDialog: MaterialDialog? = null
+    // アプリ復帰時の処理。
     fun onResume() {
-        if (modalDialog != null)
-            modalDialog?.show()
     }
 
     // JavaScriptのprompt関数をラップする。

@@ -26,7 +26,6 @@ import createLocalizedContext
 import timber.log.Timber
 import java.util.*
 
-
 /////////////////////////////////////////////////////////////////////
 // 定数。
 

@@ -16,9 +16,6 @@
         <!-- Navigation bar color. -->
         <item name="android:navigationBarColor">@color/black</item>
         <!-- Customize your theme here. -->
-        <!-- Material Dialog -->
-        <item name="md_background_color">#353434</item>
-        <item name="md_corner_radius">10dp</item>
     </style>
     <!-- Splash theme -->
     <style name="Theme.KraKra_ja_jp.Splash" parent="Theme.SplashScreen.IconBackground">
