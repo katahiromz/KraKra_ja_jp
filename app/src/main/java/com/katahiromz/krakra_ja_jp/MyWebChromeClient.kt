@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.media.VolumeShaper
+import android.text.InputType
 import android.webkit.*
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -139,7 +140,7 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
         message: String?,
         result: JsResult?
     ): Boolean {
-        // MaterialAlertDialogを使用して実装する。
+        // MaterialAlertDialogを使用して普通に実装する。
         var title = getLocString(R.string.app_name)
         var ok_text = getLocString(R.string.ok)
         MaterialAlertDialogBuilder(activity!!, R.style.AlertDialogTheme)
@@ -160,7 +161,7 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
         message: String?,
         result: JsResult?
     ): Boolean {
-        // MaterialAlertDialogを使用して実装する。
+        // MaterialAlertDialogを使用して普通に実装する。
         var title = getLocString(R.string.app_name)
         var ok_text = getLocString(R.string.ok)
         var cancel_text = getLocString(R.string.cancel)
@@ -205,26 +206,24 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
             )
             return true
         }
-        var inputtedText: String? = null
-        var hintStr = getLocString(R.string.prompt_hint)
-        modalDialog = MaterialDialog(activity!!).show {
-            title(text = title)
-            message(text = message)
-            input(hint = hintStr, prefill = defaultValue) { _, text ->
-                inputtedText = text.toString()
-            }
-            positiveButton(text = getLocString(R.string.ok)) {
-                result?.confirm(inputtedText ?: "")
-                modalDialog = null
-            }
-            negativeButton(text = getLocString(R.string.cancel)) {
-                result?.cancel()
-                modalDialog = null
-            }
-            cancelable(false)
-            cancelOnTouchOutside(false)
-            lifecycleOwner(activity)
-        }
+        // MaterialAlertDialogを使用して普通に実装する。
+        var ok_text = getLocString(R.string.ok)
+        var cancel_text = getLocString(R.string.cancel)
+        var input: EditText = EditText(activity!!)
+        input.inputType = InputType.TYPE_CLASS_TEXT
+        input.setText(if (defaultValue != null) defaultValue!! else "")
+        MaterialAlertDialogBuilder(activity!!, R.style.AlertDialogTheme)
+                .setTitle(title)
+                .setMessage(message)
+                .setView(input)
+                .setPositiveButton(ok_text) { _, _ ->
+                    result?.confirm(input.text.toString())
+                }
+                .setNegativeButton(cancel_text) { _, _ ->
+                    result?.cancel()
+                }
+                .setCancelable(false)
+                .show()
         return true
     }
 
