@@ -211,7 +211,7 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
         var cancel_text = getLocString(R.string.cancel)
         var input: EditText = EditText(activity!!)
         input.inputType = InputType.TYPE_CLASS_TEXT
-        input.setText(if (defaultValue != null) defaultValue!! else "")
+        input.setText(if (defaultValue != null) defaultValue else "")
         MaterialAlertDialogBuilder(activity!!, R.style.AlertDialogTheme)
                 .setTitle(title)
                 .setMessage(message)
