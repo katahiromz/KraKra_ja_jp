@@ -6,6 +6,7 @@ import android.content.res.Configuration
 import android.content.res.Resources
 import android.media.VolumeShaper
 import android.text.InputType
+import android.view.View
 import android.webkit.*
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -196,6 +197,7 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
     ): Boolean {
         activity!!.currLocaleContext = null
         val title = getLocString(R.string.app_name)
+        // KraKraでは特定のメッセージに対してダイアログを拡張する。
         if (isSelectMessageDialog(message)) {
             // メッセージ選択ダイアログを表示
             showSelectMessageDialog(
@@ -206,7 +208,7 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
             )
             return true
         }
-        // MaterialAlertDialogを使用して普通に実装する。
+        // さもなければMaterialAlertDialogを使用して普通に実装する。
         var ok_text = getLocString(R.string.ok)
         var cancel_text = getLocString(R.string.cancel)
         var input: EditText = EditText(activity!!)
@@ -271,48 +273,61 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
         var defaultMessageList: MutableList<String> = activity!!.getDefaultMessageList()
         var messageList: MutableList<String> = MainRepository.loadMessageList(activity!!)
 
+        // リストが空ならデフォルトで初期化する。
         if (messageList.isEmpty())
             messageList.addAll(defaultMessageList)
 
-        modalDialog = MaterialDialog(activity!!).show {
-            title(text = title)
-            message(text = message)
-            customView(R.layout.message_select_dialog, scrollable = true, horizontalPadding = true)
-            positiveButton(text = getLocString(R.string.ok)) {
-                var editText = getCustomView().findViewById<EditText>(R.id.message_edit)
-                var inputtedText = editText.text.toString()
+        // ダイアログビューを取得する。
+        var inflater = activity!!.layoutInflater
+        var dialogView: View = inflater.inflate(R.layout.message_select_dialog, null)
 
-                if (inputtedText.isNotEmpty()) {
-                    var index = messageList.indexOf(inputtedText)
-                    if (index != -1)
-                        messageList.removeAt(index)
-                    messageList.add(0, inputtedText)
-                    MainRepository.saveMessageList(activity!!, messageList)
-                }
+        // 「クリア」ボタン。
+        var clearButton = dialogView.findViewById<Button>(R.id.clear_button)
+        clearButton.setText(getLocString(R.string.clear))
 
-                result?.confirm(inputtedText)
-                modalDialog = null
-            }
-            negativeButton(text = getLocString(R.string.cancel)) {
-                result?.cancel()
-                modalDialog = null
-            }
-            neutralButton(text = getLocString(R.string.reset)) {
-                messageList.clear()
-                messageList.addAll(defaultMessageList)
-                MainRepository.saveMessageList(activity!!, messageList)
+        // テキストボックス。
+        var editText: EditText = dialogView.findViewById(R.id.message_edit)
+        editText.setText(defaultValue)
+        editText.hint = getLocString(R.string.prompt_hint)
 
-                result?.confirm("")
-                modalDialog = null
-            }
-            cancelable(false)
-            cancelOnTouchOutside(false)
-            lifecycleOwner(activity)
+        // 「クリア」ボタンをクリックしたらテキストボックスをクリアする。
+        clearButton.setOnClickListener {
+            editText.setText("")
         }
 
+        // ダイアログを表示する。
+        MaterialAlertDialogBuilder(activity!!, R.style.AlertDialogTheme)
+                .setTitle(title)
+                .setMessage(message)
+                .setView(dialogView)
+                .setPositiveButton(getLocString(R.string.ok)) { _, _ ->
+                    var inputtedText = editText.text.toString()
+
+                    if (inputtedText.isNotEmpty()) {
+                        var index = messageList.indexOf(inputtedText)
+                        if (index != -1)
+                            messageList.removeAt(index)
+                        messageList.add(0, inputtedText)
+                        MainRepository.saveMessageList(activity!!, messageList)
+                    }
+
+                    result?.confirm(inputtedText)
+                }
+                .setNegativeButton(getLocString(R.string.cancel)) { _, _ ->
+                    result?.cancel()
+                }
+                .setNeutralButton(getLocString(R.string.reset)) { _, _ ->
+                    messageList.clear()
+                    messageList.addAll(defaultMessageList)
+                    MainRepository.saveMessageList(activity!!, messageList)
+
+                    result?.confirm("")
+                }
+                .setCancelable(false)
+                .show()
+
         // ダイアログのレイアウトを設定
-        val customView = modalDialog!!.getCustomView()
-        val listView: ListView = customView.findViewById(R.id.message_list)
+        val listView: ListView = dialogView.findViewById(R.id.message_list)
         var arrayAdapter = ArrayAdapter(
             activity!!,
             android.R.layout.simple_list_item_1,
@@ -326,20 +341,8 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
         listView.onItemClickListener =
             AdapterView.OnItemClickListener { _, view, _, _ ->
                 val sampleMessage = (view as TextView).text.toString()
-                val editText: EditText = customView.findViewById(R.id.message_edit)
                 editText.setText(sampleMessage)
             }
-
-        var clearButton = customView.findViewById<Button>(R.id.clear_button)
-        clearButton.setText(getLocString(R.string.clear))
-
-        var editText: EditText = customView.findViewById(R.id.message_edit)
-        editText.setText(defaultValue)
-        editText.hint = getLocString(R.string.prompt_hint)
-
-        clearButton.setOnClickListener {
-            editText.setText("")
-        }
     }
 
     private fun getMessageListHeight(listView: ListView, arrayAdapter: ArrayAdapter<String>): Int {
