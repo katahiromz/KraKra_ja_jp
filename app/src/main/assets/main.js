@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		trans_localize(lang);
 
-		sai_id_button_agree.scrollLeft = sai_id_button_agree.scrollTop = 0;
+		sai_id_text_notice.scrollLeft = sai_id_text_notice.scrollTop = 0;
 
 		sai_hypno_releasing_img = new Image();
 		if(sai_released){
@@ -509,7 +509,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	function SAI_help(){
 		setTimeout(function(){
-			sai_id_button_agree.scrollLeft = sai_id_button_agree.scrollTop = 0;
+			sai_id_text_notice.scrollLeft = sai_id_text_notice.scrollTop = 0;
 		}, 200);
 		localStorage.setItem('saiminHelpShowing', '1');
 		SAI_choose_page(sai_id_page_agreement);
