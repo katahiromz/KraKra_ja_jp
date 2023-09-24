@@ -1669,16 +1669,16 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_old_cyScreen = window.innerHeight;
 
 		let new_time = (new Date()).getTime();
-		let diff = (new_time - sai_old_time) / 1000.0;
+		let diff_time = (new_time - sai_old_time) / 1000.0;
 		if(sai_rotation_type == 'counter')
-			diff = -diff;
+			diff_time = -diff_time;
 		if(sai_stopping)
-			diff = 0;
-		sai_counter += diff * sai_speed;
+			diff_time = 0;
+		sai_counter += diff_time * sai_speed;
 		sai_old_time = new_time;
 
 		if(sai_speed_irregular){
-			sai_clock += diff;
+			sai_clock += diff_time;
 			if(sai_clock >= sai_speed / 30.0){
 				sai_clock = 0;
 				const MIN_VALUE = 35.0;
@@ -1692,8 +1692,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		if(sai_DEBUGGING){
-			if(diff != 0){
-				sai_FPS = 1 / Math.abs(diff);
+			if(diff_time != 0){
+				sai_FPS = 1 / Math.abs(diff_time);
 				sai_FPS = Math.round(sai_FPS * 10) / 10;
 			}
 			let text = Math.round(sai_FPS).toString() + '.' + (sai_FPS * 10 % 10).toString();
