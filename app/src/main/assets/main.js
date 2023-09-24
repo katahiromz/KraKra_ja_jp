@@ -1208,7 +1208,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		}while(0);
 
 		const focal = 100;
-		function perspective(x, y, z){
+		function SAI_perspective(x, y, z){
 			let w = focal / (focal + z);
 			return [x * w, y * w];
 		}
@@ -1219,10 +1219,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		for (let z = 0; z <= 900; z += deltaz){
 			let ix = 0;
 			for (let x = -cx; x < cx; x += deltax){
-				const [x0, y0] = perspective(x, y, z);
-				const [x1, y1] = perspective(x + deltax, y, z);
-				const [x2, y2] = perspective(x + deltax, y, z + deltaz);
-				const [x3, y3] = perspective(x, y, z + deltaz);
+				const [x0, y0] = SAI_perspective(x, y, z);
+				const [x1, y1] = SAI_perspective(x + deltax, y, z);
+				const [x2, y2] = SAI_perspective(x + deltax, y, z + deltaz);
+				const [x3, y3] = SAI_perspective(x, y, z + deltaz);
 				ctx.beginPath();
 				ctx.moveTo(qx + x0, qy + y0);
 				ctx.lineTo(qx + x1, qy + y1);
@@ -1824,7 +1824,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_blink_set_type(sai_id_range_blink_type.value);
 		}, false);
 
-		function canvasClick(e){
+		function SAI_canvas_click(e){
 			if(!sai_ready)
 				return;
 			if(e.shiftKey){
@@ -1840,7 +1840,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		sai_id_canvas_01.addEventListener('click', function(e){
-			canvasClick(e);
+			SAI_canvas_click(e);
 		}, false);
 
 		sai_id_canvas_01.addEventListener('mousemove', function(e){
@@ -1992,7 +1992,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			sai_id_label_mic.classList.add('sai_class_checked');
 		}
 
-		function showButtons(enabled){
+		function SAI_show_buttons(enabled){
 			if(enabled){
 				sai_id_label_mic.classList.remove('sai_class_invisible');
 				sai_id_button_sound.classList.remove('sai_class_invisible');
@@ -2075,11 +2075,11 @@ document.addEventListener('DOMContentLoaded', function(){
 				}else{
 					SAI_screen_set_division(1);
 				}
-				showButtons(sai_division == 1);
+				SAI_show_buttons(sai_division == 1);
 				return;
 			}
 			if(e.key == 'b' || e.key == 'B'){ // buttons
-				showButtons(sai_id_label_mic.classList.contains('sai_class_invisible'));
+				SAI_show_buttons(sai_id_label_mic.classList.contains('sai_class_invisible'));
 				return;
 			}
 			if(e.key == 'w' || e.key == 'W'){ // Speed Slow
