@@ -64,6 +64,7 @@ Goggle Mode can be toggled on and off by pressing [G] key.
 Goggle Mode splits the screen in two and hides the control buttons.
 
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
+Copyright (c) 2023 Murayama Akira
 Copyright (c) 2018 Robert Eisele
 Copyright (c) 2007-2022 Akshay Nair
 Copyright 2022 OpenJS Foundation and jQuery contributors.`;
@@ -130,6 +131,7 @@ Hypnosis KraKra
 고글 모드는 화면을 2분할하고 조작 버튼을 숨깁니다.
 
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
+Copyright (c) 2023 Murayama Akira
 Copyright (c) 2018 Robert Eisele
 Copyright (c) 2007-2022 Akshay Nair
 Copyright 2022 OpenJS Foundation and jQuery contributors.`;
@@ -196,6 +198,7 @@ Hypnosis KraKra
 ゴーグルモードは、画面を２分割し、操作ボタンを隠します。
 
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
+Copyright (c) 2023 Murayama Akira
 Copyright (c) 2018 Robert Eisele
 Copyright (c) 2007-2022 Akshay Nair
 Copyright 2022 OpenJS Foundation and jQuery contributors.`;
@@ -262,6 +265,7 @@ Hypnosis KraKra
 护目镜模式将屏幕一分为二并隐藏控制按钮。
 
 Copyright (c) 2022-2023 片山博文MZ
+Copyright (c) 2023 Murayama Akira
 Copyright (c) 2018 Robert Eisele
 Copyright (c) 2007-2022 Akshay Nair
 Copyright 2022 OpenJS Foundation and jQuery contributors.`;
@@ -328,6 +332,7 @@ Hypnosis KraKra
 護目鏡模式將屏幕分為兩部分並隱藏操作按鈕。
 
 Copyright (c) 2022-2023 片山博文MZ
+Copyright (c) 2023 Murayama Akira
 Copyright (c) 2018 Robert Eisele
 Copyright (c) 2007-2022 Akshay Nair
 Copyright 2022 OpenJS Foundation and jQuery contributors.`;
@@ -394,6 +399,7 @@ La modalità Goggle può essere attivata e disattivata premendo il tasto [G].
 La modalità Goggle divide lo schermo in due e nasconde i pulsanti di controllo.
 
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
+Copyright (c) 2023 Murayama Akira
 Copyright (c) 2018 Robert Eisele
 Copyright (c) 2007-2022 Akshay Nair
 Copyright 2022 OpenJS Foundation and jQuery contributors.`;
@@ -460,6 +466,7 @@ Der Brillenmodus kann durch Drücken der Taste [G] ein- und ausgeschaltet werden
 Der Goggle-Modus teilt den Bildschirm in zwei Teile und verbirgt die Steuertasten.
 
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
+Copyright (c) 2023 Murayama Akira
 Copyright (c) 2018 Robert Eisele
 Copyright (c) 2007-2022 Akshay Nair
 Copyright 2022 OpenJS Foundation and jQuery contributors.`;
