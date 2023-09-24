@@ -191,17 +191,6 @@ label {
 .sai_class_checked {
 	background-color: rgba(204, 101, 198, 90%);
 }
-.ui-dialog-content div {
-	margin-top: 4px;
-	margin-bottom: 4px;
-}
-.ui-dialog-content div select {
-	padding-top: 5px;
-	padding-bottom: 5px;
-}
-.ui-widget {
-	font-size: 0.9em;
-}
 .sai_class_scrollable {
 	overflow-x: visible;
 	overflow-y: scroll;

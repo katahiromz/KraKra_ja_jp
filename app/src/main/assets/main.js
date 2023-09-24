@@ -1483,9 +1483,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 	}
 
-	function SAI_message_set_position(id, px, py, dx, dy, sai_counter){
+	function SAI_message_set_position(id, px, py, dx, dy, counter){
 		let x = px + dx / 2 - id.clientWidth / 2;
-		let y = py + dy * 0.7 - id.clientHeight / 2 + (1 + 0.4 * Math.sin(sai_counter * 0.1)) * dy * 0.1;
+		let y = py + dy * 0.7 - id.clientHeight / 2 + (1 + 0.4 * Math.sin(counter * 0.1)) * dy * 0.1;
 		id.style.left = x + 'px';
 		id.style.top = y + 'px';
 	}
@@ -1583,6 +1583,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			diff_time = 0;
 		sai_counter += diff_time * sai_speed;
 		sai_old_time = new_time;
+		console.log(sai_speed);
 
 		if(sai_speed_irregular){
 			sai_clock += diff_time;
