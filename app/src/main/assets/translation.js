@@ -1156,4 +1156,7 @@ function trans_localize(lang){
 		trans_setSelectOptionText(screen_brightness, 'brighter', 'Brighter');
 		trans_setHtmlText(sai_id_text_version, 'Hyponosis KraKra Ver.' + VERSION);
 	}
+
+	trans_setHtmlText(sai_id_page_agreement_header_1, trans_getText('TEXT_ABOUT_APP'));
+	trans_setHtmlText(sai_id_button_agree, trans_getText('TEXT_I_AGREE'));
 }

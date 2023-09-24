@@ -180,9 +180,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		SAI_blink_set_type(sai_id_range_blink_type.value);
 
-		trans_setHtmlText(sai_id_page_agreement_header_1, trans_getText('TEXT_ABOUT_APP'));
-		trans_setHtmlText(sai_id_button_agree, trans_getText('TEXT_I_AGREE'));
-
 		try{
 			android.setLanguage(lang);
 		}catch(error){
@@ -411,7 +408,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_id_button_type_select.innerText = trans_getText('TEXT_PIC') + sai_pic_type.toString();
 		localStorage.setItem('saiminType', sai_pic_type.toString());
 		try{
-			android.SAI_pic_set_type(sai_pic_type);
+			android.setPicType(sai_pic_type);
 		}catch(error){
 			;
 		}
