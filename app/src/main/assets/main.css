@@ -3,6 +3,14 @@ body {
 	padding: 0;
 	background-color: black;
 }
+input[type='checkbox'] {
+	cursor: pointer;
+	font-size: 0.5cm;
+	padding: 0;
+}
+label {
+	cursor: pointer;
+}
 #sai_id_main_page {
 	overflow: hidden;
 }
@@ -41,9 +49,6 @@ body {
 	width: 100dvw;
 	height: 100dvh;
 }
-label {
-	cursor: pointer;
-}
 .sai_class_ui_line {
 	padding-top: 1mm;
 	padding-bottom: 1mm;
@@ -53,11 +58,6 @@ label {
 	-webkit-hyphens: none;
 	-ms-hyphens: none;
 	hyphens: none;
-}
-input[type='checkbox'] {
-	cursor: pointer;
-	font-size: 0.5cm;
-	padding: 0;
 }
 .sai_class_floating_text {
 	pointer-events: none; // click-transparent
@@ -185,7 +185,7 @@ input[type='checkbox'] {
 	padding: 0;
 	text-align: center;
 }
-button.sai_class_navi_button {
+.sai_class_navi_button {
 	vertical-align: top;
 	line-height: 0.5cm;
 }
@@ -225,7 +225,7 @@ button.sai_class_navi_button {
 }
 
 /* https://www.tutorialstonight.com/css-toggle-switch-with-text */
-/* BEGIN FROM HERE */
+/* BEGIN toggle switch */
 .sai_class_toggle_button {
     --width: 80px;
     --height: calc(var(--width) / 3);
@@ -303,4 +303,4 @@ button.sai_class_navi_button {
 .sai_class_toggle_button input:checked~.sai_class_toggle_label::before {
     opacity: 1;
 }
-/* END AT HERE */
+/* END toggle switch */
