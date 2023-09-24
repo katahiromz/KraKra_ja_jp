@@ -36,11 +36,36 @@ document.addEventListener('DOMContentLoaded', function(){
 	let speedIrregular = false;
 	let picType = 0;
 	let blinking_interval = 0;
+	let first_time = false;
+	let requestAnime = null;
 
 	coin_img.src = 'images/coin5yen.png';
 
 	function isNativeApp(){
 		return navigator.userAgent.indexOf('/KraKra-native-app/') != -1;
+	}
+
+	function choosePage(page_id){
+		// Hide all the pages
+		initial_page.classList.add('invisible');
+		choose_langauge_page.classList.add('invisible');
+		agreement_page.classList.add('invisible');
+		main_page.classList.add('invisible');
+
+		// Display one page
+		if(typeof(page_id) == 'string')
+			page_id = document.getElementById(page_id);
+		page_id.classList.remove('invisible');
+		if (page_id == main_page){
+			if (!ready)
+				accepted();
+			if(!requestAnime){
+				requestAnime = window.requestAnimationFrame(draw_all);
+			}
+		}else{
+			window.cancelAnimationFrame(requestAnime);
+			requestAnime = null;
+		}
 	}
 
 	function getNativeAppVersion(){
@@ -151,6 +176,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		language_select.value = lang;
 
 		setBlinkingType(blinking_type.value);
+
+		trans_setHtmlText(agreement_page_header, trans_getText('TEXT_ABOUT_APP'));
+		trans_setHtmlText(agreement_ok_button, trans_getText('TEXT_I_AGREE'));
+
 		try{
 			android.setLanguage(lang);
 		}catch(error){
@@ -425,7 +454,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		fitCanvas();
 		let position = { my: 'center', at: 'center', of: window };
 		if(localStorage.getItem('saiminHelpShowing')){
-			$('#about_dialog').dialog('option', 'position', position);
+			choosePage(agreement_page) //$('#about_dialog').dialog('option', 'position', position);
 		}else if(localStorage.getItem('saiminAppearanceShowing')){
 			$('#appearance_dialog').dialog('option', 'position', position);
 		}else if(localStorage.getItem('saiminConfigShowing')){
@@ -461,106 +490,28 @@ document.addEventListener('DOMContentLoaded', function(){
 			}else{
 				setPicType(0);
 			}
-			window.requestAnimationFrame(draw_all);
+			if (!requestAnime)
+				requestAnime = window.requestAnimationFrame(draw_all);
 			ready = true;
+			choosePage(main_page);
 		}
 	}
 
 	function chooseLanguage(){
 		let lang = localStorage.getItem('saiminLanguage3');
-		let first_time = false;
 		if(!lang){
 			lang = trans_getDefaultLanguage();
 			first_time = true;
 		}
 		language_select2.value = lang;
-		let dialogContainer = $('#choose_language_dialog');
-		dialogContainer.dialog({
-			dialogClass: 'no-close',
-			title: trans_getText('TEXT_CHOOSE_LANGUAGE'),
-			buttons: [{
-				text: trans_getText('TEXT_OK'),
-				click: function(){
-					setLanguage(language_select2.value);
-					dialogContainer.dialog('close');
-					if(first_time)
-						help();
-				},
-			},{
-				text: trans_getText('TEXT_CANCEL'),
-				click: function(){
-					dialogContainer.dialog('close');
-					if(first_time && !localStorage.getItem('saiminLanguage3')){
-						setLanguage('en');
-						help();
-					}
-				},
-			}],
-			// Workaround against slowness
-			draggable: false,
-			resizable: false,
-		});
-		dialogContainer.keydown(function(e){
-			if(e.keyCode == 13){
-				$(this).parent().find('button:nth-child(1)').trigger('click');
-				return false;
-			}
-		});
-		$('#choose_language_dialog').on('dialogclose', function(event){
-			if(first_time && !localStorage.getItem('saiminLanguage3')){
-				setLanguage('en');
-				help();
-			}
-		});
 	}
 
 	function help(){
-		$('#notice_text').width(window.innerWidth * 2 / 3).height(window.innerHeight * 2 / 5);
 		setTimeout(function(){
 			notice_text.scrollLeft = notice_text.scrollTop = 0;
 		}, 200);
 		localStorage.setItem('saiminHelpShowing', '1');
-		let dialogContainer = $('#about_dialog');
-		dialogContainer.dialog({
-			dialogClass: 'no-close',
-			title: trans_getText('TEXT_ABOUT_APP'),
-			buttons: [{
-				text: trans_getText('TEXT_INIT_APP'),
-				click: function(){
-					try{
-						android.clearSettings();
-					}catch(error){
-						;
-					}
-					localStorage.clear();
-					if(theRegistration){
-						theRegistration.unregister();
-					}
-					alert(trans_getText('TEXT_INITTED_APP'));
-					location.reload();
-				},
-			},{
-				text: trans_getText('TEXT_OK'),
-				click: function(){
-					dialogContainer.dialog('close');
-					accepted();
-				},
-			}],
-			width: window.innerWidth * 4 / 5,
-			// Workaround against slowness
-			draggable: false,
-			resizable: false,
-		});
-		dialogContainer.keydown(function(e){
-			if(e.keyCode == 13){
-				$(this).parent().find('button:nth-child(2)').trigger('click');
-				return false;
-			}
-		});
-		dialogContainer.on('dialogclose', function(event){
-			localStorage.removeItem('saiminHelpShowing');
-			accepted();
-		});
+		choosePage(agreement_page);
 	}
 
 	function apperance(){
@@ -1755,7 +1706,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			ctx.fillText(text, (cxScreen - width) / 2, height);
 		}
 
-		window.requestAnimationFrame(draw_all);
+		requestAnime = window.requestAnimationFrame(draw_all);
 	}
 
 	function main(){
@@ -1877,6 +1828,11 @@ document.addEventListener('DOMContentLoaded', function(){
 				return;
 			setLanguage(language_select.value);
 		}, false);
+
+		agreement_ok_button.addEventListener('click', function(e){
+			localStorage.removeItem('saiminHelpShowing');
+			choosePage(main_page);
+		});
 
 		message_size_select.addEventListener('input', function(){
 			if(!ready)
@@ -2043,10 +1999,19 @@ document.addEventListener('DOMContentLoaded', function(){
 			accepted();
 		}else{
 			if(!saiminLanguage3){
+				choosePage(choose_langauge_page);
+				choose_language_ok_button.addEventListener('click', function(e){
+					setLanguage(language_select2.value);
+					choosePage(main_page);
+					if(first_time){
+						help();
+					}
+				});
 				chooseLanguage();
 			}else{
 				setLanguage(saiminLanguage3);
 				if(!saiminAdultCheck3){
+					choosePage(main_page);
 					help();
 				}
 			}

@@ -502,6 +502,7 @@ function trans_getText(str_id){
 		case 'TEXT_LOGO': return 'images/logo_ja.svg';
 		case 'TEXT_TAP_HERE': return 'images/please-tap-here_ja.svg';
 		case 'TEXT_MP3_RELEASED_HYPNOSIS': return 'sn/ReleasedHypnosis_ja.mp3';
+		case 'TEXT_I_AGREE': return '私は同意します';
 		}
 	}else if(lang == 'zh-CN' || lang == 'cn'){ // Chinese (Simplified)
 		switch(str_id){
@@ -529,6 +530,7 @@ function trans_getText(str_id){
 		case 'TEXT_LOGO': return 'images/logo_zh-CN.svg';
 		case 'TEXT_TAP_HERE': return 'images/please-tap-here_zh-CN.svg';
 		case 'TEXT_MP3_RELEASED_HYPNOSIS': return 'sn/ReleasedHypnosis_zh-CN.mp3';
+		case 'TEXT_I_AGREE': return '我同意';
 		}
 	}else if(lang == 'zh-TW'){ // Chinese (Traditional)
 		switch(str_id){
@@ -556,6 +558,7 @@ function trans_getText(str_id){
 		case 'TEXT_LOGO': return 'images/logo_zh-TW.svg';
 		case 'TEXT_TAP_HERE': return 'images/please-tap-here_zh-TW.svg';
 		case 'TEXT_MP3_RELEASED_HYPNOSIS': return 'sn/ReleasedHypnosis_zh-TW.mp3';
+		case 'TEXT_I_AGREE': return '我同意';
 		}
 	}else if(lang == 'ko' || lang == 'kr' || lang == 'ko-KR'){ // Korean
 		switch(str_id){
@@ -583,6 +586,7 @@ function trans_getText(str_id){
 		case 'TEXT_LOGO': return 'images/logo_ko-KR.svg';
 		case 'TEXT_TAP_HERE': return 'images/please-tap-here_ko-KR.svg';
 		case 'TEXT_MP3_RELEASED_HYPNOSIS': return 'sn/ReleasedHypnosis_ko-KR.mp3';
+		case 'TEXT_I_AGREE': return '동의합니다';
 		}
 	}else if(lang == 'it' || lang == 'it-IT'){ // Italian
 		switch(str_id){
@@ -592,7 +596,7 @@ function trans_getText(str_id){
 		case 'TEXT_YES': return 'SÌ';
 		case 'TEXT_NO': return 'No';
 		case 'TEXT_CHOOSE_LANGUAGE': return 'Scegli una lingua (Choose a language)';
-		case 'TEXT_ABOUT_APP': return 'Informazioni su questa app';
+		case 'TEXT_ABOUT_APP': return 'Informazioni sull\'app';
 		case 'TEXT_INIT_APP': return 'Inizializza l\'app';
 		case 'TEXT_INITTED_APP': return 'Inizializzata l\'app.';
 		case 'TEXT_CONFIGURATION': return 'Configurazione';
@@ -610,6 +614,7 @@ function trans_getText(str_id){
 		case 'TEXT_LOGO': return 'images/logo_it.svg';
 		case 'TEXT_TAP_HERE': return 'images/please-tap-here_it.svg';
 		case 'TEXT_MP3_RELEASED_HYPNOSIS': return 'sn/ReleasedHypnosis_it.mp3';
+		case 'TEXT_I_AGREE': return 'Sono d\'accordo';
 		}
 	}else if(lang == 'de' || lang == 'de-DE'){ // German
 		switch(str_id){
@@ -637,6 +642,7 @@ function trans_getText(str_id){
 		case 'TEXT_LOGO': return 'images/logo_de.svg';
 		case 'TEXT_TAP_HERE': return 'images/please-tap-here_de.svg';
 		case 'TEXT_MP3_RELEASED_HYPNOSIS': return 'sn/ReleasedHypnosis_de.mp3';
+		case 'TEXT_I_AGREE': return 'Ich stimme zu';
 		}
 	}else{ // English is default
 		switch(str_id){
@@ -664,6 +670,7 @@ function trans_getText(str_id){
 		case 'TEXT_LOGO': return 'images/logo_en.svg';
 		case 'TEXT_TAP_HERE': return 'images/please-tap-here_en.svg';
 		case 'TEXT_MP3_RELEASED_HYPNOSIS': return 'sn/ReleasedHypnosis_en.mp3';
+		case 'TEXT_I_AGREE': return 'I agree';
 		}
 	}
 }
@@ -793,7 +800,7 @@ function trans_localize(lang){
 		trans_setHtmlText(config_brightness, '画面の明るさ:');
 		trans_setSelectOptionText(screen_brightness, 'normal', '普通');
 		trans_setSelectOptionText(screen_brightness, 'brighter', '明るくする');
-		trans_setHtmlText(version_text, '催眠くらくら Version ' + VERSION);
+		trans_setHtmlText(version_text, '催眠くらくら Ver.' + VERSION);
 	}else if(lang == 'zh-CN' || lang == 'cn'){ // Chinese (Simplified)
 		trans_setHtmlText(notice_text, trans_NOTICE_ZW_CN);
 		trans_setImageSrc(mic_img, 'images/mic.png');
@@ -852,7 +859,7 @@ function trans_localize(lang){
 		trans_setHtmlText(config_brightness, '屏幕亮度：');
 		trans_setSelectOptionText(screen_brightness, 'normal', '通常');
 		trans_setSelectOptionText(screen_brightness, 'brighter', '明亮');
-		trans_setHtmlText(version_text, '催眠克拉克拉 Version ' + VERSION);
+		trans_setHtmlText(version_text, '催眠克拉克拉 Ver.' + VERSION);
 	}else if(lang == 'zh-TW'){ // Chinese (Traditional)
 		trans_setHtmlText(notice_text, trans_NOTICE_TW_CN);
 		trans_setImageSrc(mic_img, 'images/mic.png');
@@ -911,7 +918,7 @@ function trans_localize(lang){
 		trans_setHtmlText(config_brightness, '屏幕亮度：');
 		trans_setSelectOptionText(screen_brightness, 'normal', '正常亮度');
 		trans_setSelectOptionText(screen_brightness, 'brighter', '提亮');
-		trans_setHtmlText(version_text, '催眠克拉克拉 Version ' + VERSION);
+		trans_setHtmlText(version_text, '催眠克拉克拉 Ver.' + VERSION);
 	}else if(lang == 'kr' || lang == 'ko' || lang == 'ko-KR'){ // Korean
 		trans_setHtmlText(notice_text, trans_NOTICE_KO_KR);
 		trans_setImageSrc(mic_img, 'images/mic.png');
@@ -970,7 +977,7 @@ function trans_localize(lang){
 		trans_setHtmlText(config_brightness, '화면 밝기:');
 		trans_setSelectOptionText(screen_brightness, 'normal', '일반 밝기');
 		trans_setSelectOptionText(screen_brightness, 'brighter', '밝게 하다');
-		trans_setHtmlText(version_text, '최면 크라크라 Version ' + VERSION);
+		trans_setHtmlText(version_text, '최면 크라크라 Ver.' + VERSION);
 	}else if(lang == 'it' || lang == 'it-IT'){ // Italian
 		trans_setHtmlText(notice_text, trans_NOTICE_IT);
 		trans_setImageSrc(mic_img, 'images/mic.png');
@@ -1029,7 +1036,7 @@ function trans_localize(lang){
 		trans_setHtmlText(config_brightness, 'Luminosità:');
 		trans_setSelectOptionText(screen_brightness, 'normal', 'Normale');
 		trans_setSelectOptionText(screen_brightness, 'brighter', 'Più luminoso');
-		trans_setHtmlText(version_text, 'Ipnosi KraKra Version ' + VERSION);
+		trans_setHtmlText(version_text, 'Ipnosi KraKra Ver.' + VERSION);
 	}else if(lang == 'de' || lang == 'de-DE'){ // German
 		trans_setHtmlText(notice_text, trans_NOTICE_DE);
 		trans_setImageSrc(mic_img, 'images/mic.png');
@@ -1088,7 +1095,7 @@ function trans_localize(lang){
 		trans_setHtmlText(config_brightness, 'Helligkeit:');
 		trans_setSelectOptionText(screen_brightness, 'normal', 'Normal');
 		trans_setSelectOptionText(screen_brightness, 'brighter', 'Heller');
-		trans_setHtmlText(version_text, 'Hypnose KraKra Version ' + VERSION);
+		trans_setHtmlText(version_text, 'Hypnose KraKra Ver.' + VERSION);
 	}else{ // English is default
 		trans_setHtmlText(notice_text, trans_NOTICE_EN);
 		trans_setImageSrc(mic_img, 'images/mic.png');
@@ -1147,6 +1154,6 @@ function trans_localize(lang){
 		trans_setHtmlText(config_brightness, 'Brightness:');
 		trans_setSelectOptionText(screen_brightness, 'normal', 'Normal');
 		trans_setSelectOptionText(screen_brightness, 'brighter', 'Brighter');
-		trans_setHtmlText(version_text, 'Hyponosis KraKra Version ' + VERSION);
+		trans_setHtmlText(version_text, 'Hyponosis KraKra Ver.' + VERSION);
 	}
 }

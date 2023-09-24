@@ -32,168 +32,189 @@
 	<meta name="twitter:card" content="summary" />
 </head>
 <body>
-
-<!-- The canvas -->
-<canvas id="saimin_canvas"></canvas>
-<!-- The canvas #2 -->
-<canvas id="blurring_canvas" class="invisible"></canvas>
-
-<!-- The "microphone" button -->
-<label for="microphone" id="microphone_label" class="invisible navigate-button"><input type="checkbox" id="microphone" class="invisible" /><img id="mic_img" src="images/mic.png" alt="mic" /></label>
-
-<!-- The "pic#" button -->
-<button type="button" id="type_select_button" class="invisible navigate-button">pic0</button>
-
-<!-- The "note" button -->
-<button type="button" id="sound_button" class="invisible navigate-button"><img id="sound_img" src="images/sound.png" alt="play!" /></button>
-
-<!-- The "text" button -->
-<button type="button" id="text_button" class="invisible navigate-button"><img id="char_img" src="images/text_en.png" alt="msg" /></button>
-
-<!-- The "speech" button -->
-<label for="speech_checkbox" id="speech_label" class="invisible navigate-button"><input type="checkbox" id="speech_checkbox" class="invisible" /><img id="speech_img" src="images/speak.png" alt="spch" /></label>
-
-<!-- The "configuration" button -->
-<button type="button" id="config_button" class="invisible round-button"><img id="gear_img" src="images/gear.png" alt="cfg" /></button>
-
-<!-- The help button -->
-<button type="button" id="about_button" class="invisible round-button"><img id="question_img" src="images/question.png" alt="?" /></button>
-
-<!-- The appearance dialog -->
-<div id="appearance_dialog" class="invisible">
-	<div class="ui_line">
-		<span id="appearance_type">The type of picture:</span>
-		<select id="type_select" title="type_select">
-			<option value="-1">pic-1</option>
-			<option value="0" selected>pic0</option>
-			<option value="1">pic1</option>
-			<option value="2">pic2</option>
-			<option value="3">pic3</option>
-			<option value="4">pic4</option>
-			<option value="5">pic5</option>
-			<option value="6">pic6</option>
-			<option value="7">pic7</option>
-			<option value="8">pic8</option>
-			<option value="9">pic9</option>
-		</select>
+<div id="pages">
+	<div id="initial_page" class="page invisible">
+		<!-- Reserved -->
 	</div>
-	<div class="ui_line">
-		<span id="appearance_division">Screen splitting:</span>
-		<label class="toggle" title="Splitting">
-			<input type="checkbox" id="division_select" />
-			<span class="slider"></span>
-			<span class="labels" data-on="ON" data-off="OFF"></span>
-		</label>
-	</div>
-	<div class="ui_line">
-		<span id="appearance_speed">Speed:</span>
-		<span class="nobr">
-			<input type="range" id="speed_type_value" name="speed_type_value" min="0" max="100" value="45.0" step="1" title="Speed" />
-			<label for="speed_irregular" class="nobr">
-				<input type="checkbox" id="speed_irregular" name="speed_irregular" />
-				<span id="speed_irregular_label"></span>
-			</label>
-		</span>
-	</div>
-	<div class="ui_line">
-		<span id="appearance_rotation">Rotation:</span>
-		<label class="toggle">
-			<input type="checkbox" id="rotation_select" title="Rotation" />
-			<span class="slider"></span>
-			<span class="labels" data-on="ON" data-off="OFF"></span>
-		</label>
-	</div>
-	<div class="ui_line">
-		<span id="appearance_blinking">Blinking:</span>
-		<span class="nobr">
-			<input type="range" id="blinking_type" name="blinking_type" min="0" max="7" value="0" step="1" title="Blinking" />
-			<output id="blinking_output" name="blinking_output" for="blinking_type">No blinking</output>
-		</span>
-	</div>
-</div>
-
-<!-- The configuration dialog -->
-<div id="config_dialog" class="invisible">
-	<div class="ui_line">
-		<!-- {{LANGUAGE_SPECIFIC}} -->
-		<span id="config_language">Language:</span>
-		<select id="language_select" title="language_select">
-			<option value="zh-CN">Chinese (Simplified)</option>
-			<option value="zh-TW">Chinese (Traditional)</option>
-			<option value="en" selected>English</option>
-			<option value="de">German</option>
-			<option value="it">Italian</option>
-			<option value="ja">Japanese</option>
-			<option value="ko-KR">Korean</option>
-		</select>
-	</div>
-	<div class="ui_line">
-		<span id="config_size">Size of message:</span>
-		<input id="message_size_select" type="range" min="1" max="4" step="1" value="2" title="Message Size" />
-	</div>
-	<div class="ui_line">
-		<span id="config_note">Note button:</span>
-		<span class="nobr">
-			<select id="sound_select" title="sound_select">
-				<option value="" selected>(None)</option>
-				<option value="Cattish">Cattish</option>
-				<option value="Drill">Drill</option>
-				<option value="Exciting">Exciting</option>
-				<option value="Horror">Horror</option>
-				<option value="Hunting">Hunting</option>
-				<option value="Lonely">Lonely</option>
-				<option value="Longing">Longing</option>
-				<option value="Lovely">Lovely</option>
-				<option value="Magic">Magic</option>
-				<option value="OraSaimin">Ora! Saimin!</option>
+	<div id="choose_langauge_page" class="page center config_page invisible">
+		<h1>Choose a language (言語選択)</h1>
+		<div class="ui_line">
+			<span id="config_language2">Language (言語):</span><br />
+		</div>
+		<div class="ui_line">
+			<!-- {{LANGUAGE_SPECIFIC}} -->
+			<select id="language_select2" title="language_select2">
+				<option value="zh-CN">Chinese (Simplified) (简体中文)</option>
+				<option value="zh-TW">Chinese (Traditional) (繁體中文)</option>
+				<option value="en" selected>English (英語)</option>
+				<option value="de">German (Deutsch)</option>
+				<option value="it">Italian (Italiano)</option>
+				<option value="ja">Japanese (日本語)</option>
+				<option value="ko-KR">Korean (한국어)</option>
 			</select>
-			<button id="config_play_button" type="button"><img src="images/play.png" alt="[Play]"/></button>
-		</span>
+		</div>
+		<hr />
+		<div class="ui_line">
+			<button type="button" id="choose_language_ok_button" class="nav_button">OK</button>
+		</div>
 	</div>
-	<div class="ui_line">
-		<span id="config_switch_sound">Pic change sound:</span>
-		<label class="toggle">
-			<input type="checkbox" id="type_sound_select" title="Pic Change Sound" />
-			<span class="slider"></span>
-			<span class="labels" data-on="ON" data-off="OFF"></span>
-		</label>
+	<div id="agreement_page" class="page center config_page invisible">
+		<h1 id="agreement_page_header">バージョン情報</h1>
+		<div id="version_text">Hyponosis KraKra Version [[VERSION]]</div>
+		<div id="notice_text">
+		</div>
+		<div class="ui_line">
+			<button type="button" id="agreement_ok_button" class="nav_button">I agree</button>
+		</div>
 	</div>
-	<div class="ui_line">
-		<span id="config_brightness">Brightness:</span>
-		<select id="screen_brightness" title="screen_brightness">
-			<option value="normal" selected>Normal</option>
-			<option value="brighter">Brighter</option>
-		</select>
+	<div id="main_page" class="page invisible">
+		<!-- The canvas -->
+		<canvas id="saimin_canvas"></canvas>
+		<!-- The canvas #2 -->
+		<canvas id="blurring_canvas" class="invisible"></canvas>
+
+		<!-- The "microphone" button -->
+		<label for="microphone" id="microphone_label" class="invisible navigate-button"><input type="checkbox" id="microphone" class="invisible" /><img id="mic_img" src="images/mic.png" alt="mic" /></label>
+
+		<!-- The "pic#" button -->
+		<button type="button" id="type_select_button" class="invisible navigate-button">pic0</button>
+
+		<!-- The "note" button -->
+		<button type="button" id="sound_button" class="invisible navigate-button"><img id="sound_img" src="images/sound.png" alt="play!" /></button>
+
+		<!-- The "text" button -->
+		<button type="button" id="text_button" class="invisible navigate-button"><img id="char_img" src="images/text_en.png" alt="msg" /></button>
+
+		<!-- The "speech" button -->
+		<label for="speech_checkbox" id="speech_label" class="invisible navigate-button"><input type="checkbox" id="speech_checkbox" class="invisible" /><img id="speech_img" src="images/speak.png" alt="spch" /></label>
+
+		<!-- The "configuration" button -->
+		<button type="button" id="config_button" class="invisible round-button"><img id="gear_img" src="images/gear.png" alt="cfg" /></button>
+
+		<!-- The help button -->
+		<button type="button" id="about_button" class="invisible round-button"><img id="question_img" src="images/question.png" alt="?" /></button>
+
+		<!-- The appearance dialog -->
+		<div id="appearance_dialog" class="invisible">
+			<div class="ui_line">
+				<span id="appearance_type">The type of picture:</span>
+				<select id="type_select" title="type_select">
+					<option value="-1">pic-1</option>
+					<option value="0" selected>pic0</option>
+					<option value="1">pic1</option>
+					<option value="2">pic2</option>
+					<option value="3">pic3</option>
+					<option value="4">pic4</option>
+					<option value="5">pic5</option>
+					<option value="6">pic6</option>
+					<option value="7">pic7</option>
+					<option value="8">pic8</option>
+					<option value="9">pic9</option>
+				</select>
+			</div>
+			<div class="ui_line">
+				<span id="appearance_division">Screen splitting:</span>
+				<label class="toggle" title="Splitting">
+					<input type="checkbox" id="division_select" />
+					<span class="slider"></span>
+					<span class="labels" data-on="ON" data-off="OFF"></span>
+				</label>
+			</div>
+			<div class="ui_line">
+				<span id="appearance_speed">Speed:</span>
+				<span class="nobr">
+					<input type="range" id="speed_type_value" name="speed_type_value" min="0" max="100" value="45.0" step="1" title="Speed" />
+					<label for="speed_irregular" class="nobr">
+						<input type="checkbox" id="speed_irregular" name="speed_irregular" />
+						<span id="speed_irregular_label"></span>
+					</label>
+				</span>
+			</div>
+			<div class="ui_line">
+				<span id="appearance_rotation">Rotation:</span>
+				<label class="toggle">
+					<input type="checkbox" id="rotation_select" title="Rotation" />
+					<span class="slider"></span>
+					<span class="labels" data-on="ON" data-off="OFF"></span>
+				</label>
+			</div>
+			<div class="ui_line">
+				<span id="appearance_blinking">Blinking:</span>
+				<span class="nobr">
+					<input type="range" id="blinking_type" name="blinking_type" min="0" max="7" value="0" step="1" title="Blinking" />
+					<output id="blinking_output" name="blinking_output" for="blinking_type">No blinking</output>
+				</span>
+			</div>
+		</div>
+
+		<!-- The configuration dialog -->
+		<div id="config_dialog" class="invisible">
+			<div class="ui_line">
+				<!-- {{LANGUAGE_SPECIFIC}} -->
+				<span id="config_language">Language:</span>
+				<select id="language_select" title="language_select">
+					<option value="zh-CN">Chinese (Simplified)</option>
+					<option value="zh-TW">Chinese (Traditional)</option>
+					<option value="en" selected>English</option>
+					<option value="de">German</option>
+					<option value="it">Italian</option>
+					<option value="ja">Japanese</option>
+					<option value="ko-KR">Korean</option>
+				</select>
+			</div>
+			<div class="ui_line">
+				<span id="config_size">Size of message:</span>
+				<input id="message_size_select" type="range" min="1" max="4" step="1" value="2" title="Message Size" />
+			</div>
+			<div class="ui_line">
+				<span id="config_note">Note button:</span>
+				<span class="nobr">
+					<select id="sound_select" title="sound_select">
+						<option value="" selected>(None)</option>
+						<option value="Cattish">Cattish</option>
+						<option value="Drill">Drill</option>
+						<option value="Exciting">Exciting</option>
+						<option value="Horror">Horror</option>
+						<option value="Hunting">Hunting</option>
+						<option value="Lonely">Lonely</option>
+						<option value="Longing">Longing</option>
+						<option value="Lovely">Lovely</option>
+						<option value="Magic">Magic</option>
+						<option value="OraSaimin">Ora! Saimin!</option>
+					</select>
+					<button id="config_play_button" type="button"><img src="images/play.png" alt="[Play]"/></button>
+				</span>
+			</div>
+			<div class="ui_line">
+				<span id="config_switch_sound">Pic change sound:</span>
+				<label class="toggle">
+					<input type="checkbox" id="type_sound_select" title="Pic Change Sound" />
+					<span class="slider"></span>
+					<span class="labels" data-on="ON" data-off="OFF"></span>
+				</label>
+			</div>
+			<div class="ui_line">
+				<span id="config_brightness">Brightness:</span>
+				<select id="screen_brightness" title="screen_brightness">
+					<option value="normal" selected>Normal</option>
+					<option value="brighter">Brighter</option>
+				</select>
+			</div>
+		</div>
+
+		<!-- The floating texts -->
+		<div id="floating_text1" class="invisible font_size_normal"></div>
+		<div id="floating_text2" class="invisible font_size_normal"></div>
+
+		<!-- The "help" dialog -->
+		<!--
+			<div id="about_dialog" class="invisible">
+				<div id="version_text">Hyponosis KraKra Version [[VERSION]]</div>
+				<div>
+			<textarea id="notice_text" rows="8" title="Notice" readonly></textarea>
+				</div>
+			</div>
+		-->
 	</div>
 </div>
-
-<!-- The "Choose a language" dialog -->
-<div id="choose_language_dialog" class="invisible">
-	<div>
-		<!-- {{LANGUAGE_SPECIFIC}} -->
-		<span id="config_language2">Language (言語):</span><br />
-		<select id="language_select2" title="language_select2">
-			<option value="zh-CN">Chinese (Simplified) (简体中文)</option>
-			<option value="zh-TW">Chinese (Traditional) (繁體中文)</option>
-			<option value="en" selected>English (英語)</option>
-			<option value="de">German (Deutsch)</option>
-			<option value="it">Italian (Italiano)</option>
-			<option value="ja">Japanese (日本語)</option>
-			<option value="ko-KR">Korean (한국어)</option>
-		</select>
-	</div>
-</div>
-
-<!-- The floating texts -->
-<div id="floating_text1" class="invisible font_size_normal"></div>
-<div id="floating_text2" class="invisible font_size_normal"></div>
-
-<!-- The "help" dialog -->
-<div id="about_dialog" class="invisible">
-	<div id="version_text">Hyponosis KraKra Version [[VERSION]]</div>
-	<div>
-<textarea id="notice_text" rows="8" title="Notice" readonly></textarea>
-	</div>
-</div>
-
 </body></html>

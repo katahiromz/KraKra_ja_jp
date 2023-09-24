@@ -1,8 +1,37 @@
 body {
 	margin: 0;
 	padding: 0;
-	overflow: hidden;
 	background-color: black;
+}
+#main_page {
+	overflow: hidden;
+}
+.page {
+	margin: 0;
+	padding: 0;
+	width: 100dvw;
+	height: 100dvh;
+	background-color: #333;
+	color: #fcf;
+}
+.page h1 {
+	font-size: 1.25rem;
+	background-color: #c0c;
+	color: white;
+}
+.page select {
+	padding: 0.5rem;
+}
+.config_page {
+	font-size: 1.2rem;
+}
+.config_page select {
+	font-size: 1.5rem;
+	width: 80dvw;
+}
+.nav_button {
+	padding: 0.4rem 2rem;
+	font-size: 1.5rem;
 }
 #saimin_canvas {
 	z-index: 1;
@@ -192,8 +221,18 @@ button.navigate-button {
 	font-size: 0.9em;
 }
 #notice_text {
-	width: 90%;
 	font-size: 9pt;
+	overflow-x: visible;
+	overflow-y: scroll;
+	width: 100dvw;
+	height: calc(100dvh - 9.5rem);
+	width: 98dvw;
+	margin-left: auto;
+	margin-right: auto;
+	white-space: pre-line;
+	text-align: left;
+	background-color: #fcf;
+	color: black;
 }
 
 /* https://www.tutorialstonight.com/css-toggle-switch-with-text */
