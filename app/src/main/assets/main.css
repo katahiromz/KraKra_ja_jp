@@ -124,7 +124,7 @@ input[type='checkbox'] {
 	top: -1pt;
 	vertical-align: middle;
 }
-.releasing {
+.sai_class_releasing {
 	background-color: red !important;
 	text-align: center;
 }
@@ -140,7 +140,7 @@ input[type='checkbox'] {
 	bottom: 0;
 	width: calc(100% / 5 - 5px);
 }
-.round-button {
+.sai_class_rounded_button {
 	width: 1.3cm;
 	height: 1.3cm;
 	background-color: rgba(255, 181, 230, 0%);
@@ -149,7 +149,7 @@ input[type='checkbox'] {
 	padding: 0;
 	margin: 0;
 }
-.round-button img {
+.sai_class_rounded_button img {
 	width: 1.3cm;
 	height: 1.3cm;
 }
@@ -166,14 +166,10 @@ input[type='checkbox'] {
 .sai_class_invisible {
 	display: none;
 }
-.center {
+.sai_class_center {
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
-}
-textarea {
-	font-size: 0.5cm;
-	font-family: monospace, ui-monospace;
 }
 .sai_class_navi_button {
 	outline: 1px solid white;
@@ -199,7 +195,7 @@ button.sai_class_navi_button {
 .sai_class_navi_button:hover {
 	background-color: rgba(255, 210, 230, 85%);
 }
-.checked {
+.sai_class_checked {
 	background-color: rgba(204, 101, 198, 90%);
 }
 .ui-dialog-content div {

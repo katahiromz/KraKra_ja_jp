@@ -382,11 +382,11 @@ document.addEventListener('DOMContentLoaded', function(){
 		if(sai_pic_type == -1){
 			SAI_speech_cancel();
 			sai_id_checkbox_speech.checked = false;
-			speech_label.classList.remove('checked');
+			speech_label.classList.remove('sai_class_checked');
 			sai_released = false;
-			sai_id_button_sound.classList.add('releasing');
-			sai_id_button_message.classList.add('releasing');
-			speech_label.classList.add('releasing');
+			sai_id_button_sound.classList.add('sai_class_releasing');
+			sai_id_button_message.classList.add('sai_class_releasing');
+			speech_label.classList.add('sai_class_releasing');
 			sai_hypno_releasing_img.src = trans_getText('TEXT_KILLING_HYPNOSIS_IMG');
 			setTimeout(function(){
 				sai_hypno_releasing_img.src = trans_getText('TEXT_HYPNOSIS_RELEASED_IMG');
@@ -397,12 +397,12 @@ document.addEventListener('DOMContentLoaded', function(){
 			if(oldPicType == -1){
 				sai_message_text = '';
 				sai_id_checkbox_speech.checked = false;
-				speech_label.classList.remove('checked');
+				speech_label.classList.remove('sai_class_checked');
 				SAI_speech_cancel();
 			}
-			sai_id_button_sound.classList.remove('releasing');
-			sai_id_button_message.classList.remove('releasing');
-			speech_label.classList.remove('releasing');
+			sai_id_button_sound.classList.remove('sai_class_releasing');
+			sai_id_button_message.classList.remove('sai_class_releasing');
+			speech_label.classList.remove('sai_class_releasing');
 		}
 		sai_id_select_pic_type.value = sai_pic_type.toString();
 		sai_id_button_type_select.innerText = trans_getText('TEXT_PIC') + sai_pic_type.toString();
@@ -2012,19 +2012,19 @@ document.addEventListener('DOMContentLoaded', function(){
 			if(sai_pic_type == -1){
 				if(sai_id_checkbox_speech.checked){
 					SAI_speech_play(trans_getText('TEXT_HYPNOSIS_RELEASED'));
-					speech_label.classList.add('checked');
+					speech_label.classList.add('sai_class_checked');
 				}else{
 					SAI_speech_cancel();
-					speech_label.classList.remove('checked');
+					speech_label.classList.remove('sai_class_checked');
 				}
 				return;
 			}
 			if(sai_id_checkbox_speech.checked){
 				SAI_speech_play(sai_message_text);
-				speech_label.classList.add('checked');
+				speech_label.classList.add('sai_class_checked');
 			}else{
 				SAI_speech_cancel();
-				speech_label.classList.remove('checked');
+				speech_label.classList.remove('sai_class_checked');
 			}
 		});
 
@@ -2036,10 +2036,10 @@ document.addEventListener('DOMContentLoaded', function(){
 					mic_isInited = true;
 				}
 				mic_connect();
-				sai_id_label_mic.classList.add('checked');
+				sai_id_label_mic.classList.add('sai_class_checked');
 			}else{
 				mic_disconnect();
-				sai_id_label_mic.classList.remove('checked');
+				sai_id_label_mic.classList.remove('sai_class_checked');
 			}
 		});
 
@@ -2080,7 +2080,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		if(localStorage.getItem('AndroidMicrophoneOnReload')){
 			localStorage.removeItem('AndroidMicrophoneOnReload');
 			mic_connect();
-			sai_id_label_mic.classList.add('checked');
+			sai_id_label_mic.classList.add('sai_class_checked');
 		}
 
 		function showButtons(enabled){
