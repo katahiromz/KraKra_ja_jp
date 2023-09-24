@@ -275,39 +275,39 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	function SAI_mesage_set_type(value){
-		sai_id_text_floating_1.classList.remove('font_size_small');
-		sai_id_text_floating_1.classList.remove('font_size_normal');
-		sai_id_text_floating_1.classList.remove('font_size_large');
-		sai_id_text_floating_1.classList.remove('font_size_huge');
-		sai_id_text_floating_2.classList.remove('font_size_small');
-		sai_id_text_floating_2.classList.remove('font_size_normal');
-		sai_id_text_floating_2.classList.remove('font_size_large');
-		sai_id_text_floating_2.classList.remove('font_size_huge');
+		sai_id_text_floating_1.classList.remove('sai_class_font_size_small');
+		sai_id_text_floating_1.classList.remove('sai_class_font_size_normal');
+		sai_id_text_floating_1.classList.remove('sai_class_font_size_large');
+		sai_id_text_floating_1.classList.remove('sai_class_font_size_huge');
+		sai_id_text_floating_2.classList.remove('sai_class_font_size_small');
+		sai_id_text_floating_2.classList.remove('sai_class_font_size_normal');
+		sai_id_text_floating_2.classList.remove('sai_class_font_size_large');
+		sai_id_text_floating_2.classList.remove('sai_class_font_size_huge');
 		value = value.toString();
 		switch (value){
 		case 'small':
 		case '1':
-			sai_id_text_floating_1.classList.add('font_size_small');
-			sai_id_text_floating_2.classList.add('font_size_small');
+			sai_id_text_floating_1.classList.add('sai_class_font_size_small');
+			sai_id_text_floating_2.classList.add('sai_class_font_size_small');
 			value = '1';
 			break;
 		case 'normal':
 		case '2':
 		default:
-			sai_id_text_floating_1.classList.add('font_size_normal');
-			sai_id_text_floating_2.classList.add('font_size_normal');
+			sai_id_text_floating_1.classList.add('sai_class_font_size_normal');
+			sai_id_text_floating_2.classList.add('sai_class_font_size_normal');
 			value = '2';
 			break;
 		case 'large':
 		case '3':
-			sai_id_text_floating_1.classList.add('font_size_large');
-			sai_id_text_floating_2.classList.add('font_size_large');
+			sai_id_text_floating_1.classList.add('sai_class_font_size_large');
+			sai_id_text_floating_2.classList.add('sai_class_font_size_large');
 			value = '3';
 			break;
 		case 'huge':
 		case '4':
-			sai_id_text_floating_1.classList.add('font_size_huge');
-			sai_id_text_floating_2.classList.add('font_size_huge');
+			sai_id_text_floating_1.classList.add('sai_class_font_size_huge');
+			sai_id_text_floating_2.classList.add('sai_class_font_size_huge');
 			value = '4';
 			break;
 		}
@@ -1927,13 +1927,6 @@ document.addEventListener('DOMContentLoaded', function(){
 				kirakira.play();
 			}
 		}
-
-		sai_id_text_floating_1.addEventListener('click', function(e){
-			canvasClick(e);
-		}, false);
-		sai_id_text_floating_2.addEventListener('click', function(e){
-			canvasClick(e);
-		}, false);
 
 		sai_id_canvas_01.addEventListener('click', function(e){
 			canvasClick(e);

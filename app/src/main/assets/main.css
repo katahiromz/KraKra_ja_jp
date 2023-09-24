@@ -83,17 +83,20 @@ input[type='checkbox'] {
 	padding: 4px;
 	border: 1px solid white;
 }
-.font_size_small {
+.sai_class_font_size_small {
 	font-size: 0.4cm;
 }
-.font_size_normal {
+.sai_class_font_size_normal {
 	font-size: 0.6cm;
 }
-.font_size_large {
+.sai_class_font_size_large {
 	font-size: 1.0cm;
 }
-.font_size_huge {
+.sai_class_font_size_huge {
 	font-size: 2.0cm;
+}
+.sai_class_floating_text {
+	pointer-events: none; // click-transparent
 }
 #sai_id_button_type_select {
 	position: absolute;
