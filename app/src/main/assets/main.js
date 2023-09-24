@@ -50,10 +50,10 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	function SAI_choose_page(page_id){
 		// Hide all the pages
-		sai_id_page_initial.classList.add('sai_class_invisible');
-		sai_id_page_choose_langauge.classList.add('sai_class_invisible');
-		sai_id_page_agreement.classList.add('sai_class_invisible');
-		sai_id_page_main.classList.add('sai_class_invisible');
+		let pages = document.getElementsByClassName('sai_class_page');
+		for(let page of pages){
+			page.classList.add('sai_class_invisible');
+		}
 
 		// Display one page
 		if(typeof(page_id) == 'string')
@@ -68,6 +68,11 @@ document.addEventListener('DOMContentLoaded', function(){
 		}else{
 			window.cancelAnimationFrame(sai_request_anime);
 			sai_request_anime = null;
+		}
+		if (page_id == sai_id_page_config){
+			setTimeout(function(){
+				sai_id_config_scrollable.scrollLeft = sai_id_config_scrollable.scrollTop = 0;
+			}, 200);
 		}
 	}
 
@@ -405,7 +410,6 @@ document.addEventListener('DOMContentLoaded', function(){
 			sai_id_label_speech.classList.remove('sai_class_releasing');
 		}
 		sai_id_select_pic_type.value = sai_pic_type.toString();
-		sai_id_button_type_select.innerText = trans_getText('TEXT_PIC') + sai_pic_type.toString();
 		localStorage.setItem('saiminType', sai_pic_type.toString());
 		try{
 			android.setPicType(sai_pic_type);
@@ -453,10 +457,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		let position = { my: 'center', at: 'center', of: window };
 		if(localStorage.getItem('saiminHelpShowing')){
 			SAI_choose_page(sai_id_page_agreement);
-		}else if(localStorage.getItem('saiminAppearanceShowing')){
-			$('#appearance_dialog').dialog('option', 'position', position);
 		}else if(localStorage.getItem('saiminConfigShowing')){
-			$('#config_dialog').dialog('option', 'position', position);
+			SAI_config();
 		}
 	}
 
@@ -474,7 +476,6 @@ document.addEventListener('DOMContentLoaded', function(){
 	function SAI_accepted(){
 		localStorage.setItem('saiminAdultCheck3', '1');
 		sai_id_label_mic.classList.remove('sai_class_invisible');
-		sai_id_button_type_select.classList.remove('sai_class_invisible');
 		sai_id_button_sound.classList.remove('sai_class_invisible');
 		sai_id_label_speech.classList.remove('sai_class_invisible');
 		sai_id_button_config.classList.remove('sai_class_invisible');
@@ -512,100 +513,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_choose_page(sai_id_page_agreement);
 	}
 
-	function SAI_appearance(){
-		let old_type_value = sai_id_select_pic_type.value;
-		let old_division_value = sai_id_checkbox_split.checked ? 2 : 1;
-		let old_speed_type_value = sai_id_range_speed_type.value;
-		let old_rotation_value = sai_id_checkbox_rotation.checked;
-		let old_blinking_value = sai_id_range_blink_type.value;
-		localStorage.setItem('saiminAppearanceShowing', '1');
-		let dialogContainer = $('#appearance_dialog');
-		dialogContainer.dialog({
-			dialogClass: 'no-close',
-			title: trans_getText('TEXT_APPEARANCE'),
-			buttons: [
-				{
-					text: trans_getText('TEXT_RELEASE_HYPNOSIS'),
-					click: function(){
-						dialogContainer.dialog('close');
-						SAI_pic_set_type(-1);
-					},
-				},{
-					text: trans_getText('TEXT_OK'),
-					click: function(){
-						dialogContainer.dialog('close');
-						if(sai_pic_type == -1)
-							SAI_pic_set_type(sai_pic_type);
-					},
-				},{
-					text: trans_getText('TEXT_CANCEL'),
-					click: function(){
-						SAI_pic_set_type(old_type_value);
-						SAI_screen_set_division(old_division_value);
-						SAI_speed_set_type(old_speed_type_value);
-						SAI_rotation_set(old_rotation_value);
-						SAI_blink_set_type(old_blinking_value);
-						dialogContainer.dialog('close');
-					},
-				}
-			],
-			// Workaround against slowness
-			draggable: false,
-			resizable: false,
-		});
-		dialogContainer.keydown(function(e){
-			if(e.keyCode == 13){
-				$(this).parent().find('button:nth-child(2)').trigger('click');
-				return false;
-			}
-		});
-		dialogContainer.on('dialogclose', function(event){
-			localStorage.removeItem('saiminAppearanceShowing');
-		});
-	}
-
 	function SAI_config(){
-		let old_language = localStorage.getItem('saiminLanguage3');
-		let old_message_size_value = sai_id_select_message_size.value;
-		let old_sound_value = sound_select.value;
-		let old_type_sound_value = sai_id_checkbox_pic_change_sound.checked;
-		let old_screen_brightness = screen_brightness.value;
 		localStorage.setItem('saiminConfigShowing', '1');
-		let dialogContainer = $('#config_dialog');
-		dialogContainer.dialog({
-			dialogClass: 'no-close',
-			title: trans_getText('TEXT_CONFIGURATION'),
-			buttons: [
-				{
-					text: trans_getText('TEXT_OK'),
-					click: function(){
-						dialogContainer.dialog('close');
-					},
-				},{
-					text: trans_getText('TEXT_CANCEL'),
-					click: function(){
-						SAI_set_language(old_language);
-						SAI_mesage_set_type(old_message_size_value);
-						SAI_sound_set_name(old_sound_value);
-						SAI_set_type_sound(old_type_sound_value);
-						SAI_screen_set_brightness(old_screen_brightness);
-						dialogContainer.dialog('close');
-					},
-				}
-			],
-			// Workaround against slowness
-			draggable: false,
-			resizable: false,
-		});
-		dialogContainer.keydown(function(e){
-			if(e.keyCode == 13){
-				$(this).parent().find('button:nth-child(1)').trigger('click');
-				return false;
-			}
-		});
-		dialogContainer.on('dialogclose', function(event){
-			localStorage.removeItem('saiminConfigShowing');
-		});
+		SAI_choose_page(sai_id_page_config);
 	}
 
 	function SAI_draw_circle(ctx, x, y, radius, is_fill = true){
@@ -1779,13 +1689,13 @@ document.addEventListener('DOMContentLoaded', function(){
 			}
 		});
 
-		sai_id_button_about.addEventListener('click', function(){
+		sai_id_button_about.addEventListener('click', function(e){
 			SAI_help();
 		});
 
-		sai_id_button_type_select.addEventListener('click', function(e){
-			e.preventDefault();
-			SAI_appearance();
+		sai_id_button_config_ok.addEventListener('click', function(e){
+			localStorage.removeItem('saiminConfigShowing');
+			SAI_choose_page(sai_id_page_main);
 		});
 
 		sai_id_button_sound.addEventListener('click', function(){
@@ -2048,8 +1958,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		if(localStorage.getItem('saiminHelpShowing')){
 			SAI_help();
-		}else if(localStorage.getItem('saiminAppearanceShowing')){
-			SAI_appearance();
 		}else if(localStorage.getItem('saiminConfigShowing')){
 			SAI_config();
 		}
@@ -2086,7 +1994,6 @@ document.addEventListener('DOMContentLoaded', function(){
 		function showButtons(enabled){
 			if(enabled){
 				sai_id_label_mic.classList.remove('sai_class_invisible');
-				sai_id_button_type_select.classList.remove('sai_class_invisible');
 				sai_id_button_sound.classList.remove('sai_class_invisible');
 				sai_id_label_speech.classList.remove('sai_class_invisible');
 				sai_id_button_config.classList.remove('sai_class_invisible');
@@ -2094,7 +2001,6 @@ document.addEventListener('DOMContentLoaded', function(){
 				sai_id_button_message.classList.remove('sai_class_invisible');
 			}else{
 				sai_id_label_mic.classList.add('sai_class_invisible');
-				sai_id_button_type_select.classList.add('sai_class_invisible');
 				sai_id_button_sound.classList.add('sai_class_invisible');
 				sai_id_label_speech.classList.add('sai_class_invisible');
 				sai_id_button_config.classList.add('sai_class_invisible');
@@ -2125,7 +2031,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			}
 			if(e.key == 'a' || e.key == 'A'){ // Appearance
 				e.preventDefault();
-				sai_id_button_type_select.click();
+				sai_id_button_config.click();
 				return;
 			}
 			if(e.key == 'p' || e.key == 'P'){ // Play/Pause

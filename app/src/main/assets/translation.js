@@ -31,7 +31,6 @@ How you use it is up to you.
 
 - Basically, it is an application to enjoy looking at the screen.
 - Tap/click on the screen to switch pictures.
-- The 'pic' button allows you to set the video settings.
 - Tap the 'microphone' button to use the microphone (it needs permission).
 - Tapping the '♪' button makes a sound.
 - The 'Aa' button allows you to set the message to be displayed.
@@ -98,7 +97,6 @@ Hypnosis KraKra
 
 - 기본적으로 화면을보고 즐길 수있는 응용 프로그램입니다.
 - 화면을 탭/클릭하면 영상이 전환됩니다.
-- "pic"버튼으로 영상을 설정할 수 있습니다.
 - "마이크" 버튼으로 마이크를 사용할 수 있습니다 (권한이 필요합니다).
 - 「♪」버튼으로 소리가 울립니다.
 - "글자" 버튼으로 표시할 메시지를 설정할 수 있습니다.
@@ -165,7 +163,6 @@ Hypnosis KraKra
 
 - 基本的に画面を見て楽しむためのアプリです。
 - 画面をタップ／クリックすると映像が切り替わります。
-- 「画」ボタンで映像の設定ができます。
 - 「マイク」ボタンでマイクが使えます(権限が必要です)。
 - 「♪」ボタンで音が鳴ります。
 - 「字」ボタンで表示するメッセージを設定できます。
@@ -232,7 +229,6 @@ Hypnosis KraKra
 
 - 基本上，它是一个享受观看屏幕的应用程序。
 - 点击/单击屏幕来切换图片。
-- “图”按钮允许您设置视频设置。
 - 点击“麦克风”按钮使用麦克风（需要许可）。
 - 点击“♪”按钮会发出声音。
 - “Aa”按钮允许您设置要显示的消息。
@@ -299,7 +295,6 @@ Hypnosis KraKra
 
 - 它基本上是一個欣賞屏幕的應用程序。
 - 點擊/單擊屏幕切換視頻。
-- 您可以使用“圖”按鈕設置圖像。
 - 您可以通過“麥克風”按鈕使用麥克風（需要許可）。
 - “♪”按鈕會發出聲音。
 - 您可以設置要使用“字母”按鈕顯示的消息。
@@ -366,7 +361,6 @@ Come lo usi dipende da te.
 
 - Fondamentalmente, è un'applicazione per divertirsi guardando lo schermo.
 - Tocca / fai clic sullo schermo per cambiare le immagini.
-- Il pulsante 'pic' consente di configurare le impostazioni video.
 - Tocca il pulsante "microfono" per utilizzare il microfono (è necessaria l'autorizzazione).
 - Toccando il pulsante '♪' si emette un suono.
 - Il pulsante 'Aa' consente di impostare il messaggio da visualizzare.
@@ -433,7 +427,6 @@ Wie Sie es nutzen, bleibt Ihnen überlassen.
 
 - Im Grunde handelt es sich um eine Anwendung, mit der man gerne auf den Bildschirm schaut.
 - Tippen/klicken Sie auf den Bildschirm, um die Bilder zu wechseln.
-- Mit der Schaltfläche „pic“ können Sie die Videoeinstellungen festlegen.
 - Tippen Sie auf die Schaltfläche „Mikrofon“, um das Mikrofon zu verwenden (es erfordert eine Genehmigung).
 - Durch Tippen auf die Schaltfläche „♪“ ertönt ein Ton.
 - Mit der Schaltfläche „Aa“ können Sie die anzuzeigende Meldung festlegen.
@@ -745,7 +738,6 @@ function trans_localize(lang){
 	if(lang == 'ja' || lang == 'jp'){ // Japanese
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_JA);
 		trans_setImageSrc(sai_id_img_mic, 'images/mic.png');
-		trans_setHtmlText(sai_id_button_type_select, trans_getText('TEXT_PIC') + sai_id_select_pic_type.value);
 		trans_setImageSrc(sai_id_img_sound, 'images/sound.png');
 		trans_setImageSrc(sai_id_img_message, 'images/text_ja.png');
 		trans_setImageSrc(sai_id_img_speech, 'images/speak.png');
@@ -801,10 +793,10 @@ function trans_localize(lang){
 		trans_setSelectOptionText(screen_brightness, 'normal', '普通');
 		trans_setSelectOptionText(screen_brightness, 'brighter', '明るくする');
 		trans_setHtmlText(sai_id_text_version, '催眠くらくら Ver.' + VERSION);
+		trans_setHtmlText(sai_id_page_config_header_1, '設定');
 	}else if(lang == 'zh-CN' || lang == 'cn'){ // Chinese (Simplified)
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_ZW_CN);
 		trans_setImageSrc(sai_id_img_mic, 'images/mic.png');
-		trans_setHtmlText(sai_id_button_type_select, trans_getText('TEXT_PIC') + sai_id_select_pic_type.value);
 		trans_setImageSrc(sai_id_img_sound, 'images/sound.png');
 		trans_setImageSrc(sai_id_img_message, 'images/text_zh-CN.png');
 		trans_setImageSrc(sai_id_img_speech, 'images/speak.png');
@@ -860,10 +852,10 @@ function trans_localize(lang){
 		trans_setSelectOptionText(screen_brightness, 'normal', '通常');
 		trans_setSelectOptionText(screen_brightness, 'brighter', '明亮');
 		trans_setHtmlText(sai_id_text_version, '催眠克拉克拉 Ver.' + VERSION);
+		trans_setHtmlText(sai_id_page_config_header_1, '配置');
 	}else if(lang == 'zh-TW'){ // Chinese (Traditional)
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_TW_CN);
 		trans_setImageSrc(sai_id_img_mic, 'images/mic.png');
-		trans_setHtmlText(sai_id_button_type_select, trans_getText('TEXT_PIC') + sai_id_select_pic_type.value);
 		trans_setImageSrc(sai_id_img_sound, 'images/sound.png');
 		trans_setImageSrc(sai_id_img_message, 'images/text_zh-TW.png');
 		trans_setImageSrc(sai_id_img_speech, 'images/speak.png');
@@ -919,10 +911,10 @@ function trans_localize(lang){
 		trans_setSelectOptionText(screen_brightness, 'normal', '正常亮度');
 		trans_setSelectOptionText(screen_brightness, 'brighter', '提亮');
 		trans_setHtmlText(sai_id_text_version, '催眠克拉克拉 Ver.' + VERSION);
+		trans_setHtmlText(sai_id_page_config_header_1, '配置');
 	}else if(lang == 'kr' || lang == 'ko' || lang == 'ko-KR'){ // Korean
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_KO_KR);
 		trans_setImageSrc(sai_id_img_mic, 'images/mic.png');
-		trans_setHtmlText(sai_id_button_type_select, trans_getText('TEXT_PIC') + sai_id_select_pic_type.value);
 		trans_setImageSrc(sai_id_img_sound, 'images/sound.png');
 		trans_setImageSrc(sai_id_img_message, 'images/text_ko-KR.png');
 		trans_setImageSrc(sai_id_img_speech, 'images/speak.png');
@@ -978,10 +970,10 @@ function trans_localize(lang){
 		trans_setSelectOptionText(screen_brightness, 'normal', '일반 밝기');
 		trans_setSelectOptionText(screen_brightness, 'brighter', '밝게 하다');
 		trans_setHtmlText(sai_id_text_version, '최면 크라크라 Ver.' + VERSION);
+		trans_setHtmlText(sai_id_page_config_header_1, '구성');
 	}else if(lang == 'it' || lang == 'it-IT'){ // Italian
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_IT);
 		trans_setImageSrc(sai_id_img_mic, 'images/mic.png');
-		trans_setHtmlText(sai_id_button_type_select, trans_getText('TEXT_PIC') + sai_id_select_pic_type.value);
 		trans_setImageSrc(sai_id_img_sound, 'images/sound.png');
 		trans_setImageSrc(sai_id_img_message, 'images/text_it.png');
 		trans_setImageSrc(sai_id_img_speech, 'images/speak.png');
@@ -1037,10 +1029,10 @@ function trans_localize(lang){
 		trans_setSelectOptionText(screen_brightness, 'normal', 'Normale');
 		trans_setSelectOptionText(screen_brightness, 'brighter', 'Più luminoso');
 		trans_setHtmlText(sai_id_text_version, 'Ipnosi KraKra Ver.' + VERSION);
+		trans_setHtmlText(sai_id_page_config_header_1, 'Configurazione');
 	}else if(lang == 'de' || lang == 'de-DE'){ // German
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_DE);
 		trans_setImageSrc(sai_id_img_mic, 'images/mic.png');
-		trans_setHtmlText(sai_id_button_type_select, trans_getText('TEXT_PIC') + sai_id_select_pic_type.value);
 		trans_setImageSrc(sai_id_img_sound, 'images/sound.png');
 		trans_setImageSrc(sai_id_img_message, 'images/text_de.png');
 		trans_setImageSrc(sai_id_img_speech, 'images/speak.png');
@@ -1096,10 +1088,10 @@ function trans_localize(lang){
 		trans_setSelectOptionText(screen_brightness, 'normal', 'Normal');
 		trans_setSelectOptionText(screen_brightness, 'brighter', 'Heller');
 		trans_setHtmlText(sai_id_text_version, 'Hypnose KraKra Ver.' + VERSION);
+		trans_setHtmlText(sai_id_page_config_header_1, 'Aufbau');
 	}else{ // English is default
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_EN);
 		trans_setImageSrc(sai_id_img_mic, 'images/mic.png');
-		trans_setHtmlText(sai_id_button_type_select, trans_getText('TEXT_PIC') + sai_id_select_pic_type.value);
 		trans_setImageSrc(sai_id_img_sound, 'images/sound.png');
 		trans_setImageSrc(sai_id_img_message, 'images/text_en.png');
 		trans_setImageSrc(sai_id_img_speech, 'images/speak.png');
@@ -1155,6 +1147,7 @@ function trans_localize(lang){
 		trans_setSelectOptionText(screen_brightness, 'normal', 'Normal');
 		trans_setSelectOptionText(screen_brightness, 'brighter', 'Brighter');
 		trans_setHtmlText(sai_id_text_version, 'Hyponosis KraKra Ver.' + VERSION);
+		trans_setHtmlText(sai_id_page_config_header_1, 'Configuration');
 	}
 
 	trans_setHtmlText(sai_id_page_agreement_header_1, trans_getText('TEXT_ABOUT_APP'));
