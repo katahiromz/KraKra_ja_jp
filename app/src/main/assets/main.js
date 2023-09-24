@@ -6,8 +6,8 @@ let sai_DEBUGGING = false;
 let sai_FPS = 0;
 let sai_screen_width = 0;
 let sai_screen_height = 0;
-let sai_old_cxScreen = null;
-let sai_old_cyScreen = null;
+let sai_old_screen_width = null;
+let sai_old_screen_height = null;
 let sai_old_time = (new Date()).getTime();
 let sai_counter = 0;
 let sai_clock = 0;
@@ -1567,13 +1567,13 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_stars.shift();
 		sai_stars.push(null);
 
-		if(sai_old_cxScreen !== null && sai_old_cyScreen !== null){
-			if(window.innerWidth != sai_old_cxScreen || window.innerHeight != sai_old_cyScreen){
+		if(sai_old_screen_width !== null && sai_old_screen_height !== null){
+			if(window.innerWidth != sai_old_screen_width || window.innerHeight != sai_old_screen_height){
 				SAI_screen_fit();
 			}
 		}
-		sai_old_cxScreen = window.innerWidth;
-		sai_old_cyScreen = window.innerHeight;
+		sai_old_screen_width = window.innerWidth;
+		sai_old_screen_height = window.innerHeight;
 
 		let new_time = (new Date()).getTime();
 		let diff_time = (new_time - sai_old_time) / 1000.0;
