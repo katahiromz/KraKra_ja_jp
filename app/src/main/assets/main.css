@@ -134,7 +134,7 @@ label {
 	bottom: 0;
 	width: calc(100% / 5 - 5px);
 }
-#speech_label {
+#sai_id_label_speech {
 	position: absolute;
 	left: calc(100% / 5 * 4);
 	bottom: 0;
