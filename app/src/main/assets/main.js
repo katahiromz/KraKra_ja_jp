@@ -3,12 +3,14 @@
 const NUM_TYPE = 9;
 const VERSION = '3.4.4';
 let sai_DEBUGGING = false;
-
 let sai_FPS = 0;
-let sai_screen_width = 0, sai_screen_height = 0;
-let sai_old_cxScreen = null, sai_old_cyScreen = null;
+let sai_screen_width = 0;
+let sai_screen_height = 0;
+let sai_old_cxScreen = null;
+let sai_old_cyScreen = null;
 let sai_old_time = (new Date()).getTime();
-let sai_counter = 0, clock = 0;
+let sai_counter = 0;
+let sai_clock = 0;
 let sai_ready = false;
 let sai_message_text = '';
 let sai_division = 1;
@@ -1676,9 +1678,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_old_time = new_time;
 
 		if(sai_speed_irregular){
-			clock += diff;
-			if(clock >= sai_speed / 30.0){
-				clock = 0;
+			sai_clock += diff;
+			if(sai_clock >= sai_speed / 30.0){
+				sai_clock = 0;
 				const MIN_VALUE = 35.0;
 				const MAX_VALUE = 70.0;
 				const MIDDLE = (MIN_VALUE + MAX_VALUE) * 0.5;
@@ -1703,7 +1705,9 @@ document.addEventListener('DOMContentLoaded', function(){
 			ctx.fillText(text, (sai_screen_width - width) / 2, height);
 		}
 
-		sai_request_anime = window.requestAnimationFrame(SAI_draw_all);
+		if(sai_request_anime){
+			sai_request_anime = window.requestAnimationFrame(SAI_draw_all);
+		}
 	}
 
 	function SAI_main(){
