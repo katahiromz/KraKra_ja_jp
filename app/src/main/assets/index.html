@@ -32,18 +32,18 @@
 	<meta name="twitter:card" content="summary" />
 </head>
 <body>
-<div id="pages">
-	<div id="initial_page" class="page invisible">
+<div id="sai_class_pages">
+	<div id="sai_id_page_initial" class="sai_class_page sai_class_invisible">
 		<!-- Reserved -->
 	</div>
-	<div id="choose_langauge_page" class="page center config_page invisible">
+	<div id="sai_id_page_choose_langauge" class="sai_class_page center sai_class_config_page sai_class_invisible">
 		<h1>Choose a language (言語選択)</h1>
-		<div class="ui_line">
-			<span id="config_language2">Language (言語):</span><br />
+		<div class="sai_class_ui_line">
+			<span>Language (言語):</span><br />
 		</div>
-		<div class="ui_line">
+		<div class="sai_class_ui_line">
 			<!-- {{LANGUAGE_SPECIFIC}} -->
-			<select id="language_select2" title="language_select2">
+			<select id="sai_id_select_language_2" title="sai_id_select_language_2">
 				<option value="zh-CN">Chinese (Simplified) (简体中文)</option>
 				<option value="zh-TW">Chinese (Traditional) (繁體中文)</option>
 				<option value="en" selected>English (英語)</option>
@@ -54,51 +54,65 @@
 			</select>
 		</div>
 		<hr />
-		<div class="ui_line">
-			<button type="button" id="choose_language_ok_button" class="nav_button">OK</button>
+		<div class="sai_class_ui_line">
+			<button type="button" id="sai_id_button_choose_language" class="sai_class_nav_button">OK</button>
 		</div>
 	</div>
-	<div id="agreement_page" class="page center config_page invisible">
-		<h1 id="agreement_page_header">バージョン情報</h1>
-		<div id="version_text">Hyponosis KraKra Version [[VERSION]]</div>
-		<div id="notice_text">
+	<div id="sai_id_page_agreement" class="sai_class_page center sai_class_config_page sai_class_invisible">
+		<h1 id="sai_id_page_agreement_header_1">バージョン情報</h1>
+		<div id="sai_id_text_version">Hyponosis KraKra Version [[VERSION]]</div>
+		<div id="sai_id_text_notice">
 		</div>
-		<div class="ui_line">
-			<button type="button" id="agreement_ok_button" class="nav_button">I agree</button>
+		<div class="sai_class_ui_line">
+			<button type="button" id="sai_id_button_agree" class="sai_class_nav_button">I agree</button>
 		</div>
 	</div>
-	<div id="main_page" class="page invisible">
+	<div id="sai_id_page_main" class="sai_class_page sai_class_invisible">
 		<!-- The canvas -->
-		<canvas id="saimin_canvas"></canvas>
+		<canvas id="sai_id_canvas_01"></canvas>
 		<!-- The canvas #2 -->
-		<canvas id="blurring_canvas" class="invisible"></canvas>
+		<canvas id="sai_id_canvas_02" class="sai_class_invisible"></canvas>
 
 		<!-- The "microphone" button -->
-		<label for="microphone" id="microphone_label" class="invisible navigate-button"><input type="checkbox" id="microphone" class="invisible" /><img id="mic_img" src="images/mic.png" alt="mic" /></label>
+		<label for="sai_id_checkbox_mic" id="sai_id_label_mic" class="sai_class_invisible sai_class_navi_button">
+			<input type="checkbox" id="sai_id_checkbox_mic" class="sai_class_invisible" />
+			<img id="sai_id_img_mic" src="images/mic.png" alt="mic" />
+		</label>
 
 		<!-- The "pic#" button -->
-		<button type="button" id="type_select_button" class="invisible navigate-button">pic0</button>
+		<button type="button" id="sai_id_button_type_select" class="sai_class_invisible sai_class_navi_button">pic0</button>
 
 		<!-- The "note" button -->
-		<button type="button" id="sound_button" class="invisible navigate-button"><img id="sound_img" src="images/sound.png" alt="play!" /></button>
+		<button type="button" id="sai_id_button_sound" class="sai_class_invisible sai_class_navi_button">
+			<img id="sai_id_img_sound" src="images/sound.png" alt="play!" />
+		</button>
 
 		<!-- The "text" button -->
-		<button type="button" id="text_button" class="invisible navigate-button"><img id="char_img" src="images/text_en.png" alt="msg" /></button>
+		<button type="button" id="sai_id_button_message" class="sai_class_invisible sai_class_navi_button">
+			<img id="sai_id_img_message" src="images/text_en.png" alt="msg" />
+		</button>
 
 		<!-- The "speech" button -->
-		<label for="speech_checkbox" id="speech_label" class="invisible navigate-button"><input type="checkbox" id="speech_checkbox" class="invisible" /><img id="speech_img" src="images/speak.png" alt="spch" /></label>
+		<label for="sai_id_checkbox_speech" id="speech_label" class="sai_class_invisible sai_class_navi_button">
+			<input type="checkbox" id="sai_id_checkbox_speech" class="sai_class_invisible" />
+			<img id="sai_id_img_speech" src="images/speak.png" alt="spch" />
+		</label>
 
 		<!-- The "configuration" button -->
-		<button type="button" id="config_button" class="invisible round-button"><img id="gear_img" src="images/gear.png" alt="cfg" /></button>
+		<button type="button" id="sai_id_button_config" class="sai_class_invisible round-button">
+			<img id="sai_id_img_gear" src="images/gear.png" alt="cfg" />
+		</button>
 
 		<!-- The help button -->
-		<button type="button" id="about_button" class="invisible round-button"><img id="question_img" src="images/question.png" alt="?" /></button>
+		<button type="button" id="sai_id_button_about" class="sai_class_invisible round-button">
+			<img id="sai_id_img_question" src="images/question.png" alt="?" />
+		</button>
 
 		<!-- The appearance dialog -->
-		<div id="appearance_dialog" class="invisible">
-			<div class="ui_line">
-				<span id="appearance_type">The type of picture:</span>
-				<select id="type_select" title="type_select">
+		<div id="appearance_dialog" class="sai_class_invisible">
+			<div class="sai_class_ui_line">
+				<span id="sai_id_pic_type">The type of picture:</span>
+				<select id="sai_id_select_pic_type" title="sai_id_select_pic_type">
 					<option value="-1">pic-1</option>
 					<option value="0" selected>pic0</option>
 					<option value="1">pic1</option>
@@ -112,47 +126,47 @@
 					<option value="9">pic9</option>
 				</select>
 			</div>
-			<div class="ui_line">
-				<span id="appearance_division">Screen splitting:</span>
-				<label class="toggle" title="Splitting">
-					<input type="checkbox" id="division_select" />
+			<div class="sai_class_ui_line">
+				<span id="sai_id_text_split">Screen splitting:</span>
+				<label class="sai_class_toggle_button" title="Splitting">
+					<input type="checkbox" id="sai_id_checkbox_split" />
 					<span class="slider"></span>
-					<span class="labels" data-on="ON" data-off="OFF"></span>
+					<span class="sai_class_toggle_label" data-on="ON" data-off="OFF"></span>
 				</label>
 			</div>
-			<div class="ui_line">
-				<span id="appearance_speed">Speed:</span>
-				<span class="nobr">
-					<input type="range" id="speed_type_value" name="speed_type_value" min="0" max="100" value="45.0" step="1" title="Speed" />
-					<label for="speed_irregular" class="nobr">
+			<div class="sai_class_ui_line">
+				<span id="sai_id_text_speed">Speed:</span>
+				<span class="sai_class_nobr">
+					<input type="range" id="sai_id_range_speed_type" name="sai_id_range_speed_type" min="0" max="100" value="45.0" step="1" title="Speed" />
+					<label for="speed_irregular" class="sai_class_nobr">
 						<input type="checkbox" id="speed_irregular" name="speed_irregular" />
 						<span id="speed_irregular_label"></span>
 					</label>
 				</span>
 			</div>
-			<div class="ui_line">
-				<span id="appearance_rotation">Rotation:</span>
-				<label class="toggle">
-					<input type="checkbox" id="rotation_select" title="Rotation" />
+			<div class="sai_class_ui_line">
+				<span id="sai_id_text_rotation">Rotation:</span>
+				<label class="sai_class_toggle_button">
+					<input type="checkbox" id="sai_id_checkbox_rotation" title="Rotation" />
 					<span class="slider"></span>
-					<span class="labels" data-on="ON" data-off="OFF"></span>
+					<span class="sai_class_toggle_label" data-on="ON" data-off="OFF"></span>
 				</label>
 			</div>
-			<div class="ui_line">
-				<span id="appearance_blinking">Blinking:</span>
-				<span class="nobr">
-					<input type="range" id="blinking_type" name="blinking_type" min="0" max="7" value="0" step="1" title="Blinking" />
-					<output id="blinking_output" name="blinking_output" for="blinking_type">No blinking</output>
+			<div class="sai_class_ui_line">
+				<span id="sai_id_text_blinking">Blinking:</span>
+				<span class="sai_class_nobr">
+					<input type="range" id="sai_id_range_blink_type" name="sai_id_range_blink_type" min="0" max="7" value="0" step="1" title="Blinking" />
+					<output id="sai_id_text_blink_output" name="sai_id_text_blink_output" for="sai_id_range_blink_type">No blinking</output>
 				</span>
 			</div>
 		</div>
 
 		<!-- The configuration dialog -->
-		<div id="config_dialog" class="invisible">
-			<div class="ui_line">
+		<div id="config_dialog" class="sai_class_invisible">
+			<div class="sai_class_ui_line">
 				<!-- {{LANGUAGE_SPECIFIC}} -->
-				<span id="config_language">Language:</span>
-				<select id="language_select" title="language_select">
+				<span id="sai_id_text_language">Language:</span>
+				<select id="sai_id_select_language_1" title="sai_id_select_language_1">
 					<option value="zh-CN">Chinese (Simplified)</option>
 					<option value="zh-TW">Chinese (Traditional)</option>
 					<option value="en" selected>English</option>
@@ -162,13 +176,13 @@
 					<option value="ko-KR">Korean</option>
 				</select>
 			</div>
-			<div class="ui_line">
-				<span id="config_size">Size of message:</span>
-				<input id="message_size_select" type="range" min="1" max="4" step="1" value="2" title="Message Size" />
+			<div class="sai_class_ui_line">
+				<span id="sai_id_text_message_size">Size of message:</span>
+				<input id="sai_id_select_message_size" type="range" min="1" max="4" step="1" value="2" title="Message Size" />
 			</div>
-			<div class="ui_line">
-				<span id="config_note">Note button:</span>
-				<span class="nobr">
+			<div class="sai_class_ui_line">
+				<span id="sai_id_text_note">Note button:</span>
+				<span class="sai_class_nobr">
 					<select id="sound_select" title="sound_select">
 						<option value="" selected>(None)</option>
 						<option value="Cattish">Cattish</option>
@@ -182,19 +196,19 @@
 						<option value="Magic">Magic</option>
 						<option value="OraSaimin">Ora! Saimin!</option>
 					</select>
-					<button id="config_play_button" type="button"><img src="images/play.png" alt="[Play]"/></button>
+					<button id="sai_id_button_sound_play" type="button"><img src="images/play.png" alt="[Play]"/></button>
 				</span>
 			</div>
-			<div class="ui_line">
-				<span id="config_switch_sound">Pic change sound:</span>
-				<label class="toggle">
-					<input type="checkbox" id="type_sound_select" title="Pic Change Sound" />
+			<div class="sai_class_ui_line">
+				<span id="sai_id_text_switch_sound">Pic change sound:</span>
+				<label class="sai_class_toggle_button">
+					<input type="checkbox" id="sai_id_checkbox_pic_change_sound" title="Pic Change Sound" />
 					<span class="slider"></span>
-					<span class="labels" data-on="ON" data-off="OFF"></span>
+					<span class="sai_class_toggle_label" data-on="ON" data-off="OFF"></span>
 				</label>
 			</div>
-			<div class="ui_line">
-				<span id="config_brightness">Brightness:</span>
+			<div class="sai_class_ui_line">
+				<span id="sai_id_text_brightness">Brightness:</span>
 				<select id="screen_brightness" title="screen_brightness">
 					<option value="normal" selected>Normal</option>
 					<option value="brighter">Brighter</option>
@@ -203,18 +217,8 @@
 		</div>
 
 		<!-- The floating texts -->
-		<div id="floating_text1" class="invisible font_size_normal"></div>
-		<div id="floating_text2" class="invisible font_size_normal"></div>
-
-		<!-- The "help" dialog -->
-		<!--
-			<div id="about_dialog" class="invisible">
-				<div id="version_text">Hyponosis KraKra Version [[VERSION]]</div>
-				<div>
-			<textarea id="notice_text" rows="8" title="Notice" readonly></textarea>
-				</div>
-			</div>
-		-->
+		<div id="sai_id_text_floating_1" class="sai_class_invisible font_size_normal"></div>
+		<div id="sai_id_text_floating_2" class="sai_class_invisible font_size_normal"></div>
 	</div>
 </div>
 </body></html>
