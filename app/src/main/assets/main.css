@@ -59,29 +59,26 @@ input[type='checkbox'] {
 	font-size: 0.5cm;
 	padding: 0;
 }
-#sai_id_text_floating_1 {
-	position: absolute;
-	left: 0;
-	top: 0;
+.sai_class_floating_text {
+	pointer-events: none; // click-transparent
 	color: white;
 	background-color: black;
-	z-index: 3;
 	max-width: 80%;
 	word-break: break-all;
 	padding: 4px;
 	border: 1px solid white;
 }
+#sai_id_text_floating_1 {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 3;
+}
 #sai_id_text_floating_2 {
 	position: absolute;
 	left: 0;
 	top: 0;
-	color: white;
-	background-color: black;
 	z-index: 3;
-	max-width: 80%;
-	word-break: break-all;
-	padding: 4px;
-	border: 1px solid white;
 }
 .sai_class_font_size_small {
 	font-size: 0.4cm;
@@ -94,9 +91,6 @@ input[type='checkbox'] {
 }
 .sai_class_font_size_huge {
 	font-size: 2.0cm;
-}
-.sai_class_floating_text {
-	pointer-events: none; // click-transparent
 }
 #sai_id_button_type_select {
 	position: absolute;
