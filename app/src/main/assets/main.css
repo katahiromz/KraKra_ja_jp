@@ -94,15 +94,15 @@ label {
 }
 #sai_id_label_mic {
 	position: absolute;
-	left: calc(100% / 4 * 0);
+	left: calc(100% / 3 * 0);
 	bottom: 0;
-	width: calc(100% / 4 - 5px);
+	width: calc(100% / 3 - 5px);
 }
 #sai_id_button_sound {
 	position: absolute;
-	left: calc(100% / 4 * 1);
+	left: calc(100% / 3 * 1);
 	bottom: 0;
-	width: calc(100% / 4 - 5px);
+	width: calc(100% / 3 - 5px);
 }
 #sai_id_button_sound_play {
 	width: 35pt;
@@ -121,17 +121,11 @@ label {
 	background-color: red !important;
 	text-align: center;
 }
-#sai_id_button_message {
-	position: absolute;
-	left: calc(100% / 4 * 2);
-	bottom: 0;
-	width: calc(100% / 4 - 5px);
-}
 #sai_id_label_speech {
 	position: absolute;
-	left: calc(100% / 4 * 3);
+	left: calc(100% / 3 * 2);
 	bottom: 0;
-	width: calc(100% / 4 - 5px);
+	width: calc(100% / 3 - 5px);
 }
 .sai_class_rounded_button {
 	width: 1.3cm;

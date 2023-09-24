@@ -79,13 +79,6 @@
 			</div>
 			<hr />
 			<div class="sai_class_ui_line">
-				<span id="sai_id_text_message_size" class="sai_config_label">Size of message:</span>
-			</div>
-			<div class="sai_class_ui_line">
-				<input id="sai_id_select_message_size" type="range" min="1" max="4" step="1" value="2" title="Message Size" />
-			</div>
-			<hr />
-			<div class="sai_class_ui_line">
 				<span id="sai_id_text_note" class="sai_config_label">Note button:</span>
 			</div>
 			<div class="sai_class_ui_line">
@@ -191,6 +184,24 @@
 					<output id="sai_id_text_blink_output" name="sai_id_text_blink_output" for="sai_id_range_blink_type">No blinking</output>
 				</span>
 			</div>
+			<hr />
+			<div class="sai_class_ui_line">
+				<span id="sai_id_text_label_message_text" class="sai_config_label">Message Text:</span>
+			</div>
+			<div class="sai_class_ui_line sai_class_text_message"></div>
+			<div class="sai_class_ui_line">
+				<button type="button" id="sai_id_button_message" class="sai_class_nav_button sai_class_invisible">
+					Message...
+				</button>
+			</div>
+			<hr />
+			<div class="sai_class_ui_line">
+				<span id="sai_id_text_message_size" class="sai_config_label">Size of message:</span>
+			</div>
+			<div class="sai_class_ui_line">
+				<input id="sai_id_select_message_size" type="range" min="1" max="4" step="1" value="2" title="Message Size" />
+				<output id="sai_id_select_message_size_output" for="sai_id_select_message_size">Normal</output>
+			</div>
 		</div>
 		<hr />
 		<div class="sai_class_ui_line">
@@ -214,11 +225,6 @@
 			<img id="sai_id_img_sound" src="images/sound.png" alt="play!" />
 		</button>
 
-		<!-- The "text" button -->
-		<button type="button" id="sai_id_button_message" class="sai_class_invisible sai_class_navi_button">
-			<img id="sai_id_img_message" src="images/text_en.png" alt="msg" />
-		</button>
-
 		<!-- The "speech" button -->
 		<label for="sai_id_checkbox_speech" id="sai_id_label_speech" class="sai_class_invisible sai_class_navi_button">
 			<input type="checkbox" id="sai_id_checkbox_speech" class="sai_class_invisible" />
@@ -236,8 +242,8 @@
 		</button>
 
 		<!-- The floating texts -->
-		<div id="sai_id_text_floating_1" class="sai_class_invisible sai_class_floating_text sai_class_font_size_normal"></div>
-		<div id="sai_id_text_floating_2" class="sai_class_invisible sai_class_floating_text sai_class_font_size_normal"></div>
+		<div id="sai_id_text_floating_1" class="sai_class_invisible sai_class_floating_text sai_class_text_message sai_class_font_size_normal"></div>
+		<div id="sai_id_text_floating_2" class="sai_class_invisible sai_class_floating_text sai_class_text_message sai_class_font_size_normal"></div>
 	</div>
 </div>
 </body></html>

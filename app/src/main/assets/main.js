@@ -185,6 +185,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		SAI_blink_set_type(sai_id_range_blink_type.value);
 
+		SAI_message_set_type(sai_id_select_message_size.value, true);
+
 		try{
 			android.setLanguage(lang);
 		}catch(error){
@@ -279,7 +281,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		localStorage.setItem('saiminScreenBrightness', value);
 	}
 
-	function SAI_mesage_set_type(value){
+	function SAI_message_set_type(value){
 		sai_id_text_floating_1.classList.remove('sai_class_font_size_small');
 		sai_id_text_floating_1.classList.remove('sai_class_font_size_normal');
 		sai_id_text_floating_1.classList.remove('sai_class_font_size_large');
@@ -289,12 +291,14 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_id_text_floating_2.classList.remove('sai_class_font_size_large');
 		sai_id_text_floating_2.classList.remove('sai_class_font_size_huge');
 		value = value.toString();
+		let text = '';
 		switch (value){
 		case 'small':
 		case '1':
 			sai_id_text_floating_1.classList.add('sai_class_font_size_small');
 			sai_id_text_floating_2.classList.add('sai_class_font_size_small');
 			value = '1';
+			text = trans_getText('TEXT_SIZE_SMALL');
 			break;
 		case 'normal':
 		case '2':
@@ -302,22 +306,26 @@ document.addEventListener('DOMContentLoaded', function(){
 			sai_id_text_floating_1.classList.add('sai_class_font_size_normal');
 			sai_id_text_floating_2.classList.add('sai_class_font_size_normal');
 			value = '2';
+			text = trans_getText('TEXT_SIZE_NORMAL');
 			break;
 		case 'large':
 		case '3':
 			sai_id_text_floating_1.classList.add('sai_class_font_size_large');
 			sai_id_text_floating_2.classList.add('sai_class_font_size_large');
 			value = '3';
+			text = trans_getText('TEXT_SIZE_LARGE');
 			break;
 		case 'huge':
 		case '4':
 			sai_id_text_floating_1.classList.add('sai_class_font_size_huge');
 			sai_id_text_floating_2.classList.add('sai_class_font_size_huge');
 			value = '4';
+			text = trans_getText('TEXT_SIZE_HUGE');
 			break;
 		}
 		if(value != sai_id_select_message_size.value)
 			sai_id_select_message_size.value = value;
+		trans_setHtmlText(sai_id_select_message_size_output, text);
 		localStorage.setItem('saiminMessageSize', value);
 	}
 
@@ -422,11 +430,13 @@ document.addEventListener('DOMContentLoaded', function(){
 	function SAI_message_set_text(txt){
 		sai_message_text = txt.replace(trans_getText('TEXT_FULLWIDTH_SPACE'), '  ').trim();
 		localStorage.setItem('saiminText', sai_message_text);
-		if(sai_id_checkbox_speech.checked){
+		if(sai_message_text){
 			SAI_speech_play(sai_message_text);
 		}
-		sai_id_text_floating_1.innerText = sai_message_text;
-		sai_id_text_floating_2.innerText = sai_message_text;
+		let elements = document.getElementsByClassName('sai_class_text_message');
+		for(let element of elements){
+			trans_setHtmlText(element, sai_message_text);
+		}
 	}
 
 	function SAI_rotation_set(value){
@@ -1583,7 +1593,6 @@ document.addEventListener('DOMContentLoaded', function(){
 			diff_time = 0;
 		sai_counter += diff_time * sai_speed;
 		sai_old_time = new_time;
-		console.log(sai_speed);
 
 		if(sai_speed_irregular){
 			sai_clock += diff_time;
@@ -1669,9 +1678,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		let saiminMessageSize = localStorage.getItem('saiminMessageSize');
 		if(saiminMessageSize){
-			SAI_mesage_set_type(saiminMessageSize);
+			SAI_message_set_type(saiminMessageSize);
 		}else{
-			SAI_mesage_set_type('normal');
+			SAI_message_set_type('normal');
 		}
 
 		let saiminScreenBrightness = localStorage.getItem('saiminScreenBrightness');
@@ -1746,7 +1755,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_id_select_message_size.addEventListener('input', function(){
 			if(!sai_ready)
 				return;
-			SAI_mesage_set_type(sai_id_select_message_size.value, true);
+			SAI_message_set_type(sai_id_select_message_size.value, true);
 		}, false);
 
 		screen_brightness.addEventListener('change', function(){
@@ -1920,6 +1929,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		sai_id_checkbox_speech.addEventListener('click', function(e){
+			console.log('sai_id_checkbox_speech');
+			if(!sai_message_text){
+				sai_id_button_message.click();
+			}
 			if(sai_pic_type == -1){
 				if(sai_id_checkbox_speech.checked){
 					SAI_speech_play(trans_getText('TEXT_HYPNOSIS_RELEASED'));
@@ -1930,7 +1943,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				}
 				return;
 			}
-			if(sai_id_checkbox_speech.checked){
+			if(sai_message_text){
 				SAI_speech_play(sai_message_text);
 				sai_id_label_speech.classList.add('sai_class_checked');
 			}else{
