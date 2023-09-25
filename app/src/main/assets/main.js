@@ -103,6 +103,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	function SAI_speech_cancel(){
+		console.log('SAI_speech_cancel');
 		try{
 			android.cancelSpeech();
 		}catch(error){
@@ -209,6 +210,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	async function SAI_speech_play(text){
+		console.log('SAI_speech_play');
 		SAI_speech_cancel();
 		text = SAI_adjust_text(text);
 		try{
@@ -235,6 +237,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				else // English is default
 					speech.lang = 'en-US';
 				window.speechSynthesis.speak(speech);
+				console.log('speech');
 			}
 		}
 	}
@@ -331,24 +334,42 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	function SAI_speed_set_type(value){
 		sai_speed_irregular = false;
+		let text;
 		switch (value){
 		case 'slow':
 			sai_speed = 27.5;
+			text = trans_getText('TEXT_SPEED_SLOW');
 			break;
 		case 'normal':
 			sai_speed = 45.0;
+			text = trans_getText('TEXT_SPEED_NORMAL');
 			break;
 		case 'irregular':
 			sai_speed = 70.0;
 			sai_speed_irregular = true;
+			text = trans_getText('TEXT_SPEED_IRREGULAR');
 			break;
 		case 'fast':
 			sai_speed = 70.0;
+			text = trans_getText('TEXT_SPEED_FAST');
 			break;
 		default:
 			sai_speed = parseFloat(value);
+			if (sai_speed == 0){
+				text = trans_getText('TEXT_SPEED_ZERO');
+			}else if(sai_speed <= 27.5){
+				text = trans_getText('TEXT_SPEED_SLOW');
+			}else if(sai_speed <= 45.0){
+				text = trans_getText('TEXT_SPEED_NORMAL');
+			}else if(sai_speed <= 70.0){
+				text = trans_getText('TEXT_SPEED_FAST');
+			}else{
+				text = trans_getText('TEXT_SPEED_SUPER_FAST');
+			}
 			break;
 		}
+		sai_id_text_speed_output.innerText = text;
+
 		if(sai_speed != parseFloat(sai_id_range_speed_type.value)){
 			if(sai_speed_irregular)
 				sai_id_range_speed_type.value = sai_speed;
@@ -428,10 +449,13 @@ document.addEventListener('DOMContentLoaded', function(){
 	};
 
 	function SAI_message_set_text(txt){
+		console.log('SAI_message_set_text', txt);
 		sai_message_text = txt.replace(trans_getText('TEXT_FULLWIDTH_SPACE'), '  ').trim();
 		localStorage.setItem('saiminText', sai_message_text);
 		if(sai_message_text){
 			SAI_speech_play(sai_message_text);
+		}else{
+			SAI_speech_cancel();
 		}
 		let elements = document.getElementsByClassName('sai_class_text_message');
 		for(let element of elements){
@@ -1930,26 +1954,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		sai_id_checkbox_speech.addEventListener('click', function(e){
 			console.log('sai_id_checkbox_speech');
-			if(!sai_message_text){
-				sai_id_button_message.click();
-			}
-			if(sai_pic_type == -1){
-				if(sai_id_checkbox_speech.checked){
-					SAI_speech_play(trans_getText('TEXT_HYPNOSIS_RELEASED'));
-					sai_id_label_speech.classList.add('sai_class_checked');
-				}else{
-					SAI_speech_cancel();
-					sai_id_label_speech.classList.remove('sai_class_checked');
-				}
-				return;
-			}
-			if(sai_message_text){
-				SAI_speech_play(sai_message_text);
-				sai_id_label_speech.classList.add('sai_class_checked');
-			}else{
-				SAI_speech_cancel();
-				sai_id_label_speech.classList.remove('sai_class_checked');
-			}
+			sai_id_button_message.click();
 		});
 
 		let mic_isInited = false;

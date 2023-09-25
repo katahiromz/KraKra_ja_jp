@@ -494,6 +494,11 @@ function trans_getText(str_id){
 		case 'TEXT_SIZE_NORMAL': return '普通';
 		case 'TEXT_SIZE_LARGE': return '大きい';
 		case 'TEXT_SIZE_HUGE': return '巨大';
+		case 'TEXT_SPEED_ZERO': return '停止';
+		case 'TEXT_SPEED_SLOW': return '遅い';
+		case 'TEXT_SPEED_NORMAL': return '普通';
+		case 'TEXT_SPEED_FAST': return '速い';
+		case 'TEXT_SPEED_SUPER_FAST': return '超速い';
 		}
 	}else if(lang == 'zh-CN' || lang == 'cn'){ // Chinese (Simplified)
 		switch(str_id){
@@ -526,6 +531,11 @@ function trans_getText(str_id){
 		case 'TEXT_SIZE_NORMAL': return '普通的';
 		case 'TEXT_SIZE_LARGE': return '大的';
 		case 'TEXT_SIZE_HUGE': return '巨大的';
+		case 'TEXT_SPEED_ZERO': return '停止';
+		case 'TEXT_SPEED_SLOW': return '慢的';
+		case 'TEXT_SPEED_NORMAL': return '普通的';
+		case 'TEXT_SPEED_FAST': return '快速地';
+		case 'TEXT_SPEED_SUPER_FAST': return '超级快';
 		}
 	}else if(lang == 'zh-TW'){ // Chinese (Traditional)
 		switch(str_id){
@@ -558,6 +568,11 @@ function trans_getText(str_id){
 		case 'TEXT_SIZE_NORMAL': return '普通的';
 		case 'TEXT_SIZE_LARGE': return '大的';
 		case 'TEXT_SIZE_HUGE': return '巨大的';
+		case 'TEXT_SPEED_ZERO': return '停止';
+		case 'TEXT_SPEED_SLOW': return '慢的';
+		case 'TEXT_SPEED_NORMAL': return '普通的';
+		case 'TEXT_SPEED_FAST': return '快速地';
+		case 'TEXT_SPEED_SUPER_FAST': return '超快';
 		}
 	}else if(lang == 'ko' || lang == 'kr' || lang == 'ko-KR'){ // Korean
 		switch(str_id){
@@ -590,6 +605,11 @@ function trans_getText(str_id){
 		case 'TEXT_SIZE_NORMAL': return '정상';
 		case 'TEXT_SIZE_LARGE': return '크기가 큰';
 		case 'TEXT_SIZE_HUGE': return '거대한';
+		case 'TEXT_SPEED_ZERO': return '정지중';
+		case 'TEXT_SPEED_SLOW': return '느린';
+		case 'TEXT_SPEED_NORMAL': return '정상';
+		case 'TEXT_SPEED_FAST': return '빠른';
+		case 'TEXT_SPEED_SUPER_FAST': return '매우 빠른';
 		}
 	}else if(lang == 'it' || lang == 'it-IT'){ // Italian
 		switch(str_id){
@@ -622,6 +642,11 @@ function trans_getText(str_id){
 		case 'TEXT_SIZE_NORMAL': return 'Normale';
 		case 'TEXT_SIZE_LARGE': return 'Grande';
 		case 'TEXT_SIZE_HUGE': return 'Enorme';
+		case 'TEXT_SPEED_ZERO': return 'Fermato';
+		case 'TEXT_SPEED_SLOW': return 'Lento';
+		case 'TEXT_SPEED_NORMAL': return 'Normale';
+		case 'TEXT_SPEED_FAST': return 'Veloce';
+		case 'TEXT_SPEED_SUPER_FAST': return 'Super Veloce';
 		}
 	}else if(lang == 'de' || lang == 'de-DE'){ // German
 		switch(str_id){
@@ -654,6 +679,11 @@ function trans_getText(str_id){
 		case 'TEXT_SIZE_NORMAL': return 'Normal';
 		case 'TEXT_SIZE_LARGE': return 'Groß';
 		case 'TEXT_SIZE_HUGE': return 'Riesig';
+		case 'TEXT_SPEED_ZERO': return 'Gestoppt';
+		case 'TEXT_SPEED_SLOW': return 'Langsam';
+		case 'TEXT_SPEED_NORMAL': return 'Normal';
+		case 'TEXT_SPEED_FAST': return 'Schnell';
+		case 'TEXT_SPEED_SUPER_FAST': return 'Super Schnell';
 		}
 	}else{ // English is default
 		switch(str_id){
@@ -686,6 +716,11 @@ function trans_getText(str_id){
 		case 'TEXT_SIZE_NORMAL': return 'Normal';
 		case 'TEXT_SIZE_LARGE': return 'Large';
 		case 'TEXT_SIZE_HUGE': return 'Huge';
+		case 'TEXT_SPEED_ZERO': return 'Stopped';
+		case 'TEXT_SPEED_SLOW': return 'Slow';
+		case 'TEXT_SPEED_NORMAL': return 'Normal';
+		case 'TEXT_SPEED_FAST': return 'Fast';
+		case 'TEXT_SPEED_SUPER_FAST': return 'Super Fast';
 		}
 	}
 }
