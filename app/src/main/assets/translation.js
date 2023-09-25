@@ -30,7 +30,6 @@ How you use it is up to you.
 [(How to use)]
 
 - Basically, it is an application to enjoy looking at the screen.
-- Tap/click on the screen to switch pictures.
 - Tap the 'microphone' button to use the microphone (it needs permission).
 - Tapping the '♪' button makes a sound.
 - The 'bubble' button will speak the message.
@@ -88,7 +87,6 @@ Hypnosis KraKra
 【사용법】
 
 - 기본적으로 화면을보고 즐길 수있는 응용 프로그램입니다.
-- 화면을 탭/클릭하면 영상이 전환됩니다.
 - "마이크" 버튼으로 마이크를 사용할 수 있습니다 (권한이 필요합니다).
 - 「♪」버튼으로 소리가 울립니다.
 - "글자" 버튼으로 표시할 메시지를 설정할 수 있습니다.
@@ -147,7 +145,6 @@ Hypnosis KraKra
 【使い方】
 
 - 基本的に画面を見て楽しむためのアプリです。
-- 画面をタップ／クリックすると映像が切り替わります。
 - 「マイク」ボタンでマイクが使えます(権限が必要です)。
 - 「♪」ボタンで音が鳴ります。
 - 「ふきだし」ボタンでメッセージを自動音声でしゃべります。
@@ -205,7 +202,6 @@ Hypnosis KraKra
 【如何使用】
 
 - 基本上，它是一个享受观看屏幕的应用程序。
-- 点击/单击屏幕来切换图片。
 - 点击“麦克风”按钮使用麦克风（需要许可）。
 - 点击“♪”按钮会发出声音。
 - “气泡”按钮将说出该消息。
@@ -263,7 +259,6 @@ Hypnosis KraKra
 【用法】
 
 - 它基本上是一個欣賞屏幕的應用程序。
-- 點擊/單擊屏幕切換視頻。
 - 您可以通過“麥克風”按鈕使用麥克風（需要許可）。
 - “♪”按鈕會發出聲音。
 - 使用“語音氣泡”按鈕通過自動語音說出消息。
@@ -321,7 +316,6 @@ Come lo usi dipende da te.
 [(Come usare)]
 
 - Fondamentalmente, è un'applicazione per divertirsi guardando lo schermo.
-- Tocca / fai clic sullo schermo per cambiare le immagini.
 - Tocca il pulsante "microfono" per utilizzare il microfono (è necessaria l'autorizzazione).
 - Toccando il pulsante '♪' si emette un suono.
 - Il pulsante "bolla" pronuncerà il messaggio.
@@ -379,7 +373,6 @@ Wie Sie es nutzen, bleibt Ihnen überlassen.
 [(Wie benutzt man)]
 
 - Im Grunde handelt es sich um eine Anwendung, mit der man gerne auf den Bildschirm schaut.
-- Tippen/klicken Sie auf den Bildschirm, um die Bilder zu wechseln.
 - Tippen Sie auf die Schaltfläche „Mikrofon“, um das Mikrofon zu verwenden (es erfordert eine Genehmigung).
 - Durch Tippen auf die Schaltfläche „♪“ ertönt ein Ton.
 - Mit der „Sprechblase“-Taste wird die Nachricht vorgelesen.
