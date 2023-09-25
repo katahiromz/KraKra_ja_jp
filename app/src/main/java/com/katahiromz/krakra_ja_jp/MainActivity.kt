@@ -193,7 +193,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             }
             if (grantedAll) {
                 // Permission has been granted.
-                webView?.evaluateJavascript("AndroidMicrophoneOnReload()", null)
+                webView?.evaluateJavascript("SAI_AndroidMicrophoneOnReload()", null)
             } else {
                 // Permission request was denied.
                 showSnackbar(getLocString(R.string.no_audio_record), ACTION_SNACK_OK)
