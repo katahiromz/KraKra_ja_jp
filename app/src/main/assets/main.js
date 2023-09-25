@@ -381,7 +381,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		if(speed_irregular.checked != sai_speed_irregular){
 			speed_irregular.checked = sai_speed_irregular;
 		}
-		localStorage.setItem('saiminSpeedType', sai_speed);
+		if(sai_speed_irregular)
+			localStorage.setItem('saiminSpeedType', 'irregular');
+		else
+			localStorage.setItem('saiminSpeedType', sai_speed);
 	}
 
 	function SAI_screen_set_division(value){
