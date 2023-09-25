@@ -1,3 +1,6 @@
+// KraKraのメインアクティビティ。
+// Copyright (c) 2023 Katayama Hirofumi MZ. All Rights Reserved.
+
 package com.katahiromz.krakra_ja_jp
 
 import android.annotation.SuppressLint
@@ -205,11 +208,19 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     /////////////////////////////////////////////////////////////////////
     // イベントハンドラ関連
 
+    // アクティビティの作成時。
     override fun onCreate(savedInstanceState: Bundle?) {
         Timber.i("onCreate")
+
+        // 最初の画面を表示する。
         installSplashScreen()
+
         super.onCreate(savedInstanceState)
+
+        // レイアウト ビューを指定する。
         setContentView(R.layout.activity_main)
+
+        // アクションバーを隠す。
         supportActionBar?.hide()
 
         // WebViewを初期化。
@@ -222,44 +233,70 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         initTimber()
     }
 
+    // アクティビティの開始時。
     override fun onStart() {
         Timber.i("onStart")
-        super.onStart()
+        super.onStart() // 親にも伝える。
     }
 
+    // アクティビティの復帰時。
     override fun onResume() {
         Timber.i("onResume")
-        super.onResume()
+        super.onResume() // 親にも伝える。
+
+        // ウェブビューを復帰。
         webView?.onResume()
+
+        // テキストがあればスピーチを再開。
         if (theText != "") {
             speechText(theText)
         }
+
+        // クロームクライアントを復帰。
         chromeClient?.onResume()
+
+        // 明るさを復帰。
         setBrightness(screenBrightness);
     }
 
+    // アクティビティの一時停止時。
     override fun onPause() {
         Timber.i("onPause")
-        super.onPause()
+        super.onPause() // 親にも伝える。
+
+        // ウェブビューも一時停止。
         webView?.onPause()
+
+        // スピーチを停止する。
         stopSpeech()
     }
 
+    // アクティビティの停止時。
     override fun onStop() {
         Timber.i("onStop")
-        super.onStop()
+        super.onStop() // 親にも伝える。
+
+        // ウェブビューを一時停止。
         webView?.onPause()
+
+        // スピーチを停止する。
         stopSpeech()
     }
 
+    // アクティビティの破棄時。
     override fun onDestroy() {
         Timber.i("onDestroy")
+
+        // ウェブビューを破棄。
         webView?.destroy()
+
+        // TextToSpeechを破棄。
         tts?.shutdown()
-        super.onDestroy()
+
+        super.onDestroy() // 親にも伝える。
     }
 
-    // ValueCallback<String>
+    // 値を受け取るのに使う。ValueCallback<String>より継承。
     override fun onReceiveValue(value: String) {
         resultString = value
     }
@@ -268,11 +305,18 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     /////////////////////////////////////////////////////////////////////
     // WebView関連
 
+    // ウェブビュー オブジェクト。
     private var webView: WebView? = null
+
+    // クロームクライアント。
     private var chromeClient: MyWebChromeClient? = null
 
+    // ウェブビューを初期化する。
     private fun initWebView() {
+        // ウェブビューのビューを取得する。
         webView = findViewById(R.id.web_view)
+
+        // この処理は別スレッドかもしれないので、postを活用。
         webView?.post {
             initWebSettings()
         }
@@ -284,6 +328,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         }
     }
 
+    // ウェブビュー クライアントを初期化する。
     private fun initWebViewClient() {
         webView?.webViewClient = MyWebViewClient(object : MyWebViewClient.Listener {
             override fun onReceivedError(view: WebView?, request: WebResourceRequest?,
@@ -303,7 +348,9 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         })
     }
 
+    // クロームクライアントを初期化する。
     private fun initChromeClient() {
+        // まず、クロームクライアントを作成する。
         chromeClient = MyWebChromeClient(this, object : MyWebChromeClient.Listener {
             override fun onChromePermissionRequest(permissions: Array<String>, requestCode: Int) {
                 requestPermissions(permissions, requestCode)
@@ -311,51 +358,63 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
             override fun onSpeech(text: String) {
                 Timber.i("onSpeech")
-                theText = text
-                speechText(text)
+                theText = text // スピーチテキストをセットする。
+                speechText(text) // スピーチを開始する。
             }
 
             override fun onShowToast(text: String, typeOfToast: Int) {
-                showToast(text, typeOfToast)
+                showToast(text, typeOfToast) // Toastを表示する。
             }
 
             override fun onShowSnackbar(text: String, typeOfSnack: Int) {
-                showSnackbar(text, typeOfSnack)
+                showSnackbar(text, typeOfSnack) // Snackbarを表示する。
             }
 
             override fun onProgressChanged(view: WebView?, newProgress: Int) {
                 val bar: ProgressBar = findViewById(R.id.progressBar)
                 bar.progress = newProgress
                 if (newProgress == 100)
-                    bar.visibility = View.INVISIBLE
+                    bar.visibility = View.INVISIBLE // 進捗が完了したらプログレスを非表示にする。
             }
 
             override fun onBrightness(value: String) {
-                setBrightness(value)
+                setBrightness(value) // 明るさを指定する。
             }
         })
         webView?.webChromeClient = chromeClient
+
+        // JavaScript側からメソッドを呼び出せるインターフェイスを提供する。
         webView?.addJavascriptInterface(chromeClient!!, "android")
+
+        // URLを指定してウェブページを読み込む。
         webView?.loadUrl(getLocString(R.string.url))
     }
 
+    // ウェブ設定を初期化する。
     @SuppressLint("SetJavaScriptEnabled")
     private fun initWebSettings() {
+        // 背景色は黒。
         webView?.setBackgroundColor(0)
+
+        // 設定を取得する。
         val settings = webView?.settings
         if (settings == null)
             return
-        settings.javaScriptEnabled = true
-        settings.domStorageEnabled = true
-        settings.mediaPlaybackRequiresUserGesture = false
+
+        settings.javaScriptEnabled = true // JavaScriptを有効化。
+        settings.domStorageEnabled = true // localStorageを有効化。
+        settings.mediaPlaybackRequiresUserGesture = false // ジェスチャーなくてもメディア反応可。
         if (BuildConfig.DEBUG) {
-            settings.cacheMode = WebSettings.LOAD_NO_CACHE
-            WebView.setWebContentsDebuggingEnabled(true)
+            settings.cacheMode = WebSettings.LOAD_NO_CACHE // デバッグ中はキャッシュしない。
+            WebView.setWebContentsDebuggingEnabled(true) // デバッギングを有効にする。
         }
+
+        // JavaSciprt側からKraKraのバージョン情報を取得できるようにする。
         val versionName = getVersionName()
         settings.userAgentString += "/KraKra-native-app/$versionName/"
     }
 
+    // バージョン名を取得する。
     private fun getVersionName(): String {
         val appName: String = this.packageName
         val pm: PackageManager = this.packageManager
@@ -369,9 +428,12 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     var currLocale: Locale = Locale.ENGLISH
     var currLocaleContext: Context? = null
 
+    // 現在のロケールをセットする。
     fun setCurLocale(locale: Locale) {
         currLocale = locale
         currLocaleContext = null
+
+        // TextToSpeechにもロケールをセットする。
         if (tts != null) {
             if (tts!!.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
                 tts!!.language = locale
@@ -379,17 +441,18 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         }
     }
 
+    // ローカライズされた文字列を取得する。複数ロケール対応のため、特殊な実装が必要。
     fun getLocString(id: Int, locale: Locale): String {
         if (currLocaleContext == null) {
             currLocaleContext = applicationContext.createLocalizedContext(locale)
         }
         return currLocaleContext!!.getString(id)
     }
-
     fun getLocString(id: Int): String {
         return getLocString(id, currLocale);
     }
 
+    // KraKraの既定のメッセージリストを取得する。
     fun getDefaultMessageList(): MutableList<String> {
         currLocaleContext = null
         var ret: MutableList<String> = mutableListOf<String>()
@@ -402,10 +465,11 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     /////////////////////////////////////////////////////////////////////
     // TextToSpeech関連
     //
-    private var tts: TextToSpeech? = null
-    private var isSpeechReady = false
-    private var theText = ""
+    private var tts: TextToSpeech? = null // TextToSpeechオブジェクト。
+    private var isSpeechReady = false // スピーチの準備が完了したか？
+    private var theText = "" // スピーチテキスト。
 
+    // TextToSpeechを初期化する。
     private fun initTextToSpeech() {
         run {
             tts = TextToSpeech(this, this)
@@ -416,6 +480,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         }
     }
 
+    // TextToSpeechのために用意された初期化完了ルーチン。
     // TextToSpeech.OnInitListener
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) {
@@ -423,6 +488,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         }
     }
 
+    // スピーチを開始する。
     fun speechText(text: String) {
         if (isSpeechReady) {
             val params = Bundle()
@@ -436,6 +502,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         }
     }
 
+    // スピーチを停止する。
     private fun stopSpeech() {
         if (isSpeechReady) {
             val params = Bundle()

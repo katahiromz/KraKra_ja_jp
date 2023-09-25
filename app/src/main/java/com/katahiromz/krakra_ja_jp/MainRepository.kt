@@ -1,3 +1,8 @@
+// KraKraのメインレポジトリ。
+// Copyright (c) 2023 Katayama Hirofumi MZ. All Rights Reserved.
+
+// レポジトリ、すなわち情報の格納庫。現在、メッセージリストを管理している。
+
 package com.katahiromz.krakra_ja_jp
 
 import android.content.Context
@@ -9,10 +14,12 @@ class MainRepository {
         private const val MainPrefFileKey = "MAIN_PREF_FILE"
         private const val MessageListKey = "MESSAGE_LIST"
 
+        // 設定を取り出すためのヘルパー関数。
         private fun getPrefs(context: Context): SharedPreferences {
             return context.getSharedPreferences(MainPrefFileKey, Context.MODE_PRIVATE)
         }
 
+        // メッセージリストを読み込む。
         fun loadMessageList(context: Context): MutableList<String> {
             val prefs = getPrefs(context)
             val json = prefs.getString(MessageListKey, null) ?: return mutableListOf()
@@ -25,6 +32,7 @@ class MainRepository {
             return messageList
         }
 
+        // メッセージリストを保存する。
         fun saveMessageList(context: Context, list: List<String>) {
             val prefs = getPrefs(context)
             if (list.isNotEmpty()) {
@@ -44,6 +52,7 @@ class MainRepository {
             }
         }
 
+        // メッセージリストをクリアする。
         fun clearMessageList(context: Context) {
             val prefs = getPrefs(context)
             prefs

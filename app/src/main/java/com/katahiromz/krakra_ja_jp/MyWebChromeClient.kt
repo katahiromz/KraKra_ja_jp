@@ -1,3 +1,6 @@
+// KraKraのクロームクライアント。
+// Copyright (c) 2023 Katayama Hirofumi MZ. All Rights Reserved.
+
 package com.katahiromz.krakra_ja_jp
 
 import android.Manifest
@@ -28,6 +31,8 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
         fun onBrightness(value: String)
     }
 
+    // ローカライズされた文字列を取得する。
+    // 複数の翻訳版に対応するため、特別に処理を用意した。
     private fun getLocString(resId: Int): String {
         return activity!!.getLocString(resId)
     }
@@ -66,6 +71,7 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
 
     /////////////////////////////////////////////////////////////////////
     // JavaScript interface-related
+    // これらの関数はJavaScriptからアクセスできる。
 
     // 画面の明るさを調整する。
     @JavascriptInterface
@@ -73,33 +79,40 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
         listener.onBrightness(brightness);
     }
 
+    // NaviBarを表示する。
     @JavascriptInterface
     fun showNaviBar(show: Boolean) {
         activity!!.showNaviBar(show);
     }
 
+    // スピーチをキャンセルする。
     @JavascriptInterface
     fun cancelSpeech() {
         listener.onSpeech("")
     }
 
+    // スピーチをループする。実は32回まで。
     @JavascriptInterface
     fun speechLoop(msg: String) {
         listener.onSpeech(msg.repeat(32))
     }
 
+    // KraKraの設定をクリアする。
     @JavascriptInterface
     fun clearSettings() {
         MainRepository.clearMessageList(activity!!)
     }
 
+    // 現在の映像の種類を表す整数値。
     var currPicType: Int = 0
 
+    // 現在の映像の種類をセットする。
     @JavascriptInterface
     fun setPicType(picType: Int) {
         currPicType = picType
     }
 
+    // 現在の言語をセットする。
     @JavascriptInterface
     fun setLanguage(lang: String) {
         // {{LANGUAGE_SPECIFIC}}
@@ -122,7 +135,7 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
         activity!!.setCurLocale(locale)
     }
 
-    // JavaScriptのalert関数をラップする。
+    // JavaScriptのalert関数をフックする。
     override fun onJsAlert(
         view: WebView?,
         url: String?,
@@ -143,7 +156,7 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
         return true
     }
 
-    // JavaScriptのconfirm関数をラップする。
+    // JavaScriptのconfirm関数をフックする。
     override fun onJsConfirm(
         view: WebView?,
         url: String?,
@@ -170,9 +183,10 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
 
     // アプリ復帰時の処理。
     fun onResume() {
+        // 現在、特にすることはない。
     }
 
-    // JavaScriptのprompt関数をラップする。
+    // JavaScriptのprompt関数をフックする。
     override fun onJsPrompt(
         view: WebView?,
         url: String?,
@@ -229,11 +243,9 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
     /////////////////////////////////////////////////////////////////////
     // extension of JavaScript prompt function
 
-    /**
-     * メッセージ選択ダイアログの表示対象か判定する
-     * @param message メッセージ文字列
-     * @return true: メッセージ選択ダイアログの表示対象、false: それ以外
-     */
+    /// KraKraのメッセージ選択ダイアログの表示対象か判定する
+    /// @param message メッセージ文字列
+    /// @return true: メッセージ選択ダイアログの表示対象、false: それ以外
     private fun isSelectMessageDialog(message: String?): Boolean {
         var msg: String = getLocString(R.string.message_select_dialog_message)
         if (msg == message)
@@ -249,6 +261,7 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
                 message == "Bitte geben Sie einen Nachrichtentext ein.")
     }
 
+    /// KraKraのメッセージ選択ダイアログの表示。
     private fun showSelectMessageDialog(
         title: String,
         message: String?,
@@ -330,6 +343,7 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
             }
     }
 
+    // リストビューの高さを計算する。
     private fun getMessageListHeight(listView: ListView, arrayAdapter: ArrayAdapter<String>): Int {
         var totalHeight = 0
 

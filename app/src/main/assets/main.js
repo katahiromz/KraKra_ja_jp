@@ -70,30 +70,36 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// ページを選択。
 	function SAI_choose_page(page_id){
-		// Hide all the pages
+		// まず、すべてのページを隠す。
 		let pages = document.getElementsByClassName('sai_class_page');
 		for(let page of pages){
 			page.classList.add('sai_class_invisible');
 		}
 
-		// Display one page
+		// 一つのページを表示する。
 		if(typeof(page_id) == 'string')
 			page_id = document.getElementById(page_id);
 		page_id.classList.remove('sai_class_invisible');
-		if (page_id == sai_id_page_main){
+
+		if (page_id == sai_id_page_main){ // メインページなら
+			// 準備がまだなら、ユーザを受け入れる。
 			if (!sai_ready)
-				SAI_accepted();
+				SAI_user_accepted();
+			// 必要ならアニメーションを要求する。
 			if(!sai_request_anime){
 				sai_request_anime = window.requestAnimationFrame(SAI_draw_all);
 			}
 		}else{
+			// アニメーションをキャンセルする。
 			window.cancelAnimationFrame(sai_request_anime);
 			sai_request_anime = null;
 		}
-		if (page_id == sai_id_page_config){
+
+		if (page_id == sai_id_page_config){ // 「設定」ページなら
+			// 100ミリ秒後に一番上にスクロールする。
 			setTimeout(function(){
 				sai_id_config_scrollable.scrollLeft = sai_id_config_scrollable.scrollTop = 0;
-			}, 200);
+			}, 100);
 		}
 	}
 
@@ -104,13 +110,15 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// きらめきに新しい星を追加する。
 	function SAI_star_add(x, y){
-		sai_stars.shift();
-		if(SAI_display_is_large()){
+		sai_stars.shift(); // 古い星を消す。
+
+		if(SAI_display_is_large()){ // 画面が大きければ
+			// 大きな星を押し込む。
 			x += (Math.random() - 0.5) * 2 * 20 * 2;
 			y += (Math.random() - 0.5) * 2 * 20 * 2;
 			let size = 5 + Math.random() * 10 * 2;
 			sai_stars.push([x, y, size]);
-		}else{
+		}else{ // さもなければ小さな星を押し込む。
 			x += (Math.random() - 0.5) * 2 * 20;
 			y += (Math.random() - 0.5) * 2 * 20;
 			let size = 5 + Math.random() * 10;
@@ -122,8 +130,9 @@ document.addEventListener('DOMContentLoaded', function(){
 	function SAI_speech_cancel(){
 		console.log('SAI_speech_cancel');
 		try{
-			android.cancelSpeech();
-		}catch(error){
+			android.cancelSpeech(); // スピーチのキャンセル。Androidでなければ失敗。
+		}catch(error){ // Androidではない。
+			// Web側でスピーチをキャンセル。
 			if(window.speechSynthesis){
 				window.speechSynthesis.cancel();
 			}
@@ -132,7 +141,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 画面点滅（サブリミナル）の種類を指定する。
 	function SAI_blink_set_type(value){
-		value = parseInt(value);
+		value = parseInt(value); // 整数に変換。
+
+		// テキストとヘルツ数を取得する。
 		let text, hz;
 		switch(value){
 		case 0:
@@ -169,22 +180,33 @@ document.addEventListener('DOMContentLoaded', function(){
 			text = "10Hz";
 			break;
 		}
+		// 点滅間隔をセットする。
 		sai_blinking_interval = (hz > 0) ? (1.0 / hz) : 0;
+
+		// <input>タグの値を更新する。
 		if(sai_id_range_blink_type.value != value.toString())
 			sai_id_range_blink_type.value = value.toString();
+
+		// outputにテキストをセット。
 		sai_id_text_blink_output.innerText = text;
+
+		// ローカルストレージに点滅タイプを記憶。
 		localStorage.setItem('saiminBlinkType', value);
 	}
 
 	// KraKraの言語をセットして、UIをローカライズする。
 	function SAI_set_language(lang){
+		// 言語が指定されてなければとりあえず英語。
 		if(!lang)
 			lang = 'en';
 
+		// ローカライズ。translation.jsを参照。
 		trans_localize(lang);
 
+		// 「バージョン情報」テキストを一番上にスクロール。
 		sai_id_text_notice.scrollLeft = sai_id_text_notice.scrollTop = 0;
 
+		// 「催眠解除中」の画像を更新。
 		sai_hypno_releasing_img = new Image();
 		if(sai_hypnosis_released){
 			sai_hypno_releasing_img.src = trans_getText('TEXT_HYPNOSIS_RELEASED_IMG');
@@ -192,22 +214,31 @@ document.addEventListener('DOMContentLoaded', function(){
 			sai_hypno_releasing_img.src = trans_getText('TEXT_KILLING_HYPNOSIS_IMG');
 		}
 
+		// ロゴ画像も翻訳されているので更新が必要。
 		sai_logo_img = new Image();
 		sai_logo_img.src = trans_getText('TEXT_LOGO');
 
+		// 「ここをタップ」画像も翻訳されている。
 		sai_tap_here_img = new Image();
 		sai_tap_here_img.src = trans_getText('TEXT_TAP_HERE');
 
+		// 「催眠解除成功」の画像も更新。
 		sai_all_released_img = new Image();
 		sai_all_released_img.src = trans_getText('TEXT_ALL_RELEASED_IMG');
 
+		// 言語<select>の値も更新。
 		sai_id_select_language_1.value = lang;
 
+		// 画面点滅タイプのUIも更新。
 		SAI_blink_set_type(sai_id_range_blink_type.value);
 
+		// メッセージサイズのUIも更新。
 		SAI_message_set_size(sai_id_select_message_size.value, true);
+
+		// 映像のスピードの種類のUIも更新。
 		SAI_speed_set_type(localStorage.getItem('saiminSpeedType'));
 
+		// Android側にも言語変更を通知する。
 		try{
 			android.setLanguage(lang);
 		}catch(error){
@@ -218,14 +249,18 @@ document.addEventListener('DOMContentLoaded', function(){
 	// スピーチに対応するために、テキストを調整する。
 	function SAI_adjust_text_for_speech(text){
 		text = text.replace('～', 'ー');
-		// {{language-specific}}
+
+		// {{LANGUAGE_SPECIFIC}}
 		text = text.replace(trans_getText('TEXT_FULLWIDTH_SPACE'), '  ').trim();
 		if(text == '')
 			return text;
+
 		while (text.slice(-1) == trans_getText('TEXT_PERIOD'))
 			text = text.slice(0, -1);
+
 		if(text == '')
 			return text;
+
 		text += trans_getText('TEXT_PERIOD_SPACE');
 		return text;
 	}
@@ -233,17 +268,23 @@ document.addEventListener('DOMContentLoaded', function(){
 	// スピーチを開始する。
 	async function SAI_speech_play(text){
 		console.log('SAI_speech_play');
+
+		// 開始する前にいったんキャンセルする。
 		SAI_speech_cancel();
+
+		// スピーチ用にテキストを調整する。
 		text = SAI_adjust_text_for_speech(text);
+
 		try{
+			// Android側のスピーチを開始する。Androidでなければ失敗。
 			android.speechLoop(text);
-		}catch(error){
-			if(window.speechSynthesis){
-				text = text.repeat(32);
+		}catch(error){ // Androidではない。Web側のスピーチを開始する。
+			if(window.speechSynthesis){ // 音声合成に対応していれば
+				text = text.repeat(32); // 32回繰り返す。
 				let speech = new SpeechSynthesisUtterance(text);
-				speech.pitch = 0.6;
-				speech.rate = 0.4;
-				// {{LANGUAGE_SPECIFIC}}
+				speech.pitch = 0.6; // 音声の高さ。
+				speech.rate = 0.4; // 音声の速さ。
+				// {{LANGUAGE_SPECIFIC}}: スピーチの言語をセットする。
 				if(trans_currentLanguage == 'ja' || trans_currentLanguage == 'ja-JP') // Japanese
 					speech.lang = 'ja-JP';
 				else if(trans_currentLanguage == 'zh-CN') // Chinese (Simplified)
@@ -258,6 +299,7 @@ document.addEventListener('DOMContentLoaded', function(){
 					speech.lang = 'de-DE';
 				else // English is default
 					speech.lang = 'en-US';
+				// 実際にスピーチを開始する。
 				window.speechSynthesis.speak(speech);
 				console.log('speech');
 			}
@@ -271,29 +313,47 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 音声の名前をセットし、音声オブジェクトを作成する。設定を保存する。
 	function SAI_sound_set_name(value){
+		// 音声のバリデーション。
 		if(value.indexOf('sn') == 0)
 			value = '';
+
+		// 変数に音声の名前を記憶。
 		sai_sound_name = value;
+
+		// 必要なら音声オブジェクトを作成するか、破棄する。
 		if(sai_sound_name != ''){
 			console.log('sn/' + sai_sound_name + '.mp3');
 			sai_sound_object = new Audio('sn/' + sai_sound_name + '.mp3');
 		}else{
 			sai_sound_object = null;
 		}
-		sound_select.value = value;
+
+		// 音声の選択を更新。
+		sai_id_select_sound.value = value;
+
+		// ローカルストレージに記憶する。
 		localStorage.setItem('saiminSoundName', sai_sound_name);
 	}
 
 	// 映像切り替えの音の有無をセットする。
 	function SAI_set_type_sound(value, test = false){
+		// ローカルストレージから来た値は文字列かもしれない。正規化。
 		if(value === true || value == "true")
 			value = 1;
 		if(value === false || value == "false")
 			value = 0;
+
+		// 映像切り替えの種類を整数値でセットする。
 		sai_kirakira_sound_type = parseInt(value);
+
+		// UIを更新する。
 		if(sai_id_checkbox_pic_change_sound.checked != !!value)
 			sai_id_checkbox_pic_change_sound.checked = !!value;
+
+		// ローカルストレージに記憶する。
 		localStorage.setItem('saiminTypeSound', value);
+
+		// テストならば実際に音を出す。
 		if(test && sai_kirakira_sound_type == 1 && sai_kirakira_sound_object){
 			sai_kirakira_sound_object.play();
 		}
@@ -302,16 +362,23 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 画面の明るさをセットする。
 	function SAI_screen_set_brightness(value){
 		try{
+			// Android側で明るさをセット。Androidでなければ失敗。
 			android.setBrightness(value);
-		}catch(error){
+		}catch(error){ // Androidではなかった。
+			// 何もできないのでとりあえずログ出力。
 			console.log("android.setBrightness(" + value + ") failed: " + error);
 		}
-		screen_brightness.value = value;
+
+		// 明るさのUIを更新。
+		sai_id_select_brightness.value = value;
+
+		// ローカルストレージに記憶する。
 		localStorage.setItem('saiminScreenBrightness', value);
 	}
 
 	// メッセージの表示サイズをセットする。
 	function SAI_message_set_size(value){
+		// いったん、すべての文字サイズ設定クラスを削除。
 		sai_id_text_floating_1.classList.remove('sai_class_font_size_small');
 		sai_id_text_floating_1.classList.remove('sai_class_font_size_normal');
 		sai_id_text_floating_1.classList.remove('sai_class_font_size_large');
@@ -320,7 +387,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_id_text_floating_2.classList.remove('sai_class_font_size_normal');
 		sai_id_text_floating_2.classList.remove('sai_class_font_size_large');
 		sai_id_text_floating_2.classList.remove('sai_class_font_size_huge');
-		value = value.toString();
+
+		value = value.toString(); // 値を文字列に変換。
+
+		// 文字サイズ設定クラスを追加。テキストを取得。
 		let text = '';
 		switch (value){
 		case 'small':
@@ -353,15 +423,24 @@ document.addEventListener('DOMContentLoaded', function(){
 			text = trans_getText('TEXT_SIZE_HUGE');
 			break;
 		}
+
+		// 必要ならUIを更新。
 		if(value != sai_id_select_message_size.value)
 			sai_id_select_message_size.value = value;
+
+		// outputのUIを更新。
 		trans_setHtmlText(sai_id_select_message_size_output, text);
+
+		// ローカルストレージに記憶。
 		localStorage.setItem('saiminMessageSize', value);
 	}
 
 	// 映像スピードをセットする。
 	function SAI_speed_set_type(value){
+		// まず「不規則」ではないことを仮定。
 		sai_speed_irregular = false;
+
+		// スピードとテキストと不規則性を取得。
 		let text;
 		switch (value){
 		case 'slow':
@@ -396,8 +475,11 @@ document.addEventListener('DOMContentLoaded', function(){
 			}
 			break;
 		}
+
+		// outputのUIを更新。
 		sai_id_text_speed_output.innerText = text;
 
+		// <input>を更新。
 		if(sai_speed != parseFloat(sai_id_range_speed_type.value)){
 			if(sai_speed_irregular)
 				sai_id_range_speed_type.value = sai_speed;
@@ -407,9 +489,11 @@ document.addEventListener('DOMContentLoaded', function(){
 		if(sai_id_range_speed_type.disabled != sai_speed_irregular){
 			sai_id_range_speed_type.disabled = sai_speed_irregular;
 		}
-		if(speed_irregular.checked != sai_speed_irregular){
-			speed_irregular.checked = sai_speed_irregular;
+		if(sai_id_checkbox_speed_irregular.checked != sai_speed_irregular){
+			sai_id_checkbox_speed_irregular.checked = sai_speed_irregular;
 		}
+
+		// ローカルストレージに記憶。
 		if(sai_speed_irregular)
 			localStorage.setItem('saiminSpeedType', 'irregular');
 		else
@@ -418,7 +502,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 画面分割の種類をセットする。
 	function SAI_screen_set_split(value){
-		value = parseInt(value);
+		value = parseInt(value); // 整数値に変換する。
+
+		// チェックボックスと変数を更新。
 		switch(value){
 		case 2:
 			sai_id_checkbox_split.checked = true;
@@ -430,11 +516,14 @@ document.addEventListener('DOMContentLoaded', function(){
 			sai_screen_split = 1;
 			break;
 		}
+
+		// ローカルストレージに記憶。
 		localStorage.setItem('saiminDivision', sai_screen_split.toString());
 	}
 
 	// カウントダウンの有無をセットする。なければカウントダウンしない。
 	function SAI_set_count_down(value){
+		// ローカルストレージから来た値は文字列かもしれない。複数の型に対応。
 		switch(value){
 		case "true":
 		case true:
@@ -447,10 +536,14 @@ document.addEventListener('DOMContentLoaded', function(){
 			value = 0;
 			break;
 		}
+
+		// UIを更新。
 		if(value)
 			sai_id_checkbox_count_down.checked = true;
 		else
 			sai_id_checkbox_count_down.checked = false;
+
+		// ローカルストレージに記憶。
 		localStorage.setItem('saiminCountDown', value.toString());
 	}
 
@@ -466,34 +559,55 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像の種類の整数値をセットする。
 	function SAI_pic_set_type(value){
-		sai_pic_type = parseInt(value);
-		if(sai_pic_type == -1){
+		sai_pic_type = parseInt(value); // 整数に変換して変数に記憶。
+		if(sai_pic_type == -1){ // 「催眠解除」の場合。
+			// スピーチをキャンセル。
 			SAI_speech_cancel();
 			sai_id_checkbox_speech.checked = false;
 			sai_id_label_speech.classList.remove('sai_class_checked');
+
+			// 「催眠解除中」の変数を更新。
 			sai_hypnosis_released = false;
+
+			// 催眠解除クラスを追加。
 			sai_id_button_sound.classList.add('sai_class_releasing');
 			sai_id_button_message.classList.add('sai_class_releasing');
 			sai_id_label_speech.classList.add('sai_class_releasing');
+
+			// 催眠解除の画像のソースを更新。
 			sai_hypno_releasing_img.src = trans_getText('TEXT_KILLING_HYPNOSIS_IMG');
+
+			// 催眠解除まで時間がかかる。
 			setTimeout(function(){
+				// 3秒待った。解除されたと仮定。画像のソースを更新。
 				sai_hypno_releasing_img.src = trans_getText('TEXT_HYPNOSIS_RELEASED_IMG');
 				sai_all_released_img.src = trans_getText('TEXT_ALL_RELEASED_IMG');
+				// 解放された！
 				sai_hypnosis_released = true;
 			}, 3000);
 		}else{
-			if(sai_old_pic_type == -1){
-				sai_message_text = '';
+			if(sai_old_pic_type == -1){ // 「催眠解除中」か？
+				sai_message_text = ''; // メッセージテキストをクリア。
+
+				// スピーチをキャンセル。
 				sai_id_checkbox_speech.checked = false;
 				sai_id_label_speech.classList.remove('sai_class_checked');
 				SAI_speech_cancel();
 			}
+
+			// 「催眠解除中」ではない。
 			sai_id_button_sound.classList.remove('sai_class_releasing');
 			sai_id_button_message.classList.remove('sai_class_releasing');
 			sai_id_label_speech.classList.remove('sai_class_releasing');
 		}
+
+		// 映像の種類のUIを更新する。
 		sai_id_select_pic_type.value = sai_pic_type.toString();
+
+		// ローカルストレージに記憶。
 		localStorage.setItem('saiminType', sai_pic_type.toString());
+
+		// Android側に映像の種類の変更を通知。
 		try{
 			android.setPicType(sai_pic_type);
 		}catch(error){
@@ -505,13 +619,21 @@ document.addEventListener('DOMContentLoaded', function(){
 	// メッセージテキストをセットする。
 	function SAI_message_set_text(txt){
 		console.log('SAI_message_set_text', txt);
+
+		// メッセージテキストを調整。
 		sai_message_text = txt.replace(trans_getText('TEXT_FULLWIDTH_SPACE'), '  ').trim();
+
+		// ローカルストレージに記憶。
 		localStorage.setItem('saiminText', sai_message_text);
+
+		// メッセージテキストがあればスピーチを開始、なければスピーチをキャンセル。
 		if(sai_message_text){
 			SAI_speech_play(sai_message_text);
 		}else{
 			SAI_speech_cancel();
 		}
+
+		// メッセージテキストをセットする。
 		let elements = document.getElementsByClassName('sai_class_text_message');
 		for(let element of elements){
 			trans_setHtmlText(element, sai_message_text);
@@ -520,32 +642,35 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像の回転の向きをセットする。
 	function SAI_rotation_set(value){
+		// valueは文字列かもしれないし、ブール値かもしれない。
 		switch(value){
 		case 'normal':
 		case false:
 		default:
-			sai_id_checkbox_rotation.checked = false;
+			sai_id_checkbox_rotation.checked = false; // UIを更新。
 			sai_rotation_type = 'normal';
 			break;
 		case 'counter':
 		case true:
-			sai_id_checkbox_rotation.checked = true;
+			sai_id_checkbox_rotation.checked = true; // UIを更新。
 			sai_rotation_type = 'counter';
 			break;
 		}
+
+		// ローカルストレージに記憶。
 		localStorage.setItem('saiminRotation', sai_rotation_type.toString());
 	}
 
 	// スクリーンのサイズをセットする。必要ならキャンバスのサイズも変更する。
-	function SAI_fit_canvas(){
-		console.log('SAI_fit_canvas');
+	function SAI_screen_fit_canvas(){
+		console.log('SAI_screen_fit_canvas');
 		sai_screen_width = sai_id_canvas_01.width = window.innerWidth;
 		sai_screen_height = sai_id_canvas_01.height = window.innerHeight;
 	}
 
 	// スクリーンのサイズをセットし、必要なら画面を復帰する。
 	function SAI_screen_fit(){
-		SAI_fit_canvas();
+		SAI_screen_fit_canvas();
 		let position = { my: 'center', at: 'center', of: window };
 		if(localStorage.getItem('saiminHelpShowing')){
 			SAI_choose_page(sai_id_page_agreement);
@@ -567,51 +692,75 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// ユーザを受け入れる。
-	function SAI_accepted(){
+	function SAI_user_accepted(){
+		// ローカルストレージに記憶。
 		localStorage.setItem('saiminAdultCheck3', '1');
+
+		// コントロールパネルを表示する。
 		sai_id_control_panel.classList.remove('sai_class_invisible');
+
+		// 「バージョン情報」の表示を更新する。
 		SAI_update_version_display();
+
 		if(!sai_ready){
+			// 映像の種類を初期化する。
 			let type = localStorage.getItem('saiminType');
 			if(type && type != -1){
 				SAI_pic_set_type(type);
 			}else{
 				SAI_pic_set_type(0);
 			}
+
+			// 必要ならアニメーションを要求する。
 			if (!sai_request_anime)
 				sai_request_anime = window.requestAnimationFrame(SAI_draw_all);
+
+			// 準備完了。
 			sai_ready = true;
+
+			// メインページに飛ばす。
 			SAI_choose_page(sai_id_page_main);
 		}
 	}
 
 	// 初期時の言語選択を自動化する。
 	function SAI_language_choose(){
+		// ローカルストレージから言語を取得。
 		let lang = localStorage.getItem('saiminLanguage3');
-		if(!lang){
+		if(!lang){ // 取得できなければブラウザからデフォルトの言語を取得。
 			lang = trans_getDefaultLanguage();
-			sai_first_time = true;
+			sai_first_time = true; // これは初回時。
 		}
-		sai_id_select_language_2.value = lang;
+		sai_id_select_language_2.value = lang; // UIを更新。
 	}
 
 	// 「バージョン情報」ダイアログ。
-	function SAI_help(){
+	function SAI_help_and_agreement(){
+		// テキストの一番上にスクロール。
 		setTimeout(function(){
 			sai_id_text_notice.scrollLeft = sai_id_text_notice.scrollTop = 0;
-		}, 200);
+		}, 100);
+
+		// ローカルストレージに表示状態を記憶。
 		localStorage.setItem('saiminHelpShowing', '1');
+
+		// 初回かそれ以外か？ ボタンのテキストを変える。
 		if(sai_first_time){
 			trans_setHtmlText(sai_id_button_agree, trans_getText('TEXT_I_AGREE'));
 		}else{
 			trans_setHtmlText(sai_id_button_agree, trans_getText('TEXT_OK'));
 		}
+
+		// 同意ページに移動。
 		SAI_choose_page(sai_id_page_agreement);
 	}
 
 	// 「設定」ダイアログ。
 	function SAI_config(){
+		// ローカルストレージに表示状態を記憶。
 		localStorage.setItem('saiminConfigShowing', '1');
+
+		// 「設定」ページに飛ばす。
 		SAI_choose_page(sai_id_page_config);
 	}
 
@@ -753,10 +902,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.fill();
 	}
 
-	// サブリミナルの描画。
-	function SAI_draw_subliminal(ctx, px, py, dx, dy){
-		ctx.save();
-
+	// 長方形領域(px, py, dx, dy)をクリッピングする。
+	function SAI_clip_rect(ctx, px, py, dx, dy){
 		ctx.beginPath();
 		ctx.moveTo(px, py);
 		ctx.lineTo(px + dx, py);
@@ -764,11 +911,20 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.lineTo(px, py + dy);
 		ctx.closePath();
 		ctx.clip();
+	}
+
+	// サブリミナルの描画。
+	function SAI_draw_subliminal(ctx, px, py, dx, dy){
+		ctx.save();
+
+		// 長方形領域(px, py, dx, dy)をクリッピングする。
+		SAI_clip_rect(ctx, px, py, dx, dy);
 
 		let count = SAI_get_tick_count();
 		let factor1 = Math.sin(count * 0.1);
 		let factor2 = Math.abs(Math.cos(count * 0.03));
 
+		// 指定した色で長方形領域を塗りつぶす。
 		ctx.fillStyle = `rgb(${factor2 * 30 + 40}%, 20%, ${40}%)`;
 		ctx.fillRect(px, py, dx, dy);
 
@@ -786,18 +942,14 @@ document.addEventListener('DOMContentLoaded', function(){
 	function SAI_draw_pic_minus_1(ctx, px, py, dx, dy){
 		ctx.save();
 
-		ctx.beginPath();
-		ctx.moveTo(px, py);
-		ctx.lineTo(px + dx, py);
-		ctx.lineTo(px + dx, py + dy);
-		ctx.lineTo(px, py + dy);
-		ctx.closePath();
-		ctx.clip();
+		// 長方形領域(px, py, dx, dy)をクリッピングする。
+		SAI_clip_rect(ctx, px, py, dx, dy);
 
 		let qx = px + dx / 2;
 		let qy = py + dy / 2;
 		let dxy = (dx + dy) / 2;
 
+		// 黒で長方形領域を塗りつぶす。
 		ctx.fillStyle = 'black';
 		ctx.fillRect(px, py, dx, dy);
 
@@ -836,18 +988,14 @@ document.addEventListener('DOMContentLoaded', function(){
 	function SAI_draw_pic_0(ctx, px, py, dx, dy){
 		ctx.save();
 
-		ctx.beginPath();
-		ctx.moveTo(px, py);
-		ctx.lineTo(px + dx, py);
-		ctx.lineTo(px + dx, py + dy);
-		ctx.lineTo(px, py + dy);
-		ctx.closePath();
-		ctx.clip();
+		// 長方形領域(px, py, dx, dy)をクリッピングする。
+		SAI_clip_rect(ctx, px, py, dx, dy);
 
 		let qx = px + dx / 2;
 		let qy = py + dy / 2;
 		let dxy = (dx + dy) / 2;
 
+		// 黒で長方形領域を塗りつぶす。
 		ctx.fillStyle = 'black';
 		ctx.fillRect(px, py, dx, dy);
 
@@ -892,14 +1040,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		let qx = px + dx / 2;
 		let qy = py + dy / 2;
 
-		ctx.beginPath();
-		ctx.moveTo(px, py);
-		ctx.lineTo(px + dx, py);
-		ctx.lineTo(px + dx, py + dy);
-		ctx.lineTo(px, py + dy);
-		ctx.closePath();
-		ctx.clip();
+		// 長方形領域(px, py, dx, dy)をクリッピングする。
+		SAI_clip_rect(ctx, px, py, dx, dy);
 
+		// ショッキングピンクで長方形領域を塗りつぶす。
 		ctx.fillStyle = '#f0f';
 		ctx.fillRect(px, py, dx, dy);
 
@@ -969,6 +1113,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.closePath();
 		ctx.clip();
 
+		// 白で長方形領域を塗りつぶす。
 		ctx.fillStyle = '#fff';
 		ctx.fillRect(px, py, dx, dy);
 
@@ -1044,14 +1189,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		let qy = py + dy / 2;
 		let dxy = (dx + dy) / 2;
 
-		ctx.beginPath();
-		ctx.moveTo(px, py);
-		ctx.lineTo(px + dx, py);
-		ctx.lineTo(px + dx, py + dy);
-		ctx.lineTo(px, py + dy);
-		ctx.closePath();
-		ctx.clip();
+		// 長方形領域(px, py, dx, dy)をクリッピングする。
+		SAI_clip_rect(ctx, px, py, dx, dy);
 
+		// 白で長方形領域を塗りつぶす。
 		ctx.fillStyle = 'white';
 		ctx.fillRect(px, py, dx, dy);
 
@@ -1165,14 +1306,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		let qy = py + dy / 2;
 		let dxy = (dx + dy) / 2;
 
-		ctx.beginPath();
-		ctx.moveTo(px, py);
-		ctx.lineTo(px + dx, py);
-		ctx.lineTo(px + dx, py + dy);
-		ctx.lineTo(px, py + dy);
-		ctx.closePath();
-		ctx.clip();
+		// 長方形領域(px, py, dx, dy)をクリッピングする。
+		SAI_clip_rect(ctx, px, py, dx, dy);
 
+		// 黒で長方形領域を塗りつぶす。
 		ctx.fillStyle = 'black';
 		ctx.fillRect(px, py, dx, dy);
 
@@ -1203,13 +1340,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		let qy = py + dy / 2;
 		let dxy = (dx + dy) / 2;
 
-		ctx.beginPath();
-		ctx.moveTo(px, py);
-		ctx.lineTo(px + dx, py);
-		ctx.lineTo(px + dx, py + dy);
-		ctx.lineTo(px, py + dy);
-		ctx.closePath();
-		ctx.clip();
+		// 長方形領域(px, py, dx, dy)をクリッピングする。
+		SAI_clip_rect(ctx, px, py, dx, dy);
 
 		//ctx.fillStyle = 'white';
 		//ctx.fillRect(px, py, dx, dy);
@@ -1290,16 +1422,13 @@ document.addEventListener('DOMContentLoaded', function(){
 		let qy = py + dy / 2;
 		let dxy = (dx + dy) / 2;
 
-		ctx.beginPath();
-		ctx.moveTo(px, py);
-		ctx.lineTo(px + dx, py);
-		ctx.lineTo(px + dx, py + dy);
-		ctx.lineTo(px, py + dy);
-		ctx.closePath();
-		ctx.clip();
+		// 長方形領域(px, py, dx, dy)をクリッピングする。
+		SAI_clip_rect(ctx, px, py, dx, dy);
 
 		let count2 = SAI_get_tick_count();
 		const value = Math.sin(count2 * 0.05);
+
+		// 指定した色で長方形領域を塗りつぶす。
 		ctx.fillStyle = `rgb(${value * 30 + 40}, ${value * 30 + 40}, ${value * 25 + 150})`
 		ctx.fillRect(px, py, dx, dy);
 
@@ -1377,13 +1506,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		let qy = py + dy / 2;
 		let dxy = (dx + dy) / 2;
 
-		ctx.beginPath();
-		ctx.moveTo(px, py);
-		ctx.lineTo(px + dx, py);
-		ctx.lineTo(px + dx, py + dy);
-		ctx.lineTo(px, py + dy);
-		ctx.closePath();
-		ctx.clip();
+		// 長方形領域(px, py, dx, dy)をクリッピングする。
+		SAI_clip_rect(ctx, px, py, dx, dy);
 
 		let count2 = SAI_get_tick_count();
 		if(SAI_display_is_large()){
@@ -1394,6 +1518,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			qy += 30 * Math.sin(count2 * 0.1);
 		}
 
+		// 黒で長方形領域を塗りつぶす。
 		ctx.fillStyle = '#000';
 		ctx.fillRect(px, py, dx, dy);
 
@@ -1442,14 +1567,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		let qy = py + dy / 2;
 		let dxy = (dx + dy) / 2;
 
-		ctx.beginPath();
-		ctx.moveTo(px, py);
-		ctx.lineTo(px + dx, py);
-		ctx.lineTo(px + dx, py + dy);
-		ctx.lineTo(px, py + dy);
-		ctx.closePath();
-		ctx.clip();
+		// 長方形領域(px, py, dx, dy)をクリッピングする。
+		SAI_clip_rect(ctx, px, py, dx, dy);
 
+		// 黒で長方形領域を塗りつぶす。
 		ctx.fillStyle = '#000';
 		ctx.fillRect(px, py, dx, dy);
 
@@ -1550,14 +1671,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		let qy = py + dy / 2;
 		let dxy = (dx + dy) / 2;
 
-		ctx.beginPath();
-		ctx.moveTo(px, py);
-		ctx.lineTo(px + dx, py);
-		ctx.lineTo(px + dx, py + dy);
-		ctx.lineTo(px, py + dy);
-		ctx.closePath();
-		ctx.clip();
+		// 長方形領域(px, py, dx, dy)をクリッピングする。
+		SAI_clip_rect(ctx, px, py, dx, dy);
 
+		// 黒で長方形領域を塗りつぶす。
 		ctx.fillStyle = '#000';
 		ctx.fillRect(px, py, dx, dy);
 
@@ -1833,30 +1950,27 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 	}
 
-	// メイン関数。
-	function SAI_main(){
-		const argc = arguments.length, argv = arguments;
-
-		SAI_speech_cancel();
-		SAI_fit_canvas();
-
-		sai_coin_img.src = 'images/coin5yen.png';
-
+	// ローカルストレージから設定を読み込む。設定がなければ初期化する。
+	function SAI_load_local_storage(){
+		// ローカルストレージに催眠テキストがあれば読み込む。
 		let saiminText = localStorage.getItem('saiminText');
 		if(saiminText){
 			SAI_message_set_text(saiminText);
 		}
 
+		// ローカルストレージに画面分割があれば読み込む。
 		let saiminDivision = localStorage.getItem('saiminDivision');
 		if(saiminDivision){
 			SAI_screen_set_split(saiminDivision);
 		}
 
+		// ローカルストレージにカウントダウンがあれば読み込む。
 		let saiminCountDown = localStorage.getItem('saiminCountDown');
 		if(saiminCountDown){
 			SAI_set_count_down(saiminCountDown);
 		}
 
+		// ローカルストレージに音声の名前があれば読み込む。
 		let saiminSoundName = localStorage.getItem('saiminSoundName');
 		if(saiminSoundName){
 			SAI_sound_set_name(saiminSoundName);
@@ -1864,11 +1978,13 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_sound_set_name('Magic');
 		}
 
+		// ローカルストレージに映像切り替えの種類があれば読み込む。
 		let saiminTypeSound = localStorage.getItem('saiminTypeSound');
 		if(saiminTypeSound){
 			SAI_set_type_sound(saiminTypeSound);
 		}
 
+		// ローカルストレージにスピードの種類があれば読み込む。
 		let saiminSpeedType = localStorage.getItem('saiminSpeedType');
 		if(saiminSpeedType){
 			SAI_speed_set_type(saiminSpeedType);
@@ -1876,6 +1992,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_speed_set_type('normal');
 		}
 
+		// ローカルストレージに画面点滅の種類があれば読み込む。
 		let saiminBlinkType = localStorage.getItem('saiminBlinkType');
 		if(saiminBlinkType){
 			SAI_blink_set_type(saiminBlinkType);
@@ -1883,6 +2000,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_blink_set_type(0);
 		}
 
+		// ローカルストレージに回転の向きがあれば読み込む。
 		let saiminRotation = localStorage.getItem('saiminRotation');
 		if(saiminRotation){
 			SAI_rotation_set(saiminRotation);
@@ -1890,6 +2008,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_rotation_set('normal');
 		}
 
+		// ローカルストレージにメッセージのサイズがあれば読み込む。
 		let saiminMessageSize = localStorage.getItem('saiminMessageSize');
 		if(saiminMessageSize){
 			SAI_message_set_size(saiminMessageSize);
@@ -1897,13 +2016,49 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_message_set_size('normal');
 		}
 
+		// ローカルストレージに画面の明るさがあれば読み込む。
 		let saiminScreenBrightness = localStorage.getItem('saiminScreenBrightness');
 		if(saiminScreenBrightness){
 			SAI_screen_set_brightness(saiminScreenBrightness);
 		}else{
 			SAI_screen_set_brightness('normal');
 		}
+	}
 
+	// キャンバスがクリックされた。
+	function SAI_canvas_click(e){
+		if(!sai_ready)
+			return;
+		if(0){
+			if(e.shiftKey){
+				SAI_pic_set_type((sai_pic_type + (NUM_TYPE + 1) - 1) % (NUM_TYPE + 1));
+			}else{
+				SAI_pic_set_type((sai_pic_type + 1) % (NUM_TYPE + 1));
+			}
+			sai_id_select_pic_type.value = sai_pic_type.toString();
+			if(sai_kirakira_sound_type == 1 && sai_kirakira_sound_object && sai_id_checkbox_pic_change_sound.checked){
+				let kirakira = new Audio('sn/kirakira.mp3');
+				kirakira.play();
+			}
+		}
+		if(sai_id_control_panel.classList.contains('sai_class_invisible')){
+			// 催眠解除の場合、ダミー画面に戻す。
+			if(sai_pic_type == -1)
+				SAI_pic_set_type(0);
+			// コントロールパネルを再表示する。
+			sai_id_control_panel.classList.remove('sai_class_invisible');
+			// カウントダウンを破棄する。
+			sai_count_down = null;
+			// 映像の停止。
+			sai_stopping = true;
+			// カウンターのリセット。
+			sai_counter = 0;
+		}
+	}
+
+	// イベントリスナー群を登録する。
+	function SAI_register_event_listeners(){
+		// 「メッセージ」ボタン。
 		sai_id_button_message.addEventListener('click', function(){
 			if(sai_pic_type == -1)
 				return;
@@ -1913,15 +2068,18 @@ document.addEventListener('DOMContentLoaded', function(){
 			}
 		});
 
+		// 「バージョン情報」画面。
 		sai_id_button_about.addEventListener('click', function(e){
-			SAI_help();
+			SAI_help_and_agreement();
 		});
 
+		// 「設定」画面のOKボタン。
 		sai_id_button_config_ok.addEventListener('click', function(e){
 			localStorage.removeItem('saiminConfigShowing');
 			SAI_choose_page(sai_id_page_main);
 		});
 
+		// 「一つ前の映像」ボタン。
 		sai_id_button_previous_image.addEventListener('click', function(e){
 			let type = parseInt(sai_pic_type);
 			type = (type + NUM_TYPE) % (NUM_TYPE + 1);
@@ -1931,6 +2089,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				kirakira.play();
 			}
 		});
+		// 「一つ次の映像」ボタン。
 		sai_id_button_next_image.addEventListener('click', function(e){
 			let type = parseInt(sai_pic_type);
 			type = (type + 1) % (NUM_TYPE + 1);
@@ -1941,18 +2100,21 @@ document.addEventListener('DOMContentLoaded', function(){
 			}
 		});
 
+		// 「催眠開始」ボタン。
 		sai_id_button_start_hypnosis.addEventListener('click', function(e){
 			sai_id_control_panel.classList.add('sai_class_invisible');
 			sai_stopping = false;
 			if(sai_id_checkbox_count_down.checked)
 				sai_count_down = new Date().getTime();
 		});
+		// 「催眠解除」ボタン。
 		sai_id_button_release_hypnosis.addEventListener('click', function(e){
 			SAI_pic_set_type(-1);
 			sai_id_control_panel.classList.add('sai_class_invisible');
 			sai_stopping = false;
 		});
 
+		// 「音声再生」ボタン。
 		sai_id_button_sound.addEventListener('click', function(){
 			if(sai_pic_type == -1){
 				let releasing_sound = null;
@@ -1971,10 +2133,12 @@ document.addEventListener('DOMContentLoaded', function(){
 			}
 		});
 
+		// 「設定」ボタン。
 		sai_id_button_config.addEventListener('click', function(){
 			SAI_config();
 		});
 
+		// 映像選択。
 		sai_id_select_pic_type.addEventListener('change', function(){
 			if(!sai_ready)
 				return;
@@ -1986,40 +2150,47 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_pic_set_type(parseInt(sai_id_select_pic_type.value));
 		}, false);
 
+		// 言語選択。
 		sai_id_select_language_1.addEventListener('change', function(){
 			if(!sai_ready)
 				return;
 			SAI_set_language(sai_id_select_language_1.value);
 		}, false);
 
+		// 「私は合意します」ボタン。
 		sai_id_button_agree.addEventListener('click', function(e){
 			localStorage.removeItem('saiminHelpShowing');
 			SAI_choose_page(sai_id_page_main);
 			sai_first_time = false;
 		});
 
+		// メッセージサイズ選択。
 		sai_id_select_message_size.addEventListener('input', function(){
 			if(!sai_ready)
 				return;
 			SAI_message_set_size(sai_id_select_message_size.value, true);
 		}, false);
 
-		screen_brightness.addEventListener('change', function(){
+		// 画面の明るさ選択。
+		sai_id_select_brightness.addEventListener('change', function(){
 			if(!sai_ready)
 				return;
-			SAI_screen_set_brightness(screen_brightness.value, true);
+			SAI_screen_set_brightness(sai_id_select_brightness.value, true);
 		}, false);
 
-		sound_select.addEventListener('change', function(){
+		// 音声選択。
+		sai_id_select_sound.addEventListener('change', function(){
 			if(!sai_ready)
 				return;
-			SAI_sound_set_name(sound_select.value);
+			SAI_sound_set_name(sai_id_select_sound.value);
 		}, false);
-		sound_select.addEventListener('click', function(){
+		sai_id_select_sound.addEventListener('click', function(){
 			if(!sai_ready)
 				return;
-			SAI_sound_set_name(sound_select.value);
+			SAI_sound_set_name(sai_id_select_sound.value);
 		}, false);
+
+		// 音声再生ボタン。
 		sai_id_button_sound_play.addEventListener('click', function(){
 			if(!sai_ready)
 				return;
@@ -2029,6 +2200,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			}
 		}, false);
 
+		// 映像切り替えの音声の有無に関するボタン。
 		sai_id_checkbox_pic_change_sound.addEventListener('change', function(){
 			if(!sai_ready)
 				return;
@@ -2040,6 +2212,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_set_type_sound(sai_id_checkbox_pic_change_sound.checked, true);
 		}, false);
 
+		// 画面分割のチェックボックス。
 		sai_id_checkbox_split.addEventListener('change', function(){
 			if(!sai_ready)
 				return;
@@ -2051,6 +2224,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_screen_set_split(sai_id_checkbox_split.checked ? 2 : 1);
 		}, false);
 
+		// カウントダウンの有無選択。
 		sai_id_checkbox_count_down.addEventListener('change', function(e){
 			if(!sai_ready)
 				return;
@@ -2062,69 +2236,51 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_set_count_down(sai_id_checkbox_count_down.checked);
 		}, false);
 
+		// 映像スピードの選択。
 		sai_id_range_speed_type.addEventListener('input', function(){
 			if(!sai_ready)
 				return;
 			SAI_speed_set_type(sai_id_range_speed_type.value);
 		}, false);
 
-		speed_irregular.addEventListener('change', function(){
+		// 映像スピードの「不規則」チェックボックス。
+		sai_id_checkbox_speed_irregular.addEventListener('change', function(){
 			if(!sai_ready)
 				return;
-			if(speed_irregular.checked){
+			if(sai_id_checkbox_speed_irregular.checked){
 				SAI_speed_set_type('irregular');
 			}else{
 				SAI_speed_set_type('normal');
 			}
 		}, false);
 
+		// 「回転の向き」チェックボックス。
 		sai_id_checkbox_rotation.addEventListener('change', function(){
 			if(!sai_ready)
 				return;
 			SAI_rotation_set(sai_id_checkbox_rotation.checked);
 		}, false);
 
+		// 「画面点滅」の種類選択。
 		sai_id_range_blink_type.addEventListener('input', function(){
 			if(!sai_ready)
 				return;
 			SAI_blink_set_type(sai_id_range_blink_type.value);
 		}, false);
 
-		function SAI_canvas_click(e){
-			if(!sai_ready)
-				return;
-			if(0){
-				if(e.shiftKey){
-					SAI_pic_set_type((sai_pic_type + (NUM_TYPE + 1) - 1) % (NUM_TYPE + 1));
-				}else{
-					SAI_pic_set_type((sai_pic_type + 1) % (NUM_TYPE + 1));
-				}
-				sai_id_select_pic_type.value = sai_pic_type.toString();
-				if(sai_kirakira_sound_type == 1 && sai_kirakira_sound_object && sai_id_checkbox_pic_change_sound.checked){
-					let kirakira = new Audio('sn/kirakira.mp3');
-					kirakira.play();
-				}
-			}
-			if(sai_id_control_panel.classList.contains('sai_class_invisible')){
-				if(sai_pic_type == -1)
-					SAI_pic_set_type(0);
-				sai_id_control_panel.classList.remove('sai_class_invisible');
-				sai_count_down = null;
-				sai_stopping = true;
-				sai_counter = 0;
-			}
-		}
-
+		// キャンバスのクリック。
 		sai_id_canvas_01.addEventListener('click', function(e){
 			SAI_canvas_click(e);
 		}, false);
 
+		// キャンバスでマウス移動。
 		sai_id_canvas_01.addEventListener('mousemove', function(e){
 			if(!sai_ready)
 				return;
 			SAI_star_add(e.clientX, e.clientY);
 		}, false);
 
+		// キャンバスでタッチ操作。きらめきを表示。
 		sai_id_canvas_01.addEventListener('touchstart', function(e){
 			if(!sai_ready)
 				return;
@@ -2151,6 +2307,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			sai_touchmoving = false;
 		}, {passive: true});
 
+		// キャンバスでマウスホイール回転。
 		sai_id_canvas_01.addEventListener('wheel', function(e){
 			e.preventDefault();
 			if(!sai_ready)
@@ -2170,36 +2327,30 @@ document.addEventListener('DOMContentLoaded', function(){
 			}
 		}, { passive: false });
 
-		let saiminAdultCheck3 = localStorage.getItem('saiminAdultCheck3');
-		let saiminLanguage3 = localStorage.getItem('saiminLanguage3');
-		if(saiminAdultCheck3 && saiminLanguage3){
-			SAI_set_language(saiminLanguage3);
-			SAI_accepted();
-		}else{
-			if(!saiminLanguage3){
-				SAI_choose_page(sai_id_page_choose_langauge);
-				sai_id_button_choose_language.addEventListener('click', function(e){
-					SAI_set_language(sai_id_select_language_2.value);
-					SAI_choose_page(sai_id_page_main);
-					if(sai_first_time){
-						SAI_help();
-					}
-				});
-				SAI_language_choose();
-			}else{
-				SAI_set_language(saiminLanguage3);
-				if(!saiminAdultCheck3){
-					SAI_choose_page(sai_id_page_main);
-					SAI_help();
-				}
-			}
-		}
-
+		// スピーチをクリック。
 		sai_id_checkbox_speech.addEventListener('click', function(e){
 			console.log('sai_id_checkbox_speech');
 			sai_id_button_message.click();
 		});
 
+		// ウィンドウのサイズ変更や画面の回転を検出する。
+		window.addEventListener('resize', function(){
+			if(location.hostname == '' || SAI_is_native_app()){
+				if(localStorage.getItem('saiminHelpShowing')){ // ヘルプが表示中なら
+					// 映像の種類をローカルストレージに記憶して、再読み込み。
+					localStorage.setItem('saiminType', sai_pic_type);
+					location.reload();
+				}else{
+					SAI_screen_fit();
+				}
+			}else{
+				// 映像の種類をローカルストレージに記憶して、再読み込み。
+				localStorage.setItem('saiminType', sai_pic_type);
+				location.reload();
+			}
+		}, false);
+
+		// マイクボタンの実装。
 		let mic_isInited = false;
 		sai_id_checkbox_mic.addEventListener('click', function(e){
 			if(sai_id_checkbox_mic.checked){
@@ -2215,57 +2366,18 @@ document.addEventListener('DOMContentLoaded', function(){
 			}
 		});
 
-		// make kirakira sound quickly playable
-		sai_kirakira_sound_object = new Audio('sn/kirakira.mp3');
-
-		if(localStorage.getItem('saiminHelpShowing')){
-			SAI_help();
-		}else if(localStorage.getItem('saiminConfigShowing')){
-			SAI_config();
-		}
-
-		// service worker
-		if(location.host != '' && 'serviceWorker' in navigator){
-			navigator.serviceWorker.register('./sw.js', {scope: './'})
-			.then((registration) => {
-				sai_service_worker_registration = registration;
-				console.log('Service worker registered');
-			});
-		}
-
-		window.addEventListener('resize', function(){
-			if(location.hostname == '' || SAI_is_native_app()){
-				if(localStorage.getItem('saiminHelpShowing')){
-					localStorage.setItem('saiminType', sai_pic_type);
-					location.reload();
-				}else{
-					SAI_screen_fit();
-				}
-			}else{
-				localStorage.setItem('saiminType', sai_pic_type);
-				location.reload();
+		// 言語選択のOKボタン。
+		sai_id_button_choose_language.addEventListener('click', function(e){
+			SAI_set_language(sai_id_select_language_2.value);
+			SAI_choose_page(sai_id_page_main);
+			if(sai_first_time){
+				SAI_help_and_agreement();
 			}
-		}, false);
+		});
+	}
 
-		if(localStorage.getItem('SaiminAndroidMicrophoneOnReload')){
-			localStorage.removeItem('SaiminAndroidMicrophoneOnReload');
-			mic_connect();
-			sai_id_label_mic.classList.add('sai_class_checked');
-		}
-
-		function SAI_show_buttons(enabled){
-			if(enabled){
-				sai_id_control_panel.classList.remove('sai_class_invisible');
-			}else{
-				sai_id_control_panel.classList.add('sai_class_invisible');
-			}
-			try{
-				android.showNaviBar(enabled);
-			}catch(error){
-				;
-			}
-		}
-
+	// キーボード操作を実装。
+	function SAI_register_key_bindings(){
 		document.body.addEventListener('keydown', function(e){
 			if(!sai_ready || e.ctrlKey)
 				return;
@@ -2379,5 +2491,92 @@ document.addEventListener('DOMContentLoaded', function(){
 		});
 	}
 
+	// ボタン群を表示または非表示する。
+	function SAI_show_buttons(enabled){
+		if(enabled){
+			sai_id_control_panel.classList.remove('sai_class_invisible');
+		}else{
+			sai_id_control_panel.classList.add('sai_class_invisible');
+		}
+		try{
+			android.showNaviBar(enabled);
+		}catch(error){
+			;
+		}
+	}
+
+	// メイン関数。
+	function SAI_main(){
+		const argc = arguments.length, argv = arguments;
+
+		// スピーチをキャンセルする。
+		SAI_speech_cancel();
+
+		// キャンバスを画面にフィットさせる。
+		SAI_screen_fit_canvas();
+
+		// 五円玉を読み込む。
+		sai_coin_img.src = 'images/coin5yen.png';
+
+		// 映像切り替え音声を読み込む。
+		sai_kirakira_sound_object = new Audio('sn/kirakira.mp3');
+
+		// 設定をローカルストレージから読み込む。
+		SAI_load_local_storage();
+
+		// イベントリスナー群を登録する。
+		SAI_register_event_listeners();
+
+		// ローカルストレージに応じて処理を行う。
+		let saiminAdultCheck3 = localStorage.getItem('saiminAdultCheck3');
+		let saiminLanguage3 = localStorage.getItem('saiminLanguage3');
+		if(saiminAdultCheck3 && saiminLanguage3){ // すでにアダルトチェックが完了しているか？
+			// 言語をセット。
+			SAI_set_language(saiminLanguage3);
+
+			// ユーザを受け入れる。
+			SAI_user_accepted();
+		}else if(!saiminLanguage3){ // まだ言語選択が出来ていない？
+			// 言語選択ページに飛ばす。
+			SAI_choose_page(sai_id_page_choose_langauge);
+
+			// 言語の自動選択。
+			SAI_language_choose();
+		}else{ // 合意が必要。
+			// 言語をセット。
+			SAI_set_language(saiminLanguage3);
+
+			// 合意ページに移動。
+			SAI_help_and_agreement();
+		}
+
+		// 前回の画面状態を復元する。
+		if(localStorage.getItem('saiminHelpShowing')){
+			SAI_help_and_agreement();
+		}else if(localStorage.getItem('saiminConfigShowing')){
+			SAI_config();
+		}
+
+		// service worker
+		if(location.host != '' && 'serviceWorker' in navigator){
+			navigator.serviceWorker.register('./sw.js', {scope: './'})
+			.then((registration) => {
+				sai_service_worker_registration = registration;
+				console.log('Service worker registered');
+			});
+		}
+
+		// マイクロホン用の再読み込みなら、マイクを有効にする。
+		if(localStorage.getItem('SaiminAndroidMicrophoneOnReload')){
+			localStorage.removeItem('SaiminAndroidMicrophoneOnReload');
+			mic_connect();
+			sai_id_label_mic.classList.add('sai_class_checked');
+		}
+
+		// キーボード操作を実装。
+		SAI_register_key_bindings();
+	}
+
+	// メイン関数を呼び出す。
 	SAI_main();
 });
