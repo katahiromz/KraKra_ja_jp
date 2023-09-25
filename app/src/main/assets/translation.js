@@ -751,6 +751,19 @@ function trans_setSelectOptionText(id, value, text){
 	}
 }
 
+function trans_getSelectOptionText(id, value){
+	if(typeof(id) == 'string')
+		id = document.getElementById(id);
+	value = value.toString();
+	let options = id.options;
+	for(let i = 0; i < options.length; ++i){
+		if(options[i].value == value){
+			return options[i].text;
+		}
+	}
+	return "";
+}
+
 function trans_setImageSrc(id, src){
 	if(typeof(id) == 'string')
 		id = document.getElementById(id);
@@ -859,6 +872,9 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_page_config_header_1, '設定');
 		trans_setHtmlText(sai_id_text_label_message_text, 'メッセージ テキスト:');
 		trans_setHtmlText(sai_id_button_message, 'メッセージ...');
+		trans_setHtmlText(sai_id_button_start_hypnosis, '催眠開始...');
+		trans_setHtmlText(sai_id_button_release_hypnosis, '催眠解除');
+		trans_setHtmlText(sai_id_text_count_down, 'カウントダウン:');
 	}else if(lang == 'zh-CN' || lang == 'cn'){ // Chinese (Simplified)
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_ZW_CN);
 		trans_setImageSrc(sai_id_img_mic, 'images/mic.png');
@@ -919,6 +935,9 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_page_config_header_1, '配置');
 		trans_setHtmlText(sai_id_text_label_message_text, '留言内容：');
 		trans_setHtmlText(sai_id_button_message, '信息...');
+		trans_setHtmlText(sai_id_button_start_hypnosis, '开始催眠...');
+		trans_setHtmlText(sai_id_button_release_hypnosis, '释放催眠');
+		trans_setHtmlText(sai_id_text_count_down, '倒数：');
 	}else if(lang == 'zh-TW'){ // Chinese (Traditional)
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_TW_CN);
 		trans_setImageSrc(sai_id_img_mic, 'images/mic.png');
@@ -979,6 +998,9 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_page_config_header_1, '配置');
 		trans_setHtmlText(sai_id_text_label_message_text, '留言內容：');
 		trans_setHtmlText(sai_id_button_message, '訊息...');
+		trans_setHtmlText(sai_id_button_start_hypnosis, '開始催眠...');
+		trans_setHtmlText(sai_id_button_release_hypnosis, '釋放催眠');
+		trans_setHtmlText(sai_id_text_count_down, '倒數：');
 	}else if(lang == 'kr' || lang == 'ko' || lang == 'ko-KR'){ // Korean
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_KO_KR);
 		trans_setImageSrc(sai_id_img_mic, 'images/mic.png');
@@ -1039,6 +1061,9 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_page_config_header_1, '구성');
 		trans_setHtmlText(sai_id_text_label_message_text, '메시지 텍스트:');
 		trans_setHtmlText(sai_id_button_message, '메시지...');
+		trans_setHtmlText(sai_id_button_start_hypnosis, '최면 시작...');
+		trans_setHtmlText(sai_id_button_release_hypnosis, '최면 해제');
+		trans_setHtmlText(sai_id_text_count_down, '카운트다운:');
 	}else if(lang == 'it' || lang == 'it-IT'){ // Italian
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_IT);
 		trans_setImageSrc(sai_id_img_mic, 'images/mic.png');
@@ -1099,6 +1124,9 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_page_config_header_1, 'Configurazione');
 		trans_setHtmlText(sai_id_text_label_message_text, 'Messaggio di testo:');
 		trans_setHtmlText(sai_id_button_message, 'Messaggio...');
+		trans_setHtmlText(sai_id_button_start_hypnosis, 'Inizia l\'ipnosi...');
+		trans_setHtmlText(sai_id_button_release_hypnosis, 'Rilascia l\'ipnosi');
+		trans_setHtmlText(sai_id_text_count_down, 'Conto alla rovescia:');
 	}else if(lang == 'de' || lang == 'de-DE'){ // German
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_DE);
 		trans_setImageSrc(sai_id_img_mic, 'images/mic.png');
@@ -1159,6 +1187,9 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_page_config_header_1, 'Aufbau');
 		trans_setHtmlText(sai_id_text_label_message_text, 'Nachrichtentext:');
 		trans_setHtmlText(sai_id_button_message, 'Nachricht...');
+		trans_setHtmlText(sai_id_button_start_hypnosis, 'Beginnen Sie mit der Hypnose...');
+		trans_setHtmlText(sai_id_button_release_hypnosis, 'Hypnose loslassen');
+		trans_setHtmlText(sai_id_text_count_down, 'Countdown:');
 	}else{ // English is default
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_EN);
 		trans_setImageSrc(sai_id_img_mic, 'images/mic.png');
@@ -1219,6 +1250,9 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_page_config_header_1, 'Configuration');
 		trans_setHtmlText(sai_id_text_label_message_text, 'Message Text:');
 		trans_setHtmlText(sai_id_button_message, 'Message...');
+		trans_setHtmlText(sai_id_button_start_hypnosis, 'Start Hypnosis...');
+		trans_setHtmlText(sai_id_button_release_hypnosis, 'Release Hypnosis');
+		trans_setHtmlText(sai_id_text_count_down, 'Count Down:');
 	}
 
 	trans_setHtmlText(sai_id_page_agreement_header_1, trans_getText('TEXT_ABOUT_APP'));

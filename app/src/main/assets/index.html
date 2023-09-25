@@ -29,7 +29,10 @@
 		<!-- Reserved -->
 	</div>
 	<div id="sai_id_page_choose_langauge" class="sai_class_page sai_class_center sai_class_config_page sai_class_invisible">
-		<h1>Choose a language (言語選択)</h1>
+		<h1>Choose a language</h1>
+		<div class="sai_class_ui_line">
+			<h2>言語選択</h2>
+		</div>
 		<div class="sai_class_ui_line">
 			<span>Language (言語):</span><br />
 		</div>
@@ -106,7 +109,7 @@
 			<div class="sai_class_ui_line">
 				<label class="sai_class_toggle_button">
 					<input type="checkbox" id="sai_id_checkbox_pic_change_sound" title="Pic Change Sound" />
-					<span class="slider"></span>
+					<span class="sai_class_slider"></span>
 					<span class="sai_class_toggle_label" data-on="ON" data-off="OFF"></span>
 				</label>
 			</div>
@@ -120,24 +123,26 @@
 					<option value="brighter">Brighter</option>
 				</select>
 			</div>
-			<hr />
-			<div class="sai_class_ui_line">
-				<span id="sai_id_pic_type" class="sai_config_label">The type of picture:</span>
-			</div>
-			<div class="sai_class_ui_line">
-				<select id="sai_id_select_pic_type" title="sai_id_select_pic_type">
-					<option value="-1">pic-1</option>
-					<option value="0" selected>pic0</option>
-					<option value="1">pic1</option>
-					<option value="2">pic2</option>
-					<option value="3">pic3</option>
-					<option value="4">pic4</option>
-					<option value="5">pic5</option>
-					<option value="6">pic6</option>
-					<option value="7">pic7</option>
-					<option value="8">pic8</option>
-					<option value="9">pic9</option>
-				</select>
+			<div class="sai_class_invisible">
+				<hr />
+				<div class="sai_class_ui_line">
+					<span id="sai_id_pic_type" class="sai_config_label">The type of picture:</span>
+				</div>
+				<div class="sai_class_ui_line">
+					<select id="sai_id_select_pic_type" title="sai_id_select_pic_type">
+						<option value="-1">pic-1</option>
+						<option value="0" selected>pic0</option>
+						<option value="1">pic1</option>
+						<option value="2">pic2</option>
+						<option value="3">pic3</option>
+						<option value="4">pic4</option>
+						<option value="5">pic5</option>
+						<option value="6">pic6</option>
+						<option value="7">pic7</option>
+						<option value="8">pic8</option>
+						<option value="9">pic9</option>
+					</select>
+				</div>
 			</div>
 			<hr />
 			<div class="sai_class_ui_line">
@@ -146,7 +151,18 @@
 			<div class="sai_class_ui_line">
 				<label class="sai_class_toggle_button" title="Splitting">
 					<input type="checkbox" id="sai_id_checkbox_split" />
-					<span class="slider"></span>
+					<span class="sai_class_slider"></span>
+					<span class="sai_class_toggle_label" data-on="ON" data-off="OFF"></span>
+				</label>
+			</div>
+			<hr />
+			<div class="sai_class_ui_line">
+				<span id="sai_id_text_count_down" class="sai_config_label">Count Down:</span>
+			</div>
+			<div class="sai_class_ui_line">
+				<label class="sai_class_toggle_button" title="Count Down">
+					<input type="checkbox" id="sai_id_checkbox_count_down" checked />
+					<span class="sai_class_slider"></span>
 					<span class="sai_class_toggle_label" data-on="ON" data-off="OFF"></span>
 				</label>
 			</div>
@@ -171,7 +187,7 @@
 			<div class="sai_class_ui_line">
 				<label class="sai_class_toggle_button">
 					<input type="checkbox" id="sai_id_checkbox_rotation" title="Rotation" />
-					<span class="slider"></span>
+					<span class="sai_class_slider"></span>
 					<span class="sai_class_toggle_label" data-on="ON" data-off="OFF"></span>
 				</label>
 			</div>
@@ -211,37 +227,58 @@
 	</div>
 	<div id="sai_id_page_main" class="sai_class_page sai_class_invisible">
 		<!-- The canvas #1 -->
-		<canvas id="sai_id_canvas_01" class="sai_class_canvas"></canvas>
+		<canvas id="sai_id_canvas_01" class="sai_class_canvas">
+		</canvas>
 		<!-- The canvas #2 -->
 		<canvas id="sai_id_canvas_02" class="sai_class_canvas sai_class_invisible"></canvas>
+		<div id="sai_id_control_panel" class="">
+			<!-- The "configuration" button -->
+			<button type="button" id="sai_id_button_config" class="sai_class_rounded_button">
+				<img id="sai_id_img_gear" src="images/gear.png" alt="cfg" />
+			</button>
+
+			<!-- The help button -->
+			<button type="button" id="sai_id_button_about" class="sai_class_rounded_button">
+				<img id="sai_id_img_question" src="images/question.png" alt="?" />
+			</button>
+
+			<!-- The previous image button -->
+			<button type="button" id="sai_id_button_previous_image" class="">
+				&lt;
+			</button>
+
+			<!-- The next image button -->
+			<button type="button" id="sai_id_button_next_image" class="">
+				&gt;
+			</button>
+
+			<!-- The start hypnosis button -->
+			<button type="button" id="sai_id_button_start_hypnosis" class="">
+				Start hypnosis...
+			</button>
+
+			<!-- The release hypnosis button -->
+			<button type="button" id="sai_id_button_release_hypnosis" class="">
+				Release hypnosis...
+			</button>
+		</div>
 
 		<!-- The "microphone" button -->
-		<label for="sai_id_checkbox_mic" id="sai_id_label_mic" class="sai_class_invisible sai_class_navi_button">
+		<label for="sai_id_checkbox_mic" id="sai_id_label_mic" class="sai_class_navi_button">
 			<input type="checkbox" id="sai_id_checkbox_mic" class="sai_class_invisible" />
 			<img id="sai_id_img_mic" src="images/mic.png" alt="mic" />
 		</label>
 
 		<!-- The "note" button -->
-		<button type="button" id="sai_id_button_sound" class="sai_class_invisible sai_class_navi_button">
+		<button type="button" id="sai_id_button_sound" class="sai_class_navi_button">
 			<img id="sai_id_img_sound" src="images/sound.png" alt="play!" />
 		</button>
 
 		<!-- The "speech" button -->
-		<label for="sai_id_checkbox_speech" id="sai_id_label_speech" class="sai_class_invisible sai_class_navi_button">
+		<label for="sai_id_checkbox_speech" id="sai_id_label_speech" class="sai_class_navi_button">
 			<input type="checkbox" id="sai_id_checkbox_speech" class="sai_class_invisible" />
 			<img id="sai_id_img_speech" src="images/speak.png" alt="spch" />
 		</label>
-
-		<!-- The "configuration" button -->
-		<button type="button" id="sai_id_button_config" class="sai_class_invisible sai_class_rounded_button">
-			<img id="sai_id_img_gear" src="images/gear.png" alt="cfg" />
-		</button>
-
-		<!-- The help button -->
-		<button type="button" id="sai_id_button_about" class="sai_class_invisible sai_class_rounded_button">
-			<img id="sai_id_img_question" src="images/question.png" alt="?" />
-		</button>
-
 		<!-- The floating texts -->
 		<div id="sai_id_text_floating_1" class="sai_class_invisible sai_class_floating_text sai_class_text_message sai_class_font_size_normal"></div>
 		<div id="sai_id_text_floating_2" class="sai_class_invisible sai_class_floating_text sai_class_text_message sai_class_font_size_normal"></div>

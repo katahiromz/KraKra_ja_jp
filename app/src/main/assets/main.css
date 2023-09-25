@@ -113,7 +113,7 @@ label {
 	background-color: #333;
 	height: 3rem;
 	font-weight: bold;
-	padding: 0.4rem 2rem 0.4rem 2rem;
+	padding: 0.4rem 1.8rem 0.4rem 1.8rem;
 	vertical-align: middle;
 }
 #sai_id_button_sound_play {
@@ -156,6 +156,44 @@ label {
 	position: absolute;
 	right: 3px;
 	top: 3px;
+}
+#sai_id_button_previous_image {
+	position: absolute;
+	left: 1rem;
+	top: calc(50dvh - 2.5rem / 2);
+	width: 2.5rem;
+	height: 2.5rem;
+	background-color: rgba(50%, 50%, 50%, 80%);
+	font-size: 1.5rem;
+}
+#sai_id_button_next_image {
+	position: absolute;
+	right: 1rem;
+	top: calc(50dvh - 2.5rem / 2);
+	width: 2.5rem;
+	height: 2.5rem;
+	background-color: rgba(50%, 50%, 50%, 80%);
+	font-size: 1.5rem;
+}
+#sai_id_button_start_hypnosis {
+	position: absolute;
+	width: 8rem;
+	height: 5rem;
+	left: calc(50dvw - 8rem / 2);
+	top: calc(50dvh - 5rem / 2);
+	background-color: rgba(100%, 50%, 100%, 100%);
+	font-size: 1rem;
+	font-weight: bold;
+}
+#sai_id_button_release_hypnosis {
+	position: absolute;
+	width: 8rem;
+	height: 5rem;
+	left: calc(50dvw - 8rem / 2);
+	top: calc(70dvh - 5rem / 2);
+	background-color: rgba(100%, 50%, 100%, 100%);
+	font-size: 1rem;
+	font-weight: bold;
 }
 .sai_class_invisible {
 	display: none;
@@ -205,7 +243,7 @@ label {
 }
 .sai_config_label {
 	font-weight: bold;
-	font-size: 1.75rem;
+	font-size: 1.5rem;
 }
 #sai_id_text_notice {
 	font-size: 9pt;
@@ -214,7 +252,10 @@ label {
 	background-color: #fcf;
 	color: black;
 }
-
+#sai_id_control_panel {
+	width: 100dvw;
+	height: 100dvh;
+}
 /* https://www.tutorialstonight.com/css-toggle-switch-with-text */
 /* BEGIN toggle switch */
 .sai_class_toggle_button {
@@ -232,7 +273,7 @@ label {
 .sai_class_toggle_button input {
     display: none;
 }
-.sai_class_toggle_button .slider {
+.sai_class_toggle_button .sai_class_slider {
     position: absolute;
     top: 0;
     left: 0;
@@ -242,7 +283,7 @@ label {
     background-color: #ccc;
     transition: all 0.4s ease-in-out;
 }
-.sai_class_toggle_button .slider::before {
+.sai_class_toggle_button .sai_class_slider::before {
     content: '';
     position: absolute;
     top: 0;
@@ -254,10 +295,10 @@ label {
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
     transition: all 0.4s ease-in-out;
 }
-.sai_class_toggle_button input:checked + .slider {
+.sai_class_toggle_button input:checked + .sai_class_slider {
     background-color: #2196F3;
 }
-.sai_class_toggle_button input:checked + .slider::before {
+.sai_class_toggle_button input:checked + .sai_class_slider::before {
     transform: translateX(calc(var(--width) - var(--height)));
 }
 .sai_class_toggle_button .sai_class_toggle_label {

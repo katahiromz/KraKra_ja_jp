@@ -22,7 +22,7 @@ let sai_touchmoving = false;
 let sai_registration = null;
 let sai_coin_img = new Image();
 let sai_rotation_type = 'normal';
-let sai_stopping = false;
+let sai_stopping = true;
 let sai_released = false;
 let sai_logo_img = new Image();
 let sai_tap_here_img = new Image();
@@ -33,6 +33,7 @@ let sai_pic_type = 0;
 let sai_blinking_interval = 0;
 let sai_first_time = false;
 let sai_request_anime = null;
+let sai_count_down = null;
 
 function AndroidMicrophoneOnReload(){
 	localStorage.setItem('AndroidMicrophoneOnReload', '1');
@@ -403,6 +404,26 @@ document.addEventListener('DOMContentLoaded', function(){
 		localStorage.setItem('saiminDivision', sai_division.toString());
 	}
 
+	function SAI_set_count_down(value){
+		switch(value){
+		case "true":
+		case true:
+		case "1":
+			value = 1;
+			break;
+		case "false":
+		case false:
+		case "0":
+			value = 0;
+			break;
+		}
+		if(value)
+			sai_id_checkbox_count_down.checked = true;
+		else
+			sai_id_checkbox_count_down.checked = false;
+		localStorage.setItem('saiminCountDown', value.toString());
+	}
+
 	function SAI_get_tick_count(){
 		return sai_counter;
 	}
@@ -520,7 +541,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_update_version_display();
 		if(!sai_ready){
 			let theType = localStorage.getItem('saiminType');
-			if(theType){
+			if(theType && theType != -1){
 				SAI_pic_set_type(theType);
 			}else{
 				SAI_pic_set_type(0);
@@ -546,6 +567,11 @@ document.addEventListener('DOMContentLoaded', function(){
 			sai_id_text_notice.scrollLeft = sai_id_text_notice.scrollTop = 0;
 		}, 200);
 		localStorage.setItem('saiminHelpShowing', '1');
+		if(sai_first_time){
+			trans_setHtmlText(sai_id_button_agree, trans_getText('TEXT_I_AGREE'));
+		}else{
+			trans_setHtmlText(sai_id_button_agree, trans_getText('TEXT_OK'));
+		}
 		SAI_choose_page(sai_id_page_agreement);
 	}
 
@@ -794,11 +820,11 @@ document.addEventListener('DOMContentLoaded', function(){
 				height *= 0.75;
 			}
 			let x = px + (dx - width) / 2;
-			let y = py + (dy - height) / 2 - dy * 0.1;
+			let y = py + (dy - height) * 0.4 - dy * 0.1;
 			ctx.drawImage(sai_logo_img, x, y, width, height);
 		}
 
-		if(sai_tap_here_img.complete){
+		if(!sai_stopping && sai_tap_here_img.complete){
 			let x = qx - sai_tap_here_img.width / 2;
 			let y = py + dy * 0.7;
 			ctx.drawImage(sai_tap_here_img, x, y);
@@ -1462,7 +1488,61 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore();
 	}
 
+	function SAI_draw_pic_count_down(ctx, px, py, dx, dy){
+		ctx.save();
+
+		SAI_fit_canvas();
+
+		let qx = px + dx / 2;
+		let qy = py + dy / 2;
+		let dxy = (dx + dy) / 2;
+
+		ctx.beginPath();
+		ctx.moveTo(px, py);
+		ctx.lineTo(px + dx, py);
+		ctx.lineTo(px + dx, py + dy);
+		ctx.lineTo(px, py + dy);
+		ctx.closePath();
+		ctx.clip();
+
+		ctx.fillStyle = '#000';
+		ctx.fillRect(px, py, dx, dy);
+
+		if(sai_count_down){
+			let new_time = (new Date()).getTime();
+			let diff_time = (new_time - sai_count_down) / 1000.0;
+			if (diff_time >= 3){
+				sai_count_down = null;
+			}else{
+				let value = Math.floor(diff_time);
+				let text = (3 - value).toString();
+
+				let cxy = Math.min(dx, dy) * 0.8;
+				ctx.font = `${cxy}px san-serif`;
+
+				ctx.textAlign = 'center';
+				ctx.textBaseline = 'middle';
+
+				ctx.fillStyle = "white";
+				ctx.fillText(text, px + dx / 2, py + dy / 2);
+
+				let radian = (diff_time % 1) * Math.PI * 2;
+				ctx.beginPath();
+				ctx.arc(px + dx / 2, py + dy / 2, cxy * 0.5, -Math.PI / 2, radian);
+				ctx.strokeStyle = "white";
+				ctx.lineWidth = 8;
+				ctx.stroke();
+			}
+		}
+
+		ctx.restore();
+	}
+
 	function SAI_draw_pic(ctx, px, py, dx, dy){
+		if(sai_count_down){
+			SAI_draw_pic_count_down(ctx, px, py, dx, dy);
+			return;
+		}
 		switch (sai_pic_type){
 		case -1:
 			SAI_draw_pic_minus_1(ctx, px, py, dx, dy);
@@ -1651,6 +1731,38 @@ document.addEventListener('DOMContentLoaded', function(){
 			ctx.fillText(text, (sai_screen_width - width) / 2, height);
 		}
 
+		if(sai_stopping){
+			let text = trans_getSelectOptionText(sai_id_select_pic_type, sai_id_select_pic_type.value);
+			// {{LANGUAGE_SPECIFIC}}
+			switch (sai_id_select_language_1.value){
+			case 'en':
+			case 'de':
+			case 'it':
+				ctx.font = '14px san-serif';
+				break;
+			case 'zh-CN':
+			case 'zh-TW':
+				ctx.font = '21px san-serif';
+				break;
+			case 'ja':
+			case 'ko-KR':
+				ctx.font = '23px san-serif';
+				break;
+			}
+			ctx.textAlign = 'center';
+			ctx.textBaseline = 'middle';
+			ctx.fillStyle = "white";
+			let x = sai_screen_width / 2, y = sai_screen_height * 0.2;
+			ctx.fillText(text, x - 1, y - 1);
+			ctx.fillText(text, x + 1, y + 1);
+			ctx.fillText(text, x - 2, y);
+			ctx.fillText(text, x + 2, y);
+			ctx.fillText(text, x, y - 2);
+			ctx.fillText(text, x, y + 2);
+			ctx.fillStyle = "black";
+			ctx.fillText(text, x, y);
+		}
+
 		if(sai_request_anime){
 			sai_request_anime = window.requestAnimationFrame(SAI_draw_all);
 		}
@@ -1670,6 +1782,11 @@ document.addEventListener('DOMContentLoaded', function(){
 		let saiminDivision = localStorage.getItem('saiminDivision');
 		if(saiminDivision){
 			SAI_screen_set_division(saiminDivision);
+		}
+
+		let saiminCountDown = localStorage.getItem('saiminCountDown');
+		if(saiminCountDown){
+			SAI_set_count_down(saiminCountDown);
 		}
 
 		let saiminSoundName = localStorage.getItem('saiminSoundName');
@@ -1737,6 +1854,37 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_choose_page(sai_id_page_main);
 		});
 
+		sai_id_button_previous_image.addEventListener('click', function(e){
+			let type = parseInt(sai_pic_type);
+			type = (type + NUM_TYPE) % (NUM_TYPE + 1);
+			SAI_pic_set_type(type);
+			if(sai_type_sound == 1 && sai_kirakira_sound && sai_id_checkbox_pic_change_sound.checked){
+				let kirakira = new Audio('sn/kirakira.mp3');
+				kirakira.play();
+			}
+		});
+		sai_id_button_next_image.addEventListener('click', function(e){
+			let type = parseInt(sai_pic_type);
+			type = (type + 1) % (NUM_TYPE + 1);
+			SAI_pic_set_type(type);
+			if(sai_type_sound == 1 && sai_kirakira_sound && sai_id_checkbox_pic_change_sound.checked){
+				let kirakira = new Audio('sn/kirakira.mp3');
+				kirakira.play();
+			}
+		});
+
+		sai_id_button_start_hypnosis.addEventListener('click', function(e){
+			sai_id_control_panel.classList.add('sai_class_invisible');
+			sai_stopping = false;
+			if(sai_id_checkbox_count_down.checked)
+				sai_count_down = new Date().getTime();
+		});
+		sai_id_button_release_hypnosis.addEventListener('click', function(e){
+			SAI_pic_set_type(-1);
+			sai_id_control_panel.classList.add('sai_class_invisible');
+			sai_stopping = false;
+		});
+
 		sai_id_button_sound.addEventListener('click', function(){
 			if(sai_pic_type == -1){
 				let releasing_sound = null;
@@ -1779,6 +1927,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_id_button_agree.addEventListener('click', function(e){
 			localStorage.removeItem('saiminHelpShowing');
 			SAI_choose_page(sai_id_page_main);
+			sai_first_time = false;
 		});
 
 		sai_id_select_message_size.addEventListener('input', function(){
@@ -1834,6 +1983,17 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_screen_set_division(sai_id_checkbox_split.checked ? 2 : 1);
 		}, false);
 
+		sai_id_checkbox_count_down.addEventListener('change', function(e){
+			if(!sai_ready)
+				return;
+			SAI_set_count_down(sai_id_checkbox_count_down.checked);
+		}, false);
+		sai_id_checkbox_count_down.addEventListener('click', function(e){
+			if(!sai_ready)
+				return;
+			SAI_set_count_down(sai_id_checkbox_count_down.checked);
+		}, false);
+
 		sai_id_range_speed_type.addEventListener('input', function(){
 			if(!sai_ready)
 				return;
@@ -1865,15 +2025,25 @@ document.addEventListener('DOMContentLoaded', function(){
 		function SAI_canvas_click(e){
 			if(!sai_ready)
 				return;
-			if(e.shiftKey){
-				SAI_pic_set_type((sai_pic_type + (NUM_TYPE + 1) - 1) % (NUM_TYPE + 1));
-			}else{
-				SAI_pic_set_type((sai_pic_type + 1) % (NUM_TYPE + 1));
+			if(0){
+				if(e.shiftKey){
+					SAI_pic_set_type((sai_pic_type + (NUM_TYPE + 1) - 1) % (NUM_TYPE + 1));
+				}else{
+					SAI_pic_set_type((sai_pic_type + 1) % (NUM_TYPE + 1));
+				}
+				sai_id_select_pic_type.value = sai_pic_type.toString();
+				if(sai_type_sound == 1 && sai_kirakira_sound && sai_id_checkbox_pic_change_sound.checked){
+					let kirakira = new Audio('sn/kirakira.mp3');
+					kirakira.play();
+				}
 			}
-			sai_id_select_pic_type.value = sai_pic_type.toString();
-			if(sai_type_sound == 1 && sai_kirakira_sound && sai_id_checkbox_pic_change_sound.checked){
-				let kirakira = new Audio('sn/kirakira.mp3');
-				kirakira.play();
+			if(sai_id_control_panel.classList.contains('sai_class_invisible')){
+				if(sai_pic_type == -1)
+					SAI_pic_set_type(0);
+				sai_id_control_panel.classList.remove('sai_class_invisible');
+				sai_count_down = null;
+				sai_stopping = true;
+				sai_counter = 0;
 			}
 		}
 
@@ -2017,19 +2187,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		function SAI_show_buttons(enabled){
 			if(enabled){
-				sai_id_label_mic.classList.remove('sai_class_invisible');
-				sai_id_button_sound.classList.remove('sai_class_invisible');
-				sai_id_label_speech.classList.remove('sai_class_invisible');
-				sai_id_button_config.classList.remove('sai_class_invisible');
-				sai_id_button_about.classList.remove('sai_class_invisible');
-				sai_id_button_message.classList.remove('sai_class_invisible');
+				sai_id_control_panel.classList.remove('sai_class_invisible');
 			}else{
-				sai_id_label_mic.classList.add('sai_class_invisible');
-				sai_id_button_sound.classList.add('sai_class_invisible');
-				sai_id_label_speech.classList.add('sai_class_invisible');
-				sai_id_button_config.classList.add('sai_class_invisible');
-				sai_id_button_about.classList.add('sai_class_invisible');
-				sai_id_button_message.classList.add('sai_class_invisible');
+				sai_id_control_panel.classList.add('sai_class_invisible');
 			}
 			try{
 				android.showNaviBar(enabled);
