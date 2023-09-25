@@ -6,8 +6,6 @@ let sai_DEBUGGING = false;
 let sai_FPS = 0;
 let sai_screen_width = 0;
 let sai_screen_height = 0;
-let sai_old_screen_width = null;
-let sai_old_screen_height = null;
 let sai_old_time = (new Date()).getTime();
 let sai_counter = 0;
 let sai_clock = 0;
@@ -186,7 +184,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		SAI_blink_set_type(sai_id_range_blink_type.value);
 
-		SAI_message_set_type(sai_id_select_message_size.value, true);
+		SAI_message_set_size(sai_id_select_message_size.value, true);
+		SAI_speed_set_type(localStorage.getItem('saiminSpeedType'));
 
 		try{
 			android.setLanguage(lang);
@@ -284,7 +283,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		localStorage.setItem('saiminScreenBrightness', value);
 	}
 
-	function SAI_message_set_type(value){
+	function SAI_message_set_size(value){
 		sai_id_text_floating_1.classList.remove('sai_class_font_size_small');
 		sai_id_text_floating_1.classList.remove('sai_class_font_size_normal');
 		sai_id_text_floating_1.classList.remove('sai_class_font_size_large');
@@ -481,9 +480,8 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	function SAI_fit_canvas(){
-		let ctx = sai_id_canvas_01.getContext('2d', { alpha: false });
-		sai_screen_width = ctx.canvas.width = window.innerWidth;
-		sai_screen_height = ctx.canvas.height = window.innerHeight;
+		sai_screen_width = sai_id_canvas_01.width = window.innerWidth;
+		sai_screen_height = sai_id_canvas_01.height = window.innerHeight;
 	}
 
 	function SAI_screen_fit(){
@@ -1601,13 +1599,11 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_stars.shift();
 		sai_stars.push(null);
 
-		if(sai_old_screen_width !== null && sai_old_screen_height !== null){
-			if(window.innerWidth != sai_old_screen_width || window.innerHeight != sai_old_screen_height){
-				SAI_screen_fit();
-			}
+		if(window.innerWidth != sai_screen_width || window.innerHeight != sai_screen_height ||
+		   window.innerWidth != sai_id_canvas_01.width || window.innerHeight != sai_id_canvas_01.height)
+		{
+			SAI_screen_fit();
 		}
-		sai_old_screen_width = window.innerWidth;
-		sai_old_screen_height = window.innerHeight;
 
 		let new_time = (new Date()).getTime();
 		let diff_time = (new_time - sai_old_time) / 1000.0;
@@ -1702,9 +1698,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		let saiminMessageSize = localStorage.getItem('saiminMessageSize');
 		if(saiminMessageSize){
-			SAI_message_set_type(saiminMessageSize);
+			SAI_message_set_size(saiminMessageSize);
 		}else{
-			SAI_message_set_type('normal');
+			SAI_message_set_size('normal');
 		}
 
 		let saiminScreenBrightness = localStorage.getItem('saiminScreenBrightness');
@@ -1779,7 +1775,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_id_select_message_size.addEventListener('input', function(){
 			if(!sai_ready)
 				return;
-			SAI_message_set_type(sai_id_select_message_size.value, true);
+			SAI_message_set_size(sai_id_select_message_size.value, true);
 		}, false);
 
 		screen_brightness.addEventListener('change', function(){
