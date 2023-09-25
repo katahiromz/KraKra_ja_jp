@@ -483,6 +483,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	function SAI_fit_canvas(){
+		console.log('SAI_fit_canvas');
 		sai_screen_width = sai_id_canvas_01.width = window.innerWidth;
 		sai_screen_height = sai_id_canvas_01.height = window.innerHeight;
 	}
@@ -787,8 +788,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_circle(ctx, qx, qy, dxy, true);
 
 		if(sai_logo_img.complete){
-			let width = sai_logo_img.width;
-			let height = sai_logo_img.height;
+			let width = sai_logo_img.width, height = sai_logo_img.height;
 			if (width > sai_screen_width){
 				width *= 0.75;
 				height *= 0.75;
