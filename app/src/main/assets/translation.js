@@ -56,8 +56,6 @@ When a keyboard is connected, the following operations are available:
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2018 Robert Eisele
-Copyright (c) 2007-2022 Akshay Nair
-Copyright 2022 OpenJS Foundation and jQuery contributors.`;
 
 // {{LANGUAGE_SPECIFIC}}
 const trans_NOTICE_KO_KR = `=========================
@@ -114,8 +112,6 @@ Hypnosis KraKra
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2018 Robert Eisele
-Copyright (c) 2007-2022 Akshay Nair
-Copyright 2022 OpenJS Foundation and jQuery contributors.`;
 
 // {{LANGUAGE_SPECIFIC}}
 const trans_NOTICE_JA = `=========================
@@ -171,8 +167,6 @@ Hypnosis KraKra
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2018 Robert Eisele
-Copyright (c) 2007-2022 Akshay Nair
-Copyright 2022 OpenJS Foundation and jQuery contributors.`;
 
 // {{LANGUAGE_SPECIFIC}}
 const trans_NOTICE_ZW_CN = `=========================
@@ -228,8 +222,6 @@ Hypnosis KraKra
 Copyright (c) 2022-2023 片山博文MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2018 Robert Eisele
-Copyright (c) 2007-2022 Akshay Nair
-Copyright 2022 OpenJS Foundation and jQuery contributors.`;
 
 // {{LANGUAGE_SPECIFIC}}
 const trans_NOTICE_TW_CN = `=========================
@@ -285,8 +277,6 @@ Hypnosis KraKra
 Copyright (c) 2022-2023 片山博文MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2018 Robert Eisele
-Copyright (c) 2007-2022 Akshay Nair
-Copyright 2022 OpenJS Foundation and jQuery contributors.`;
 
 // {{LANGUAGE_SPECIFIC}}
 const trans_NOTICE_IT = `=========================
@@ -342,8 +332,6 @@ Quando è collegata una tastiera, sono disponibili le seguenti operazioni:
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2018 Robert Eisele
-Copyright (c) 2007-2022 Akshay Nair
-Copyright 2022 OpenJS Foundation and jQuery contributors.`;
 
 // {{LANGUAGE_SPECIFIC}}
 const trans_NOTICE_DE = `=========================
@@ -399,8 +387,6 @@ Wenn eine Tastatur angeschlossen ist, stehen folgende Vorgänge zur Verfügung:
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2018 Robert Eisele
-Copyright (c) 2007-2022 Akshay Nair
-Copyright 2022 OpenJS Foundation and jQuery contributors.`;
 
 // {{LANGUAGE_SPECIFIC}}
 function trans_getText(str_id){
