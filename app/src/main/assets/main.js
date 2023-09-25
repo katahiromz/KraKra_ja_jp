@@ -243,7 +243,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	function SAI_display_is_large(){
-		return sai_screen_width >= 1500 || sai_screen_height >= 1500;
+		return sai_screen_width >= 1200 || sai_screen_height >= 1200;
 	}
 
 	function SAI_sound_set_name(value){
@@ -818,6 +818,14 @@ document.addEventListener('DOMContentLoaded', function(){
 			if (width > sai_screen_width){
 				width *= 0.75;
 				height *= 0.75;
+			}else{
+				if(SAI_display_is_large() &&
+					sai_screen_width * 2 < width &&
+					sai_screen_height * 2 < height)
+				{
+					width *= 2;
+					height *= 2;
+				}
 			}
 			let x = px + (dx - width) / 2;
 			let y = py + (dy - height) * 0.4 - dy * 0.1;
@@ -1491,8 +1499,6 @@ document.addEventListener('DOMContentLoaded', function(){
 	function SAI_draw_pic_count_down(ctx, px, py, dx, dy){
 		ctx.save();
 
-		SAI_fit_canvas();
-
 		let qx = px + dx / 2;
 		let qy = py + dy / 2;
 		let dxy = (dx + dy) / 2;
@@ -1518,7 +1524,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				let text = (3 - value).toString();
 
 				let cxy = Math.min(dx, dy) * 0.8;
-				ctx.font = `${cxy}px san-serif`;
+				ctx.font = `${cxy * 0.6}px san-serif`;
 
 				ctx.textAlign = 'center';
 				ctx.textBaseline = 'middle';
@@ -1733,26 +1739,34 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		if(sai_stopping){
 			let text = trans_getSelectOptionText(sai_id_select_pic_type, sai_id_select_pic_type.value);
+			let text_size;
 			// {{LANGUAGE_SPECIFIC}}
 			switch (sai_id_select_language_1.value){
 			case 'en':
 			case 'de':
 			case 'it':
-				ctx.font = '14px san-serif';
+			default:
+				text_size = 14;
 				break;
 			case 'zh-CN':
 			case 'zh-TW':
-				ctx.font = '21px san-serif';
+				text_size = 21;
 				break;
 			case 'ja':
 			case 'ko-KR':
-				ctx.font = '23px san-serif';
+				text_size = 23;
 				break;
+			}
+			ctx.font = text_size.toString() + 'px san-serif';
+			let measure = ctx.measureText(text);
+			if(measure.width * 2 < sai_screen_width){
+				text_size *= 1.8;
+				ctx.font = text_size.toString() + 'px san-serif';
 			}
 			ctx.textAlign = 'center';
 			ctx.textBaseline = 'middle';
 			ctx.fillStyle = "white";
-			let x = sai_screen_width / 2, y = sai_screen_height * 0.2;
+			let x = sai_screen_width / 2, y = sai_screen_height * 0.15;
 			ctx.fillText(text, x - 1, y - 1);
 			ctx.fillText(text, x + 1, y + 1);
 			ctx.fillText(text, x - 2, y);

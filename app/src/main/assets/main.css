@@ -159,41 +159,55 @@ label {
 }
 #sai_id_button_previous_image {
 	position: absolute;
-	left: 1rem;
+	left: 0.5rem;
 	top: calc(50dvh - 2.5rem / 2);
-	width: 2.5rem;
-	height: 2.5rem;
+	width: 1.5cm;
+	height: 1.5cm;
 	background-color: rgba(50%, 50%, 50%, 80%);
 	font-size: 1.5rem;
 }
 #sai_id_button_next_image {
 	position: absolute;
-	right: 1rem;
+	right: 0.5rem;
 	top: calc(50dvh - 2.5rem / 2);
-	width: 2.5rem;
-	height: 2.5rem;
+	width: 1.5cm;
+	height: 1.5cm;
 	background-color: rgba(50%, 50%, 50%, 80%);
 	font-size: 1.5rem;
 }
 #sai_id_button_start_hypnosis {
 	position: absolute;
-	width: 8rem;
-	height: 5rem;
-	left: calc(50dvw - 8rem / 2);
-	top: calc(50dvh - 5rem / 2);
+	width: 50dvw;
+	height: 15dvh;
+	left: calc(50dvw - 50dvw / 2);
+	top: calc(50dvh - 15dvh / 2);
 	background-color: rgba(100%, 50%, 100%, 100%);
-	font-size: 1rem;
+	font-size: 7vmin;
 	font-weight: bold;
 }
 #sai_id_button_release_hypnosis {
 	position: absolute;
-	width: 8rem;
-	height: 5rem;
-	left: calc(50dvw - 8rem / 2);
-	top: calc(70dvh - 5rem / 2);
+	width: 50dvw;
+	height: 15dvh;
+	left: calc(50dvw - 50dvw / 2);
+	top: calc(70dvh - 15dvh / 2);
 	background-color: rgba(100%, 50%, 100%, 100%);
-	font-size: 1rem;
+	font-size: 7vmin;
 	font-weight: bold;
+}
+@media screen and (max-height: 360px) {
+	#sai_id_button_start_hypnosis {
+		width: 20dvw;
+		height: 20dvh;
+		left: calc(30dvw - 20dvw / 2);
+		top: calc(60dvh - 20dvh / 2);
+	}
+	#sai_id_button_release_hypnosis {
+		width: 20dvw;
+		height: 20dvh;
+		left: calc(70dvw - 20dvw / 2);
+		top: calc(60dvh - 20dvh / 2);
+	}
 }
 .sai_class_invisible {
 	display: none;
