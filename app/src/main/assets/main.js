@@ -1,11 +1,13 @@
 // 催眠アプリ「催眠くらくら」のJavaScriptのメインコード。
 // 暗号名はKraKra。
 
-// 【KraKra命名規則】
+// 【KraKra JavaScript 命名規則】
 // ☆ 関数名の頭に SAI_ を付ける。
 // ☆ 変数名の頭に sai_ を付ける。
 // ☆ 要素IDの頭に sai_id_ を付ける。
 // ☆ CSSクラスの頭に sai_class_ を付ける。
+//
+// 言語特有の記述が必要な個所は「{{LANGUAGE_SPECIFIC}}」というコメントを付けること。
 
 const sai_VERSION = '3.4.4'; // KraKraバージョン番号。
 const sai_DEBUGGING = false; // デバッグ中か？
