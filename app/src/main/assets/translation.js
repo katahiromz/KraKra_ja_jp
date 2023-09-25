@@ -805,7 +805,6 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_brightness, '画面の明るさ:');
 		trans_setSelectOptionText(screen_brightness, 'normal', '普通');
 		trans_setSelectOptionText(screen_brightness, 'brighter', '明るくする');
-		trans_setHtmlText(sai_id_text_version, '催眠くらくら Ver.' + VERSION);
 		trans_setHtmlText(sai_id_page_config_header_1, '設定');
 		trans_setHtmlText(sai_id_text_label_message_text, 'メッセージ テキスト:');
 		trans_setHtmlText(sai_id_button_message, 'メッセージ...');
@@ -868,7 +867,6 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_brightness, '屏幕亮度：');
 		trans_setSelectOptionText(screen_brightness, 'normal', '通常');
 		trans_setSelectOptionText(screen_brightness, 'brighter', '明亮');
-		trans_setHtmlText(sai_id_text_version, '催眠克拉克拉 Ver.' + VERSION);
 		trans_setHtmlText(sai_id_page_config_header_1, '配置');
 		trans_setHtmlText(sai_id_text_label_message_text, '留言内容：');
 		trans_setHtmlText(sai_id_button_message, '信息...');
@@ -931,7 +929,6 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_brightness, '屏幕亮度：');
 		trans_setSelectOptionText(screen_brightness, 'normal', '正常亮度');
 		trans_setSelectOptionText(screen_brightness, 'brighter', '提亮');
-		trans_setHtmlText(sai_id_text_version, '催眠克拉克拉 Ver.' + VERSION);
 		trans_setHtmlText(sai_id_page_config_header_1, '配置');
 		trans_setHtmlText(sai_id_text_label_message_text, '留言內容：');
 		trans_setHtmlText(sai_id_button_message, '訊息...');
@@ -994,7 +991,6 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_brightness, '화면 밝기:');
 		trans_setSelectOptionText(screen_brightness, 'normal', '일반 밝기');
 		trans_setSelectOptionText(screen_brightness, 'brighter', '밝게 하다');
-		trans_setHtmlText(sai_id_text_version, '최면 크라크라 Ver.' + VERSION);
 		trans_setHtmlText(sai_id_page_config_header_1, '구성');
 		trans_setHtmlText(sai_id_text_label_message_text, '메시지 텍스트:');
 		trans_setHtmlText(sai_id_button_message, '메시지...');
@@ -1057,7 +1053,6 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_brightness, 'Luminosità:');
 		trans_setSelectOptionText(screen_brightness, 'normal', 'Normale');
 		trans_setSelectOptionText(screen_brightness, 'brighter', 'Più luminoso');
-		trans_setHtmlText(sai_id_text_version, 'Ipnosi KraKra Ver.' + VERSION);
 		trans_setHtmlText(sai_id_page_config_header_1, 'Configurazione');
 		trans_setHtmlText(sai_id_text_label_message_text, 'Messaggio di testo:');
 		trans_setHtmlText(sai_id_button_message, 'Messaggio...');
@@ -1120,7 +1115,6 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_brightness, 'Helligkeit:');
 		trans_setSelectOptionText(screen_brightness, 'normal', 'Normal');
 		trans_setSelectOptionText(screen_brightness, 'brighter', 'Heller');
-		trans_setHtmlText(sai_id_text_version, 'Hypnose KraKra Ver.' + VERSION);
 		trans_setHtmlText(sai_id_page_config_header_1, 'Aufbau');
 		trans_setHtmlText(sai_id_text_label_message_text, 'Nachrichtentext:');
 		trans_setHtmlText(sai_id_button_message, 'Nachricht...');
@@ -1183,7 +1177,6 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_brightness, 'Brightness:');
 		trans_setSelectOptionText(screen_brightness, 'normal', 'Normal');
 		trans_setSelectOptionText(screen_brightness, 'brighter', 'Brighter');
-		trans_setHtmlText(sai_id_text_version, 'Hyponosis KraKra Ver.' + VERSION);
 		trans_setHtmlText(sai_id_page_config_header_1, 'Configuration');
 		trans_setHtmlText(sai_id_text_label_message_text, 'Message Text:');
 		trans_setHtmlText(sai_id_button_message, 'Message...');

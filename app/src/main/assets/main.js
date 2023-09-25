@@ -1,8 +1,13 @@
 // 催眠アプリ「催眠くらくら」のJavaScriptのメインコード。
 // 暗号名はKraKra。
 
-const NUM_TYPE = 9; // 「画」の個数。
-const VERSION = '3.4.4'; // KraKra
+// 【KraKra命名規則】
+// ☆ 関数名の頭に SAI_ を付ける。
+// ☆ 変数名の頭に sai_ を付ける。
+// ☆ 要素IDの頭に sai_id_ を付ける。
+// ☆ CSSクラスの頭に sai_class_ を付ける。
+
+const sai_VERSION = '3.4.4'; // KraKraバージョン番号。
 const sai_DEBUGGING = false; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
 
@@ -15,6 +20,7 @@ function SAI_AndroidMicrophoneOnReload(){
 // ドキュメントの読み込みが完了（DOMContentLoaded）されたら無名関数が呼び出される。
 document.addEventListener('DOMContentLoaded', function(){
 	// 変数を保護するため、関数内部に閉じ込める。
+	const NUM_TYPE = 9; // 「画」の個数。
 	let sai_screen_width = 0; // スクリーンの幅（ピクセル単位）を覚えておく。
 	let sai_screen_height = 0; // スクリーンの高さ（ピクセル単位）を覚えておく。
 	let sai_old_time = (new Date()).getTime(); // 処理フレームの時刻を覚えておく。
@@ -551,9 +557,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		let nativeVersion = SAI_get_native_app_version();
 		let text = sai_id_text_version.innerText;
 		if(nativeVersion){
-			text = text.replace('[[VERSION]]', nativeVersion + '(native) / ' + VERSION + '(web)');
+			text = text.replace('[[VERSION]]', nativeVersion + '(native) / ' + sai_VERSION + '(web)');
 		}else{
-			text = text.replace('[[VERSION]]', VERSION + '(web)');
+			text = text.replace('[[VERSION]]', sai_VERSION + '(web)');
 		}
 		sai_id_text_version.innerText = text;
 	}
@@ -561,17 +567,12 @@ document.addEventListener('DOMContentLoaded', function(){
 	// ユーザを受け入れる。
 	function SAI_accepted(){
 		localStorage.setItem('saiminAdultCheck3', '1');
-		sai_id_label_mic.classList.remove('sai_class_invisible');
-		sai_id_button_sound.classList.remove('sai_class_invisible');
-		sai_id_label_speech.classList.remove('sai_class_invisible');
-		sai_id_button_config.classList.remove('sai_class_invisible');
-		sai_id_button_about.classList.remove('sai_class_invisible');
-		sai_id_button_message.classList.remove('sai_class_invisible');
+		sai_id_control_panel.classList.remove('sai_class_invisible');
 		SAI_update_version_display();
 		if(!sai_ready){
-			let theType = localStorage.getItem('saiminType');
-			if(theType && theType != -1){
-				SAI_pic_set_type(theType);
+			let type = localStorage.getItem('saiminType');
+			if(type && type != -1){
+				SAI_pic_set_type(type);
 			}else{
 				SAI_pic_set_type(0);
 			}
