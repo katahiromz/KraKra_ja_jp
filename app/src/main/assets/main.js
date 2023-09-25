@@ -787,9 +787,15 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_circle(ctx, qx, qy, dxy, true);
 
 		if(sai_logo_img.complete){
-			let x = px + (dx - sai_logo_img.width) / 2;
-			let y = py + (dy - sai_logo_img.height) / 2 - dy * 0.1;
-			ctx.drawImage(sai_logo_img, x, y);
+			let width = sai_logo_img.width;
+			let height = sai_logo_img.height;
+			if (width > sai_screen_width){
+				width *= 0.75;
+				height *= 0.75;
+			}
+			let x = px + (dx - width) / 2;
+			let y = py + (dy - height) / 2 - dy * 0.1;
+			ctx.drawImage(sai_logo_img, x, y, width, height);
 		}
 
 		if(sai_tap_here_img.complete){

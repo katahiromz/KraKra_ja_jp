@@ -31,6 +31,9 @@ label {
 	padding: 0.5rem;
 }
 .sai_class_config_page {
+	user-select: none;
+}
+.sai_class_config_page {
 	font-size: 1.2rem;
 }
 .sai_class_config_page select {
@@ -104,17 +107,21 @@ label {
 	bottom: 0;
 	width: calc(100% / 3 - 5px);
 }
-#sai_id_button_sound_play {
-	width: 35pt;
-	height: 22pt;
+.sai_class_config_page button {
 	position: relative;
-	top: -1pt;
-	vertical-align: middle;
+	color: #fff;
 	background-color: #333;
+	height: 3rem;
+	font-weight: bold;
+	padding: 0.4rem 3rem 0.4rem 3rem;
+	vertical-align: middle;
+}
+#sai_id_button_sound_play {
+	top: -1pt;
 }
 #sai_id_button_sound_play img {
-	position: relative;
 	top: -1pt;
+	width: 2rem;
 	vertical-align: middle;
 }
 .sai_class_releasing {
