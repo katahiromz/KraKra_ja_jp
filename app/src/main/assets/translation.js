@@ -53,13 +53,6 @@ When a keyboard is connected, the following operations are available:
 - Press [-] or [K] keys to kill hypnosis.
 - Press [D] key to split the screen.
 - Press [B] key to toggle display of the buttons.
-- Press [G] key to turn on/off of Goggle Mode.
-
-[(Goggle Mode)]
-
-Goggle Mode is available with a connectable keyboard and goggles.
-Goggle Mode can be toggled on and off by pressing [G] key.
-Goggle Mode splits the screen in two and hides the control buttons.
 
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
@@ -119,13 +112,6 @@ Hypnosis KraKra
 - "-" 키 또는 "K" 키를 누르면 최면을 끕니다.
 - "D" 키를 누르면 화면 분할이 전환됩니다.
 - "B" 키를 누르면 버튼 표시가 전환됩니다.
-- "G" 키를 누르면 고글 모드가 전환됩니다.
-
-【고글 모드】
-
-연결 가능한 키보드와 고글이 있으면 고글 모드를 사용할 수 있습니다.
-「G」키를 누르면 고글 모드의 ON/OFF의 전환이 가능합니다.
-고글 모드는 화면을 2분할하고 조작 버튼을 숨깁니다.
 
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
@@ -184,13 +170,6 @@ Hypnosis KraKra
 - 「-」キーか「K」キーを押すと催眠を消します。
 - 「D」キーを押すと画面分割が切り替わります。
 - 「B」キーを押すとボタンの表示が切り替わります。
-- 「G」キーを押すとゴーグルモードが切り替わります。
-
-【ゴーグルモード】
-
-接続可能なキーボードとゴーグルがあれば、ゴーグルモードを利用できます。
-「G」キーを押すとゴーグルモードのON/OFFの切り替えが可能です。
-ゴーグルモードは、画面を２分割し、操作ボタンを隠します。
 
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
@@ -249,13 +228,6 @@ Hypnosis KraKra
 - 按[-]或[K]键终止催眠。
 - 按[D]键分割屏幕。
 - 按[B]键切换按钮的显示。
-- 按[G]键打开/关闭护目镜模式。
-
-【护目镜模式】
-
-护目镜模式可通过可连接的键盘和护目镜使用。
-按 [G] 键可以打开和关闭护目镜模式。
-护目镜模式将屏幕一分为二并隐藏控制按钮。
 
 Copyright (c) 2022-2023 片山博文MZ
 Copyright (c) 2023 Murayama Akira
@@ -314,13 +286,6 @@ Hypnosis KraKra
 - 按“-”或“K”關閉催眠。
 - 按“D”鍵在屏幕分割之間切換。
 - 按“B”鍵切換按鈕顯示。
-- 按“G”鍵切換護目鏡模式。
-
-【護目鏡模式】
-
-如果您有可連接的鍵盤和護目鏡，則可以使用護目鏡模式。
-按“G”鍵可打開/關閉護目鏡模式。
-護目鏡模式將屏幕分為兩部分並隱藏操作按鈕。
 
 Copyright (c) 2022-2023 片山博文MZ
 Copyright (c) 2023 Murayama Akira
@@ -379,13 +344,6 @@ Quando è collegata una tastiera, sono disponibili le seguenti operazioni:
 - Premi i tasti [-] o [K] per eliminare l'ipnosi.
 - Premere il tasto [D] per dividere lo schermo.
 - Premere il tasto [B] per alternare la visualizzazione dei pulsanti.
-- Premere il tasto [G] per attivare/disattivare la modalità Goggle.
-
-[(Modalità occhiali)]
-
-La modalità Goggle è disponibile con tastiera e occhiali collegabili.
-La modalità Goggle può essere attivata e disattivata premendo il tasto [G].
-La modalità Goggle divide lo schermo in due e nasconde i pulsanti di controllo.
 
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
@@ -444,13 +402,6 @@ Wenn eine Tastatur angeschlossen ist, stehen folgende Vorgänge zur Verfügung:
 - Drücken Sie die Tasten [-] oder [K], um die Hypnose zu beenden.
 - Drücken Sie die Taste [D], um den Bildschirm zu teilen.
 - Drücken Sie die Taste [B], um die Anzeige der Schaltflächen umzuschalten.
-- Drücken Sie die Taste [G], um den Brillenmodus ein-/auszuschalten.
-
-[(Brillenmodus)]
-
-Der Goggle-Modus ist mit einer anschließbaren Tastatur und einer Schutzbrille verfügbar.
-Der Brillenmodus kann durch Drücken der Taste [G] ein- und ausgeschaltet werden.
-Der Goggle-Modus teilt den Bildschirm in zwei Teile und verbirgt die Steuertasten.
 
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
