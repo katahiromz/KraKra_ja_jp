@@ -4,6 +4,7 @@
 const NUM_TYPE = 9; // 「画」の個数。
 const VERSION = '3.4.4'; // KraKra
 const sai_DEBUGGING = false; // デバッグ中か？
+let sai_FPS = 0; // 実測フレームレート。
 
 // マイクロホン設定変更時にAndroid側から呼び出される関数。再ロードする。
 function SAI_AndroidMicrophoneOnReload(){
@@ -14,7 +15,6 @@ function SAI_AndroidMicrophoneOnReload(){
 // ドキュメントの読み込みが完了（DOMContentLoaded）されたら無名関数が呼び出される。
 document.addEventListener('DOMContentLoaded', function(){
 	// 変数を保護するため、関数内部に閉じ込める。
-	let sai_FPS = 0; // 実測フレームレート。
 	let sai_screen_width = 0; // スクリーンの幅（ピクセル単位）を覚えておく。
 	let sai_screen_height = 0; // スクリーンの高さ（ピクセル単位）を覚えておく。
 	let sai_old_time = (new Date()).getTime(); // 処理フレームの時刻を覚えておく。
