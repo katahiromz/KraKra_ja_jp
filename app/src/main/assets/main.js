@@ -590,8 +590,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		if(sai_pic_type == -1){ // 「催眠解除」の場合。
 			// スピーチをキャンセル。
 			SAI_speech_cancel();
-			sai_id_checkbox_speech.checked = false;
-			sai_id_label_speech.classList.remove('sai_class_checked');
+			sai_id_button_speech.classList.remove('sai_class_checked');
 
 			// 「催眠解除中」の変数を更新。
 			sai_hypnosis_released = false;
@@ -599,7 +598,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			// 催眠解除クラスを追加。
 			sai_id_button_sound.classList.add('sai_class_releasing');
 			sai_id_button_message.classList.add('sai_class_releasing');
-			sai_id_label_speech.classList.add('sai_class_releasing');
+			sai_id_button_speech.classList.add('sai_class_releasing');
 
 			// 催眠解除の画像のソースを更新。
 			sai_hypno_releasing_img.src = trans_getText('TEXT_KILLING_HYPNOSIS_IMG');
@@ -617,15 +616,14 @@ document.addEventListener('DOMContentLoaded', function(){
 				sai_message_text = ''; // メッセージテキストをクリア。
 
 				// スピーチをキャンセル。
-				sai_id_checkbox_speech.checked = false;
-				sai_id_label_speech.classList.remove('sai_class_checked');
+				sai_id_button_speech.classList.remove('sai_class_checked');
 				SAI_speech_cancel();
 			}
 
 			// 「催眠解除中」ではない。
 			sai_id_button_sound.classList.remove('sai_class_releasing');
 			sai_id_button_message.classList.remove('sai_class_releasing');
-			sai_id_label_speech.classList.remove('sai_class_releasing');
+			sai_id_button_speech.classList.remove('sai_class_releasing');
 		}
 
 		// 映像の種類のUIを更新する。
@@ -2393,8 +2391,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		}, { passive: false });
 
 		// スピーチをクリック。
-		sai_id_checkbox_speech.addEventListener('click', function(e){
-			console.log('sai_id_checkbox_speech');
+		sai_id_button_speech.addEventListener('click', function(e){
+			console.log('sai_id_button_speech');
 			sai_id_button_message.click();
 		});
 
@@ -2476,7 +2474,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				return;
 			}
 			if(e.key == 's' || e.key == 'S'){ // Speech
-				sai_id_checkbox_speech.click();
+				sai_id_button_speech.click();
 				return;
 			}
 			if(e.key == 'x' || e.key == 'X'){ // Pause
