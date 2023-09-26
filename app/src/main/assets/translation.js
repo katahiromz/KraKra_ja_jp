@@ -26,6 +26,7 @@ How you use it is up to you.
 - People with trypophobia should not use this software.
 - If you experience symptoms such as headache, dizzy, hyperpnea, nausea, gastrointestinal problems, or abnormal emotions, discontinue use immediately and consult a specialist.
 - The Operator may terminate the Service at any time if any reason arises that makes it difficult to continue the Service.
+- Please do not hypnotize others without their consent.
 
 [(How to use)]
 
@@ -82,6 +83,7 @@ Hypnosis KraKra
 - 집합체 공포증을 가진 사람은 사용하지 마십시오.
 - 두통, 현기증, 과호흡, 메스꺼움, 위장 장애, 이상한 감정 등의 증상이 발생한 경우에는 신속하게 사용을 중지하고 전문의의 진단을 받으십시오.
 - 운영자는 본 서비스의 계속이 곤란해지는 사유가 발생한 경우 언제든지 본 서비스를 종료할 수 있는 것으로 합니다.
+- 타인에게 동의없이 최면을 걸지 마십시오.
 
 【사용법】
 
@@ -139,6 +141,7 @@ Hypnosis KraKra
 - 集合体恐怖症の人は使用しないで下さい。
 - 頭痛、めまい、過呼吸、吐き気、胃腸の不具合、異常な感情などの症状が生じた場合は、速やかに使用を中止し、専門医の診断を受けて下さい。
 - 運営者は、本サービスの継続が困難となる事由が生じた場合、いつでも本サービスを終了することができるものとします。
+- 他人に同意なく催眠を掛けないで下さい。
 
 【使い方】
 
@@ -195,6 +198,7 @@ Hypnosis KraKra
 - 有密集恐惧症的人不应使用此软件。
 - 如果出现头痛、头晕、呼吸急促、恶心、肠胃问题或情绪异常等症状，请立即停止使用并咨询专科医生。
 - 如果出现任何原因导致难以继续提供服务，运营商可以随时终止服务。
+- 未经他人同意，请勿催眠他人。
 
 【如何使用】
 
@@ -251,6 +255,7 @@ Hypnosis KraKra
 - 如果您有廣場恐懼症，請勿使用。
 - 如果出現頭痛、頭暈、換氣過度、噁心、腸胃不適或情緒異常等症狀，請立即停止使用並諮詢專科醫生。
 - 如果有理由難以繼續提供該服務，運營商可以隨時終止該服務。
+- 未經他人同意，請勿催眠他人。
 
 【用法】
 
@@ -307,6 +312,7 @@ Come lo usi dipende da te.
 - Le persone con tripofobia non dovrebbero usare questo software.
 - Se si verificano sintomi come mal di testa, vertigini, iperpnea, nausea, problemi gastrointestinali o emozioni anormali, interrompere immediatamente l'uso e consultare uno specialista.
 - L'Operatore può interrompere il Servizio in qualsiasi momento se si verifica un motivo che rende difficile continuare il Servizio.
+- Per favore non ipnotizzare gli altri senza il loro consenso.
 
 [(Come usare)]
 
@@ -363,6 +369,7 @@ Wie Sie es nutzen, bleibt Ihnen überlassen.
 - Personen mit Trypophobie sollten diese Software nicht verwenden.
 - Wenn bei Ihnen Symptome wie Kopfschmerzen, Schwindel, Hyperpnoe, Übelkeit, Magen-Darm-Probleme oder abnormale Emotionen auftreten, brechen Sie die Anwendung sofort ab und konsultieren Sie einen Spezialisten.
 - Der Betreiber kann den Dienst jederzeit beenden, wenn ein Grund vorliegt, der die Fortsetzung des Dienstes erschwert.
+- Bitte hypnotisieren Sie andere nicht ohne deren Zustimmung.
 
 [(Wie benutzt man)]
 
