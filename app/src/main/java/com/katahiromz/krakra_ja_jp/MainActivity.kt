@@ -137,6 +137,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     // ナビゲーションバーの表示の切り替え。
     @Suppress("DEPRECATION")
     fun showNaviBar(show: Boolean) {
+        // 別スレッドかもしれないので、postする。
         webView?.post {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) { // API 30以上の場合
                 if (show) {
@@ -221,7 +222,9 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         setContentView(R.layout.activity_main)
 
         // アクションバーを隠す。
-        supportActionBar?.hide()
+        if (false) { // Theme.MaterialComponents.DayNight.NoActionBarで指定できるので省略。
+            supportActionBar?.hide()
+        }
 
         // WebViewを初期化。
         initWebView()
