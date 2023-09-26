@@ -780,7 +780,7 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Korean (한국어)');
 		trans_setHtmlText(sai_id_pic_type, '映像の種類:');
 		trans_setSelectOptionText(sai_id_select_pic_type, '-1', '画-1: 催眠解除');
-		trans_setSelectOptionText(sai_id_select_pic_type, '0', '画0: ダミー画面(練習用)');
+		trans_setSelectOptionText(sai_id_select_pic_type, '0', '画0: ダミー画面（練習用）');
 		trans_setSelectOptionText(sai_id_select_pic_type, '1', '画1: ピンク色の渦巻き');
 		trans_setSelectOptionText(sai_id_select_pic_type, '2', '画2: 同心円状');
 		trans_setSelectOptionText(sai_id_select_pic_type, '3', '画3: 目が回る');
