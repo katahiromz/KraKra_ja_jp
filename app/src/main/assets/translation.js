@@ -32,7 +32,7 @@ How you use it is up to you.
 - Basically, it is an application to enjoy looking at the screen.
 - Tap the 'microphone' button to use the microphone (it needs permission).
 - Tapping the '♪' button makes a sound.
-- The 'bubble' button will speak the message.
+- The 'bubble' button will display the message.
 - The 'gear' button will open Configuration.
 - When you run your finger on the screen, the screen sparks to attract their attention.
 
@@ -86,9 +86,9 @@ Hypnosis KraKra
 【사용법】
 
 - 기본적으로 화면을보고 즐길 수있는 응용 프로그램입니다.
-- "마이크" 버튼으로 마이크를 사용할 수 있습니다 (권한이 필요합니다).
-- 「♪」버튼으로 소리가 울립니다.
-- "글자" 버튼으로 표시할 메시지를 설정할 수 있습니다.
+- '마이크' 버튼으로 마이크를 사용할 수 있습니다 (권한이 필요합니다).
+- '♪' 버튼으로 소리가 울립니다.
+- '버블'버튼에 메시지가 표시됩니다.
 - "후키다시"버튼으로 메시지를 자동 음성으로 말합니다.
 - '기어' 버튼으로 일반 설정을 할 수 있습니다.
 - 화면을 손가락으로 추적하면 반짝임이 표시되어 상대방의 주의를 끌 수 있습니다.
@@ -145,7 +145,7 @@ Hypnosis KraKra
 - 基本的に画面を見て楽しむためのアプリです。
 - 「マイク」ボタンでマイクが使えます(権限が必要です)。
 - 「♪」ボタンで音が鳴ります。
-- 「ふきだし」ボタンでメッセージを自動音声でしゃべります。
+- 「ふきだし」ボタンでメッセージを表示します。
 - 「歯車」ボタンで全般設定ができます。
 - 画面を指でなぞると、きらめきが表示され、相手の注意を引くことができます。
 
@@ -201,7 +201,7 @@ Hypnosis KraKra
 - 基本上，它是一个享受观看屏幕的应用程序。
 - 点击“麦克风”按钮使用麦克风（需要许可）。
 - 点击“♪”按钮会发出声音。
-- “气泡”按钮将说出该消息。
+- “气泡”按钮将显示消息。
 - “齿轮”按钮将打开配置。
 - 当你的手指在屏幕上运行时，屏幕会产生火花，吸引他们的注意力。
 
@@ -257,7 +257,7 @@ Hypnosis KraKra
 - 它基本上是一個欣賞屏幕的應用程序。
 - 您可以通過“麥克風”按鈕使用麥克風（需要許可）。
 - “♪”按鈕會發出聲音。
-- 使用“語音氣泡”按鈕通過自動語音說出消息。
+- “氣泡”按鈕將顯示消息。
 - 用於常規設置的“齒輪”按鈕。
 - 在屏幕上滑動手指即可顯示閃爍的光芒，吸引對手的注意力。
 
@@ -313,7 +313,7 @@ Come lo usi dipende da te.
 - Fondamentalmente, è un'applicazione per divertirsi guardando lo schermo.
 - Tocca il pulsante "microfono" per utilizzare il microfono (è necessaria l'autorizzazione).
 - Toccando il pulsante '♪' si emette un suono.
-- Il pulsante "bolla" pronuncerà il messaggio.
+- Il pulsante "Bubble" visualizzerà il messaggio.
 - Il pulsante "ingranaggio" aprirà Configurazione.
 - Quando fai scorrere il dito sullo schermo, lo schermo si illumina per attirare la loro attenzione.
 
@@ -369,7 +369,7 @@ Wie Sie es nutzen, bleibt Ihnen überlassen.
 - Im Grunde handelt es sich um eine Anwendung, mit der man gerne auf den Bildschirm schaut.
 - Tippen Sie auf die Schaltfläche „Mikrofon“, um das Mikrofon zu verwenden (es erfordert eine Genehmigung).
 - Durch Tippen auf die Schaltfläche „♪“ ertönt ein Ton.
-- Mit der „Sprechblase“-Taste wird die Nachricht vorgelesen.
+- Die Schaltfläche "Blasen" zeigt die Nachricht an.
 - Die Schaltfläche „Zahnrad“ öffnet die Konfiguration.
 - Wenn Sie mit dem Finger über den Bildschirm fahren, erzeugt der Bildschirm Funken, um ihre Aufmerksamkeit zu erregen.
 
