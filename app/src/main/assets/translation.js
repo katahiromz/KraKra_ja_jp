@@ -44,7 +44,6 @@ When a keyboard is connected, the following operations are available:
 - Press [0] to [9] keys to switch pictures.
 - Press [C] key to open the configuration.
 - Press [H] key to open the version information.
-- Press [A] key to open appearance settings.
 - Press [P] key to play sound.
 - Press [M] key to turn on/off the microphone (it needs permission).
 - Press [T] key to open the message settings.
@@ -102,12 +101,11 @@ Hypnosis KraKra
 - "0"~"9" 키를 누르면 영상이 전환됩니다.
 - "C" 키를 누르면 일반 설정이 열립니다.
 - "H" 키를 누르면 버전 정보가 열립니다.
-- "A" 키를 누르면 외형 설정을 엽니다.
 - "P" 키를 누르면 소리가 납니다.
-- 「M」키를 누르면 마이크의 ON/OFF를 전환합니다(권한이 필요합니다).
+- "M" 키를 누르면 마이크의 ON/OFF를 전환합니다(권한이 필요합니다).
 - "T" 키를 누르면 메시지 설정이 열립니다.
 - "S" 키를 누르면 현재 메시지를 자동 음성으로 말합니다.
-- “X” 키를 누르면 일시정지됩니다.
+- "X" 키를 누르면 일시정지됩니다.
 - "-" 키 또는 "K" 키를 누르면 최면을 끕니다.
 - "D" 키를 누르면 화면 분할이 전환됩니다.
 - "B" 키를 누르면 버튼 표시가 전환됩니다.
@@ -159,7 +157,6 @@ Hypnosis KraKra
 - 「0」～「9」キーを押すと、映像が切り替わります。
 - 「C」キーを押すと全般設定が開きます。
 - 「H」キーを押すとバージョン情報を開きます。
-- 「A」キーを押すと見た目の設定を開きます。
 - 「P」キーを押すと音を鳴らします。
 - 「M」キーを押すとマイクのON/OFFを切り替えます(権限が必要です)。
 - 「T」キーを押すとメッセージの設定を開きます。
@@ -216,7 +213,6 @@ Hypnosis KraKra
 - 按[0]至[9]键切换图像。
 - 按[C]键打开配置。
 - 按[H]键打开版本信息。
-- 按[A]键打开外观设置。
 - 按[P]键播放声音。
 - 按[M]键打开/关闭麦克风（需要许可）。
 - 按[T]键打开消息设置。
@@ -273,7 +269,6 @@ Hypnosis KraKra
 - 按“0”至“9”鍵切換圖像。
 - 按“C”鍵打開常規設置。
 - 按“H”鍵打開版本信息。
-- 按“A”鍵打開外觀設置。
 - 按“P”鍵播放聲音。
 - 按“M”鍵打開/關閉麥克風（需要許可）。
 - 按“T”鍵打開消息設置。
@@ -330,7 +325,6 @@ Quando è collegata una tastiera, sono disponibili le seguenti operazioni:
 - Premere i tasti da [0] a [9] per cambiare immagine.
 - Premere il tasto [C] per aprire la configurazione.
 - Premere il tasto [H] per aprire le informazioni sulla versione.
-- Premere il tasto [A] per aprire le impostazioni dell'aspetto.
 - Premere il tasto [P] per riprodurre il suono.
 - Premere il tasto [M] per accendere/spegnere il microfono (è necessario il permesso).
 - Premere il tasto [T] per aprire le impostazioni del messaggio.
@@ -387,7 +381,6 @@ Wenn eine Tastatur angeschlossen ist, stehen folgende Vorgänge zur Verfügung:
 - Drücken Sie die Tasten [0] bis [9], um zwischen den Bildern zu wechseln.
 - Drücken Sie die Taste [C], um die Konfiguration zu öffnen.
 - Drücken Sie die Taste [H], um die Versionsinformationen zu öffnen.
-- Drücken Sie die Taste [A], um die Darstellungseinstellungen zu öffnen.
 - Drücken Sie die Taste [P], um den Ton abzuspielen.
 - Drücken Sie die Taste [M], um das Mikrofon ein-/auszuschalten (es erfordert eine Genehmigung).
 - Drücken Sie die Taste [T], um die Nachrichteneinstellungen zu öffnen.

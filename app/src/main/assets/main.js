@@ -2461,11 +2461,6 @@ document.addEventListener('DOMContentLoaded', function(){
 				sai_id_button_about.click();
 				return;
 			}
-			if(e.key == 'a' || e.key == 'A'){ // Appearance
-				e.preventDefault();
-				sai_id_button_config.click();
-				return;
-			}
 			if(e.key == 'p' || e.key == 'P'){ // Play/Pause
 				sai_id_button_sound.click();
 				return;
@@ -2498,15 +2493,6 @@ document.addEventListener('DOMContentLoaded', function(){
 				}else{
 					SAI_screen_set_split(1);
 				}
-				return;
-			}
-			if(e.key == 'g' || e.key == 'G'){ // Goggle Mode
-				if(sai_screen_split == 1){
-					SAI_screen_set_split(2);
-				}else{
-					SAI_screen_set_split(1);
-				}
-				SAI_show_main_controls(sai_screen_split == 1);
 				return;
 			}
 			if(e.key == 'b' || e.key == 'B'){ // buttons
