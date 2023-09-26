@@ -115,12 +115,6 @@ label {
 	padding: 0.2rem 1.1rem 0.2rem 1.1rem;
 	vertical-align: middle;
 }
-#sai_id_button_sound_play {
-}
-#sai_id_button_sound_play img {
-	width: 10dvw;
-	vertical-align: middle;
-}
 .sai_class_releasing {
 	background-color: red !important;
 	text-align: center;
