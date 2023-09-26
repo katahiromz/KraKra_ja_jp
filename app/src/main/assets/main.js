@@ -9,7 +9,7 @@
 //
 // 言語特有の記述が必要な個所は「{{LANGUAGE_SPECIFIC}}」というコメントを付けること。
 
-const sai_VERSION = '3.4.4'; // KraKraバージョン番号。
+const sai_VERSION = '3.4.5'; // KraKraバージョン番号。
 const sai_DEBUGGING = false; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
 
