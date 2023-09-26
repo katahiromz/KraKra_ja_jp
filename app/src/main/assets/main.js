@@ -653,7 +653,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		// ローカルストレージに記憶。
 		localStorage.setItem('saiminText', sai_message_text);
 
-		if(!sai_stopping){ // 停止中でないとき
+		// 停止中でなく、スピーチが有効な時
+		if(!sai_stopping && sai_id_checkbox_speech_on_off.checked){
 			// メッセージテキストがあればスピーチを開始、なければスピーチをキャンセル。
 			if(sai_message_text){
 				SAI_speech_start(sai_message_text);
@@ -675,12 +676,14 @@ document.addEventListener('DOMContentLoaded', function(){
 		switch(value){
 		case 'normal':
 		case false:
+		case 0:
 		default:
 			sai_id_checkbox_rotation.checked = false; // UIを更新。
 			sai_rotation_type = 'normal';
 			break;
 		case 'counter':
 		case true:
+		case 1:
 			sai_id_checkbox_rotation.checked = true; // UIを更新。
 			sai_rotation_type = 'counter';
 			break;
@@ -1712,6 +1715,10 @@ document.addEventListener('DOMContentLoaded', function(){
 			let diff_time = (new_time - sai_count_down) / 1000.0;
 			if (diff_time >= 3){
 				sai_count_down = null;
+				// 必要ならスピーチを開始する。
+				if(sai_id_checkbox_speech_on_off.checked){
+					SAI_speech_start(sai_message_text);
+				}
 			}else{
 				let value = Math.floor(diff_time);
 				let text = (3 - value).toString();
@@ -1862,7 +1869,10 @@ document.addEventListener('DOMContentLoaded', function(){
 			splitted = true;
 		}
 
-		if(sai_pic_type == -1){
+		if(sai_stopping || sai_count_down){
+			sai_id_text_floating_1.classList.add('sai_class_invisible');
+			sai_id_text_floating_2.classList.add('sai_class_invisible');
+		}else if(sai_pic_type == -1){
 			sai_id_text_floating_1.classList.add('sai_class_invisible');
 			sai_id_text_floating_2.classList.add('sai_class_invisible');
 		}else if(sai_message_text != ''){
@@ -2144,11 +2154,13 @@ document.addEventListener('DOMContentLoaded', function(){
 			// コントロールパネルを非表示にする。
 			sai_id_control_panel.classList.add('sai_class_invisible');
 			// 必要ならカウントダウンを開始する。
-			if(sai_id_checkbox_count_down.checked)
+			if(sai_id_checkbox_count_down.checked){
 				sai_count_down = new Date().getTime();
-			// 必要ならスピーチを開始する。
-			if(sai_id_checkbox_speech_on_off.checked){
-				SAI_speech_start(sai_message_text);
+			}else{
+				// 必要ならスピーチを開始する。
+				if(sai_id_checkbox_speech_on_off.checked){
+					SAI_speech_start(sai_message_text);
+				}
 			}
 			// 映像を再開する。
 			sai_stopping = false;
