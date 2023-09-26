@@ -1,3 +1,7 @@
+* {
+	/* いったん、すべての要素をスクロール不能にする。スクロールしたいものは個別に指定する。 */
+	overflow: hidden;
+}
 body {
 	margin: 0;
 	padding: 0;
@@ -23,7 +27,6 @@ label {
 }
 #sai_id_main_page {
 	position: absolute;
-	overflow: hidden;
 	left: 0;
 	top: 0;
 	width: 100vw;
@@ -32,9 +35,11 @@ label {
 	height: 100dvh;
 }
 .sai_class_page h1 {
-	font-size: 1.25rem;
+	font-size: 1.25rem; /* ① */
+	line-height: 1.25rem; /* ① */
 	background-color: #c0c;
 	color: white;
+	margin: 0;
 }
 .sai_class_page select {
 	padding: 0.5rem;
@@ -42,7 +47,6 @@ label {
 .sai_class_config_page {
 	user-select: none;
 	font-size: 1.2rem;
-	overflow: hidden;
 }
 .sai_class_config_page select {
 	font-size: 1.5rem;
@@ -266,32 +270,37 @@ label {
 	background-color: rgba(204, 101, 198, 90%);
 }
 .sai_class_config_navi_line {
-	height: 3rem;
+	height: 5rem; /* ③ */
 }
-.sai_class_scrollable_1 {
+.sai_class_img_config_logo {
+	height: 31px; /* ④ */
+	border: 0;
+}
+.sai_class_scrollable_1 { /* バージョン情報のテキストエリアみたいなところ。 */
 	overflow-x: visible;
 	overflow-y: scroll;
 	width: 98dw;
 	width: 98dvw;
-	height: calc(100vh - 8.5rem - 1.25rem);
-	height: calc(100dvh - 8.5rem - 1.25rem);
+	height: calc(100vh - 1.25rem - 0.9rem - 5rem); /* 全体 - ① - ② - ③ */
+	height: calc(100dvh - 1.25rem - 0.9rem - 5rem); /* 全体 - ① - ② - ③ */
 	margin-left: auto;
 	margin-right: auto;
 }
-.sai_class_scrollable_2 {
+.sai_class_scrollable_2 { /* 設定画面の設定項目のスクロール可能な部分。 */
 	overflow-x: visible;
 	overflow-y: scroll;
 	width: 98vw;
 	width: 98dvw;
-	height: calc(100vh - 12rem);
-	height: calc(100dvh - 12rem);
+	height: calc(100vh - 1.25rem - 31px - 5rem); /* 全体 - ① - ④ - ③ */
+	height: calc(100dvh - 1.25rem - 31px - 5rem); /* 全体 - ① - ④ - ③ */
 	margin-left: auto;
 	margin-right: auto;
 }
 #sai_id_config_scrollable {
 }
 #sai_id_text_version {
-	font-size: 0.9rem;
+	font-size: 0.9rem; /* ② */
+	line-height: 0.9rem; /* ② */
 }
 .sai_config_label {
 	font-weight: bold;
@@ -303,8 +312,6 @@ label {
 	text-align: left;
 	background-color: #fcf;
 	color: black;
-}
-#sai_class_img_config_logo {
 }
 /* https://www.tutorialstonight.com/css-toggle-switch-with-text */
 /* BEGIN toggle switch */
