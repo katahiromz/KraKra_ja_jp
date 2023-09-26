@@ -726,8 +726,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		// ローカルストレージに記憶。
 		localStorage.setItem('saiminAdultCheck3', '1');
 
-		// コントロールパネルを表示する。
-		sai_id_control_panel.classList.remove('sai_class_invisible');
+		// メインコントロール群を表示する。
+		SAI_show_main_controls(true);
 
 		// 「バージョン情報」の表示を更新する。
 		SAI_update_version_display();
@@ -2090,8 +2090,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			// 催眠解除の場合、ダミー画面に戻す。
 			if(sai_pic_type == -1)
 				SAI_pic_set_type(0);
-			// コントロールパネルを再表示する。
-			sai_id_control_panel.classList.remove('sai_class_invisible');
+			// メインコントロール群を表示する。
+			SAI_show_main_controls(true);
 			// カウントダウンを破棄する。
 			sai_count_down = null;
 			// 映像の停止。
@@ -2149,8 +2149,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 「催眠開始」ボタン。
 		sai_id_button_start_hypnosis.addEventListener('click', function(e){
-			// コントロールパネルを非表示にする。
-			sai_id_control_panel.classList.add('sai_class_invisible');
+			// メインコントロール群を非表示にする。
+			SAI_show_main_controls(false);
 			// 必要ならカウントダウンを開始する。
 			if(sai_id_checkbox_count_down.checked){
 				sai_count_down = new Date().getTime();
@@ -2165,8 +2165,13 @@ document.addEventListener('DOMContentLoaded', function(){
 		});
 		// 「催眠解除」ボタン。
 		sai_id_button_release_hypnosis.addEventListener('click', function(e){
+			// 解除映像に切り替える。
 			SAI_pic_set_type(-1);
-			sai_id_control_panel.classList.add('sai_class_invisible');
+
+			// メインコントロール群を非表示にする。
+			SAI_show_main_controls(false);
+
+			// 映像を再開する。
 			sai_stopping = false;
 		});
 
@@ -2501,11 +2506,11 @@ document.addEventListener('DOMContentLoaded', function(){
 				}else{
 					SAI_screen_set_split(1);
 				}
-				SAI_show_buttons(sai_screen_split == 1);
+				SAI_show_main_controls(sai_screen_split == 1);
 				return;
 			}
 			if(e.key == 'b' || e.key == 'B'){ // buttons
-				SAI_show_buttons(sai_id_label_mic.classList.contains('sai_class_invisible'));
+				SAI_show_main_controls(sai_id_label_mic.classList.contains('sai_class_invisible'));
 				return;
 			}
 			if(e.key == 'w' || e.key == 'W'){ // Speed Slow
@@ -2554,15 +2559,20 @@ document.addEventListener('DOMContentLoaded', function(){
 		});
 	}
 
-	// ボタン群を表示または非表示する。
-	function SAI_show_buttons(enabled){
-		if(enabled){
-			sai_id_control_panel.classList.remove('sai_class_invisible');
+	// メインのボタン群を表示または非表示にする。
+	function SAI_show_main_controls(show){
+		let main_controls = document.getElementsByClassName('sai_class_button_main_control');
+		if(show){
+			for(let control of main_controls){
+				control.classList.remove('sai_class_invisible');
+			}
 		}else{
-			sai_id_control_panel.classList.add('sai_class_invisible');
+			for(let control of main_controls){
+				control.classList.add('sai_class_invisible');
+			}
 		}
 		try{
-			android.showNaviBar(enabled);
+			android.showNaviBar(show);
 		}catch(error){
 			;
 		}

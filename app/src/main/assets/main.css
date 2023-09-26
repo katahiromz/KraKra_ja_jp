@@ -11,16 +11,25 @@ input[type='checkbox'] {
 label {
 	cursor: pointer;
 }
-#sai_id_main_page {
-	overflow: hidden;
-}
 .sai_class_page {
 	margin: 0;
 	padding: 0;
+	width: 100vw;
 	width: 100dvw;
+	height: 100vh;
 	height: 100dvh;
 	background-color: #603;
 	color: #fcf;
+}
+#sai_id_main_page {
+	position: absolute;
+	overflow: hidden;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	width: 100dvw;
+	height: 100vh;
+	height: 100dvh;
 }
 .sai_class_page h1 {
 	font-size: 1.25rem;
@@ -37,6 +46,7 @@ label {
 }
 .sai_class_config_page select {
 	font-size: 1.5rem;
+	max-width: 80vw;
 	max-width: 80dvw;
 }
 .sai_class_nav_button {
@@ -48,7 +58,9 @@ label {
 	background-color: #222;
 	top: 0;
 	left: 0;
+	width: 100vw;
 	width: 100dvw;
+	height: 100vh;
 	height: 100dvh;
 }
 .sai_class_ui_line {
@@ -151,6 +163,7 @@ label {
 #sai_id_button_previous_image {
 	position: absolute;
 	left: 0.5rem;
+	top: calc(50vh - 2.5rem / 2);
 	top: calc(50dvh - 2.5rem / 2);
 	width: 1.5cm;
 	height: 1.5cm;
@@ -160,6 +173,7 @@ label {
 #sai_id_button_next_image {
 	position: absolute;
 	right: 0.5rem;
+	top: calc(50vh - 2.5rem / 2);
 	top: calc(50dvh - 2.5rem / 2);
 	width: 1.5cm;
 	height: 1.5cm;
@@ -168,9 +182,13 @@ label {
 }
 #sai_id_button_start_hypnosis {
 	position: absolute;
+	width: 50vw;
 	width: 50dvw;
+	height: 15vh;
 	height: 15dvh;
+	left: calc(50vw - 50vw / 2);
 	left: calc(50dvw - 50dvw / 2);
+	top: calc(50vh - 15vh / 2);
 	top: calc(50dvh - 15dvh / 2);
 	background-color: rgba(100%, 50%, 100%, 100%);
 	font-size: 6vmin;
@@ -178,9 +196,13 @@ label {
 }
 #sai_id_button_release_hypnosis {
 	position: absolute;
+	width: 50vw;
 	width: 50dvw;
+	height: 15vh;
 	height: 15dvh;
+	left: calc(50vw - 50vw / 2);
 	left: calc(50dvw - 50dvw / 2);
+	top: calc(70vh - 15vh / 2);
 	top: calc(70dvh - 15dvh / 2);
 	background-color: rgba(100%, 50%, 100%, 100%);
 	font-size: 6vmin;
@@ -188,15 +210,23 @@ label {
 }
 @media screen and (max-height: 360px) {
 	#sai_id_button_start_hypnosis {
+		width: 20vw;
 		width: 20dvw;
+		height: 20vh;
 		height: 20dvh;
+		left: calc(30vw - 20vw / 2);
 		left: calc(30dvw - 20dvw / 2);
+		top: calc(60vh - 20vh / 2);
 		top: calc(60dvh - 20dvh / 2);
 	}
 	#sai_id_button_release_hypnosis {
+		width: 20vw;
 		width: 20dvw;
+		height: 20vh;
 		height: 20dvh;
+		left: calc(70vw - 20vw / 2);
 		left: calc(70dvw - 20dvw / 2);
+		top: calc(60vh - 20vh / 2);
 		top: calc(60dvh - 20dvh / 2);
 	}
 }
@@ -241,18 +271,20 @@ label {
 .sai_class_scrollable_1 {
 	overflow-x: visible;
 	overflow-y: scroll;
-	width: 100dvw;
-	height: calc(100dvh - 8.5rem - 1.25rem);
+	width: 98dw;
 	width: 98dvw;
+	height: calc(100vh - 8.5rem - 1.25rem);
+	height: calc(100dvh - 8.5rem - 1.25rem);
 	margin-left: auto;
 	margin-right: auto;
 }
 .sai_class_scrollable_2 {
 	overflow-x: visible;
 	overflow-y: scroll;
-	width: 100dvw;
-	height: calc(100dvh - 12rem);
+	width: 98vw;
 	width: 98dvw;
+	height: calc(100vh - 12rem);
+	height: calc(100dvh - 12rem);
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -271,10 +303,6 @@ label {
 	text-align: left;
 	background-color: #fcf;
 	color: black;
-}
-#sai_id_control_panel {
-	width: 100dvw;
-	height: 100dvh;
 }
 #sai_class_img_config_logo {
 }
