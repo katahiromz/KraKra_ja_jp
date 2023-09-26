@@ -52,16 +52,18 @@
 	</div>
 	<div id="sai_id_page_agreement" class="sai_class_page sai_class_center sai_class_config_page sai_class_invisible">
 		<h1 id="sai_id_page_agreement_header_1">About this app</h1>
-		<div id="sai_id_text_version">Hyponosis KraKra Version [[VERSION]]</div>
-		<div id="sai_id_text_notice" class="sai_class_scrollable">
+		<div id="sai_id_text_version">Hyponosis KraKra [[VERSION]]</div>
+		<div id="sai_id_text_notice" class="sai_class_scrollable_1">
 		</div>
-		<div class="sai_class_ui_line">
+		<div class="sai_class_config_navi_line">
+			<hr />
 			<button type="button" id="sai_id_button_agree" class="sai_class_nav_button">I agree</button>
 		</div>
 	</div>
 	<div id="sai_id_page_config" class="sai_class_page sai_class_center sai_class_config_page sai_class_invisible">
 		<h1 id="sai_id_page_config_header_1">Configuration</h1>
-		<div id="sai_id_config_scrollable" class="sai_class_scrollable">
+		<img class="sai_class_img_config_logo" alt="" width="165" height="31" />
+		<div id="sai_id_config_scrollable" class="sai_class_scrollable_2">
 			<div class="sai_class_ui_line">
 				<span id="sai_id_text_language" class="sai_config_label">Language (言語):</span>
 			</div>
@@ -110,15 +112,17 @@
 					<span class="sai_class_toggle_label" data-on="ON" data-off="OFF"></span>
 				</label>
 			</div>
-			<hr />
-			<div class="sai_class_ui_line">
-				<span id="sai_id_text_brightness" class="sai_config_label">Brightness:</span>
-			</div>
-			<div class="sai_class_ui_line">
-				<select id="sai_id_select_brightness" title="sai_id_select_brightness">
-					<option value="normal" selected>Normal</option>
-					<option value="brighter">Brighter</option>
-				</select>
+			<div id="sai_id_brightness_show_or_hide">
+				<hr />
+				<div class="sai_class_ui_line">
+					<span id="sai_id_text_brightness" class="sai_config_label">Brightness:</span>
+				</div>
+				<div class="sai_class_ui_line">
+					<select id="sai_id_select_brightness" title="sai_id_select_brightness">
+						<option value="normal" selected>Normal</option>
+						<option value="brighter">Brighter</option>
+					</select>
+				</div>
 			</div>
 			<div class="sai_class_invisible">
 				<hr />
@@ -190,23 +194,24 @@
 			</div>
 			<hr />
 			<div class="sai_class_ui_line">
-				<span id="sai_id_text_blinking" class="sai_config_label">Blinking:</span>
-			</div>
-			<div class="sai_class_ui_line">
-				<span class="sai_class_nobr">
-					<input type="range" id="sai_id_range_blink_type" name="sai_id_range_blink_type" min="0" max="7" value="0" step="1" title="Blinking" /><br />
-					<output id="sai_id_text_blink_output" name="sai_id_text_blink_output" for="sai_id_range_blink_type">No blinking</output>
-				</span>
-			</div>
-			<hr />
-			<div class="sai_class_ui_line">
 				<span id="sai_id_text_label_message_text" class="sai_config_label">Message Text:</span>
 			</div>
 			<div class="sai_class_ui_line sai_class_text_message"></div>
 			<div class="sai_class_ui_line">
-				<button type="button" id="sai_id_button_message" class="sai_class_nav_button sai_class_invisible">
+				<button type="button" id="sai_id_button_message" class="sai_class_nav_button">
 					Message...
 				</button>
+			</div>
+			<hr />
+			<div class="sai_class_ui_line">
+				<span id="sai_id_text_label_message_speech" class="sai_config_label">Message Speech:</span>
+			</div>
+			<div class="sai_class_ui_line">
+				<label class="sai_class_toggle_button">
+					<input type="checkbox" id="sai_id_checkbox_speech_on_off" title="Speech" />
+					<span class="sai_class_slider"></span>
+					<span class="sai_class_toggle_label" data-on="ON" data-off="OFF"></span>
+				</label>
 			</div>
 			<hr />
 			<div class="sai_class_ui_line">
@@ -216,9 +221,19 @@
 				<input id="sai_id_select_message_size" type="range" min="1" max="4" step="1" value="2" title="Message Size" /><br />
 				<output id="sai_id_select_message_size_output" for="sai_id_select_message_size">Normal</output>
 			</div>
+			<hr />
+			<div class="sai_class_ui_line">
+				<span id="sai_id_text_blinking" class="sai_config_label">Blinking:</span>
+			</div>
+			<div class="sai_class_ui_line">
+				<span class="sai_class_nobr">
+					<input type="range" id="sai_id_range_blink_type" name="sai_id_range_blink_type" min="0" max="7" value="0" step="1" title="Blinking" /><br />
+					<output id="sai_id_text_blink_output" name="sai_id_text_blink_output" for="sai_id_range_blink_type">No blinking</output>
+				</span>
+			</div>
 		</div>
-		<hr />
-		<div class="sai_class_ui_line">
+		<div class="sai_class_config_navi_line">
+			<hr />
 			<button type="button" id="sai_id_button_config_ok" class="sai_class_nav_button">OK</button>
 		</div>
 	</div>

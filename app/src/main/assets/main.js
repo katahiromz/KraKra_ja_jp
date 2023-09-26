@@ -15,7 +15,7 @@ let sai_FPS = 0; // 実測フレームレート。
 
 // マイクロホン設定変更時にAndroid側から呼び出される関数。再ロードする。
 function SAI_AndroidMicrophoneOnReload(){
-	localStorage.setItem('SaiminAndroidMicrophoneOnReload', '1');
+	localStorage.setItem('saiminAndroidMicrophoneOnReload', '1');
 	location.reload();
 }
 
@@ -137,6 +137,33 @@ document.addEventListener('DOMContentLoaded', function(){
 				window.speechSynthesis.cancel();
 			}
 		}
+	}
+
+	// メッセージをしゃべるかどうか？
+	function SAI_speech_set(value){
+		switch(value){
+		case 0:
+		case '0':
+		case false:
+		case 'false':
+		default:
+			value = 0;
+			break;
+
+		case 1:
+		case '1':
+		case true:
+		case 'true':
+			value = 1;
+			break;
+		}
+
+		// UIを更新。
+		if(sai_id_checkbox_speech_on_off.checked != !!value)
+			sai_id_checkbox_speech_on_off.checked = !!value;
+
+		// ローカルストレージに記憶。
+		localStorage.setItem('saiminSpeech', value.toString());
 	}
 
 	// 画面点滅（サブリミナル）の種類を指定する。
@@ -266,8 +293,8 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// スピーチを開始する。
-	async function SAI_speech_play(text){
-		console.log('SAI_speech_play');
+	async function SAI_speech_start(text){
+		console.log('SAI_speech_start');
 
 		// 開始する前にいったんキャンセルする。
 		SAI_speech_cancel();
@@ -626,11 +653,13 @@ document.addEventListener('DOMContentLoaded', function(){
 		// ローカルストレージに記憶。
 		localStorage.setItem('saiminText', sai_message_text);
 
-		// メッセージテキストがあればスピーチを開始、なければスピーチをキャンセル。
-		if(sai_message_text){
-			SAI_speech_play(sai_message_text);
-		}else{
-			SAI_speech_cancel();
+		if(!sai_stopping){ // 停止中でないとき
+			// メッセージテキストがあればスピーチを開始、なければスピーチをキャンセル。
+			if(sai_message_text){
+				SAI_speech_start(sai_message_text);
+			}else{
+				SAI_speech_cancel();
+			}
 		}
 
 		// メッセージテキストをセットする。
@@ -2023,6 +2052,14 @@ document.addEventListener('DOMContentLoaded', function(){
 		}else{
 			SAI_screen_set_brightness('normal');
 		}
+
+		// ローカルストレージにスピーチがあれば読み込む。
+		let saiminSpeech = localStorage.getItem('saiminSpeech');
+		if(saiminSpeech){
+			SAI_speech_set(saiminSpeech);
+		}else{
+			SAI_speech_set(false);
+		}
 	}
 
 	// キャンバスがクリックされた。
@@ -2041,7 +2078,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				kirakira.play();
 			}
 		}
-		if(sai_id_control_panel.classList.contains('sai_class_invisible')){
+		if(!sai_stopping){
 			// 催眠解除の場合、ダミー画面に戻す。
 			if(sai_pic_type == -1)
 				SAI_pic_set_type(0);
@@ -2051,6 +2088,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			sai_count_down = null;
 			// 映像の停止。
 			sai_stopping = true;
+			// スピーチをキャンセル。
+			SAI_speech_cancel();
 			// カウンターのリセット。
 			sai_counter = 0;
 		}
@@ -2102,10 +2141,17 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 「催眠開始」ボタン。
 		sai_id_button_start_hypnosis.addEventListener('click', function(e){
+			// コントロールパネルを非表示にする。
 			sai_id_control_panel.classList.add('sai_class_invisible');
-			sai_stopping = false;
+			// 必要ならカウントダウンを開始する。
 			if(sai_id_checkbox_count_down.checked)
 				sai_count_down = new Date().getTime();
+			// 必要ならスピーチを開始する。
+			if(sai_id_checkbox_speech_on_off.checked){
+				SAI_speech_start(sai_message_text);
+			}
+			// 映像を再開する。
+			sai_stopping = false;
 		});
 		// 「催眠解除」ボタン。
 		sai_id_button_release_hypnosis.addEventListener('click', function(e){
@@ -2267,6 +2313,13 @@ document.addEventListener('DOMContentLoaded', function(){
 				return;
 			SAI_blink_set_type(sai_id_range_blink_type.value);
 		}, false);
+
+		// 「メッセージをしゃべる」
+		sai_id_checkbox_speech_on_off.addEventListener('click', function(e){
+			if(!sai_ready)
+				return;
+			SAI_speech_set(sai_id_checkbox_speech_on_off.checked);
+		});
 
 		// キャンバスのクリック。
 		sai_id_canvas_01.addEventListener('click', function(e){
@@ -2527,6 +2580,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		// イベントリスナー群を登録する。
 		SAI_register_event_listeners();
 
+		// ネイティブアプリでなければ画面の明るさの設定を隠す。
+		if (!SAI_is_native_app())
+			sai_id_brightness_show_or_hide.classList.add('sai_class_invisible');
+
 		// ローカルストレージに応じて処理を行う。
 		let saiminAdultCheck3 = localStorage.getItem('saiminAdultCheck3');
 		let saiminLanguage3 = localStorage.getItem('saiminLanguage3');
@@ -2567,8 +2624,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		// マイクロホン用の再読み込みなら、マイクを有効にする。
-		if(localStorage.getItem('SaiminAndroidMicrophoneOnReload')){
-			localStorage.removeItem('SaiminAndroidMicrophoneOnReload');
+		if(localStorage.getItem('saiminAndroidMicrophoneOnReload')){
+			localStorage.removeItem('saiminAndroidMicrophoneOnReload');
 			mic_connect();
 			sai_id_label_mic.classList.add('sai_class_checked');
 		}

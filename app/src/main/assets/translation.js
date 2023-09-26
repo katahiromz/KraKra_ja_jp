@@ -811,6 +811,7 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_button_start_hypnosis, '催眠開始...');
 		trans_setHtmlText(sai_id_button_release_hypnosis, '催眠解除');
 		trans_setHtmlText(sai_id_text_count_down, 'カウントダウン:');
+		trans_setHtmlText(sai_id_text_label_message_speech, 'メッセージをしゃべる:');
 	}else if(lang == 'zh-CN' || lang == 'cn'){ // Chinese (Simplified)
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_ZW_CN);
 		trans_setImageSrc(sai_id_img_mic, 'images/mic.png');
@@ -873,6 +874,7 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_button_start_hypnosis, '开始催眠...');
 		trans_setHtmlText(sai_id_button_release_hypnosis, '释放催眠');
 		trans_setHtmlText(sai_id_text_count_down, '倒数：');
+		trans_setHtmlText(sai_id_text_label_message_speech, '留言演讲：');
 	}else if(lang == 'zh-TW'){ // Chinese (Traditional)
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_TW_CN);
 		trans_setImageSrc(sai_id_img_mic, 'images/mic.png');
@@ -935,6 +937,7 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_button_start_hypnosis, '開始催眠...');
 		trans_setHtmlText(sai_id_button_release_hypnosis, '釋放催眠');
 		trans_setHtmlText(sai_id_text_count_down, '倒數：');
+		trans_setHtmlText(sai_id_text_label_message_speech, '留言演講：');
 	}else if(lang == 'kr' || lang == 'ko' || lang == 'ko-KR'){ // Korean
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_KO_KR);
 		trans_setImageSrc(sai_id_img_mic, 'images/mic.png');
@@ -997,6 +1000,7 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_button_start_hypnosis, '최면 시작...');
 		trans_setHtmlText(sai_id_button_release_hypnosis, '최면 해제');
 		trans_setHtmlText(sai_id_text_count_down, '카운트다운:');
+		trans_setHtmlText(sai_id_text_label_message_speech, '메시지 연설:');
 	}else if(lang == 'it' || lang == 'it-IT'){ // Italian
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_IT);
 		trans_setImageSrc(sai_id_img_mic, 'images/mic.png');
@@ -1059,6 +1063,7 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_button_start_hypnosis, 'Inizia l\'ipnosi...');
 		trans_setHtmlText(sai_id_button_release_hypnosis, 'Rilascia l\'ipnosi');
 		trans_setHtmlText(sai_id_text_count_down, 'Conto alla rovescia:');
+		trans_setHtmlText(sai_id_text_label_message_speech, 'Discorso del messaggio:');
 	}else if(lang == 'de' || lang == 'de-DE'){ // German
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_DE);
 		trans_setImageSrc(sai_id_img_mic, 'images/mic.png');
@@ -1121,6 +1126,7 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_button_start_hypnosis, 'Beginnen Sie mit der Hypnose...');
 		trans_setHtmlText(sai_id_button_release_hypnosis, 'Hypnose loslassen');
 		trans_setHtmlText(sai_id_text_count_down, 'Countdown:');
+		trans_setHtmlText(sai_id_text_label_message_speech, 'Nachrichtenansprache:');
 	}else{ // English is default
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_EN);
 		trans_setImageSrc(sai_id_img_mic, 'images/mic.png');
@@ -1183,8 +1189,15 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_button_start_hypnosis, 'Start Hypnosis...');
 		trans_setHtmlText(sai_id_button_release_hypnosis, 'Release Hypnosis');
 		trans_setHtmlText(sai_id_text_count_down, 'Count Down:');
+		trans_setHtmlText(sai_id_text_label_message_speech, 'Message Speech:');
 	}
 
 	trans_setHtmlText(sai_id_page_agreement_header_1, trans_getText('TEXT_ABOUT_APP'));
 	trans_setHtmlText(sai_id_button_agree, trans_getText('TEXT_I_AGREE'));
+
+	// 設定画面のロゴ画像をセットする。
+	let logo_imgs = document.getElementsByClassName('sai_class_img_config_logo');
+	for (let img of logo_imgs){
+		trans_setImageSrc(img, trans_getText('TEXT_LOGO'));
+	}
 }
