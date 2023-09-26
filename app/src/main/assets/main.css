@@ -173,7 +173,7 @@ label {
 	left: calc(50dvw - 50dvw / 2);
 	top: calc(50dvh - 15dvh / 2);
 	background-color: rgba(100%, 50%, 100%, 100%);
-	font-size: 7vmin;
+	font-size: 6vmin;
 	font-weight: bold;
 }
 #sai_id_button_release_hypnosis {
@@ -183,7 +183,7 @@ label {
 	left: calc(50dvw - 50dvw / 2);
 	top: calc(70dvh - 15dvh / 2);
 	background-color: rgba(100%, 50%, 100%, 100%);
-	font-size: 7vmin;
+	font-size: 6vmin;
 	font-weight: bold;
 }
 @media screen and (max-height: 360px) {
