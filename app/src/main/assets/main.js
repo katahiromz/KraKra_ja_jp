@@ -1799,14 +1799,19 @@ document.addEventListener('DOMContentLoaded', function(){
 		switch (sai_pic_type){
 		case 8:
 		case 9:
-			// 特定の画で解像度を下げて描画する。
-			let ratio = 0.5;
-			sai_id_canvas_02.width = dx * ratio;
-			sai_id_canvas_02.height = dy * ratio;
-			let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
-			SAI_draw_pic(ctx2, 0, 0, dx * ratio, dy * ratio);
-			ctx.drawImage(sai_id_canvas_02, 0, 0, dx * ratio, dy * ratio, px, py, dx, dy);
+			// 特定の映像で解像度を下げて描画する。
+			if(!sai_count_down){
+				let ratio = 0.5;
+				sai_id_canvas_02.width = dx * ratio;
+				sai_id_canvas_02.height = dy * ratio;
+				let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+				SAI_draw_pic(ctx2, 0, 0, dx * ratio, dy * ratio);
+				ctx.drawImage(sai_id_canvas_02, 0, 0, dx * ratio, dy * ratio, px, py, dx, dy);
+			}else{
+				SAI_draw_pic(ctx, px, py, dx, dy);
+			}
 			break;
+
 		default:
 			// それ以外は普通に描画する。
 			SAI_draw_pic(ctx, px, py, dx, dy);
@@ -1824,17 +1829,17 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像をすべて描画する。
 	function SAI_draw_all(){
+		// 二次元の描画コンテキスト。キャンバスは不透明。
 		let ctx = sai_id_canvas_01.getContext('2d', { alpha: false });
 
+		// 画面のサイズ。
 		let cx = sai_screen_width, cy = sai_screen_height;
-		let x = sai_screen_width / 2, y = sai_screen_height / 2;
 
-		let splitted = false;
-		if(sai_screen_split == 1){
+		let splitted = false; // 画面分割したか？
+		if(sai_screen_split == 1){ // 画面分割なし。
 			SAI_draw_pic_blur(ctx, 0, 0, cx, cy);
 			SAI_message_set_position(sai_id_text_floating_1, 0, 0, cx, cy, sai_counter);
-			y += cy / 4;
-		}else if(sai_screen_split == -1){
+		}else if(sai_screen_split == -1){ // 画面分割自動。
 			if(cx >= cy * 1.75){
 				SAI_draw_pic_blur(ctx, 0, 0, cx / 2, cy);
 				//SAI_draw_pic_blur(ctx, cx / 2, 0, cx / 2, cy);
@@ -1852,9 +1857,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			}else{
 				SAI_draw_pic_blur(ctx, 0, 0, cx, cy);
 				SAI_message_set_position(sai_id_text_floating_1, 0, 0, cx, cy, sai_counter);
-				y += cy / 4;
 			}
-		}else{
+		}else{ // 画面２分割。
 			if(cx >= cy){
 				SAI_draw_pic_blur(ctx, 0, 0, cx / 2, cy);
 				//SAI_draw_pic_blur(ctx, cx / 2, 0, cx / 2, cy);
@@ -1871,6 +1875,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			splitted = true;
 		}
 
+		// 浮遊するテキストを処理する。
 		if(sai_stopping || sai_count_down){
 			sai_id_text_floating_1.classList.add('sai_class_invisible');
 			sai_id_text_floating_2.classList.add('sai_class_invisible');
@@ -1890,25 +1895,32 @@ document.addEventListener('DOMContentLoaded', function(){
 			sai_id_text_floating_2.classList.add('sai_class_invisible');
 		}
 
+		// きらめきを描画する。
 		for (let iStar = 0; iStar < sai_stars.length; ++iStar){
 			let star = sai_stars[iStar];
 			if(star){
+				// 黄色い光を描く。
 				ctx.fillStyle = `rgb(255, 255, 0, 0.8)`;
 				SAI_draw_light(ctx, star[0], star[1], star[2]);
+
+				// きらめきの半径がだんだん小さくなる演出。
 				if(star[2] > 1.0){
 					star[2] *= 0.98;
 				}
 			}
 		}
+		// きらめきがだんだん消えうせる演出。
 		sai_stars.shift();
 		sai_stars.push(null);
 
+		// 画面サイズが変わっていればキャンバスをフィットさせる。
 		if(window.innerWidth != sai_screen_width || window.innerHeight != sai_screen_height ||
 		   window.innerWidth != sai_id_canvas_01.width || window.innerHeight != sai_id_canvas_01.height)
 		{
 			SAI_screen_fit();
 		}
 
+		// 時間の経過を計算。
 		let new_time = (new Date()).getTime();
 		let diff_time = (new_time - sai_old_time) / 1000.0;
 		if(sai_rotation_type == 'counter')
@@ -1918,9 +1930,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_counter += diff_time * sai_speed;
 		sai_old_time = new_time;
 
-		if(sai_speed_irregular){
+		if(sai_speed_irregular){ // スピードが不規則なら
 			sai_clock += diff_time;
-			if(sai_clock >= sai_speed / 30.0){
+			if(sai_clock >= sai_speed / 30.0){ // ときどき速度を変える。
 				sai_clock = 0;
 				const MIN_VALUE = 35.0;
 				const MAX_VALUE = 70.0;
@@ -1932,7 +1944,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			}
 		}
 
-		if(sai_DEBUGGING){
+		if(sai_DEBUGGING){ // デバッグ中なら
+			// FPSを描画する。
 			if(diff_time != 0){
 				sai_FPS = 1 / Math.abs(diff_time);
 				sai_FPS = Math.round(sai_FPS * 10) / 10;
@@ -1946,10 +1959,12 @@ document.addEventListener('DOMContentLoaded', function(){
 			ctx.fillText(text, (sai_screen_width - width) / 2, height);
 		}
 
-		if(sai_stopping){
+		if(sai_stopping){ // 停止中なら映像の種類を描画する。
+			// 映像の種類のテキストを取得。
 			let text = trans_getSelectOptionText(sai_id_select_pic_type, sai_id_select_pic_type.value);
+
+			// {{LANGUAGE_SPECIFIC}}: 言語に応じてテキストサイズを設定。
 			let text_size;
-			// {{LANGUAGE_SPECIFIC}}
 			switch (sai_id_select_language_1.value){
 			case 'en':
 			case 'de':
@@ -1967,11 +1982,15 @@ document.addEventListener('DOMContentLoaded', function(){
 				break;
 			}
 			ctx.font = text_size.toString() + 'px san-serif';
+
+			// 小さければ拡大する。
 			let measure = ctx.measureText(text);
 			if(measure.width * 2 < sai_screen_width){
 				text_size *= 1.8;
 				ctx.font = text_size.toString() + 'px san-serif';
 			}
+
+			// テキストに枠を付けて描画。
 			ctx.textAlign = 'center';
 			ctx.textBaseline = 'middle';
 			ctx.fillStyle = "white";
@@ -1986,6 +2005,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			ctx.fillText(text, x, y);
 		}
 
+		// 必要ならアニメーションを要求する。
 		if(sai_request_anime){
 			sai_request_anime = window.requestAnimationFrame(SAI_draw_all);
 		}
