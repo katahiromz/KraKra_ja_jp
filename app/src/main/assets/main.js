@@ -1,17 +1,18 @@
 // 催眠アプリ「催眠くらくら」のJavaScriptのメインコード。
 // 暗号名はKraKra。
 
-// 【KraKra JavaScript 命名規則】
-// ☆ 関数名の頭に SAI_ を付ける。
-// ☆ 変数名の頭に sai_ を付ける。
-// ☆ 要素IDの頭に sai_id_ を付ける。
-// ☆ CSSクラスの頭に sai_class_ を付ける。
-//
-// 言語特有の記述が必要な個所は「{{LANGUAGE_SPECIFIC}}」というコメントを付けること。
-
 const sai_VERSION = '3.4.6'; // KraKraバージョン番号。
 const sai_DEBUGGING = false; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
+
+// 【KraKra JavaScript 命名規則】
+//
+// - 関数名の頭に SAI_ を付ける。
+// - 変数名・定数名の頭に sai_ を付ける。
+// - 要素IDの頭に sai_id_ を付ける。
+// - CSSクラスの頭に sai_class_ を付ける。
+//
+// ※ 言語特有の記述が必要な個所は「{{LANGUAGE_SPECIFIC}}」というコメントを付けること。
 
 // マイクロホン設定変更時にAndroid側から呼び出される関数。再ロードする。
 function SAI_AndroidMicrophoneOnReload(){
@@ -2610,9 +2611,13 @@ document.addEventListener('DOMContentLoaded', function(){
 		// イベントリスナー群を登録する。
 		SAI_register_event_listeners();
 
-		// ネイティブアプリでなければ画面の明るさの設定を隠す。
-		if (!SAI_is_native_app())
-			sai_id_brightness_show_or_hide.classList.add('sai_class_invisible');
+		// ネイティブアプリでなければネイティブオンリーの要素を隠す。
+		if (!SAI_is_native_app()){
+			let items = document.getElementsByClassName('sai_class_native_app_only');
+			for(let item of items){
+				item.classList.add('sai_class_invisible');
+			}
+		}
 
 		// ローカルストレージに応じて処理を行う。
 		let saiminAdultCheck3 = localStorage.getItem('saiminAdultCheck3');
