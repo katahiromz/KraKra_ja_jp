@@ -9,7 +9,7 @@
 //
 // 言語特有の記述が必要な個所は「{{LANGUAGE_SPECIFIC}}」というコメントを付けること。
 
-const sai_VERSION = '3.4.5'; // KraKraバージョン番号。
+const sai_VERSION = '3.4.6'; // KraKraバージョン番号。
 const sai_DEBUGGING = false; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
 
@@ -22,7 +22,7 @@ function SAI_AndroidMicrophoneOnReload(){
 // ドキュメントの読み込みが完了（DOMContentLoaded）されたら無名関数が呼び出される。
 document.addEventListener('DOMContentLoaded', function(){
 	// 変数を保護するため、関数内部に閉じ込める。
-	const NUM_TYPE = 9; // 「画」の個数。
+	const sai_NUM_TYPE = 10; // 「画」の個数。
 	let sai_screen_width = 0; // スクリーンの幅（ピクセル単位）を覚えておく。
 	let sai_screen_height = 0; // スクリーンの高さ（ピクセル単位）を覚えておく。
 	let sai_old_time = (new Date()).getTime(); // 処理フレームの時刻を覚えておく。
@@ -2076,9 +2076,9 @@ document.addEventListener('DOMContentLoaded', function(){
 			return;
 		if(0){
 			if(e.shiftKey){
-				SAI_pic_set_type((sai_pic_type + (NUM_TYPE + 1) - 1) % (NUM_TYPE + 1));
+				SAI_pic_set_type((sai_pic_type + sai_NUM_TYPE - 1) % sai_NUM_TYPE);
 			}else{
-				SAI_pic_set_type((sai_pic_type + 1) % (NUM_TYPE + 1));
+				SAI_pic_set_type((sai_pic_type + 1) % sai_NUM_TYPE);
 			}
 			sai_id_select_pic_type.value = sai_pic_type.toString();
 			if(sai_kirakira_sound_type == 1 && sai_kirakira_sound_object && sai_id_checkbox_pic_change_sound.checked){
@@ -2129,7 +2129,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 「一つ前の映像」ボタン。
 		sai_id_button_previous_image.addEventListener('click', function(e){
 			let type = parseInt(sai_pic_type);
-			type = (type + NUM_TYPE) % (NUM_TYPE + 1);
+			type = (type + sai_NUM_TYPE - 1) % sai_NUM_TYPE;
 			SAI_pic_set_type(type);
 			if(sai_kirakira_sound_type == 1 && sai_kirakira_sound_object && sai_id_checkbox_pic_change_sound.checked){
 				let kirakira = new Audio('sn/kirakira.mp3');
@@ -2139,7 +2139,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 「一つ次の映像」ボタン。
 		sai_id_button_next_image.addEventListener('click', function(e){
 			let type = parseInt(sai_pic_type);
-			type = (type + 1) % (NUM_TYPE + 1);
+			type = (type + 1) % sai_NUM_TYPE;
 			SAI_pic_set_type(type);
 			if(sai_kirakira_sound_type == 1 && sai_kirakira_sound_object && sai_id_checkbox_pic_change_sound.checked){
 				let kirakira = new Audio('sn/kirakira.mp3');
