@@ -6,7 +6,7 @@ plugins {
 apply plugin: 'kotlin-kapt' // for Permission Dispatcher
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
     buildToolsVersion "30.0.0"
 
     defaultConfig {

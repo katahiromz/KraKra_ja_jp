@@ -421,7 +421,12 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     private fun getVersionName(): String {
         val appName: String = this.packageName
         val pm: PackageManager = this.packageManager
-        val pi: PackageInfo = pm.getPackageInfo(appName, PackageManager.GET_META_DATA)
+        val pi: PackageInfo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            pm.getPackageInfo(appName, PackageManager.PackageInfoFlags.of(PackageManager.GET_META_DATA.toLong()))
+        } else {
+            @Suppress("DEPRECATION")
+            pm.getPackageInfo(appName, PackageManager.GET_META_DATA)
+        }
         return pi.versionName
     }
 
