@@ -1788,15 +1788,18 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 必要ならサブリミナルやぼかしなどをつけて映像を描画。
 	function SAI_draw_pic_blur(ctx, px, py, dx, dy){
-		if(sai_blinking_interval != 0 && sai_pic_type != -1){
+		// 一定の条件で画面点滅（サブリミナル）を表示。
+		if(!sai_stopping && sai_blinking_interval != 0 && sai_pic_type != -1){
 			if(SAI_mod(sai_old_time / 1000, sai_blinking_interval) < (sai_blinking_interval * 0.3)){
 				SAI_draw_subliminal(ctx, px, py, dx, dy);
 				return;
 			}
 		}
+
 		switch (sai_pic_type){
 		case 8:
 		case 9:
+			// 特定の画で解像度を下げて描画する。
 			let ratio = 0.5;
 			sai_id_canvas_02.width = dx * ratio;
 			sai_id_canvas_02.height = dy * ratio;
@@ -1805,6 +1808,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			ctx.drawImage(sai_id_canvas_02, 0, 0, dx * ratio, dy * ratio, px, py, dx, dy);
 			break;
 		default:
+			// それ以外は普通に描画する。
 			SAI_draw_pic(ctx, px, py, dx, dy);
 			break;
 		}
