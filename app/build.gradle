@@ -44,7 +44,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.5.0'
 
     // 起動画面表示用。
-    implementation 'androidx.core:core-splashscreen:1.0.0-beta01'
+    implementation 'androidx.core:core-splashscreen:1.0.0'
 
     // レイアウト管理用。
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
