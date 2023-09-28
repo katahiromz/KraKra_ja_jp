@@ -7,15 +7,11 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
-import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
-import android.os.LocaleList
 import android.speech.tts.TextToSpeech
 import android.view.View
 import android.view.WindowInsets
-import android.view.WindowInsetsController.BEHAVIOR_SHOW_BARS_BY_SWIPE
-import android.view.WindowInsetsController.BEHAVIOR_SHOW_BARS_BY_TOUCH
 import android.view.WindowManager
 import android.webkit.*
 import android.widget.ProgressBar
