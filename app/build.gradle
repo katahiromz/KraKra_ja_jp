@@ -3,7 +3,7 @@ plugins {
     id 'kotlin-android'
 }
 
-apply plugin: 'kotlin-kapt' // for Permission Dispatcher
+apply plugin: 'kotlin-kapt' // for Permissions Dispatcher
 
 android {
     compileSdkVersion 33
@@ -55,7 +55,7 @@ dependencies {
     // ログ出力用：Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
-    // 権限管理用：Permission Dispatcher
+    // 権限管理用：Permissions Dispatcher
     implementation "com.github.permissions-dispatcher:permissionsdispatcher:4.9.2"
     kapt "com.github.permissions-dispatcher:permissionsdispatcher-processor:4.9.2"
 
