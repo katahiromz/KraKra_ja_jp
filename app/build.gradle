@@ -7,7 +7,6 @@ apply plugin: 'kotlin-kapt' // for Permissions Dispatcher
 
 android {
     compileSdkVersion 33
-    buildToolsVersion "30.0.0"
 
     defaultConfig {
         applicationId "com.katahiromz.krakra_ja_jp"
@@ -27,8 +26,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility kotlin_version
+        targetCompatibility kotlin_version
     }
     kotlinOptions {
         jvmTarget = '1.8'
@@ -40,17 +39,17 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.core:core-ktx:1.5.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.core:core-ktx:1.9.0'
 
     // 起動画面表示用。
-    implementation 'androidx.core:core-splashscreen:1.0.0'
+    implementation 'androidx.core:core-splashscreen:1.0.1'
 
     // レイアウト管理用。
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     // ダイアログ表示用。
-    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'com.google.android.material:material:1.6.0'
 
     // ログ出力用：Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
@@ -60,7 +59,7 @@ dependencies {
     kapt "com.github.permissions-dispatcher:permissionsdispatcher-processor:4.9.2"
 
     // テスト用。
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
