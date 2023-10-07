@@ -2660,8 +2660,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// マイクロホン用の再読み込みなら、マイクを有効にする。
 		if(localStorage.getItem('saiminAndroidMicrophoneOnReload')){
-			localStorage.removeItem('saiminAndroidMicrophoneOnReload');
 			mic_connect();
+			localStorage.removeItem('saiminAndroidMicrophoneOnReload');
 			sai_id_label_mic.classList.add('sai_class_checked');
 		}
 

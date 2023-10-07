@@ -5,6 +5,8 @@
     <string name="cancel">Cancel</string>
     <string name="clear">Clear</string>
     <string name="reset">Reset</string>
+    <string name="needs_microphone">This app needs permission to access the microphone.</string>
+    <string name="cant_use_microphone">This app cannot use the microphone without permission.</string>
 
     <!-- main -->
     <string name="app_name">KraKra</string>

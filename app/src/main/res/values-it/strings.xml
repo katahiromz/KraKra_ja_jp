@@ -5,6 +5,8 @@
     <string name="cancel">Annulla</string>
     <string name="clear">Chiara</string>
     <string name="reset">Ripristina</string>
+    <string name="needs_microphone">Questa app necessita dell\'autorizzazione per accedere al microfono.</string>
+    <string name="cant_use_microphone">Questa app non può utilizzare il microfono senza autorizzazione.</string>
 
     <!-- main -->
     <string name="app_name">KraKra</string>

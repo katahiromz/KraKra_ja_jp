@@ -3,27 +3,30 @@
 
 package com.katahiromz.krakra_ja_jp
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.text.InputType
 import android.view.View
-import android.webkit.*
-import android.widget.*
-import androidx.core.app.ActivityCompat.*
-import androidx.core.content.ContextCompat
+import android.webkit.ConsoleMessage
+import android.webkit.JavascriptInterface
+import android.webkit.JsPromptResult
+import android.webkit.JsResult
+import android.webkit.PermissionRequest
+import android.webkit.WebChromeClient
+import android.webkit.WebView
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ListView
+import android.widget.TextView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import timber.log.Timber
-import java.util.*
-
-// 定数。
-const val MY_WEBVIEW_REQUEST_CODE_01 = 999
+import java.util.Locale
 
 class MyWebChromeClient(public var activity: MainActivity?, private val listener: Listener) :
     WebChromeClient() {
 
     // リスナ。
     interface Listener {
-        fun onChromePermissionRequest(permissions: Array<String>, requestCode: Int)
         fun onSpeech(text: String)
         fun onShowToast(text: String, typeOfToast: Int)
         fun onShowSnackbar(text: String, typeOfSnack: Int)
@@ -42,31 +45,16 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
     }
 
     /////////////////////////////////////////////////////////////////////
-    // パーミッション関連
+    // パーミッション関連。
 
-    override fun onPermissionRequest(request: PermissionRequest?) {
-        // Audio record request
-        val audioCheck =
-                ContextCompat.checkSelfPermission(activity!!, Manifest.permission.RECORD_AUDIO)
-        when (audioCheck) {
-            PackageManager.PERMISSION_GRANTED -> {
-                request?.grant(request.resources)
-            }
-            PackageManager.PERMISSION_DENIED -> {
-                val audioRational =
-                        shouldShowRequestPermissionRationale(
-                                activity!!, Manifest.permission.RECORD_AUDIO)
-                if (audioRational) {
-                    listener.onChromePermissionRequest(
-                            arrayOf(Manifest.permission.RECORD_AUDIO),
-                            MY_WEBVIEW_REQUEST_CODE_01)
-                }
-            }
-            else -> {
-                require(false, { "PermissionChecker" })
+    override fun onPermissionRequest(request: PermissionRequest) {
+        for (res in request.resources) {
+            if (res == PermissionRequest.RESOURCE_AUDIO_CAPTURE) {
+                request.grant(request.resources)
+                return
             }
         }
-        // TODO: Add more request
+        super.onPermissionRequest(request)
     }
 
     /////////////////////////////////////////////////////////////////////
@@ -116,20 +104,21 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
     @JavascriptInterface
     fun setLanguage(lang: String) {
         // {{LANGUAGE_SPECIFIC}}
-        var locale : Locale = if (lang == "ja" || lang == "jp" || lang == "ja-JP") { // Japanese
-            Locale.JAPANESE
+        var locale : Locale
+        if (lang == "ja" || lang == "jp" || lang == "ja-JP") { // Japanese
+            locale = Locale.JAPANESE
         } else if (lang == "zh-CN") { // Chinese (Simplified)
-            Locale.SIMPLIFIED_CHINESE
+            locale = Locale.SIMPLIFIED_CHINESE
         } else if (lang == "zh-TW") { // Chinese (Traditional)
-            Locale.TRADITIONAL_CHINESE
+            locale = Locale.TRADITIONAL_CHINESE
         } else if (lang == "ko-KR") { // Korean
-            Locale.KOREAN
+            locale = Locale.KOREAN
         } else if (lang == "it" || lang == "it-IT") { // Italian
-            Locale.ITALIAN
+            locale = Locale.ITALIAN
         } else if (lang == "de" || lang == "de-DE") { // German
-            Locale.GERMAN
+            locale = Locale.GERMAN
         } else { // English is default
-            Locale.ENGLISH
+            locale = Locale.ENGLISH
         }
         Locale.setDefault(locale)
         activity!!.setCurLocale(locale)

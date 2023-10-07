@@ -5,6 +5,8 @@
     <string name="cancel">取消</string>
     <string name="clear">清除</string>
     <string name="reset">重置</string>
+    <string name="needs_microphone">此应用程序需要访问麦克风的权限。</string>
+    <string name="cant_use_microphone">此应用程序未经许可不能使用麦克风。</string>
 
     <!-- main -->
     <string name="app_name">催眠克拉克拉</string>

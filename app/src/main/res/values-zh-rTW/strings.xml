@@ -5,6 +5,8 @@
     <string name="cancel">取消</string>
     <string name="clear">清除</string>
     <string name="reset">重置</string>
+    <string name="needs_microphone">此應用程式需要存取麥克風的權限。</string>
+    <string name="cant_use_microphone">此應用程式未經許可不能使用麥克風。</string>
 
     <!-- main -->
     <string name="app_name">催眠克拉克拉</string>

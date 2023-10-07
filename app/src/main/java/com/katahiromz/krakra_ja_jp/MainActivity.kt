@@ -19,7 +19,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import createLocalizedContext
 import timber.log.Timber
@@ -38,8 +40,7 @@ const val LONG_SNACK = 1
 const val ACTION_SNACK_OK = 2
 // TODO: Add more snack
 
-class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.OnInitListener,
-        ActivityCompat.OnRequestPermissionsResultCallback {
+class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.OnInitListener {
     /////////////////////////////////////////////////////////////////////
     // 共通
 
@@ -176,30 +177,33 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
     /////////////////////////////////////////////////////////////////////
     // パーミッション関連
+    // 参考：https://qiita.com/sokume2106/items/46bd286569a6e7fac43d
 
-    override fun onRequestPermissionsResult(
-            requestCode: Int,
-            permissions: Array<String>,
-            grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        var grantedAll = true
-        // 音声の要求。
-        if (requestCode == MY_WEBVIEW_REQUEST_CODE_01) {
-            for (result in grantResults) {
-                if (result != PackageManager.PERMISSION_GRANTED) {
-                    grantedAll = false
-                }
+    private val audioRecordingPermissionChecker =
+        PermissionChecker(
+            this,
+            android.Manifest.permission.RECORD_AUDIO,
+            onDenied = {
+                showToast(getLocString(R.string.cant_use_microphone), LONG_TOAST)
+            },
+            onShowRationale = { onRequest ->
+                var title = getLocString(R.string.app_name)
+                var message = getLocString(R.string.needs_microphone)
+                MaterialAlertDialogBuilder(this, R.style.AlertDialogTheme)
+                    .setTitle(title)
+                    .setMessage(message)
+                    .setPositiveButton(getLocString(R.string.ok)) { _, _ -> onRequest() }
+                    .setCancelable(false)
+                    .show()
             }
-            if (grantedAll) {
-                // Permission has been granted.
-                webView?.evaluateJavascript("SAI_AndroidMicrophoneOnReload()", null)
-            } else {
-                // Permission request was denied.
-                showSnackbar(getLocString(R.string.no_audio_record), ACTION_SNACK_OK)
-            }
+        )
+
+    @JavascriptInterface
+    fun requestAudioRecoding() {
+        val audioCheck = ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO)
+        if (audioCheck != PackageManager.PERMISSION_GRANTED) {
+            audioRecordingPermissionChecker.runWithPermission({})
         }
-        // TODO: Add more request
     }
 
     /////////////////////////////////////////////////////////////////////
@@ -220,6 +224,11 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         // アクションバーを隠す。
         if (false) { // Theme.MaterialComponents.DayNight.NoActionBarで指定できるので省略。
             supportActionBar?.hide()
+        }
+
+        var granted = ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO)
+        if (granted != PackageManager.PERMISSION_GRANTED) {
+            requestAudioRecoding()
         }
 
         // WebViewを初期化。
@@ -351,10 +360,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     private fun initChromeClient() {
         // まず、クロームクライアントを作成する。
         chromeClient = MyWebChromeClient(this, object : MyWebChromeClient.Listener {
-            override fun onChromePermissionRequest(permissions: Array<String>, requestCode: Int) {
-                requestPermissions(permissions, requestCode)
-            }
-
             override fun onSpeech(text: String) {
                 Timber.i("onSpeech")
                 theText = text // スピーチテキストをセットする。

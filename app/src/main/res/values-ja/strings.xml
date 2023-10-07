@@ -5,6 +5,8 @@
     <string name="cancel">キャンセル</string>
     <string name="clear">クリア</string>
     <string name="reset">リセット</string>
+    <string name="needs_microphone">このアプリはマイクにアクセスするために権限が必要です。</string>
+    <string name="cant_use_microphone">このアプリは権限なくマイクを使うことはできません。</string>
 
     <!-- main -->
     <string name="app_name">催眠くらくら</string>

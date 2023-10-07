@@ -5,6 +5,8 @@
     <string name="cancel">취소</string>
     <string name="clear">클리어</string>
     <string name="reset">초기화</string>
+    <string name="needs_microphone">이 앱은 마이크에 접근하기 위한 권한이 필요합니다.</string>
+    <string name="cant_use_microphone">이 앱은 허가 없이 마이크를 사용할 수 없습니다.</string>
 
     <!-- main -->
     <string name="app_name">최면 크라크라</string>
