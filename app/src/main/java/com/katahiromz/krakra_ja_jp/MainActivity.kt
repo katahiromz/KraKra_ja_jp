@@ -226,6 +226,10 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             supportActionBar?.hide()
         }
 
+        // ロケールをセットする。
+        setCurLocale(Locale.getDefault())
+
+        // 権限を確認する。
         var granted = ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO)
         if (granted != PackageManager.PERMISSION_GRANTED) {
             requestAudioRecoding()
