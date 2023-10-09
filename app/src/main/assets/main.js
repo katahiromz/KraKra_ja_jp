@@ -14,12 +14,6 @@ let sai_FPS = 0; // 実測フレームレート。
 //
 // ※ 言語特有の記述が必要な個所は「{{LANGUAGE_SPECIFIC}}」というコメントを付けること。
 
-// マイクロホン設定変更時にAndroid側から呼び出される関数。再ロードする。
-function SAI_AndroidMicrophoneOnReload(){
-	localStorage.setItem('saiminAndroidMicrophoneOnReload', '1');
-	location.reload();
-}
-
 // ドキュメントの読み込みが完了（DOMContentLoaded）されたら無名関数が呼び出される。
 document.addEventListener('DOMContentLoaded', function(){
 	// 変数を保護するため、関数内部に閉じ込める。
