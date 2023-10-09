@@ -1790,7 +1790,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 必要ならサブリミナルやぼかしなどをつけて映像を描画。
 	function SAI_draw_pic_blur(ctx, px, py, dx, dy){
 		// 一定の条件で画面点滅（サブリミナル）を表示。
-		if(!sai_stopping && sai_blinking_interval != 0 && sai_pic_type != -1){
+		if(!sai_stopping && !sai_count_down && sai_blinking_interval != 0 && sai_pic_type != -1){
 			if(SAI_mod(sai_old_time / 1000, sai_blinking_interval) < (sai_blinking_interval * 0.3)){
 				SAI_draw_subliminal(ctx, px, py, dx, dy);
 				return;
