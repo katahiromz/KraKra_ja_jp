@@ -788,6 +788,7 @@ function trans_localize(lang){
 		trans_setHtmlText(speed_irregular_label, '不規則');
 		trans_setHtmlText(sai_id_text_rotation, '逆回転:');
 		trans_setHtmlText(sai_id_text_blinking, '画面点滅:');
+		trans_setHtmlText(sai_id_text_fullscreen_mode, 'フルスクリーン モード:');
 		trans_setHtmlText(sai_id_text_message_size, 'メッセージの大きさ:');
 		trans_setHtmlText(sai_id_text_note, '音符ボタン:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(なし)');
@@ -851,6 +852,7 @@ function trans_localize(lang){
 		trans_setHtmlText(speed_irregular_label, '不规律的');
 		trans_setHtmlText(sai_id_text_rotation, '反向旋转：');
 		trans_setHtmlText(sai_id_text_blinking, '屏幕闪烁：');
+		trans_setHtmlText(sai_id_text_fullscreen_mode, '全屏模式：');
 		trans_setHtmlText(sai_id_text_message_size, '消息大小：');
 		trans_setHtmlText(sai_id_text_note, '声音按钮：');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(无)');
@@ -914,6 +916,7 @@ function trans_localize(lang){
 		trans_setHtmlText(speed_irregular_label, '不規律的');
 		trans_setHtmlText(sai_id_text_rotation, '反向旋轉：');
 		trans_setHtmlText(sai_id_text_blinking, '螢幕閃爍：');
+		trans_setHtmlText(sai_id_text_fullscreen_mode, '全螢幕模式：');
 		trans_setHtmlText(sai_id_text_message_size, '消息大小：');
 		trans_setHtmlText(sai_id_text_note, '聲音按鈕：');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(無)');
@@ -977,6 +980,7 @@ function trans_localize(lang){
 		trans_setHtmlText(speed_irregular_label, '불규칙');
 		trans_setHtmlText(sai_id_text_rotation, '역회전:');
 		trans_setHtmlText(sai_id_text_blinking, '화면 깜박임:');
+		trans_setHtmlText(sai_id_text_fullscreen_mode, '전체 화면 모드:');
 		trans_setHtmlText(sai_id_text_message_size, '메시지 크기:');
 		trans_setHtmlText(sai_id_text_note, '사운드 버튼:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(없음)');
@@ -1040,6 +1044,7 @@ function trans_localize(lang){
 		trans_setHtmlText(speed_irregular_label, 'Irregolare');
 		trans_setHtmlText(sai_id_text_rotation, 'Controrotazione:');
 		trans_setHtmlText(sai_id_text_blinking, 'Schermo lampeggiante:');
+		trans_setHtmlText(sai_id_text_fullscreen_mode, 'Modalità schermo intero:');
 		trans_setHtmlText(sai_id_text_message_size, 'Dimensione del messaggio:');
 		trans_setHtmlText(sai_id_text_note, 'Pulsante audio:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(Nessuno)');
@@ -1103,6 +1108,7 @@ function trans_localize(lang){
 		trans_setHtmlText(speed_irregular_label, 'Irregulär');
 		trans_setHtmlText(sai_id_text_rotation, 'Gegenrotation:');
 		trans_setHtmlText(sai_id_text_blinking, 'Bildschirm blinkt:');
+		trans_setHtmlText(sai_id_text_fullscreen_mode, 'Vollbildmodus:');
 		trans_setHtmlText(sai_id_text_message_size, 'Größe der Nachricht:');
 		trans_setHtmlText(sai_id_text_note, 'Sound-Taste:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(Kein)');
@@ -1166,6 +1172,7 @@ function trans_localize(lang){
 		trans_setHtmlText(speed_irregular_label, 'Irregular');
 		trans_setHtmlText(sai_id_text_rotation, 'Counterrotation:');
 		trans_setHtmlText(sai_id_text_blinking, 'Screen flashing:');
+		trans_setHtmlText(sai_id_text_fullscreen_mode, 'Full screen mode:');
 		trans_setHtmlText(sai_id_text_message_size, 'Size of message:');
 		trans_setHtmlText(sai_id_text_note, 'Sound button:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(None)');

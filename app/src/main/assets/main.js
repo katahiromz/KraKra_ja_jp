@@ -692,6 +692,28 @@ document.addEventListener('DOMContentLoaded', function(){
 		localStorage.setItem('saiminRotation', sai_rotation_type.toString());
 	}
 
+	// フルスクリーンモード。
+	function SAI_screen_set_fullscreen_mode(value){
+		switch(value){
+		case '1':
+		case 'true':
+		case true:
+			value = 1;
+			break;
+		case '0':
+		case 'false':
+		case false:
+		case null:
+			value = 0;
+			break;
+		}
+
+		sai_id_checkbox_fullscreen.checked = (value == 1);
+
+		// ローカルストレージに記憶。
+		localStorage.setItem('saiminFullscreen', value.toString());
+	}
+
 	// スクリーンのサイズをセットする。必要ならキャンバスのサイズも変更する。
 	function SAI_screen_fit_canvas(){
 		console.log('SAI_screen_fit_canvas');
@@ -2467,6 +2489,11 @@ document.addEventListener('DOMContentLoaded', function(){
 				SAI_help_and_agreement();
 			}
 		});
+
+		// フルスクリーンモード。
+		sai_id_checkbox_fullscreen.addEventListener('click', function(e){
+			SAI_screen_set_fullscreen_mode(sai_id_checkbox_fullscreen.checked);
+		});
 	}
 
 	// キーボード操作を実装。
@@ -2573,19 +2600,33 @@ document.addEventListener('DOMContentLoaded', function(){
 	// メインのボタン群を表示または非表示にする。
 	function SAI_show_main_controls(show){
 		let main_controls = document.getElementsByClassName('sai_class_button_main_control');
+		let tool_buttons = document.getElementsByClassName('sai_tool_button');
 		if(show){
 			for(let control of main_controls){
 				control.classList.remove('sai_class_invisible');
+			}
+			for (let button of tool_buttons){
+				button.classList.remove('sai_class_invisible');
+			}
+			try{
+				android.showNaviBar(true);
+			}catch(error){
+				;
 			}
 		}else{
 			for(let control of main_controls){
 				control.classList.add('sai_class_invisible');
 			}
-		}
-		try{
-			android.showNaviBar(show);
-		}catch(error){
-			;
+			if (sai_id_checkbox_fullscreen.checked){
+				for (let button of tool_buttons){
+					button.classList.add('sai_class_invisible');
+				}
+				try{
+					android.showNaviBar(false);
+				}catch(error){
+					;
+				}
+			}
 		}
 	}
 
@@ -2647,6 +2688,14 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_help_and_agreement();
 		}else if(localStorage.getItem('saiminConfigShowing')){
 			SAI_config();
+		}
+
+		// フルスクリーンモードを復元する。
+		let saiminFullscreen = localStorage.getItem('saiminFullscreen');
+		if(saiminFullscreen == '0' || saiminFullscreen == '1'){
+			SAI_screen_set_fullscreen_mode(saiminFullscreen);
+		}else{
+			SAI_screen_set_fullscreen_mode(false);
 		}
 
 		// service worker
