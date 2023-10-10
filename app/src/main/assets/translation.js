@@ -783,6 +783,7 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '7', '画7: ぼわんぼわん');
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', '画8: クレージーな色');
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', '画9: ミックス渦巻き');
+		trans_setSelectOptionText(sai_id_select_pic_type, '10', '画10: アナログディスク');
 		trans_setHtmlText(sai_id_text_split, '画面分割:');
 		trans_setHtmlText(sai_id_text_speed, 'スピード:');
 		trans_setHtmlText(speed_irregular_label, '不規則');
@@ -847,6 +848,7 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '7', '图7: 头晕 头晕');
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', '图8: 疯狂的颜色');
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', '图9: 混合漩涡');
+		trans_setSelectOptionText(sai_id_select_pic_type, '10', '图10: 模拟光盘');
 		trans_setHtmlText(sai_id_text_split, '分屏：');
 		trans_setHtmlText(sai_id_text_speed, '速度：');
 		trans_setHtmlText(speed_irregular_label, '不规律的');
@@ -911,6 +913,7 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '7', '圖7: 頭暈 頭暈');
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', '圖8: 瘋狂的顏色');
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', '圖9: 混合漩渦');
+		trans_setSelectOptionText(sai_id_select_pic_type, '10', '圖10: 類比光碟');
 		trans_setHtmlText(sai_id_text_split, '分屏：');
 		trans_setHtmlText(sai_id_text_speed, '速度：');
 		trans_setHtmlText(speed_irregular_label, '不規律的');
@@ -975,6 +978,7 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'pic7: 보완 보완');
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'pic8: 미친 색');
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'pic9: 믹스 소용돌이');
+		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'pic10: 아날로그 디스크');
 		trans_setHtmlText(sai_id_text_split, '화면 분할:');
 		trans_setHtmlText(sai_id_text_speed, '속도:');
 		trans_setHtmlText(speed_irregular_label, '불규칙');
@@ -1039,6 +1043,7 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'pic7: Clamore Clamore');
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'pic8: Colori pazzi');
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'pic9: Spirali miste');
+		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'pic10: Disco Analogico');
 		trans_setHtmlText(sai_id_text_split, 'Divisione dello schermo:');
 		trans_setHtmlText(sai_id_text_speed, 'Velocità:');
 		trans_setHtmlText(speed_irregular_label, 'Irregolare');
@@ -1103,6 +1108,7 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'pic7: Lärm, Lärm');
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'pic8: Verrückte Farben');
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'pic9: Gemischte Spiralen');
+		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'pic10: Analoge Disc');
 		trans_setHtmlText(sai_id_text_split, 'Bildschirmaufteilung:');
 		trans_setHtmlText(sai_id_text_speed, 'Geschwindigkeit:');
 		trans_setHtmlText(speed_irregular_label, 'Irregulär');
@@ -1167,6 +1173,7 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'pic7: Clamor Clamor');
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'pic8: Crazy Colors');
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'pic9: Mixed Spirals');
+		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'pic10: Analog Disc');
 		trans_setHtmlText(sai_id_text_split, 'Screen splitting:');
 		trans_setHtmlText(sai_id_text_speed, 'Speed:');
 		trans_setHtmlText(speed_irregular_label, 'Irregular');

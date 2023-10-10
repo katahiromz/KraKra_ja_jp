@@ -32,7 +32,7 @@ function SAI_OnAndroidSystemBarsChanged(sysBarsVisible){
 // ドキュメントの読み込みが完了（DOMContentLoaded）されたら無名関数が呼び出される。
 document.addEventListener('DOMContentLoaded', function(){
 	// 変数を保護するため、関数内部に閉じ込める。
-	const sai_NUM_TYPE = 10; // 「画」の個数。
+	const sai_NUM_TYPE = 11; // 「画」の個数。
 	let sai_screen_width = 0; // スクリーンの幅（ピクセル単位）を覚えておく。
 	let sai_screen_height = 0; // スクリーンの高さ（ピクセル単位）を覚えておく。
 	let sai_old_time = (new Date()).getTime(); // 処理フレームの時刻を覚えておく。
@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	let sai_first_time = false; // 初回か？
 	let sai_request_anime = null; // アニメーションの要求。
 	let sai_count_down = null; // カウントダウンの時刻またはnull。
+	let sai_spiral_img = new Image();
 
 	// このアプリはネイティブアプリか？
 	function SAI_is_native_app(){
@@ -261,6 +262,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 「催眠解除成功」の画像も更新。
 		sai_all_released_img = new Image();
 		sai_all_released_img.src = trans_getText('TEXT_ALL_RELEASED_IMG');
+
+		// スパイラルの画像も更新。
+		sai_spiral_img = new Image();
+		sai_spiral_img.src = "images/spiral.svg";
 
 		// 言語<select>の値も更新。
 		sai_id_select_language_1.value = lang;
@@ -1717,6 +1722,34 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore();
 	}
 
+	// 映像の描画。pic10: Analog Disc
+	function SAI_draw_pic_10(ctx, px, py, dx, dy){
+		ctx.save();
+
+		let qx = px + dx / 2;
+		let qy = py + dy / 2;
+		let maxxy = Math.max(dx, dy);
+		let minxy = Math.min(dx, dy);
+
+		let count2 = SAI_get_tick_count();
+
+		ctx.translate(qx, qy);
+
+		if (sai_spiral_img.complete){
+			let x = -sai_spiral_img.width / 2;
+			let y = -sai_spiral_img.height / 2;
+			ctx.rotate(-count2 * 0.3);
+			let ratio = 2.5 * maxxy / (sai_spiral_img.width + sai_spiral_img.height);
+			ratio *= 1 + (count2 * 0.008) % 0.8;
+			ctx.scale(ratio, ratio);
+			ctx.globalAlpha = 0.5;
+			ctx.drawImage(sai_spiral_img, x, y);
+			ctx.globalAlpha = 1.0;
+		}
+
+		ctx.restore();
+	}
+
 	// カウントダウン映像の描画。
 	function SAI_draw_pic_count_down(ctx, px, py, dx, dy){
 		ctx.save();
@@ -1806,6 +1839,9 @@ document.addEventListener('DOMContentLoaded', function(){
 			break;
 		case 9:
 			SAI_draw_pic_9(ctx, px, py, dx, dy);
+			break;
+		case 10:
+			SAI_draw_pic_10(ctx, px, py, dx, dy);
 			break;
 		}
 	}
