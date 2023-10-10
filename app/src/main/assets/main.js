@@ -1369,22 +1369,24 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_clip_rect(ctx, px, py, dx, dy);
 
 		// 黒で長方形領域を塗りつぶす。
-		ctx.fillStyle = 'black';
+		ctx.fillStyle = 'white';
 		ctx.fillRect(px, py, dx, dy);
+
+		ctx.translate(qx, qy);
 
 		let factor = SAI_get_tick_count() * 0.4;
 
 		let radius = 1;
-		ctx.fillStyle = '#fff';
+		ctx.fillStyle = 'rgba(0, 0, 0, 33%)';
 		for(let radian = 0; radian < 120;){
 			const radian2 = radian - factor;
-			const x0 = qx + radius * Math.cos(-radian2);
-			const y0 = qy + radius * Math.sin(-radian2);
+			const x0 = radius * Math.cos(-radian2);
+			const y0 = radius * Math.sin(-radian2);
 			radius *= 1.009;
 			radian += 0.08;
 			const radian3 = radian - factor;
-			const x1 = qx + radius * Math.cos(-radian3);
-			const y1 = qy + radius * Math.sin(-radian3);
+			const x1 = radius * Math.cos(-radian3);
+			const y1 = radius * Math.sin(-radian3);
 			SAI_draw_line_2(ctx, x0, y0, x1, y1, radius * 0.325);
 		}
 
