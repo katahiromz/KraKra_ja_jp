@@ -1148,15 +1148,14 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 発散する渦巻きを描画する。
 		let ci = 8;
 		for(let i = 0; i <= ci; ++i){
-			let x, y, oldx = 0, oldy = 0, f = 2;
+			let oldx = 0, oldy = 0, f = 2;
 			for(let radius = 0; radius < maxxy * 1.5; radius += f){
 				// 角度を計算する。
 				let radian = radius * 0.01 + i * (2 * Math.PI) / ci;
 
 				// 複素数を計算する。
 				let comp = new Complex({abs:radius, arg:-radian});
-				x = comp.re;
-				y = comp.im;
+				let x = comp.re, y = comp.im;
 
 				// 線を描画する。
 				SAI_draw_line(ctx, oldx, oldy, x, y, f * 8);
@@ -1742,48 +1741,55 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
-	// 映像の描画。pic9: Mixed Spirals
+	// 映像の描画。pic9: Golden Spiral
 	function SAI_draw_pic_9(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
 		let qx = px + dx / 2, qy = py + dy / 2;
 
-		// 画面の辺の平均の長さ。
-		let dxy = (dx + dy) / 2;
+		// 画面の寸法を使って計算する。
+		let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
 
+		// 黒で長方形領域を塗りつぶす。
+		ctx.fillStyle = '#000';
+		ctx.fillRect(px, py, dx, dy);
+
+		// 長方形領域(px, py, dx, dy)をクリッピングする。
+		SAI_clip_rect(ctx, px, py, dx, dy);
+
+		// 映像の進行を表す変数。
 		let count2 = SAI_get_tick_count();
-		let sx = qx + dxy * Math.cos(count2 * 0.01) * 0.0015;
-		let sy = qy + dxy * Math.sin(count2 * 0.01) * 0.0015;
-		let tx = qx + dxy * Math.cos(count2 * 0.01) * 0.0025;
-		let ty = qy + dxy * Math.sin(count2 * 0.01) * 0.0025;
-		let delta1 = dxy / 8;
-		ctx.beginPath();
-		for(let i = 0; i < dxy; i += 2 * delta1){
-			ctx.arc(sx, sy, i, 0, Math.PI * 2, false);
-			ctx.arc(sx, sy, i + delta1, 0, Math.PI * 2, true);
+
+		// 画面中央を原点とする。
+		ctx.translate(qx, qy);
+
+		// 回転させる。
+		ctx.rotate(-count2 * 0.3);
+
+		// 中心を少しずらす。
+		let fx = minxy * (1 + Math.cos(count2 * 0.1)) * 0.02;
+		let fy = minxy * (1 + Math.sin(count2 * 0.1)) * 0.02;
+		ctx.translate(fx, fy);
+
+		// グラデーションで塗る。
+		let grd = ctx.createRadialGradient(0, 0, 0, fx, fy, (maxxy + minxy) * 0.1);
+		grd.addColorStop(0.5, "#c00");
+		grd.addColorStop(1, "#ff3");
+		ctx.fillStyle = grd;
+
+		// 黄金らせんの公式に従って描画する。
+		let b = 0.3063489, oldx = 0, oldy = 0;
+		for (let theta = 0; theta <= Math.PI * 2 * 10; theta += 0.1) {
+			let r = Math.exp(b * theta);
+			let comp = new Complex({abs:r, arg:theta});
+			let x = comp.re, y = comp.im;
+
+			SAI_draw_line_2(ctx, oldx, oldy, x, y, r * 0.7);
+
+			oldx = x;
+			oldy = y;
 		}
-		ctx.clip();
-
-		let ratio = 0.01;
-
-		sai_counter = -sai_counter * 0.8;
-		SAI_draw_pic_1(ctx, px, py, dx, dy);
-		sai_counter = -sai_counter / 0.8;
-
-		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
-		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
-
-		ctx.beginPath();
-		for(let i = delta1; i < dxy; i += 2 * delta1){
-			ctx.arc(tx, ty, i, 0, Math.PI * 2, false);
-			ctx.arc(tx, ty, i + delta1, 0, Math.PI * 2, true);
-		}
-		ctx.clip();
-
-		sai_counter *= 0.8;
-		SAI_draw_pic_1(ctx, px, py, dx, dy);
-		sai_counter /= 0.8;
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
