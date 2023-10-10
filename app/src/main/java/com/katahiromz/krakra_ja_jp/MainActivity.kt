@@ -134,13 +134,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     var showingNaviBar: Boolean = true
 
     // ナビゲーションバーの表示の切り替え。
-    @Suppress("DEPRECATION")
     fun showNaviBar(show: Boolean) {
-        if (showingNaviBar == show) {
-            Timber.i("showingNaviBar == show")
-            return
-        }
-
         // 別スレッドかもしれないので、postする。
         webView?.post {
             WindowCompat.setDecorFitsSystemWindows(window, show)
@@ -154,8 +148,10 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             } else {
                 WindowInsetsControllerCompat(window, view).let { controller ->
                     controller.hide(WindowInsetsCompat.Type.systemBars())
-                    controller.systemBarsBehavior =
-                        WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+                    if (showingNaviBar) {
+                        controller.systemBarsBehavior =
+                            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+                    }
                 }
             }
         }
@@ -251,6 +247,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             var str: String = "SAI_OnAndroidSystemBarsChanged("
             str += sysBarsVisible.toString()
             str += ")"
+            Timber.i(str)
             webView?.evaluateJavascript(str, {})
             WindowInsetsCompat.toWindowInsetsCompat(view.onApplyWindowInsets(insets.toWindowInsets()))
         }
