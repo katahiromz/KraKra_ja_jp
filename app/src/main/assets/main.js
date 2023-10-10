@@ -1113,8 +1113,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		let count2 = -SAI_get_tick_count();
 
 		ctx.translate(qx, qy);
-		ctx.rotate(-count2 * 0.1);
-		ctx.translate(25 * Math.cos(count2 * 0.1), 25 * Math.sin(count2 * 0.33333));
+		ctx.rotate(-count2 * 0.12);
+		ctx.translate(25 * Math.cos(count2 * 0.02), 25 * Math.sin(count2 * 0.05));
 		ctx.rotate(count2 * 0.0333);
 
 		let flag2 = -1;
