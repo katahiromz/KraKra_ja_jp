@@ -4,6 +4,7 @@
 const sai_VERSION = '3.4.6'; // KraKraバージョン番号。
 const sai_DEBUGGING = false; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
+let sai_stopping = true; // 停止中か？
 
 // 【KraKra JavaScript 命名規則】
 //
@@ -13,6 +14,20 @@ let sai_FPS = 0; // 実測フレームレート。
 // - CSSクラスの頭に sai_class_ を付ける。
 //
 // ※ 言語特有の記述が必要な個所は「{{LANGUAGE_SPECIFIC}}」というコメントを付けること。
+
+// Androidアプリの場合でシステムバーが変更された場合に呼び出される関数。
+function SAI_OnAndroidSystemBarsChanged(sysBarsVisible){
+	let tool_buttons = document.getElementsByClassName('sai_tool_button');
+	if(sysBarsVisible || sai_stopping || !sai_id_checkbox_fullscreen.checked){
+		for(let button of tool_buttons){
+			button.classList.remove('sai_class_invisible');
+		}
+	}else{
+		for(let button of tool_buttons){
+			button.classList.add('sai_class_invisible');
+		}
+	}
+}
 
 // ドキュメントの読み込みが完了（DOMContentLoaded）されたら無名関数が呼び出される。
 document.addEventListener('DOMContentLoaded', function(){
@@ -36,7 +51,6 @@ document.addEventListener('DOMContentLoaded', function(){
 	let sai_service_worker_registration = null; // サービスワーカーの登録。
 	let sai_coin_img = new Image(); // 五円玉のイメージ。
 	let sai_rotation_type = 'normal'; // 回転の種類。
-	let sai_stopping = true; // 停止中か？
 	let sai_hypnosis_released = false; // 催眠術を解放したか？
 	let sai_logo_img = new Image(); // KraKraのロゴ。
 	let sai_tap_here_img = new Image(); // 「ここをタップ」の画像。
@@ -2131,12 +2145,12 @@ document.addEventListener('DOMContentLoaded', function(){
 			// 催眠解除の場合、ダミー画面に戻す。
 			if(sai_pic_type == -1)
 				SAI_pic_set_type(0);
+			// 映像の停止。
+			sai_stopping = true;
 			// メインコントロール群を表示する。
 			SAI_show_main_controls(true);
 			// カウントダウンを破棄する。
 			sai_count_down = null;
-			// 映像の停止。
-			sai_stopping = true;
 			// スピーチをキャンセル。
 			SAI_speech_cancel();
 			// カウンターのリセット。
@@ -2190,6 +2204,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 「催眠開始」ボタン。
 		sai_id_button_start_hypnosis.addEventListener('click', function(e){
+			// 映像を再開する。
+			sai_stopping = false;
 			// メインコントロール群を非表示にする。
 			SAI_show_main_controls(false);
 			// 必要ならカウントダウンを開始する。
@@ -2201,19 +2217,17 @@ document.addEventListener('DOMContentLoaded', function(){
 					SAI_speech_start(sai_message_text);
 				}
 			}
-			// 映像を再開する。
-			sai_stopping = false;
 		});
 		// 「催眠解除」ボタン。
 		sai_id_button_release_hypnosis.addEventListener('click', function(e){
 			// 解除映像に切り替える。
 			SAI_pic_set_type(-1);
 
-			// メインコントロール群を非表示にする。
-			SAI_show_main_controls(false);
-
 			// 映像を再開する。
 			sai_stopping = false;
+
+			// メインコントロール群を非表示にする。
+			SAI_show_main_controls(false);
 		});
 
 		// 「音声再生」ボタン。

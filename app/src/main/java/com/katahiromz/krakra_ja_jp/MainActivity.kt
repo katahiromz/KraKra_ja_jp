@@ -11,16 +11,18 @@ import android.os.Build
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.view.View
-import android.view.WindowInsets
 import android.view.WindowManager
 import android.webkit.*
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import createLocalizedContext
@@ -134,31 +136,30 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     // ナビゲーションバーの表示の切り替え。
     @Suppress("DEPRECATION")
     fun showNaviBar(show: Boolean) {
+        if (showingNaviBar == show) {
+            Timber.i("showingNaviBar == show")
+            return
+        }
+
         // 別スレッドかもしれないので、postする。
         webView?.post {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) { // API 30以上の場合
-                if (show) {
-                    window.decorView.windowInsetsController?.show(
-                            WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars()
-                    )
-                } else {
-                    window.decorView.windowInsetsController?.hide(
-                            WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars()
-                    )
+            WindowCompat.setDecorFitsSystemWindows(window, show)
+            var view = this.findViewById<View>(R.layout.activity_main)
+            if (show) {
+                WindowInsetsControllerCompat(window, view).let { controller ->
+                    controller.show(WindowInsetsCompat.Type.systemBars())
+                    controller.systemBarsBehavior =
+                        WindowInsetsControllerCompat.BEHAVIOR_DEFAULT
                 }
-            } else { // API 30未満の場合
-                if (show) {
-                    window.decorView.systemUiVisibility = 0
-                } else {
-                    window.decorView.systemUiVisibility = (
-                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or
-                        View.SYSTEM_UI_FLAG_FULLSCREEN or
-                        View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
-                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
+            } else {
+                WindowInsetsControllerCompat(window, view).let { controller ->
+                    controller.hide(WindowInsetsCompat.Type.systemBars())
+                    controller.systemBarsBehavior =
+                        WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
                 }
             }
         }
+
         showingNaviBar = show
     }
 
@@ -243,6 +244,16 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
         // Timberを初期化。
         initTimber()
+
+        // システムバーが変更された場合を検出し、Web側に渡す。
+        ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { view, insets ->
+            var sysBarsVisible = insets.isVisible(WindowInsetsCompat.Type.systemBars())
+            var str: String = "SAI_OnAndroidSystemBarsChanged("
+            str += sysBarsVisible.toString()
+            str += ")"
+            webView?.evaluateJavascript(str, {})
+            WindowInsetsCompat.toWindowInsetsCompat(view.onApplyWindowInsets(insets.toWindowInsets()))
+        }
     }
 
     // アクティビティの開始時。
