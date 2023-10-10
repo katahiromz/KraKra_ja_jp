@@ -2485,17 +2485,17 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// マイクボタンの実装。
 		let mic_isInited = false;
-		sai_id_checkbox_mic.addEventListener('click', function(e){
-			if(sai_id_checkbox_mic.checked){
+		sai_id_button_microphone.addEventListener('click', function(e){
+			if(!sai_id_button_microphone.classList.contains('sai_class_checked')){
 				if(!mic_isInited){
 					mic_setup();
 					mic_isInited = true;
 				}
 				mic_connect();
-				sai_id_label_mic.classList.add('sai_class_checked');
+				sai_id_button_microphone.classList.add('sai_class_checked');
 			}else{
 				mic_disconnect();
-				sai_id_label_mic.classList.remove('sai_class_checked');
+				sai_id_button_microphone.classList.remove('sai_class_checked');
 			}
 		});
 
@@ -2536,7 +2536,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				return;
 			}
 			if(e.key == 'm' || e.key == 'M'){ // Microphone
-				sai_id_checkbox_mic.click();
+				sai_id_button_microphone.click();
 				return;
 			}
 			if(e.key == 't' || e.key == 'T'){ // Text
@@ -2566,7 +2566,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				return;
 			}
 			if(e.key == 'b' || e.key == 'B'){ // buttons
-				SAI_show_main_controls(sai_id_label_mic.classList.contains('sai_class_invisible'));
+				SAI_show_main_controls(sai_id_button_microphone.classList.contains('sai_class_invisible'));
 				return;
 			}
 			if(e.key == 'w' || e.key == 'W'){ // Speed Slow
@@ -2739,7 +2739,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		if(localStorage.getItem('saiminAndroidMicrophoneOnReload')){
 			mic_connect();
 			localStorage.removeItem('saiminAndroidMicrophoneOnReload');
-			sai_id_label_mic.classList.add('sai_class_checked');
+			sai_id_button_microphone.classList.add('sai_class_checked');
 		}
 
 		// キーボード操作を実装。

@@ -110,7 +110,7 @@ label {
 .sai_class_font_size_huge {
 	font-size: 2.0cm;
 }
-#sai_id_label_mic {
+#sai_id_button_microphone {
 	position: absolute;
 	left: calc(100% / 3 * 0);
 	bottom: 0;
@@ -262,9 +262,6 @@ label {
 }
 .sai_class_navi_button img {
 	vertical-align: middle;
-}
-.sai_class_navi_button:hover {
-	background-color: rgba(255, 210, 230, 85%);
 }
 .sai_class_checked {
 	background-color: rgba(204, 101, 198, 90%);
