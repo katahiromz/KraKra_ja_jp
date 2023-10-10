@@ -1772,11 +1772,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		let fy = minxy * (1 + Math.sin(count2 * 0.1)) * 0.02;
 		ctx.translate(fx, fy);
 
-		// グラデーションで塗る。
-		let grd = ctx.createRadialGradient(0, 0, 0, fx, fy, (maxxy + minxy) * 0.1);
-		grd.addColorStop(0.5, "#c00");
-		grd.addColorStop(1, "#ff3");
-		ctx.fillStyle = grd;
+		// 黄色で塗る。
+		ctx.fillStyle = '#ff0';
 
 		// 黄金らせんの公式に従って描画する。
 		let b = 0.3063489, oldx = 0, oldy = 0;
