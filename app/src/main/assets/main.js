@@ -1799,13 +1799,17 @@ document.addEventListener('DOMContentLoaded', function(){
 		let qx = px + dx / 2, qy = py + dy / 2;
 
 		// 画面の寸法を使って計算する。
-		let maxxy = Math.max(dx, dy);
+		let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
 
 		// 映像の進行を表す変数。
 		let count2 = SAI_get_tick_count();
 
 		// 画面中央を原点とする。
 		ctx.translate(qx, qy);
+
+		// 上下に揺らす。
+		let updown = minxy * Math.sin(count2 * 0.2) * 0.16;
+		ctx.translate(0, updown);
 
 		if (sai_spiral_img.complete){ // 渦巻きイメージの読み込みが完了していたら
 			// 描画位置を計算。

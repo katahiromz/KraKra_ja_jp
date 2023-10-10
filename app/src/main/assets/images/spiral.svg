@@ -26,7 +26,7 @@
      inkscape:document-units="mm"
      inkscape:zoom="1.1767058"
      inkscape:cx="130.44892"
-     inkscape:cy="193.33635"
+     inkscape:cy="194.18618"
      inkscape:window-width="1366"
      inkscape:window-height="705"
      inkscape:window-x="-8"
@@ -36,14 +36,26 @@
   <defs
      id="defs1">
     <linearGradient
+       id="linearGradient3"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#ff8214;stop-opacity:1;"
+         offset="0"
+         id="stop3" />
+      <stop
+         style="stop-color:#ff8214;stop-opacity:0;"
+         offset="1"
+         id="stop4" />
+    </linearGradient>
+    <linearGradient
        id="linearGradient1"
        inkscape:collect="always">
       <stop
-         style="stop-color:#bbdfbd;stop-opacity:1;"
+         style="stop-color:#8a0000;stop-opacity:1;"
          offset="0"
          id="stop2" />
       <stop
-         style="stop-color:#45da00;stop-opacity:1;"
+         style="stop-color:#ff3cfb;stop-opacity:1;"
          offset="1"
          id="stop1" />
     </linearGradient>
@@ -57,6 +69,17 @@
        fy="139.5336"
        r="96.817223"
        gradientTransform="matrix(1,0,0,1.0273974,0,-3.8228607)"
+       gradientUnits="userSpaceOnUse" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3"
+       id="radialGradient4"
+       cx="53.424232"
+       cy="106.75939"
+       fx="53.424232"
+       fy="106.75939"
+       r="49.787767"
+       gradientTransform="matrix(1,0,0,1.0016889,0,-0.18030785)"
        gradientUnits="userSpaceOnUse" />
   </defs>
   <g
@@ -76,7 +99,7 @@
          y="40.063839" />
       <path
          sodipodi:type="spiral"
-         style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#006e03;stroke-width:5.5945;stroke-dasharray:none;stroke-opacity:1"
+         style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:url(#radialGradient4);stroke-width:5.5945;stroke-dasharray:none;stroke-opacity:1"
          id="path1"
          sodipodi:cx="56.601711"
          sodipodi:cy="106.84368"
@@ -94,6 +117,13 @@
          cy="134.97983"
          rx="6.8541465"
          ry="7.1436625" />
+      <ellipse
+         style="fill:#e70000;fill-opacity:0.93680298;stroke:#ff982b;stroke-width:5.81593;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
+         id="path3"
+         cx="108.99232"
+         cy="134.97983"
+         rx="8.6310511"
+         ry="8.631032" />
     </g>
   </g>
 </svg>
