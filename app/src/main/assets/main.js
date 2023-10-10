@@ -15,7 +15,7 @@ let sai_stopping = true; // 停止中か？
 //
 // ※ 言語特有の記述が必要な個所は「{{LANGUAGE_SPECIFIC}}」というコメントを付けること。
 
-// Androidアプリの場合でシステムバーが変更された場合に呼び出される関数。
+// Androidアプリにおいて、システムバーが変更された場合に呼び出される関数。
 function SAI_OnAndroidSystemBarsChanged(sysBarsVisible){
 	let tool_buttons = document.getElementsByClassName('sai_tool_button');
 	if(sysBarsVisible || sai_stopping || !sai_id_checkbox_fullscreen.checked){
@@ -981,38 +981,40 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// サブリミナルの描画。
 	function SAI_draw_subliminal(ctx, px, py, dx, dy){
-		ctx.save();
+		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
 		SAI_clip_rect(ctx, px, py, dx, dy);
 
 		let count = SAI_get_tick_count();
-		let factor1 = Math.sin(count * 0.1);
-		let factor2 = Math.abs(Math.cos(count * 0.03));
+		let factor1 = Math.sin(count * 0.1), factor2 = Math.abs(Math.cos(count * 0.03));
 
 		// 指定した色で長方形領域を塗りつぶす。
 		ctx.fillStyle = `rgb(${factor2 * 30 + 40}%, 20%, ${40}%)`;
 		ctx.fillRect(px, py, dx, dy);
 
-		let mxy = Math.min(dx, dy) * (0.7 + 0.2 * factor1);
-		let cx = px + dx / 2;
-		let cy = py + dy / 2;
+		// 画面中央の座標を計算する。
+		let qx = px + dx / 2, qy = py + dy / 2;
 
+		// ハート形を描画する。
 		ctx.fillStyle = '#f03';
-		SAI_draw_heart(ctx, cx, cy - mxy / 2, cx, cy + mxy / 2);
+		let mxy = Math.min(dx, dy) * (0.7 + 0.2 * factor1);
+		SAI_draw_heart(ctx, qx, qy - mxy / 2, qx, qy + mxy / 2);
 
-		ctx.restore();
+		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
 	// 映像の描画。pic-1: Release Hyponosis
 	function SAI_draw_pic_minus_1(ctx, px, py, dx, dy){
-		ctx.save();
+		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
 		SAI_clip_rect(ctx, px, py, dx, dy);
 
-		let qx = px + dx / 2;
-		let qy = py + dy / 2;
+		// 画面中央の座標を計算する。
+		let qx = px + dx / 2, qy = py + dy / 2;
+
+		// 画面の辺の平均の長さ。
 		let dxy = (dx + dy) / 2;
 
 		// 黒で長方形領域を塗りつぶす。
@@ -1025,53 +1027,61 @@ document.addEventListener('DOMContentLoaded', function(){
 		if(sai_hypnosis_released)
 			factor = 1.0;
 
+		// 黄色っぽくて丸いグラデーションを描画する。
 		let grd = ctx.createRadialGradient(qx, qy, 0, qx, qy, dxy * factor);
 		grd.addColorStop(0, 'rgba(255, 255, 0, 1.0)');
 		grd.addColorStop(1, 'rgba(255, 255, 255, 1.0)');
 		ctx.fillStyle = grd;
 		SAI_draw_circle(ctx, qx, qy, dxy, true);
 
+		// 黒い丸を描画する。
 		ctx.strokeStyle = "black";
 		ctx.lineWidth = 10;
 		SAI_draw_circle(ctx, qx, qy, (dx + dy + 10) / 5 * factor + dxy * 0.2, false);
 
+		// 「催眠解放中」のイメージを描画する。
 		if(sai_hypno_releasing_img.complete){
 			let x = px + (dx - sai_hypno_releasing_img.width) / 2;
 			let y = py + (dy - sai_hypno_releasing_img.height) / 2 - dy * 0.1;
 			ctx.drawImage(sai_hypno_releasing_img, x, y);
 		}
 
+		// 「催眠解除完了」のイメージを描画する。
 		if(sai_hypnosis_released && sai_all_released_img.complete){
 			let x = px + (dx - sai_all_released_img.width) / 2;
 			let y = py + (dy - sai_all_released_img.height) / 2 + dy * 0.2;
 			ctx.drawImage(sai_all_released_img, x, y);
 		}
 
-		ctx.restore();
+		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
 	// 映像の描画。pic0: Dummy Screen (for practice)
 	function SAI_draw_pic_0(ctx, px, py, dx, dy){
-		ctx.save();
+		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
 		SAI_clip_rect(ctx, px, py, dx, dy);
 
-		let qx = px + dx / 2;
-		let qy = py + dy / 2;
+		// 画面中央の座標を計算する。
+		let qx = px + dx / 2, qy = py + dy / 2;
+
+		// 画面の辺の平均の長さ。
 		let dxy = (dx + dy) / 2;
 
 		// 黒で長方形領域を塗りつぶす。
 		ctx.fillStyle = 'black';
 		ctx.fillRect(px, py, dx, dy);
 
+		// ピンク色の丸いグラデーションを描画する。
 		let grd = ctx.createRadialGradient(qx, qy, 0, qx, qy, dxy * 0.5);
 		grd.addColorStop(0, 'rgba(255, 0, 255, 0.0)');
 		grd.addColorStop(1, 'rgba(255, 0, 255, 1.0)');
 		ctx.fillStyle = grd;
 		SAI_draw_circle(ctx, qx, qy, dxy, true);
 
-		if(sai_logo_img.complete){
+		if(sai_logo_img.complete){ // ロゴイメージの読み込みが完了されたか？
+			// 寸法を調整する。
 			let width = sai_logo_img.width, height = sai_logo_img.height;
 			if (width > sai_screen_width){
 				width *= 0.75;
@@ -1085,99 +1095,113 @@ document.addEventListener('DOMContentLoaded', function(){
 					height *= 2;
 				}
 			}
+			// 描画するロゴの位置を計算する。
 			let x = px + (dx - width) / 2;
 			let y = py + (dy - height) * 0.4 - dy * 0.1;
+			// ロゴを描画する。
 			ctx.drawImage(sai_logo_img, x, y, width, height);
 		}
 
 		if(!sai_stopping && sai_tap_here_img.complete){
+			// 停止中でなければ「タップして下さい」のイメージを描画する。
 			let x = qx - sai_tap_here_img.width / 2;
 			let y = py + dy * 0.7;
 			ctx.drawImage(sai_tap_here_img, x, y);
 		}
 
-		ctx.restore();
+		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
 	// 映像の描画。pic1: Spiral
 	function SAI_draw_pic_1(ctx, px, py, dx, dy){
-		ctx.save();
+		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
-		let qx = px + dx / 2;
-		let qy = py + dy / 2;
+		// 画面中央の座標を計算する。
+		let qx = px + dx / 2, qy = py + dy / 2;
 
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
 		SAI_clip_rect(ctx, px, py, dx, dy);
 
+		// 黒で塗りつぶす。
 		ctx.fillStyle = '#000';
 		ctx.fillRect(px, py, dx, dy);
 
-		let minxy = Math.min(dx, dy);
-		let maxxy = Math.min(dx, dy);
-		let avgxy = (minxy + maxxy) / 2;
+		// 寸法を計算する。
+		let minxy = Math.min(dx, dy), maxxy = Math.min(dx, dy);
+
+		// 画面中央を原点とする。
+		ctx.translate(qx, qy);
+
+		// 映像の進行を表す。
 		let count2 = -SAI_get_tick_count();
 
-		ctx.translate(qx, qy);
+		// 原点を中心として、これから描画する図形を回転する。
 		ctx.rotate(-count2 * 0.12);
+
+		// 少し回転のずれを表現する。
 		ctx.translate(25 * Math.cos(count2 * 0.02), 25 * Math.sin(count2 * 0.05));
 		ctx.rotate(count2 * 0.0333);
 
-		let flag2 = -1;
-		let ci = 8;
-
-		ctx.strokeStyle = '#f0f';
+		ctx.strokeStyle = '#f0f'; // ショッキングピンクで描画する。
 		ctx.lineCap = 'square';
 
+		// 発散する渦巻きを描画する。
+		let ci = 8;
 		for(let i = 0; i <= ci; ++i){
-			let count = 0;
 			let x, y, oldx = 0, oldy = 0, f = 2;
 			for(let radius = 0; radius < maxxy * 1.5; radius += f){
+				// 角度を計算する。
 				let radian = radius * 0.01 + i * (2 * Math.PI) / ci;
-				let comp = new Complex({abs:radius, arg:flag2 * radian});
+
+				// 複素数を計算する。
+				let comp = new Complex({abs:radius, arg:-radian});
 				x = comp.re;
 				y = comp.im;
+
+				// 線を描画する。
 				SAI_draw_line(ctx, oldx, oldy, x, y, f * 8);
 
+				// 古い(x, y)を保存する。
 				oldx = x;
 				oldy = y;
-				count += 1;
-				f *= 1.01;
+
+				f *= 1.01; // 半径の増分は単純増加。
 			}
 		}
 
-		ctx.restore();
+		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
 	// 映像の描画。pic2: Concentric Circles
 	function SAI_draw_pic_2(ctx, px, py, dx, dy, flag=true){
-		ctx.save();
+		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
-		let qx = px + dx / 2;
-		let qy = py + dy / 2;
+		// 画面中央の座標を計算する。
+		let qx = px + dx / 2, qy = py + dy / 2;
+
+		// 画面の辺の平均の長さ。
 		let dxy = (dx + dy) / 2;
 
+		// 映像の進行を表す変数。
 		let count2 = SAI_get_tick_count();
 		let factor = (0.99 + Math.abs(Math.sin(count2 * 0.2)) * 0.01);
 
-		ctx.beginPath();
+		// クリッピングする。!flagならば円形に切り抜く。円形の半径は時刻により変動する。
 		if(flag){
-			ctx.moveTo(px, py);
-			ctx.lineTo(px + dx, py);
-			ctx.lineTo(px + dx, py + dy);
-			ctx.lineTo(px, py + dy);
+			SAI_clip_rect(ctx, px, py, dx, dy);
 		}else{
+			ctx.beginPath();
 			let value = 0.2 + 0.2 * Math.abs(Math.sin(count2 * 0.02));
 			ctx.arc(qx, qy, Math.abs(dxy) * value, 0, 2 * Math.PI);
+			ctx.closePath();
+			ctx.clip();
 		}
-		ctx.closePath();
-		ctx.clip();
 
 		// 白で長方形領域を塗りつぶす。
 		ctx.fillStyle = '#fff';
 		ctx.fillRect(px, py, dx, dy);
 
-		let size = (dx + dy) * 0.4;
-
+		// さまざまな計算をする。
 		let dr0 = 30;
 		if(SAI_display_is_large()){
 			dr0 *= 2;
@@ -1191,61 +1215,23 @@ document.addEventListener('DOMContentLoaded', function(){
 		if(flag)
 			radius = dr0 - radius;
 
+		// 同心円状に描画する。
+		let size = (dx + dy) * 0.4;
 		for(; radius < size; radius += dr0){
 			SAI_draw_circle(ctx, qx, qy, radius, false);
 		}
 
-		ctx.restore();
-	}
-
-	// HSV色空間からRGB色空間への変換。
-	// HSVはCSSに直接指定できるため、多分不必要。
-	function SAI_hsv2rgb(h, s, v){
-		let r, g, b;
-		r = g = b = v;
-		if(s > 0)
-		{
-			h *= 6;
-			let i = Math.floor(h);
-			let f = h - i;
-			switch (i)
-			{
-			case 0:
-			default:
-				g *= 1 - s * (1 - f);
-				b *= 1 - s;
-				break;
-			case 1:
-				r *= 1 - s * f;
-				b *= 1 - s;
-				break;
-			case 2:
-				r *= 1 - s;
-				b *= 1 - s * (1 - f);
-				break;
-			case 3:
-				r *= 1 - s;
-				g *= 1 - s * f;
-				break;
-			case 4:
-				r *= 1 - s * (1 - f);
-				g *= 1 - s;
-				break;
-			case 5:
-				g *= 1 - s;
-				b *= 1 - s * f;
-				break;
-			}
-		}
-		return [r, g, b];
+		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
 	// 映像の描画。pic3: The Eyes
 	function SAI_draw_pic_3(ctx, px, py, dx, dy){
-		ctx.save();
+		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
-		let qx = px + dx / 2;
-		let qy = py + dy / 2;
+		// 画面中央の座標を計算する。
+		let qx = px + dx / 2, qy = py + dy / 2;
+
+		// 画面の辺の平均の長さ。
 		let dxy = (dx + dy) / 2;
 
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
@@ -1255,45 +1241,52 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.fillStyle = 'white';
 		ctx.fillRect(px, py, dx, dy);
 
+		// 映像の進行を表す変数。
 		let count2 = SAI_get_tick_count();
 		let factor = count2 * 0.03;
 
-		let cxy = ((dx >= dy) ? dy : dx) * 1.2;
-		const colors = ['#f0f', '#ff0', '#0f0', '#0ff', '#00c', '#f0f'];
+		// 画面中央を原点とする。
+		ctx.translate(qx, qy);
 
+		// パイの一切れを塗りつぶす。
 		let k = factor * 5;
 		let r_delta = 30;
 		let flag = (factor % 10) / 0.5;
 		let flag2 = Math.sin(factor * 0.7) > -0.4;
-		for(let r = 0; r < 360;){
-			let radian = r * Math.PI / 180 + factor;
-			ctx.beginPath();
-			ctx.moveTo(qx, qy);
-			let x0 = qx + cxy * Math.cos(radian);
-			let y0 = qy + cxy * Math.sin(radian);
+		let cxy = Math.min(dx, dy) * 1.2;
+		for(let r = 0; r < 360; ++k){
+			let radian = r * Math.PI / 180 + factor; // 角度。
+
+			// 三角形のパスを構築する。
+			ctx.beginPath(); // パスを開始。
+			ctx.moveTo(0, 0); // 原点に移動。
+			let x0 = cxy * Math.cos(radian), y0 = cxy * Math.sin(radian);
 			ctx.lineTo(x0, y0);
 			r += r_delta;
 			radian = r * Math.PI / 180 + factor;
-			let x1 = qx + cxy * Math.cos(radian);
-			let y1 = qy + cxy * Math.sin(radian);
+			let x1 = cxy * Math.cos(radian), y1 = cxy * Math.sin(radian);
 			ctx.lineTo(x1, y1);
+
 			let factor2 = Math.abs(1 - Math.sin(factor * 8));
-			if(flag2){
+			if(flag2){ // 赤から黄色で。
 				ctx.fillStyle = `rgb(255, ${factor2 * 50 + 55}, ${factor2 * 200 + 55})`;
-			}else{
+			}else{ // さもなければ虹色。
 				ctx.fillStyle = `hsl(${(k * 60) % 360}, 100%, 50%)`
 			}
+
+			// 三角形を塗りつぶす。
 			ctx.fill();
-			++k;
 		}
+
+		// 放射状の線を描画する。
 		k = factor * 5;
 		for(let r = 0; r < 360;){
 			let radian = r * Math.PI / 180 + factor;
-			let x0 = qx + cxy * Math.cos(radian);
-			let y0 = qy + cxy * Math.sin(radian);
+			let x0 = cxy * Math.cos(radian);
+			let y0 = cxy * Math.sin(radian);
 			let factor2 = Math.abs(1 - Math.sin(factor * 8));
 			ctx.beginPath();
-			ctx.moveTo(qx, qy);
+			ctx.moveTo(0, 0);
 			ctx.lineTo(x0, y0);
 			ctx.strokeStyle = `rgb(255, 200, ${factor2 * 192}`;
 			ctx.lineWidth = 10;
@@ -1302,67 +1295,73 @@ document.addEventListener('DOMContentLoaded', function(){
 			++k;
 		}
 
-		dxy = (dx >= dy) ? dx : dy;
+		// 画面の辺の最大値。
+		dxy = Math.max(dx, dy);
 
+		// 同心円状に広がる円を描画する。
 		ctx.lineWidth = 10;
 		let i = 0;
 		ctx.strokeStyle = 'rgba(255, 0, 0, 50%)';
 		for(let r = SAI_mod(count2 * 2, 100); r < cxy; r += 100){
-			SAI_draw_circle(ctx, qx, qy, r, false);
+			SAI_draw_circle(ctx, 0, 0, r, false);
 			++i;
 		}
 
+		// 中央の目の開き具合。
 		let opened = 1.0;
 		let f = Math.sin(Math.abs(count2 * 0.1));
 		if(f >= 0.8){
 			opened = 0.6 + 0.4 * Math.abs(Math.sin(f * Math.PI));
 		}
 
+		// 中央の大きな目を描画する。
 		let factor3 = (0.3 + Math.sin(count2 * 0.05) * 0.3);
-		SAI_draw_eye_2(ctx, qx, qy, cxy / 8, (1.0 + factor3));
+		SAI_draw_eye_2(ctx, 0, 0, cxy / 8, (1.0 + factor3));
 		ctx.fillStyle = '#f00';
 		factor3 = 0.5 + Math.abs(factor3);
-		SAI_draw_heart(ctx, qx, qy - cxy / 25 * factor3, qx, qy + cxy / 25 * factor3);
+		SAI_draw_heart(ctx, 0, 0 - cxy / 25 * factor3, 0, cxy / 25 * factor3);
 
+		// 周りの回転する４つの目を描画する。
 		const N = 4;
-		const delta = (2 * Math.PI) / N;
 		let radian = factor * 1.3;
 		for(i = 0; i < N; ++i){
-			let x, y;
+			let x = cxy * Math.cos(radian + 0.4) * 0.3;
+			let y = cxy * Math.sin(radian + 0.4) * 0.3;
+			SAI_draw_eye(ctx, x, y, cxy / 10, opened, 0.25); // アルファ値0.25により透過する。
 
-			x = qx + cxy * Math.cos(radian + 0.4) * 0.3;
-			y = qy + cxy * Math.sin(radian + 0.4) * 0.3;
-			SAI_draw_eye(ctx, x, y, cxy / 10, opened, 0.25);
+			x = cxy * Math.cos(radian + 0.2) * 0.3;
+			y = cxy * Math.sin(radian + 0.2) * 0.3;
+			SAI_draw_eye(ctx, x, y, cxy / 10, opened, 0.65); // アルファ値0.65により透過する。
 
-			x = qx + cxy * Math.cos(radian + 0.2) * 0.3;
-			y = qy + cxy * Math.sin(radian + 0.2) * 0.3;
-			SAI_draw_eye(ctx, x, y, cxy / 10, opened, 0.65);
+			x = cxy * Math.cos(radian) * 0.3;
+			y = cxy * Math.sin(radian) * 0.3;
+			SAI_draw_eye(ctx, x, y, cxy / 10, opened); // 透過しない。
 
-			x = qx + cxy * Math.cos(radian) * 0.3;
-			y = qy + cxy * Math.sin(radian) * 0.3;
-			SAI_draw_eye(ctx, x, y, cxy / 10, opened);
-
+			// 目の中にハート型を描画する。
 			ctx.fillStyle = '#f00';
 			SAI_draw_heart(ctx, x, y - cxy * opened / 50, x, y + cxy * opened / 50);
 
-			radian += delta;
+			radian += (2 * Math.PI) / N;
 		}
 
-		let grd = ctx.createRadialGradient(qx, qy, dxy * 0.25, qx, qy, dxy * 0.5);
+		// 中央から離れるにつれ黄色を深めるグラデーション。
+		let grd = ctx.createRadialGradient(0, 0, dxy * 0.25, 0, 0, dxy * 0.5);
 		grd.addColorStop(0, 'rgba(255, 255, 255, 0.0)');
 		grd.addColorStop(1, 'rgba(255, 255, 0, 0.8)');
 		ctx.fillStyle = grd;
-		SAI_draw_circle(ctx, qx, qy, dxy, true);
+		SAI_draw_circle(ctx, 0, 0, dxy, true);
 
-		ctx.restore();
+		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
 	// 映像の描画。pic4: Black and White Spiral
 	function SAI_draw_pic_4(ctx, px, py, dx, dy){
-		ctx.save();
+		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
-		let qx = px + dx / 2;
-		let qy = py + dy / 2;
+		// 画面中央の座標を計算する。
+		let qx = px + dx / 2, qy = py + dy / 2;
+
+		// 画面の辺の平均の長さ。
 		let dxy = (dx + dy) / 2;
 
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
@@ -1372,44 +1371,53 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.fillStyle = 'white';
 		ctx.fillRect(px, py, dx, dy);
 
+		// 画面中央を原点とする。
 		ctx.translate(qx, qy);
 
+		// 映像の進行を表す変数。
 		let factor = SAI_get_tick_count() * 0.4;
 
-		let radius = 1;
+		// 原点を中心に発散する渦巻きを描画する。
+		let radius = 1; // 半径。
 		ctx.fillStyle = 'rgba(0, 0, 0, 33%)';
-		for(let radian = 0; radian < 120;){
+		for(let radian = 0; radian < 120;){ // 角度によりループ。
 			const radian2 = radian - factor;
-			const x0 = radius * Math.cos(-radian2);
-			const y0 = radius * Math.sin(-radian2);
-			radius *= 1.009;
-			radian += 0.08;
+
+			// 線の始点。
+			const x0 = radius * Math.cos(-radian2), y0 = radius * Math.sin(-radian2);
+
+			radius *= 1.009; // 半径は単純増加。
+			radian += 0.08; // 角度も単純増加。
 			const radian3 = radian - factor;
-			const x1 = radius * Math.cos(-radian3);
-			const y1 = radius * Math.sin(-radian3);
+
+			// 線の終点。
+			const x1 = radius * Math.cos(-radian3), y1 = radius * Math.sin(-radian3);
+
+			// 線を描画する。
 			SAI_draw_line_2(ctx, x0, y0, x1, y1, radius * 0.325);
 		}
 
-		ctx.restore();
+		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
 	// 映像の描画。pic5: Spreading Rainbow
 	function SAI_draw_pic_5(ctx, px, py, dx, dy){
-		ctx.save();
+		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
-		let qx = px + dx / 2;
-		let qy = py + dy / 2;
+		// 画面中央の座標を計算する。
+		let qx = px + dx / 2, qy = py + dy / 2;
+
+		// 画面の辺の平均の長さ。
 		let dxy = (dx + dy) / 2;
 
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
 		SAI_clip_rect(ctx, px, py, dx, dy);
 
-		//ctx.fillStyle = 'white';
-		//ctx.fillRect(px, py, dx, dy);
-
+		// 映像の進行を表す変数。
 		let count2 = SAI_get_tick_count();
 		let factor = count2 * 0.16;
 
+		// 画面中央を少しずらす。
 		if(SAI_display_is_large()){
 			qx += 60 * Math.cos(factor * 0.8);
 			qy += 60 * Math.sin(factor * 0.8);
@@ -1418,45 +1426,59 @@ document.addEventListener('DOMContentLoaded', function(){
 			qy += 30 * Math.sin(factor * 0.8);
 		}
 
+		// 画面中央を原点とする。
+		ctx.translate(qx, qy);
+
+		// 星形のレインボーを描画する。外側から順番に。
 		let isLarge = SAI_display_is_large();
 		for(let radius = isLarge ? ((dx + dy) * 0.2) : ((dx + dy) * 0.4); radius >= 10; radius *= 0.92){
-			let r0, g0, b0;
-			[r0, g0, b0] = SAI_hsv2rgb((dxy + factor * 0.3 - radius * 0.015) % 1.0, 1.0, 1.0);
-			ctx.fillStyle = `rgb(${r0*255},${g0*255},${b0*255})`;
+			// 虹色の指定はHSL色空間で。
+			ctx.fillStyle = `hsl(${((dxy + factor * 0.3 - radius * 0.015) * 360) % 360}deg, 100%, 50%)`;
 
 			let N0 = 20, N1 = 5;
 			let i = 0;
 			let oldx = null, oldy = null;
 			for(let angle = 0; angle <= 360; angle += 360 / N0){
+				// 角度を計算する。
 				let radian = (angle + count2 * 2) * (Math.PI / 180.0);
+
+				// 星形の一点を計算する。
 				let factor2 = radius * (1 + 0.7 * Math.abs(Math.sin(N1 * i * Math.PI / N0)));
 				if(isLarge)
 					factor2 *= 2;
-				let x = qx + factor2 * Math.cos(radian);
-				let y = qy + factor2 * Math.sin(radian);
-				if(angle == 0){
+				let x = factor2 * Math.cos(radian), y = factor2 * Math.sin(radian);
+
+				if(angle == 0){ // 角度がゼロならパスを開始する。
 					ctx.beginPath();
 					ctx.moveTo(x, y);
-				}else{
+				}else{ // さもなければパスにベジエ曲線を追加する。
 					if((i % 2) == 0){
 						ctx.bezierCurveTo(oldx, oldy, (x + oldx) / 2, (y + oldy) / 2, x, y);
 					}
 				}
+
+				// 古い座標を保存する。
 				oldx = x;
 				oldy = y;
+
 				++i;
 			}
+
+			// できたパスを塗りつぶす。
 			ctx.fill();
 		}
 
-		dxy = (dx >= dy) ? dx : dy;
+		// 画面の辺の最大値。
+		dxy = Math.max(dx, dy);
 
-		let grd = ctx.createRadialGradient(qx, qy, dxy * 0.25, qx, qy, dxy * 0.5);
+		// 外側に行くほど白っぽい、薄いグラデーションを掛ける。
+		let grd = ctx.createRadialGradient(0, 0, dxy * 0.25, 0, 0, dxy * 0.5);
 		grd.addColorStop(0, 'rgba(255, 255, 255, 0.0)');
 		grd.addColorStop(1, 'rgba(255, 255, 255, 0.7)');
 		ctx.fillStyle = grd;
-		SAI_draw_circle(ctx, qx, qy, dxy, true);
+		SAI_draw_circle(ctx, 0, 0, dxy, true);
 
+		// 回転しながら広がるハート（複数）を描画する。
 		let value = factor * 25 + 10;
 		let value2 = SAI_mod(value, 191);
 		ctx.fillStyle = `rgb(255,${value2},${value2})`;
@@ -1465,34 +1487,38 @@ document.addEventListener('DOMContentLoaded', function(){
 		for(let radius = SAI_mod((factor * 10), 100) + 30; radius < dxy; radius += 100){
 			for(let angle = 0; angle < 360; angle += 360 / M){
 				let radian = angle * (Math.PI / 180.0);
-				let x0 = qx + radius * Math.cos(radian + factor * 0.1 + radius / 100);
-				let y0 = qy + radius * Math.sin(radian + factor * 0.1 + radius / 100);
+				let x0 = radius * Math.cos(radian + factor * 0.1 + radius / 100);
+				let y0 = radius * Math.sin(radian + factor * 0.1 + radius / 100);
 				SAI_draw_heart(ctx, x0, y0, x0, y0 + heartSize + SAI_mod(value, 191) / 12);
 			}
 			heartSize += 5;
 		}
 
-		ctx.restore();
+		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
 	// 映像の描画。pic6: 5-yen coin
 	function SAI_draw_pic_6(ctx, px, py, dx, dy){
-		ctx.save();
+		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
-		let qx = px + dx / 2;
-		let qy = py + dy / 2;
+		// 画面中央の座標を計算する。
+		let qx = px + dx / 2, qy = py + dy / 2;
+
+		// 画面の辺の平均の長さ。
 		let dxy = (dx + dy) / 2;
 
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
 		SAI_clip_rect(ctx, px, py, dx, dy);
 
+		// 映像の進行を表す変数。
 		let count2 = SAI_get_tick_count();
 		const value = Math.sin(count2 * 0.05);
 
 		// 指定した色で長方形領域を塗りつぶす。
-		ctx.fillStyle = `rgb(${value * 30 + 40}, ${value * 30 + 40}, ${value * 25 + 150})`
+		ctx.fillStyle = `rgb(${value * 30 + 40}, ${value * 20 + 80}, ${value * 15 + 80})`
 		ctx.fillRect(px, py, dx, dy);
 
+		// 空を漂う、小さな謎の丸い物体を描画する。
 		for(let k = dxy; k > 0; k -= 160){
 			const delta = 10000 / k;
 			for(let i = 0; i < 360; i += delta){
@@ -1505,7 +1531,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			}
 		}
 
-		do {
+		// 空を漂う宇宙基地？を描画する。
+		if(true){
 			ctx.strokeStyle = `rgb(90, 80, 100)`;
 			let r = dxy * 0.5;
 			let r2 = r * 0.05;
@@ -1516,14 +1543,16 @@ document.addEventListener('DOMContentLoaded', function(){
 			let x1 = x + r2 * Math.cos(count2 / 20 + Math.PI * 0.25);
 			let y1 = y + r2 * Math.sin(count2 / 20 + Math.PI * 0.25);
 			SAI_draw_line(ctx, x0, y0, x1, y1, 5);
-		}while(0);
+		}
 
+		// 遠近法を処理するヘルパー関数。疑似3D。
 		const focal = 100;
 		function SAI_perspective(x, y, z){
 			let w = focal / (focal + z);
 			return [x * w, y * w];
 		}
 
+		// 3Dっぽい背景を描画する。市松模様のタイル。
 		const y = 600, cx = 8000;
 		const deltax = 300, deltaz = 100;
 		let iz = 0;
@@ -1539,13 +1568,14 @@ document.addEventListener('DOMContentLoaded', function(){
 				ctx.lineTo(qx + x1, qy + y1);
 				ctx.lineTo(qx + x2, qy + y2);
 				ctx.lineTo(qx + x3, qy + y3);
-				ctx.fillStyle = ((ix + iz) & 1) ? '#333' : '#666';
+				ctx.fillStyle = ((ix + iz) & 1) ? '#333' : '#833';
 				ctx.fill();
 				++ix;
 			}
 			++iz;
 		}
 
+		// ヒモのついた五円玉を回転させて描画する。
 		if(sai_coin_img.complete){
 			ctx.translate(qx - sai_coin_img.width * 0.5, qy - sai_coin_img.height * 0.75);
 
@@ -1556,21 +1586,27 @@ document.addEventListener('DOMContentLoaded', function(){
 			ctx.drawImage(sai_coin_img, 0, 0, sai_coin_img.width * ratio, sai_coin_img.height * ratio);
 		}
 
-		ctx.restore();
+		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
 	// 映像の描画。pic7: Clamor Clamor
 	function SAI_draw_pic_7(ctx, px, py, dx, dy){
-		ctx.save();
+		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
-		let qx = px + dx / 2;
-		let qy = py + dy / 2;
+		// 画面中央の座標を計算する。
+		let qx = px + dx / 2, qy = py + dy / 2;
+
+		// 画面の辺の平均の長さ。
 		let dxy = (dx + dy) / 2;
 
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
 		SAI_clip_rect(ctx, px, py, dx, dy);
 
+		// 映像の進行を表す変数。
 		let count2 = SAI_get_tick_count();
+		let factor1 = count2 * 0.13, factor2 = count2 * 0.075;
+
+		// 画面中央を少しずらす。
 		if(SAI_display_is_large()){
 			qx += 60 * Math.cos(count2 * 0.1);
 			qy += 60 * Math.sin(count2 * 0.1);
@@ -1583,49 +1619,60 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.fillStyle = '#000';
 		ctx.fillRect(px, py, dx, dy);
 
-		let factor1 = count2 * 0.13;
-		let factor2 = count2 * 0.075;
+		// 画面中央を原点とする。
+		ctx.translate(qx, qy);
 
+		// アスタリスクのような星形？を描画する。外側から順番に描画する。
 		let i = 0;
 		const delta = dxy * 0.015 + 1;
 		for(let radius = (Math.floor(dxy * 0.35 / delta) + 1) * delta; radius > 0; radius -= delta){
+			// 塗りつぶしの色を選ぶ。
 			switch (i & 3){
 			case 0: ctx.fillStyle = '#f00'; break;
 			case 1: ctx.fillStyle = '#ff0'; break;
 			case 2: ctx.fillStyle = '#f90'; break;
 			case 3: ctx.fillStyle = '#300'; break;
 			}
+
+			// パスを構築する。
 			ctx.beginPath();
 			for(let angle = 0; angle <= 360; angle += 5){
 				let radian = angle * (Math.PI / 180);
 				let zoom = (1.0 * Math.abs(Math.sin(radian * 3)) + Math.cos(factor1) + 2);
 				let x = (radius + 2) * Math.cos(radian + factor2) * zoom;
 				let y = (radius + 2) * Math.sin(radian + factor2) * zoom;
-				if(angle == 0){
-					ctx.moveTo(qx + x, qy + y);
+				if(angle == 0){ // 角度がゼロなら最初の点。
+					ctx.moveTo(x, y);
 				}else{
-					ctx.lineTo(qx + x, qy + y);
+					ctx.lineTo(x, y);
 				}
 			}
+
+			// 出来たパスを塗りつぶす。
 			ctx.fill();
+
+			// 色選択に使う変数を更新する。
 			++i;
 		}
 
-		let grd = ctx.createRadialGradient(qx, qy, 0, qx, qy, dxy * 0.75);
+		// 外側に行くほど白くなる円形グラデーションを掛ける。
+		let grd = ctx.createRadialGradient(0, 0, 0, 0, 0, dxy * 0.75);
 		grd.addColorStop(0, 'rgba(255, 255, 255, 0.0)');
 		grd.addColorStop(1, 'rgba(255, 255, 255, 1.0)');
 		ctx.fillStyle = grd;
-		SAI_draw_circle(ctx, qx, qy, dxy, true);
+		SAI_draw_circle(ctx, 0, 0, dxy, true);
 
-		ctx.restore();
+		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
 	// 映像の描画。pic8: Crazy Colors
 	function SAI_draw_pic_8(ctx, px, py, dx, dy){
-		ctx.save();
+		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
-		let qx = px + dx / 2;
-		let qy = py + dy / 2;
+		// 画面中央の座標を計算する。
+		let qx = px + dx / 2, qy = py + dy / 2;
+
+		// 画面の辺の平均の長さ。
 		let dxy = (dx + dy) / 2;
 
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
@@ -1635,7 +1682,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.fillStyle = '#000';
 		ctx.fillRect(px, py, dx, dy);
 
+		// 映像の進行を表す変数。
 		let count2 = SAI_get_tick_count();
+
+		// 画面中央を少しずらす。
 		if(SAI_display_is_large()){
 			qx += 40 * Math.cos(count2 * 0.08);
 			qy += 40 * Math.sin(count2 * 0.08);
@@ -1644,22 +1694,32 @@ document.addEventListener('DOMContentLoaded', function(){
 			qy += 20 * Math.sin(count2 * 0.08);
 		}
 
+		// 画面中央を原点とする。
+		ctx.translate(qx, qy);
+
+		// 座標計算用のヘルパー関数。
 		const rotation = 8, width = dxy * 0.1;
 		let calc_point = function(radius, radian){
-			let x = qx + radius * Math.cos(radian);
-			let y = qy + radius * Math.sin(radian);
+			let x = radius * Math.cos(radian);
+			let y = radius * Math.sin(radian);
 			return [x, y];
 		}
+
+		// 虹色の渦巻きを描画する。
 		const colors = ['#f00', '#ff0', '#0f0', '#0ff', '#00c', '#f0f'];
 		const factor = count2 * 0.5;
 		for(let radian0 = -4.5; radian0 < rotation * 2 * Math.PI; radian0 += 0.12){
 			const radian1 = radian0 + 0.15;
 			const radius0 = width * radian0 / (2 * Math.PI);
 			const radius1 = radius0 + width * 1.03;
+
+			// 渦巻きの一部の座標を計算する。
 			const [x0, y0] = calc_point(radius0, radian0 - factor);
 			const [x1, y1] = calc_point(radius1, radian0 - factor);
 			const [x2, y2] = calc_point(radius1, radian1 - factor);
 			const [x3, y3] = calc_point(radius0, radian1 - factor);
+
+			// 線形グラデーションを作成し適用する。
 			let g = ctx.createLinearGradient(x0, y0, x1, y1);
 			g.addColorStop(0 / 7, colors[0]);
 			g.addColorStop(1 / 7, colors[1]);
@@ -1669,6 +1729,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			g.addColorStop(5 / 7, colors[5]);
 			g.addColorStop(6 / 7, colors[0]);
 			ctx.fillStyle = g;
+
+			// 渦巻きの一部をグラデーションで塗りつぶす。
 			ctx.beginPath();
 			ctx.lineTo(x0, y0);
 			ctx.lineTo(x1, y1);
@@ -1677,15 +1739,17 @@ document.addEventListener('DOMContentLoaded', function(){
 			ctx.fill();
 		}
 
-		ctx.restore();
+		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
 	// 映像の描画。pic9: Mixed Spirals
 	function SAI_draw_pic_9(ctx, px, py, dx, dy){
-		ctx.save();
+		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
-		let qx = px + dx / 2;
-		let qy = py + dy / 2;
+		// 画面中央の座標を計算する。
+		let qx = px + dx / 2, qy = py + dy / 2;
+
+		// 画面の辺の平均の長さ。
 		let dxy = (dx + dy) / 2;
 
 		let count2 = SAI_get_tick_count();
@@ -1707,8 +1771,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_pic_1(ctx, px, py, dx, dy);
 		sai_counter = -sai_counter / 0.8;
 
-		ctx.restore();
-		ctx.save();
+		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
+		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		ctx.beginPath();
 		for(let i = delta1; i < dxy; i += 2 * delta1){
@@ -1721,43 +1785,53 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_pic_1(ctx, px, py, dx, dy);
 		sai_counter /= 0.8;
 
-		ctx.restore();
+		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
 	// 映像の描画。pic10: Analog Disc
 	function SAI_draw_pic_10(ctx, px, py, dx, dy){
-		ctx.save();
+		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
-		let qx = px + dx / 2;
-		let qy = py + dy / 2;
+		// 画面中央の座標を計算する。
+		let qx = px + dx / 2, qy = py + dy / 2;
+
+		// 画面の寸法を使って計算する。
 		let maxxy = Math.max(dx, dy);
-		let minxy = Math.min(dx, dy);
 
+		// 映像の進行を表す変数。
 		let count2 = SAI_get_tick_count();
 
+		// 画面中央を原点とする。
 		ctx.translate(qx, qy);
 
-		if (sai_spiral_img.complete){
-			let x = -sai_spiral_img.width / 2;
-			let y = -sai_spiral_img.height / 2;
+		if (sai_spiral_img.complete){ // 渦巻きイメージの読み込みが完了していたら
+			// 描画位置を計算。
+			let x = -sai_spiral_img.width / 2, y = -sai_spiral_img.height / 2;
+
+			// これから描画する図形を回転。
 			ctx.rotate(-count2 * 0.3);
+
+			// 拡大率を設定。
 			let ratio = 2.5 * maxxy / (sai_spiral_img.width + sai_spiral_img.height);
-			ratio *= 1 + (count2 * 0.008) % 0.8;
+			ratio *= 1 + (count2 * 0.003) % 0.3; // 被験者の注意を引くため、ときどき映像をずらす。
 			ctx.scale(ratio, ratio);
-			ctx.globalAlpha = 0.5;
-			ctx.drawImage(sai_spiral_img, x, y);
-			ctx.globalAlpha = 1.0;
+
+			ctx.globalAlpha = 0.5; // 透過効果を付ける。
+			ctx.drawImage(sai_spiral_img, x, y); // 渦巻きイメージを描画する。
+			ctx.globalAlpha = 1.0; // 透過効果を元に戻す。
 		}
 
-		ctx.restore();
+		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
 	// カウントダウン映像の描画。
 	function SAI_draw_pic_count_down(ctx, px, py, dx, dy){
-		ctx.save();
+		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
-		let qx = px + dx / 2;
-		let qy = py + dy / 2;
+		// 画面中央の座標を計算する。
+		let qx = px + dx / 2, qy = py + dy / 2;
+
+		// 画面の辺の平均の長さ。
 		let dxy = (dx + dy) / 2;
 
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
@@ -1767,16 +1841,18 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.fillStyle = '#000';
 		ctx.fillRect(px, py, dx, dy);
 
-		if(sai_count_down){
+		if(sai_count_down){ // カウントダウン変数が有効なら
 			let new_time = (new Date()).getTime();
 			let diff_time = (new_time - sai_count_down) / 1000.0;
-			if (diff_time >= 3){
+			if (diff_time >= 3){ // 3秒経過したら
+				// カウントダウンを終了する。
 				sai_count_down = null;
 				// 必要ならスピーチを開始する。
 				if(sai_id_checkbox_speech_on_off.checked){
 					SAI_speech_start(sai_message_text);
 				}
 			}else{
+				// 数字を画面中央に描画する。
 				let value = Math.floor(diff_time);
 				let text = (3 - value).toString();
 
@@ -1798,7 +1874,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			}
 		}
 
-		ctx.restore();
+		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
 	// 映像の描画を一手に引き受ける。

@@ -1167,7 +1167,7 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '1', 'pic1: Pink Spiral');
 		trans_setSelectOptionText(sai_id_select_pic_type, '2', 'pic2: Concentric Circles');
 		trans_setSelectOptionText(sai_id_select_pic_type, '3', 'pic3: The Eyes');
-		trans_setSelectOptionText(sai_id_select_pic_type, '4', 'pic4: Black and White Spiral');
+		trans_setSelectOptionText(sai_id_select_pic_type, '4', 'pic4: Black/White Spiral');
 		trans_setSelectOptionText(sai_id_select_pic_type, '5', 'pic5: Spreading Hearts');
 		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'pic6: 5-Yen Coin');
 		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'pic7: Clamor Clamor');
