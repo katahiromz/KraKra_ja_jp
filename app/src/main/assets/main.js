@@ -839,7 +839,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 円の描画２。描画の最適化に使う。
 	function SAI_draw_circle_2(ctx, x, y, radius, is_fill = true, N = 16){
 		ctx.beginPath();
-		for (let i = 0; i < N; ++i){
+		for(let i = 0; i < N; ++i){
 			let x0 = x + radius * Math.cos(2 * Math.PI * i / N);
 			let y0 = y + radius * Math.sin(2 * Math.PI * i / N);
 			if(i == 0){
@@ -1126,10 +1126,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.strokeStyle = '#000';
 		ctx.lineCap = 'square';
 
-		for (let i = 0; i <= ci; ++i){
+		for(let i = 0; i <= ci; ++i){
 			let count = 0;
 			let x, y, oldx = qx, oldy = qy, f = 0.5;
-			for (let radius = 0; radius < size; radius += f){
+			for(let radius = 0; radius < size; radius += f){
 				let theta = dr0 * count * 0.375;
 				let value = 0.3 * Math.sin(count2 * 0.04) + 0.7;
 
@@ -1193,7 +1193,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		if(flag)
 			radius = dr0 - radius;
 
-		for (; radius < size; radius += dr0){
+		for(; radius < size; radius += dr0){
 			SAI_draw_circle(ctx, qx, qy, radius, false);
 		}
 
@@ -1267,7 +1267,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let r_delta = 30;
 		let flag = (factor % 10) / 0.5;
 		let flag2 = Math.sin(factor * 0.7) > -0.4;
-		for (let r = 0; r < 360;){
+		for(let r = 0; r < 360;){
 			let radian = r * Math.PI / 180 + factor;
 			ctx.beginPath();
 			ctx.moveTo(qx, qy);
@@ -1289,7 +1289,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			++k;
 		}
 		k = factor * 5;
-		for (let r = 0; r < 360;){
+		for(let r = 0; r < 360;){
 			let radian = r * Math.PI / 180 + factor;
 			let x0 = qx + cxy * Math.cos(radian);
 			let y0 = qy + cxy * Math.sin(radian);
@@ -1309,7 +1309,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.lineWidth = 10;
 		let i = 0;
 		ctx.strokeStyle = 'rgba(255, 0, 0, 50%)';
-		for (let r = SAI_mod(count2 * 2, 100); r < cxy; r += 100){
+		for(let r = SAI_mod(count2 * 2, 100); r < cxy; r += 100){
 			SAI_draw_circle(ctx, qx, qy, r, false);
 			++i;
 		}
@@ -1329,7 +1329,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		const N = 4;
 		const delta = (2 * Math.PI) / N;
 		let radian = factor * 1.3;
-		for (i = 0; i < N; ++i){
+		for(i = 0; i < N; ++i){
 			let x, y;
 
 			x = qx + cxy * Math.cos(radian + 0.4) * 0.3;
@@ -1378,7 +1378,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		let radius = 1;
 		ctx.fillStyle = '#fff';
-		for (let radian = 0; radian < 120;){
+		for(let radian = 0; radian < 120;){
 			const radian2 = radian - factor;
 			const x0 = qx + radius * Math.cos(-radian2);
 			const y0 = qy + radius * Math.sin(-radian2);
@@ -1419,7 +1419,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		let isLarge = SAI_display_is_large();
-		for (let radius = isLarge ? ((dx + dy) * 0.2) : ((dx + dy) * 0.4); radius >= 10; radius *= 0.92){
+		for(let radius = isLarge ? ((dx + dy) * 0.2) : ((dx + dy) * 0.4); radius >= 10; radius *= 0.92){
 			let r0, g0, b0;
 			[r0, g0, b0] = SAI_hsv2rgb((dxy + factor * 0.3 - radius * 0.015) % 1.0, 1.0, 1.0);
 			ctx.fillStyle = `rgb(${r0*255},${g0*255},${b0*255})`;
@@ -1427,7 +1427,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			let N0 = 20, N1 = 5;
 			let i = 0;
 			let oldx = null, oldy = null;
-			for (let angle = 0; angle <= 360; angle += 360 / N0){
+			for(let angle = 0; angle <= 360; angle += 360 / N0){
 				let radian = (angle + count2 * 2) * (Math.PI / 180.0);
 				let factor2 = radius * (1 + 0.7 * Math.abs(Math.sin(N1 * i * Math.PI / N0)));
 				if(isLarge)
@@ -1462,8 +1462,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.fillStyle = `rgb(255,${value2},${value2})`;
 		let M = 5;
 		let heartSize = 30;
-		for (let radius = SAI_mod((factor * 10), 100) + 30; radius < dxy; radius += 100){
-			for (let angle = 0; angle < 360; angle += 360 / M){
+		for(let radius = SAI_mod((factor * 10), 100) + 30; radius < dxy; radius += 100){
+			for(let angle = 0; angle < 360; angle += 360 / M){
 				let radian = angle * (Math.PI / 180.0);
 				let x0 = qx + radius * Math.cos(radian + factor * 0.1 + radius / 100);
 				let y0 = qy + radius * Math.sin(radian + factor * 0.1 + radius / 100);
@@ -1493,9 +1493,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.fillStyle = `rgb(${value * 30 + 40}, ${value * 30 + 40}, ${value * 25 + 150})`
 		ctx.fillRect(px, py, dx, dy);
 
-		for (let k = dxy; k > 0; k -= 160){
+		for(let k = dxy; k > 0; k -= 160){
 			const delta = 10000 / k;
-			for (let i = 0; i < 360; i += delta){
+			for(let i = 0; i < 360; i += delta){
 				let x = qx + k * Math.cos(count2 / 200 + i * (Math.PI / 180));
 				let y = qy + k * Math.sin(count2 / 200 + i * (Math.PI / 180));
 				x += k * Math.cos(i) * 0.2;
@@ -1527,9 +1527,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		const y = 600, cx = 8000;
 		const deltax = 300, deltaz = 100;
 		let iz = 0;
-		for (let z = 0; z <= 900; z += deltaz){
+		for(let z = 0; z <= 900; z += deltaz){
 			let ix = 0;
-			for (let x = -cx; x < cx; x += deltax){
+			for(let x = -cx; x < cx; x += deltax){
 				const [x0, y0] = SAI_perspective(x, y, z);
 				const [x1, y1] = SAI_perspective(x + deltax, y, z);
 				const [x2, y2] = SAI_perspective(x + deltax, y, z + deltaz);
@@ -1588,7 +1588,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		let i = 0;
 		const delta = dxy * 0.015 + 1;
-		for (let radius = (Math.floor(dxy * 0.35 / delta) + 1) * delta; radius > 0; radius -= delta){
+		for(let radius = (Math.floor(dxy * 0.35 / delta) + 1) * delta; radius > 0; radius -= delta){
 			switch (i & 3){
 			case 0: ctx.fillStyle = '#f00'; break;
 			case 1: ctx.fillStyle = '#ff0'; break;
@@ -1596,7 +1596,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			case 3: ctx.fillStyle = '#300'; break;
 			}
 			ctx.beginPath();
-			for (let angle = 0; angle <= 360; angle += 5){
+			for(let angle = 0; angle <= 360; angle += 5){
 				let radian = angle * (Math.PI / 180);
 				let zoom = (1.0 * Math.abs(Math.sin(radian * 3)) + Math.cos(factor1) + 2);
 				let x = (radius + 2) * Math.cos(radian + factor2) * zoom;
@@ -1652,7 +1652,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 		const colors = ['#f00', '#ff0', '#0f0', '#0ff', '#00c', '#f0f'];
 		const factor = count2 * 0.5;
-		for (let radian0 = -4.5; radian0 < rotation * 2 * Math.PI; radian0 += 0.12){
+		for(let radian0 = -4.5; radian0 < rotation * 2 * Math.PI; radian0 += 0.12){
 			const radian1 = radian0 + 0.15;
 			const radius0 = width * radian0 / (2 * Math.PI);
 			const radius1 = radius0 + width * 1.03;
@@ -1695,7 +1695,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let ty = qy + dxy * Math.sin(count2 * 0.01) * 0.0025;
 		let delta1 = dxy / 8;
 		ctx.beginPath();
-		for (let i = 0; i < dxy; i += 2 * delta1){
+		for(let i = 0; i < dxy; i += 2 * delta1){
 			ctx.arc(sx, sy, i, 0, Math.PI * 2, false);
 			ctx.arc(sx, sy, i + delta1, 0, Math.PI * 2, true);
 		}
@@ -1711,7 +1711,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.save();
 
 		ctx.beginPath();
-		for (let i = delta1; i < dxy; i += 2 * delta1){
+		for(let i = delta1; i < dxy; i += 2 * delta1){
 			ctx.arc(tx, ty, i, 0, Math.PI * 2, false);
 			ctx.arc(tx, ty, i + delta1, 0, Math.PI * 2, true);
 		}
@@ -1927,7 +1927,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		// きらめきを描画する。
-		for (let iStar = 0; iStar < sai_stars.length; ++iStar){
+		for(let iStar = 0; iStar < sai_stars.length; ++iStar){
 			let star = sai_stars[iStar];
 			if(star){
 				// 黄色い光を描く。
@@ -2141,20 +2141,30 @@ document.addEventListener('DOMContentLoaded', function(){
 				kirakira.play();
 			}
 		}
+		// 停止中か？
 		if(!sai_stopping){
-			// 催眠解除の場合、ダミー画面に戻す。
-			if(sai_pic_type == -1)
-				SAI_pic_set_type(0);
-			// 映像の停止。
-			sai_stopping = true;
-			// メインコントロール群を表示する。
-			SAI_show_main_controls(true);
-			// カウントダウンを破棄する。
-			sai_count_down = null;
-			// スピーチをキャンセル。
-			SAI_speech_cancel();
-			// カウンターのリセット。
-			sai_counter = 0;
+			// フルスクリーンモード、またはツールボタンが見えるか？
+			if(!sai_id_checkbox_fullscreen.checked || SAI_are_tool_buttons_shown()){
+				// 催眠解除の場合、ダミー画面に戻す。
+				if(sai_pic_type == -1)
+					SAI_pic_set_type(0);
+				// メインコントロール群を表示する。
+				SAI_show_main_controls(true);
+				// 映像の停止。
+				sai_stopping = true;
+				// カウントダウンを破棄する。
+				sai_count_down = null;
+				// スピーチをキャンセル。
+				SAI_speech_cancel();
+				// カウンターのリセット。
+				sai_counter = 0;
+			}else{
+				// ツールボタンを表示する。
+				let tool_buttons = document.getElementsByClassName('sai_tool_button');
+				for(let button of tool_buttons){
+					button.classList.remove('sai_class_invisible');
+				}
+			}
 		}
 	}
 
@@ -2605,6 +2615,16 @@ document.addEventListener('DOMContentLoaded', function(){
 		});
 	}
 
+	// ツールボタンが見えるかどうか？
+	function SAI_are_tool_buttons_shown(){
+		let tool_buttons = document.getElementsByClassName('sai_tool_button');
+		for(let button of tool_buttons){
+			if(!button.classList.contains('sai_class_invisible'))
+				return true;
+		}
+		return false;
+	}
+
 	// メインのボタン群を表示または非表示にする。
 	function SAI_show_main_controls(show){
 		let main_controls = document.getElementsByClassName('sai_class_button_main_control');
@@ -2613,7 +2633,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			for(let control of main_controls){
 				control.classList.remove('sai_class_invisible');
 			}
-			for (let button of tool_buttons){
+			for(let button of tool_buttons){
 				button.classList.remove('sai_class_invisible');
 			}
 			try{
@@ -2626,7 +2646,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				control.classList.add('sai_class_invisible');
 			}
 			if (sai_id_checkbox_fullscreen.checked){
-				for (let button of tool_buttons){
+				for(let button of tool_buttons){
 					button.classList.add('sai_class_invisible');
 				}
 				try{
