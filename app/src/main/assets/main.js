@@ -1104,46 +1104,39 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
 		SAI_clip_rect(ctx, px, py, dx, dy);
 
-		// ショッキングピンクで長方形領域を塗りつぶす。
-		ctx.fillStyle = '#f0f';
+		ctx.fillStyle = '#000';
 		ctx.fillRect(px, py, dx, dy);
 
-		let size = (dx + dy) * 2 / 5;
+		let minxy = Math.min(dx, dy);
+		let maxxy = Math.min(dx, dy);
+		let avgxy = (minxy + maxxy) / 2;
 		let count2 = -SAI_get_tick_count();
-		if(SAI_display_is_large()){
-			qx += 40 * Math.cos(count2 * 0.15);
-			qy += 40 * Math.sin(count2 * 0.15);
-		}else{
-			qx += 20 * Math.cos(count2 * 0.15);
-			qy += 20 * Math.sin(count2 * 0.15);
-		}
 
-		let dr0 = 15;
-		let dr = dr0 / 2;
+		ctx.translate(qx, qy);
+		ctx.rotate(-count2 * 0.1);
+		ctx.translate(25 * Math.cos(count2 * 0.1), 25 * Math.sin(count2 * 0.33333));
+		ctx.rotate(count2 * 0.0333);
+
 		let flag2 = -1;
-		let ci = 6;
+		let ci = 8;
 
-		ctx.strokeStyle = '#000';
+		ctx.strokeStyle = '#f0f';
 		ctx.lineCap = 'square';
 
 		for(let i = 0; i <= ci; ++i){
 			let count = 0;
-			let x, y, oldx = qx, oldy = qy, f = 0.5;
-			for(let radius = 0; radius < size; radius += f){
-				let theta = dr0 * count * 0.375;
-				let value = 0.3 * Math.sin(count2 * 0.04) + 0.7;
-
-				let radian = theta * (Math.PI / 180.0) + i * (2 * Math.PI) / ci;
-				let comp = new Complex({abs:radius, arg:flag2 * radian - count2 * (Math.PI * 0.03)});
-				x = qx + comp.re;
-				y = qy + comp.im;
-			
-				SAI_draw_line(ctx, oldx, oldy, x, y, dr * f * 0.666);
+			let x, y, oldx = 0, oldy = 0, f = 2;
+			for(let radius = 0; radius < maxxy * 1.5; radius += f){
+				let radian = radius * 0.01 + i * (2 * Math.PI) / ci;
+				let comp = new Complex({abs:radius, arg:flag2 * radian});
+				x = comp.re;
+				y = comp.im;
+				SAI_draw_line(ctx, oldx, oldy, x, y, f * 8);
 
 				oldx = x;
 				oldy = y;
 				count += 1;
-				f *= 1.02;
+				f *= 1.01;
 			}
 		}
 
