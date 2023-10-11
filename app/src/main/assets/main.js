@@ -2573,19 +2573,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// ウィンドウのサイズ変更や画面の回転を検出する。
 		window.addEventListener('resize', function(){
-			if(location.hostname == '' || SAI_is_native_app()){
-				if(localStorage.getItem('saiminHelpShowing')){ // ヘルプが表示中なら
-					// 映像の種類をローカルストレージに記憶して、再読み込み。
-					localStorage.setItem('saiminType', sai_pic_type);
-					location.reload();
-				}else{
-					SAI_screen_fit();
-				}
-			}else{
-				// 映像の種類をローカルストレージに記憶して、再読み込み。
-				localStorage.setItem('saiminType', sai_pic_type);
-				location.reload();
-			}
+			console.log(`innerWidth:${window.innerWidth}, innerHeight:${window.innerHeight}`);
+			sai_screen_width = window.innerWidth;
+			sai_screen_height = window.innerHeight;
 		}, false);
 
 		// マイクボタンの実装。
