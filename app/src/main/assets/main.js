@@ -1771,7 +1771,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		for(let i = 0; i < ci; ++i){
 			let oldx = 0, oldy = 0;
 			let theta_delta = 2 * Math.PI * i / ci;
-			for(let theta = 0; theta <= Math.PI * 2 * 10; theta += 0.1){
+			for(let theta = 0; theta <= Math.PI * 2 * 10; theta += 0.13){
 				let r = Math.exp(b * theta);
 				let comp = new Complex({abs:r, arg:theta + theta_delta});
 				let x = comp.re, y = comp.im;
