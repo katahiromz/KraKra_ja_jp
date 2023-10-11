@@ -46,7 +46,6 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
 
     /////////////////////////////////////////////////////////////////////
     // パーミッション関連。
-
     override fun onPermissionRequest(request: PermissionRequest) {
         for (res in request.resources) {
             if (res == PermissionRequest.RESOURCE_AUDIO_CAPTURE) {
@@ -168,11 +167,6 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
             .setCancelable(false)
             .show()
         return true
-    }
-
-    // アプリ復帰時の処理。
-    fun onResume() {
-        // 現在、特にすることはない。
     }
 
     // JavaScriptのprompt関数をフックする。

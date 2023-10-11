@@ -272,9 +272,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             speechText(theText)
         }
 
-        // クロームクライアントを復帰。
-        chromeClient?.onResume()
-
         // 明るさを復帰。
         setBrightness(screenBrightness);
     }
