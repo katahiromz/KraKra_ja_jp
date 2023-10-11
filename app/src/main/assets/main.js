@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	function SAI_star_add(x, y){
 		sai_stars.shift(); // 古い星を消す。
 
-		if(SAI_display_is_large()){ // 画面が大きければ
+		if(SAI_screen_is_large()){ // 画面が大きければ
 			// 大きな星を押し込む。
 			x += (Math.random() - 0.5) * 2 * 20 * 2;
 			y += (Math.random() - 0.5) * 2 * 20 * 2;
@@ -264,10 +264,6 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_all_released_img = new Image();
 		sai_all_released_img.src = trans_getText('TEXT_ALL_RELEASED_IMG');
 
-		// スパイラルの画像も更新。
-		sai_spiral_img = new Image();
-		sai_spiral_img.src = "images/spiral.svg";
-
 		// 言語<select>の値も更新。
 		sai_id_select_language_1.value = lang;
 
@@ -349,7 +345,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 大きな画面か？
-	function SAI_display_is_large(){
+	function SAI_screen_is_large(){
 		return sai_screen_width >= 1200 || sai_screen_height >= 1200;
 	}
 
@@ -1092,7 +1088,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				width *= 0.75;
 				height *= 0.75;
 			}else{
-				if(SAI_display_is_large() &&
+				if(SAI_screen_is_large() &&
 					sai_screen_width * 2 < width &&
 					sai_screen_height * 2 < height)
 				{
@@ -1115,7 +1111,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
-	// 映像の描画。pic1: Spiral
+	// 映像の描画。pic1: Pink Spiral
 	function SAI_draw_pic_1(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
@@ -1201,7 +1197,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// さまざまな計算をする。
 		let dr0 = 30;
-		if(SAI_display_is_large()){
+		if(SAI_screen_is_large()){
 			dr0 *= 2;
 			count2 *= 2;
 			ctx.lineWidth = 30;
@@ -1415,7 +1411,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let factor = count2 * 0.16;
 
 		// 画面中央を少しずらす。
-		if(SAI_display_is_large()){
+		if(SAI_screen_is_large()){
 			qx += 60 * Math.cos(factor * 0.8);
 			qy += 60 * Math.sin(factor * 0.8);
 		}else{
@@ -1427,7 +1423,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.translate(qx, qy);
 
 		// 星形のレインボーを描画する。外側から順番に。
-		let isLarge = SAI_display_is_large();
+		let isLarge = SAI_screen_is_large();
 		for(let radius = isLarge ? ((dx + dy) * 0.2) : ((dx + dy) * 0.4); radius >= 10; radius *= 0.92){
 			// 虹色の指定はHSL色空間で。
 			ctx.fillStyle = `hsl(${((dxy + factor * 0.3 - radius * 0.015) * 360) % 360}deg, 100%, 50%)`;
@@ -1579,7 +1575,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			let angle = Math.PI * Math.sin(count2 * 0.1 - 0.05) * 0.078;
 			ctx.rotate(angle);
 
-			let ratio = SAI_display_is_large() ? 1.4 : 1;
+			let ratio = SAI_screen_is_large() ? 1.4 : 1;
 			ctx.drawImage(sai_coin_img, 0, 0, sai_coin_img.width * ratio, sai_coin_img.height * ratio);
 		}
 
@@ -1604,7 +1600,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let factor1 = count2 * 0.13, factor2 = count2 * 0.075;
 
 		// 画面中央を少しずらす。
-		if(SAI_display_is_large()){
+		if(SAI_screen_is_large()){
 			qx += 60 * Math.cos(count2 * 0.1);
 			qy += 60 * Math.sin(count2 * 0.1);
 		}else{
@@ -1683,7 +1679,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let count2 = SAI_get_tick_count();
 
 		// 画面中央を少しずらす。
-		if(SAI_display_is_large()){
+		if(SAI_screen_is_large()){
 			qx += 40 * Math.cos(count2 * 0.08);
 			qy += 40 * Math.sin(count2 * 0.08);
 		}else{
@@ -1817,15 +1813,14 @@ document.addEventListener('DOMContentLoaded', function(){
 
 			// 拡大率を設定。
 			let ratio = 2.5 * maxxy / (sai_spiral_img.width + sai_spiral_img.height);
-			ratio *= 1 + (count2 * 0.003) % 0.3; // 被験者の注意を引くため、ときどき映像をずらす。
 			ctx.scale(ratio, ratio);
 
-			if (!SAI_display_is_large())
+			if (!SAI_screen_is_large())
 				ctx.globalAlpha = 0.5; // 透過効果を付ける。
 
 			ctx.drawImage(sai_spiral_img, x, y); // 渦巻きイメージを描画する。
 
-			if (!SAI_display_is_large())
+			if (!SAI_screen_is_large())
 				ctx.globalAlpha = 1.0; // 透過効果を元に戻す。
 		}
 
@@ -2785,8 +2780,11 @@ document.addEventListener('DOMContentLoaded', function(){
 		// キャンバスを画面にフィットさせる。
 		SAI_screen_fit_canvas();
 
-		// 五円玉を読み込む。
+		// 五円玉の画像を読み込む。
 		sai_coin_img.src = 'images/coin5yen.png';
+
+		// スパイラルの画像も更新。
+		sai_spiral_img.src = "images/spiral.svg";
 
 		// 映像切り替え音声を読み込む。
 		sai_kirakira_sound_object = new Audio('sn/kirakira.mp3');
