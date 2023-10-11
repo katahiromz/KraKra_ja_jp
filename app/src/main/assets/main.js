@@ -1158,6 +1158,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				let comp = new Complex({abs:r, arg:theta + delta_theta});
 				let x = comp.re, y = comp.im;
 
+				// 線を描画する。
 				SAI_draw_line_2(ctx, oldx, oldy, x, y, r * 1.8 / ci);
 
 				// 古い(x, y)を記憶する。
@@ -1760,37 +1761,28 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.translate(qx, qy);
 
 		// 回転させる。
-		ctx.rotate(-count2 * 0.3);
+		ctx.rotate(-count2 * 0.23);
 
 		// 黄色で塗る。
 		ctx.fillStyle = '#ff0';
 
-		// 黄金らせんの公式に従って描画する。
-		let b = 0.3063489, oldx = 0, oldy = 0;
-		for(let theta = 0; theta <= Math.PI * 2 * 10; theta += 0.1){
-			let r = Math.exp(b * theta);
-			let comp = new Complex({abs:r, arg:theta});
-			let x = comp.re, y = comp.im;
+		// 黄金らせんの公式に従って描画する。ただしtheta_deltaだけ偏角をずらす。
+		const b = 0.3063489, ci = 3;
+		for(let i = 0; i < ci; ++i){
+			let oldx = 0, oldy = 0;
+			let theta_delta = 2 * Math.PI * i / ci;
+			for(let theta = 0; theta <= Math.PI * 2 * 10; theta += 0.1){
+				let r = Math.exp(b * theta);
+				let comp = new Complex({abs:r, arg:theta + theta_delta});
+				let x = comp.re, y = comp.im;
 
-			SAI_draw_line_2(ctx, oldx, oldy, x, y, r * 0.4);
+				// 線を描画する。
+				SAI_draw_line_2(ctx, oldx, oldy, x, y, r * 0.8 / ci);
 
-			// 古い(x, y)を記憶する。
-			oldx = x;
-			oldy = y;
-		}
-
-		// 偏角をMath.PIだけずらしてもう一度描画する。
-		oldx = oldy = 0;
-		for(let theta = 0; theta <= Math.PI * 2 * 10; theta += 0.1){
-			let r = Math.exp(b * theta);
-			let comp = new Complex({abs:r, arg:(theta + Math.PI)});
-			let x = comp.re, y = comp.im;
-
-			SAI_draw_line_2(ctx, oldx, oldy, x, y, r * 0.4);
-
-			// 古い(x, y)を記憶する。
-			oldx = x;
-			oldy = y;
+				// 古い(x, y)を記憶する。
+				oldx = x;
+				oldy = y;
+			}
 		}
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
