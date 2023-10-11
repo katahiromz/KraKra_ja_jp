@@ -1805,7 +1805,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.translate(qx, qy);
 
 		// 上下に揺らす。
-		let updown = minxy * Math.sin(count2 * 0.2) * 0.1;
+		let updown = minxy * Math.sin(count2 * 0.2) * 0.16;
 		ctx.translate(0, updown);
 
 		if (sai_spiral_img.complete){ // 渦巻きイメージの読み込みが完了していたら
@@ -1813,21 +1813,20 @@ document.addEventListener('DOMContentLoaded', function(){
 			let x = -sai_spiral_img.width / 2, y = -sai_spiral_img.height / 2;
 
 			// これから描画する図形を回転。
-			ctx.rotate(-count2 * 0.2);
+			ctx.rotate(-count2 * 0.3);
 
 			// 拡大率を設定。
-			let ratio = 2.2 * maxxy / (sai_spiral_img.width + sai_spiral_img.height);
+			let ratio = 2.5 * maxxy / (sai_spiral_img.width + sai_spiral_img.height);
+			ratio *= 1 + (count2 * 0.003) % 0.3; // 被験者の注意を引くため、ときどき映像をずらす。
 			ctx.scale(ratio, ratio);
 
+			if (!SAI_display_is_large())
+				ctx.globalAlpha = 0.5; // 透過効果を付ける。
+
 			ctx.drawImage(sai_spiral_img, x, y); // 渦巻きイメージを描画する。
 
-			// さらに回転。
-			ctx.rotate(Math.PI * 0.05);
-
-			// 半透明で描画する。
-			ctx.globalAlpha = 0.5;
-			ctx.drawImage(sai_spiral_img, x, y); // 渦巻きイメージを描画する。
-			ctx.globalAlpha = 1.0;
+			if (!SAI_display_is_large())
+				ctx.globalAlpha = 1.0; // 透過効果を元に戻す。
 		}
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
