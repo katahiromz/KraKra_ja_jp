@@ -1139,32 +1139,27 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.rotate(-count2 * 0.12);
 
 		// 少し回転のずれを表現する。
-		ctx.translate(25 * Math.cos(count2 * 0.02), 25 * Math.sin(count2 * 0.05));
-		ctx.rotate(count2 * 0.0333);
+		ctx.translate(25 * Math.cos(count2 * 0.01), 25 * Math.sin(count2 * 0.05));
+		ctx.rotate(count2 * 0.02);
 
-		ctx.strokeStyle = '#f0f'; // ショッキングピンクで描画する。
-		ctx.lineCap = 'square';
+		ctx.fillStyle = '#f0f'; // ショッキングピンクで描画する。
 
 		// 発散する渦巻きを描画する。
 		let ci = 8;
 		for(let i = 0; i <= ci; ++i){
-			let oldx = 0, oldy = 0, f = 2;
-			for(let radius = 0; radius < maxxy * 1.5; radius += f){
-				// 角度を計算する。
-				let radian = radius * 0.01 + i * (2 * Math.PI) / ci;
-
-				// 複素数を計算する。
-				let comp = new Complex({abs:radius, arg:-radian});
+			let delta_theta = 2 * Math.PI * i / ci;
+			// 対数らせんの公式に従って描画する。ただし偏角はdelta_thetaだけずらす。
+			let a = 1, b = 1.1, oldx = 0, oldy = 0;
+			for(let theta = 0; theta <= Math.PI * 2 * 10; theta += 0.2){
+				let r = a * Math.exp(b * theta);
+				let comp = new Complex({abs:r, arg:theta + delta_theta});
 				let x = comp.re, y = comp.im;
 
-				// 線を描画する。
-				SAI_draw_line(ctx, oldx, oldy, x, y, f * 8);
+				SAI_draw_line_2(ctx, oldx, oldy, x, y, r * 1.8 / ci);
 
-				// 古い(x, y)を保存する。
+				// 古い(x, y)を記憶する。
 				oldx = x;
 				oldy = y;
-
-				f *= 1.01; // 半径の増分は単純増加。
 			}
 		}
 
@@ -1779,6 +1774,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 			SAI_draw_line_2(ctx, oldx, oldy, x, y, r * 0.4);
 
+			// 古い(x, y)を記憶する。
 			oldx = x;
 			oldy = y;
 		}
@@ -1792,6 +1788,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 			SAI_draw_line_2(ctx, oldx, oldy, x, y, r * 0.4);
 
+			// 古い(x, y)を記憶する。
 			oldx = x;
 			oldy = y;
 		}
