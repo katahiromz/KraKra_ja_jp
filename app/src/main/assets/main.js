@@ -1,7 +1,7 @@
 // 催眠アプリ「催眠くらくら」のJavaScriptのメインコード。
 // 暗号名はKraKra。
 
-const sai_VERSION = '3.4.7'; // KraKraバージョン番号。
+const sai_VERSION = '3.4.8'; // KraKraバージョン番号。
 const sai_DEBUGGING = false; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
 let sai_stopping = true; // 停止中か？
@@ -1082,7 +1082,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		if(sai_logo_img.complete){ // ロゴイメージの読み込みが完了されたか？
 			// 寸法を調整する。
-			let width = sai_logo_img.width, height = sai_logo_img.height;
+			let wid
+			th = sai_logo_img.width, height = sai_logo_img.height;
 			if (width > sai_screen_width){
 				width *= 0.75;
 				height *= 0.75;
@@ -1348,7 +1349,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
-	// 映像の描画。pic4: Black and White Spiral
+	// 映像の描画。pic4: Black/White Spiral
 	function SAI_draw_pic_4(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
@@ -1694,12 +1695,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 座標計算用のヘルパー関数。
 		const rotation = 8, width = dxy * 0.1;
 		let calc_point = function(radius, radian){
-			let x = radius * Math.cos(radian);
-			let y = radius * Math.sin(radian);
-			return [x, y];
+			return [radius * Math.cos(radian), radius * Math.sin(radian)];
 		}
 
-		// 虹色の渦巻きを描画する。
+		// 虹色の渦巻きを描画する。アルキメデスのらせんの公式に従う。
 		const colors = ['#f00', '#ff0', '#0f0', '#0ff', '#00c', '#f0f'];
 		const factor = count2 * 0.5;
 		for(let radian0 = -4.5; radian0 < rotation * 2 * Math.PI; radian0 += 0.12){
