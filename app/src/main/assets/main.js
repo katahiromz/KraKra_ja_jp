@@ -17,7 +17,8 @@ let sai_stopping = true; // 停止中か？
 
 // Androidアプリにおいて、システムバーが変更された場合に呼び出される関数。
 function SAI_OnAndroidSystemBarsChanged(sysBarsVisible){
-	let tool_buttons = document.getElementsByClassName('sai_tool_button');
+	// ツールボタンを取得する。ツールボタンは、sai_class_tool_buttonクラスを持つ要素。
+	let tool_buttons = document.getElementsByClassName('sai_class_tool_button');
 	if(sysBarsVisible || sai_stopping || !sai_id_checkbox_fullscreen.checked){
 		for(let button of tool_buttons){
 			button.classList.remove('sai_class_invisible');
@@ -1096,16 +1097,14 @@ document.addEventListener('DOMContentLoaded', function(){
 				}
 			}
 			// 描画するロゴの位置を計算する。
-			let x = px + (dx - width) / 2;
-			let y = py + (dy - height) * 0.4 - dy * 0.1;
+			let x = px + (dx - width) / 2, y = py + (dy - height) * 0.4 - dy * 0.1;
 			// ロゴを描画する。
 			ctx.drawImage(sai_logo_img, x, y, width, height);
 		}
 
 		if(!sai_stopping && sai_tap_here_img.complete){
 			// 停止中でなければ「タップして下さい」のイメージを描画する。
-			let x = qx - sai_tap_here_img.width / 2;
-			let y = py + dy * 0.7;
+			let x = qx - sai_tap_here_img.width / 2, y = py + dy * 0.7;
 			ctx.drawImage(sai_tap_here_img, x, y);
 		}
 
@@ -1319,8 +1318,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		const N = 4;
 		let radian = factor * 1.3;
 		for(i = 0; i < N; ++i){
-			let x = cxy * Math.cos(radian + 0.4) * 0.3;
-			let y = cxy * Math.sin(radian + 0.4) * 0.3;
+			let x = cxy * Math.cos(radian + 0.4) * 0.3, y = cxy * Math.sin(radian + 0.4) * 0.3;
 			SAI_draw_eye(ctx, x, y, cxy / 10, opened, 0.25); // アルファ値0.25により透過する。
 
 			x = cxy * Math.cos(radian + 0.2) * 0.3;
@@ -2271,8 +2269,8 @@ document.addEventListener('DOMContentLoaded', function(){
 				// カウンターのリセット。
 				sai_counter = 0;
 			}else{
-				// ツールボタンを表示する。
-				let tool_buttons = document.getElementsByClassName('sai_tool_button');
+				// ツールボタンを表示する。ツールボタンは、sai_class_tool_buttonクラスを持つ要素。
+				let tool_buttons = document.getElementsByClassName('sai_class_tool_button');
 				for(let button of tool_buttons){
 					button.classList.remove('sai_class_invisible');
 				}
@@ -2729,18 +2727,25 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// ツールボタンが見えるかどうか？
 	function SAI_are_tool_buttons_shown(){
-		let tool_buttons = document.getElementsByClassName('sai_tool_button');
+		// ツールボタン群を取得する。ツールボタンは、sai_class_tool_buttonクラスを持つ要素。
+		let tool_buttons = document.getElementsByClassName('sai_class_tool_button');
 		for(let button of tool_buttons){
 			if(!button.classList.contains('sai_class_invisible'))
-				return true;
+				return true; // 見える。
 		}
-		return false;
+		return false; // 見えない。
 	}
 
 	// メインのボタン群を表示または非表示にする。
 	function SAI_show_main_controls(show){
+		// メインコントロール群を取得する。
+		// メインコントロールはsai_class_button_main_controlクラスを持つ要素。
 		let main_controls = document.getElementsByClassName('sai_class_button_main_control');
-		let tool_buttons = document.getElementsByClassName('sai_tool_button');
+
+		// ツールボタン群を取得する。
+		// ツールボタンは、sai_class_tool_buttonクラスを持つ要素。
+		let tool_buttons = document.getElementsByClassName('sai_class_tool_button');
+
 		if(show){
 			for(let control of main_controls){
 				control.classList.remove('sai_class_invisible');
