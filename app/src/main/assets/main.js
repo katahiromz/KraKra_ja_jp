@@ -1767,22 +1767,30 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 回転させる。
 		ctx.rotate(-count2 * 0.3);
 
-		// 中心を少しずらす。
-		let fx = minxy * (1 + Math.cos(count2 * 0.1)) * 0.02;
-		let fy = minxy * (1 + Math.sin(count2 * 0.1)) * 0.02;
-		ctx.translate(fx, fy);
-
 		// 黄色で塗る。
 		ctx.fillStyle = '#ff0';
 
 		// 黄金らせんの公式に従って描画する。
 		let b = 0.3063489, oldx = 0, oldy = 0;
-		for (let theta = 0; theta <= Math.PI * 2 * 10; theta += 0.1) {
+		for(let theta = 0; theta <= Math.PI * 2 * 10; theta += 0.1){
 			let r = Math.exp(b * theta);
 			let comp = new Complex({abs:r, arg:theta});
 			let x = comp.re, y = comp.im;
 
-			SAI_draw_line_2(ctx, oldx, oldy, x, y, r * 0.7);
+			SAI_draw_line_2(ctx, oldx, oldy, x, y, r * 0.4);
+
+			oldx = x;
+			oldy = y;
+		}
+
+		// 偏角をMath.PIだけずらしてもう一度描画する。
+		oldx = oldy = 0;
+		for(let theta = 0; theta <= Math.PI * 2 * 10; theta += 0.1){
+			let r = Math.exp(b * theta);
+			let comp = new Complex({abs:r, arg:(theta + Math.PI)});
+			let x = comp.re, y = comp.im;
+
+			SAI_draw_line_2(ctx, oldx, oldy, x, y, r * 0.4);
 
 			oldx = x;
 			oldy = y;
@@ -1943,7 +1951,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		switch (sai_pic_type){
 		case 8:
-		case 9:
 			// 特定の映像で解像度を下げて描画する。
 			if(!sai_count_down){
 				let ratio = 0.5;
