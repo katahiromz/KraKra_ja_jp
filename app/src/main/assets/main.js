@@ -1082,8 +1082,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		if(sai_logo_img.complete){ // ロゴイメージの読み込みが完了されたか？
 			// 寸法を調整する。
-			let wid
-			th = sai_logo_img.width, height = sai_logo_img.height;
+			let width = sai_logo_img.width, height = sai_logo_img.height;
 			if (width > sai_screen_width){
 				width *= 0.75;
 				height *= 0.75;
