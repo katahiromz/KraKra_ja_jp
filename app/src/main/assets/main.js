@@ -842,7 +842,9 @@ document.addEventListener('DOMContentLoaded', function(){
 			ctx.stroke();
 	}
 
-	// 円の描画２。描画の最適化に使う。
+	// 円の描画２。
+	// いくつかの環境では大きな円を描くときにSAI_draw_circleを使うと遅くなる。
+	// こちらの関数は自前で円に近い図形（正多角形）を描画する。
 	function SAI_draw_circle_2(ctx, x, y, radius, is_fill = true, N = 16){
 		ctx.beginPath();
 		for(let i = 0; i < N; ++i){
@@ -870,7 +872,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.stroke();
 	}
 
-	// 線分の描画２。描画の最適化に使う。
+	// 線分の描画２。
+	// いくつかの環境ではSAI_draw_lineでかなり太い線を描くと時間がかかる。
+	// こちらの関数は自前で線をレンダリングする。
 	function SAI_draw_line_2(ctx, x0, y0, x1, y1, lineWidth){
 		let dx = x1 - x0, dy = y1 - y0;
 		let len = Math.sqrt(dx * dx + dy * dy);
