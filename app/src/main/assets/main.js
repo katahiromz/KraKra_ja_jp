@@ -1813,13 +1813,21 @@ document.addEventListener('DOMContentLoaded', function(){
 			let x = -sai_spiral_img.width / 2, y = -sai_spiral_img.height / 2;
 
 			// これから描画する図形を回転。
-			ctx.rotate(-count2 * 0.12);
+			ctx.rotate(-count2 * 0.2);
 
 			// 拡大率を設定。
 			let ratio = 2.2 * maxxy / (sai_spiral_img.width + sai_spiral_img.height);
 			ctx.scale(ratio, ratio);
 
 			ctx.drawImage(sai_spiral_img, x, y); // 渦巻きイメージを描画する。
+
+			// さらに回転。
+			ctx.rotate(Math.PI * 0.05);
+
+			// 半透明で描画する。
+			ctx.globalAlpha = 0.5;
+			ctx.drawImage(sai_spiral_img, x, y); // 渦巻きイメージを描画する。
+			ctx.globalAlpha = 1.0;
 		}
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
