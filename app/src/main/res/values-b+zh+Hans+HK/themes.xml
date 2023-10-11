@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.KraKra_ja_jp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
@@ -12,7 +12,7 @@
         <item name="colorOnSecondary">@color/black</item>
         <item name="android:textColorSecondary">@color/white</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
         <!-- Navigation bar color. -->
         <item name="android:navigationBarColor">@color/black</item>
         <!-- Customize your theme here. -->

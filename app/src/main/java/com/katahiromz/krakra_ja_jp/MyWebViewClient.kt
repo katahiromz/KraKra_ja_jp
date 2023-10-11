@@ -21,8 +21,8 @@ class MyWebViewClient(val listener: Listener) : WebViewClient() {
     ): Boolean {
         if (view != null && request != null) {
             // アセット内部に制限する。
-            var url: String = request.url.toString()
-            var index:Int = url.indexOf("file:///android_asset/")
+            val url: String = request.url.toString()
+            val index:Int = url.indexOf("file:///android_asset/")
             if (index == 0) {
                 view.loadUrl(url)
             }

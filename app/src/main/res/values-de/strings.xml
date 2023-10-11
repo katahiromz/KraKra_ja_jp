@@ -14,7 +14,6 @@
     <string name="progress_bar">Fortschrittsanzeige</string>
     <string name="now_starting">KraKra wird gestartet...</string>
     <string name="prompt_hint">Bitte geben Sie eine Zeichenfolge ein</string>
-    <string name="no_audio_record">Keine Erlaubnis zur Verwendung von Audioaufnahmen.</string>
 
     <!-- message list -->
     <string name="message_000">Du wirst immer schläfriger...</string>

@@ -22,7 +22,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import timber.log.Timber
 import java.util.Locale
 
-class MyWebChromeClient(public var activity: MainActivity?, private val listener: Listener) :
+class MyWebChromeClient(var activity: MainActivity?, private val listener: Listener) :
     WebChromeClient() {
 
     // リスナ。
@@ -63,13 +63,13 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
     // 画面の明るさを調整する。
     @JavascriptInterface
     fun setBrightness(brightness: String) {
-        listener.onBrightness(brightness);
+        listener.onBrightness(brightness)
     }
 
     // NaviBarを表示する。
     @JavascriptInterface
     fun showNaviBar(show: Boolean) {
-        activity!!.showNaviBar(show);
+        activity!!.showNaviBar(show)
     }
 
     // スピーチをキャンセルする。
@@ -103,21 +103,29 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
     @JavascriptInterface
     fun setLanguage(lang: String) {
         // {{LANGUAGE_SPECIFIC}}
-        var locale : Locale
-        if (lang == "ja" || lang == "jp" || lang == "ja-JP") { // Japanese
-            locale = Locale.JAPANESE
-        } else if (lang == "zh-CN") { // Chinese (Simplified)
-            locale = Locale.SIMPLIFIED_CHINESE
-        } else if (lang == "zh-TW") { // Chinese (Traditional)
-            locale = Locale.TRADITIONAL_CHINESE
-        } else if (lang == "ko-KR") { // Korean
-            locale = Locale.KOREAN
-        } else if (lang == "it" || lang == "it-IT") { // Italian
-            locale = Locale.ITALIAN
-        } else if (lang == "de" || lang == "de-DE") { // German
-            locale = Locale.GERMAN
-        } else { // English is default
-            locale = Locale.ENGLISH
+        val locale : Locale
+        when (lang) {
+            "ja", "jp", "ja-JP" -> { // Japanese
+                locale = Locale.JAPANESE
+            }
+            "zh-CN" -> { // Chinese (Simplified)
+                locale = Locale.SIMPLIFIED_CHINESE
+            }
+            "zh-TW" -> { // Chinese (Traditional)
+                locale = Locale.TRADITIONAL_CHINESE
+            }
+            "ko-KR" -> { // Korean
+                locale = Locale.KOREAN
+            }
+            "it", "it-IT" -> { // Italian
+                locale = Locale.ITALIAN
+            }
+            "de", "de-DE" -> { // German
+                locale = Locale.GERMAN
+            }
+            else -> { // English is default
+                locale = Locale.ENGLISH
+            }
         }
         Locale.setDefault(locale)
         activity!!.setCurLocale(locale)
@@ -131,12 +139,12 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
         result: JsResult?
     ): Boolean {
         // MaterialAlertDialogを使用して普通に実装する。
-        var title = getLocString(R.string.app_name)
-        var ok_text = getLocString(R.string.ok)
+        val title = getLocString(R.string.app_name)
+        val okText = getLocString(R.string.ok)
         MaterialAlertDialogBuilder(activity!!, R.style.AlertDialogTheme)
             .setTitle(title)
             .setMessage(message)
-            .setPositiveButton(ok_text) { _, _ ->
+            .setPositiveButton(okText) { _, _ ->
                 result?.confirm()
             }
             .setCancelable(false)
@@ -152,16 +160,16 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
         result: JsResult?
     ): Boolean {
         // MaterialAlertDialogを使用して普通に実装する。
-        var title = getLocString(R.string.app_name)
-        var ok_text = getLocString(R.string.ok)
-        var cancel_text = getLocString(R.string.cancel)
+        val title = getLocString(R.string.app_name)
+        val okText = getLocString(R.string.ok)
+        val cancelText = getLocString(R.string.cancel)
         MaterialAlertDialogBuilder(activity!!, R.style.AlertDialogTheme)
             .setTitle(title)
             .setMessage(message)
-            .setPositiveButton(ok_text) { _, _ ->
+            .setPositiveButton(okText) { _, _ ->
                 result?.confirm()
             }
-            .setNegativeButton(cancel_text) { _, _ ->
+            .setNegativeButton(cancelText) { _, _ ->
                 result?.cancel()
             }
             .setCancelable(false)
@@ -191,19 +199,19 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
             return true
         }
         // さもなければMaterialAlertDialogを使用して普通に実装する。
-        var ok_text = getLocString(R.string.ok)
-        var cancel_text = getLocString(R.string.cancel)
-        var input: EditText = EditText(activity!!)
+        val okText = getLocString(R.string.ok)
+        val cancelText = getLocString(R.string.cancel)
+        val input = EditText(activity!!)
         input.inputType = InputType.TYPE_CLASS_TEXT
         input.setText(if (defaultValue != null) defaultValue else "")
         MaterialAlertDialogBuilder(activity!!, R.style.AlertDialogTheme)
                 .setTitle(title)
                 .setMessage(message)
                 .setView(input)
-                .setPositiveButton(ok_text) { _, _ ->
+                .setPositiveButton(okText) { _, _ ->
                     result?.confirm(input.text.toString())
                 }
-                .setNegativeButton(cancel_text) { _, _ ->
+                .setNegativeButton(cancelText) { _, _ ->
                     result?.cancel()
                 }
                 .setCancelable(false)
@@ -230,7 +238,7 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
     /// @param message メッセージ文字列
     /// @return true: メッセージ選択ダイアログの表示対象、false: それ以外
     private fun isSelectMessageDialog(message: String?): Boolean {
-        var msg: String = getLocString(R.string.message_select_dialog_message)
+        val msg: String = getLocString(R.string.message_select_dialog_message)
         if (msg == message)
             return true
         // {{LANGUAGE_SPECIFIC}}
@@ -251,23 +259,23 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
         defaultValue: String?,
         result: JsPromptResult?
     ) {
-        var defaultMessageList: MutableList<String> = activity!!.getDefaultMessageList()
-        var messageList: MutableList<String> = MainRepository.loadMessageList(activity!!)
+        val defaultMessageList: MutableList<String> = activity!!.getDefaultMessageList()
+        val messageList: MutableList<String> = MainRepository.loadMessageList(activity!!)
 
         // リストが空ならデフォルトで初期化する。
         if (messageList.isEmpty())
             messageList.addAll(defaultMessageList)
 
         // ダイアログビューを取得する。
-        var inflater = activity!!.layoutInflater
-        var dialogView: View = inflater.inflate(R.layout.message_select_dialog, null)
+        val inflater = activity!!.layoutInflater
+        val dialogView: View = inflater.inflate(R.layout.message_select_dialog, null)
 
         // 「クリア」ボタン。
-        var clearButton = dialogView.findViewById<Button>(R.id.clear_button)
-        clearButton.setText(getLocString(R.string.clear))
+        val clearButton = dialogView.findViewById<Button>(R.id.clear_button)
+        clearButton.text = getLocString(R.string.clear)
 
         // テキストボックス。
-        var editText: EditText = dialogView.findViewById(R.id.message_edit)
+        val editText: EditText = dialogView.findViewById(R.id.message_edit)
         editText.setText(defaultValue)
         editText.hint = getLocString(R.string.prompt_hint)
 
@@ -282,10 +290,10 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
                 .setMessage(message)
                 .setView(dialogView)
                 .setPositiveButton(getLocString(R.string.ok)) { _, _ ->
-                    var inputtedText = editText.text.toString()
+                    val inputtedText = editText.text.toString()
 
                     if (inputtedText.isNotEmpty()) {
-                        var index = messageList.indexOf(inputtedText)
+                        val index = messageList.indexOf(inputtedText)
                         if (index != -1)
                             messageList.removeAt(index)
                         messageList.add(0, inputtedText)
@@ -309,7 +317,7 @@ class MyWebChromeClient(public var activity: MainActivity?, private val listener
 
         // ダイアログのレイアウトを設定
         val listView: ListView = dialogView.findViewById(R.id.message_list)
-        var arrayAdapter = ArrayAdapter(
+        val arrayAdapter = ArrayAdapter(
             activity!!,
             android.R.layout.simple_list_item_1,
             messageList

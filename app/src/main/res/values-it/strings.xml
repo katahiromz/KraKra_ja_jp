@@ -14,7 +14,6 @@
     <string name="progress_bar">ProgressBar</string>
     <string name="now_starting">Avvio di KraKra...</string>
     <string name="prompt_hint">Inserisci una stringa</string>
-    <string name="no_audio_record">Nessun permesso per utilizzare la registrazione audio.</string>
 
     <!-- message list -->
     <string name="message_000">Stai diventando sempre più assonnato...</string>

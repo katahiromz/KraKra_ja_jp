@@ -14,7 +14,6 @@
     <string name="progress_bar">進度條</string>
     <string name="now_starting">克拉克拉啟動過程中...</string>
     <string name="prompt_hint">請輸入一個字符串</string>
-    <string name="no_audio_record">輸入音頻需要權限</string>
 
     <!-- message list -->
     <string name="message_000">你越來越困了。。。</string>

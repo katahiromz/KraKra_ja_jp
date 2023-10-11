@@ -17,6 +17,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
@@ -65,7 +66,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
                 lastToast?.show()
             }
             else -> {
-                require(false, { "typeOfToast: $typeOfToast" })
+                require(false) { "typeOfToast: $typeOfToast" }
             }
         }
     }
@@ -100,7 +101,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             }
             // TODO: Add more Snack
             else -> {
-                require(false, { "typeOfSnack: $typeOfSnack" })
+                require(false) { "typeOfSnack: $typeOfSnack" }
             }
         }
     }
@@ -138,7 +139,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         // 別スレッドかもしれないので、postする。
         webView?.post {
             WindowCompat.setDecorFitsSystemWindows(window, show)
-            var view = this.findViewById<View>(R.layout.activity_main)
+            val view = findViewById<ConstraintLayout>(R.id.activity_main)
             if (show) {
                 WindowInsetsControllerCompat(window, view).let { controller ->
                     controller.show(WindowInsetsCompat.Type.systemBars())
@@ -164,14 +165,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         showNaviBar(showingNaviBar)
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-    }
-
     /////////////////////////////////////////////////////////////////////
     // パーミッション関連
     // 参考：https://qiita.com/sokume2106/items/46bd286569a6e7fac43d
@@ -184,8 +177,8 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
                 showToast(getLocString(R.string.cant_use_microphone), LONG_TOAST)
             },
             onShowRationale = { onRequest ->
-                var title = getLocString(R.string.app_name)
-                var message = getLocString(R.string.needs_microphone)
+                val title = getLocString(R.string.app_name)
+                val message = getLocString(R.string.needs_microphone)
                 MaterialAlertDialogBuilder(this, R.style.AlertDialogTheme)
                     .setTitle(title)
                     .setMessage(message)
@@ -199,7 +192,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     fun requestAudioRecoding() {
         val audioCheck = ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO)
         if (audioCheck != PackageManager.PERMISSION_GRANTED) {
-            audioRecordingPermissionChecker.runWithPermission({})
+            audioRecordingPermissionChecker.runWithPermission {}
         }
     }
 
@@ -227,7 +220,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         setCurLocale(Locale.getDefault())
 
         // 権限を確認する。
-        var granted = ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO)
+        val granted = ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO)
         if (granted != PackageManager.PERMISSION_GRANTED) {
             requestAudioRecoding()
         }
@@ -243,12 +236,12 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
         // システムバーが変更された場合を検出し、Web側に渡す。
         ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { view, insets ->
-            var sysBarsVisible = insets.isVisible(WindowInsetsCompat.Type.systemBars())
-            var str: String = "SAI_OnAndroidSystemBarsChanged("
+            val sysBarsVisible = insets.isVisible(WindowInsetsCompat.Type.systemBars())
+            var str = "SAI_OnAndroidSystemBarsChanged("
             str += sysBarsVisible.toString()
             str += ")"
             Timber.i(str)
-            webView?.evaluateJavascript(str, {})
+            webView?.evaluateJavascript(str) {}
             WindowInsetsCompat.toWindowInsetsCompat(view.onApplyWindowInsets(insets.toWindowInsets()))
         }
     }
@@ -273,7 +266,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         }
 
         // 明るさを復帰。
-        setBrightness(screenBrightness);
+        setBrightness(screenBrightness)
     }
 
     // アクティビティの一時停止時。
@@ -434,7 +427,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         val pi: PackageInfo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             pm.getPackageInfo(appName, PackageManager.PackageInfoFlags.of(PackageManager.GET_META_DATA.toLong()))
         } else {
-            @Suppress("DEPRECATION")
             pm.getPackageInfo(appName, PackageManager.GET_META_DATA)
         }
         return pi.versionName
@@ -467,13 +459,13 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         return currLocaleContext!!.getString(id)
     }
     fun getLocString(id: Int): String {
-        return getLocString(id, currLocale);
+        return getLocString(id, currLocale)
     }
 
     // KraKraの既定のメッセージリストを取得する。
     fun getDefaultMessageList(): MutableList<String> {
         currLocaleContext = null
-        var ret: MutableList<String> = mutableListOf<String>()
+        val ret = mutableListOf<String>()
         for (id in R.string.message_000 .. R.string.message_049) {
             ret.add(getLocString(id))
         }
@@ -491,7 +483,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     private fun initTextToSpeech() {
         run {
             tts = TextToSpeech(this, this)
-            var locale = currLocale
+            val locale = currLocale
             if (tts!!.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
                 tts!!.language = locale
             }

@@ -14,7 +14,6 @@
     <string name="progress_bar">진척 바</string>
     <string name="now_starting">크라크라 시동 중...</string>
     <string name="prompt_hint">보려는 문자열을 입력하십시오.</string>
-    <string name="no_audio_record">음성을 입력하려면 권한이 필요합니다.</string>
 
     <!-- message list -->
     <string name="message_000">너는 점점 졸린다</string>
