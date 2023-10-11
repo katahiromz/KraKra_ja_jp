@@ -1960,7 +1960,6 @@ document.addEventListener('DOMContentLoaded', function(){
 		}else{
 			// それ以外は普通に描画する。
 			SAI_draw_pic(ctx, px, py, dx, dy);
-			break;
 		}
 	}
 
