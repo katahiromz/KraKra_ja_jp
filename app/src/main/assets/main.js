@@ -1816,7 +1816,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			ctx.rotate(-count2 * 0.3);
 
 			// 拡大率を設定。
-			let ratio = 2.05 * maxxy / (sai_spiral_img.width + sai_spiral_img.height);
+			let ratio = 2.1 * maxxy / (sai_spiral_img.width + sai_spiral_img.height);
 			ctx.scale(ratio, ratio);
 
 			ctx.globalAlpha = 0.5; // 透過効果を付ける。
