@@ -1805,7 +1805,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.translate(qx, qy);
 
 		// 上下に揺らす。
-		let updown = minxy * Math.sin(count2 * 0.2) * 0.16;
+		let updown = minxy * Math.sin(count2 * 0.2) * 0.14;
 		ctx.translate(0, updown);
 
 		if (sai_spiral_img.complete){ // 渦巻きイメージの読み込みが完了していたら
@@ -1816,7 +1816,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			ctx.rotate(-count2 * 0.3);
 
 			// 拡大率を設定。
-			let ratio = 2.5 * maxxy / (sai_spiral_img.width + sai_spiral_img.height);
+			let ratio = 2.05 * maxxy / (sai_spiral_img.width + sai_spiral_img.height);
 			ratio *= 1 + (count2 * 0.003) % 0.3; // 被験者の注意を引くため、ときどき映像をずらす。
 			ctx.scale(ratio, ratio);
 
