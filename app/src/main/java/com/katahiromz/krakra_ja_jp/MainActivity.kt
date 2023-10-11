@@ -107,7 +107,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
     var lastSnackbar : Snackbar? = null
     // Snackbarをキャンセルする。
-    @JavascriptInterface
     fun cancelSnackbar() {
         if (lastSnackbar != null) {
             lastSnackbar?.dismiss()
@@ -188,7 +187,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             }
         )
 
-    @JavascriptInterface
     fun requestAudioRecoding() {
         val audioCheck = ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO)
         if (audioCheck != PackageManager.PERMISSION_GRANTED) {
@@ -212,9 +210,8 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         setContentView(R.layout.activity_main)
 
         // アクションバーを隠す。
-        if (false) { // Theme.MaterialComponents.DayNight.NoActionBarで指定できるので省略。
-            supportActionBar?.hide()
-        }
+        // Theme.MaterialComponents.DayNight.NoActionBarで指定できるので省略。
+        //supportActionBar?.hide()
 
         // ロケールをセットする。
         setCurLocale(Locale.getDefault())
