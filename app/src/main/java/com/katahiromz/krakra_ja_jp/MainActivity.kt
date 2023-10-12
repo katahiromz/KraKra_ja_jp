@@ -326,15 +326,15 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
     // ウェブビューを初期化する。
     private fun initWebView(savedInstanceState: Bundle?) {
-        // ウェブビューのビューを取得する。
-        webView = findViewById(R.id.web_view)
-
         // 以前の状態を復元する。
         // SEE ALSO: https://twigstechtips.blogspot.com/2013/08/android-retain-instance-of-webview.html
-        if (savedInstanceState != null) {
+        if (webView != null && savedInstanceState != null) {
             webView?.restoreState(savedInstanceState)
             return
         }
+
+        // ウェブビューのビューを取得する。
+        webView = findViewById(R.id.web_view)
 
         // この処理は別スレッドかもしれないので、postを活用。
         webView?.post {
