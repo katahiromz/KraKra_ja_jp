@@ -31,7 +31,8 @@
             android:name=".MainActivity"
             android:theme="@style/Theme.KraKra_ja_jp.Splash"
             android:exported="true"
-            android:screenOrientation="fullUser">
+            android:screenOrientation="fullUser"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

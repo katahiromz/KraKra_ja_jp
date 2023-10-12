@@ -18,6 +18,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import timber.log.Timber
 import java.util.Locale
@@ -131,6 +132,16 @@ class MyWebChromeClient(var activity: MainActivity?, private val listener: Liste
         activity!!.setCurLocale(locale)
     }
 
+    var modalDialog: AlertDialog? = null
+
+    // 一時停止時の処理。
+    fun onPause() {
+    }
+
+    // 復帰時の処理。
+    fun onResume() {
+    }
+
     // JavaScriptのalert関数をフックする。
     override fun onJsAlert(
         view: WebView?,
@@ -141,14 +152,16 @@ class MyWebChromeClient(var activity: MainActivity?, private val listener: Liste
         // MaterialAlertDialogを使用して普通に実装する。
         val title = getLocString(R.string.app_name)
         val okText = getLocString(R.string.ok)
-        MaterialAlertDialogBuilder(activity!!, R.style.AlertDialogTheme)
+        modalDialog = MaterialAlertDialogBuilder(activity!!, R.style.AlertDialogTheme)
             .setTitle(title)
             .setMessage(message)
             .setPositiveButton(okText) { _, _ ->
                 result?.confirm()
+                modalDialog = null
             }
             .setCancelable(false)
-            .show()
+            .create()
+        modalDialog?.show()
         return true
     }
 
@@ -163,17 +176,20 @@ class MyWebChromeClient(var activity: MainActivity?, private val listener: Liste
         val title = getLocString(R.string.app_name)
         val okText = getLocString(R.string.ok)
         val cancelText = getLocString(R.string.cancel)
-        MaterialAlertDialogBuilder(activity!!, R.style.AlertDialogTheme)
+        modalDialog = MaterialAlertDialogBuilder(activity!!, R.style.AlertDialogTheme)
             .setTitle(title)
             .setMessage(message)
             .setPositiveButton(okText) { _, _ ->
                 result?.confirm()
+                modalDialog = null
             }
             .setNegativeButton(cancelText) { _, _ ->
                 result?.cancel()
+                modalDialog = null
             }
             .setCancelable(false)
-            .show()
+            .create()
+        modalDialog?.show()
         return true
     }
 
@@ -204,18 +220,21 @@ class MyWebChromeClient(var activity: MainActivity?, private val listener: Liste
         val input = EditText(activity!!)
         input.inputType = InputType.TYPE_CLASS_TEXT
         input.setText(if (defaultValue != null) defaultValue else "")
-        MaterialAlertDialogBuilder(activity!!, R.style.AlertDialogTheme)
+        modalDialog = MaterialAlertDialogBuilder(activity!!, R.style.AlertDialogTheme)
                 .setTitle(title)
                 .setMessage(message)
                 .setView(input)
                 .setPositiveButton(okText) { _, _ ->
                     result?.confirm(input.text.toString())
+                    modalDialog = null
                 }
                 .setNegativeButton(cancelText) { _, _ ->
                     result?.cancel()
+                    modalDialog = null
                 }
                 .setCancelable(false)
-                .show()
+                .create()
+        modalDialog?.show()
         return true
     }
 
@@ -285,35 +304,39 @@ class MyWebChromeClient(var activity: MainActivity?, private val listener: Liste
         }
 
         // ダイアログを表示する。
-        MaterialAlertDialogBuilder(activity!!, R.style.AlertDialogTheme)
-                .setTitle(title)
-                .setMessage(message)
-                .setView(dialogView)
-                .setPositiveButton(getLocString(R.string.ok)) { _, _ ->
-                    val inputtedText = editText.text.toString()
+        modalDialog = MaterialAlertDialogBuilder(activity!!, R.style.AlertDialogTheme)
+            .setTitle(title)
+            .setMessage(message)
+            .setView(dialogView)
+            .setPositiveButton(getLocString(R.string.ok)) { _, _ ->
+                val inputtedText = editText.text.toString()
 
-                    if (inputtedText.isNotEmpty()) {
-                        val index = messageList.indexOf(inputtedText)
-                        if (index != -1)
-                            messageList.removeAt(index)
-                        messageList.add(0, inputtedText)
-                        MainRepository.saveMessageList(activity!!, messageList)
-                    }
-
-                    result?.confirm(inputtedText)
-                }
-                .setNegativeButton(getLocString(R.string.cancel)) { _, _ ->
-                    result?.cancel()
-                }
-                .setNeutralButton(getLocString(R.string.reset)) { _, _ ->
-                    messageList.clear()
-                    messageList.addAll(defaultMessageList)
+                if (inputtedText.isNotEmpty()) {
+                    val index = messageList.indexOf(inputtedText)
+                    if (index != -1)
+                        messageList.removeAt(index)
+                    messageList.add(0, inputtedText)
                     MainRepository.saveMessageList(activity!!, messageList)
-
-                    result?.confirm("")
                 }
-                .setCancelable(false)
-                .show()
+
+                result?.confirm(inputtedText)
+                modalDialog = null
+            }
+            .setNegativeButton(getLocString(R.string.cancel)) { _, _ ->
+                result?.cancel()
+                modalDialog = null
+            }
+            .setNeutralButton(getLocString(R.string.reset)) { _, _ ->
+                messageList.clear()
+                messageList.addAll(defaultMessageList)
+                MainRepository.saveMessageList(activity!!, messageList)
+
+                result?.confirm("")
+                modalDialog = null
+            }
+            .setCancelable(false)
+            .create()
+        modalDialog?.show()
 
         // ダイアログのレイアウトを設定
         val listView: ListView = dialogView.findViewById(R.id.message_list)

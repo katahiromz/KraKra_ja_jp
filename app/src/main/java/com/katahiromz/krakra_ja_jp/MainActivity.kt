@@ -223,7 +223,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         }
 
         // WebViewを初期化。
-        initWebView()
+        initWebView(savedInstanceState)
 
         // TextToSpeechを初期化。
         initTextToSpeech()
@@ -254,6 +254,9 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         Timber.i("onResume")
         super.onResume() // 親にも伝える。
 
+        // クロームクライアントを復帰。
+        chromeClient?.onResume()
+
         // ウェブビューを復帰。
         webView?.onResume()
 
@@ -270,6 +273,9 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     override fun onPause() {
         Timber.i("onPause")
         super.onPause() // 親にも伝える。
+
+        // クロームクライアントを一時停止。
+        chromeClient?.onPause()
 
         // ウェブビューも一時停止。
         webView?.onPause()
@@ -319,9 +325,16 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     private var chromeClient: MyWebChromeClient? = null
 
     // ウェブビューを初期化する。
-    private fun initWebView() {
+    private fun initWebView(savedInstanceState: Bundle?) {
         // ウェブビューのビューを取得する。
         webView = findViewById(R.id.web_view)
+
+        // 以前の状態を復元する。
+        // SEE ALSO: https://twigstechtips.blogspot.com/2013/08/android-retain-instance-of-webview.html
+        if (savedInstanceState != null) {
+            webView?.restoreState(savedInstanceState)
+            return
+        }
 
         // この処理は別スレッドかもしれないので、postを活用。
         webView?.post {
