@@ -221,19 +221,19 @@ class MyWebChromeClient(var activity: MainActivity?, private val listener: Liste
         input.inputType = InputType.TYPE_CLASS_TEXT
         input.setText(if (defaultValue != null) defaultValue else "")
         modalDialog = MaterialAlertDialogBuilder(activity!!, R.style.AlertDialogTheme)
-                .setTitle(title)
-                .setMessage(message)
-                .setView(input)
-                .setPositiveButton(okText) { _, _ ->
-                    result?.confirm(input.text.toString())
-                    modalDialog = null
-                }
-                .setNegativeButton(cancelText) { _, _ ->
-                    result?.cancel()
-                    modalDialog = null
-                }
-                .setCancelable(false)
-                .create()
+            .setTitle(title)
+            .setMessage(message)
+            .setView(input)
+            .setPositiveButton(okText) { _, _ ->
+                result?.confirm(input.text.toString())
+                modalDialog = null
+            }
+            .setNegativeButton(cancelText) { _, _ ->
+                result?.cancel()
+                modalDialog = null
+            }
+            .setCancelable(false)
+            .create()
         modalDialog?.show()
         return true
     }
