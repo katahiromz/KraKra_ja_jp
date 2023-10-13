@@ -794,7 +794,6 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_note, '音符ボタン:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(なし)');
 		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', 'ネコっぽい');
-		trans_setSelectOptionText(sai_id_select_sound, 'Drill', 'ドリル');
 		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', '興奮');
 		trans_setSelectOptionText(sai_id_select_sound, 'Horror', '恐怖');
 		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', '狩人');
@@ -803,6 +802,10 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'Lovely', '愛らしい');
 		trans_setSelectOptionText(sai_id_select_sound, 'Magic', '魔術');
 		trans_setSelectOptionText(sai_id_select_sound, 'OraSaimin', 'おら! 催眠!');
+		trans_setSelectOptionText(sai_id_select_sound, 'Noise', '雑音');
+		trans_setSelectOptionText(sai_id_select_sound, '432Hz', '432Hz');
+		trans_setSelectOptionText(sai_id_select_sound, 'Heli', 'ヘリコプター');
+		trans_setSelectOptionText(sai_id_select_sound, 'HeliPlus432Hz', 'ヘリ+432Hz');
 		trans_setHtmlText(sai_id_text_switch_sound, '切り替え音:');
 		trans_setHtmlText(sai_id_text_brightness, '画面の明るさ:');
 		trans_setSelectOptionText(sai_id_select_brightness, 'normal', '普通');
@@ -859,7 +862,6 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_note, '声音按钮：');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(无)');
 		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', '像猫一样');
-		trans_setSelectOptionText(sai_id_select_sound, 'Drill', '钻头');
 		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', '激发');
 		trans_setSelectOptionText(sai_id_select_sound, 'Horror', '害怕');
 		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', '猎人');
@@ -868,6 +870,10 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'Lovely', '可爱的');
 		trans_setSelectOptionText(sai_id_select_sound, 'Magic', '巫术');
 		trans_setSelectOptionText(sai_id_select_sound, 'OraSaimin', '天啊！ 催眠！');
+		trans_setSelectOptionText(sai_id_select_sound, 'Noise', '噪音');
+		trans_setSelectOptionText(sai_id_select_sound, '432Hz', '432Hz');
+		trans_setSelectOptionText(sai_id_select_sound, 'Heli', '直升机');
+		trans_setSelectOptionText(sai_id_select_sound, 'HeliPlus432Hz', '直升机+432Hz');
 		trans_setHtmlText(sai_id_text_switch_sound, '开关声音：');
 		trans_setHtmlText(sai_id_text_brightness, '屏幕亮度：');
 		trans_setSelectOptionText(sai_id_select_brightness, 'normal', '通常');
@@ -924,7 +930,6 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_note, '聲音按鈕：');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(無)');
 		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', '像貓一樣');
-		trans_setSelectOptionText(sai_id_select_sound, 'Drill', '鑽頭');
 		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', '激發');
 		trans_setSelectOptionText(sai_id_select_sound, 'Horror', '害怕');
 		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', '獵人');
@@ -933,6 +938,10 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'Lovely', '可愛的');
 		trans_setSelectOptionText(sai_id_select_sound, 'Magic', '巫術');
 		trans_setSelectOptionText(sai_id_select_sound, 'OraSaimin', '天啊！ 催眠！');
+		trans_setSelectOptionText(sai_id_select_sound, 'Noise', '噪音');
+		trans_setSelectOptionText(sai_id_select_sound, '432Hz', '432Hz');
+		trans_setSelectOptionText(sai_id_select_sound, 'Heli', '直升機');
+		trans_setSelectOptionText(sai_id_select_sound, 'HeliPlus432Hz', '直升機+432Hz');
 		trans_setHtmlText(sai_id_text_switch_sound, '開關聲音：');
 		trans_setHtmlText(sai_id_text_brightness, '屏幕亮度：');
 		trans_setSelectOptionText(sai_id_select_brightness, 'normal', '正常亮度');
@@ -989,7 +998,6 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_note, '사운드 버튼:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(없음)');
 		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', '고양이 같은');
-		trans_setSelectOptionText(sai_id_select_sound, 'Drill', '드릴');
 		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', '일으키다');
 		trans_setSelectOptionText(sai_id_select_sound, 'Horror', '공포');
 		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', '사냥꾼');
@@ -998,6 +1006,10 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'Lovely', '사랑스러운');
 		trans_setSelectOptionText(sai_id_select_sound, 'Magic', '마술');
 		trans_setSelectOptionText(sai_id_select_sound, 'OraSaimin', '오! 최면!');
+		trans_setSelectOptionText(sai_id_select_sound, 'Noise', '소음');
+		trans_setSelectOptionText(sai_id_select_sound, '432Hz', '432Hz');
+		trans_setSelectOptionText(sai_id_select_sound, 'Heli', '헬리콥터');
+		trans_setSelectOptionText(sai_id_select_sound, 'HeliPlus432Hz', '헬리콥터+432Hz');
 		trans_setHtmlText(sai_id_text_switch_sound, '전환 사운드:');
 		trans_setHtmlText(sai_id_text_brightness, '화면 밝기:');
 		trans_setSelectOptionText(sai_id_select_brightness, 'normal', '일반 밝기');
@@ -1054,7 +1066,6 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_note, 'Pulsante audio:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(Nessuno)');
 		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', 'Simile a un gatto');
-		trans_setSelectOptionText(sai_id_select_sound, 'Drill', 'Trapano');
 		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', 'Eccitare');
 		trans_setSelectOptionText(sai_id_select_sound, 'Horror', 'Paura');
 		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', 'A caccia');
@@ -1063,6 +1074,10 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'Lovely', 'Adorabile');
 		trans_setSelectOptionText(sai_id_select_sound, 'Magic', 'Stregoneria');
 		trans_setSelectOptionText(sai_id_select_sound, 'OraSaimin', 'Ora! Saimin!');
+		trans_setSelectOptionText(sai_id_select_sound, 'Noise', 'Rumore');
+		trans_setSelectOptionText(sai_id_select_sound, '432Hz', '432Hz');
+		trans_setSelectOptionText(sai_id_select_sound, 'Heli', 'Elicottero');
+		trans_setSelectOptionText(sai_id_select_sound, 'HeliPlus432Hz', 'Elicottero+432Hz');
 		trans_setHtmlText(sai_id_text_switch_sound, 'Suono cambio foto:');
 		trans_setHtmlText(sai_id_text_brightness, 'Luminosità:');
 		trans_setSelectOptionText(sai_id_select_brightness, 'normal', 'Normale');
@@ -1119,7 +1134,6 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_note, 'Sound-Taste:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(Kein)');
 		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', 'Katzenartig');
-		trans_setSelectOptionText(sai_id_select_sound, 'Drill', 'Bohren');
 		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', 'Anregen');
 		trans_setSelectOptionText(sai_id_select_sound, 'Horror', 'Furcht');
 		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', 'Jagd');
@@ -1128,6 +1142,10 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'Lovely', 'Liebenswert');
 		trans_setSelectOptionText(sai_id_select_sound, 'Magic', 'Hexerei');
 		trans_setSelectOptionText(sai_id_select_sound, 'OraSaimin', 'Ora! Saimin!');
+		trans_setSelectOptionText(sai_id_select_sound, 'Noise', 'Lärm');
+		trans_setSelectOptionText(sai_id_select_sound, '432Hz', '432Hz');
+		trans_setSelectOptionText(sai_id_select_sound, 'Heli', 'Hubschrauber');
+		trans_setSelectOptionText(sai_id_select_sound, 'HeliPlus432Hz', 'Hubschrauber+432Hz');
 		trans_setHtmlText(sai_id_text_switch_sound, 'Bildwechselton:');
 		trans_setHtmlText(sai_id_text_brightness, 'Helligkeit:');
 		trans_setSelectOptionText(sai_id_select_brightness, 'normal', 'Normal');
@@ -1184,7 +1202,6 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_note, 'Sound button:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(None)');
 		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', 'Cattish');
-		trans_setSelectOptionText(sai_id_select_sound, 'Drill', 'Drill');
 		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', 'Exciting');
 		trans_setSelectOptionText(sai_id_select_sound, 'Horror', 'Horror');
 		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', 'Hunting');
@@ -1193,6 +1210,10 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'Lovely', 'Lovely');
 		trans_setSelectOptionText(sai_id_select_sound, 'Magic', 'Magic');
 		trans_setSelectOptionText(sai_id_select_sound, 'OraSaimin', 'Ora! Saimin!');
+		trans_setSelectOptionText(sai_id_select_sound, 'Noise', 'Noise');
+		trans_setSelectOptionText(sai_id_select_sound, '432Hz', '432Hz');
+		trans_setSelectOptionText(sai_id_select_sound, 'Heli', 'Helicopter');
+		trans_setSelectOptionText(sai_id_select_sound, 'HeliPlus432Hz', 'Heli+432Hz');
 		trans_setHtmlText(sai_id_text_switch_sound, 'Pic change sound:');
 		trans_setHtmlText(sai_id_text_brightness, 'Brightness:');
 		trans_setSelectOptionText(sai_id_select_brightness, 'normal', 'Normal');
