@@ -797,7 +797,6 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', '興奮');
 		trans_setSelectOptionText(sai_id_select_sound, 'Horror', '恐怖');
 		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', '狩人');
-		trans_setSelectOptionText(sai_id_select_sound, 'Lonely', 'さびしさ');
 		trans_setSelectOptionText(sai_id_select_sound, 'Longing', 'あこがれ');
 		trans_setSelectOptionText(sai_id_select_sound, 'Lovely', '愛らしい');
 		trans_setSelectOptionText(sai_id_select_sound, 'Magic', '魔術');
@@ -865,7 +864,6 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', '激发');
 		trans_setSelectOptionText(sai_id_select_sound, 'Horror', '害怕');
 		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', '猎人');
-		trans_setSelectOptionText(sai_id_select_sound, 'Lonely', '孤独');
 		trans_setSelectOptionText(sai_id_select_sound, 'Longing', '渴望');
 		trans_setSelectOptionText(sai_id_select_sound, 'Lovely', '可爱的');
 		trans_setSelectOptionText(sai_id_select_sound, 'Magic', '巫术');
@@ -933,7 +931,6 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', '激發');
 		trans_setSelectOptionText(sai_id_select_sound, 'Horror', '害怕');
 		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', '獵人');
-		trans_setSelectOptionText(sai_id_select_sound, 'Lonely', '孤獨');
 		trans_setSelectOptionText(sai_id_select_sound, 'Longing', '渴望');
 		trans_setSelectOptionText(sai_id_select_sound, 'Lovely', '可愛的');
 		trans_setSelectOptionText(sai_id_select_sound, 'Magic', '巫術');
@@ -1001,7 +998,6 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', '일으키다');
 		trans_setSelectOptionText(sai_id_select_sound, 'Horror', '공포');
 		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', '사냥꾼');
-		trans_setSelectOptionText(sai_id_select_sound, 'Lonely', '녹슬다');
 		trans_setSelectOptionText(sai_id_select_sound, 'Longing', '동경');
 		trans_setSelectOptionText(sai_id_select_sound, 'Lovely', '사랑스러운');
 		trans_setSelectOptionText(sai_id_select_sound, 'Magic', '마술');
@@ -1069,7 +1065,6 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', 'Eccitare');
 		trans_setSelectOptionText(sai_id_select_sound, 'Horror', 'Paura');
 		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', 'A caccia');
-		trans_setSelectOptionText(sai_id_select_sound, 'Lonely', 'Solitudine');
 		trans_setSelectOptionText(sai_id_select_sound, 'Longing', 'Desiderio');
 		trans_setSelectOptionText(sai_id_select_sound, 'Lovely', 'Adorabile');
 		trans_setSelectOptionText(sai_id_select_sound, 'Magic', 'Stregoneria');
@@ -1137,7 +1132,6 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', 'Anregen');
 		trans_setSelectOptionText(sai_id_select_sound, 'Horror', 'Furcht');
 		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', 'Jagd');
-		trans_setSelectOptionText(sai_id_select_sound, 'Lonely', 'Einsamkeit');
 		trans_setSelectOptionText(sai_id_select_sound, 'Longing', 'Sehnsucht');
 		trans_setSelectOptionText(sai_id_select_sound, 'Lovely', 'Liebenswert');
 		trans_setSelectOptionText(sai_id_select_sound, 'Magic', 'Hexerei');
@@ -1205,7 +1199,6 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', 'Exciting');
 		trans_setSelectOptionText(sai_id_select_sound, 'Horror', 'Horror');
 		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', 'Hunting');
-		trans_setSelectOptionText(sai_id_select_sound, 'Lonely', 'Lonely');
 		trans_setSelectOptionText(sai_id_select_sound, 'Longing', 'Longing');
 		trans_setSelectOptionText(sai_id_select_sound, 'Lovely', 'Lovely');
 		trans_setSelectOptionText(sai_id_select_sound, 'Magic', 'Magic');
