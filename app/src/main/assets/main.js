@@ -724,6 +724,28 @@ document.addEventListener('DOMContentLoaded', function(){
 		localStorage.setItem('saiminFullscreen', value.toString());
 	}
 
+	// 音声の自動繰り返し。
+	function SAI_sound_set_auto_repeat(value){
+		switch(value){
+		case '1':
+		case 'true':
+		case true:
+			value = 1;
+			break;
+		case '0':
+		case 'false':
+		case false:
+		case null:
+			value = 0;
+			break;
+		}
+
+		sai_id_checkbox_auto_repeat_sound.checked = (value == 1);
+
+		// ローカルストレージに記憶。
+		localStorage.setItem('saiminSoundAutoRepeat', value.toString());
+	}
+
 	// スクリーンのサイズをセットする。必要ならキャンバスのサイズも変更する。
 	function SAI_screen_fit_canvas(){
 		console.log('SAI_screen_fit_canvas');
@@ -2246,8 +2268,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				kirakira.play();
 			}
 		}
-		// 停止中か？
-		if(!sai_stopping){
+		if(!sai_stopping){ // 停止中でなければ
 			// フルスクリーンモード、またはツールボタンが見えるか？
 			if(!sai_id_checkbox_fullscreen.checked || SAI_are_tool_buttons_shown()){
 				// 催眠解除の場合、ダミー画面に戻す。
@@ -2257,6 +2278,11 @@ document.addEventListener('DOMContentLoaded', function(){
 				SAI_show_main_controls(true);
 				// 映像の停止。
 				sai_stopping = true;
+				// 音声の停止。
+				if(sai_sound_object && !sai_sound_object.paused){
+					sai_sound_object.pause();
+					sai_id_button_sound.classList.remove('sai_class_checked');
+				}
 				// カウントダウンを破棄する。
 				sai_count_down = null;
 				// スピーチをキャンセル。
@@ -2332,6 +2358,11 @@ document.addEventListener('DOMContentLoaded', function(){
 					SAI_speech_start(sai_message_text);
 				}
 			}
+			// 音声を停止する。
+			if(!sai_sound_object.paused){
+				sai_sound_object.pause();
+				sai_id_button_sound.classList.remove('sai_class_checked');
+			}
 		});
 		// 「催眠解除」ボタン。
 		sai_id_button_release_hypnosis.addEventListener('click', function(e){
@@ -2354,10 +2385,36 @@ document.addEventListener('DOMContentLoaded', function(){
 				releasing_sound.play();
 				return;
 			}
+			// 選択されている音声名があれば
 			if(sai_sound_name != ''){
-				if(sai_sound_object){
-					let s = new Audio('sn/' + sai_sound_name + '.mp3');
-					s.play();
+				// 必要ならば音声を作成。
+				if(!sai_sound_object){
+					sai_sound_object = new Audio('sn/' + sai_sound_name + '.mp3');
+				}
+
+				// リピート再生か？
+				if(sai_id_checkbox_auto_repeat_sound.checked){
+					// リピート再生である。
+					sai_sound_object.loop = true;
+
+					if(sai_sound_object.ended || sai_sound_object.paused){ // 再生中ではない。
+						// 再生する。
+						sai_sound_object.currentTime = 0;
+						sai_sound_object.play();
+						sai_id_button_sound.classList.add('sai_class_checked');
+					}else{ // 再生中。
+						// 停止する。
+						sai_sound_object.pause();
+						sai_id_button_sound.classList.remove('sai_class_checked');
+					}
+				}else{
+					// リピート再生ではない。
+					sai_sound_object.loop = false;
+					if(sai_sound_object.paused){
+						sai_sound_object.play();
+					}else{
+						sai_sound_object.currentTime = 0;
+					}
 				}
 			}else{
 				SAI_config();
@@ -2607,6 +2664,11 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_id_checkbox_fullscreen.addEventListener('click', function(e){
 			SAI_screen_set_fullscreen_mode(sai_id_checkbox_fullscreen.checked);
 		});
+
+		// 音声の自動繰り返し。
+		sai_id_checkbox_auto_repeat_sound.addEventListener('click', function(e){
+			SAI_sound_set_auto_repeat(sai_id_checkbox_auto_repeat_sound.checked);
+		});
 	}
 
 	// キーボード操作を実装。
@@ -2829,6 +2891,14 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_screen_set_fullscreen_mode(saiminFullscreen);
 		}else{
 			SAI_screen_set_fullscreen_mode(false);
+		}
+
+		// 音声の自動繰り返しを復元する。
+		let saiminSoundAutoRepeat = localStorage.getItem('saiminSoundAutoRepeat');
+		if(saiminSoundAutoRepeat == '0' || saiminSoundAutoRepeat == '1'){
+			SAI_sound_set_auto_repeat(saiminSoundAutoRepeat);
+		}else{
+			SAI_sound_set_auto_repeat(false);
 		}
 
 		// service worker
