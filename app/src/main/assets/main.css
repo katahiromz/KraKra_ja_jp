@@ -116,13 +116,19 @@ select {
 }
 #sai_id_button_microphone {
 	position: absolute;
-	left: calc(100% / 3 * 0);
+	left: calc(100% / 3 * 0 + 5px/2);
 	bottom: 0;
 	width: calc(100% / 3 - 5px);
 }
 #sai_id_button_sound {
 	position: absolute;
-	left: calc(100% / 3 * 1);
+	left: calc(100% / 3 * 1 + 5px/2);
+	bottom: 0;
+	width: calc(100% / 3 - 5px);
+}
+#sai_id_button_speech {
+	position: absolute;
+	left: calc(100% / 3 * 2 + 5px/2);
 	bottom: 0;
 	width: calc(100% / 3 - 5px);
 }
@@ -138,12 +144,6 @@ select {
 .sai_class_releasing {
 	background-color: red !important;
 	text-align: center;
-}
-#sai_id_button_speech {
-	position: absolute;
-	left: calc(100% / 3 * 2);
-	bottom: 0;
-	width: calc(100% / 3 - 5px);
 }
 .sai_class_rounded_button {
 	width: 1.3cm;
