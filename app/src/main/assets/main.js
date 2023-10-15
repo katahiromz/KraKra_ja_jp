@@ -2413,11 +2413,6 @@ document.addEventListener('DOMContentLoaded', function(){
 					SAI_speech_start(sai_message_text);
 				}
 			}
-			// 音声を停止する。
-			if(!sai_sound_object.paused){
-				sai_sound_object.pause();
-				sai_id_button_sound.classList.remove('sai_class_checked');
-			}
 		});
 		// 「催眠解除」ボタン。
 		sai_id_button_release_hypnosis.addEventListener('click', function(e){
