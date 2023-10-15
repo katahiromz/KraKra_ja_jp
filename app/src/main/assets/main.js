@@ -2322,10 +2322,15 @@ document.addEventListener('DOMContentLoaded', function(){
 			sai_sound_object.volume = 1.0;
 			sai_sound_object.currentTime = 0;
 		}
+		// 必要ならループする。
+		sai_sound_object.loop = sai_id_checkbox_auto_repeat_sound.checked;
 		// 再生を開始する。
 		sai_sound_object.play();
-		// 音声ボタンをチェックする。
-		sai_id_button_sound.classList.add('sai_class_checked');
+		// ループなら音声ボタンをチェックする。
+		if(sai_sound_object.loop)
+			sai_id_button_sound.classList.add('sai_class_checked');
+		else
+			sai_id_button_sound.classList.remove('sai_class_checked');
 	}
 
 	// 音声を一時停止。
