@@ -104,6 +104,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			// アニメーションをキャンセルする。
 			window.cancelAnimationFrame(sai_request_anime);
 			sai_request_anime = null;
+			// 音声の再生を停止する。
+			SAI_sound_pause();
 		}
 
 		if (page_id == sai_id_page_config){ // 「設定」ページなら
@@ -602,6 +604,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			// スピーチをキャンセル。
 			SAI_speech_cancel();
 			sai_id_button_speech.classList.remove('sai_class_checked');
+			// 音声を停止。
+			SAI_sound_pause();
 
 			// 「催眠解除中」の変数を更新。
 			sai_hypnosis_released = false;
@@ -1876,6 +1880,9 @@ document.addEventListener('DOMContentLoaded', function(){
 				if(sai_id_checkbox_speech_on_off.checked){
 					SAI_speech_start(sai_message_text);
 				}
+				// 必要ならミュートを解除する。
+				if(sai_sound_object && !sai_sound_object.paused)
+					sai_sound_object.volume = 1.0;
 			}else{
 				// 数字を画面中央に描画する。
 				let value = Math.floor(diff_time);
@@ -2299,6 +2306,52 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 	}
 
+	// 音声が再生中か？
+	function SAI_sound_is_playing(){
+		return sai_sound_object && !sai_sound_object.paused && !sai_sound_object.ended;
+	}
+
+	// 音声を再生開始。
+	function SAI_sound_start(){
+		// 必要ならば音声を作成。
+		if(!sai_sound_object)
+			sai_sound_object = new Audio('sn/' + sai_sound_name + '.mp3');
+		// 音量と再生位置の設定。
+		if(sai_sound_object)
+		{
+			sai_sound_object.volume = 1.0;
+			sai_sound_object.currentTime = 0;
+		}
+		// 再生を開始する。
+		sai_sound_object.play();
+		// 音声ボタンをチェックする。
+		sai_id_button_sound.classList.add('sai_class_checked');
+	}
+
+	// 音声を一時停止。
+	function SAI_sound_pause(){
+		// 再生中なら停止する。
+		if(SAI_sound_is_playing())
+			sai_sound_object.pause();
+		// 音声ボタンをチェックを外す。
+		sai_id_button_sound.classList.remove('sai_class_checked');
+	}
+
+	// 音声をミュート。
+	function SAI_sound_mute(){
+		if(sai_sound_object){
+			sai_sound_object.volume = 0.0;
+		}
+	}
+
+	// 音声を切り替える。
+	function SAI_sound_toggle(){
+		if(SAI_sound_is_playing())
+			SAI_sound_pause();
+		else
+			SAI_sound_start();
+	}
+
 	// イベントリスナー群を登録する。
 	function SAI_register_event_listeners(){
 		// 「メッセージ」ボタン。
@@ -2352,6 +2405,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			// 必要ならカウントダウンを開始する。
 			if(sai_id_checkbox_count_down.checked){
 				sai_count_down = new Date().getTime();
+				// 音声をミュートする。
+				SAI_sound_mute();
 			}else{
 				// 必要ならスピーチを開始する。
 				if(sai_id_checkbox_speech_on_off.checked){
@@ -2397,24 +2452,14 @@ document.addEventListener('DOMContentLoaded', function(){
 					// リピート再生である。
 					sai_sound_object.loop = true;
 
-					if(sai_sound_object.ended || sai_sound_object.paused){ // 再生中ではない。
-						// 再生する。
-						sai_sound_object.currentTime = 0;
-						sai_sound_object.play();
-						sai_id_button_sound.classList.add('sai_class_checked');
-					}else{ // 再生中。
-						// 停止する。
-						sai_sound_object.pause();
-						sai_id_button_sound.classList.remove('sai_class_checked');
-					}
+					// 再生と停止を切り替える。
+					SAI_sound_toggle();
 				}else{
 					// リピート再生ではない。
 					sai_sound_object.loop = false;
-					if(sai_sound_object.paused){
-						sai_sound_object.play();
-					}else{
-						sai_sound_object.currentTime = 0;
-					}
+
+					// 再生を開始する。
+					SAI_sound_start();
 				}
 			}else{
 				SAI_config();
