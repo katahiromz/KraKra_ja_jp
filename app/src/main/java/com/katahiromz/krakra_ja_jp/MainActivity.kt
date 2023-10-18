@@ -240,6 +240,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             str += ")"
             Timber.i(str)
             webView?.evaluateJavascript(str) {}
+            chromeClient?.onScreenSizeChanged()
             WindowInsetsCompat.toWindowInsetsCompat(view.onApplyWindowInsets(insets.toWindowInsets()))
         }
     }

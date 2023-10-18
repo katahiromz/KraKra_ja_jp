@@ -142,6 +142,10 @@ class MyWebChromeClient(var activity: MainActivity?, private val listener: Liste
     fun onResume() {
     }
 
+    // ウィンドウのサイズが変更された時。
+    fun onScreenSizeChanged() {
+    }
+
     // JavaScriptのalert関数をフックする。
     override fun onJsAlert(
         view: WebView?,
@@ -312,11 +316,12 @@ class MyWebChromeClient(var activity: MainActivity?, private val listener: Liste
         )
         listView!!.adapter = arrayAdapter!!
 
-        var listViewHeight: Int = getMessageListHeight(listView!!, arrayAdapter!!)
+        // スクリーンの1/3をリストビューの高さとする。
         var params = listView!!.layoutParams
-        params.height = listViewHeight
+        params.height = activity!!.getScreenHeight() / 3;
         listView!!.layoutParams = params
 
+        // リストビューをクリックしたときの処理。
         listView!!.onItemClickListener =
             AdapterView.OnItemClickListener { _, view, _, _ ->
                 val sampleMessage = (view as TextView).text.toString()
@@ -357,30 +362,5 @@ class MyWebChromeClient(var activity: MainActivity?, private val listener: Liste
             .setCancelable(false)
             .create()
         modalDialog?.show()
-    }
-
-    // リストビューの高さを計算する。
-    private fun getMessageListHeight(listView: ListView,
-                                     arrayAdapter: ArrayAdapter<String>): Int
-    {
-        var totalHeight = 0
-        var screenHeight: Int = activity!!.getScreenHeight()
-        var density: Float = activity!!.getDisplayDensity()
-        var visibleItemCount: Int = 0
-
-        // 個々のアイテムの高さを測り、加算していく
-        for (i in 0 until arrayAdapter.count) {
-            val listItem: View = arrayAdapter.getView(i, null, listView)
-            listItem.measure(0, 0)
-            var height: Float = listItem.measuredHeight / density
-            totalHeight += height.toInt()
-            if (totalHeight + height / 2 > screenHeight * 0.3333) {
-                break
-            }
-            visibleItemCount += 1
-        }
-
-        // (区切り線の高さ * 要素数の数)を高さとする
-        return totalHeight + (listView.dividerHeight * visibleItemCount)
     }
 }
