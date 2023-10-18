@@ -7,6 +7,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
@@ -314,6 +315,20 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         resultString = value
     }
     private var resultString = ""
+
+    fun getScreenWidth(): Int {
+        val outRect = Rect()
+        window.decorView.getWindowVisibleDisplayFrame(outRect)
+        return outRect.width()
+    }
+    fun getScreenHeight(): Int {
+        val outRect = Rect()
+        window.decorView.getWindowVisibleDisplayFrame(outRect)
+        return outRect.height()
+    }
+    fun getDisplayDensity(): Float {
+        return resources!!.displayMetrics!!.density
+    }
 
     /////////////////////////////////////////////////////////////////////
     // WebView関連

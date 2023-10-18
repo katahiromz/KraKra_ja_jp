@@ -286,8 +286,8 @@ class MyWebChromeClient(var activity: MainActivity?, private val listener: Liste
             messageList.addAll(defaultMessageList)
 
         // ダイアログビューを取得する。
-        val inflater = activity!!.layoutInflater
-        val dialogView: View = inflater.inflate(R.layout.message_select_dialog, null)
+        var inflater = activity!!.layoutInflater
+        var dialogView: View = inflater.inflate(R.layout.message_select_dialog, null)
 
         // 「クリア」ボタン。
         val clearButton = dialogView.findViewById<Button>(R.id.clear_button)
@@ -302,6 +302,26 @@ class MyWebChromeClient(var activity: MainActivity?, private val listener: Liste
         clearButton.setOnClickListener {
             editText.setText("")
         }
+
+        // ダイアログのレイアウトを設定
+        var listView: ListView? = dialogView.findViewById(R.id.message_list)
+        var arrayAdapter: ArrayAdapter<String>? = ArrayAdapter(
+            activity!!,
+            android.R.layout.simple_list_item_1,
+            messageList
+        )
+        listView!!.adapter = arrayAdapter!!
+
+        var listViewHeight: Int = getMessageListHeight(listView!!, arrayAdapter!!)
+        var params = listView!!.layoutParams
+        params.height = listViewHeight
+        listView!!.layoutParams = params
+
+        listView!!.onItemClickListener =
+            AdapterView.OnItemClickListener { _, view, _, _ ->
+                val sampleMessage = (view as TextView).text.toString()
+                editText.setText(sampleMessage)
+            }
 
         // ダイアログを表示する。
         modalDialog = MaterialAlertDialogBuilder(activity!!, R.style.AlertDialogTheme)
@@ -337,46 +357,30 @@ class MyWebChromeClient(var activity: MainActivity?, private val listener: Liste
             .setCancelable(false)
             .create()
         modalDialog?.show()
-
-        // ダイアログのレイアウトを設定
-        val listView: ListView = dialogView.findViewById(R.id.message_list)
-        val arrayAdapter = ArrayAdapter(
-            activity!!,
-            android.R.layout.simple_list_item_1,
-            messageList
-        )
-        listView.adapter = arrayAdapter
-
-        val params = listView.layoutParams
-        params.height = getMessageListHeight(listView, arrayAdapter)
-        listView.layoutParams = params
-        listView.onItemClickListener =
-            AdapterView.OnItemClickListener { _, view, _, _ ->
-                val sampleMessage = (view as TextView).text.toString()
-                editText.setText(sampleMessage)
-            }
     }
 
     // リストビューの高さを計算する。
-    private fun getMessageListHeight(listView: ListView, arrayAdapter: ArrayAdapter<String>): Int {
+    private fun getMessageListHeight(listView: ListView,
+                                     arrayAdapter: ArrayAdapter<String>): Int
+    {
         var totalHeight = 0
+        var screenHeight: Int = activity!!.getScreenHeight()
+        var density: Float = activity!!.getDisplayDensity()
+        var count: Int = 1
 
         // 個々のアイテムの高さを測り、加算していく
-        val listItemHeightCount = 5
         for (i in 0 until arrayAdapter.count) {
-            val listItem = arrayAdapter.getView(i, null, listView)
+            val listItem: View = arrayAdapter.getView(i, null, listView)
             listItem.measure(0, 0)
-            totalHeight += listItem.measuredHeight
-            if (i == listItemHeightCount - 1) {
+            var height: Float = listItem.measuredHeight / density
+            totalHeight += height.toInt()
+            if (totalHeight + height / 2 > screenHeight * 0.3333) {
                 break
             }
+            count += 1
         }
 
         // (区切り線の高さ * 要素数の数)を高さとする
-        return if (arrayAdapter.count < listItemHeightCount) {
-            totalHeight + (listView.dividerHeight * (arrayAdapter.count - 1))
-        } else {
-            totalHeight + (listView.dividerHeight * listItemHeightCount)
-        }
+        return totalHeight + (listView.dividerHeight * (count - 1))
     }
 }
