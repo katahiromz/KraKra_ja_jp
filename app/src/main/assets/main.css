@@ -120,7 +120,7 @@ select {
 	bottom: 0;
 	width: calc(100% / 3 - 5px);
 }
-#sai_id_button_sound {
+#sai_id_button_sound_play {
 	position: absolute;
 	left: calc(100% / 3 * 1 + 5px/2);
 	bottom: 0;

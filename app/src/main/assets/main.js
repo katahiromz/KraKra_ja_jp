@@ -366,6 +366,26 @@ document.addEventListener('DOMContentLoaded', function(){
 		localStorage.setItem('saiminSoundVolume', value.toString());
 	}
 
+	// 音声オブジェクトを作成する。
+	function SAI_sound_create(){
+		// 音声名がなければ音声オブジェクトなし。
+		if(!sai_sound_name){
+			if(sai_sound_object)
+				sai_sound_object.pause();
+			sai_sound_object = null;
+			return;
+		}
+
+		sai_sound_object = new Audio('sn/' + sai_sound_name + '.mp3');
+		sai_sound_object.addEventListener('ended', function(e){ // 音声が停止した？
+			// 音声再生ボタンのイメージを更新する。
+			sai_id_image_play_pause.src = 'images/play.svg';
+
+			// チェックを外す。
+			sai_id_button_sound_play.classList.remove('sai_class_checked');
+		});
+	}
+
 	// 音声の名前をセットし、音声オブジェクトを作成する。設定を保存する。
 	function SAI_sound_set_name(value){
 		// 音声のバリデーション。
@@ -376,15 +396,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_sound_name = value;
 
 		// 必要なら音声オブジェクトを作成するか、破棄する。
-		if(sai_sound_name != ''){
-			console.log('sn/' + sai_sound_name + '.mp3');
-			sai_sound_object = new Audio('sn/' + sai_sound_name + '.mp3');
-			sai_sound_object.addEventListener('ended', function(e){
-				sai_id_image_play_pause.src = 'images/play.svg';
-			});
-		}else{
-			sai_sound_object = null;
-		}
+		SAI_sound_create();
 
 		// 音声の選択を更新。
 		sai_id_select_sound.value = value;
@@ -629,7 +641,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			sai_hypnosis_released = false;
 
 			// 催眠解除クラスを追加。
-			sai_id_button_sound.classList.add('sai_class_releasing');
+			sai_id_button_sound_play.classList.add('sai_class_releasing');
 			sai_id_button_message.classList.add('sai_class_releasing');
 			sai_id_button_speech.classList.add('sai_class_releasing');
 
@@ -654,7 +666,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			}
 
 			// 「催眠解除中」ではない。
-			sai_id_button_sound.classList.remove('sai_class_releasing');
+			sai_id_button_sound_play.classList.remove('sai_class_releasing');
 			sai_id_button_message.classList.remove('sai_class_releasing');
 			sai_id_button_speech.classList.remove('sai_class_releasing');
 		}
@@ -2314,7 +2326,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				// 音声の停止。
 				if(sai_sound_object && !sai_sound_object.paused){
 					sai_sound_object.pause();
-					sai_id_button_sound.classList.remove('sai_class_checked');
+					sai_id_button_sound_play.classList.remove('sai_class_checked');
 				}
 				// カウントダウンを破棄する。
 				sai_count_down = null;
@@ -2341,21 +2353,20 @@ document.addEventListener('DOMContentLoaded', function(){
 	function SAI_sound_start(){
 		// 必要ならば音声を作成。
 		if(!sai_sound_object)
-			sai_sound_object = new Audio('sn/' + sai_sound_name + '.mp3');
+			SAI_sound_create();
+
 		// 音量と再生位置の設定。
-		if(sai_sound_object){
-			sai_sound_object.volume = sai_id_range_sound_volume.value / 100.0;
-			sai_sound_object.currentTime = 0;
-		}
+		sai_sound_object.volume = sai_id_range_sound_volume.value / 100.0;
+		sai_sound_object.currentTime = 0;
+
 		// 必要ならループする。
 		sai_sound_object.loop = sai_id_checkbox_auto_repeat_sound.checked;
+
 		// 再生を開始する。
 		sai_sound_object.play();
-		// ループなら音声ボタンをチェックする。
-		if(sai_sound_object.loop)
-			sai_id_button_sound.classList.add('sai_class_checked');
-		else
-			sai_id_button_sound.classList.remove('sai_class_checked');
+
+		// 音声ボタンをチェックする。
+		sai_id_button_sound_play.classList.add('sai_class_checked');
 	}
 
 	// 音声を一時停止。
@@ -2364,7 +2375,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		if(SAI_sound_is_playing())
 			sai_sound_object.pause();
 		// 音声ボタンをチェックを外す。
-		sai_id_button_sound.classList.remove('sai_class_checked');
+		sai_id_button_sound_play.classList.remove('sai_class_checked');
 	}
 
 	// 音声をミュート。
@@ -2457,7 +2468,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		});
 
 		// 「音声再生」ボタン。
-		sai_id_button_sound.addEventListener('click', function(){
+		sai_id_button_sound_play.addEventListener('click', function(){
 			if(sai_pic_type == -1){
 				let releasing_sound = null;
 				let lang = localStorage.getItem('saiminLanguage3');
@@ -2469,22 +2480,27 @@ document.addEventListener('DOMContentLoaded', function(){
 			if(sai_sound_name != ''){
 				// 必要ならば音声を作成。
 				if(!sai_sound_object){
-					sai_sound_object = new Audio('sn/' + sai_sound_name + '.mp3');
+					SAI_sound_create();
 				}
+				if(sai_sound_object){
+					// リピート再生か？
+					if(sai_id_checkbox_auto_repeat_sound.checked){
+						// リピート再生である。
+						sai_sound_object.loop = true;
 
-				// リピート再生か？
-				if(sai_id_checkbox_auto_repeat_sound.checked){
-					// リピート再生である。
-					sai_sound_object.loop = true;
+						// 再生と停止を切り替える。
+						SAI_sound_toggle();
+					}else{
+						// リピート再生ではない。
+						sai_sound_object.loop = false;
 
-					// 再生と停止を切り替える。
-					SAI_sound_toggle();
-				}else{
-					// リピート再生ではない。
-					sai_sound_object.loop = false;
-
-					// 再生を開始する。
-					SAI_sound_start();
+						// 再生の停止と再生を切り替える。
+						if(sai_sound_object.paused){
+							SAI_sound_start();
+						}else{
+							SAI_sound_pause();
+						}
+					}
 				}
 			}else{
 				SAI_config();
@@ -2548,20 +2564,26 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_sound_set_name(sai_id_select_sound.value);
 		}, false);
 
-		// 音声再生ボタン。
-		sai_id_button_sound_play.addEventListener('click', function(){
-			if(!sai_ready)
+		// 設定の音声再生ボタン。
+		sai_id_button_sound_config_play.addEventListener('click', function(){
+			if(!sai_ready || !sai_sound_object)
 				return;
-			if(sai_sound_name != '' && sai_sound_object){
-				if(sai_sound_object.paused){
-					sai_sound_object.volume = sai_id_range_sound_volume.value / 100.0;
-					sai_sound_object.currentTime = 0;
-					sai_sound_object.play();
-					sai_id_image_play_pause.src = 'images/stop.svg';
-				}else{
-					sai_sound_object.pause();
-					sai_id_image_play_pause.src = 'images/play.svg';
-				}
+
+			// ループを外す。
+			sai_sound_object.loop = false;
+			// 停止中なら
+			if(sai_sound_object.paused){
+				// 再生を再開する。
+				sai_sound_object.volume = sai_id_range_sound_volume.value / 100.0;
+				sai_sound_object.currentTime = 0;
+				sai_sound_object.play();
+				// 再生ボタンのイメージを更新する。
+				sai_id_image_play_pause.src = 'images/stop.svg';
+			}else{ // 再生中なら
+				// 停止する。
+				sai_sound_object.pause();
+				// 再生ボタンのイメージを更新する。
+				sai_id_image_play_pause.src = 'images/play.svg';
 			}
 		}, false);
 
@@ -2773,7 +2795,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				return;
 			}
 			if(e.key == 'p' || e.key == 'P'){ // Play/Pause
-				sai_id_button_sound.click();
+				sai_id_button_sound_play.click();
 				return;
 			}
 			if(e.key == 'm' || e.key == 'M'){ // Microphone
