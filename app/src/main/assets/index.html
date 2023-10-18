@@ -102,8 +102,18 @@
 						<option value="Heli">Heli</option>
 						<option value="HeliPlus432Hz">Heli+432Hz</option>
 					</select>
-					<button id="sai_id_button_sound_play" type="button"><img src="images/play.svg" alt="[Play]" loading="lazy" /></button>
+					<button id="sai_id_button_sound_play" type="button"><img id="sai_id_image_play_pause" src="images/play.svg" alt="[Play]" loading="lazy" /></button>
 				</span>
+			</div>
+			<hr />
+			<div class="sai_class_ui_line">
+				<span id="sai_id_text_sound_volume" class="sai_config_label">Sound Volume:</span>
+			</div>
+			<div class="sai_class_ui_line">
+				<span class="sai_class_nobr">
+					<input type="range" id="sai_id_range_sound_volume" name="sai_id_range_sound_volume" min="0" max="100" value="100" step="1" title="Volume" />
+				</span><br />
+				<output id="sai_id_text_sound_volume_output" name="sai_id_text_sound_volume_output" for="sai_id_range_sound_volume">100%</output>
 			</div>
 			<hr />
 			<div class="sai_class_ui_line">

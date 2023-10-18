@@ -351,6 +351,21 @@ document.addEventListener('DOMContentLoaded', function(){
 		return sai_screen_width >= 1200 || sai_screen_height >= 1200;
 	}
 
+	// 音量。
+	function SAI_sound_set_volume(value){
+		value = parseInt(value);
+
+		// 音量をセットする。
+		sai_id_range_sound_volume.value = value;
+		sai_id_text_sound_volume_output.innerText = value.toString() + "%";
+		if(sai_sound_object){
+			sai_sound_object.volume = value / 100.0;
+		}
+
+		// ローカルストレージに記憶する。
+		localStorage.setItem('saiminSoundVolume', value.toString());
+	}
+
 	// 音声の名前をセットし、音声オブジェクトを作成する。設定を保存する。
 	function SAI_sound_set_name(value){
 		// 音声のバリデーション。
@@ -364,6 +379,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		if(sai_sound_name != ''){
 			console.log('sn/' + sai_sound_name + '.mp3');
 			sai_sound_object = new Audio('sn/' + sai_sound_name + '.mp3');
+			sai_sound_object.addEventListener('ended', function(e){
+				sai_id_image_play_pause.src = 'images/play.svg';
+			});
 		}else{
 			sai_sound_object = null;
 		}
@@ -1882,7 +1900,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				}
 				// 必要ならミュートを解除する。
 				if(sai_sound_object && !sai_sound_object.paused)
-					sai_sound_object.volume = 1.0;
+					sai_sound_object.volume = sai_id_range_sound_volume.value / 100.0;
 			}else{
 				// 数字を画面中央に描画する。
 				let value = Math.floor(diff_time);
@@ -2204,6 +2222,14 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_sound_set_name('Magic');
 		}
 
+		// ローカルストレージに音量の設定があれば読み込む。
+		let saiminSoundVolume = localStorage.getItem('saiminSoundVolume');
+		if(saiminSoundVolume){
+			SAI_sound_set_volume(saiminSoundVolume);
+		}else{
+			SAI_sound_set_volume(100);
+		}
+
 		// ローカルストレージに映像切り替えの種類があれば読み込む。
 		let saiminTypeSound = localStorage.getItem('saiminTypeSound');
 		if(saiminTypeSound){
@@ -2317,9 +2343,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		if(!sai_sound_object)
 			sai_sound_object = new Audio('sn/' + sai_sound_name + '.mp3');
 		// 音量と再生位置の設定。
-		if(sai_sound_object)
-		{
-			sai_sound_object.volume = 1.0;
+		if(sai_sound_object){
+			sai_sound_object.volume = sai_id_range_sound_volume.value / 100.0;
 			sai_sound_object.currentTime = 0;
 		}
 		// 必要ならループする。
@@ -2528,8 +2553,15 @@ document.addEventListener('DOMContentLoaded', function(){
 			if(!sai_ready)
 				return;
 			if(sai_sound_name != '' && sai_sound_object){
-				let s = new Audio('sn/' + sai_sound_name + '.mp3');
-				s.play();
+				if(sai_sound_object.paused){
+					sai_sound_object.volume = sai_id_range_sound_volume.value / 100.0;
+					sai_sound_object.currentTime = 0;
+					sai_sound_object.play();
+					sai_id_image_play_pause.src = 'images/stop.svg';
+				}else{
+					sai_sound_object.pause();
+					sai_id_image_play_pause.src = 'images/play.svg';
+				}
 			}
 		}, false);
 
@@ -2586,6 +2618,13 @@ document.addEventListener('DOMContentLoaded', function(){
 				SAI_speed_set_type('normal');
 			}
 		}, false);
+
+		// 音量の選択。
+		sai_id_range_sound_volume.addEventListener('input', function(e){
+			if(!sai_ready)
+				return;
+			SAI_sound_set_volume(sai_id_range_sound_volume.value);
+		});
 
 		// 「回転の向き」チェックボックス。
 		sai_id_checkbox_rotation.addEventListener('change', function(){
