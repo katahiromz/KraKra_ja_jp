@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	let sai_speed = 45.0; // 映像のスピード。
 	let sai_sound_object = null; // 音声オブジェクト。
 	let sai_sound_name = 'Magic'; // 音声の名前。ファイル名の一部。
-	let sai_switch_sound_object = null; // 切り替えの音声のオブジェクト。
+	let sai_switch_sound_object = new Audio('sn/kirakira.mp3'); // 切り替えの音声のオブジェクト。
 	let sai_switch_sound_type = 1; // 切り替えの音声の種類。
 	let sai_stars = new Array(32); // 画面を指でなぞったときのきらめきを保存する。
 	let sai_touchmoving = false; // 画面を指でなぞっているかどうか？
@@ -428,9 +428,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		localStorage.setItem('saiminSwitchSound', value.toString());
 
 		// テストならば実際に音を出す。
-		if(test && sai_switch_sound_type == 1 && sai_switch_sound_object){
-			sai_switch_sound_object.play();
-		}
+		if(test)
+			SAI_sound_play_switch();
 	}
 
 	// 画面の明るさをセットする。
@@ -2304,8 +2303,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 必要ならば切り替え音を再生する。
 	function SAI_sound_play_switch(){
 		if(sai_switch_sound_type == 1 && sai_switch_sound_object && sai_id_checkbox_switching_sound.checked){
-			let kirakira = new Audio('sn/kirakira.mp3');
-			kirakira.play();
+			sai_switch_sound_object.play();
 		}
 	}
 
@@ -2942,9 +2940,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// スパイラルの画像も更新。
 		sai_spiral_img.src = "images/spiral.svg";
-
-		// 切り替え音声を読み込む。
-		sai_switch_sound_object = new Audio('sn/kirakira.mp3');
 
 		// 設定をローカルストレージから読み込む。
 		SAI_load_local_storage();
