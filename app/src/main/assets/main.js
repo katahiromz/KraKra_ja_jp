@@ -408,20 +408,24 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 映像切り替えの音の有無をセットする。
 	function SAI_set_type_sound(value, test = false){
 		// ローカルストレージから来た値は文字列かもしれない。正規化。
-		if(value === true || value == "true")
+		switch(value){
+		case true:
+		case 'true':
+		case '1':
 			value = 1;
-		if(value === false || value == "false")
+			break;
+		default:
 			value = 0;
+		}
 
 		// 映像切り替えの種類を整数値でセットする。
 		sai_switch_sound_type = parseInt(value);
 
 		// UIを更新する。
-		if(sai_id_checkbox_pic_change_sound.checked != !!value)
-			sai_id_checkbox_pic_change_sound.checked = !!value;
+		sai_id_checkbox_switching_sound.checked = !!value;
 
 		// ローカルストレージに記憶する。
-		localStorage.setItem('saiminTypeSound', value);
+		localStorage.setItem('saiminSwitchSound', value.toString());
 
 		// テストならば実際に音を出す。
 		if(test && sai_switch_sound_type == 1 && sai_switch_sound_object){
@@ -2243,9 +2247,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		// ローカルストレージに映像切り替えの種類があれば読み込む。
-		let saiminTypeSound = localStorage.getItem('saiminTypeSound');
-		if(saiminTypeSound){
-			SAI_set_type_sound(saiminTypeSound);
+		let saiminSwitchSound = localStorage.getItem('saiminSwitchSound');
+		if(saiminSwitchSound){
+			SAI_set_type_sound(saiminSwitchSound);
 		}
 
 		// ローカルストレージにスピードの種類があれば読み込む。
@@ -2299,7 +2303,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 必要ならば切り替え音を再生する。
 	function SAI_sound_play_switch(){
-		if(sai_switch_sound_type == 1 && sai_switch_sound_object && sai_id_checkbox_pic_change_sound.checked){
+		if(sai_switch_sound_type == 1 && sai_switch_sound_object && sai_id_checkbox_switching_sound.checked){
 			let kirakira = new Audio('sn/kirakira.mp3');
 			kirakira.play();
 		}
@@ -2583,15 +2587,15 @@ document.addEventListener('DOMContentLoaded', function(){
 		}, false);
 
 		// 映像切り替えの音声の有無に関するボタン。
-		sai_id_checkbox_pic_change_sound.addEventListener('change', function(){
+		sai_id_checkbox_switching_sound.addEventListener('change', function(){
 			if(!sai_ready)
 				return;
-			SAI_set_type_sound(sai_id_checkbox_pic_change_sound.checked, true);
+			SAI_set_type_sound(sai_id_checkbox_switching_sound.checked, true);
 		}, false);
-		sai_id_checkbox_pic_change_sound.addEventListener('click', function(){
+		sai_id_checkbox_switching_sound.addEventListener('click', function(){
 			if(!sai_ready)
 				return;
-			SAI_set_type_sound(sai_id_checkbox_pic_change_sound.checked, true);
+			SAI_set_type_sound(sai_id_checkbox_switching_sound.checked, true);
 		}, false);
 
 		// 画面分割のチェックボックス。
