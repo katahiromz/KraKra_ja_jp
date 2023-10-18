@@ -876,7 +876,7 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'HeliPlus432Hz', '直升机+432Hz');
 		trans_setHtmlText(sai_id_text_sound_volume, '音量：');
 		trans_setHtmlText(sai_id_text_auto_repeat_sound, '自动重复音频：');
-		trans_setHtmlText(sai_id_text_switch_sound, '开关声音：');
+		trans_setHtmlText(sai_id_text_switch_sound, '切换声音');
 		trans_setHtmlText(sai_id_text_brightness, '屏幕亮度：');
 		trans_setSelectOptionText(sai_id_select_brightness, 'normal', '通常');
 		trans_setSelectOptionText(sai_id_select_brightness, 'brighter', '明亮');
@@ -945,7 +945,7 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'HeliPlus432Hz', '直升機+432Hz');
 		trans_setHtmlText(sai_id_text_sound_volume, '音量：');
 		trans_setHtmlText(sai_id_text_auto_repeat_sound, '自動重複音訊：');
-		trans_setHtmlText(sai_id_text_switch_sound, '開關聲音：');
+		trans_setHtmlText(sai_id_text_switch_sound, '切換聲音：');
 		trans_setHtmlText(sai_id_text_brightness, '屏幕亮度：');
 		trans_setSelectOptionText(sai_id_select_brightness, 'normal', '正常亮度');
 		trans_setSelectOptionText(sai_id_select_brightness, 'brighter', '提亮');
@@ -1014,7 +1014,7 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'HeliPlus432Hz', '헬리콥터+432Hz');
 		trans_setHtmlText(sai_id_text_sound_volume, '사운드 볼륨:');
 		trans_setHtmlText(sai_id_text_auto_repeat_sound, '음성 자동 반복:');
-		trans_setHtmlText(sai_id_text_switch_sound, '전환 사운드:');
+		trans_setHtmlText(sai_id_text_switch_sound, '전환음:');
 		trans_setHtmlText(sai_id_text_brightness, '화면 밝기:');
 		trans_setSelectOptionText(sai_id_select_brightness, 'normal', '일반 밝기');
 		trans_setSelectOptionText(sai_id_select_brightness, 'brighter', '밝게 하다');
@@ -1083,7 +1083,7 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'HeliPlus432Hz', 'Elicottero+432Hz');
 		trans_setHtmlText(sai_id_text_sound_volume, 'Volume del suono:');
 		trans_setHtmlText(sai_id_text_auto_repeat_sound, 'Ripetere l\'audio:');
-		trans_setHtmlText(sai_id_text_switch_sound, 'Suono cambio foto:');
+		trans_setHtmlText(sai_id_text_switch_sound, 'Suono di commutazione:');
 		trans_setHtmlText(sai_id_text_brightness, 'Luminosità:');
 		trans_setSelectOptionText(sai_id_select_brightness, 'normal', 'Normale');
 		trans_setSelectOptionText(sai_id_select_brightness, 'brighter', 'Più luminoso');
@@ -1152,7 +1152,7 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'HeliPlus432Hz', 'Hubschrauber+432Hz');
 		trans_setHtmlText(sai_id_text_sound_volume, 'Lautstärke:');
 		trans_setHtmlText(sai_id_text_auto_repeat_sound, 'Sich Wiederholender Ton:');
-		trans_setHtmlText(sai_id_text_switch_sound, 'Bildwechselton:');
+		trans_setHtmlText(sai_id_text_switch_sound, 'Schaltgeräusch:');
 		trans_setHtmlText(sai_id_text_brightness, 'Helligkeit:');
 		trans_setSelectOptionText(sai_id_select_brightness, 'normal', 'Normal');
 		trans_setSelectOptionText(sai_id_select_brightness, 'brighter', 'Heller');
@@ -1221,7 +1221,7 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'HeliPlus432Hz', 'Heli+432Hz');
 		trans_setHtmlText(sai_id_text_sound_volume, 'Sound volume:');
 		trans_setHtmlText(sai_id_text_auto_repeat_sound, 'Repeating audio:');
-		trans_setHtmlText(sai_id_text_switch_sound, 'Pic change sound:');
+		trans_setHtmlText(sai_id_text_switch_sound, 'Switching sound:');
 		trans_setHtmlText(sai_id_text_brightness, 'Brightness:');
 		trans_setSelectOptionText(sai_id_select_brightness, 'normal', 'Normal');
 		trans_setSelectOptionText(sai_id_select_brightness, 'brighter', 'Brighter');

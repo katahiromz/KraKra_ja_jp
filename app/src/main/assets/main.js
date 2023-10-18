@@ -45,8 +45,8 @@ document.addEventListener('DOMContentLoaded', function(){
 	let sai_speed = 45.0; // 映像のスピード。
 	let sai_sound_object = null; // 音声オブジェクト。
 	let sai_sound_name = 'Magic'; // 音声の名前。ファイル名の一部。
-	let sai_kirakira_sound_object = null; // 映像切り替えの音声のオブジェクト。
-	let sai_kirakira_sound_type = 1; // 映像切り替えの音声の種類。
+	let sai_switch_sound_object = null; // 切り替えの音声のオブジェクト。
+	let sai_switch_sound_type = 1; // 切り替えの音声の種類。
 	let sai_stars = new Array(32); // 画面を指でなぞったときのきらめきを保存する。
 	let sai_touchmoving = false; // 画面を指でなぞっているかどうか？
 	let sai_service_worker_registration = null; // サービスワーカーの登録。
@@ -414,7 +414,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			value = 0;
 
 		// 映像切り替えの種類を整数値でセットする。
-		sai_kirakira_sound_type = parseInt(value);
+		sai_switch_sound_type = parseInt(value);
 
 		// UIを更新する。
 		if(sai_id_checkbox_pic_change_sound.checked != !!value)
@@ -424,8 +424,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		localStorage.setItem('saiminTypeSound', value);
 
 		// テストならば実際に音を出す。
-		if(test && sai_kirakira_sound_type == 1 && sai_kirakira_sound_object){
-			sai_kirakira_sound_object.play();
+		if(test && sai_switch_sound_type == 1 && sai_switch_sound_object){
+			sai_switch_sound_object.play();
 		}
 	}
 
@@ -2297,6 +2297,14 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 	}
 
+	// 必要ならば切り替え音を再生する。
+	function SAI_sound_play_switch(){
+		if(sai_switch_sound_type == 1 && sai_switch_sound_object && sai_id_checkbox_pic_change_sound.checked){
+			let kirakira = new Audio('sn/kirakira.mp3');
+			kirakira.play();
+		}
+	}
+
 	// キャンバスがクリックされた。
 	function SAI_canvas_click(e){
 		if(!sai_ready)
@@ -2308,10 +2316,8 @@ document.addEventListener('DOMContentLoaded', function(){
 				SAI_pic_set_type((sai_pic_type + 1) % sai_NUM_TYPE);
 			}
 			sai_id_select_pic_type.value = sai_pic_type.toString();
-			if(sai_kirakira_sound_type == 1 && sai_kirakira_sound_object && sai_id_checkbox_pic_change_sound.checked){
-				let kirakira = new Audio('sn/kirakira.mp3');
-				kirakira.play();
-			}
+			// 必要ならば切り替え音を再生する。
+			SAI_sound_play_switch();
 		}
 		if(!sai_stopping){ // 停止中でなければ
 			// フルスクリーンモード、またはツールボタンが見えるか？
@@ -2354,6 +2360,12 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 必要ならば音声を作成。
 		if(!sai_sound_object)
 			SAI_sound_create();
+		// 音声なしなら
+		if(!sai_sound_object){
+			// 音声ボタンのチェックを外す。
+			sai_id_button_sound_play.classList.remove('sai_class_checked');
+			return;
+		}
 
 		// 音量と再生位置の設定。
 		sai_sound_object.volume = sai_id_range_sound_volume.value / 100.0;
@@ -2385,14 +2397,6 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 	}
 
-	// 音声を切り替える。
-	function SAI_sound_toggle(){
-		if(SAI_sound_is_playing())
-			SAI_sound_pause();
-		else
-			SAI_sound_start();
-	}
-
 	// イベントリスナー群を登録する。
 	function SAI_register_event_listeners(){
 		// 「メッセージ」ボタン。
@@ -2408,12 +2412,16 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 「バージョン情報」画面。
 		sai_id_button_about.addEventListener('click', function(e){
 			SAI_help_and_agreement();
+			// 必要ならば切り替え音を再生する。
+			SAI_sound_play_switch();
 		});
 
 		// 「設定」画面のOKボタン。
 		sai_id_button_config_ok.addEventListener('click', function(e){
 			localStorage.removeItem('saiminConfigShowing');
 			SAI_choose_page(sai_id_page_main);
+			// 必要ならば切り替え音を再生する。
+			SAI_sound_play_switch();
 		});
 
 		// 「一つ前の映像」ボタン。
@@ -2421,20 +2429,16 @@ document.addEventListener('DOMContentLoaded', function(){
 			let type = parseInt(sai_pic_type);
 			type = (type + sai_NUM_TYPE - 1) % sai_NUM_TYPE;
 			SAI_pic_set_type(type);
-			if(sai_kirakira_sound_type == 1 && sai_kirakira_sound_object && sai_id_checkbox_pic_change_sound.checked){
-				let kirakira = new Audio('sn/kirakira.mp3');
-				kirakira.play();
-			}
+			// 必要ならば切り替え音を再生する。
+			SAI_sound_play_switch();
 		});
 		// 「一つ次の映像」ボタン。
 		sai_id_button_next_image.addEventListener('click', function(e){
 			let type = parseInt(sai_pic_type);
 			type = (type + 1) % sai_NUM_TYPE;
 			SAI_pic_set_type(type);
-			if(sai_kirakira_sound_type == 1 && sai_kirakira_sound_object && sai_id_checkbox_pic_change_sound.checked){
-				let kirakira = new Audio('sn/kirakira.mp3');
-				kirakira.play();
-			}
+			// 必要ならば切り替え音を再生する。
+			SAI_sound_play_switch();
 		});
 
 		// 「催眠開始」ボタン。
@@ -2479,28 +2483,15 @@ document.addEventListener('DOMContentLoaded', function(){
 			// 選択されている音声名があれば
 			if(sai_sound_name != ''){
 				// 必要ならば音声を作成。
-				if(!sai_sound_object){
+				if(!sai_sound_object)
 					SAI_sound_create();
-				}
+				// 音声ありなら
 				if(sai_sound_object){
-					// リピート再生か？
-					if(sai_id_checkbox_auto_repeat_sound.checked){
-						// リピート再生である。
-						sai_sound_object.loop = true;
-
-						// 再生と停止を切り替える。
-						SAI_sound_toggle();
-					}else{
-						// リピート再生ではない。
-						sai_sound_object.loop = false;
-
-						// 再生の停止と再生を切り替える。
-						if(sai_sound_object.paused){
-							SAI_sound_start();
-						}else{
-							SAI_sound_pause();
-						}
-					}
+					// 再生と停止を切り替える。
+					if(SAI_sound_is_playing())
+						SAI_sound_pause();
+					else
+						SAI_sound_start();
 				}
 			}else{
 				SAI_config();
@@ -2510,6 +2501,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 「設定」ボタン。
 		sai_id_button_config.addEventListener('click', function(){
 			SAI_config();
+			// 必要ならば切り替え音を再生する。
+			SAI_sound_play_switch();
 		});
 
 		// 映像選択。
@@ -2536,6 +2529,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			localStorage.removeItem('saiminHelpShowing');
 			SAI_choose_page(sai_id_page_main);
 			sai_first_time = false;
+			// 必要ならば切り替え音を再生する。
+			SAI_sound_play_switch();
 		});
 
 		// メッセージサイズ選択。
@@ -2730,7 +2725,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// スピーチをクリック。
 		sai_id_button_speech.addEventListener('click', function(e){
-			console.log('sai_id_button_speech');
+			// メッセージボタンをクリック。
 			sai_id_button_message.click();
 		});
 
@@ -2944,8 +2939,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		// スパイラルの画像も更新。
 		sai_spiral_img.src = "images/spiral.svg";
 
-		// 映像切り替え音声を読み込む。
-		sai_kirakira_sound_object = new Audio('sn/kirakira.mp3');
+		// 切り替え音声を読み込む。
+		sai_switch_sound_object = new Audio('sn/kirakira.mp3');
 
 		// 設定をローカルストレージから読み込む。
 		SAI_load_local_storage();
