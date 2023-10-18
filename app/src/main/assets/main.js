@@ -416,6 +416,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			break;
 		default:
 			value = 0;
+			break;
 		}
 
 		// 映像切り替えの種類を整数値でセットする。
@@ -2309,52 +2310,41 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// キャンバスがクリックされた。
 	function SAI_canvas_click(e){
-		if(!sai_ready)
+		if(!sai_ready || sai_stopping) // 準備完了でないか、停止中なら無視。
 			return;
-		if(0){
-			if(e.shiftKey){
-				SAI_pic_set_type((sai_pic_type + sai_NUM_TYPE - 1) % sai_NUM_TYPE);
-			}else{
-				SAI_pic_set_type((sai_pic_type + 1) % sai_NUM_TYPE);
+
+		// フルスクリーンモード、またはツールボタンが見えるか？
+		if(!sai_id_checkbox_fullscreen.checked || SAI_are_tool_buttons_shown()){
+			// 催眠解除の場合、ダミー画面に戻す。
+			if(sai_pic_type == -1)
+				SAI_pic_set_type(0);
+			// メインコントロール群を表示する。
+			SAI_show_main_controls(true);
+			// 映像の停止。
+			sai_stopping = true;
+			// 音声の停止。
+			if(sai_sound_object && !sai_sound_object.paused){
+				sai_sound_object.pause();
+				sai_id_button_sound_play.classList.remove('sai_class_checked');
 			}
-			sai_id_select_pic_type.value = sai_pic_type.toString();
-			// 必要ならば切り替え音を再生する。
-			SAI_sound_play_switch();
-		}
-		if(!sai_stopping){ // 停止中でなければ
-			// フルスクリーンモード、またはツールボタンが見えるか？
-			if(!sai_id_checkbox_fullscreen.checked || SAI_are_tool_buttons_shown()){
-				// 催眠解除の場合、ダミー画面に戻す。
-				if(sai_pic_type == -1)
-					SAI_pic_set_type(0);
-				// メインコントロール群を表示する。
-				SAI_show_main_controls(true);
-				// 映像の停止。
-				sai_stopping = true;
-				// 音声の停止。
-				if(sai_sound_object && !sai_sound_object.paused){
-					sai_sound_object.pause();
-					sai_id_button_sound_play.classList.remove('sai_class_checked');
-				}
-				// カウントダウンを破棄する。
-				sai_count_down = null;
-				// スピーチをキャンセル。
-				SAI_speech_cancel();
-				// カウンターのリセット。
-				sai_counter = 0;
-			}else{
-				// ツールボタンを表示する。ツールボタンは、sai_class_tool_buttonクラスを持つ要素。
-				let tool_buttons = document.getElementsByClassName('sai_class_tool_button');
-				for(let button of tool_buttons){
-					button.classList.remove('sai_class_invisible');
-				}
+			// カウントダウンを破棄する。
+			sai_count_down = null;
+			// スピーチをキャンセル。
+			SAI_speech_cancel();
+			// カウンターのリセット。
+			sai_counter = 0;
+		}else{
+			// ツールボタンを表示する。ツールボタンは、sai_class_tool_buttonクラスを持つ要素。
+			let tool_buttons = document.getElementsByClassName('sai_class_tool_button');
+			for(let button of tool_buttons){
+				button.classList.remove('sai_class_invisible');
 			}
 		}
 	}
 
 	// 音声が再生中か？
 	function SAI_sound_is_playing(){
-		return sai_sound_object && !sai_sound_object.paused && !sai_sound_object.ended;
+		return sai_sound_object && !sai_sound_object.paused;
 	}
 
 	// 音声を再生開始。
