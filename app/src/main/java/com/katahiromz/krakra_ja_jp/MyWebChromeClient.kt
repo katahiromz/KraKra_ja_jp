@@ -366,7 +366,7 @@ class MyWebChromeClient(var activity: MainActivity?, private val listener: Liste
         var totalHeight = 0
         var screenHeight: Int = activity!!.getScreenHeight()
         var density: Float = activity!!.getDisplayDensity()
-        var count: Int = 1
+        var visibleItemCount: Int = 0
 
         // 個々のアイテムの高さを測り、加算していく
         for (i in 0 until arrayAdapter.count) {
@@ -377,10 +377,10 @@ class MyWebChromeClient(var activity: MainActivity?, private val listener: Liste
             if (totalHeight + height / 2 > screenHeight * 0.3333) {
                 break
             }
-            count += 1
+            visibleItemCount += 1
         }
 
         // (区切り線の高さ * 要素数の数)を高さとする
-        return totalHeight + (listView.dividerHeight * (count - 1))
+        return totalHeight + (listView.dividerHeight * visibleItemCount)
     }
 }
