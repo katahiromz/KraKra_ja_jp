@@ -93,9 +93,6 @@ document.addEventListener('DOMContentLoaded', function(){
 		page_id.classList.remove('sai_class_invisible');
 
 		if (page_id == sai_id_page_main){ // メインページなら
-			// 準備がまだなら、ユーザを受け入れる。
-			if (!sai_ready)
-				SAI_user_accepted();
 			// 必要ならアニメーションを要求する。
 			if(!sai_request_anime){
 				sai_request_anime = window.requestAnimationFrame(SAI_draw_all);
@@ -816,9 +813,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// ユーザを受け入れる。
 	function SAI_user_accepted(){
-		// ローカルストレージに記憶。
-		localStorage.setItem('saiminAdultCheck3', '1');
-
 		// メインコントロール群を表示する。
 		SAI_show_main_controls(true);
 
@@ -864,15 +858,15 @@ document.addEventListener('DOMContentLoaded', function(){
 			sai_id_text_notice.scrollLeft = sai_id_text_notice.scrollTop = 0;
 		}, 100);
 
+		// ユーザーが同意したか？ ボタンのテキストを変える。
+		if(localStorage.getItem('saiminUserAccepted')){
+			trans_setHtmlText(sai_id_button_agree, trans_getText('TEXT_OK'));
+		}else{
+			trans_setHtmlText(sai_id_button_agree, trans_getText('TEXT_I_AGREE'));
+		}
+
 		// ローカルストレージに表示状態を記憶。
 		localStorage.setItem('saiminHelpShowing', '1');
-
-		// 初回かそれ以外か？ ボタンのテキストを変える。
-		if(sai_first_time){
-			trans_setHtmlText(sai_id_button_agree, trans_getText('TEXT_I_AGREE'));
-		}else{
-			trans_setHtmlText(sai_id_button_agree, trans_getText('TEXT_OK'));
-		}
 
 		// 同意ページに移動。
 		SAI_choose_page(sai_id_page_agreement);
@@ -2519,6 +2513,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 「私は合意します」ボタン。
 		sai_id_button_agree.addEventListener('click', function(e){
 			localStorage.removeItem('saiminHelpShowing');
+			localStorage.setItem('saiminUserAccepted', '1');
 			SAI_choose_page(sai_id_page_main);
 			sai_first_time = false;
 			// 必要ならば切り替え音を再生する。
@@ -2747,10 +2742,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 言語選択のOKボタン。
 		sai_id_button_choose_language.addEventListener('click', function(e){
 			SAI_set_language(sai_id_select_language_2.value);
-			SAI_choose_page(sai_id_page_main);
-			if(sai_first_time){
+			if(localStorage.getItem('saiminUserAccepted'))
+				SAI_choose_page(sai_id_page_main);
+			else
 				SAI_help_and_agreement();
-			}
 		});
 
 		// フルスクリーンモード。
@@ -2946,9 +2941,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		// ローカルストレージに応じて処理を行う。
-		let saiminAdultCheck3 = localStorage.getItem('saiminAdultCheck3');
+		let saiminUserAccepted = localStorage.getItem('saiminUserAccepted');
 		let saiminLanguage3 = localStorage.getItem('saiminLanguage3');
-		if(saiminAdultCheck3 && saiminLanguage3){ // すでにアダルトチェックが完了しているか？
+		if(saiminUserAccepted && saiminLanguage3){ // すでにアダルトチェックが完了しているか？
 			// 言語をセット。
 			SAI_set_language(saiminLanguage3);
 
