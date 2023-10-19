@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     // 共通
 
     // デバッグログにTimberを使用する。
-    fun initTimber() {
+    private fun initTimber() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             }
         }
     }
-    var lastToast : Toast? = null
+    private var lastToast : Toast? = null
     // Toastをキャンセルする。
     fun cancelToast() {
         if (lastToast != null) {
@@ -106,7 +106,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             }
         }
     }
-    var lastSnackbar : Snackbar? = null
+    private var lastSnackbar : Snackbar? = null
     // Snackbarをキャンセルする。
     fun cancelSnackbar() {
         if (lastSnackbar != null) {
@@ -240,7 +240,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             str += ")"
             Timber.i(str)
             webView?.evaluateJavascript(str) {}
-            chromeClient?.onScreenSizeChanged()
             WindowInsetsCompat.toWindowInsetsCompat(view.onApplyWindowInsets(insets.toWindowInsets()))
         }
     }
@@ -255,9 +254,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     override fun onResume() {
         Timber.i("onResume")
         super.onResume() // 親にも伝える。
-
-        // クロームクライアントを復帰。
-        chromeClient?.onResume()
 
         // ウェブビューを復帰。
         webView?.onResume()
@@ -275,9 +271,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     override fun onPause() {
         Timber.i("onPause")
         super.onPause() // 親にも伝える。
-
-        // クロームクライアントを一時停止。
-        chromeClient?.onPause()
 
         // ウェブビューも一時停止。
         webView?.onPause()

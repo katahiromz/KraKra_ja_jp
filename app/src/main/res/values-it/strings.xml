@@ -72,7 +72,6 @@
 
     <!-- Content Description -->
     <string name="guide_clear_button">pulsante chiaro</string>
-    <string name="guide_message_list">elenco messaggi</string>
 
     <!-- URLs -->
     <string name="url">file:///android_asset/index.html</string>

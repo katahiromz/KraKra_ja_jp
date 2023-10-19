@@ -72,7 +72,6 @@
 
     <!-- Content Description -->
     <string name="guide_clear_button">クリアボタン</string>
-    <string name="guide_message_list">メッセージリスト</string>
 
     <!-- URLs -->
     <string name="url">file:///android_asset/index.html</string>

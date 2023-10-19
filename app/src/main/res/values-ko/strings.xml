@@ -72,7 +72,6 @@
 
     <!-- Content Description -->
     <string name="guide_clear_button">클리어 버튼</string>
-    <string name="guide_message_list">메시지 목록</string>
 
     <!-- URLs -->
     <string name="url">file:///android_asset/index.html</string>

@@ -17,7 +17,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import timber.log.Timber
 import java.util.Locale
 
-class MyWebChromeClient(var activity: MainActivity?, private val listener: Listener) :
+class MyWebChromeClient(private var activity: MainActivity?, private val listener: Listener) :
     WebChromeClient() {
 
     // リスナ。
@@ -86,7 +86,7 @@ class MyWebChromeClient(var activity: MainActivity?, private val listener: Liste
     }
 
     // 現在の映像の種類を表す整数値。
-    var currPicType: Int = 0
+    private var currPicType: Int = 0
 
     // 現在の映像の種類をセットする。
     @JavascriptInterface
@@ -126,19 +126,7 @@ class MyWebChromeClient(var activity: MainActivity?, private val listener: Liste
         activity!!.setCurLocale(locale)
     }
 
-    var modalDialog: AlertDialog? = null
-
-    // 一時停止時の処理。
-    fun onPause() {
-    }
-
-    // 復帰時の処理。
-    fun onResume() {
-    }
-
-    // ウィンドウのサイズが変更された時。
-    fun onScreenSizeChanged() {
-    }
+    private var modalDialog: AlertDialog? = null
 
     // JavaScriptのalert関数をフックする。
     override fun onJsAlert(
@@ -201,6 +189,7 @@ class MyWebChromeClient(var activity: MainActivity?, private val listener: Liste
     ): Boolean {
         activity!!.currLocaleContext = null
         val title = getLocString(R.string.app_name)
+
         // KraKraでは特定のメッセージに対してダイアログを拡張する。
         if (isSelectMessageDialog(message)) {
             // メッセージ選択ダイアログを表示
@@ -212,6 +201,7 @@ class MyWebChromeClient(var activity: MainActivity?, private val listener: Liste
             )
             return true
         }
+
         // さもなければMaterialAlertDialogを使用して普通に実装する。
         val okText = getLocString(R.string.ok)
         val cancelText = getLocString(R.string.cancel)
@@ -269,16 +259,10 @@ class MyWebChromeClient(var activity: MainActivity?, private val listener: Liste
                 message == "Bitte geben Sie einen Nachrichtentext ein.")
     }
 
-    var messageArray: Array<String>? = null
-
     /// KraKraのメッセージ選択ダイアログの表示。
-    private fun showSelectMessageDialog(
-        title: String,
-        message: String?,
-        defaultValue: String?,
-        result: JsPromptResult?
-    ) {
-        var messageListDialog: MessageListDialog = MessageListDialog(activity!!, defaultValue, result)
-        messageListDialog.show(activity!!.supportFragmentManager!!, "MessageListDialog")
+    private fun showSelectMessageDialog(title: String, message: String?, defaultValue: String?,
+                                        result: JsPromptResult?) {
+        val messageListDialog = MessageListDialog(activity!!, defaultValue, result)
+        messageListDialog.show(activity!!.supportFragmentManager, "MessageListDialog")
     }
 }

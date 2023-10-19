@@ -3,9 +3,13 @@
 
 package com.katahiromz.krakra_ja_jp
 
-import android.webkit.*
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
+import android.webkit.WebView
+import android.webkit.WebViewClient
 
-class MyWebViewClient(val listener: Listener) : WebViewClient() {
+class MyWebViewClient(private val listener: Listener) : WebViewClient() {
     // リスナー。
     interface Listener {
         fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?)

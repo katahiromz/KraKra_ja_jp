@@ -1,4 +1,4 @@
-package com.katahiromz.krakra_ja_jp;
+package com.katahiromz.krakra_ja_jp
 
 import android.os.Bundle
 import android.view.View
@@ -10,19 +10,20 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class MessageListDialog(var mainActivity: MainActivity, var defaultValue: String?,
-                        var result: JsPromptResult?): DialogFragment()
+class MessageListDialog(
+    private var mainActivity: MainActivity, private var defaultValue: String?,
+    private var result: JsPromptResult?): DialogFragment()
 {
     override fun onCreateDialog(savedInstanceState: Bundle?): AlertDialog {
         var messageList: MutableList<String> = MainRepository.loadMessageList(mainActivity)
         val defaultMessageList: MutableList<String> = mainActivity.getDefaultMessageList()
 
         if (messageList.isEmpty())
-            messageList = defaultMessageList;
+            messageList = defaultMessageList
 
-        var customTitle: View = View.inflate(mainActivity, R.layout.message_select_dialog, null)
-        var editText: EditText = customTitle.findViewById(R.id.message_text_edit)
-        var clearButton: Button = customTitle.findViewById(R.id.message_clear_button)
+        val customTitle: View = View.inflate(mainActivity, R.layout.message_select_dialog, null)
+        val editText: EditText = customTitle.findViewById(R.id.message_text_edit)
+        val clearButton: Button = customTitle.findViewById(R.id.message_clear_button)
 
         var checkedItem: Int = -1
         if (defaultValue != null) {
@@ -33,16 +34,16 @@ class MessageListDialog(var mainActivity: MainActivity, var defaultValue: String
                 checkedItem = index
         }
 
-        var adapter = ArrayAdapter<String>(
+        val adapter = ArrayAdapter(
             mainActivity, android.R.layout.simple_list_item_1, messageList)
 
-        var builder = MaterialAlertDialogBuilder(mainActivity, R.style.AlertDialogTheme)
+        val builder = MaterialAlertDialogBuilder(mainActivity, R.style.AlertDialogTheme)
             .setCustomTitle(customTitle)
             .setSingleChoiceItems(adapter, checkedItem) { _, which ->
                 editText.setText(messageList[which])
             }
             .setPositiveButton(mainActivity.getLocString(R.string.ok)) { dialog, _ ->
-                var inputtedText: String = editText.text.toString()
+                val inputtedText: String = editText.text.toString()
 
                 if (inputtedText.isNotEmpty()) {
                     val index = messageList.indexOf(inputtedText)
