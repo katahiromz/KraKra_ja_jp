@@ -5,45 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ListView
-        android:id="@+id/message_list"
-        android:layout_width="match_parent"
-        android:layout_height="125dp"
-        android:layout_marginHorizontal="25dp"
-        android:layout_marginVertical="5dp"
-        android:contentDescription="@string/guide_message_list"
-        android:fadeScrollbars="false"
-        android:scrollbarThumbVertical="@drawable/scrollbar"
-        android:scrollbars="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <EditText
-        android:id="@+id/message_edit"
+        android:id="@+id/message_text_edit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
         android:hint="@string/prompt_hint"
         android:inputType="textMultiLine"
         android:textColor="@color/white"
         android:textColorHint="@color/themeColor"
-        app:layout_constraintEnd_toStartOf="@id/clear_button"
+        app:layout_constraintEnd_toStartOf="@id/message_clear_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/message_list"
-        tools:ignore="Autofill,HardcodedText,LabelFor" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/clear_button"
+        android:id="@+id/message_clear_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:gravity="center"
         android:contentDescription="@string/guide_clear_button"
         android:text="@string/clear"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@id/message_edit"
+        app:layout_constraintBottom_toBottomOf="@id/message_text_edit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/message_edit" />
+        app:layout_constraintStart_toEndOf="@id/message_text_edit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

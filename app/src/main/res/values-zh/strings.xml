@@ -13,7 +13,7 @@
     <string name="web_view">网页浏览</string>
     <string name="progress_bar">进度条</string>
     <string name="now_starting">开始克拉克拉...</string>
-    <string name="prompt_hint">请输入一个字符串来显示</string>
+    <string name="prompt_hint">输入您的留言</string>
 
     <!-- message list -->
     <string name="message_000">你越来越困了...</string>

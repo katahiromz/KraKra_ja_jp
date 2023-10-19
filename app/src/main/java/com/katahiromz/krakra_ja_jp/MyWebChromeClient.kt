@@ -4,7 +4,6 @@
 package com.katahiromz.krakra_ja_jp
 
 import android.text.InputType
-import android.view.View
 import android.webkit.ConsoleMessage
 import android.webkit.JavascriptInterface
 import android.webkit.JsPromptResult
@@ -12,12 +11,7 @@ import android.webkit.JsResult
 import android.webkit.PermissionRequest
 import android.webkit.WebChromeClient
 import android.webkit.WebView
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.EditText
-import android.widget.ListView
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import timber.log.Timber
@@ -275,6 +269,8 @@ class MyWebChromeClient(var activity: MainActivity?, private val listener: Liste
                 message == "Bitte geben Sie einen Nachrichtentext ein.")
     }
 
+    var messageArray: Array<String>? = null
+
     /// KraKraのメッセージ選択ダイアログの表示。
     private fun showSelectMessageDialog(
         title: String,
@@ -282,85 +278,7 @@ class MyWebChromeClient(var activity: MainActivity?, private val listener: Liste
         defaultValue: String?,
         result: JsPromptResult?
     ) {
-        val defaultMessageList: MutableList<String> = activity!!.getDefaultMessageList()
-        val messageList: MutableList<String> = MainRepository.loadMessageList(activity!!)
-
-        // リストが空ならデフォルトで初期化する。
-        if (messageList.isEmpty())
-            messageList.addAll(defaultMessageList)
-
-        // ダイアログビューを取得する。
-        var inflater = activity!!.layoutInflater
-        var dialogView: View = inflater.inflate(R.layout.message_select_dialog, null)
-
-        // 「クリア」ボタン。
-        val clearButton = dialogView.findViewById<Button>(R.id.clear_button)
-        clearButton.text = getLocString(R.string.clear)
-
-        // テキストボックス。
-        val editText: EditText = dialogView.findViewById(R.id.message_edit)
-        editText.setText(defaultValue)
-        editText.hint = getLocString(R.string.prompt_hint)
-
-        // 「クリア」ボタンをクリックしたらテキストボックスをクリアする。
-        clearButton.setOnClickListener {
-            editText.setText("")
-        }
-
-        // ダイアログのレイアウトを設定
-        var listView: ListView? = dialogView.findViewById(R.id.message_list)
-        var arrayAdapter: ArrayAdapter<String>? = ArrayAdapter(
-            activity!!,
-            android.R.layout.simple_list_item_1,
-            messageList
-        )
-        listView!!.adapter = arrayAdapter!!
-
-        // スクリーンの1/3をリストビューの高さとする。
-        var params = listView!!.layoutParams
-        params.height = activity!!.getScreenHeight() / 3;
-        listView!!.layoutParams = params
-
-        // リストビューをクリックしたときの処理。
-        listView!!.onItemClickListener =
-            AdapterView.OnItemClickListener { _, view, _, _ ->
-                val sampleMessage = (view as TextView).text.toString()
-                editText.setText(sampleMessage)
-            }
-
-        // ダイアログを表示する。
-        modalDialog = MaterialAlertDialogBuilder(activity!!, R.style.AlertDialogTheme)
-            .setTitle(title)
-            .setMessage(message)
-            .setView(dialogView)
-            .setPositiveButton(getLocString(R.string.ok)) { _, _ ->
-                val inputtedText = editText.text.toString()
-
-                if (inputtedText.isNotEmpty()) {
-                    val index = messageList.indexOf(inputtedText)
-                    if (index != -1)
-                        messageList.removeAt(index)
-                    messageList.add(0, inputtedText)
-                    MainRepository.saveMessageList(activity!!, messageList)
-                }
-
-                result?.confirm(inputtedText)
-                modalDialog = null
-            }
-            .setNegativeButton(getLocString(R.string.cancel)) { _, _ ->
-                result?.cancel()
-                modalDialog = null
-            }
-            .setNeutralButton(getLocString(R.string.reset)) { _, _ ->
-                messageList.clear()
-                messageList.addAll(defaultMessageList)
-                MainRepository.saveMessageList(activity!!, messageList)
-
-                result?.confirm("")
-                modalDialog = null
-            }
-            .setCancelable(false)
-            .create()
-        modalDialog?.show()
+        var messageListDialog: MessageListDialog = MessageListDialog(activity!!, defaultValue, result)
+        messageListDialog.show(activity!!.supportFragmentManager!!, "MessageListDialog")
     }
 }

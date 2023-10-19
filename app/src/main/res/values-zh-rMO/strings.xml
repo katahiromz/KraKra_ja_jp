@@ -13,7 +13,7 @@
     <string name="web_view">網頁視圖</string>
     <string name="progress_bar">進度條</string>
     <string name="now_starting">克拉克拉啟動過程中...</string>
-    <string name="prompt_hint">請輸入一個字符串</string>
+    <string name="prompt_hint">输入您的留言</string>
 
     <!-- message list -->
     <string name="message_000">你越來越困了。。。</string>

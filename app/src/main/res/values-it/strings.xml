@@ -13,7 +13,7 @@
     <string name="web_view">WebView</string>
     <string name="progress_bar">ProgressBar</string>
     <string name="now_starting">Avvio di KraKra...</string>
-    <string name="prompt_hint">Inserisci una stringa</string>
+    <string name="prompt_hint">Inserisci il tuo messaggio</string>
 
     <!-- message list -->
     <string name="message_000">Stai diventando sempre più assonnato...</string>

@@ -13,7 +13,7 @@
     <string name="web_view">웹뷰</string>
     <string name="progress_bar">진척 바</string>
     <string name="now_starting">크라크라 시동 중...</string>
-    <string name="prompt_hint">보려는 문자열을 입력하십시오.</string>
+    <string name="prompt_hint">메시지 입력</string>
 
     <!-- message list -->
     <string name="message_000">너는 점점 졸린다</string>

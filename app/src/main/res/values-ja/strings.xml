@@ -13,7 +13,7 @@
     <string name="web_view">ウェブビュー</string>
     <string name="progress_bar">進捗バー</string>
     <string name="now_starting">くらくら起動中...</string>
-    <string name="prompt_hint">表示したい文字列を入力して下さい</string>
+    <string name="prompt_hint">メッセージを入力</string>
 
     <!-- message list -->
     <string name="message_000">あなたはだんだん眠くなーる</string>
