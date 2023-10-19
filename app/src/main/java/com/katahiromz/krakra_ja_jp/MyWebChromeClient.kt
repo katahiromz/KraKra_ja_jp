@@ -194,8 +194,6 @@ class MyWebChromeClient(private var activity: MainActivity?, private val listene
         if (isSelectMessageDialog(message)) {
             // メッセージ選択ダイアログを表示
             showSelectMessageDialog(
-                title = title,
-                message = message,
                 defaultValue = defaultValue,
                 result = result
             )
@@ -260,8 +258,7 @@ class MyWebChromeClient(private var activity: MainActivity?, private val listene
     }
 
     /// KraKraのメッセージ選択ダイアログの表示。
-    private fun showSelectMessageDialog(title: String, message: String?, defaultValue: String?,
-                                        result: JsPromptResult?) {
+    private fun showSelectMessageDialog(defaultValue: String?, result: JsPromptResult?) {
         val messageListDialog = MessageListDialog(activity!!, defaultValue, result)
         messageListDialog.show(activity!!.supportFragmentManager, "MessageListDialog")
     }

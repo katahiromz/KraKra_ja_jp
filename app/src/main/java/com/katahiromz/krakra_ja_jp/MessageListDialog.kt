@@ -66,12 +66,14 @@ class MessageListDialog(
                 MainRepository.saveMessageList(mainActivity, messageList)
                 result?.confirm("")
             }
-            .setCancelable(false)
             .create()
 
         clearButton.setOnClickListener {
             editText.setText("")
         }
+
+        // See https://techbooster.org/android/ui/16927/
+        this.isCancelable = false
 
         editText.isFocusedByDefault = true
 

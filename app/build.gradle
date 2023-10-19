@@ -10,8 +10,8 @@ android {
         applicationId "com.katahiromz.krakra_ja_jp"
         minSdkVersion 28
         targetSdkVersion 34
-        versionCode 350
-        versionName "3.5.0"
+        versionCode 351
+        versionName "3.5.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -54,8 +54,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     // ダイアログ表示用。
-    // NOTE: 1.7.0以降に問題があってバージョンアップできない。
-    implementation 'com.google.android.material:material:1.6.0'
+    implementation 'com.google.android.material:material:1.10.0'
 
     // ログ出力用：Timber
     implementation 'com.jakewharton.timber:timber:5.0.1'
