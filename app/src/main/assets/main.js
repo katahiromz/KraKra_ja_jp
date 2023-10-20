@@ -1249,7 +1249,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			let delta_theta = 2 * Math.PI * i / ci;
 			// 対数らせんの公式に従って描画する。ただし偏角はdelta_thetaだけずらす。
 			let a = 1, b = 1.1, oldx = 0, oldy = 0;
-			for(let theta = 0; theta <= Math.PI * 2 * 10; theta += 0.2){
+			for(let theta = 0; theta <= Math.PI * 2 * 10; theta += 0.1){
 				let r = a * Math.exp(b * theta);
 				let comp = new Complex({abs:r, arg:theta + delta_theta});
 				let x = comp.re, y = comp.im;
@@ -2259,19 +2259,35 @@ document.addEventListener('DOMContentLoaded', function(){
 
 			// 小さければ拡大する。
 			let text_size = 10;
+			let measure;
 			for(;;){
 				ctx.font = text_size.toString() + 'px san-serif';
-				let measure = ctx.measureText(text);
+				measure = ctx.measureText(text);
 				if (measure.width >= sai_screen_width * 0.9 ||
 				    measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent > 20) break;
 				text_size *= 1.1;
 			}
+			let x = sai_screen_width / 2, y = sai_screen_height * 0.15;
+
+			// ひし形を描く。
+			let width = measure.width * 1.5;
+			let height = (measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent) * 1.5;
+			ctx.strokeStyle = "#fff";
+			ctx.lineWidth = 2;
+			ctx.beginPath();
+			ctx.moveTo(x - width, y);
+			ctx.lineTo(x, y - height);
+			ctx.lineTo(x + width, y);
+			ctx.lineTo(x, y + height);
+			ctx.closePath();
+			ctx.stroke();
+			ctx.fillStyle = "rgba(255, 255, 255, 30%)";
+			ctx.fill();
 
 			// テキストに枠を付けて描画。
 			ctx.textAlign = 'center';
 			ctx.textBaseline = 'middle';
 			ctx.fillStyle = "white";
-			let x = sai_screen_width / 2, y = sai_screen_height * 0.15;
 			for(let dy = -3; dy <= 3; ++dy){
 				for(let dx = -3; dx <= 3; ++dx){
 					if (Math.abs(dx) > 2 || Math.abs(dy) > 2)
