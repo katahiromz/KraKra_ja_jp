@@ -2,7 +2,7 @@
 // 暗号名はKraKra。
 
 const sai_VERSION = '3.5.3'; // KraKraバージョン番号。
-const sai_DEBUGGING = false; // デバッグ中か？
+const sai_DEBUGGING = true; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
 let sai_stopping = true; // 停止中か？
 
@@ -1158,7 +1158,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 映像の描画。pic0: Dummy Screen (for practice)
-	function SAI_draw_pic_0(ctx, px, py, dx, dy){
+	function SAI_draw_pic_00(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
@@ -1212,7 +1212,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 映像の描画。pic1: Logarithmic Spiral
-	function SAI_draw_pic_1(ctx, px, py, dx, dy){
+	function SAI_draw_pic_01(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
@@ -1240,11 +1240,11 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.rotate(count2 * 0.02);
 
 		// 発散する渦巻きを表す多角形の頂点を計算する。
-		const ci = 24; // これは偶数でなければならない。
+		const num_lines = 12; // これは偶数でなければならない。
 		const a = 1, b = 1.1;
 		let lines = [];
-		for(let i = 0; i < ci; ++i){
-			let delta_theta = 2 * Math.PI * i / ci;
+		for(let i = 0; i < num_lines; ++i){
+			let delta_theta = 2 * Math.PI * i / num_lines;
 			// 対数らせんの公式に従って頂点を追加していく。ただし偏角はdelta_thetaだけずらす。
 			let line = [];
 			line.push([0, 0]);
@@ -1261,7 +1261,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let even = true;
 		ctx.beginPath();
 		ctx.moveTo(0, 0);
-		for(let i = 0; i < ci; ++i){
+		for(let i = 0; i < num_lines; ++i){
 			let line = lines[i];
 			if(even){ // 偶数回目はそのままの向き。
 				for(let k = 0; k < line.length; ++k)
@@ -1333,13 +1333,13 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 映像の描画。pic2: Concentric Circles
-	function SAI_draw_pic_2(ctx, px, py, dx, dy){
+	function SAI_draw_pic_02(ctx, px, py, dx, dy){
 		SAI_draw_pic_2_sub(ctx, px, py, dx, dy, true);
 		SAI_draw_pic_2_sub(ctx, px, py, dx, dy, false);
 	}
 
 	// 映像の描画。pic3: The Eyes
-	function SAI_draw_pic_3(ctx, px, py, dx, dy){
+	function SAI_draw_pic_03(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
@@ -1468,7 +1468,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 映像の描画。pic4: Archimedes' Spiral
-	function SAI_draw_pic_4(ctx, px, py, dx, dy){
+	function SAI_draw_pic_04(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
@@ -1535,7 +1535,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 映像の描画。pic5: Spreading Rainbow
-	function SAI_draw_pic_5(ctx, px, py, dx, dy){
+	function SAI_draw_pic_05(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
@@ -1632,7 +1632,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 映像の描画。pic6: 5-yen coin
-	function SAI_draw_pic_6(ctx, px, py, dx, dy){
+	function SAI_draw_pic_06(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
@@ -1724,7 +1724,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 映像の描画。pic7: Clamor Clamor
-	function SAI_draw_pic_7(ctx, px, py, dx, dy){
+	function SAI_draw_pic_07(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
@@ -1798,7 +1798,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 映像の描画。pic8: Crazy Colors
-	function SAI_draw_pic_8(ctx, px, py, dx, dy){
+	function SAI_draw_pic_08(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
@@ -1873,7 +1873,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 映像の描画。pic9: Golden Spiral
-	function SAI_draw_pic_9(ctx, px, py, dx, dy){
+	function SAI_draw_pic_09(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
@@ -2158,34 +2158,34 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_draw_pic_minus_1(ctx, px, py, dx, dy);
 			break;
 		case 0:
-			SAI_draw_pic_0(ctx, px, py, dx, dy);
+			SAI_draw_pic_00(ctx, px, py, dx, dy);
 			break;
 		case 1:
-			SAI_draw_pic_1(ctx, px, py, dx, dy);
+			SAI_draw_pic_01(ctx, px, py, dx, dy);
 			break;
 		case 2:
-			SAI_draw_pic_2(ctx, px, py, dx, dy);
+			SAI_draw_pic_02(ctx, px, py, dx, dy);
 			break;
 		case 3:
-			SAI_draw_pic_3(ctx, px, py, dx, dy);
+			SAI_draw_pic_03(ctx, px, py, dx, dy);
 			break;
 		case 4:
-			SAI_draw_pic_4(ctx, px, py, dx, dy);
+			SAI_draw_pic_04(ctx, px, py, dx, dy);
 			break;
 		case 5:
-			SAI_draw_pic_5(ctx, px, py, dx, dy);
+			SAI_draw_pic_05(ctx, px, py, dx, dy);
 			break;
 		case 6:
-			SAI_draw_pic_6(ctx, px, py, dx, dy);
+			SAI_draw_pic_06(ctx, px, py, dx, dy);
 			break;
 		case 7:
-			SAI_draw_pic_7(ctx, px, py, dx, dy);
+			SAI_draw_pic_07(ctx, px, py, dx, dy);
 			break;
 		case 8:
-			SAI_draw_pic_8(ctx, px, py, dx, dy);
+			SAI_draw_pic_08(ctx, px, py, dx, dy);
 			break;
 		case 9:
-			SAI_draw_pic_9(ctx, px, py, dx, dy);
+			SAI_draw_pic_09(ctx, px, py, dx, dy);
 			break;
 		case 10:
 			SAI_draw_pic_10(ctx, px, py, dx, dy);
