@@ -1206,7 +1206,6 @@ function trans_localize(lang){
 		trans_setImageSrc(sai_id_img_sound, 'images/sound.png');
 		trans_setImageSrc(sai_id_img_speech, 'images/speak.png');
 		trans_setImageSrc(sai_id_img_gear, 'images/gear.png');
-		trans_setImageSrc(sai_id_img_question, 'images/question.png');
 		trans_setHtmlText(sai_id_text_language, '言語 (Language):');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
@@ -1284,7 +1283,6 @@ function trans_localize(lang){
 		trans_setImageSrc(sai_id_img_sound, 'images/sound.png');
 		trans_setImageSrc(sai_id_img_speech, 'images/speak.png');
 		trans_setImageSrc(sai_id_img_gear, 'images/gear.png');
-		trans_setImageSrc(sai_id_img_question, 'images/question.png');
 		trans_setHtmlText(sai_id_text_language, '语言 (Language):');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
@@ -1362,7 +1360,6 @@ function trans_localize(lang){
 		trans_setImageSrc(sai_id_img_sound, 'images/sound.png');
 		trans_setImageSrc(sai_id_img_speech, 'images/speak.png');
 		trans_setImageSrc(sai_id_img_gear, 'images/gear.png');
-		trans_setImageSrc(sai_id_img_question, 'images/question.png');
 		trans_setHtmlText(sai_id_text_language, '語言 (Language):');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
@@ -1440,7 +1437,6 @@ function trans_localize(lang){
 		trans_setImageSrc(sai_id_img_sound, 'images/sound.png');
 		trans_setImageSrc(sai_id_img_speech, 'images/speak.png');
 		trans_setImageSrc(sai_id_img_gear, 'images/gear.png');
-		trans_setImageSrc(sai_id_img_question, 'images/question.png');
 		trans_setHtmlText(sai_id_text_language, '언어 (Language):');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
@@ -1518,7 +1514,6 @@ function trans_localize(lang){
 		trans_setImageSrc(sai_id_img_sound, 'images/sound.png');
 		trans_setImageSrc(sai_id_img_speech, 'images/speak.png');
 		trans_setImageSrc(sai_id_img_gear, 'images/gear.png');
-		trans_setImageSrc(sai_id_img_question, 'images/question.png');
 		trans_setHtmlText(sai_id_text_language, 'Lingua (Language):');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
@@ -1596,7 +1591,6 @@ function trans_localize(lang){
 		trans_setImageSrc(sai_id_img_sound, 'images/sound.png');
 		trans_setImageSrc(sai_id_img_speech, 'images/speak.png');
 		trans_setImageSrc(sai_id_img_gear, 'images/gear.png');
-		trans_setImageSrc(sai_id_img_question, 'images/question.png');
 		trans_setHtmlText(sai_id_text_language, 'Sprache (Language):');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
@@ -1674,7 +1668,6 @@ function trans_localize(lang){
 		trans_setImageSrc(sai_id_img_sound, 'images/sound.png');
 		trans_setImageSrc(sai_id_img_speech, 'images/speak.png');
 		trans_setImageSrc(sai_id_img_gear, 'images/gear.png');
-		trans_setImageSrc(sai_id_img_question, 'images/question.png');
 		trans_setHtmlText(sai_id_text_language, 'Language (言語):');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
