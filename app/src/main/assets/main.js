@@ -1987,20 +1987,18 @@ document.addEventListener('DOMContentLoaded', function(){
 	function SAI_draw_pic_11(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
-		// 画面中央の座標を計算する。
-		let qx = px + dx / 2, qy = py + dy / 2;
-
-		// 長方形領域(px, py, dx, dy)をクリッピングする。
-		SAI_clip_rect(ctx, px, py, dx, dy);
-
 		// 黒色で塗りつぶす。
 		ctx.fillStyle = sai_id_color_2nd.value;
 		ctx.fillRect(px, py, dx, dy);
+
+		// 長方形領域(px, py, dx, dy)をクリッピングする。
+		SAI_clip_rect(ctx, px, py, dx, dy);
 
 		// 寸法を計算する。
 		let minxy = Math.min(dx, dy), maxxy = Math.max(dx, dy);
 
 		// 画面中央を原点とする。
+		let qx = px + dx / 2, qy = py + dy / 2;
 		ctx.translate(qx, qy);
 
 		// 映像の進行を表す。
@@ -2052,9 +2050,9 @@ document.addEventListener('DOMContentLoaded', function(){
 			}
 			ctx.closePath();
 			if(m == 0)
-				ctx.fillStyle = sai_id_color_1st.value; // 1番目ので描画する。
+				ctx.fillStyle = sai_id_color_1st.value; // 1番目の色で描画する。
 			else
-				ctx.fillStyle = sai_id_color_2nd.value; // 2番目ので描画する。
+				ctx.fillStyle = sai_id_color_2nd.value; // 2番目の色で描画する。
 			ctx.globalAlpha = 0.5;
 			ctx.fill();
 			ctx.globalAlpha = 1.0;
@@ -2088,7 +2086,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像の描画。pic15: White screen
 	function SAI_draw_pic_15(ctx, px, py, dx, dy){
-		// 赤で長方形領域を塗りつぶす。
+		// 白で長方形領域を塗りつぶす。
 		ctx.fillStyle = '#fff';
 		ctx.fillRect(px, py, dx, dy);
 	}
@@ -2221,7 +2219,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		if(sai_pic_type == 8){
-			// pic4, pic8の場合は描画に時間がかかるので、解像度の低い映像としてレンダリングする。
+			// pic8の場合は描画に時間がかかるので、解像度の低い映像としてレンダリングする。
 			if(!sai_count_down){
 				let ratio = 0.5;
 				sai_id_canvas_02.width = dx * ratio;
@@ -2265,9 +2263,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 		let x = sai_screen_width / 2, y = sai_screen_height * 0.15;
 
-		// ひし形を描く。
 		let width = measure.width;
 		let height = (measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent) * 1.5;
+
+		// ひし形を描く。
 		ctx.beginPath();
 		ctx.moveTo(x - width, y);
 		ctx.lineTo(x, y - height);
@@ -2277,10 +2276,18 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.strokeStyle = '#fff';
 		ctx.lineWidth = 2;
 		ctx.stroke();
+
+		// ひし形を描く。
+		ctx.beginPath();
+		ctx.moveTo(x - width, y);
+		ctx.lineTo(x, y - height);
+		ctx.lineTo(x + width, y);
+		ctx.lineTo(x, y + height);
+		ctx.closePath();
 		ctx.fillStyle = "rgba(255, 255, 255, 30%)";
 		ctx.fill();
 
-		// テキストに枠を付けて描画。
+		// 黒いテキストに白い外枠を付けて描画。
 		ctx.textAlign = 'center';
 		ctx.textBaseline = 'middle';
 		ctx.fillStyle = "white";
@@ -2428,8 +2435,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			ctx.fillText(text, (sai_screen_width - width) / 2, height);
 		}
 
-		if(sai_stopping){ // 停止中なら映像の種類を描画する。
-			// 映像のキャプションを表示する。
+		// 停止中なら映像のキャプションを表示する。
+		if(sai_stopping){
 			draw_caption(ctx);
 		}
 
