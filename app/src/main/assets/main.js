@@ -2270,7 +2270,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			let x = sai_screen_width / 2, y = sai_screen_height * 0.15;
 
 			// ひし形を描く。
-			let width = measure.width * 1.5;
+			let width = measure.width;
 			let height = (measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent) * 1.5;
 			ctx.strokeStyle = "#fff";
 			ctx.lineWidth = 2;
