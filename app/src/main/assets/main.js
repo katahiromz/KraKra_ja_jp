@@ -1311,6 +1311,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 同心円状に描画する。
 		let size = (dx + dy) * 0.4;
+		ctx.strokeStyle = 'black';
 		for(; radius < size; radius += dr0){
 			SAI_draw_circle(ctx, qx, qy, radius, false);
 		}
