@@ -17,7 +17,7 @@ let sai_stopping = true; // 停止中か？
 
 // メッセージがクリックされた。
 function SAI_on_click_message(id){
-	sai_id_text_message.value = id.innerText;
+	sai_id_text_message.value = id.textContent;
 }
 
 // ドキュメントの読み込みが完了（DOMContentLoaded）されたら無名関数が呼び出される。
@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			sai_id_range_blink_type.value = value.toString();
 
 		// outputにテキストをセット。
-		sai_id_text_blink_output.innerText = text;
+		sai_id_text_blink_output.textContent = text;
 
 		// ローカルストレージに点滅タイプを記憶。
 		localStorage.setItem('saiminBlinkType', value);
@@ -392,7 +392,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 音量をセットする。
 		sai_id_range_sound_volume.value = value;
-		sai_id_text_sound_volume_output.innerText = value.toString() + "%";
+		sai_id_text_sound_volume_output.textContent = value.toString() + "%";
 		if(sai_sound_object){
 			sai_sound_object.volume = value / 100.0;
 		}
@@ -586,7 +586,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		// outputのUIを更新。
-		sai_id_text_speed_output.innerText = text;
+		sai_id_text_speed_output.textContent = text;
 
 		// <input>を更新。
 		if(sai_speed != parseFloat(sai_id_range_speed_type.value)){
@@ -840,13 +840,13 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 「バージョン情報」にバージョン番号をセットする。
 	function SAI_update_version_display(){
 		let nativeVersion = SAI_get_native_app_version();
-		let text = sai_id_text_version.innerText;
+		let text = sai_id_text_version.textContent;
 		if(nativeVersion){
-			text = text.replace('[[VERSION]]', nativeVersion + '(native) / ' + sai_VERSION + '(web)');
+			text = text.replace('[[VERSION]]', nativeVersion + '(native)');
 		}else{
 			text = text.replace('[[VERSION]]', sai_VERSION + '(web)');
 		}
-		sai_id_text_version.innerText = text;
+		sai_id_text_version.textContent = text;
 	}
 
 	// ユーザを受け入れる。
