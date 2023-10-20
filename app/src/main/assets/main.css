@@ -132,7 +132,7 @@ select {
 	bottom: 0;
 	width: calc(100% / 3 - 5px);
 }
-.sai_class_config_page button {
+.sai_class_config_button {
 	position: relative;
 	color: #afa;
 	background-color: #363;
@@ -159,6 +159,21 @@ select {
 	height: 1.3cm;
 }
 #sai_id_button_config {
+	position: absolute;
+	left: 3px;
+	top: 3px;
+}
+#sai_id_button_config_back {
+	position: absolute;
+	left: 3px;
+	top: 3px;
+}
+#sai_id_button_message_back {
+	position: absolute;
+	left: 3px;
+	top: 3px;
+}
+#sai_id_button_agreement_back {
 	position: absolute;
 	left: 3px;
 	top: 3px;
