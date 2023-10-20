@@ -2879,8 +2879,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 「戻る」をクリック。
 		sai_id_button_message_back.addEventListener('click', function(e){
-			localStorage.removeItem('saiminMessageListShowing');
-			SAI_choose_page(sai_id_page_main);
+			sai_id_button_mesage_ok.click();
 		});
 		sai_id_button_config_back.addEventListener('click', function(e){
 			localStorage.removeItem('saiminConfigShowing');
