@@ -1223,7 +1223,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.fillRect(px, py, dx, dy);
 
 		// 寸法を計算する。
-		let minxy = Math.min(dx, dy), maxxy = Math.min(dx, dy);
+		let minxy = Math.min(dx, dy), maxxy = Math.max(dx, dy);
 
 		// 画面中央を原点とする。
 		let qx = px + dx / 2, qy = py + dy / 2;
@@ -1998,7 +1998,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.fillRect(px, py, dx, dy);
 
 		// 寸法を計算する。
-		let minxy = Math.min(dx, dy), maxxy = Math.min(dx, dy);
+		let minxy = Math.min(dx, dy), maxxy = Math.max(dx, dy);
 
 		// 画面中央を原点とする。
 		ctx.translate(qx, qy);
@@ -2246,6 +2246,56 @@ document.addEventListener('DOMContentLoaded', function(){
 		id.style.top = y + 'px';
 	}
 
+	// 映像のキャプションを描画する。
+	function draw_caption(ctx){
+		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
+
+		// 映像の種類のテキストを取得。
+		let text = trans_getSelectOptionText(sai_id_select_pic_type, sai_id_select_pic_type.value);
+
+		// 小さければ拡大する。
+		let text_size = 10;
+		let measure;
+		for(;;){
+			ctx.font = text_size.toString() + 'px san-serif';
+			measure = ctx.measureText(text);
+			if (measure.width >= sai_screen_width * 0.9 ||
+			    measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent > 20) break;
+			text_size *= 1.1;
+		}
+		let x = sai_screen_width / 2, y = sai_screen_height * 0.15;
+
+		// ひし形を描く。
+		let width = measure.width;
+		let height = (measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent) * 1.5;
+		ctx.beginPath();
+		ctx.moveTo(x - width, y);
+		ctx.lineTo(x, y - height);
+		ctx.lineTo(x + width, y);
+		ctx.lineTo(x, y + height);
+		ctx.closePath();
+		ctx.strokeStyle = '#fff';
+		ctx.lineWidth = 2;
+		ctx.stroke();
+		ctx.fillStyle = "rgba(255, 255, 255, 30%)";
+		ctx.fill();
+
+		// テキストに枠を付けて描画。
+		ctx.textAlign = 'center';
+		ctx.textBaseline = 'middle';
+		ctx.fillStyle = "white";
+		for(let dy = -3; dy <= 3; ++dy){
+			for(let dx = -3; dx <= 3; ++dx){
+				if (Math.abs(dx) > 2 || Math.abs(dy) > 2)
+					ctx.fillText(text, x + dx, y + dy);
+			}
+		}
+		ctx.fillStyle = "black";
+		ctx.fillText(text, x, y);
+
+		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
+	}
+
 	// 映像をすべて描画する。
 	function SAI_draw_all(){
 		// 二次元の描画コンテキスト。キャンバスは不透明。
@@ -2379,48 +2429,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		if(sai_stopping){ // 停止中なら映像の種類を描画する。
-			// 映像の種類のテキストを取得。
-			let text = trans_getSelectOptionText(sai_id_select_pic_type, sai_id_select_pic_type.value);
-
-			// 小さければ拡大する。
-			let text_size = 10;
-			let measure;
-			for(;;){
-				ctx.font = text_size.toString() + 'px san-serif';
-				measure = ctx.measureText(text);
-				if (measure.width >= sai_screen_width * 0.9 ||
-				    measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent > 20) break;
-				text_size *= 1.1;
-			}
-			let x = sai_screen_width / 2, y = sai_screen_height * 0.15;
-
-			// ひし形を描く。
-			let width = measure.width;
-			let height = (measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent) * 1.5;
-			ctx.strokeStyle = "#fff";
-			ctx.lineWidth = 2;
-			ctx.beginPath();
-			ctx.moveTo(x - width, y);
-			ctx.lineTo(x, y - height);
-			ctx.lineTo(x + width, y);
-			ctx.lineTo(x, y + height);
-			ctx.closePath();
-			ctx.stroke();
-			ctx.fillStyle = "rgba(255, 255, 255, 30%)";
-			ctx.fill();
-
-			// テキストに枠を付けて描画。
-			ctx.textAlign = 'center';
-			ctx.textBaseline = 'middle';
-			ctx.fillStyle = "white";
-			for(let dy = -3; dy <= 3; ++dy){
-				for(let dx = -3; dx <= 3; ++dx){
-					if (Math.abs(dx) > 2 || Math.abs(dy) > 2)
-						ctx.fillText(text, x + dx, y + dy);
-				}
-			}
-			ctx.fillStyle = "black";
-			ctx.fillText(text, x, y);
+			// 映像のキャプションを表示する。
+			draw_caption(ctx);
 		}
 
 		// 必要ならアニメーションを要求する。
