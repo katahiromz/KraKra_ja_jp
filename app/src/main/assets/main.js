@@ -1222,9 +1222,6 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.fillStyle = sai_id_color_2nd.value;
 		ctx.fillRect(px, py, dx, dy);
 
-		// 寸法を計算する。
-		const maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
-
 		// 画面中央を原点とする。
 		let qx = px + dx / 2, qy = py + dy / 2;
 		ctx.translate(qx, qy);
@@ -1248,7 +1245,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			let delta_theta = 2 * Math.PI * i / num_lines;
 			// 対数らせんの公式に従って頂点を追加していく。ただし偏角はdelta_thetaだけずらす。
 			let line = [[0, 0]];
-			for(let theta = 0; theta <= Math.PI * 2 * 10; theta += 0.1){
+			for(let theta = 0; theta <= Math.PI * 2; theta += 0.1){
 				let r = a * Math.exp(b * theta);
 				let comp = new Complex({abs:r, arg:theta + delta_theta});
 				let x = comp.re, y = comp.im;
@@ -1270,13 +1267,6 @@ document.addEventListener('DOMContentLoaded', function(){
 			}else{ // 奇数回目は逆向き。
 				for(let k = line.length - 1; k >= 0; --k)
 					ctx.lineTo(line[k][0], line[k][1]);
-				// ここで多角形を一つ。
-				ctx.closePath();
-				ctx.fillStyle = sai_id_color_1st.value; // 1番目の色で塗りつぶす。
-				ctx.fill();
-				// 次の線の準備。
-				ctx.beginPath();
-				ctx.moveTo(0, 0);
 			}
 			even = !even;
 		}
@@ -2333,138 +2323,134 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像をすべて描画する。
 	function SAI_draw_all(){
-		try{
-			// 二次元の描画コンテキスト。キャンバスは不透明。
-			let ctx = sai_id_canvas_01.getContext('2d', { alpha: false });
+		// 二次元の描画コンテキスト。キャンバスは不透明。
+		let ctx = sai_id_canvas_01.getContext('2d', { alpha: false });
 
-			// 画面のサイズ。
-			const dx = sai_screen_width, dy = sai_screen_height;
+		// 画面のサイズ。
+		const dx = sai_screen_width, dy = sai_screen_height;
 
-			let splitted = false; // 画面分割したか？
-			if(sai_screen_split == 1){ // 画面分割なし。
+		let splitted = false; // 画面分割したか？
+		if(sai_screen_split == 1){ // 画面分割なし。
+			SAI_draw_pic_with_effects(ctx, 0, 0, dx, dy);
+			SAI_message_set_position(sai_id_text_floating_1, 0, 0, dx, dy, sai_counter);
+		}else if(sai_screen_split == -1){ // 画面分割自動。
+			if(dx >= dy * 1.75){ // 充分に横長。
+				SAI_draw_pic_with_effects(ctx, 0, 0, dx / 2, dy);
+				//SAI_draw_pic_with_effects(ctx, dx / 2, 0, dx / 2, dy); // drawImageで描画時間を節約。
+				ctx.drawImage(sai_id_canvas_01, 0, 0, dx / 2, dy, dx / 2, 0, dx / 2, dy);
+				SAI_message_set_position(sai_id_text_floating_1, 0, 0, dx / 2, dy, sai_counter);
+				SAI_message_set_position(sai_id_text_floating_2, dx / 2, 0, dx / 2, dy, sai_counter);
+				splitted = true; // 画面分割した。
+			}else if(dy >= dx * 1.75){ // 充分に縦長。
+				SAI_draw_pic_with_effects(ctx, 0, 0, dx, dy / 2);
+				//SAI_draw_pic_with_effects(ctx, 0, dy / 2, dx, dy / 2); // drawImageで描画時間を節約。
+				ctx.drawImage(sai_id_canvas_01, 0, 0, dx, dy / 2, 0, dy / 2, dx, dy / 2);
+				SAI_message_set_position(sai_id_text_floating_1, 0, 0, dx, dy / 2, sai_counter);
+				SAI_message_set_position(sai_id_text_floating_2, 0, dy / 2, dx, dy / 2, sai_counter);
+				splitted = true; // 画面分割した。
+			}else{ // それ以外は分割しない。
 				SAI_draw_pic_with_effects(ctx, 0, 0, dx, dy);
 				SAI_message_set_position(sai_id_text_floating_1, 0, 0, dx, dy, sai_counter);
-			}else if(sai_screen_split == -1){ // 画面分割自動。
-				if(dx >= dy * 1.75){ // 充分に横長。
-					SAI_draw_pic_with_effects(ctx, 0, 0, dx / 2, dy);
-					//SAI_draw_pic_with_effects(ctx, dx / 2, 0, dx / 2, dy); // drawImageで描画時間を節約。
-					ctx.drawImage(sai_id_canvas_01, 0, 0, dx / 2, dy, dx / 2, 0, dx / 2, dy);
-					SAI_message_set_position(sai_id_text_floating_1, 0, 0, dx / 2, dy, sai_counter);
-					SAI_message_set_position(sai_id_text_floating_2, dx / 2, 0, dx / 2, dy, sai_counter);
-					splitted = true; // 画面分割した。
-				}else if(dy >= dx * 1.75){ // 充分に縦長。
-					SAI_draw_pic_with_effects(ctx, 0, 0, dx, dy / 2);
-					//SAI_draw_pic_with_effects(ctx, 0, dy / 2, dx, dy / 2); // drawImageで描画時間を節約。
-					ctx.drawImage(sai_id_canvas_01, 0, 0, dx, dy / 2, 0, dy / 2, dx, dy / 2);
-					SAI_message_set_position(sai_id_text_floating_1, 0, 0, dx, dy / 2, sai_counter);
-					SAI_message_set_position(sai_id_text_floating_2, 0, dy / 2, dx, dy / 2, sai_counter);
-					splitted = true; // 画面分割した。
-				}else{ // それ以外は分割しない。
-					SAI_draw_pic_with_effects(ctx, 0, 0, dx, dy);
-					SAI_message_set_position(sai_id_text_floating_1, 0, 0, dx, dy, sai_counter);
-				}
-			}else{ // 画面２分割。
-				if(dx >= dy){ // 横長。
-					SAI_draw_pic_with_effects(ctx, 0, 0, dx / 2, dy);
-					//SAI_draw_pic_with_effects(ctx, dx / 2, 0, dx / 2, dy); // drawImageで描画時間を節約。
-					ctx.drawImage(sai_id_canvas_01, 0, 0, dx / 2, dy, dx / 2, 0, dx / 2, dy);
-					SAI_message_set_position(sai_id_text_floating_1, 0, 0, dx / 2, dy, sai_counter);
-					SAI_message_set_position(sai_id_text_floating_2, dx / 2, 0, dx / 2, dy, sai_counter);
-				}else{ // 縦長。
-					SAI_draw_pic_with_effects(ctx, 0, 0, dx, dy / 2);
-					//SAI_draw_pic_with_effects(ctx, 0, dy / 2, dx, dy / 2); // drawImageで描画時間を節約。
-					ctx.drawImage(sai_id_canvas_01, 0, 0, dx, dy / 2, 0, dy / 2, dx, dy / 2);
-					SAI_message_set_position(sai_id_text_floating_1, 0, 0, dx, dy / 2, sai_counter);
-					SAI_message_set_position(sai_id_text_floating_2, 0, dy / 2, dx, dy / 2, sai_counter);
-				}
-				splitted = true; // 画面分割した。
 			}
+		}else{ // 画面２分割。
+			if(dx >= dy){ // 横長。
+				SAI_draw_pic_with_effects(ctx, 0, 0, dx / 2, dy);
+				//SAI_draw_pic_with_effects(ctx, dx / 2, 0, dx / 2, dy); // drawImageで描画時間を節約。
+				ctx.drawImage(sai_id_canvas_01, 0, 0, dx / 2, dy, dx / 2, 0, dx / 2, dy);
+				SAI_message_set_position(sai_id_text_floating_1, 0, 0, dx / 2, dy, sai_counter);
+				SAI_message_set_position(sai_id_text_floating_2, dx / 2, 0, dx / 2, dy, sai_counter);
+			}else{ // 縦長。
+				SAI_draw_pic_with_effects(ctx, 0, 0, dx, dy / 2);
+				//SAI_draw_pic_with_effects(ctx, 0, dy / 2, dx, dy / 2); // drawImageで描画時間を節約。
+				ctx.drawImage(sai_id_canvas_01, 0, 0, dx, dy / 2, 0, dy / 2, dx, dy / 2);
+				SAI_message_set_position(sai_id_text_floating_1, 0, 0, dx, dy / 2, sai_counter);
+				SAI_message_set_position(sai_id_text_floating_2, 0, dy / 2, dx, dy / 2, sai_counter);
+			}
+			splitted = true; // 画面分割した。
+		}
 
-			// 浮遊するテキストを処理する。
-			if(sai_stopping || sai_count_down){
-				sai_id_text_floating_1.classList.add('sai_class_invisible');
-				sai_id_text_floating_2.classList.add('sai_class_invisible');
-			}else if(sai_pic_type == -1){
-				sai_id_text_floating_1.classList.add('sai_class_invisible');
-				sai_id_text_floating_2.classList.add('sai_class_invisible');
-			}else if(sai_message_text != ''){
-				if(splitted){
-					sai_id_text_floating_1.classList.remove('sai_class_invisible');
-					sai_id_text_floating_2.classList.remove('sai_class_invisible');
-				}else{
-					sai_id_text_floating_1.classList.remove('sai_class_invisible');
-					sai_id_text_floating_2.classList.add('sai_class_invisible');
-				}
+		// 浮遊するテキストを処理する。
+		if(sai_stopping || sai_count_down){
+			sai_id_text_floating_1.classList.add('sai_class_invisible');
+			sai_id_text_floating_2.classList.add('sai_class_invisible');
+		}else if(sai_pic_type == -1){
+			sai_id_text_floating_1.classList.add('sai_class_invisible');
+			sai_id_text_floating_2.classList.add('sai_class_invisible');
+		}else if(sai_message_text != ''){
+			if(splitted){
+				sai_id_text_floating_1.classList.remove('sai_class_invisible');
+				sai_id_text_floating_2.classList.remove('sai_class_invisible');
 			}else{
-				sai_id_text_floating_1.classList.add('sai_class_invisible');
+				sai_id_text_floating_1.classList.remove('sai_class_invisible');
 				sai_id_text_floating_2.classList.add('sai_class_invisible');
 			}
+		}else{
+			sai_id_text_floating_1.classList.add('sai_class_invisible');
+			sai_id_text_floating_2.classList.add('sai_class_invisible');
+		}
 
-			// きらめきを描画する。
-			for(let iStar = 0; iStar < sai_stars.length; ++iStar){
-				let star = sai_stars[iStar];
-				if(star){
-					// 黄色い光を描く。
-					ctx.fillStyle = `rgb(255, 255, 0, 0.8)`;
-					SAI_draw_light(ctx, star[0], star[1], star[2]);
+		// きらめきを描画する。
+		for(let iStar = 0; iStar < sai_stars.length; ++iStar){
+			let star = sai_stars[iStar];
+			if(star){
+				// 黄色い光を描く。
+				ctx.fillStyle = `rgb(255, 255, 0, 0.8)`;
+				SAI_draw_light(ctx, star[0], star[1], star[2]);
 
-					// きらめきの半径がだんだん小さくなる演出。
-					if(star[2] > 1.0){
-						star[2] *= 0.98;
-					}
+				// きらめきの半径がだんだん小さくなる演出。
+				if(star[2] > 1.0){
+					star[2] *= 0.98;
 				}
 			}
-			// きらめきがだんだん消えうせる演出。
-			sai_stars.shift();
-			sai_stars.push(null);
+		}
+		// きらめきがだんだん消えうせる演出。
+		sai_stars.shift();
+		sai_stars.push(null);
 
-			// 画面サイズが変わっていればキャンバスをフィットさせる。
-			if(window.innerWidth != sai_screen_width || window.innerHeight != sai_screen_height ||
-			   window.innerWidth != sai_id_canvas_01.width || window.innerHeight != sai_id_canvas_01.height)
-			{
-				SAI_screen_fit();
+		// 画面サイズが変わっていればキャンバスをフィットさせる。
+		if(window.innerWidth != sai_screen_width || window.innerHeight != sai_screen_height ||
+		   window.innerWidth != sai_id_canvas_01.width || window.innerHeight != sai_id_canvas_01.height)
+		{
+			SAI_screen_fit();
+		}
+
+		// 時間の経過を計算。
+		let new_time = (new Date()).getTime();
+		let diff_time = (new_time - sai_old_time) / 1000.0;
+		if(sai_rotation_type == 'counter')
+			diff_time = -diff_time;
+		if(sai_stopping)
+			diff_time = 0;
+		sai_counter += diff_time * sai_speed;
+		sai_old_time = new_time;
+
+		if(sai_speed_irregular){ // スピードが不規則なら
+			sai_clock += diff_time;
+			if(sai_clock >= sai_speed / 30.0){ // ときどき速度を変える。
+				sai_clock = 0;
+				const MIN_VALUE = 35.0;
+				const MAX_VALUE = 70.0;
+				const MIDDLE = (MIN_VALUE + MAX_VALUE) * 0.5;
+				if(sai_speed < MIDDLE)
+					sai_speed = MIDDLE + (MAX_VALUE - MIDDLE) * Math.random();
+				else
+					sai_speed = MIN_VALUE + (MIDDLE - MIN_VALUE) * Math.random();
 			}
+		}
 
-			// 時間の経過を計算。
-			let new_time = (new Date()).getTime();
-			let diff_time = (new_time - sai_old_time) / 1000.0;
-			if(sai_rotation_type == 'counter')
-				diff_time = -diff_time;
-			if(sai_stopping)
-				diff_time = 0;
-			sai_counter += diff_time * sai_speed;
-			sai_old_time = new_time;
+		// デバッグ中ならFPSを描画する。
+		if(sai_DEBUGGING){
+			draw_fps(ctx, diff_time);
+		}
 
-			if(sai_speed_irregular){ // スピードが不規則なら
-				sai_clock += diff_time;
-				if(sai_clock >= sai_speed / 30.0){ // ときどき速度を変える。
-					sai_clock = 0;
-					const MIN_VALUE = 35.0;
-					const MAX_VALUE = 70.0;
-					const MIDDLE = (MIN_VALUE + MAX_VALUE) * 0.5;
-					if(sai_speed < MIDDLE)
-						sai_speed = MIDDLE + (MAX_VALUE - MIDDLE) * Math.random();
-					else
-						sai_speed = MIN_VALUE + (MIDDLE - MIN_VALUE) * Math.random();
-				}
-			}
+		// 停止中なら映像のキャプションを表示する。
+		if(sai_stopping){
+			draw_caption(ctx);
+		}
 
-			// デバッグ中ならFPSを描画する。
-			if(sai_DEBUGGING){
-				draw_fps(ctx, diff_time);
-			}
-
-			// 停止中なら映像のキャプションを表示する。
-			if(sai_stopping){
-				draw_caption(ctx);
-			}
-
-			// 必要ならアニメーションを要求する。
-			if(sai_request_anime){
-				sai_request_anime = window.requestAnimationFrame(SAI_draw_all);
-			}
-		}catch(e){
-			alert(e);
+		// 必要ならアニメーションを要求する。
+		if(sai_request_anime){
+			sai_request_anime = window.requestAnimationFrame(SAI_draw_all);
 		}
 	}
 
