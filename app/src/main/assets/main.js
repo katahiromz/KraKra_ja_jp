@@ -88,6 +88,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		for(let item of sai_user_message_list){
 			msg_list.unshift(item);
 		}
+		msg_list.unshift(''); // 使いやすさのために空文字列を最初に置く。
 
 		let html = '';
 		for(let item of msg_list){

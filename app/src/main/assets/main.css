@@ -283,11 +283,12 @@ select {
 	font-size: 0.6cm;
 	width: 95%;
 }
-.sai_class_scrollable_3 div div {
+#sai_id_message_list div {
 	border: solid 1px black;
 	padding: 0.2cm;
+	min-height: 0.8cm;
 }
-.sai_class_scrollable_3 div div:hover {
+#sai_id_message_list div:hover {
 	background-color: #c0c;
 }
 #sai_id_page_message .sai_class_nav_button {
