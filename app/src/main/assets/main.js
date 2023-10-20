@@ -24,7 +24,7 @@ function SAI_on_click_message(id){
 // ドキュメントの読み込みが完了（DOMContentLoaded）されたら無名関数が呼び出される。
 document.addEventListener('DOMContentLoaded', function(){
 	// 変数を保護するため、関数内部に閉じ込める。
-	const sai_NUM_TYPE = 11; // 「画」の個数。
+	const sai_NUM_TYPE = 16; // 「画」の個数。
 	let sai_screen_width = 0; // スクリーンの幅（ピクセル単位）を覚えておく。
 	let sai_screen_height = 0; // スクリーンの高さ（ピクセル単位）を覚えておく。
 	let sai_old_time = (new Date()).getTime(); // 処理フレームの時刻を覚えておく。
@@ -1916,6 +1916,41 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
+	// 映像の描画。pic11: Black screen
+	function SAI_draw_pic_11(ctx, px, py, dx, dy){
+		// 黒で長方形領域を塗りつぶす。
+		ctx.fillStyle = '#000';
+		ctx.fillRect(px, py, dx, dy);
+	}
+
+	// 映像の描画。pic12: Red screen
+	function SAI_draw_pic_12(ctx, px, py, dx, dy){
+		// 赤で長方形領域を塗りつぶす。
+		ctx.fillStyle = '#f00';
+		ctx.fillRect(px, py, dx, dy);
+	}
+
+	// 映像の描画。pic13: Green screen
+	function SAI_draw_pic_13(ctx, px, py, dx, dy){
+		// 緑色で長方形領域を塗りつぶす。
+		ctx.fillStyle = '#0f0';
+		ctx.fillRect(px, py, dx, dy);
+	}
+
+	// 映像の描画。pic14: Blue screen
+	function SAI_draw_pic_14(ctx, px, py, dx, dy){
+		// 赤で長方形領域を塗りつぶす。
+		ctx.fillStyle = '#00f';
+		ctx.fillRect(px, py, dx, dy);
+	}
+
+	// 映像の描画。pic15: White screen
+	function SAI_draw_pic_15(ctx, px, py, dx, dy){
+		// 赤で長方形領域を塗りつぶす。
+		ctx.fillStyle = '#fff';
+		ctx.fillRect(px, py, dx, dy);
+	}
+
 	// カウントダウン映像の描画。
 	function SAI_draw_pic_count_down(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
@@ -2015,6 +2050,21 @@ document.addEventListener('DOMContentLoaded', function(){
 			break;
 		case 10:
 			SAI_draw_pic_10(ctx, px, py, dx, dy);
+			break;
+		case 11:
+			SAI_draw_pic_11(ctx, px, py, dx, dy);
+			break;
+		case 12:
+			SAI_draw_pic_12(ctx, px, py, dx, dy);
+			break;
+		case 13:
+			SAI_draw_pic_13(ctx, px, py, dx, dy);
+			break;
+		case 14:
+			SAI_draw_pic_14(ctx, px, py, dx, dy);
+			break;
+		case 15:
+			SAI_draw_pic_15(ctx, px, py, dx, dy);
 			break;
 		}
 	}
