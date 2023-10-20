@@ -2289,12 +2289,12 @@ document.addEventListener('DOMContentLoaded', function(){
 			ctx.textBaseline = 'middle';
 			ctx.fillStyle = "white";
 			let x = sai_screen_width / 2, y = sai_screen_height * 0.15;
-			ctx.fillText(text, x - 1, y - 1);
-			ctx.fillText(text, x + 1, y + 1);
-			ctx.fillText(text, x - 2, y);
-			ctx.fillText(text, x + 2, y);
-			ctx.fillText(text, x, y - 2);
-			ctx.fillText(text, x, y + 2);
+			for(let dy = -3; dy <= 3; ++dy){
+				for(let dx = -3; dx <= 3; ++dx){
+					if (Math.abs(dx) > 2 || Math.abs(dy) > 2)
+						ctx.fillText(text, x + dx, y + dy);
+				}
+			}
 			ctx.fillStyle = "black";
 			ctx.fillText(text, x, y);
 		}
