@@ -15,10 +15,19 @@ let sai_stopping = true; // 停止中か？
 //
 // ※ 言語特有の記述が必要な個所は「{{LANGUAGE_SPECIFIC}}」というコメントを付けること。
 
-// メッセージがクリックされた。
+// メッセージ項目がクリックされた。
 function SAI_on_click_message(id){
 	sai_id_text_message.value = id.textContent;
 	sai_id_text_message.focus();
+}
+
+// メッセージ項目でキーが入力された。
+function SAI_on_keydown_message(e){
+	if(e.code == 'Enter' || e.key == ' '){
+		e.target.click();
+		return false;
+	}
+	return true;
 }
 
 // ドキュメントの読み込みが完了（DOMContentLoaded）されたら無名関数が呼び出される。
@@ -92,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		let html = '';
 		for(let item of msg_list){
-			html += '<div onclick="SAI_on_click_message(this)">';
+			html += '<div onclick="SAI_on_click_message(this)" tabindex="0" onkeydown="return SAI_on_keydown_message(arguments[0])">';
 			html += SAI_htmlspecialchars(item);
 			html += '</div>';
 		}
