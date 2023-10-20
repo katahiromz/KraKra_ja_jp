@@ -1211,7 +1211,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
-	// 映像の描画。pic1: Pink Spiral
+	// 映像の描画。pic1: Logarithmic Spiral
 	function SAI_draw_pic_1(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
@@ -1221,8 +1221,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
 		SAI_clip_rect(ctx, px, py, dx, dy);
 
-		// 黒で塗りつぶす。
-		ctx.fillStyle = '#000';
+		// 2番目の色で塗りつぶす。
+		ctx.fillStyle = sai_id_color_2nd.value;
 		ctx.fillRect(px, py, dx, dy);
 
 		// 寸法を計算する。
@@ -1241,27 +1241,43 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.translate(25 * Math.cos(count2 * 0.01), 25 * Math.sin(count2 * 0.05));
 		ctx.rotate(count2 * 0.02);
 
-		ctx.fillStyle = '#f0f'; // ショッキングピンクで描画する。
+		ctx.fillStyle = sai_id_color_1st.value; // 1番目ので描画する。
 
 		// 発散する渦巻きを描画する。
-		let ci = 8;
-		for(let i = 0; i <= ci; ++i){
+		let ci = 24; // これは偶数でなければならない。
+		let lines = [];
+		for(let i = 0; i < ci; ++i){
 			let delta_theta = 2 * Math.PI * i / ci;
 			// 対数らせんの公式に従って描画する。ただし偏角はdelta_thetaだけずらす。
-			let a = 1, b = 1.1, oldx = 0, oldy = 0;
+			let a = 1, b = 1.1;
+			let line = [];
+			line.push([0, 0]);
 			for(let theta = 0; theta <= Math.PI * 2 * 10; theta += 0.1){
 				let r = a * Math.exp(b * theta);
 				let comp = new Complex({abs:r, arg:theta + delta_theta});
 				let x = comp.re, y = comp.im;
-
-				// 線を描画する。
-				SAI_draw_line_2(ctx, oldx, oldy, x, y, r * 1.8 / ci);
-
-				// 古い(x, y)を記憶する。
-				oldx = x;
-				oldy = y;
+				line.push([x, y]);
 			}
+			lines.push(line);
 		}
+
+		// 線を描画する。
+		let even = true;
+		ctx.beginPath();
+		ctx.moveTo(0, 0);
+		for(let i = 0; i < ci; ++i){
+			let line = lines[i];
+			if(even){ // 偶数回目はそのままの向き。
+				for(let k = 0; k < line.length; ++k)
+					ctx.lineTo(line[k][0], line[k][1]);
+			}else{ // 奇数回目は逆向き。
+				for(let k = line.length - 1; k >= 0; --k)
+					ctx.lineTo(line[k][0], line[k][1]);
+			}
+			even = !even;
+		}
+		ctx.closePath();
+		ctx.fill();
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
@@ -1292,7 +1308,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		// 白で長方形領域を塗りつぶす。
-		ctx.fillStyle = '#fff';
+		ctx.fillStyle = sai_id_color_1st.value;
 		ctx.fillRect(px, py, dx, dy);
 
 		// さまざまな計算をする。
@@ -1311,7 +1327,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 同心円状に描画する。
 		let size = (dx + dy) * 0.4;
-		ctx.strokeStyle = 'black';
+		ctx.strokeStyle = sai_id_color_2nd.value;
 		for(; radius < size; radius += dr0){
 			SAI_draw_circle(ctx, qx, qy, radius, false);
 		}
@@ -1454,7 +1470,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
-	// 映像の描画。pic4: Black/White Spiral
+	// 映像の描画。pic4: Archimedes' Spiral
 	function SAI_draw_pic_4(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
@@ -1468,34 +1484,55 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_clip_rect(ctx, px, py, dx, dy);
 
 		// 黒で長方形領域を塗りつぶす。
-		ctx.fillStyle = 'white';
+		ctx.fillStyle = sai_id_color_2nd.value;
 		ctx.fillRect(px, py, dx, dy);
 
 		// 画面中央を原点とする。
 		ctx.translate(qx, qy);
 
 		// 映像の進行を表す変数。
-		let factor = SAI_get_tick_count() * 0.4;
+		let factor = SAI_get_tick_count() * 0.2;
 
-		// 原点を中心に発散する渦巻きを描画する。
-		let radius = 1; // 半径。
-		ctx.fillStyle = 'rgba(0, 0, 0, 33%)';
-		for(let radian = 0; radian < 120;){ // 角度によりループ。
-			const radian2 = radian - factor;
+		// これから描画する図形を回転する。
+		ctx.rotate(factor);
 
-			// 線の始点。
-			const x0 = radius * Math.cos(-radian2), y0 = radius * Math.sin(-radian2);
+		ctx.fillStyle = sai_id_color_1st.value; // 1番目ので描画する。
 
-			radius *= 1.009; // 半径は単純増加。
-			radian += 0.08; // 角度も単純増加。
-			const radian3 = radian - factor;
-
-			// 線の終点。
-			const x1 = radius * Math.cos(-radian3), y1 = radius * Math.sin(-radian3);
-
-			// 線を描画する。
-			SAI_draw_line_2(ctx, x0, y0, x1, y1, radius * 0.325);
+		// 発散する渦巻きを描画する。
+		let ci = 8; // これは偶数でなければならない。
+		let lines = [];
+		const a = 20;
+		for(let i = 0; i < ci; ++i){
+			let delta_theta = 2 * Math.PI * i / ci;
+			// アルキメデスのらせんの公式に従って描画する。ただし偏角はdelta_thetaだけずらす。
+			let line = [];
+			line.push([0, 0]);
+			for(let theta = 0; theta <= Math.PI * 2 * 10; theta += 0.1){
+				let r = a * theta;
+				let comp = new Complex({abs:r, arg:theta + delta_theta});
+				let x = comp.re, y = comp.im;
+				line.push([x, y]);
+			}
+			lines.push(line);
 		}
+
+		// 線を描画する。
+		let even = true;
+		ctx.beginPath();
+		ctx.moveTo(0, 0);
+		for(let i = 0; i < ci; ++i){
+			let line = lines[i];
+			if(even){ // 偶数回目はそのままの向き。
+				for(let k = 0; k < line.length; ++k)
+					ctx.lineTo(line[k][0], line[k][1]);
+			}else{ // 奇数回目は逆向き。
+				for(let k = line.length - 1; k >= 0; --k)
+					ctx.lineTo(line[k][0], line[k][1]);
+			}
+			even = !even;
+		}
+		ctx.closePath();
+		ctx.fill();
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
@@ -1727,11 +1764,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		const delta = dxy * 0.015 + 1;
 		for(let radius = (Math.floor(dxy * 0.35 / delta) + 1) * delta; radius > 0; radius -= delta){
 			// 塗りつぶしの色を選ぶ。
-			switch (i & 3){
-			case 0: ctx.fillStyle = '#f00'; break;
-			case 1: ctx.fillStyle = '#ff0'; break;
-			case 2: ctx.fillStyle = '#f90'; break;
-			case 3: ctx.fillStyle = '#300'; break;
+			switch (i % 2){
+			case 0: ctx.fillStyle = sai_id_color_1st.value; break;
+			case 1: ctx.fillStyle = sai_id_color_2nd.value; break;
 			}
 
 			// パスを構築する。
@@ -1851,7 +1886,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
 
 		// 黒で長方形領域を塗りつぶす。
-		ctx.fillStyle = '#000';
+		ctx.fillStyle = sai_id_color_2nd.value;
 		ctx.fillRect(px, py, dx, dy);
 
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
@@ -1867,26 +1902,43 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.rotate(-count2 * 0.23);
 
 		// 黄色で塗る。
-		ctx.fillStyle = '#ff0';
+		ctx.fillStyle = sai_id_color_1st.value;
 
-		// 黄金らせんの公式に従って描画する。ただしtheta_deltaだけ偏角をずらす。
-		const b = 0.3063489, ci = 3;
+		// 発散する渦巻きを描画する。
+		let ci = 8; // これは偶数でなければならない。
+		let lines = [];
 		for(let i = 0; i < ci; ++i){
-			let oldx = 0, oldy = 0;
-			let theta_delta = 2 * Math.PI * i / ci;
-			for(let theta = 0; theta <= Math.PI * 2 * 10; theta += 0.13){
-				let r = Math.exp(b * theta);
-				let comp = new Complex({abs:r, arg:theta + theta_delta});
+			let delta_theta = 2 * Math.PI * i / ci;
+			// 黄金らせんの公式に従って描画する。ただしtheta_deltaだけ偏角をずらす。
+			let a = 1, b = 0.3063489;
+			let line = [];
+			line.push([0, 0]);
+			for(let theta = 0; theta <= Math.PI * 2 * 10; theta += 0.1){
+				let r = a * Math.exp(b * theta);
+				let comp = new Complex({abs:r, arg:theta + delta_theta});
 				let x = comp.re, y = comp.im;
-
-				// 線を描画する。
-				SAI_draw_line_2(ctx, oldx, oldy, x, y, r * 0.8 / ci);
-
-				// 古い(x, y)を記憶する。
-				oldx = x;
-				oldy = y;
+				line.push([x, y]);
 			}
+			lines.push(line);
 		}
+
+		// 多角形を描画する。
+		let even = true;
+		ctx.beginPath();
+		ctx.moveTo(0, 0);
+		for(let i = 0; i < ci; ++i){
+			let line = lines[i];
+			if(even){ // 偶数回目はそのままの向き。
+				for(let k = 0; k < line.length; ++k)
+					ctx.lineTo(line[k][0], line[k][1]);
+			}else{ // 奇数回目は逆向き。
+				for(let k = line.length - 1; k >= 0; --k)
+					ctx.lineTo(line[k][0], line[k][1]);
+			}
+			even = !even;
+		}
+		ctx.closePath();
+		ctx.fill();
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
@@ -1934,31 +1986,106 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
-	// 映像の描画。pic11: Black screen
+	// 映像の描画。pic11: Mixed Spiral
 	function SAI_draw_pic_11(ctx, px, py, dx, dy){
+		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
+
+		// 画面中央の座標を計算する。
+		let qx = px + dx / 2, qy = py + dy / 2;
+
+		// 長方形領域(px, py, dx, dy)をクリッピングする。
+		SAI_clip_rect(ctx, px, py, dx, dy);
+
+		// 黒色で塗りつぶす。
+		ctx.fillStyle = sai_id_color_2nd.value;
+		ctx.fillRect(px, py, dx, dy);
+
+		// 寸法を計算する。
+		let minxy = Math.min(dx, dy), maxxy = Math.min(dx, dy);
+
+		// 画面中央を原点とする。
+		ctx.translate(qx, qy);
+
+		// 映像の進行を表す。
+		let count2 = -SAI_get_tick_count();
+
+		// 原点を中心として、これから描画する図形を回転する。
+		ctx.rotate(-count2 * 0.12);
+
+		// 少し回転のずれを表現する。
+		ctx.translate(25 * Math.cos(count2 * 0.01), 25 * Math.sin(count2 * 0.05));
+		ctx.rotate(count2 * 0.02);
+
+		let ci = 24; // これは偶数でなければならない。
+		let lines;
+		let even;
+
+		for(let m = 0; m < 2; ++m){
+			// 発散する渦巻きを描画する。
+			lines = [];
+			for(let i = 0; i < ci; ++i){
+				let delta_theta = 2 * Math.PI * i / ci;
+				// 対数らせんの公式に従って描画する。ただし偏角はdelta_thetaだけずらす。
+				let a = 1, b = 1.1;
+				let line = [];
+				line.push([0, 0]);
+				for(let theta = 0; theta <= Math.PI * 2 * 10; theta += 0.1){
+					let r = a * Math.exp(b * theta);
+					let comp = new Complex({abs:r, arg:(m == 0 ? 1 : -1) * (theta + delta_theta)});
+					let x = comp.re, y = comp.im;
+					line.push([x, y]);
+				}
+				lines.push(line);
+			}
+
+			// 線を描画する。
+			even = true;
+			ctx.beginPath();
+			ctx.moveTo(0, 0);
+			for(let i = 0; i < ci; ++i){
+				let line = lines[i];
+				if(even){ // 偶数回目はそのままの向き。
+					for(let k = 0; k < line.length; ++k)
+						ctx.lineTo(line[k][0], line[k][1]);
+				}else{ // 奇数回目は逆向き。
+					for(let k = line.length - 1; k >= 0; --k)
+						ctx.lineTo(line[k][0], line[k][1]);
+				}
+				even = !even;
+			}
+			ctx.closePath();
+			if(m == 0)
+				ctx.fillStyle = sai_id_color_1st.value; // 1番目ので描画する。
+			else
+				ctx.fillStyle = sai_id_color_2nd.value; // 2番目ので描画する。
+			ctx.globalAlpha = 0.5;
+			ctx.fill();
+			ctx.globalAlpha = 1.0;
+
+			ctx.rotate(Math.PI / 3);
+		}
+
+		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
+	}
+
+	// 映像の描画。pic12: 1st color screen
+	function SAI_draw_pic_12(ctx, px, py, dx, dy){
+		// 1番目の色で長方形領域を塗りつぶす。
+		ctx.fillStyle = sai_id_color_1st.value;
+		ctx.fillRect(px, py, dx, dy);
+	}
+
+	// 映像の描画。pic13: 2st color screen
+	function SAI_draw_pic_13(ctx, px, py, dx, dy){
+		// 2番目の色で長方形領域を塗りつぶす。
+		ctx.fillStyle = sai_id_color_2nd.value;
+		ctx.fillRect(px, py, dx, dy);
+	}
+
+	// 映像の描画。pic14: Black screen
+	function SAI_draw_pic_14(ctx, px, py, dx, dy){
 		// 黒で長方形領域を塗りつぶす。
 		ctx.fillStyle = '#000';
-		ctx.fillRect(px, py, dx, dy);
-	}
-
-	// 映像の描画。pic12: Red screen
-	function SAI_draw_pic_12(ctx, px, py, dx, dy){
-		// 赤で長方形領域を塗りつぶす。
-		ctx.fillStyle = '#f00';
-		ctx.fillRect(px, py, dx, dy);
-	}
-
-	// 映像の描画。pic13: Green screen
-	function SAI_draw_pic_13(ctx, px, py, dx, dy){
-		// 緑色で長方形領域を塗りつぶす。
-		ctx.fillStyle = '#0f0';
-		ctx.fillRect(px, py, dx, dy);
-	}
-
-	// 映像の描画。pic14: Blue screen
-	function SAI_draw_pic_14(ctx, px, py, dx, dy){
-		// 赤で長方形領域を塗りつぶす。
-		ctx.fillStyle = '#00f';
 		ctx.fillRect(px, py, dx, dy);
 	}
 
@@ -2097,7 +2224,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		if(sai_pic_type == 8){
-			// pic8の場合は描画に時間がかかるので、解像度の低い映像としてレンダリングする。
+			// pic4, pic8の場合は描画に時間がかかるので、解像度の低い映像としてレンダリングする。
 			if(!sai_count_down){
 				let ratio = 0.5;
 				sai_id_canvas_02.width = dx * ratio;
@@ -2397,6 +2524,20 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// ローカルストレージにメッセージリストがあれば読み込む。
 		SAI_load_message_list();
+
+		// 色を読み込む。
+		let saimin1stColor = localStorage.getItem('saimin1stColor');
+		if(saimin1stColor){
+			sai_id_color_1st.value = saimin1stColor;
+		}else{
+			sai_id_color_1st.value = '#ff00ff';
+		}
+		let saimin2ndColor = localStorage.getItem('saimin2ndColor');
+		if(saimin2ndColor){
+			sai_id_color_2nd.value = saimin2ndColor;
+		}else{
+			sai_id_color_2nd.value = '#000000';
+		}
 	}
 
 	// 必要ならば切り替え音を再生する。
@@ -2888,6 +3029,22 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_id_button_agreement_back.addEventListener('click', function(e){
 			localStorage.removeItem('saiminHelpShowing');
 			SAI_choose_page(sai_id_page_main);
+		});
+
+		// 色を保存。
+		sai_id_color_1st.addEventListener('change', function(e){
+			localStorage.setItem('saimin1stColor', sai_id_color_1st.value);
+		});
+		sai_id_color_2nd.addEventListener('change', function(e){
+			localStorage.setItem('saimin2ndColor', sai_id_color_2nd.value);
+		});
+		sai_id_color_1st_reset.addEventListener('click', function(e){
+			sai_id_color_1st.value = "#ff00ff";
+			localStorage.setItem('saimin1stColor', sai_id_color_1st.value);
+		});
+		sai_id_color_2nd_reset.addEventListener('click', function(e){
+			sai_id_color_2nd.value = "#000000";
+			localStorage.setItem('saimin2ndColor', sai_id_color_2nd.value);
 		});
 	}
 
