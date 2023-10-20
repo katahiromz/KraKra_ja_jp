@@ -855,9 +855,6 @@ document.addEventListener('DOMContentLoaded', function(){
 		// メインコントロール群を表示する。
 		SAI_show_main_controls(true);
 
-		// 「バージョン情報」の表示を更新する。
-		SAI_update_version_display();
-
 		// 映像の種類を初期化する。
 		let type = localStorage.getItem('saiminType');
 		if(type && type != -1){
@@ -887,6 +884,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 「バージョン情報」ダイアログ。
 	function SAI_help_and_agreement(){
+		// バージョン番号の表示を更新。
+		SAI_update_version_display();
+
 		// テキストの一番上にスクロール。
 		setTimeout(function(){
 			sai_id_text_notice.scrollLeft = sai_id_text_notice.scrollTop = 0;
