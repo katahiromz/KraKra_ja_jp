@@ -1215,9 +1215,6 @@ document.addEventListener('DOMContentLoaded', function(){
 	function SAI_draw_pic_1(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
-		// 画面中央の座標を計算する。
-		let qx = px + dx / 2, qy = py + dy / 2;
-
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
 		SAI_clip_rect(ctx, px, py, dx, dy);
 
@@ -1229,9 +1226,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		let minxy = Math.min(dx, dy), maxxy = Math.min(dx, dy);
 
 		// 画面中央を原点とする。
+		let qx = px + dx / 2, qy = py + dy / 2;
 		ctx.translate(qx, qy);
 
-		// 映像の進行を表す。
+		// 映像の進行を表す変数。
 		let count2 = -SAI_get_tick_count();
 
 		// 原点を中心として、これから描画する図形を回転する。
@@ -1241,15 +1239,13 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.translate(25 * Math.cos(count2 * 0.01), 25 * Math.sin(count2 * 0.05));
 		ctx.rotate(count2 * 0.02);
 
-		ctx.fillStyle = sai_id_color_1st.value; // 1番目ので描画する。
-
-		// 発散する渦巻きを描画する。
-		let ci = 24; // これは偶数でなければならない。
+		// 発散する渦巻きを表す多角形の頂点を計算する。
+		const ci = 24; // これは偶数でなければならない。
+		const a = 1, b = 1.1;
 		let lines = [];
 		for(let i = 0; i < ci; ++i){
 			let delta_theta = 2 * Math.PI * i / ci;
-			// 対数らせんの公式に従って描画する。ただし偏角はdelta_thetaだけずらす。
-			let a = 1, b = 1.1;
+			// 対数らせんの公式に従って頂点を追加していく。ただし偏角はdelta_thetaだけずらす。
 			let line = [];
 			line.push([0, 0]);
 			for(let theta = 0; theta <= Math.PI * 2 * 10; theta += 0.1){
@@ -1261,7 +1257,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			lines.push(line);
 		}
 
-		// 線を描画する。
+		// 多角形を描画する。
 		let even = true;
 		ctx.beginPath();
 		ctx.moveTo(0, 0);
@@ -1277,6 +1273,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			even = !even;
 		}
 		ctx.closePath();
+		ctx.fillStyle = sai_id_color_1st.value; // 1番目の色で塗りつぶす。
 		ctx.fill();
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
