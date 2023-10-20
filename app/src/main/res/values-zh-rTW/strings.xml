@@ -13,65 +13,6 @@
     <string name="web_view">網頁視圖</string>
     <string name="progress_bar">進度條</string>
     <string name="now_starting">克拉克拉啟動過程中...</string>
-    <string name="prompt_hint">輸入您的留言</string>
-
-    <!-- message list -->
-    <string name="message_000">你越來越困了。。。</string>
-    <string name="message_001">我想學習並取得好成績。。。</string>
-    <string name="message_002">熱愛在公司工作。。。</string>
-    <string name="message_003">很高興見到你</string>
-    <string name="message_004">早上好</string>
-    <string name="message_005">你好</string>
-    <string name="message_006">晚上好</string>
-    <string name="message_007">謝謝</string>
-    <string name="message_008">好久不見</string>
-    <string name="message_009">我現在去上班</string>
-    <string name="message_010">我要去學校了</string>
-    <string name="message_011">小心</string>
-    <string name="message_012">我在家</string>
-    <string name="message_013">對不起，我正在反思</string>
-    <string name="message_014">對此感到抱歉</string>
-    <string name="message_015">有什麼麻煩嗎？</string>
-    <string name="message_016">你擔心什麼嗎？</string>
-    <string name="message_017">不要強迫自己</string>
-    <string name="message_018">別緊張</string>
-    <string name="message_019">別害羞</string>
-    <string name="message_020">我不會欺負你</string>
-    <string name="message_021">不要害怕</string>
-    <string name="message_022">冷靜下來</string>
-    <string name="message_023">跟我說話</string>
-    <string name="message_024">我們一起想一想</string>
-    <string name="message_025">您有什麼抱怨嗎？</string>
-    <string name="message_026">請幫我</string>
-    <string name="message_027">請讓我的願望成真</string>
-    <string name="message_028">越來越喜歡我</string>
-    <string name="message_029">沒有什麼</string>
-    <string name="message_030">我們現在去吃飯吧</string>
-    <string name="message_031">我給你買一罐果汁</string>
-    <string name="message_032">我們去餐廳吧</string>
-    <string name="message_033">我把這個給你</string>
-    <string name="message_034">很美味</string>
-    <string name="message_035">很有趣</string>
-    <string name="message_036">非常好</string>
-    <string name="message_037">多學習，取得更好的成績</string>
-    <string name="message_038">更加努力，取得更好的成績</string>
-    <string name="message_039">這很酷</string>
-    <string name="message_040">你很美麗</string>
-    <string name="message_041">你是我的朋友</string>
-    <string name="message_042">卡盤打開</string>
-    <string name="message_043">今天我們玩得開心吧</string>
-    <string name="message_044">桌子上有食物</string>
-    <string name="message_045">我冰箱裡有食物</string>
-    <string name="message_046">幫我做家務</string>
-    <string name="message_047">我累了所以我要休息</string>
-    <string name="message_048">我現在就上床睡覺</string>
-    <string name="message_049">你今晚怎麼樣</string>
-
-    <!-- message select dialog -->
-    <string name="message_select_dialog_message">請輸入消息字符串。</string>
-
-    <!-- Content Description -->
-    <string name="guide_clear_button">清除按鈕</string>
 
     <!-- URLs -->
     <string name="url">file:///android_asset/index.html</string>

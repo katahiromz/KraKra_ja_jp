@@ -3,6 +3,408 @@
 let trans_currentLanguage = 'en';
 
 // {{LANGUAGE_SPECIFIC}}
+const trans_DEFAULT_MESSAGE_LIST_EN = [
+	"You are getting sleepier and sleepier...",
+	"I want to study and get good grades...",
+	"You'll love working for the company...",
+	"I am glad to meet you.",
+	"Good morning!",
+	"Hello.",
+	"Good evening!",
+	"Thank you.",
+	"It's been a while.",
+	"I'm going to the office now.",
+	"I'm going to school.",
+	"Have a good day.",
+	"I'm home!",
+	"I'm sorry.",
+	"I beg your pardon.",
+	"Can I help you?",
+	"Are you worried about something?",
+	"Please do not overdo...",
+	"Don't be nervous.",
+	"Don't be shy.",
+	"I won't bully you.",
+	"Don't be afraid.",
+	"Calm down, please.",
+	"Come and talk to me.",
+	"We'll work with you on that one.",
+	"Do you have any complaints?",
+	"Please help me, please...",
+	"Make my wish come true...",
+	"You're going to love me...",
+	"It's nothing.",
+	"Let's go out to dinner now.",
+	"I'll buy you a can of juice.",
+	"Let's go to the restaurant.",
+	"I'll give you this.",
+	"It was delicious.",
+	"It was a lot of fun.",
+	"It was very good.",
+	"You need to learn more.",
+	"Work harder and get better grades.",
+	"It's cool.",
+	"You're beautiful.",
+	"You're my friend.",
+	"Your zipper's open.",
+	"Let's have fun today.",
+	"There's food on the table.",
+	"There's food in the fridge.",
+	"Help me with the housework.",
+	"I'm tired, so I'm going to rest.",
+	"I'm going to bed now.",
+	"How about tonight?",
+];
+const trans_DEFAULT_MESSAGE_LIST_KO_KR = [
+	"너는 점점 졸린다",
+	"공부하고 좋은 성적을 얻고 싶어진다",
+	"회사에서 일하는 것을 좋아한다",
+	"만나서 반갑습니다",
+	"좋은 아침",
+	"안녕하세요",
+	"안녕하세요",
+	"고마워요",
+	"오랜만입니다",
+	"지금부터 회사로 이동",
+	"학교에 갈거야",
+	"가자",
+	"지금",
+	"미안해, 반성해",
+	"그것은 무례했습니다",
+	"뭔가 곤란해도?",
+	"뭔가 불안해?",
+	"무리하지 마십시오",
+	"긴장하지 마십시오",
+	"부끄러워하지 마라",
+	"괴롭히지 마라",
+	"두려워하지 마라",
+	"진정하십시오",
+	"나와 토론하자",
+	"그 문제는 함께 생각합시다",
+	"뭔가 불만이 있습니까?",
+	"저를 도와주세요",
+	"내 소원을 실현하십시오",
+	"나를 좋아해",
+	"아무것도 아니야",
+	"지금부터 식사하러 가자",
+	"캔 주스를 사주세요",
+	"레스토랑에 가자",
+	"이거 줘",
+	"맛있었습니다",
+	"매우 재미있었습니다",
+	"매우 좋았습니다",
+	"더 공부하고 성적을 올려주세요",
+	"더 많은 일을하고 성적을 올리십시오",
+	"멋지다",
+	"너는 아름답다",
+	"너는 친구야",
+	"척이 열려 있습니다",
+	"오늘은 즐기자",
+	"테이블에 요리가 있습니다",
+	"냉장고에 요리가 있습니다",
+	"가사를 도와주세요",
+	"피곤해서 쉬고",
+	"지금부터 침대에서 자고",
+	"오늘 밤은 어때?",
+];
+const trans_DEFAULT_MESSAGE_LIST_JA = [
+	"あなたはだんだん眠くなーる",
+	"勉強して良い成績を取りたくなーる",
+	"会社で働くのが好きになーる",
+	"はじめまして",
+	"おはようございます",
+	"こんにちは",
+	"こんばんは",
+	"ありがとうございます",
+	"お久しぶりですね",
+	"今から会社へ行きます",
+	"学校へ行ってきます",
+	"いってらっしゃい",
+	"ただいま",
+	"ごめんなさい、反省してます",
+	"それは失礼しました",
+	"何かお困りでも？",
+	"何か不安でもありますか？",
+	"無理をしないで下さい",
+	"緊張しないで下さい",
+	"恥ずかしがらないで",
+	"いじめたりしないよ",
+	"怖がらないで",
+	"落ち着いて下さい",
+	"私と話し合おうよ",
+	"その件は一緒に考えましょう",
+	"何かご不満でもありますか？",
+	"私を助けて下さい",
+	"私の願いを叶えて下さい",
+	"私のことが好きになーる",
+	"なんでもないよ",
+	"今から食事に行こうよ",
+	"缶ジュース買ってあげる",
+	"レストランへ行きましょう",
+	"これ、あげる",
+	"美味しかったよ",
+	"とっても楽しかった",
+	"とってもよかった",
+	"もっと勉強して成績上げてね",
+	"もっと仕事を頑張って成績を上げてね",
+	"カッコイイじゃん",
+	"君はきれいだね",
+	"君は友だちだよ",
+	"チャックが開いてるよ",
+	"今日は楽しもうぜ",
+	"テーブルに料理があるよ",
+	"冷蔵庫に料理があるよ",
+	"家事を手伝って下さい",
+	"疲れたので休みます",
+	"今からベッドで寝ます",
+	"今夜はどうですか",
+];
+const trans_DEFAULT_MESSAGE_LIST_ZW_CN = [
+	"你越来越困了...",
+	"我想学习并取得好成绩...",
+	"你会喜欢为公司工作...",
+	"我很高兴见到你。",
+	"早晨好!",
+	"你好。",
+	"晚上好!",
+	"谢谢你。",
+	"已经有一段时间了。",
+	"我现在要去办公室了。",
+	"我要去上学了。",
+	"祝你有个愉快的一天。",
+	"我回来了!",
+	"我很抱歉。",
+	"请您原谅。",
+	"我可以帮你吗？",
+	"你在担心什么吗？",
+	"请不要过度...",
+	"不要紧张。",
+	"不要害羞。",
+	"我不会欺负你。",
+	"不要害怕。",
+	"冷静下来，请。",
+	"来和我谈谈吧。",
+	"我们将与你一起工作。",
+	"你有什么抱怨吗？",
+	"请帮助我，请...",
+	"让我的愿望成真...",
+	"你将会爱上我...",
+	"这没什么。",
+	"我们现在出去吃饭吧。",
+	"我给你买一罐果汁。",
+	"我们去餐厅吧。",
+	"我给你这个。",
+	"这很美味。",
+	"这是很有趣的。",
+	"这是非常好的。",
+	"你需要学习更多。",
+	"更加努力工作，取得更好的成绩。",
+	"这很好。",
+	"你很美。",
+	"你是我的朋友。",
+	"你的拉链已经打开。",
+	"今天让我们玩得开心点。",
+	"桌子上有食物。",
+	"冰箱里有食物。",
+	"帮我做家务。",
+	"我很累了，所以我要休息了。",
+	"我现在要去睡觉了。",
+	"今晚怎么样？",
+];
+const trans_DEFAULT_MESSAGE_LIST_ZH_TW = [
+	"你越來越困了。。。",
+	"我想學習並取得好成績。。。",
+	"熱愛在公司工作。。。",
+	"很高興見到你",
+	"早上好",
+	"你好",
+	"晚上好",
+	"謝謝",
+	"好久不見",
+	"我現在去上班",
+	"我要去學校了",
+	"小心",
+	"我在家",
+	"對不起，我正在反思",
+	"對此感到抱歉",
+	"有什麼麻煩嗎？",
+	"你擔心什麼嗎？",
+	"不要強迫自己",
+	"別緊張",
+	"別害羞",
+	"我不會欺負你",
+	"不要害怕",
+	"冷靜下來",
+	"跟我說話",
+	"我們一起想一想",
+	"您有什麼抱怨嗎？",
+	"請幫我",
+	"請讓我的願望成真",
+	"越來越喜歡我",
+	"沒有什麼",
+	"我們現在去吃飯吧",
+	"我給你買一罐果汁",
+	"我們去餐廳吧",
+	"我把這個給你",
+	"很美味",
+	"很有趣",
+	"非常好",
+	"多學習，取得更好的成績",
+	"更加努力，取得更好的成績",
+	"這很酷",
+	"你很美麗",
+	"你是我的朋友",
+	"卡盤打開",
+	"今天我們玩得開心吧",
+	"桌子上有食物",
+	"我冰箱裡有食物",
+	"幫我做家務",
+	"我累了所以我要休息",
+	"我現在就上床睡覺",
+	"你今晚怎麼樣",
+];
+const trans_DEFAULT_MESSAGE_LIST_IT = [
+	"Stai diventando sempre più assonnato...",
+	"Voglio studiare e prendere bei voti...",
+	"Ti piacerà lavorare per l'azienda...",
+	"Sono felice di incontrarvi.",
+	"Buongiorno!",
+	"Ciao.",
+	"Buonasera!",
+	"Grazie.",
+	"È passato un po 'di tempo.",
+	"Adesso vado in ufficio.",
+	"Io vado a scuola.",
+	"Buona giornata.",
+	"Sono a casa!",
+	"Mi dispiace.",
+	"Chiedo scusa.",
+	"Posso aiutarla?",
+	"Sei preoccupato per qualcosa?",
+	"Mi raccomando non esagerare...",
+	"Non essere nervoso.",
+	"Non essere timido.",
+	"Non ti farò il prepotente.",
+	"Non aver paura.",
+	"Calma per favore.",
+	"Vieni a parlare con me.",
+	"Lavoreremo con te su quello.",
+	"Hai qualche lamentela?",
+	"Per favore aiutami, per favore...",
+	"Realizza il mio desiderio...",
+	"Mi amerai...",
+	"Non è niente.",
+	"Andiamo a cena fuori adesso.",
+	"Ti comprerò una lattina di succo.",
+	"Andiamo al ristorante.",
+	"Ti darò questo.",
+	"È stato delizioso.",
+	"E 'stato molto divertente.",
+	"Era molto buono.",
+	"Devi saperne di più.",
+	"Lavora di più e ottieni voti migliori.",
+	"È fantastico.",
+	"Sei bello.",
+	"Tu sei mio amico.",
+	"La tua cerniera è aperta.",
+	"Divertiamoci oggi.",
+	"C'è del cibo sul tavolo.",
+	"C'è del cibo in frigo.",
+	"Aiutami con le faccende domestiche.",
+	"Sono stanco, quindi vado a riposare.",
+	"Sto andando a letto ora.",
+	"Che ne dici di stasera?",
+];
+const trans_DEFAULT_MESSAGE_LIST_DE = [
+	"Du wirst immer schläfriger...",
+	"Ich möchte lernen und gute Noten bekommen...",
+	"Sie werden es lieben, für das Unternehmen zu arbeiten...",
+	"Ich freue mich, Sie kennen zu lernen.",
+	"Guten Morgen!",
+	"Hallo.",
+	"Guten Abend!",
+	"Danke schön.",
+	"Es ist eine Weile her.",
+	"Ich gehe jetzt ins Büro.",
+	"Ich gehe zur Schule.",
+	"Haben Sie einen guten Tag.",
+	"Ich bin zuhause!",
+	"Es tut mir Leid.",
+	"Wie bitte.",
+	"Kann ich Ihnen helfen?",
+	"Machst du dir wegen etwas Sorgen?",
+	"Bitte übertreiben Sie es nicht...",
+	"Seien Sie nicht nervös.",
+	"Seien Sie nicht schüchtern.",
+	"Ich werde dich nicht schikanieren.",
+	"Hab keine Angst.",
+	"Beruhige dich bitte.",
+	"Komm und rede mit mir.",
+	"Wir werden mit Ihnen daran arbeiten.",
+	"Haben Sie Beschwerden?",
+	"Bitte helfen Sie mir, bitte...",
+	"Erfülle meinen Wunsch...",
+	"Du wirst mich lieben...",
+	"Schon gut.",
+	"Lass uns jetzt zum Abendessen ausgehen.",
+	"Ich kaufe dir eine Dose Saft.",
+	"Lass uns zum Restaurant gehen.",
+	"Ich gebe dir das.",
+	"Es hat sehr gut geschmeckt.",
+	"Es war viel Spaß.",
+	"Es war sehr gut.",
+	"Sie müssen mehr lernen.",
+	"Arbeite härter und bekomme bessere Noten.",
+	"Es ist cool.",
+	"Du bist wunderschön.",
+	"Du bist mein Freund.",
+	"Dein Reißverschluss ist offen.",
+	"Lasst uns heute Spaß haben.",
+	"Es gibt Essen auf dem Tisch.",
+	"Es gibt Essen im Kühlschrank.",
+	"Hilf mir bei der Hausarbeit.",
+	"Ich bin müde, also werde ich mich ausruhen.",
+	"Ich gehe jetzt ins Bett.",
+	"Wie wäre es mit heute Nacht?"
+];
+
+function trans_message_list(){
+	// {{LANGUAGE_SPECIFIC}}
+	if(trans_currentLanguage == 'ja' || trans_currentLanguage == 'ja-JP') // Japanese
+		return trans_DEFAULT_MESSAGE_LIST_JA;
+	else if(trans_currentLanguage == 'zh-CN') // Chinese (Simplified)
+		return trans_DEFAULT_MESSAGE_LIST_ZH_CN;
+	else if(trans_currentLanguage == 'zh-TW') // Chinese (Traditional)
+		return trans_DEFAULT_MESSAGE_LIST_ZH_TW;
+	else if(trans_currentLanguage == 'ko-KR') // Korean
+		return trans_DEFAULT_MESSAGE_LIST_KO_KR;
+	else if(trans_currentLanguage == 'it' || trans_currentLanguage == 'it-IT') // Italian
+		return trans_DEFAULT_MESSAGE_LIST_IT;
+	else if(trans_currentLanguage == 'de' || trans_currentLanguage == 'de-DE') // German
+		return trans_DEFAULT_MESSAGE_LIST_DE;
+	else // English is default
+		return trans_DEFAULT_MESSAGE_LIST_EN;
+}
+
+function trans_message_placefolder(){
+	// {{LANGUAGE_SPECIFIC}}
+	if(trans_currentLanguage == 'ja' || trans_currentLanguage == 'ja-JP') // Japanese
+		return "メッセージを入力";
+	else if(trans_currentLanguage == 'zh-CN') // Chinese (Simplified)
+		return "输入您的留言";
+	else if(trans_currentLanguage == 'zh-TW') // Chinese (Traditional)
+		return "輸入您的留言";
+	else if(trans_currentLanguage == 'ko-KR') // Korean
+		return "메시지 입력";
+	else if(trans_currentLanguage == 'it' || trans_currentLanguage == 'it-IT') // Italian
+		return "Inserisci il tuo messaggio";
+	else if(trans_currentLanguage == 'de' || trans_currentLanguage == 'de-DE') // German
+		return "Gib deine Nachricht ein";
+	else // English is default
+		return "Input message";
+}
+
+// {{LANGUAGE_SPECIFIC}}
 const trans_NOTICE_EN = `=========================
 催眠くらくら
 Hypnosis KraKra
@@ -228,7 +630,7 @@ Copyright (c) 2018 Robert Eisele
 `
 
 // {{LANGUAGE_SPECIFIC}}
-const trans_NOTICE_TW_CN = `=========================
+const trans_NOTICE_ZH_TW = `=========================
 催眠克拉克拉
 Hypnosis KraKra
 =========================
@@ -790,6 +1192,10 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_rotation, '逆回転:');
 		trans_setHtmlText(sai_id_text_blinking, '画面点滅:');
 		trans_setHtmlText(sai_id_text_fullscreen_mode, 'フルスクリーン モード:');
+		trans_setHtmlText(sai_id_page_message_header, 'メッセージ');
+		trans_setHtmlText(sai_id_button_mesage_reset, 'リセット');
+		trans_setHtmlText(sai_id_button_mesage_cancel, 'キャンセル');
+		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
 		trans_setHtmlText(sai_id_text_message_size, 'メッセージの大きさ:');
 		trans_setHtmlText(sai_id_text_note, '音符ボタン:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(なし)');
@@ -859,6 +1265,10 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_rotation, '反向旋转：');
 		trans_setHtmlText(sai_id_text_blinking, '屏幕闪烁：');
 		trans_setHtmlText(sai_id_text_fullscreen_mode, '全屏模式：');
+		trans_setHtmlText(sai_id_page_message_header, '信息');
+		trans_setHtmlText(sai_id_button_mesage_reset, '重置');
+		trans_setHtmlText(sai_id_button_mesage_cancel, '取消');
+		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
 		trans_setHtmlText(sai_id_text_message_size, '消息大小：');
 		trans_setHtmlText(sai_id_text_note, '声音按钮：');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(无)');
@@ -888,7 +1298,7 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_count_down, '倒数：');
 		trans_setHtmlText(sai_id_text_label_message_speech, '留言演讲：');
 	}else if(lang == 'zh-TW'){ // Chinese (Traditional)
-		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_TW_CN);
+		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_ZH_TW);
 		trans_setImageSrc(sai_id_img_mic, 'images/mic.png');
 		trans_setImageSrc(sai_id_img_sound, 'images/sound.png');
 		trans_setImageSrc(sai_id_img_speech, 'images/speak.png');
@@ -928,6 +1338,10 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_rotation, '反向旋轉：');
 		trans_setHtmlText(sai_id_text_blinking, '螢幕閃爍：');
 		trans_setHtmlText(sai_id_text_fullscreen_mode, '全螢幕模式：');
+		trans_setHtmlText(sai_id_page_message_header, '資訊');
+		trans_setHtmlText(sai_id_button_mesage_reset, '重置');
+		trans_setHtmlText(sai_id_button_mesage_cancel, '取消');
+		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
 		trans_setHtmlText(sai_id_text_message_size, '消息大小：');
 		trans_setHtmlText(sai_id_text_note, '聲音按鈕：');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(無)');
@@ -997,6 +1411,10 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_rotation, '역회전:');
 		trans_setHtmlText(sai_id_text_blinking, '화면 깜박임:');
 		trans_setHtmlText(sai_id_text_fullscreen_mode, '전체 화면 모드:');
+		trans_setHtmlText(sai_id_page_message_header, '메시지');
+		trans_setHtmlText(sai_id_button_mesage_reset, '초기화');
+		trans_setHtmlText(sai_id_button_mesage_cancel, '취소');
+		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
 		trans_setHtmlText(sai_id_text_message_size, '메시지 크기:');
 		trans_setHtmlText(sai_id_text_note, '사운드 버튼:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(없음)');
@@ -1066,6 +1484,10 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_rotation, 'Controrotazione:');
 		trans_setHtmlText(sai_id_text_blinking, 'Schermo lampeggiante:');
 		trans_setHtmlText(sai_id_text_fullscreen_mode, 'Modalità schermo intero:');
+		trans_setHtmlText(sai_id_page_message_header, 'Messaggio');
+		trans_setHtmlText(sai_id_button_mesage_reset, 'Ripristina');
+		trans_setHtmlText(sai_id_button_mesage_cancel, 'Annulla');
+		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
 		trans_setHtmlText(sai_id_text_message_size, 'Dimensione del messaggio:');
 		trans_setHtmlText(sai_id_text_note, 'Pulsante audio:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(Nessuno)');
@@ -1135,6 +1557,10 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_rotation, 'Gegenrotation:');
 		trans_setHtmlText(sai_id_text_blinking, 'Bildschirm blinkt:');
 		trans_setHtmlText(sai_id_text_fullscreen_mode, 'Vollbildmodus:');
+		trans_setHtmlText(sai_id_page_message_header, 'Nachricht');
+		trans_setHtmlText(sai_id_button_mesage_reset, 'Zurücksetzen');
+		trans_setHtmlText(sai_id_button_mesage_cancel, 'Stornieren');
+		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
 		trans_setHtmlText(sai_id_text_message_size, 'Größe der Nachricht:');
 		trans_setHtmlText(sai_id_text_note, 'Sound-Taste:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(Kein)');
@@ -1203,7 +1629,11 @@ function trans_localize(lang){
 		trans_setHtmlText(speed_irregular_label, 'Irregular');
 		trans_setHtmlText(sai_id_text_rotation, 'Counterrotation:');
 		trans_setHtmlText(sai_id_text_blinking, 'Screen flashing:');
-		trans_setHtmlText(sai_id_text_fullscreen_mode, 'Full screen mode:');
+		trans_setHtmlText(sai_id_text_fullscreen_mode, 'Fullscreen mode:');
+		trans_setHtmlText(sai_id_page_message_header, 'Message');
+		trans_setHtmlText(sai_id_button_mesage_reset, 'Reset');
+		trans_setHtmlText(sai_id_button_mesage_cancel, 'Cancel');
+		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
 		trans_setHtmlText(sai_id_text_message_size, 'Size of message:');
 		trans_setHtmlText(sai_id_text_note, 'Sound button:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(None)');

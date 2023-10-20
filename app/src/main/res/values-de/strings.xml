@@ -13,65 +13,6 @@
     <string name="web_view">WebView</string>
     <string name="progress_bar">Fortschrittsanzeige</string>
     <string name="now_starting">KraKra wird gestartet...</string>
-    <string name="prompt_hint">Gib deine Nachricht ein</string>
-
-    <!-- message list -->
-    <string name="message_000">Du wirst immer schläfriger...</string>
-    <string name="message_001">Ich möchte lernen und gute Noten bekommen...</string>
-    <string name="message_002">Sie werden es lieben, für das Unternehmen zu arbeiten...</string>
-    <string name="message_003">Ich freue mich, Sie kennen zu lernen.</string>
-    <string name="message_004">Guten Morgen!</string>
-    <string name="message_005">Hallo.</string>
-    <string name="message_006">Guten Abend!</string>
-    <string name="message_007">Danke schön.</string>
-    <string name="message_008">Es ist eine Weile her.</string>
-    <string name="message_009">Ich gehe jetzt ins Büro.</string>
-    <string name="message_010">Ich gehe zur Schule.</string>
-    <string name="message_011">Haben Sie einen guten Tag.</string>
-    <string name="message_012">Ich bin zuhause!</string>
-    <string name="message_013">Es tut mir Leid.</string>
-    <string name="message_014">Wie bitte.</string>
-    <string name="message_015">Kann ich Ihnen helfen?</string>
-    <string name="message_016">Machst du dir wegen etwas Sorgen?</string>
-    <string name="message_017">Bitte übertreiben Sie es nicht...</string>
-    <string name="message_018">Seien Sie nicht nervös.</string>
-    <string name="message_019">Seien Sie nicht schüchtern.</string>
-    <string name="message_020">Ich werde dich nicht schikanieren.</string>
-    <string name="message_021">Hab keine Angst.</string>
-    <string name="message_022">Beruhige dich bitte.</string>
-    <string name="message_023">Komm und rede mit mir.</string>
-    <string name="message_024">Wir werden mit Ihnen daran arbeiten.</string>
-    <string name="message_025">Haben Sie Beschwerden?</string>
-    <string name="message_026">Bitte helfen Sie mir, bitte...</string>
-    <string name="message_027">Erfülle meinen Wunsch...</string>
-    <string name="message_028">Du wirst mich lieben...</string>
-    <string name="message_029">Schon gut.</string>
-    <string name="message_030">Lass uns jetzt zum Abendessen ausgehen.</string>
-    <string name="message_031">Ich kaufe dir eine Dose Saft.</string>
-    <string name="message_032">Lass uns zum Restaurant gehen.</string>
-    <string name="message_033">Ich gebe dir das.</string>
-    <string name="message_034">Es hat sehr gut geschmeckt.</string>
-    <string name="message_035">Es war viel Spaß.</string>
-    <string name="message_036">Es war sehr gut.</string>
-    <string name="message_037">Sie müssen mehr lernen.</string>
-    <string name="message_038">Arbeite härter und bekomme bessere Noten.</string>
-    <string name="message_039">Es ist cool.</string>
-    <string name="message_040">Du bist wunderschön.</string>
-    <string name="message_041">Du bist mein Freund.</string>
-    <string name="message_042">Dein Reißverschluss ist offen.</string>
-    <string name="message_043">Lasst uns heute Spaß haben.</string>
-    <string name="message_044">Es gibt Essen auf dem Tisch.</string>
-    <string name="message_045">Es gibt Essen im Kühlschrank.</string>
-    <string name="message_046">Hilf mir bei der Hausarbeit.</string>
-    <string name="message_047">Ich bin müde, also werde ich mich ausruhen.</string>
-    <string name="message_048">Ich gehe jetzt ins Bett.</string>
-    <string name="message_049">Wie wäre es mit heute Nacht?</string>
-
-    <!-- message select dialog -->
-    <string name="message_select_dialog_message">Bitte geben Sie einen Nachrichtentext ein.</string>
-
-    <!-- Content Description -->
-    <string name="guide_clear_button">Löschen-Taste</string>
 
     <!-- URLs -->
     <string name="url">file:///android_asset/index.html</string>

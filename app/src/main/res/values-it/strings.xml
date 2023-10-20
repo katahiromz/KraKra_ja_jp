@@ -13,65 +13,6 @@
     <string name="web_view">WebView</string>
     <string name="progress_bar">ProgressBar</string>
     <string name="now_starting">Avvio di KraKra...</string>
-    <string name="prompt_hint">Inserisci il tuo messaggio</string>
-
-    <!-- message list -->
-    <string name="message_000">Stai diventando sempre più assonnato...</string>
-    <string name="message_001">Voglio studiare e prendere bei voti...</string>
-    <string name="message_002">Ti piacerà lavorare per l\'azienda...</string>
-    <string name="message_003">Sono felice di incontrarvi.</string>
-    <string name="message_004">Buongiorno!</string>
-    <string name="message_005">Ciao.</string>
-    <string name="message_006">Buonasera!</string>
-    <string name="message_007">Grazie.</string>
-    <string name="message_008">È passato un po \'di tempo.</string>
-    <string name="message_009">Adesso vado in ufficio.</string>
-    <string name="message_010">Io vado a scuola.</string>
-    <string name="message_011">Buona giornata.</string>
-    <string name="message_012">Sono a casa!</string>
-    <string name="message_013">Mi dispiace.</string>
-    <string name="message_014">Chiedo scusa.</string>
-    <string name="message_015">Posso aiutarla?</string>
-    <string name="message_016">Sei preoccupato per qualcosa?</string>
-    <string name="message_017">Mi raccomando non esagerare...</string>
-    <string name="message_018">Non essere nervoso.</string>
-    <string name="message_019">Non essere timido.</string>
-    <string name="message_020">Non ti farò il prepotente.</string>
-    <string name="message_021">Non aver paura.</string>
-    <string name="message_022">Calma per favore.</string>
-    <string name="message_023">Vieni a parlare con me.</string>
-    <string name="message_024">Lavoreremo con te su quello.</string>
-    <string name="message_025">Hai qualche lamentela?</string>
-    <string name="message_026">Per favore aiutami, per favore...</string>
-    <string name="message_027">Realizza il mio desiderio...</string>
-    <string name="message_028">Mi amerai...</string>
-    <string name="message_029">Non è niente.</string>
-    <string name="message_030">Andiamo a cena fuori adesso.</string>
-    <string name="message_031">Ti comprerò una lattina di succo.</string>
-    <string name="message_032">Andiamo al ristorante.</string>
-    <string name="message_033">Ti darò questo.</string>
-    <string name="message_034">È stato delizioso.</string>
-    <string name="message_035">E \'stato molto divertente.</string>
-    <string name="message_036">Era molto buono.</string>
-    <string name="message_037">Devi saperne di più.</string>
-    <string name="message_038">Lavora di più e ottieni voti migliori.</string>
-    <string name="message_039">È fantastico.</string>
-    <string name="message_040">Sei bello.</string>
-    <string name="message_041">Tu sei mio amico.</string>
-    <string name="message_042">La tua cerniera è aperta.</string>
-    <string name="message_043">Divertiamoci oggi.</string>
-    <string name="message_044">C\'è del cibo sul tavolo.</string>
-    <string name="message_045">C\'è del cibo in frigo.</string>
-    <string name="message_046">Aiutami con le faccende domestiche.</string>
-    <string name="message_047">Sono stanco, quindi vado a riposare.</string>
-    <string name="message_048">Sto andando a letto ora.</string>
-    <string name="message_049">Che ne dici di stasera?</string>
-
-    <!-- message select dialog -->
-    <string name="message_select_dialog_message">Inserisci il testo del messaggio.</string>
-
-    <!-- Content Description -->
-    <string name="guide_clear_button">pulsante chiaro</string>
 
     <!-- URLs -->
     <string name="url">file:///android_asset/index.html</string>

@@ -277,6 +277,25 @@ select {
 	height: 31px; /* ④ */
 	border: 0;
 }
+#sai_id_text_message {
+	padding: 0;
+	height: 0.9cm; /* ⑤ */
+	font-size: 0.6cm;
+	width: 95%;
+}
+.sai_class_scrollable_3 div div {
+	border: solid 1px black;
+	padding: 0.2cm;
+}
+.sai_class_scrollable_3 div div:hover {
+	background-color: #c0c;
+}
+#sai_id_page_message .sai_class_nav_button {
+	font-size: 1rem;
+	padding: 0 0.1cm;
+	min-width: 1.3cm;
+	height: 2.5rem;
+}
 .sai_class_scrollable_1 { /* バージョン情報のテキストエリアみたいなところ。 */
 	overflow-x: visible;
 	overflow-y: scroll;
@@ -294,6 +313,16 @@ select {
 	width: 98dvw;
 	height: calc(100vh - 1.25rem - 31px - 5rem); /* 全体 - ① - ④ - ③ */
 	height: calc(100dvh - 1.25rem - 31px - 5rem); /* 全体 - ① - ④ - ③ */
+	margin-left: auto;
+	margin-right: auto;
+}
+.sai_class_scrollable_3 { /* メッセージ選択ダイアログのスクロール可能な部分。 */
+	overflow-x: visible;
+	overflow-y: scroll;
+	width: 98vw;
+	width: 98dvw;
+	height: calc(100vh - 1.25rem - (0.9cm + 2px) - 31px - 5rem); /* 全体 - ① - ⑤ - ④ - ③ */
+	height: calc(100dvh - 1.25rem - (0.9cm + 2px) - 31px - 5rem); /* 全体 - ① - ⑤ - ④ - ③ */
 	margin-left: auto;
 	margin-right: auto;
 }

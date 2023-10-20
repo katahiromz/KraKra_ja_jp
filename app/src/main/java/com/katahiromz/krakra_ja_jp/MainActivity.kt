@@ -18,13 +18,10 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
-import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import createLocalizedContext
@@ -131,38 +128,8 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         screenBrightness = value
     }
 
-    // ナビゲーションバーの表示・非表示。
-    var showingNaviBar: Boolean = true
-
-    // ナビゲーションバーの表示の切り替え。
-    fun showNaviBar(show: Boolean) {
-        // 別スレッドかもしれないので、postする。
-        webView?.post {
-            WindowCompat.setDecorFitsSystemWindows(window, show)
-            val view = findViewById<ConstraintLayout>(R.id.activity_main)
-            if (show) {
-                WindowInsetsControllerCompat(window, view).let { controller ->
-                    controller.show(WindowInsetsCompat.Type.systemBars())
-                    controller.systemBarsBehavior =
-                        WindowInsetsControllerCompat.BEHAVIOR_DEFAULT
-                }
-            } else {
-                WindowInsetsControllerCompat(window, view).let { controller ->
-                    controller.hide(WindowInsetsCompat.Type.systemBars())
-                    if (showingNaviBar) {
-                        controller.systemBarsBehavior =
-                            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-                    }
-                }
-            }
-        }
-
-        showingNaviBar = show
-    }
-
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        showNaviBar(showingNaviBar)
     }
 
     /////////////////////////////////////////////////////////////////////
@@ -479,16 +446,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
     fun getLocString(id: Int): String {
         return getLocString(id, currLocale)
-    }
-
-    // KraKraの既定のメッセージリストを取得する。
-    fun getDefaultMessageList(): MutableList<String> {
-        currLocaleContext = null
-        val ret = mutableListOf<String>()
-        for (id in R.string.message_000 .. R.string.message_049) {
-            ret.add(getLocString(id))
-        }
-        return ret
     }
 
     /////////////////////////////////////////////////////////////////////

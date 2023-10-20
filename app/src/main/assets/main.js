@@ -15,19 +15,9 @@ let sai_stopping = true; // 停止中か？
 //
 // ※ 言語特有の記述が必要な個所は「{{LANGUAGE_SPECIFIC}}」というコメントを付けること。
 
-// Androidアプリにおいて、システムバーが変更された場合に呼び出される関数。
-function SAI_OnAndroidSystemBarsChanged(sysBarsVisible){
-	// ツールボタンを取得する。ツールボタンは、sai_class_tool_buttonクラスを持つ要素。
-	let tool_buttons = document.getElementsByClassName('sai_class_tool_button');
-	if(sysBarsVisible || sai_stopping || !sai_id_checkbox_fullscreen.checked){
-		for(let button of tool_buttons){
-			button.classList.remove('sai_class_invisible');
-		}
-	}else{
-		for(let button of tool_buttons){
-			button.classList.add('sai_class_invisible');
-		}
-	}
+// メッセージがクリックされた。
+function SAI_on_click_message(id){
+	sai_id_text_message.value = id.innerText;
 }
 
 // ドキュメントの読み込みが完了（DOMContentLoaded）されたら無名関数が呼び出される。
@@ -39,7 +29,6 @@ document.addEventListener('DOMContentLoaded', function(){
 	let sai_old_time = (new Date()).getTime(); // 処理フレームの時刻を覚えておく。
 	let sai_counter = 0; // 映像を動かす変数。
 	let sai_clock = 0; // スピードが不規則のときに映像の速さを変化させる変数。
-	let sai_ready = false; // 準備完了か？
 	let sai_message_text = ''; // メッセージテキスト。
 	let sai_screen_split = 1; // 画面分割の分割数。
 	let sai_speed = 45.0; // 映像のスピード。
@@ -65,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	let sai_request_anime = null; // アニメーションの要求。
 	let sai_count_down = null; // カウントダウンの時刻またはnull。
 	let sai_spiral_img = new Image();
+	let sai_user_message_list = []; // メッセージリスト。
 
 	// このアプリはネイティブアプリか？
 	function SAI_is_native_app(){
@@ -77,6 +67,34 @@ document.addEventListener('DOMContentLoaded', function(){
 		if(results)
 			return results[1];
 		return false;
+	}
+
+	// HTMLの特殊文字を置換。
+	function SAI_htmlspecialchars(str){
+		return (str + '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#039;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); 
+	}
+
+	// メッセージリストを作成する。
+	function SAI_populate_message_list(){
+		// メッセージリストを構築する。
+		let msg_list = trans_message_list();
+		msg_list = JSON.parse(JSON.stringify(msg_list)); // Deep Copy
+		for(let item of sai_user_message_list){
+			let index = msg_list.indexOf(item);
+			if(index >= 0)
+				msg_list.splice(index, 1);
+		}
+		for(let item of sai_user_message_list){
+			msg_list.unshift(item);
+		}
+
+		let html = '';
+		for(let item of msg_list){
+			html += '<div onclick="SAI_on_click_message(this)">';
+			html += SAI_htmlspecialchars(item);
+			html += '</div>';
+		}
+		sai_id_message_list.innerHTML = html;
 	}
 
 	// ページを選択。
@@ -105,12 +123,32 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_sound_pause();
 		}
 
+		if (page_id == sai_id_page_message){ // 「メッセージ」ページなら
+			// メッセージリスト表示状態を保存する。
+			localStorage.setItem('saiminMessageListShowing', 1);
+			// メッセージリストを埋める。
+			SAI_populate_message_list();
+			// メッセージテキストボックスのプレースホルダーをセットする。
+			sai_id_text_message.placeholder = trans_message_placefolder();
+			// 現在のメッセージを設定する。
+			sai_id_text_message.value = localStorage.getItem('saiminText') || '';
+			// 100ミリ秒後に一番上にスクロールする。
+			setTimeout(function(){
+				sai_id_message_scrollable.scrollLeft = sai_id_message_scrollable.scrollTop = 0;
+			}, 100);
+		}
+
 		if (page_id == sai_id_page_config){ // 「設定」ページなら
 			// 100ミリ秒後に一番上にスクロールする。
 			setTimeout(function(){
 				sai_id_config_scrollable.scrollLeft = sai_id_config_scrollable.scrollTop = 0;
 			}, 100);
 		}
+	}
+
+	// メッセージリストを表示する。
+	function SAI_message_list_show(){
+		SAI_choose_page(sai_id_page_message);
 	}
 
 	// 負の浮動小数点数に対応した剰余（modular; 余り）関数。
@@ -819,25 +857,20 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 「バージョン情報」の表示を更新する。
 		SAI_update_version_display();
 
-		if(!sai_ready){
-			// 映像の種類を初期化する。
-			let type = localStorage.getItem('saiminType');
-			if(type && type != -1){
-				SAI_pic_set_type(type);
-			}else{
-				SAI_pic_set_type(0);
-			}
-
-			// 必要ならアニメーションを要求する。
-			if (!sai_request_anime)
-				sai_request_anime = window.requestAnimationFrame(SAI_draw_all);
-
-			// 準備完了。
-			sai_ready = true;
-
-			// メインページに飛ばす。
-			SAI_choose_page(sai_id_page_main);
+		// 映像の種類を初期化する。
+		let type = localStorage.getItem('saiminType');
+		if(type && type != -1){
+			SAI_pic_set_type(type);
+		}else{
+			SAI_pic_set_type(0);
 		}
+
+		// 必要ならアニメーションを要求する。
+		if (!sai_request_anime)
+			sai_request_anime = window.requestAnimationFrame(SAI_draw_all);
+
+		// メインページに飛ばす。
+		SAI_choose_page(sai_id_page_main);
 	}
 
 	// 初期時の言語選択を自動化する。
@@ -2293,6 +2326,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		}else{
 			SAI_speech_set(false);
 		}
+
+		// ローカルストレージにメッセージリストがあれば読み込む。
+		SAI_load_message_list();
 	}
 
 	// 必要ならば切り替え音を再生する。
@@ -2304,7 +2340,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// キャンバスがクリックされた。
 	function SAI_canvas_click(e){
-		if(!sai_ready || sai_stopping) // 準備完了でないか、停止中なら無視。
+		if(sai_stopping) // 停止中なら無視。
 			return;
 
 		// フルスクリーンモード、またはツールボタンが見えるか？
@@ -2380,6 +2416,37 @@ document.addEventListener('DOMContentLoaded', function(){
 	function SAI_sound_mute(){
 		if(sai_sound_object){
 			sai_sound_object.volume = 0.0;
+		}
+	}
+
+	// メッセージリストに追加する。
+	function SAI_add_to_message_list(message){
+		if(!message)
+			return;
+		let index = sai_user_message_list.indexOf(message);
+		if(index >= 0)
+			sai_user_message_list.splice(index, 1);
+		sai_user_message_list.push(message);
+	}
+
+	// メッセージリストを読み込む。
+	function SAI_load_message_list(){
+		let saiminMessageCount = localStorage.getItem('saiminMessageCount');
+		saiminMessageCount = parseInt(saiminMessageCount);
+		sai_user_message_list = [];
+		for (let i = 0; i < saiminMessageCount; ++i){
+			let saiminMessage = localStorage.getItem('saiminMessage' + i.toString());
+			sai_user_message_list.push(saiminMessage);
+		}
+	}
+
+	// メッセージリストを保存する。
+	function SAI_save_message_list(){
+		localStorage.setItem('saiminMessageCount', sai_user_message_list.length.toString());
+		let i = 0;
+		for(let item of sai_user_message_list){
+			localStorage.setItem('saiminMessage' + i.toString(), item);
+			++i;
 		}
 	}
 
@@ -2493,20 +2560,14 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 映像選択。
 		sai_id_select_pic_type.addEventListener('change', function(){
-			if(!sai_ready)
-				return;
 			SAI_pic_set_type(parseInt(sai_id_select_pic_type.value));
 		}, false);
 		sai_id_select_pic_type.addEventListener('click', function(){
-			if(!sai_ready)
-				return;
 			SAI_pic_set_type(parseInt(sai_id_select_pic_type.value));
 		}, false);
 
 		// 言語選択。
 		sai_id_select_language_1.addEventListener('change', function(){
-			if(!sai_ready)
-				return;
 			SAI_set_language(sai_id_select_language_1.value);
 		}, false);
 
@@ -2522,33 +2583,25 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// メッセージサイズ選択。
 		sai_id_select_message_size.addEventListener('input', function(){
-			if(!sai_ready)
-				return;
 			SAI_message_set_size(sai_id_select_message_size.value, true);
 		}, false);
 
 		// 画面の明るさ選択。
 		sai_id_select_brightness.addEventListener('change', function(){
-			if(!sai_ready)
-				return;
 			SAI_screen_set_brightness(sai_id_select_brightness.value, true);
 		}, false);
 
 		// 音声選択。
 		sai_id_select_sound.addEventListener('change', function(){
-			if(!sai_ready)
-				return;
 			SAI_sound_set_name(sai_id_select_sound.value);
 		}, false);
 		sai_id_select_sound.addEventListener('click', function(){
-			if(!sai_ready)
-				return;
 			SAI_sound_set_name(sai_id_select_sound.value);
 		}, false);
 
 		// 設定の音声再生ボタン。
 		sai_id_button_sound_config_play.addEventListener('click', function(){
-			if(!sai_ready || !sai_sound_object)
+			if(!sai_sound_object)
 				return;
 
 			// ループを外す。
@@ -2571,51 +2624,35 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 映像切り替えの音声の有無に関するボタン。
 		sai_id_checkbox_switching_sound.addEventListener('change', function(){
-			if(!sai_ready)
-				return;
 			SAI_set_type_sound(sai_id_checkbox_switching_sound.checked, true);
 		}, false);
 		sai_id_checkbox_switching_sound.addEventListener('click', function(){
-			if(!sai_ready)
-				return;
 			SAI_set_type_sound(sai_id_checkbox_switching_sound.checked, true);
 		}, false);
 
 		// 画面分割のチェックボックス。
 		sai_id_checkbox_split.addEventListener('change', function(){
-			if(!sai_ready)
-				return;
 			SAI_screen_set_split(sai_id_checkbox_split.checked ? 2 : 1);
 		}, false);
 		sai_id_checkbox_split.addEventListener('click', function(){
-			if(!sai_ready)
-				return;
 			SAI_screen_set_split(sai_id_checkbox_split.checked ? 2 : 1);
 		}, false);
 
 		// カウントダウンの有無選択。
 		sai_id_checkbox_count_down.addEventListener('change', function(e){
-			if(!sai_ready)
-				return;
 			SAI_set_count_down(sai_id_checkbox_count_down.checked);
 		}, false);
 		sai_id_checkbox_count_down.addEventListener('click', function(e){
-			if(!sai_ready)
-				return;
 			SAI_set_count_down(sai_id_checkbox_count_down.checked);
 		}, false);
 
 		// 映像スピードの選択。
 		sai_id_range_speed_type.addEventListener('input', function(){
-			if(!sai_ready)
-				return;
 			SAI_speed_set_type(sai_id_range_speed_type.value);
 		}, false);
 
 		// 映像スピードの「不規則」チェックボックス。
 		sai_id_checkbox_speed_irregular.addEventListener('change', function(){
-			if(!sai_ready)
-				return;
 			if(sai_id_checkbox_speed_irregular.checked){
 				SAI_speed_set_type('irregular');
 			}else{
@@ -2625,29 +2662,21 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 音量の選択。
 		sai_id_range_sound_volume.addEventListener('input', function(e){
-			if(!sai_ready)
-				return;
 			SAI_sound_set_volume(sai_id_range_sound_volume.value);
 		});
 
 		// 「回転の向き」チェックボックス。
 		sai_id_checkbox_rotation.addEventListener('change', function(){
-			if(!sai_ready)
-				return;
 			SAI_rotation_set(sai_id_checkbox_rotation.checked);
 		}, false);
 
 		// 「画面点滅」の種類選択。
 		sai_id_range_blink_type.addEventListener('input', function(){
-			if(!sai_ready)
-				return;
 			SAI_blink_set_type(sai_id_range_blink_type.value);
 		}, false);
 
 		// 「メッセージをしゃべる」
 		sai_id_checkbox_speech_on_off.addEventListener('click', function(e){
-			if(!sai_ready)
-				return;
 			SAI_speech_set(sai_id_checkbox_speech_on_off.checked);
 		});
 
@@ -2658,20 +2687,14 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// キャンバスでマウス移動。
 		sai_id_canvas_01.addEventListener('mousemove', function(e){
-			if(!sai_ready)
-				return;
 			SAI_star_add(e.clientX, e.clientY);
 		}, false);
 
 		// キャンバスでタッチ操作。きらめきを表示。
 		sai_id_canvas_01.addEventListener('touchstart', function(e){
-			if(!sai_ready)
-				return;
 			sai_touchmoving = true;
 		}, {passive: true});
 		sai_id_canvas_01.addEventListener('touchmove', function(e){
-			if(!sai_ready)
-				return;
 			if(sai_touchmoving){
 				let touches = e.touches;
 				if(touches && touches.length == 1){
@@ -2680,21 +2703,15 @@ document.addEventListener('DOMContentLoaded', function(){
 			}
 		}, {passive: true});
 		sai_id_canvas_01.addEventListener('touchend', function(e){
-			if(!sai_ready)
-				return;
 			sai_touchmoving = false;
 		}, {passive: true});
 		sai_id_canvas_01.addEventListener('touchcancel', function(e){
-			if(!sai_ready)
-				return;
 			sai_touchmoving = false;
 		}, {passive: true});
 
 		// キャンバスでマウスホイール回転。
 		sai_id_canvas_01.addEventListener('wheel', function(e){
 			e.preventDefault();
-			if(!sai_ready)
-				return;
 			if(e.ctrlKey)
 				return;
 			if(e.deltaY < 0){
@@ -2712,8 +2729,12 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// スピーチをクリック。
 		sai_id_button_speech.addEventListener('click', function(e){
-			// メッセージボタンをクリック。
-			sai_id_button_message.click();
+			if(0){
+				// メッセージボタンをクリック。
+				sai_id_button_message.click();
+			}else{
+				SAI_choose_page(sai_id_page_message);
+			}
 		});
 
 		// ウィンドウのサイズ変更や画面の回転を検出する。
@@ -2757,12 +2778,36 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_id_checkbox_auto_repeat_sound.addEventListener('click', function(e){
 			SAI_sound_set_auto_repeat(sai_id_checkbox_auto_repeat_sound.checked);
 		});
+
+		// メッセージをOK。
+		sai_id_button_mesage_ok.addEventListener('click', function(e){
+			SAI_message_set_text(sai_id_text_message.value);
+			SAI_add_to_message_list(sai_message_text);
+			SAI_save_message_list();
+			localStorage.removeItem('saiminMessageListShowing');
+			SAI_choose_page(sai_id_page_main);
+		});
+
+		// メッセージをキャンセル。
+		sai_id_button_mesage_cancel.addEventListener('click', function(e){
+			localStorage.removeItem('saiminMessageListShowing');
+			SAI_choose_page(sai_id_page_main);
+		});
+
+		// メッセージをリセット。
+		sai_id_button_mesage_reset.addEventListener('click', function(e){
+			SAI_message_set_text('');
+			sai_user_message_list = [];
+			SAI_save_message_list();
+			localStorage.removeItem('saiminMessageListShowing');
+			SAI_choose_page(sai_id_page_main);
+		});
 	}
 
 	// キーボード操作を実装。
 	function SAI_register_key_bindings(){
 		document.body.addEventListener('keydown', function(e){
-			if(!sai_ready || e.ctrlKey)
+			if(e.ctrlKey || sai_id_page_main.classList.contains('sai_class_invisible'))
 				return;
 			if('0' <= e.key && e.key <= '9'){ // pic0...pic9
 				SAI_pic_set_type(e.key);
@@ -2888,11 +2933,6 @@ document.addEventListener('DOMContentLoaded', function(){
 			for(let button of tool_buttons){
 				button.classList.remove('sai_class_invisible');
 			}
-			try{
-				android.showNaviBar(true);
-			}catch(error){
-				;
-			}
 		}else{
 			for(let control of main_controls){
 				control.classList.add('sai_class_invisible');
@@ -2900,11 +2940,6 @@ document.addEventListener('DOMContentLoaded', function(){
 			if (sai_id_checkbox_fullscreen.checked){
 				for(let button of tool_buttons){
 					button.classList.add('sai_class_invisible');
-				}
-				try{
-					android.showNaviBar(false);
-				}catch(error){
-					;
 				}
 			}
 		}
@@ -2968,6 +3003,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_help_and_agreement();
 		}else if(localStorage.getItem('saiminConfigShowing')){
 			SAI_config();
+		}else if (localStorage.getItem('saiminMessageListShowing')){
+			SAI_message_list_show();
 		}
 
 		// フルスクリーンモードを復元する。

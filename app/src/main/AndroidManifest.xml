@@ -32,7 +32,8 @@
             android:theme="@style/Theme.KraKra_ja_jp.Splash"
             android:exported="true"
             android:screenOrientation="fullUser"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="stateVisible|stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

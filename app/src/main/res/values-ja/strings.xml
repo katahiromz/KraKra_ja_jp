@@ -13,65 +13,6 @@
     <string name="web_view">ウェブビュー</string>
     <string name="progress_bar">進捗バー</string>
     <string name="now_starting">くらくら起動中...</string>
-    <string name="prompt_hint">メッセージを入力</string>
-
-    <!-- message list -->
-    <string name="message_000">あなたはだんだん眠くなーる</string>
-    <string name="message_001">勉強して良い成績を取りたくなーる</string>
-    <string name="message_002">会社で働くのが好きになーる</string>
-    <string name="message_003">はじめまして</string>
-    <string name="message_004">おはようございます</string>
-    <string name="message_005">こんにちは</string>
-    <string name="message_006">こんばんは</string>
-    <string name="message_007">ありがとうございます</string>
-    <string name="message_008">お久しぶりですね</string>
-    <string name="message_009">今から会社へ行きます</string>
-    <string name="message_010">学校へ行ってきます</string>
-    <string name="message_011">いってらっしゃい</string>
-    <string name="message_012">ただいま</string>
-    <string name="message_013">ごめんなさい、反省してます</string>
-    <string name="message_014">それは失礼しました</string>
-    <string name="message_015">何かお困りでも？</string>
-    <string name="message_016">何か不安でもありますか？</string>
-    <string name="message_017">無理をしないで下さい</string>
-    <string name="message_018">緊張しないで下さい</string>
-    <string name="message_019">恥ずかしがらないで</string>
-    <string name="message_020">いじめたりしないよ</string>
-    <string name="message_021">怖がらないで</string>
-    <string name="message_022">落ち着いて下さい</string>
-    <string name="message_023">私と話し合おうよ</string>
-    <string name="message_024">その件は一緒に考えましょう</string>
-    <string name="message_025">何かご不満でもありますか？</string>
-    <string name="message_026">私を助けて下さい</string>
-    <string name="message_027">私の願いを叶えて下さい</string>
-    <string name="message_028">私のことが好きになーる</string>
-    <string name="message_029">なんでもないよ</string>
-    <string name="message_030">今から食事に行こうよ</string>
-    <string name="message_031">缶ジュース買ってあげる</string>
-    <string name="message_032">レストランへ行きましょう</string>
-    <string name="message_033">これ、あげる</string>
-    <string name="message_034">美味しかったよ</string>
-    <string name="message_035">とっても楽しかった</string>
-    <string name="message_036">とってもよかった</string>
-    <string name="message_037">もっと勉強して成績上げてね</string>
-    <string name="message_038">もっと仕事を頑張って成績を上げてね</string>
-    <string name="message_039">カッコイイじゃん</string>
-    <string name="message_040">君はきれいだね</string>
-    <string name="message_041">君は友だちだよ</string>
-    <string name="message_042">チャックが開いてるよ</string>
-    <string name="message_043">今日は楽しもうぜ</string>
-    <string name="message_044">テーブルに料理があるよ</string>
-    <string name="message_045">冷蔵庫に料理があるよ</string>
-    <string name="message_046">家事を手伝って下さい</string>
-    <string name="message_047">疲れたので休みます</string>
-    <string name="message_048">今からベッドで寝ます</string>
-    <string name="message_049">今夜はどうですか</string>
-
-    <!-- message select dialog -->
-    <string name="message_select_dialog_message">メッセージ文字列を入力して下さい。</string>
-
-    <!-- Content Description -->
-    <string name="guide_clear_button">クリアボタン</string>
 
     <!-- URLs -->
     <string name="url">file:///android_asset/index.html</string>
