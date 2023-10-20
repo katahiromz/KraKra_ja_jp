@@ -1256,7 +1256,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 映像の描画。pic2: Concentric Circles
-	function SAI_draw_pic_2(ctx, px, py, dx, dy, flag=true){
+	function SAI_draw_pic_2_sub(ctx, px, py, dx, dy, flag=true){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
@@ -1305,6 +1305,12 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
+	}
+
+	// 映像の描画。pic2: Concentric Circles
+	function SAI_draw_pic_2(ctx, px, py, dx, dy){
+		SAI_draw_pic_2_sub(ctx, px, py, dx, dy, true);
+		SAI_draw_pic_2_sub(ctx, px, py, dx, dy, false);
 	}
 
 	// 映像の描画。pic3: The Eyes
@@ -2024,8 +2030,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_draw_pic_1(ctx, px, py, dx, dy);
 			break;
 		case 2:
-			SAI_draw_pic_2(ctx, px, py, dx, dy, true);
-			SAI_draw_pic_2(ctx, px, py, dx, dy, false);
+			SAI_draw_pic_2(ctx, px, py, dx, dy);
 			break;
 		case 3:
 			SAI_draw_pic_3(ctx, px, py, dx, dy);
