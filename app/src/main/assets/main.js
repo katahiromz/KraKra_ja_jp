@@ -2478,12 +2478,18 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// メッセージリストに追加する。
 	function SAI_add_to_message_list(message){
+		// 空文字列は追加しない。
 		if(!message)
 			return;
+		// メッセージリストにあれば取り除く。
 		let index = sai_user_message_list.indexOf(message);
 		if(index >= 0)
 			sai_user_message_list.splice(index, 1);
+		// 配列の末尾に追加。
 		sai_user_message_list.push(message);
+		// 64項目までに制限。
+		while(sai_user_message_list.length > 64)
+			sai_user_message_list.shift();
 	}
 
 	// メッセージリストを読み込む。
