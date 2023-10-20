@@ -4,6 +4,13 @@ let trans_currentLanguage = 'en';
 
 // {{LANGUAGE_SPECIFIC}}
 const trans_DEFAULT_MESSAGE_LIST_EN = [
+	"It is dangerous. Run away quickly.",
+	"It's a tsunami. Run to higher ground.",
+	"I need help.",
+	"I'm injured. Call an ambulance.",
+	"They are unconscious. Call an ambulance.",
+	"It's a molester.",
+	"it's okay.",
 	"You are getting sleepier and sleepier...",
 	"I want to study and get good grades...",
 	"You'll love working for the company...",
@@ -56,6 +63,13 @@ const trans_DEFAULT_MESSAGE_LIST_EN = [
 	"How about tonight?",
 ];
 const trans_DEFAULT_MESSAGE_LIST_KO_KR = [
+	"위험합니다. 빨리 도망쳐.",
+	"쓰나미입니다. 높은 곳으로 도망 가라.",
+	"도움이 필요합니다.",
+	"부상입니다. 구급차를 부르십시오.",
+	"의식 불명입니다. 구급차를 부르십시오.",
+	"치한.",
+	"괜찮아.",
 	"너는 점점 졸린다",
 	"공부하고 좋은 성적을 얻고 싶어진다",
 	"회사에서 일하는 것을 좋아한다",
@@ -108,6 +122,13 @@ const trans_DEFAULT_MESSAGE_LIST_KO_KR = [
 	"오늘 밤은 어때?",
 ];
 const trans_DEFAULT_MESSAGE_LIST_JA = [
+	"危険です。早く逃げて。",
+	"津波です。高台に逃げろ。",
+	"助けが必要です。",
+	"ケガ人がいます。救急車を呼んで下さい。",
+	"意識不明の人がいます。救急車を呼んで下さい",
+	"痴漢です。",
+	"大丈夫です。",
 	"あなたはだんだん眠くなーる",
 	"勉強して良い成績を取りたくなーる",
 	"会社で働くのが好きになーる",
@@ -160,6 +181,13 @@ const trans_DEFAULT_MESSAGE_LIST_JA = [
 	"今夜はどうですか",
 ];
 const trans_DEFAULT_MESSAGE_LIST_ZW_CN = [
+	"有危险。赶紧逃跑。",
+	"这是一场海啸。跑向更高的地方。",
+	"我需要帮助。",
+	"有受伤人员。打电话叫救护车。",
+	"有人失去了知觉。打电话叫救护车。",
+	"这是一个猥亵者。",
+	"没关系。",
 	"你越来越困了...",
 	"我想学习并取得好成绩...",
 	"你会喜欢为公司工作...",
@@ -212,6 +240,13 @@ const trans_DEFAULT_MESSAGE_LIST_ZW_CN = [
 	"今晚怎么样？",
 ];
 const trans_DEFAULT_MESSAGE_LIST_ZH_TW = [
+	"有危險。趕緊逃跑。",
+	"這是一場海嘯。跑向更高的地方。",
+	"我需要幫助。",
+	"有受傷人員。打電話叫救護車。",
+	"有人失去了知覺。打電話叫救護車。",
+	"這是一個猥褻者。",
+	"沒關係。",
 	"你越來越困了。。。",
 	"我想學習並取得好成績。。。",
 	"熱愛在公司工作。。。",
@@ -264,6 +299,13 @@ const trans_DEFAULT_MESSAGE_LIST_ZH_TW = [
 	"你今晚怎麼樣",
 ];
 const trans_DEFAULT_MESSAGE_LIST_IT = [
+	"È pericoloso. Scappare velocemente.",
+	"È uno tsunami. Corri verso un terreno più elevato.",
+	"Ho bisogno di aiuto.",
+	"Ci sono persone ferite. Chiami un'ambulanza.",
+	"Qualcuno è incosciente. Chiami un'ambulanza.",
+	"E' un molestatore.",
+	"Va bene.",
 	"Stai diventando sempre più assonnato...",
 	"Voglio studiare e prendere bei voti...",
 	"Ti piacerà lavorare per l'azienda...",
@@ -316,6 +358,13 @@ const trans_DEFAULT_MESSAGE_LIST_IT = [
 	"Che ne dici di stasera?",
 ];
 const trans_DEFAULT_MESSAGE_LIST_DE = [
+	"Es ist gefährlich. Lauf schnell weg.",
+	"Es ist ein Tsunami. Laufen Sie auf eine höhere Ebene.",
+	"Ich brauche Hilfe.",
+	"Es gibt Verletzte. Rufen Sie einen Krankenwagen.",
+	"Jemand ist bewusstlos. Rufen Sie einen Krankenwagen.",
+	"Es ist ein Perverser.",
+	"Es ist okay.",
 	"Du wirst immer schläfriger...",
 	"Ich möchte lernen und gute Noten bekommen...",
 	"Sie werden es lieben, für das Unternehmen zu arbeiten...",
@@ -365,7 +414,7 @@ const trans_DEFAULT_MESSAGE_LIST_DE = [
 	"Hilf mir bei der Hausarbeit.",
 	"Ich bin müde, also werde ich mich ausruhen.",
 	"Ich gehe jetzt ins Bett.",
-	"Wie wäre es mit heute Nacht?"
+	"Wie wäre es mit heute Nacht?",
 ];
 
 function trans_message_list(){
