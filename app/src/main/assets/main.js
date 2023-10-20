@@ -425,7 +425,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_sound_object = new Audio('sn/' + sai_sound_name + '.mp3');
 		sai_sound_object.addEventListener('ended', function(e){ // 音声が停止した？
 			// 音声再生ボタンのイメージを更新する。
-			sai_id_image_play_pause.src = 'images/play.svg';
+			sai_id_image_play_pause.src = 'img/play.svg';
 
 			// チェックを外す。
 			sai_id_button_sound_play.classList.remove('sai_class_checked');
@@ -2687,12 +2687,12 @@ document.addEventListener('DOMContentLoaded', function(){
 				sai_sound_object.currentTime = 0;
 				sai_sound_object.play();
 				// 再生ボタンのイメージを更新する。
-				sai_id_image_play_pause.src = 'images/stop.svg';
+				sai_id_image_play_pause.src = 'img/stop.svg';
 			}else{ // 再生中なら
 				// 停止する。
 				sai_sound_object.pause();
 				// 再生ボタンのイメージを更新する。
-				sai_id_image_play_pause.src = 'images/play.svg';
+				sai_id_image_play_pause.src = 'img/play.svg';
 			}
 		}, false);
 
@@ -3043,10 +3043,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_screen_fit_canvas();
 
 		// 五円玉の画像を読み込む。
-		sai_coin_img.src = 'images/coin5yen.png';
+		sai_coin_img.src = 'img/coin5yen.png';
 
 		// スパイラルの画像も更新。
-		sai_spiral_img.src = "images/spiral.svg";
+		sai_spiral_img.src = "img/spiral.svg";
 
 		// 設定をローカルストレージから読み込む。
 		SAI_load_local_storage();
