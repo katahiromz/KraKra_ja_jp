@@ -2312,7 +2312,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// FPSを描画する。
-	function draw_fps(ctx){
+	function draw_fps(ctx, diff_time){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// FPSを描画する。
@@ -2450,7 +2450,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// デバッグ中ならFPSを描画する。
 		if(sai_DEBUGGING){
-			draw_fps(ctx);
+			draw_fps(ctx, diff_time);
 		}
 
 		// 停止中なら映像のキャプションを表示する。
