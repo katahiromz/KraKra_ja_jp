@@ -123,7 +123,7 @@ const trans_DEFAULT_MESSAGE_LIST_KO_KR = [
 ];
 const trans_DEFAULT_MESSAGE_LIST_JA = [
 	"危険です。早く逃げて。",
-	"津波です。高台に逃げろ。",
+	"津波です。高い場所に逃げろ。",
 	"助けが必要です。",
 	"怪我人がいます。救急車を呼んで下さい。",
 	"意識不明の人がいます。救急車を呼んで下さい",
