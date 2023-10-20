@@ -1203,7 +1203,6 @@ function trans_localize(lang){
 	if(lang == 'ja' || lang == 'jp'){ // Japanese
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_JA);
 		trans_setImageSrc(sai_id_img_mic, 'images/mic.png');
-		trans_setImageSrc(sai_id_img_speech, 'images/speak.png');
 		trans_setHtmlText(sai_id_text_language, '言語 (Language):');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
@@ -1278,7 +1277,6 @@ function trans_localize(lang){
 	}else if(lang == 'zh-CN' || lang == 'cn'){ // Chinese (Simplified)
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_ZW_CN);
 		trans_setImageSrc(sai_id_img_mic, 'images/mic.png');
-		trans_setImageSrc(sai_id_img_speech, 'images/speak.png');
 		trans_setHtmlText(sai_id_text_language, '语言 (Language):');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
@@ -1353,7 +1351,6 @@ function trans_localize(lang){
 	}else if(lang == 'zh-TW'){ // Chinese (Traditional)
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_ZH_TW);
 		trans_setImageSrc(sai_id_img_mic, 'images/mic.png');
-		trans_setImageSrc(sai_id_img_speech, 'images/speak.png');
 		trans_setHtmlText(sai_id_text_language, '語言 (Language):');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
@@ -1428,7 +1425,6 @@ function trans_localize(lang){
 	}else if(lang == 'kr' || lang == 'ko' || lang == 'ko-KR'){ // Korean
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_KO_KR);
 		trans_setImageSrc(sai_id_img_mic, 'images/mic.png');
-		trans_setImageSrc(sai_id_img_speech, 'images/speak.png');
 		trans_setHtmlText(sai_id_text_language, '언어 (Language):');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
@@ -1503,7 +1499,6 @@ function trans_localize(lang){
 	}else if(lang == 'it' || lang == 'it-IT'){ // Italian
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_IT);
 		trans_setImageSrc(sai_id_img_mic, 'images/mic.png');
-		trans_setImageSrc(sai_id_img_speech, 'images/speak.png');
 		trans_setHtmlText(sai_id_text_language, 'Lingua (Language):');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
@@ -1578,7 +1573,6 @@ function trans_localize(lang){
 	}else if(lang == 'de' || lang == 'de-DE'){ // German
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_DE);
 		trans_setImageSrc(sai_id_img_mic, 'images/mic.png');
-		trans_setImageSrc(sai_id_img_speech, 'images/speak.png');
 		trans_setHtmlText(sai_id_text_language, 'Sprache (Language):');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
@@ -1653,7 +1647,6 @@ function trans_localize(lang){
 	}else{ // English is default
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_EN);
 		trans_setImageSrc(sai_id_img_mic, 'images/mic.png');
-		trans_setImageSrc(sai_id_img_speech, 'images/speak.png');
 		trans_setHtmlText(sai_id_text_language, 'Language (言語):');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
