@@ -18,6 +18,7 @@ let sai_stopping = true; // 停止中か？
 // メッセージがクリックされた。
 function SAI_on_click_message(id){
 	sai_id_text_message.value = id.textContent;
+	sai_id_text_message.focus();
 }
 
 // ドキュメントの読み込みが完了（DOMContentLoaded）されたら無名関数が呼び出される。

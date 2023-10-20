@@ -277,18 +277,20 @@
 	<div id="sai_id_page_message" class="sai_class_page sai_class_center sai_class_config_page sai_class_invisible">
 		<h1 id="sai_id_page_message_header">Message</h1>
 		<img class="sai_class_img_config_logo" alt="" width="165" height="31" loading="lazy" />
-		<input id="sai_id_text_message" type="text" placeholder="Input message" />
-		<div id="sai_id_message_scrollable" class="sai_class_scrollable_3">
-			<div id="sai_id_message_list">
-				<!-- Filled by SAI_populate_message_list -->
+		<form>
+			<input id="sai_id_text_message" type="text" placeholder="Input message" enterkeyhint="done" />
+			<div id="sai_id_message_scrollable" class="sai_class_scrollable_3">
+				<div id="sai_id_message_list">
+					<!-- Filled by SAI_populate_message_list -->
+				</div>
 			</div>
-		</div>
-		<div class="sai_class_config_navi_line">
-			<hr />
-			<button type="button" id="sai_id_button_mesage_reset" class="sai_class_nav_button">Reset</button>
-			<button type="button" id="sai_id_button_mesage_cancel" class="sai_class_nav_button">Cancel</button>
-			<button type="button" id="sai_id_button_mesage_ok" class="sai_class_nav_button">OK</button>
-		</div>
+			<div class="sai_class_config_navi_line">
+				<hr />
+				<button type="button" id="sai_id_button_mesage_reset" class="sai_class_nav_button">Reset</button>
+				<button type="button" id="sai_id_button_mesage_cancel" class="sai_class_nav_button">Cancel</button>
+				<button type="submit" id="sai_id_button_mesage_ok" class="sai_class_nav_button">OK</button>
+			</div>
+		</form>
 	</div>
 	<div id="sai_id_page_main" class="sai_class_page sai_class_invisible">
 		<!-- The "configuration" button -->
