@@ -2257,31 +2257,14 @@ document.addEventListener('DOMContentLoaded', function(){
 			// 映像の種類のテキストを取得。
 			let text = trans_getSelectOptionText(sai_id_select_pic_type, sai_id_select_pic_type.value);
 
-			// {{LANGUAGE_SPECIFIC}}: 言語に応じてテキストサイズを設定。
-			let text_size;
-			switch (sai_id_select_language_1.value){
-			case 'en':
-			case 'de':
-			case 'it':
-			default:
-				text_size = 14;
-				break;
-			case 'zh-CN':
-			case 'zh-TW':
-				text_size = 21;
-				break;
-			case 'ja':
-			case 'ko-KR':
-				text_size = 23;
-				break;
-			}
-			ctx.font = text_size.toString() + 'px san-serif';
-
 			// 小さければ拡大する。
-			let measure = ctx.measureText(text);
-			if(measure.width * 2 < sai_screen_width){
-				text_size *= 1.8;
+			let text_size = 10;
+			for(;;){
 				ctx.font = text_size.toString() + 'px san-serif';
+				let measure = ctx.measureText(text);
+				if (measure.width >= sai_screen_width * 0.9 ||
+				    measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent > 20) break;
+				text_size *= 1.1;
 			}
 
 			// テキストに枠を付けて描画。
