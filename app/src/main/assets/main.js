@@ -1223,7 +1223,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.fillRect(px, py, dx, dy);
 
 		// 寸法を計算する。
-		let minxy = Math.min(dx, dy), maxxy = Math.max(dx, dy);
+		const maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
 
 		// 画面中央を原点とする。
 		let qx = px + dx / 2, qy = py + dy / 2;
@@ -1239,15 +1239,15 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.translate(25 * Math.cos(count2 * 0.01), 25 * Math.sin(count2 * 0.05));
 		ctx.rotate(count2 * 0.02);
 
-		// 発散する渦巻きを表す多角形の頂点を計算する。
-		const num_lines = 12; // これは偶数でなければならない。
+		const num_lines = 24; // これは偶数でなければならない。
 		const a = 1, b = 1.1;
+
+		// 発散する渦巻きを表す多角形の頂点を構築する。
 		let lines = [];
 		for(let i = 0; i < num_lines; ++i){
 			let delta_theta = 2 * Math.PI * i / num_lines;
 			// 対数らせんの公式に従って頂点を追加していく。ただし偏角はdelta_thetaだけずらす。
-			let line = [];
-			line.push([0, 0]);
+			let line = [[0, 0]];
 			for(let theta = 0; theta <= Math.PI * 2 * 10; theta += 0.1){
 				let r = a * Math.exp(b * theta);
 				let comp = new Complex({abs:r, arg:theta + delta_theta});
@@ -1264,11 +1264,19 @@ document.addEventListener('DOMContentLoaded', function(){
 		for(let i = 0; i < num_lines; ++i){
 			let line = lines[i];
 			if(even){ // 偶数回目はそのままの向き。
-				for(let k = 0; k < line.length; ++k)
+				for(let k = 0; k < line.length; ++k){
 					ctx.lineTo(line[k][0], line[k][1]);
+				}
 			}else{ // 奇数回目は逆向き。
 				for(let k = line.length - 1; k >= 0; --k)
 					ctx.lineTo(line[k][0], line[k][1]);
+				// ここで多角形を一つ。
+				ctx.closePath();
+				ctx.fillStyle = sai_id_color_1st.value; // 1番目の色で塗りつぶす。
+				ctx.fill();
+				// 次の線の準備。
+				ctx.beginPath();
+				ctx.moveTo(0, 0);
 			}
 			even = !even;
 		}
@@ -2101,12 +2109,12 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 画面の辺の平均の長さ。
 		let dxy = (dx + dy) / 2;
 
-		// 長方形領域(px, py, dx, dy)をクリッピングする。
-		SAI_clip_rect(ctx, px, py, dx, dy);
-
 		// 黒で長方形領域を塗りつぶす。
 		ctx.fillStyle = '#000';
 		ctx.fillRect(px, py, dx, dy);
+
+		// 長方形領域(px, py, dx, dy)をクリッピングする。
+		SAI_clip_rect(ctx, px, py, dx, dy);
 
 		if(sai_count_down){ // カウントダウン変数が有効なら
 			let new_time = (new Date()).getTime();
@@ -2303,50 +2311,70 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
+	// FPSを描画する。
+	function draw_fps(ctx){
+		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
+
+		// FPSを描画する。
+		if(diff_time != 0){
+			sai_FPS = 1 / Math.abs(diff_time);
+			sai_FPS = Math.round(sai_FPS * 10) / 10;
+		}
+		let text = Math.round(sai_FPS).toString() + '.' + (sai_FPS * 10 % 10).toString();
+		ctx.font = '32px san-serif';
+		let measure = ctx.measureText(text);
+		let width = measure.width;
+		let height = measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent;
+		ctx.fillStyle = "red";
+		ctx.fillText(text, (sai_screen_width - width) / 2, height);
+
+		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
+	}
+
 	// 映像をすべて描画する。
 	function SAI_draw_all(){
 		// 二次元の描画コンテキスト。キャンバスは不透明。
 		let ctx = sai_id_canvas_01.getContext('2d', { alpha: false });
 
 		// 画面のサイズ。
-		let cx = sai_screen_width, cy = sai_screen_height;
+		const dx = sai_screen_width, dy = sai_screen_height;
 
 		let splitted = false; // 画面分割したか？
 		if(sai_screen_split == 1){ // 画面分割なし。
-			SAI_draw_pic_with_effects(ctx, 0, 0, cx, cy);
-			SAI_message_set_position(sai_id_text_floating_1, 0, 0, cx, cy, sai_counter);
+			SAI_draw_pic_with_effects(ctx, 0, 0, dx, dy);
+			SAI_message_set_position(sai_id_text_floating_1, 0, 0, dx, dy, sai_counter);
 		}else if(sai_screen_split == -1){ // 画面分割自動。
-			if(cx >= cy * 1.75){ // 充分に横長。
-				SAI_draw_pic_with_effects(ctx, 0, 0, cx / 2, cy);
-				//SAI_draw_pic_with_effects(ctx, cx / 2, 0, cx / 2, cy); // drawImageで描画時間を節約。
-				ctx.drawImage(sai_id_canvas_01, 0, 0, cx / 2, cy, cx / 2, 0, cx / 2, cy);
-				SAI_message_set_position(sai_id_text_floating_1, 0, 0, cx / 2, cy, sai_counter);
-				SAI_message_set_position(sai_id_text_floating_2, cx / 2, 0, cx / 2, cy, sai_counter);
+			if(dx >= dy * 1.75){ // 充分に横長。
+				SAI_draw_pic_with_effects(ctx, 0, 0, dx / 2, dy);
+				//SAI_draw_pic_with_effects(ctx, dx / 2, 0, dx / 2, dy); // drawImageで描画時間を節約。
+				ctx.drawImage(sai_id_canvas_01, 0, 0, dx / 2, dy, dx / 2, 0, dx / 2, dy);
+				SAI_message_set_position(sai_id_text_floating_1, 0, 0, dx / 2, dy, sai_counter);
+				SAI_message_set_position(sai_id_text_floating_2, dx / 2, 0, dx / 2, dy, sai_counter);
 				splitted = true; // 画面分割した。
-			}else if(cy >= cx * 1.75){ // 充分に縦長。
-				SAI_draw_pic_with_effects(ctx, 0, 0, cx, cy / 2);
-				//SAI_draw_pic_with_effects(ctx, 0, cy / 2, cx, cy / 2); // drawImageで描画時間を節約。
-				ctx.drawImage(sai_id_canvas_01, 0, 0, cx, cy / 2, 0, cy / 2, cx, cy / 2);
-				SAI_message_set_position(sai_id_text_floating_1, 0, 0, cx, cy / 2, sai_counter);
-				SAI_message_set_position(sai_id_text_floating_2, 0, cy / 2, cx, cy / 2, sai_counter);
+			}else if(dy >= dx * 1.75){ // 充分に縦長。
+				SAI_draw_pic_with_effects(ctx, 0, 0, dx, dy / 2);
+				//SAI_draw_pic_with_effects(ctx, 0, dy / 2, dx, dy / 2); // drawImageで描画時間を節約。
+				ctx.drawImage(sai_id_canvas_01, 0, 0, dx, dy / 2, 0, dy / 2, dx, dy / 2);
+				SAI_message_set_position(sai_id_text_floating_1, 0, 0, dx, dy / 2, sai_counter);
+				SAI_message_set_position(sai_id_text_floating_2, 0, dy / 2, dx, dy / 2, sai_counter);
 				splitted = true; // 画面分割した。
 			}else{ // それ以外は分割しない。
-				SAI_draw_pic_with_effects(ctx, 0, 0, cx, cy);
-				SAI_message_set_position(sai_id_text_floating_1, 0, 0, cx, cy, sai_counter);
+				SAI_draw_pic_with_effects(ctx, 0, 0, dx, dy);
+				SAI_message_set_position(sai_id_text_floating_1, 0, 0, dx, dy, sai_counter);
 			}
 		}else{ // 画面２分割。
-			if(cx >= cy){ // 横長。
-				SAI_draw_pic_with_effects(ctx, 0, 0, cx / 2, cy);
-				//SAI_draw_pic_with_effects(ctx, cx / 2, 0, cx / 2, cy); // drawImageで描画時間を節約。
-				ctx.drawImage(sai_id_canvas_01, 0, 0, cx / 2, cy, cx / 2, 0, cx / 2, cy);
-				SAI_message_set_position(sai_id_text_floating_1, 0, 0, cx / 2, cy, sai_counter);
-				SAI_message_set_position(sai_id_text_floating_2, cx / 2, 0, cx / 2, cy, sai_counter);
+			if(dx >= dy){ // 横長。
+				SAI_draw_pic_with_effects(ctx, 0, 0, dx / 2, dy);
+				//SAI_draw_pic_with_effects(ctx, dx / 2, 0, dx / 2, dy); // drawImageで描画時間を節約。
+				ctx.drawImage(sai_id_canvas_01, 0, 0, dx / 2, dy, dx / 2, 0, dx / 2, dy);
+				SAI_message_set_position(sai_id_text_floating_1, 0, 0, dx / 2, dy, sai_counter);
+				SAI_message_set_position(sai_id_text_floating_2, dx / 2, 0, dx / 2, dy, sai_counter);
 			}else{ // 縦長。
-				SAI_draw_pic_with_effects(ctx, 0, 0, cx, cy / 2);
-				//SAI_draw_pic_with_effects(ctx, 0, cy / 2, cx, cy / 2); // drawImageで描画時間を節約。
-				ctx.drawImage(sai_id_canvas_01, 0, 0, cx, cy / 2, 0, cy / 2, cx, cy / 2);
-				SAI_message_set_position(sai_id_text_floating_1, 0, 0, cx, cy / 2, sai_counter);
-				SAI_message_set_position(sai_id_text_floating_2, 0, cy / 2, cx, cy / 2, sai_counter);
+				SAI_draw_pic_with_effects(ctx, 0, 0, dx, dy / 2);
+				//SAI_draw_pic_with_effects(ctx, 0, dy / 2, dx, dy / 2); // drawImageで描画時間を節約。
+				ctx.drawImage(sai_id_canvas_01, 0, 0, dx, dy / 2, 0, dy / 2, dx, dy / 2);
+				SAI_message_set_position(sai_id_text_floating_1, 0, 0, dx, dy / 2, sai_counter);
+				SAI_message_set_position(sai_id_text_floating_2, 0, dy / 2, dx, dy / 2, sai_counter);
 			}
 			splitted = true; // 画面分割した。
 		}
@@ -2420,19 +2448,9 @@ document.addEventListener('DOMContentLoaded', function(){
 			}
 		}
 
-		if(sai_DEBUGGING){ // デバッグ中なら
-			// FPSを描画する。
-			if(diff_time != 0){
-				sai_FPS = 1 / Math.abs(diff_time);
-				sai_FPS = Math.round(sai_FPS * 10) / 10;
-			}
-			let text = Math.round(sai_FPS).toString() + '.' + (sai_FPS * 10 % 10).toString();
-			ctx.font = '32px san-serif';
-			let measure = ctx.measureText(text);
-			let width = measure.width;
-			let height = measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent;
-			ctx.fillStyle = "red";
-			ctx.fillText(text, (sai_screen_width - width) / 2, height);
+		// デバッグ中ならFPSを描画する。
+		if(sai_DEBUGGING){
+			draw_fps(ctx);
 		}
 
 		// 停止中なら映像のキャプションを表示する。
