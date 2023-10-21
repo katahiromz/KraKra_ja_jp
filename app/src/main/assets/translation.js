@@ -888,6 +888,7 @@ function trans_getText(str_id){
 		case 'TEXT_SPEED_FAST': return '速い';
 		case 'TEXT_SPEED_SUPER_FAST': return '超速い';
 		case 'TEXT_SPEED_IRREGULAR': return '不規則';
+		case 'TEXT_RAINBOW': return '虹色';
 		}
 	}else if(lang == 'zh-CN' || lang == 'cn'){ // Chinese (Simplified)
 		switch(str_id){
@@ -926,6 +927,7 @@ function trans_getText(str_id){
 		case 'TEXT_SPEED_FAST': return '快速地';
 		case 'TEXT_SPEED_SUPER_FAST': return '超级快';
 		case 'TEXT_SPEED_IRREGULAR': return '不规律的';
+		case 'TEXT_RAINBOW': return '彩虹色';
 		}
 	}else if(lang == 'zh-TW'){ // Chinese (Traditional)
 		switch(str_id){
@@ -964,6 +966,7 @@ function trans_getText(str_id){
 		case 'TEXT_SPEED_FAST': return '快速地';
 		case 'TEXT_SPEED_SUPER_FAST': return '超快';
 		case 'TEXT_SPEED_IRREGULAR': return '不規律的';
+		case 'TEXT_RAINBOW': return '彩虹色';
 		}
 	}else if(lang == 'ko' || lang == 'kr' || lang == 'ko-KR'){ // Korean
 		switch(str_id){
@@ -1002,6 +1005,7 @@ function trans_getText(str_id){
 		case 'TEXT_SPEED_FAST': return '빠른';
 		case 'TEXT_SPEED_SUPER_FAST': return '매우 빠른';
 		case 'TEXT_SPEED_IRREGULAR': return '불규칙한';
+		case 'TEXT_RAINBOW': return '무지개 색';
 		}
 	}else if(lang == 'it' || lang == 'it-IT'){ // Italian
 		switch(str_id){
@@ -1040,6 +1044,7 @@ function trans_getText(str_id){
 		case 'TEXT_SPEED_FAST': return 'Veloce';
 		case 'TEXT_SPEED_SUPER_FAST': return 'Super Veloce';
 		case 'TEXT_SPEED_IRREGULAR': return 'Irregolare';
+		case 'TEXT_RAINBOW': return 'Arcobaleno';
 		}
 	}else if(lang == 'de' || lang == 'de-DE'){ // German
 		switch(str_id){
@@ -1078,6 +1083,7 @@ function trans_getText(str_id){
 		case 'TEXT_SPEED_FAST': return 'Schnell';
 		case 'TEXT_SPEED_SUPER_FAST': return 'Super Schnell';
 		case 'TEXT_SPEED_IRREGULAR': return 'Irregulär';
+		case 'TEXT_RAINBOW': return 'Regenbogen';
 		}
 	}else{ // English is default
 		switch(str_id){
@@ -1116,6 +1122,7 @@ function trans_getText(str_id){
 		case 'TEXT_SPEED_FAST': return 'Fast';
 		case 'TEXT_SPEED_SUPER_FAST': return 'Super Fast';
 		case 'TEXT_SPEED_IRREGULAR': return 'Irregular';
+		case 'TEXT_RAINBOW': return 'Rainbow';
 		}
 	}
 }
@@ -1762,5 +1769,10 @@ function trans_localize(lang){
 	let logo_imgs = document.getElementsByClassName('sai_class_img_config_logo');
 	for (let img of logo_imgs){
 		trans_setImageSrc(img, trans_getText('TEXT_LOGO'));
+	}
+
+	let rainbows = document.getElementsByClassName('sai_class_rainbow');
+	for (let span of rainbows){
+		trans_setHtmlText(span, trans_getText('TEXT_RAINBOW'));
 	}
 }

@@ -1176,6 +1176,26 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
+	// 1番目の色を取得。
+	function SAI_color_get_1st(){
+		if(sai_id_checkbox_color_1st_rainbow.checked){
+			let value = SAI_mod(SAI_get_tick_count() * 0.02, 1);
+			return `hsl(${value * 360 % 360}, 100%, 50%)`;
+		}else{
+			return sai_id_color_1st.value;
+		}
+	}
+
+	// 2番目の色を取得。
+	function SAI_color_get_2nd(){
+		if(sai_id_checkbox_color_2nd_rainbow.checked){
+			let value = SAI_mod(SAI_get_tick_count() * 0.02 + 0.5, 1);
+			return `hsl(${value * 360 % 360}, 100%, 50%)`;
+		}else{
+			return sai_id_color_2nd.value;
+		}
+	}
+
 	// 映像の描画。pic0: Dummy Screen (for practice)
 	function SAI_draw_pic_00(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
@@ -1238,7 +1258,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_clip_rect(ctx, px, py, dx, dy);
 
 		// 2番目の色で塗りつぶす。
-		ctx.fillStyle = sai_id_color_2nd.value;
+		ctx.fillStyle = SAI_color_get_2nd();
 		ctx.fillRect(px, py, dx, dy);
 
 		// 画面中央を原点とする。
@@ -1290,7 +1310,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			even = !even;
 		}
 		ctx.closePath();
-		ctx.fillStyle = sai_id_color_1st.value; // 1番目の色で塗りつぶす。
+		ctx.fillStyle = SAI_color_get_1st(); // 1番目の色で塗りつぶす。
 		ctx.fill();
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
@@ -1321,8 +1341,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			ctx.clip();
 		}
 
-		// 白で長方形領域を塗りつぶす。
-		ctx.fillStyle = sai_id_color_1st.value;
+		// 長方形領域を塗りつぶす。
+		ctx.fillStyle = SAI_color_get_1st();
 		ctx.fillRect(px, py, dx, dy);
 
 		// さまざまな計算をする。
@@ -1341,7 +1361,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 同心円状に描画する。
 		let size = (dx + dy) * 0.4;
-		ctx.strokeStyle = sai_id_color_2nd.value;
+		ctx.strokeStyle = SAI_color_get_2nd();
 		for(; radius < size; radius += dr0){
 			SAI_draw_circle(ctx, qx, qy, radius, false);
 		}
@@ -1498,7 +1518,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_clip_rect(ctx, px, py, dx, dy);
 
 		// 黒で長方形領域を塗りつぶす。
-		ctx.fillStyle = sai_id_color_2nd.value;
+		ctx.fillStyle = SAI_color_get_2nd();
 		ctx.fillRect(px, py, dx, dy);
 
 		// 画面中央を原点とする。
@@ -1507,7 +1527,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		// これから描画する図形を回転する。
 		ctx.rotate(SAI_get_tick_count() * -0.2);
 
-		ctx.fillStyle = sai_id_color_1st.value; // 1番目ので描画する。
+		ctx.fillStyle = SAI_color_get_1st(); // 1番目の色で描画する。
 
 		// 発散する渦巻きを描画する。
 		let ci = 8; // これは偶数でなければならない。
@@ -1776,8 +1796,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		for(let radius = (Math.floor(dxy * 0.35 / delta) + 1) * delta; radius > 0; radius -= delta){
 			// 塗りつぶしの色を選ぶ。
 			switch (i % 2){
-			case 0: ctx.fillStyle = sai_id_color_1st.value; break;
-			case 1: ctx.fillStyle = sai_id_color_2nd.value; break;
+			case 0: ctx.fillStyle = SAI_color_get_1st(); break;
+			case 1: ctx.fillStyle = SAI_color_get_2nd(); break;
 			}
 
 			// パスを構築する。
@@ -1897,7 +1917,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
 
 		// 黒で長方形領域を塗りつぶす。
-		ctx.fillStyle = sai_id_color_2nd.value;
+		ctx.fillStyle = SAI_color_get_2nd();
 		ctx.fillRect(px, py, dx, dy);
 
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
@@ -1912,8 +1932,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 回転させる。
 		ctx.rotate(-count2 * 0.23);
 
-		// 黄色で塗る。
-		ctx.fillStyle = sai_id_color_1st.value;
+		// 1番目の色で塗る。
+		ctx.fillStyle = SAI_color_get_1st();
 
 		// 発散する渦巻きを描画する。
 		let ci = 8; // これは偶数でなければならない。
@@ -2005,7 +2025,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_clip_rect(ctx, px, py, dx, dy);
 
 		// 2番目の色で塗りつぶす。
-		ctx.fillStyle = sai_id_color_2nd.value;
+		ctx.fillStyle = SAI_color_get_2nd();
 		ctx.fillRect(px, py, dx, dy);
 
 		// 画面中央を原点とする。
@@ -2068,7 +2088,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				even = !even;
 			}
 		}
-		ctx.fillStyle = sai_id_color_1st.value; // 1番目の色で塗りつぶす。
+		ctx.fillStyle = SAI_color_get_1st(); // 1番目の色で塗りつぶす。
 		ctx.fill();
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
@@ -2077,14 +2097,14 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 映像の描画。pic12: 1st color screen
 	function SAI_draw_pic_12(ctx, px, py, dx, dy){
 		// 1番目の色で長方形領域を塗りつぶす。
-		ctx.fillStyle = sai_id_color_1st.value;
+		ctx.fillStyle = SAI_color_get_1st();
 		ctx.fillRect(px, py, dx, dy);
 	}
 
 	// 映像の描画。pic13: 2st color screen
 	function SAI_draw_pic_13(ctx, px, py, dx, dy){
 		// 2番目の色で長方形領域を塗りつぶす。
-		ctx.fillStyle = sai_id_color_2nd.value;
+		ctx.fillStyle = SAI_color_get_2nd();
 		ctx.fillRect(px, py, dx, dy);
 	}
 
@@ -2592,6 +2612,20 @@ document.addEventListener('DOMContentLoaded', function(){
 			sai_id_checkbox_auto_play_sound.checked = true;
 		}else{
 			sai_id_checkbox_auto_play_sound.checked = false;
+		}
+
+		// 虹色の設定。
+		let saimin1stColorRainbow = localStorage.getItem('saimin1stColorRainbow');
+		if(saimin1stColorRainbow){
+			sai_id_checkbox_color_1st_rainbow.checked = true;
+		}else{
+			sai_id_checkbox_color_1st_rainbow.checked = false;
+		}
+		let saimin2ndColorRainbow = localStorage.getItem('saimin2ndColorRainbow');
+		if(saimin2ndColorRainbow){
+			sai_id_checkbox_color_2nd_rainbow.checked = true;
+		}else{
+			sai_id_checkbox_color_2nd_rainbow.checked = false;
 		}
 	}
 
@@ -3143,6 +3177,22 @@ document.addEventListener('DOMContentLoaded', function(){
 				localStorage.setItem('saiminAutoPlay', 'true');
 			}else{
 				localStorage.removeItem('saiminAutoPlay');
+			}
+		});
+
+		// 虹色を保存。
+		sai_id_checkbox_color_1st_rainbow.addEventListener('click', function(e){
+			if(sai_id_checkbox_color_1st_rainbow.checked){
+				localStorage.setItem('saimin1stColorRainbow', 'true');
+			}else{
+				localStorage.removeItem('saimin1stColorRainbow');
+			}
+		});
+		sai_id_checkbox_color_2nd_rainbow.addEventListener('click', function(e){
+			if(sai_id_checkbox_color_2nd_rainbow.checked){
+				localStorage.setItem('saimin2ndColorRainbow', 'true');
+			}else{
+				localStorage.removeItem('saimin2ndColorRainbow');
 			}
 		});
 	}
