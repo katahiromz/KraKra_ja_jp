@@ -1683,7 +1683,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		const value = Math.sin(count2 * 0.05);
 
 		// 指定した色で長方形領域を塗りつぶす。
-		ctx.fillStyle = `rgb(${value * 30 + 40}, ${value * 20 + 80}, ${value * 15 + 80})`
+		ctx.fillStyle = `rgb(${value * 30 + 40}, ${value * 20 + 80}, ${value * 80 + 180})`
 		ctx.fillRect(px, py, dx, dy);
 
 		// 空を漂う、小さな謎の丸い物体を描画する。
