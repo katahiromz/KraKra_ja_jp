@@ -21,8 +21,8 @@ select {
 }
 button {
 	font-weight: bold;
-	background-color: #909;
-	color: #fff;
+	background-color: #f9f;
+	color: #003;
 }
 .sai_class_page {
 	margin: 0;
@@ -408,7 +408,8 @@ input[type='color'] {
     transition: all 0.4s ease-in-out;
 }
 .sai_class_toggle_button input:checked + .sai_class_slider {
-    background-color: #c09;
+    background-color: #f0f;
+    color: black;
 }
 .sai_class_toggle_button input:checked + .sai_class_slider::before {
     transform: translateX(calc(var(--width) - var(--height)));
@@ -422,12 +423,13 @@ input[type='color'] {
     font-size: 12px;
     font-family: sans-serif;
     transition: all 0.4s ease-in-out;
+    font-weight: bold;
 }
 .sai_class_toggle_button .sai_class_toggle_label::after {
     content: attr(data-off);
     position: absolute;
     right: 5px;
-    color: #f9f;
+    color: #fff;
     opacity: 1;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
     transition: all 0.4s ease-in-out;
@@ -436,7 +438,7 @@ input[type='color'] {
     content: attr(data-on);
     position: absolute;
     left: 5px;
-    color: #fcf;
+    color: #000;
     opacity: 0;
     text-shadow: 1px 1px 2px rgba(0, 255, 0, 0.4);
     transition: all 0.4s ease-in-out;

@@ -1277,6 +1277,7 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_label_message_speech, 'メッセージをしゃべる:');
 		trans_setHtmlText(sai_id_text_color_1st, "1番目の色:");
 		trans_setHtmlText(sai_id_text_color_2nd, "2番目の色:");
+		trans_setHtmlText(sai_id_button_init_app, "初期化");
 	}else if(lang == 'zh-CN' || lang == 'cn'){ // Chinese (Simplified)
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_ZW_CN);
 		trans_setHtmlText(sai_id_text_language, '语言 (Language):');
@@ -1354,6 +1355,7 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_label_message_speech, '留言演讲：');
 		trans_setHtmlText(sai_id_text_color_1st, "第一种颜色：");
 		trans_setHtmlText(sai_id_text_color_2nd, "第二种颜色：");
+		trans_setHtmlText(sai_id_button_init_app, "初始化");
 	}else if(lang == 'zh-TW'){ // Chinese (Traditional)
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_ZH_TW);
 		trans_setHtmlText(sai_id_text_language, '語言 (Language):');
@@ -1431,6 +1433,7 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_label_message_speech, '留言演講：');
 		trans_setHtmlText(sai_id_text_color_1st, "第一種顏色：");
 		trans_setHtmlText(sai_id_text_color_2nd, "第二種顏色：");
+		trans_setHtmlText(sai_id_button_init_app, "初始化");
 	}else if(lang == 'kr' || lang == 'ko' || lang == 'ko-KR'){ // Korean
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_KO_KR);
 		trans_setHtmlText(sai_id_text_language, '언어 (Language):');
@@ -1508,6 +1511,7 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_label_message_speech, '메시지 연설:');
 		trans_setHtmlText(sai_id_text_color_1st, "첫 번째 색상:");
 		trans_setHtmlText(sai_id_text_color_2nd, "두 번째 색상:");
+		trans_setHtmlText(sai_id_button_init_app, "앱 재설정");
 	}else if(lang == 'it' || lang == 'it-IT'){ // Italian
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_IT);
 		trans_setHtmlText(sai_id_text_language, 'Lingua (Language):');
@@ -1585,6 +1589,7 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_label_message_speech, 'Discorso del messaggio:');
 		trans_setHtmlText(sai_id_text_color_1st, "1° colore:");
 		trans_setHtmlText(sai_id_text_color_2nd, "2° colore:");
+		trans_setHtmlText(sai_id_button_init_app, "Inizializzare");
 	}else if(lang == 'de' || lang == 'de-DE'){ // German
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_DE);
 		trans_setHtmlText(sai_id_text_language, 'Sprache (Language):');
@@ -1662,6 +1667,7 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_label_message_speech, 'Nachrichtenansprache:');
 		trans_setHtmlText(sai_id_text_color_1st, "1. Farbe:");
 		trans_setHtmlText(sai_id_text_color_2nd, "2. Farbe:");
+		trans_setHtmlText(sai_id_button_init_app, "Initialisieren");
 	}else{ // English is default
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_EN);
 		trans_setHtmlText(sai_id_text_language, 'Language (言語):');
@@ -1739,6 +1745,7 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_label_message_speech, 'Message Speech:');
 		trans_setHtmlText(sai_id_text_color_1st, "1st color:");
 		trans_setHtmlText(sai_id_text_color_2nd, "2nd color:");
+		trans_setHtmlText(sai_id_button_init_app, "Initialize");
 	}
 
 	trans_setHtmlText(sai_id_page_agreement_header_1, trans_getText('TEXT_ABOUT_APP'));

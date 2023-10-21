@@ -906,9 +906,11 @@ document.addEventListener('DOMContentLoaded', function(){
 		if(localStorage.getItem('saiminUserAccepted')){
 			trans_setHtmlText(sai_id_button_agree, trans_getText('TEXT_OK'));
 			sai_id_button_agreement_back.classList.remove('sai_class_invisible');
+			sai_id_button_init_app.classList.remove('sai_class_invisible');
 		}else{
 			trans_setHtmlText(sai_id_button_agree, trans_getText('TEXT_I_AGREE'));
 			sai_id_button_agreement_back.classList.add('sai_class_invisible');
+			sai_id_button_init_app.classList.add('sai_class_invisible');
 		}
 
 		// ローカルストレージに表示状態を記憶。
@@ -3061,6 +3063,12 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_id_color_2nd_reset.addEventListener('click', function(e){
 			sai_id_color_2nd.value = "#000000";
 			localStorage.setItem('saimin2ndColor', sai_id_color_2nd.value);
+		});
+
+		// アプリの初期化ボタン。
+		sai_id_button_init_app.addEventListener('click', function(e){
+			localStorage.clear();
+			location.reload();
 		});
 	}
 
