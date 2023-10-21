@@ -1724,6 +1724,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		const y = 600, cx = 8000;
 		const deltax = 300, deltaz = 100;
 		let iz = 0;
+		const color_1st = SAI_color_get_1st();
+		const color_2nd = SAI_color_get_2nd();
 		for(let z = 0; z <= 900; z += deltaz){
 			let ix = 0;
 			for(let x = -cx; x < cx; x += deltax){
@@ -1736,7 +1738,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				ctx.lineTo(qx + x1, qy + y1);
 				ctx.lineTo(qx + x2, qy + y2);
 				ctx.lineTo(qx + x3, qy + y3);
-				ctx.fillStyle = ((ix + iz) & 1) ? '#333' : '#833';
+				ctx.fillStyle = ((ix + iz) & 1) ? color_1st : color_2nd;
 				ctx.fill();
 				++ix;
 			}
