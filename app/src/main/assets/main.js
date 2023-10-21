@@ -2,7 +2,7 @@
 // 暗号名はKraKra。
 
 const sai_VERSION = '3.5.3'; // KraKraバージョン番号。
-const sai_DEBUGGING = true; // デバッグ中か？
+const sai_DEBUGGING = false; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
 let sai_stopping = true; // 停止中か？
 
@@ -1237,7 +1237,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.rotate(count2 * 0.02);
 
 		const num_lines = 24; // これは偶数でなければならない。
-		const a = 1, b = 1.1;
+		const a = 1, b = 1.1; // らせんの係数。
 
 		// 発散する渦巻きを表す多角形の頂点を構築する。
 		let lines = [];
@@ -1985,78 +1985,75 @@ document.addEventListener('DOMContentLoaded', function(){
 	function SAI_draw_pic_11(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
-		// 黒色で塗りつぶす。
-		ctx.fillStyle = sai_id_color_2nd.value;
-		ctx.fillRect(px, py, dx, dy);
-
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
 		SAI_clip_rect(ctx, px, py, dx, dy);
 
-		// 寸法を計算する。
-		let minxy = Math.min(dx, dy), maxxy = Math.max(dx, dy);
+		// 2番目の色で塗りつぶす。
+		ctx.fillStyle = sai_id_color_2nd.value;
+		ctx.fillRect(px, py, dx, dy);
 
 		// 画面中央を原点とする。
 		let qx = px + dx / 2, qy = py + dy / 2;
 		ctx.translate(qx, qy);
 
-		// 映像の進行を表す。
+		// 映像の進行を表す変数。
 		let count2 = -SAI_get_tick_count();
 
-		// 原点を中心として、これから描画する図形を回転する。
-		ctx.rotate(-count2 * 0.12);
+		const num_lines = 24; // これは偶数でなければならない。
 
-		// 少し回転のずれを表現する。
-		ctx.translate(25 * Math.cos(count2 * 0.01), 25 * Math.sin(count2 * 0.05));
-		ctx.rotate(count2 * 0.02);
+		// らせんの係数。
+		let a = (1 + Math.sin(count2 * 0.1) * 0.2);
+		let b = (1 + Math.cos(count2 * 0.1) * 0.1);
 
-		let ci = 24; // これは偶数でなければならない。
-		let lines;
-		let even;
-
-		for(let m = 0; m < 2; ++m){
-			// 発散する渦巻きを描画する。
-			lines = [];
-			for(let i = 0; i < ci; ++i){
-				let delta_theta = 2 * Math.PI * i / ci;
-				// 対数らせんの公式に従って描画する。ただし偏角はdelta_thetaだけずらす。
-				let a = 1, b = 1.1;
-				let line = [];
-				line.push([0, 0]);
-				for(let theta = 0; theta <= Math.PI * 2 * 10; theta += 0.1){
-					let r = a * Math.exp(b * theta);
-					let comp = new Complex({abs:r, arg:(m == 0 ? 1 : -1) * (theta + delta_theta)});
-					let x = comp.re, y = comp.im;
-					line.push([x, y]);
-				}
-				lines.push(line);
+		// 発散する渦巻きを表す多角形の頂点を構築する。
+		let lines = [];
+		for(let i = 0; i < num_lines; ++i){
+			let delta_theta = 2 * Math.PI * i / num_lines;
+			// 対数らせんの公式に従って頂点を追加していく。ただし偏角はdelta_thetaだけずらす。
+			let line = [[0, 0]];
+			for(let theta = 0; theta <= Math.PI * 3; theta += 0.1){
+				let r = a * Math.exp(b * theta);
+				let comp = new Complex({abs:r, arg:theta + delta_theta});
+				let x = comp.re, y = comp.im;
+				line.push([x, y]);
 			}
+			lines.push(line);
+		}
 
-			// 線を描画する。
-			even = true;
-			ctx.beginPath();
+		// 原点を中心として、これから描画する図形を回転する。
+		ctx.rotate(count2 * 0.035);
+
+		// 多角形を描画する。逆回転で二重にする。
+		ctx.beginPath();
+		for(let m = 0; m < 2; ++m){
+			let even = true;
 			ctx.moveTo(0, 0);
-			for(let i = 0; i < ci; ++i){
+			for(let i = 0; i < num_lines; ++i){
 				let line = lines[i];
-				if(even){ // 偶数回目はそのままの向き。
-					for(let k = 0; k < line.length; ++k)
-						ctx.lineTo(line[k][0], line[k][1]);
-				}else{ // 奇数回目は逆向き。
-					for(let k = line.length - 1; k >= 0; --k)
-						ctx.lineTo(line[k][0], line[k][1]);
+				if(m == 0){
+					if(even){ // 偶数回目はそのままの向き。
+						for(let k = 0; k < line.length; ++k){
+							ctx.lineTo(line[k][0], line[k][1]);
+						}
+					}else{ // 奇数回目は逆向き。
+						for(let k = line.length - 1; k >= 0; --k)
+							ctx.lineTo(line[k][0], line[k][1]);
+					}
+				}else{
+					if(even){ // 偶数回目はそのままの向き。
+						for(let k = 0; k < line.length; ++k){
+							ctx.lineTo(line[k][0], -line[k][1]);
+						}
+					}else{ // 奇数回目は逆向き。
+						for(let k = line.length - 1; k >= 0; --k)
+							ctx.lineTo(line[k][0], -line[k][1]);
+					}
 				}
 				even = !even;
 			}
-			ctx.closePath();
-			if(m == 0)
-				ctx.fillStyle = sai_id_color_1st.value; // 1番目の色で描画する。
-			else
-				ctx.fillStyle = sai_id_color_2nd.value; // 2番目の色で描画する。
-			ctx.globalAlpha = 0.5;
-			ctx.fill();
-			ctx.globalAlpha = 1.0;
-
-			ctx.rotate(Math.PI / 3);
 		}
+		ctx.fillStyle = sai_id_color_1st.value; // 1番目の色で塗りつぶす。
+		ctx.fill();
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
