@@ -1228,7 +1228,7 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '6', '画6: 五円玉');
 		trans_setSelectOptionText(sai_id_select_pic_type, '7', '画7: ぼわんぼわん');
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', '画8: クレージーな色');
-		trans_setSelectOptionText(sai_id_select_pic_type, '9', '画9: 黄金スパイラル');
+		trans_setSelectOptionText(sai_id_select_pic_type, '9', '画9: 対数らせん2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', '画10: アナログディスク');
 		trans_setSelectOptionText(sai_id_select_pic_type, '11', '画11: ミックス渦巻き');
 		trans_setSelectOptionText(sai_id_select_pic_type, '12', '画12: 1番目の色の画面');
@@ -1243,6 +1243,8 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_fullscreen_mode, 'フルスクリーン モード:');
 		trans_setHtmlText(sai_id_page_message_header, 'メッセージ');
 		trans_setHtmlText(sai_id_button_mesage_reset, 'リセット');
+		trans_setHtmlText(sai_id_color_1st_reset, 'リセット');
+		trans_setHtmlText(sai_id_color_2nd_reset, 'リセット');
 		trans_setHtmlText(sai_id_button_mesage_cancel, 'キャンセル');
 		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
 		trans_setHtmlText(sai_id_text_message_size, 'メッセージの大きさ:');
@@ -1303,7 +1305,7 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '6', '图6: 5日元硬币');
 		trans_setSelectOptionText(sai_id_select_pic_type, '7', '图7: 头晕 头晕');
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', '图8: 疯狂的颜色');
-		trans_setSelectOptionText(sai_id_select_pic_type, '9', '图9: 黄金螺旋');
+		trans_setSelectOptionText(sai_id_select_pic_type, '9', '图9: 对数螺线 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', '图10: 模拟光盘');
 		trans_setSelectOptionText(sai_id_select_pic_type, '11', '图11: ミックス渦巻き');
 		trans_setSelectOptionText(sai_id_select_pic_type, '12', '图12: 第一个彩色屏幕');
@@ -1318,6 +1320,8 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_fullscreen_mode, '全屏模式：');
 		trans_setHtmlText(sai_id_page_message_header, '信息');
 		trans_setHtmlText(sai_id_button_mesage_reset, '重置');
+		trans_setHtmlText(sai_id_color_1st_reset, '重置');
+		trans_setHtmlText(sai_id_color_2nd_reset, '重置');
 		trans_setHtmlText(sai_id_button_mesage_cancel, '取消');
 		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
 		trans_setHtmlText(sai_id_text_message_size, '消息大小：');
@@ -1378,7 +1382,7 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '6', '圖6: 5日元硬幣');
 		trans_setSelectOptionText(sai_id_select_pic_type, '7', '圖7: 頭暈 頭暈');
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', '圖8: 瘋狂的顏色');
-		trans_setSelectOptionText(sai_id_select_pic_type, '9', '圖9: 黃金螺旋');
+		trans_setSelectOptionText(sai_id_select_pic_type, '9', '圖9: 對數螺線 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', '圖10: 類比光碟');
 		trans_setSelectOptionText(sai_id_select_pic_type, '11', '圖11: 混合漩涡');
 		trans_setSelectOptionText(sai_id_select_pic_type, '12', '圖12: 第一个彩色屏幕');
@@ -1393,6 +1397,8 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_fullscreen_mode, '全螢幕模式：');
 		trans_setHtmlText(sai_id_page_message_header, '資訊');
 		trans_setHtmlText(sai_id_button_mesage_reset, '重置');
+		trans_setHtmlText(sai_id_color_1st_reset, '重置');
+		trans_setHtmlText(sai_id_color_2nd_reset, '重置');
 		trans_setHtmlText(sai_id_button_mesage_cancel, '取消');
 		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
 		trans_setHtmlText(sai_id_text_message_size, '消息大小：');
@@ -1453,7 +1459,7 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'pic6: 오엔 구슬');
 		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'pic7: 보완 보완');
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'pic8: 미친 색');
-		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'pic9: 황금 나선');
+		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'pic9: 로그 나선 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'pic10: 아날로그 디스크');
 		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'pic11: 믹스 소용돌이');
 		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'pic12: 첫 번째 컬러 화면');
@@ -1468,6 +1474,8 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_fullscreen_mode, '전체 화면 모드:');
 		trans_setHtmlText(sai_id_page_message_header, '메시지');
 		trans_setHtmlText(sai_id_button_mesage_reset, '초기화');
+		trans_setHtmlText(sai_id_color_1st_reset, '초기화');
+		trans_setHtmlText(sai_id_color_2nd_reset, '초기화');
 		trans_setHtmlText(sai_id_button_mesage_cancel, '취소');
 		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
 		trans_setHtmlText(sai_id_text_message_size, '메시지 크기:');
@@ -1528,7 +1536,7 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'pic6: Moneta da 5 Yen');
 		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'pic7: Clamore Clamore');
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'pic8: Colori Pazzi');
-		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'pic9: Spirale Aurea');
+		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'pic9: Spirale Logaritmica 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'pic10: Disco Analogico');
 		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'pic11: Mescolare il turbinio');
 		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'pic12: 1° schermo a colori');
@@ -1543,6 +1551,8 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_fullscreen_mode, 'Modalità schermo intero:');
 		trans_setHtmlText(sai_id_page_message_header, 'Messaggio');
 		trans_setHtmlText(sai_id_button_mesage_reset, 'Ripristina');
+		trans_setHtmlText(sai_id_color_1st_reset, 'Ripristina');
+		trans_setHtmlText(sai_id_color_2nd_reset, 'Ripristina');
 		trans_setHtmlText(sai_id_button_mesage_cancel, 'Annulla');
 		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
 		trans_setHtmlText(sai_id_text_message_size, 'Dimensione del messaggio:');
@@ -1603,7 +1613,7 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'pic6: 5-Yen-Münze');
 		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'pic7: Lärm, Lärm');
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'pic8: Verrückte Farben');
-		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'pic9: Goldene Spirale');
+		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'pic9: Logarithmische Spirale 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'pic10: Analoge Scheibe');
 		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'pic11: Mischwirbel');
 		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'pic12: 1. Farbbildschirm');
@@ -1618,6 +1628,8 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_fullscreen_mode, 'Vollbildmodus:');
 		trans_setHtmlText(sai_id_page_message_header, 'Nachricht');
 		trans_setHtmlText(sai_id_button_mesage_reset, 'Zurücksetzen');
+		trans_setHtmlText(sai_id_color_1st_reset, 'Zurücksetzen');
+		trans_setHtmlText(sai_id_color_2nd_reset, 'Zurücksetzen');
 		trans_setHtmlText(sai_id_button_mesage_cancel, 'Stornieren');
 		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
 		trans_setHtmlText(sai_id_text_message_size, 'Größe der Nachricht:');
@@ -1678,7 +1690,7 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'pic6: 5-Yen Coin');
 		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'pic7: Clamor Clamor');
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'pic8: Crazy Colors');
-		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'pic9: Golden Spiral');
+		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'pic9: Logarithmic Spiral 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'pic10: Analog Disc');
 		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'pic11: Mixed Spiral');
 		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'pic12: 1st color screen');
@@ -1693,6 +1705,8 @@ function trans_localize(lang){
 		trans_setHtmlText(sai_id_text_fullscreen_mode, 'Fullscreen mode:');
 		trans_setHtmlText(sai_id_page_message_header, 'Message');
 		trans_setHtmlText(sai_id_button_mesage_reset, 'Reset');
+		trans_setHtmlText(sai_id_color_1st_reset, 'Reset');
+		trans_setHtmlText(sai_id_color_2nd_reset, 'Reset');
 		trans_setHtmlText(sai_id_button_mesage_cancel, 'Cancel');
 		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
 		trans_setHtmlText(sai_id_text_message_size, 'Size of message:');

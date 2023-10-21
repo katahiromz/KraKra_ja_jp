@@ -1245,7 +1245,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			let delta_theta = 2 * Math.PI * i / num_lines;
 			// 対数らせんの公式に従って頂点を追加していく。ただし偏角はdelta_thetaだけずらす。
 			let line = [[0, 0]];
-			for(let theta = 0; theta <= Math.PI * 2; theta += 0.1){
+			for(let theta = 0; theta <= 2 * Math.PI; theta += 0.1){
 				let r = a * Math.exp(b * theta);
 				let comp = new Complex({abs:r, arg:theta + delta_theta});
 				let x = comp.re, y = comp.im;
@@ -1485,11 +1485,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 画面中央を原点とする。
 		ctx.translate(qx, qy);
 
-		// 映像の進行を表す変数。
-		let factor = SAI_get_tick_count() * 0.2;
-
 		// これから描画する図形を回転する。
-		ctx.rotate(factor);
+		ctx.rotate(SAI_get_tick_count() * -0.2);
 
 		ctx.fillStyle = sai_id_color_1st.value; // 1番目ので描画する。
 
@@ -1502,7 +1499,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			// アルキメデスのらせんの公式に従って描画する。ただし偏角はdelta_thetaだけずらす。
 			let line = [];
 			line.push([0, 0]);
-			for(let theta = 0; theta <= Math.PI * 2 * 10; theta += 0.1){
+			for(let theta = 0; theta <= 2 * Math.PI * 10; theta += 0.1){
 				let r = a * theta;
 				let comp = new Complex({abs:r, arg:theta + delta_theta});
 				let x = comp.re, y = comp.im;
@@ -1908,7 +1905,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			let a = 1, b = 0.3063489;
 			let line = [];
 			line.push([0, 0]);
-			for(let theta = 0; theta <= Math.PI * 2 * 10; theta += 0.1){
+			for(let theta = 0; theta <= 2 * Math.PI * 10; theta += 0.1){
 				let r = a * Math.exp(b * theta);
 				let comp = new Complex({abs:r, arg:theta + delta_theta});
 				let x = comp.re, y = comp.im;
