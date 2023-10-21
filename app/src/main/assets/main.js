@@ -3067,8 +3067,11 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// アプリの初期化ボタン。
 		sai_id_button_init_app.addEventListener('click', function(e){
-			localStorage.clear();
-			location.reload();
+			if(confirm(trans_getText('TEXT_INIT_APP'))){
+				alert(trans_getText('TEXT_INITTED_APP'));
+				localStorage.clear();
+				location.reload();
+			}
 		});
 	}
 
