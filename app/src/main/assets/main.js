@@ -4,7 +4,6 @@
 const sai_VERSION = '3.5.4'; // KraKraバージョン番号。
 const sai_DEBUGGING = false; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
-let sai_stopping = true; // 停止中か？
 
 // 【KraKra JavaScript 命名規則】
 //
@@ -33,9 +32,10 @@ function SAI_on_keydown_message(e){
 // ドキュメントの読み込みが完了（DOMContentLoaded）されたら無名関数が呼び出される。
 document.addEventListener('DOMContentLoaded', function(){
 	// 変数を保護するため、関数内部に閉じ込める。
-	const sai_NUM_TYPE = 16; // 「画」の個数。
+	const sai_NUM_TYPE = 17; // 「画」の個数。
 	let sai_screen_width = 0; // スクリーンの幅（ピクセル単位）を覚えておく。
 	let sai_screen_height = 0; // スクリーンの高さ（ピクセル単位）を覚えておく。
+	let sai_stopping = true; // 停止中か？
 	let sai_old_time = (new Date()).getTime(); // 処理フレームの時刻を覚えておく。
 	let sai_counter = 0; // 映像を動かす変数。
 	let sai_clock = 0; // スピードが不規則のときに映像の速さを変化させる変数。
@@ -67,6 +67,9 @@ document.addEventListener('DOMContentLoaded', function(){
 	let sai_user_message_list = []; // メッセージリスト。
 	let sai_releasing_sound = null; // 催眠解除の音声。
 	let sai_message_size = 2; // メッセージの寸法。
+	let sai_kaleido_radius = 50; // 万華鏡の細胞の半径。
+	let sai_kaleido_canvas_1 = null; // 万華鏡用の一時的なキャンバス1。
+	let sai_kaleido_canvas_2 = null; // 万華鏡用の一時的なキャンバス2。
 
 	// このアプリはネイティブアプリか？
 	function SAI_is_native_app(){
@@ -679,6 +682,9 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 映像の進行を支配する関数。
 	function SAI_get_tick_count(){
 		return sai_counter;
+	}
+	function SAI_get_tick_count_2(){
+		return sai_counter * 10000 / (1 + Math.min(sai_screen_width, sai_screen_height));
 	}
 
 	// 映像の種類を取得する。
@@ -2110,33 +2116,152 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
-	// 映像「画12: 1番目の色の画面」の描画。
-	// pic12: 1st color screen
+	// 万華鏡のソースの多角形を作成する。
+	function SAI_create_kaleido_polygon(radius){
+		const ROTATE2 = true;
+		let counter = SAI_get_tick_count_2() * 2;
+		return Kaleido_regular_polygon(3, {x:0, y:0}, radius, ROTATE2 ? counter * 0.0005 : -Math.PI / 2);
+	}
+
+	// 円を描画する。
+	function SAI_draw_circle_3(ctx, radius, center, velocity, fillStyle){
+		let counter = SAI_get_tick_count_2();
+		let px = sai_kaleido_radius * Math.cos(counter * velocity.x * 0.0003) * 0.3;
+		let py = sai_kaleido_radius * Math.sin(counter * velocity.y * 0.0003) * 0.3;
+		let radius2 = radius * (3 + Math.sin(counter * 0.001 + (velocity.x + velocity.y) % Math.PI));
+		radius2 *= sai_kaleido_radius / 1000;
+		radius2 += 20;
+		if(false){
+			SAI_draw_circle_2(ctx, px, py, radius2);
+		}else{
+			Kaleido_draw_circle(ctx, {x:px, y:py}, radius2);
+			ctx.fillStyle = fillStyle;
+			ctx.fill();
+		}
+	}
+
+	// 万華鏡のソースを描画する。
+	function draw_kaleido_source(ctx, px, py, dx, dy){
+		// 現在の状態を保存する。
+		ctx.save();
+
+		// 映像の進行をつかさどる変数。
+		let counter = SAI_get_tick_count_2();
+
+		// 背景を塗りつぶす。
+		ctx.fillStyle = `hsl(${(counter * 0.1 + 0.2) % 360}deg, 40%, 50%)`;
+		ctx.fillRect(px, py, dx, dy);
+
+		// 中心を原点とする。
+		let cx = px + dx / 2, cy = py + dy / 2;
+		ctx.translate(cx, cy);
+
+		// 格子状の模様を描画する。
+		const GRIDS = true;
+		if(GRIDS){
+			ctx.lineWidth = 3;
+			ctx.strokeStyle = SAI_color_get_1st();
+			let factor = Math.abs(Math.sin(counter * 0.003) + 3);
+			const ROTATE1 = true;
+			if(ROTATE1){
+				ctx.rotate((counter * 0.0002 % 1) * 2 * Math.PI);
+			}
+			const dxy = Math.min(dx, dy) * 0.2;
+			ctx.fillStyle = "pink";
+			for(let y = factor; y < dxy; y += 10 * factor){
+				SAI_draw_line_2(ctx, -dx / 2, y, +dx / 2, y, 5);
+				SAI_draw_line_2(ctx, -dx / 2, -y, +dx / 2, -y, 5);
+			}
+			for(let x = -factor; x < dxy; x += 10 * factor){
+				SAI_draw_line_2(ctx, x, -dy / 2, x, +dy / 2, 5);
+				SAI_draw_line_2(ctx, -x, -dy / 2, -x, +dy / 2, 5);
+			}
+		}
+
+		// ポリゴンを構築する。
+		let polygon = SAI_create_kaleido_polygon(sai_kaleido_radius);
+		if(true){
+			// ポリゴンを描画する。
+			Kaleido_draw_polygon(ctx, polygon);
+			ctx.stroke();
+		}
+
+		// 泡を描画する。
+		const BUBBLES = true;
+		if(BUBBLES){
+			const s = Math.min(ctx.canvas.width, ctx.canvas.height);
+			const color1 = `hsla(${(counter * 0.15 + 2) % 360}deg, 100%, 50%, 60%)`;
+			const color2 = `hsla(${(counter * 0.2 + 0.5) % 360}deg, 100%, 50%, 40%)`;
+			const color3 = `hsla(${(counter * 0.1333 + 1) % 360}deg, 100%, 50%, 60%)`;
+			const color4 = `hsla(${(counter * 0.3 + 2.3) % 360}deg, 100%, 50%, 40%)`;
+			SAI_draw_circle_3(ctx, s * 2 / 24, { x: s * 0.125 * 1, y: s * 0.125 * 5 }, { x: 0.01 * s, y: 0.02 * s }, color1);
+			SAI_draw_circle_3(ctx, s * 3 / 24, { x: s * 0.125 * 4, y: s * 0.125 * 2 }, { x: 0.02 * s, y: 0.01 * s }, color2);
+			SAI_draw_circle_3(ctx, s * 1 / 24, { x: s * 0.125 * 5, y: s * 0.125 * 5 }, { x: -0.02 * s, y: 0.02 * s }, color3);
+			SAI_draw_circle_3(ctx, s * 1.5 / 20, { x: s * 0.125 * 3, y: s * 0.125 * 7 }, { x: -0.015 * s, y: 0.03 * s }, color4);
+		}
+
+		ctx.restore();
+	}
+
+	// 映像「画12: 万華鏡」の描画。
+	// pic12: Kaleidoscope
 	function SAI_draw_pic_12(ctx, px, py, dx, dy){
+		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
+
+		if(false){
+			// 万華鏡のソースを描画する。
+			draw_kaleido_source(ctx, px, py, dx, dy);
+		}else{
+			// 1番目の色で長方形領域を塗りつぶす。
+			ctx.fillStyle = 'black';
+			ctx.fillRect(px, py, dx, dy);
+
+			// 万華鏡のソースを描画する。
+			sai_kaleido_canvas_1 = Kaleido_create_empty_canvas(sai_kaleido_canvas_1, dx, dy);
+			let ctx1 = sai_kaleido_canvas_1.getContext('2d', { alpha: false });
+			draw_kaleido_source(ctx1, 0, 0, dx, dy);
+
+			// 中点を原点とする。
+			ctx1.translate(dx / 2, dy / 2);
+
+			// 万華鏡のキャンバスを作成し、万華鏡を描画する。
+			let polygon = SAI_create_kaleido_polygon(sai_kaleido_radius);
+			sai_kaleido_canvas_2 =
+				Kaleido_create_drawn_canvas(sai_kaleido_canvas_2,
+					sai_kaleido_radius, dx, dy, ctx1, polygon);
+			ctx.drawImage(sai_kaleido_canvas_2, 0, 0, dx, dy, px, py, dx, dy);
+		}
+
+		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
+	}
+
+	// 映像「画13: 1番目の色の画面」の描画。
+	// pic13: 1st color screen
+	function SAI_draw_pic_13(ctx, px, py, dx, dy){
 		// 1番目の色で長方形領域を塗りつぶす。
 		ctx.fillStyle = SAI_color_get_1st();
 		ctx.fillRect(px, py, dx, dy);
 	}
 
-	// 映像「画13: 2番目の色の画面」の描画。
-	// pic13: 2st color screen
-	function SAI_draw_pic_13(ctx, px, py, dx, dy){
+	// 映像「画14: 2番目の色の画面」の描画。
+	// pic14: 2st color screen
+	function SAI_draw_pic_14(ctx, px, py, dx, dy){
 		// 2番目の色で長方形領域を塗りつぶす。
 		ctx.fillStyle = SAI_color_get_2nd();
 		ctx.fillRect(px, py, dx, dy);
 	}
 
-	// 映像「画14: ただの黒い画面」の描画。
-	// pic14: Black screen
-	function SAI_draw_pic_14(ctx, px, py, dx, dy){
+	// 映像「画15: ただの黒い画面」の描画。
+	// pic15: Black screen
+	function SAI_draw_pic_15(ctx, px, py, dx, dy){
 		// 黒で長方形領域を塗りつぶす。
 		ctx.fillStyle = '#000';
 		ctx.fillRect(px, py, dx, dy);
 	}
 
-	// 映像「画15: ただの白い画面」の描画。
-	// pic15: White screen
-	function SAI_draw_pic_15(ctx, px, py, dx, dy){
+	// 映像「画16: ただの白い画面」の描画。
+	// pic16: White screen
+	function SAI_draw_pic_16(ctx, px, py, dx, dy){
 		// 白で長方形領域を塗りつぶす。
 		ctx.fillStyle = '#fff';
 		ctx.fillRect(px, py, dx, dy);
@@ -2260,6 +2385,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		case 15:
 			SAI_draw_pic_15(ctx, px, py, dx, dy);
 			break;
+		case 16:
+			SAI_draw_pic_16(ctx, px, py, dx, dy);
+			break;
 		}
 	}
 
@@ -2312,8 +2440,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		for(;;){
 			ctx.font = text_size.toString() + 'px san-serif';
 			measure = ctx.measureText(text);
-			if (measure.width >= sai_screen_width * 0.9 ||
-			    measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent > 20) break;
+			if(measure.width >= sai_screen_width * 0.9 ||
+				measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent > 20) break;
 			text_size *= 1.1;
 		}
 		let x = sai_screen_width / 2, y = sai_screen_height * 0.15;
@@ -2348,7 +2476,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.fillStyle = "white";
 		for(let dy = -3; dy <= 3; ++dy){
 			for(let dx = -3; dx <= 3; ++dx){
-				if (Math.abs(dx) > 2 || Math.abs(dy) > 2)
+				if(Math.abs(dx) > 2 || Math.abs(dy) > 2)
 					ctx.fillText(text, x + dx, y + dy);
 			}
 		}
@@ -2372,7 +2500,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let measure = ctx.measureText(text);
 		let width = measure.width;
 		let height = measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent;
-		ctx.fillStyle = "red";
+		ctx.fillStyle = "white";
 		ctx.fillText(text, (sai_screen_width - width) / 2, height);
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
@@ -2765,7 +2893,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let saiminMessageCount = localStorage.getItem('saiminMessageCount');
 		saiminMessageCount = parseInt(saiminMessageCount);
 		sai_user_message_list = [];
-		for (let i = 0; i < saiminMessageCount; ++i){
+		for(let i = 0; i < saiminMessageCount; ++i){
 			let saiminMessage = localStorage.getItem('saiminMessage' + i.toString());
 			sai_user_message_list.push(saiminMessage);
 		}
@@ -2779,6 +2907,14 @@ document.addEventListener('DOMContentLoaded', function(){
 			localStorage.setItem('saiminMessage' + i.toString(), item);
 			++i;
 		}
+	}
+
+	// 画面のサイズが変わったときに呼び出される関数。
+	function SAI_screen_resize(){
+		console.log(`innerWidth:${window.innerWidth}, innerHeight:${window.innerHeight}`);
+		sai_screen_width = window.innerWidth;
+		sai_screen_height = window.innerHeight;
+		sai_kaleido_radius = Math.min(window.innerWidth, window.innerHeight) * 0.2;
 	}
 
 	// イベントリスナー群を登録する。
@@ -3088,10 +3224,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// ウィンドウのサイズ変更や画面の回転を検出する。
 		window.addEventListener('resize', function(){
-			console.log(`innerWidth:${window.innerWidth}, innerHeight:${window.innerHeight}`);
-			sai_screen_width = window.innerWidth;
-			sai_screen_height = window.innerHeight;
+			SAI_screen_resize();
 		}, false);
+		SAI_screen_resize();
 
 		// マイクボタンの実装。
 		let mic_isInited = false;
@@ -3174,10 +3309,12 @@ document.addEventListener('DOMContentLoaded', function(){
 		});
 		sai_id_color_1st_reset.addEventListener('click', function(e){
 			sai_id_color_1st.value = "#ff00ff";
+			sai_id_checkbox_color_1st_rainbow.checked = false;
 			localStorage.setItem('saimin1stColor', sai_id_color_1st.value);
 		});
 		sai_id_color_2nd_reset.addEventListener('click', function(e){
 			sai_id_color_2nd.value = "#000000";
+			sai_id_checkbox_color_2nd_rainbow.checked = false;
 			localStorage.setItem('saimin2ndColor', sai_id_color_2nd.value);
 		});
 

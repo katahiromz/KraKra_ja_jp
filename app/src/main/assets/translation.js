@@ -506,6 +506,7 @@ When a keyboard is connected, the following operations are available:
 
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
+Copyright (c) 2023 TT
 Copyright (c) 2018 Robert Eisele
 `
 
@@ -563,6 +564,7 @@ Hypnosis KraKra
 
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
+Copyright (c) 2023 TT
 Copyright (c) 2018 Robert Eisele
 `
 
@@ -619,6 +621,7 @@ Hypnosis KraKra
 
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
+Copyright (c) 2023 TT
 Copyright (c) 2018 Robert Eisele
 `
 
@@ -675,6 +678,7 @@ Hypnosis KraKra
 
 Copyright (c) 2022-2023 片山博文MZ
 Copyright (c) 2023 Murayama Akira
+Copyright (c) 2023 TT
 Copyright (c) 2018 Robert Eisele
 `
 
@@ -731,6 +735,7 @@ Hypnosis KraKra
 
 Copyright (c) 2022-2023 片山博文MZ
 Copyright (c) 2023 Murayama Akira
+Copyright (c) 2023 TT
 Copyright (c) 2018 Robert Eisele
 `
 
@@ -787,6 +792,7 @@ Quando è collegata una tastiera, sono disponibili le seguenti operazioni:
 
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
+Copyright (c) 2023 TT
 Copyright (c) 2018 Robert Eisele
 `
 
@@ -843,6 +849,7 @@ Wenn eine Tastatur angeschlossen ist, stehen folgende Vorgänge zur Verfügung:
 
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
+Copyright (c) 2023 TT
 Copyright (c) 2018 Robert Eisele
 `
 
@@ -1238,10 +1245,11 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', '画9: 対数らせん2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', '画10: アナログディスク');
 		trans_setSelectOptionText(sai_id_select_pic_type, '11', '画11: ミックス渦巻き');
-		trans_setSelectOptionText(sai_id_select_pic_type, '12', '画12: 1番目の色の画面');
-		trans_setSelectOptionText(sai_id_select_pic_type, '13', '画13: 2番目の色の画面');
-		trans_setSelectOptionText(sai_id_select_pic_type, '14', '画14: ただの黒い画面');
-		trans_setSelectOptionText(sai_id_select_pic_type, '15', '画15: ただの白い画面');
+		trans_setSelectOptionText(sai_id_select_pic_type, '12', '画12: 万華鏡');
+		trans_setSelectOptionText(sai_id_select_pic_type, '13', '画13: 1番目の色の画面');
+		trans_setSelectOptionText(sai_id_select_pic_type, '14', '画14: 2番目の色の画面');
+		trans_setSelectOptionText(sai_id_select_pic_type, '15', '画15: ただの黒い画面');
+		trans_setSelectOptionText(sai_id_select_pic_type, '16', '画16: ただの白い画面');
 		trans_setHtmlText(sai_id_text_split, '画面分割:');
 		trans_setHtmlText(sai_id_text_speed, 'スピード:');
 		trans_setHtmlText(speed_irregular_label, '不規則');
@@ -1317,10 +1325,11 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', '图9: 对数螺线 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', '图10: 模拟光盘');
 		trans_setSelectOptionText(sai_id_select_pic_type, '11', '图11: ミックス渦巻き');
-		trans_setSelectOptionText(sai_id_select_pic_type, '12', '图12: 第一个彩色屏幕');
-		trans_setSelectOptionText(sai_id_select_pic_type, '13', '图13: 第二个彩色屏幕');
-		trans_setSelectOptionText(sai_id_select_pic_type, '14', '图14：只是黑屏');
-		trans_setSelectOptionText(sai_id_select_pic_type, '15', '图15：只是白屏');
+		trans_setSelectOptionText(sai_id_select_pic_type, '12', '图12: 万花筒');
+		trans_setSelectOptionText(sai_id_select_pic_type, '13', '图13: 第一个彩色屏幕');
+		trans_setSelectOptionText(sai_id_select_pic_type, '14', '图14: 第二个彩色屏幕');
+		trans_setSelectOptionText(sai_id_select_pic_type, '15', '图15：只是黑屏');
+		trans_setSelectOptionText(sai_id_select_pic_type, '16', '图16：只是白屏');
 		trans_setHtmlText(sai_id_text_split, '分屏：');
 		trans_setHtmlText(sai_id_text_speed, '速度：');
 		trans_setHtmlText(speed_irregular_label, '不规律的');
@@ -1396,10 +1405,11 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', '圖9: 對數螺線 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', '圖10: 類比光碟');
 		trans_setSelectOptionText(sai_id_select_pic_type, '11', '圖11: 混合漩涡');
-		trans_setSelectOptionText(sai_id_select_pic_type, '12', '圖12: 第一个彩色屏幕');
-		trans_setSelectOptionText(sai_id_select_pic_type, '13', '圖13: 第二个彩色屏幕');
-		trans_setSelectOptionText(sai_id_select_pic_type, '14', '圖14: 只是黑屏');
-		trans_setSelectOptionText(sai_id_select_pic_type, '15', '圖15: 只是白屏');
+		trans_setSelectOptionText(sai_id_select_pic_type, '12', '圖12: 萬花筒');
+		trans_setSelectOptionText(sai_id_select_pic_type, '13', '圖13: 第一个彩色屏幕');
+		trans_setSelectOptionText(sai_id_select_pic_type, '14', '圖14: 第二个彩色屏幕');
+		trans_setSelectOptionText(sai_id_select_pic_type, '15', '圖15: 只是黑屏');
+		trans_setSelectOptionText(sai_id_select_pic_type, '16', '圖16: 只是白屏');
 		trans_setHtmlText(sai_id_text_split, '分屏：');
 		trans_setHtmlText(sai_id_text_speed, '速度：');
 		trans_setHtmlText(speed_irregular_label, '不規律的');
@@ -1475,10 +1485,11 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'pic9: 로그 나선 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'pic10: 아날로그 디스크');
 		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'pic11: 믹스 소용돌이');
-		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'pic12: 첫 번째 컬러 화면');
-		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'pic13: 두 번째 색상 화면');
-		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'pic14: 그냥 검은 화면');
-		trans_setSelectOptionText(sai_id_select_pic_type, '15', 'pic15: 그냥 흰색 화면');
+		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'pic12: 만화경');
+		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'pic13: 첫 번째 컬러 화면');
+		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'pic14: 두 번째 색상 화면');
+		trans_setSelectOptionText(sai_id_select_pic_type, '15', 'pic15: 그냥 검은 화면');
+		trans_setSelectOptionText(sai_id_select_pic_type, '16', 'pic16: 그냥 흰색 화면');
 		trans_setHtmlText(sai_id_text_split, '화면 분할:');
 		trans_setHtmlText(sai_id_text_speed, '속도:');
 		trans_setHtmlText(speed_irregular_label, '불규칙');
@@ -1554,10 +1565,11 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'pic9: Spirale Logaritmica 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'pic10: Disco Analogico');
 		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'pic11: Mescolare il turbinio');
-		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'pic12: 1° schermo a colori');
-		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'pic13: 2° schermo a colori');
-		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'pic14: Solo uno schermo nero');
-		trans_setSelectOptionText(sai_id_select_pic_type, '15', 'pic15: Solo uno schermo bianco');
+		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'pic12: Caleidoscopio');
+		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'pic13: 1° schermo a colori');
+		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'pic14: 2° schermo a colori');
+		trans_setSelectOptionText(sai_id_select_pic_type, '15', 'pic15: Solo uno schermo nero');
+		trans_setSelectOptionText(sai_id_select_pic_type, '16', 'pic16: Solo uno schermo bianco');
 		trans_setHtmlText(sai_id_text_split, 'Divisione dello schermo:');
 		trans_setHtmlText(sai_id_text_speed, 'Velocità:');
 		trans_setHtmlText(speed_irregular_label, 'Irregolare');
@@ -1633,10 +1645,11 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'pic9: Logarithmische Spirale 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'pic10: Analoge Scheibe');
 		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'pic11: Mischwirbel');
-		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'pic12: 1. Farbbildschirm');
-		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'pic13: Zweiter Farbbildschirm');
-		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'pic14: Nur ein schwarzer Bildschirm');
-		trans_setSelectOptionText(sai_id_select_pic_type, '15', 'pic15: Nur ein weißer Bildschirm');
+		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'pic12: Kaleidoskop');
+		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'pic13: 1. Farbbildschirm');
+		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'pic14: Zweiter Farbbildschirm');
+		trans_setSelectOptionText(sai_id_select_pic_type, '15', 'pic15: Nur ein schwarzer Bildschirm');
+		trans_setSelectOptionText(sai_id_select_pic_type, '16', 'pic16: Nur ein weißer Bildschirm');
 		trans_setHtmlText(sai_id_text_split, 'Bildschirmaufteilung:');
 		trans_setHtmlText(sai_id_text_speed, 'Geschwindigkeit:');
 		trans_setHtmlText(speed_irregular_label, 'Irregulär');
@@ -1712,10 +1725,11 @@ function trans_localize(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'pic9: Logarithmic Spiral 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'pic10: Analog Disc');
 		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'pic11: Mixed Spiral');
-		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'pic12: 1st color screen');
-		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'pic13: 2st color screen');
-		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'pic14: Just a black screen');
-		trans_setSelectOptionText(sai_id_select_pic_type, '15', 'pic15: Just a white screen');
+		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'pic12: Kaleidoscope');
+		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'pic13: 1st color screen');
+		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'pic14: 2st color screen');
+		trans_setSelectOptionText(sai_id_select_pic_type, '15', 'pic15: Just a black screen');
+		trans_setSelectOptionText(sai_id_select_pic_type, '16', 'pic16: Just a white screen');
 		trans_setHtmlText(sai_id_text_split, 'Screen splitting:');
 		trans_setHtmlText(sai_id_text_speed, 'Speed:');
 		trans_setHtmlText(speed_irregular_label, 'Irregular');
