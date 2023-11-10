@@ -2416,7 +2416,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 必要なら映像効果をつけて映像を描画。
 	const SAI_draw_pic_with_effects = function(ctx, px, py, dx, dy){
 		// 一定の条件で画面点滅（サブリミナル）を表示。
-		if(!sai_stopping && !sai_count_down && sai_blinking_interval != 0 && !sai_hypnosis_releasing){
+		if(!sai_stopping && !sai_count_down && sai_blinking_interval != 0 && !sai_hypnosis_releasing_time){
 			if(SAI_mod(sai_old_time / 1000, sai_blinking_interval) < (sai_blinking_interval * 0.3)){
 				SAI_draw_subliminal(ctx, px, py, dx, dy);
 				return;
@@ -2933,8 +2933,9 @@ document.addEventListener('DOMContentLoaded', function(){
 	const SAI_register_event_listeners = function(){
 		// 「メッセージ」ボタン。
 		sai_id_button_message.addEventListener('click', function(){
-			if(sai_hypnosis_releasing)
-				return;
+			if(sai_hypnosis_releasing_time)
+				return; // 催眠解除中。
+			// メッセージ文字列の入力を促す。
 			let text = prompt(trans_getText('TEXT_INPUT_MESSAGE'), sai_message_text);
 			if(text !== null){
 				SAI_message_set_text(text);
@@ -3019,7 +3020,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 「音声再生」ボタン。
 		sai_id_button_sound_play.addEventListener('click', function(){
-			if(sai_hypnosis_releasing){
+			if(sai_hypnosis_releasing_time){ // 催眠解除中？
 				let lang = localStorage.getItem('saiminLanguage3');
 				if(!sai_releasing_sound)
 					sai_releasing_sound = new Audio(trans_getText('TEXT_MP3_RELEASED_HYPNOSIS'));
@@ -3227,11 +3228,11 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// スピーチをクリック。
 		sai_id_button_speech.addEventListener('click', function(e){
-			if(sai_hypnosis_releasing){
-				// 催眠解除のときは反応しない。
-			}else{
-				SAI_choose_page(sai_id_page_message);
-			}
+			if(sai_hypnosis_releasing_time)
+				return; // 催眠解除中のときは反応しない。
+
+			// メッセージリストダイアログを表示。
+			SAI_choose_page(sai_id_page_message);
 		});
 
 		// ウィンドウのサイズ変更や画面の回転を検出する。
