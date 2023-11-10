@@ -383,7 +383,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// スピーチを開始する。
-	const SAI_speech_start = function(text){
+	const SAI_speech_start = function(text, once_only = false){
 		console.log('SAI_speech_start');
 
 		// 開始する前にいったんキャンセルする。
@@ -400,7 +400,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			android.speechLoop(text, voice_volume);
 		}catch(error){ // Androidではない。Web側のスピーチを開始する。
 			if(window.speechSynthesis){ // 音声合成に対応していれば
-				text = text.repeat(32); // 32回繰り返す。
+				if(!once_only)
+					text = text.repeat(32); // 32回繰り返す。
 				let speech = new SpeechSynthesisUtterance(text);
 				speech.pitch = 0.6; // 音声の高さ。
 				speech.rate = 0.4; // 音声の速さ。
@@ -3402,6 +3403,11 @@ document.addEventListener('DOMContentLoaded', function(){
 			}else{
 				localStorage.removeItem('saimin2ndColorRainbow');
 			}
+		});
+
+		// スピーチの音量の設定
+		sai_id_button_voice_play.addEventListener('click', function(e){
+			SAI_speech_start(sai_message_text, true);
 		});
 	}
 
