@@ -417,7 +417,7 @@ const trans_DEFAULT_MESSAGE_LIST_DE = [
 	"Wie wäre es mit heute Nacht?",
 ];
 
-function trans_message_list(){
+const trans_message_list = function(){
 	// {{LANGUAGE_SPECIFIC}}
 	if(trans_currentLanguage == 'ja' || trans_currentLanguage == 'ja-JP') // Japanese
 		return trans_DEFAULT_MESSAGE_LIST_JA;
@@ -435,7 +435,7 @@ function trans_message_list(){
 		return trans_DEFAULT_MESSAGE_LIST_EN;
 }
 
-function trans_message_placefolder(){
+const trans_message_placefolder = function(){
 	// {{LANGUAGE_SPECIFIC}}
 	if(trans_currentLanguage == 'ja' || trans_currentLanguage == 'ja-JP') // Japanese
 		return "メッセージを入力";
@@ -854,7 +854,7 @@ Copyright (c) 2018 Robert Eisele
 `
 
 // {{LANGUAGE_SPECIFIC}}
-function trans_getText(str_id){
+const trans_getText = function(str_id){
 	let lang = localStorage.getItem('saiminLanguage3');
 	if(!lang)
 		lang = 'en';
@@ -1134,13 +1134,13 @@ function trans_getText(str_id){
 	}
 }
 
-function trans_setHtmlText(id, text){
+const trans_setHtmlText = function(id, text){
 	if(typeof(id) == 'string')
 		id = document.getElementById(id);
 	id.textContent = text;
 }
 
-function trans_setSelectOptionText(id, value, text){
+const trans_setSelectOptionText = function(id, value, text){
 	if(typeof(id) == 'string')
 		id = document.getElementById(id);
 	value = value.toString();
@@ -1153,7 +1153,7 @@ function trans_setSelectOptionText(id, value, text){
 	}
 }
 
-function trans_getSelectOptionText(id, value){
+const trans_getSelectOptionText = function(id, value){
 	if(typeof(id) == 'string')
 		id = document.getElementById(id);
 	value = value.toString();
@@ -1166,14 +1166,14 @@ function trans_getSelectOptionText(id, value){
 	return "";
 }
 
-function trans_setImageSrc(id, src){
+const trans_setImageSrc = function(id, src){
 	if(typeof(id) == 'string')
 		id = document.getElementById(id);
 	id.src = src;
 }
 
 // {{LANGUAGE_SPECIFIC}}
-function trans_getDefaultLanguage(){
+const trans_getDefaultLanguage = function(){
 	switch (navigator.language){
 	case 'zh':
 	case 'zh-CN':
@@ -1211,7 +1211,7 @@ function trans_getDefaultLanguage(){
 }
 
 // {{LANGUAGE_SPECIFIC}}
-function trans_localize(lang){
+const trans_localize = function(lang){
 	localStorage.setItem('saiminLanguage3', lang);
 	trans_currentLanguage = lang;
 	if(lang == 'ja' || lang == 'jp'){ // Japanese

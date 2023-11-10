@@ -1,7 +1,7 @@
 var mic_audio = null;
 var mic_microphone = null;
 
-function mic_setup(){
+const mic_setup = function(){
   navigator.mediaDevices = navigator.mediaDevices || ((navigator.mozGetUserMedia || navigator.webkitGetUserMedia) ? {
     getUserMedia: function(c){
       return new Promise(function(y, n){
@@ -16,7 +16,7 @@ function mic_setup(){
   return true;
 }
 
-function mic_connect(){
+const mic_connect = function(){
   if (mic_audio){
     mic_microphone.connect(mic_audio.destination);
     return true;
@@ -41,7 +41,7 @@ function mic_connect(){
   return true;
 }
 
-function mic_disconnect(){
+const mic_disconnect = function(){
   if (mic_microphone){
     mic_microphone.disconnect();
   }

@@ -3,7 +3,7 @@
 // Copyright (C) 2023 TT.
 
 // 正多角形の頂点の配列を返す関数。
-function Kaleido_regular_polygon(n, center, radius, diff_angle = -Math.PI / 2){
+const Kaleido_regular_polygon = function(n, center, radius, diff_angle = -Math.PI / 2){
 	const ret = [];
 	const angleIncrement = (2 * Math.PI) / n;
 	let angle = diff_angle;
@@ -17,7 +17,7 @@ function Kaleido_regular_polygon(n, center, radius, diff_angle = -Math.PI / 2){
 }
 
 // 長方形ポリゴンの頂点の配列を返す関数。
-function Kaleido_polygon_rectangle(center, width, height){
+const Kaleido_polygon_rectangle = function(center, width, height){
 	return [
 		{x: center.x - width / 2, y: center.y - height / 2},
 		{x: center.x + width / 2, y: center.y - height / 2},
@@ -27,7 +27,7 @@ function Kaleido_polygon_rectangle(center, width, height){
 }
 
 // 多角形を描画する関数。
-function Kaleido_draw_polygon(ctx, polygon){
+const Kaleido_draw_polygon = function(ctx, polygon){
 	ctx.beginPath();
 	let first = true;
 	for(let vertex of polygon){
@@ -41,23 +41,23 @@ function Kaleido_draw_polygon(ctx, polygon){
 }
 
 // 円を描画する関数。
-function Kaleido_draw_circle(ctx, center, radius){
+const Kaleido_draw_circle = function(ctx, center, radius){
 	ctx.beginPath();
 	ctx.arc(center.x, center.y, radius, 0, 2 * Math.PI, false);
 }
 
 // 度をラジアンに変換する関数。
-function Kaleido_deg2rad(degree){
+const Kaleido_deg2rad = function(degree){
 	return degree * Math.PI / 180;
 }
 
 // 負の浮動小数点数を受け付ける剰余関数。
-function Kaleido_mod(x, y){
+const Kaleido_mod = function(x, y){
 	return ((x % y) + y) % y;
 }
 
 // 指定したサイズでキャンバスを作成する。
-function Kaleido_create_empty_canvas(canvas, width, height, do_fill = false){
+const Kaleido_create_empty_canvas = function(canvas, width, height, do_fill = false){
 	if(!canvas)
 		canvas = document.createElement('canvas');
 	if(canvas.width != width || canvas.height != height){
@@ -72,7 +72,7 @@ function Kaleido_create_empty_canvas(canvas, width, height, do_fill = false){
 }
 
 // 頂点が可視かどうか？
-function Kaleido_point_visible(ctx, point){
+const Kaleido_point_visible = function(ctx, point){
 	let canvas = ctx.canvas;
 	if(!(0 <= point.x && point.x < canvas.width))
 		return false;
@@ -82,7 +82,7 @@ function Kaleido_point_visible(ctx, point){
 }
 
 // ２つの長方形の交差部分を返す関数。
-function Kaleido_intersect_rectangle(rect1, rect2){
+const Kaleido_intersect_rectangle = function(rect1, rect2){
 	if(rect1.width <= 0 || rect1.height <= 0 || rect2.width <= 0 || rect2.height <= 0)
 		return false;
 	let x0 = Math.max(rect1.x, rect2.x);
@@ -96,7 +96,7 @@ function Kaleido_intersect_rectangle(rect1, rect2){
 }
 
 // 座標変換したポリゴンが可視か？
-function Kaleido_transformed_polygon_visible(ctx, polygon){
+const Kaleido_transformed_polygon_visible = function(ctx, polygon){
 	let transform = ctx.getTransform();
 	let minx = 1000000, miny = 1000000, maxx = -1000000, maxy = -1000000;
 	for(let vertex of polygon){
@@ -114,7 +114,7 @@ function Kaleido_transformed_polygon_visible(ctx, polygon){
 }
 
 // 万華鏡を描画する再帰関数。
-function Kaleido_draw_cells_recursive(ctx2, polygon, ctx1, radius, done){
+const Kaleido_draw_cells_recursive = function(ctx2, polygon, ctx1, radius, done){
 	// 現在の状態を保存する。
 	ctx2.save();
 
@@ -203,7 +203,7 @@ function Kaleido_draw_cells_recursive(ctx2, polygon, ctx1, radius, done){
 // @param ctx1 転送元。
 // @param radius 細胞の半径。
 // @param done 処理を完了した細胞の原点の配列。最初は [] を指定する。
-function Kaleido_draw(ctx2, polygon, ctx1, radius){
+const Kaleido_draw = function(ctx2, polygon, ctx1, radius){
 	let done = [];
 	Kaleido_draw_cells_recursive(ctx2, polygon, ctx1, radius, done);
 }
@@ -214,7 +214,7 @@ function Kaleido_draw(ctx2, polygon, ctx1, radius){
 // @param height キャンバスの高さ。
 // @param ctx1 転送元。
 // @param polygon regular_polygonなどを使って構築されたポリゴン。
-function Kaleido_create_drawn_canvas(canvas, radius, width, height, ctx1, polygon = null, origin = null){
+const Kaleido_create_drawn_canvas = function(canvas, radius, width, height, ctx1, polygon = null, origin = null){
 	canvas = Kaleido_create_empty_canvas(canvas, width, height);
 	const ctx = canvas.getContext('2d', { alpha: false });
 	ctx.save();

@@ -11,17 +11,19 @@ let sai_FPS = 0; // 実測フレームレート。
 // - 変数名・定数名の頭に sai_ を付ける。
 // - 要素IDの頭に sai_id_ を付ける。
 // - CSSクラスの頭に sai_class_ を付ける。
-//
-// ※ 言語特有の記述が必要な個所は「{{LANGUAGE_SPECIFIC}}」というコメントを付けること。
+
+// 【KraKra コーディング ルール】
+// - 言語特有の記述が必要な個所は「{{LANGUAGE_SPECIFIC}}」というコメントを付けること。
+// - 関数はすべてconst変数にすること。functionキーワードは省略しないこと。
 
 // メッセージ項目がクリックされた。
-function SAI_on_click_message(id){
+const SAI_on_click_message = function(id){
 	sai_id_text_message.value = id.textContent;
 	sai_id_text_message.focus();
 }
 
 // メッセージ項目でキーが入力された。
-function SAI_on_keydown_message(e){
+const SAI_on_keydown_message = function(e){
 	if(e.code == 'Enter' || e.key == ' '){
 		e.target.click();
 		return false;
@@ -72,12 +74,12 @@ document.addEventListener('DOMContentLoaded', function(){
 	let sai_kaleido_canvas_2 = null; // 万華鏡用の一時的なキャンバス2。
 
 	// このアプリはネイティブアプリか？
-	function SAI_is_native_app(){
+	const SAI_is_native_app = function(){
 		return navigator.userAgent.indexOf('/KraKra-native-app/') != -1;
 	}
 
 	// ネイティブアプリならバージョン番号を取得する。
-	function SAI_get_native_app_version(){
+	const SAI_get_native_app_version = function(){
 		let results = navigator.userAgent.match(/\/KraKra-native-app\/([\d\.]+)\//);
 		if(results)
 			return results[1];
@@ -85,12 +87,12 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// HTMLの特殊文字を置換。
-	function SAI_htmlspecialchars(str){
+	const SAI_htmlspecialchars = function(str){
 		return (str + '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#039;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); 
 	}
 
 	// メッセージリストを作成する。
-	function SAI_populate_message_list(){
+	const SAI_populate_message_list = function(){
 		// メッセージリストを構築する。
 		let msg_list = trans_message_list();
 		msg_list = JSON.parse(JSON.stringify(msg_list)); // Deep Copy
@@ -113,8 +115,22 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_id_message_list.innerHTML = html;
 	}
 
+	// 音声が再生中か？
+	const SAI_sound_is_playing = function(){
+		return sai_sound_object && !sai_sound_object.paused;
+	}
+
+	// 音声を一時停止。
+	const SAI_sound_pause = function(){
+		// 再生中なら停止する。
+		if(SAI_sound_is_playing())
+			sai_sound_object.pause();
+		// 音声ボタンをチェックを外す。
+		sai_id_button_sound_play.classList.remove('sai_class_checked');
+	}
+
 	// ページを選択。
-	function SAI_choose_page(page_id){
+	const SAI_choose_page = function(page_id){
 		// まず、すべてのページを隠す。
 		let pages = document.getElementsByClassName('sai_class_page');
 		for(let page of pages){
@@ -166,17 +182,17 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// メッセージリストを表示する。
-	function SAI_message_list_show(){
+	const SAI_message_list_show = function(){
 		SAI_choose_page(sai_id_page_message);
 	}
 
 	// 負の浮動小数点数に対応した剰余（modular; 余り）関数。
-	function SAI_mod(x, y){
+	const SAI_mod = function(x, y){
 		return (x*y < 0) * y + x % y;
 	}
 
 	// きらめきに新しい星を追加する。
-	function SAI_star_add(x, y){
+	const SAI_star_add = function(x, y){
 		sai_stars.shift(); // 古い星を消す。
 
 		if(SAI_screen_is_large()){ // 画面が大きければ
@@ -194,7 +210,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// スピーチを中断する。
-	function SAI_speech_cancel(){
+	const SAI_speech_cancel = function(){
 		console.log('SAI_speech_cancel');
 		try{
 			android.cancelSpeech(); // スピーチのキャンセル。Androidでなければ失敗。
@@ -207,7 +223,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// メッセージをしゃべるかどうか？
-	function SAI_speech_set(value){
+	const SAI_speech_set = function(value){
 		switch(value){
 		case 0:
 		case '0':
@@ -234,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 画面点滅（サブリミナル）の種類を指定する。
-	function SAI_blink_set_type(value){
+	const SAI_blink_set_type = function(value){
 		value = parseInt(value); // 整数に変換。
 
 		// テキストとヘルツ数を取得する。
@@ -289,7 +305,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// KraKraの言語をセットして、UIをローカライズする。
-	function SAI_set_language(lang){
+	const SAI_set_language = function(lang){
 		// 言語が指定されてなければとりあえず英語。
 		if(!lang)
 			lang = 'en';
@@ -341,7 +357,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// スピーチに対応するために、テキストを調整する。
-	function SAI_adjust_text_for_speech(text){
+	const SAI_adjust_text_for_speech = function(text){
 		text = text.replace('～', 'ー');
 
 		// {{LANGUAGE_SPECIFIC}}
@@ -360,7 +376,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// スピーチを開始する。
-	async function SAI_speech_start(text){
+	const SAI_speech_start = function(text){
 		console.log('SAI_speech_start');
 
 		// 開始する前にいったんキャンセルする。
@@ -401,12 +417,12 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 大きな画面か？
-	function SAI_screen_is_large(){
+	const SAI_screen_is_large = function(){
 		return sai_screen_width >= 1200 || sai_screen_height >= 1200;
 	}
 
 	// 音量。
-	function SAI_sound_set_volume(value){
+	const SAI_sound_set_volume = function(value){
 		value = parseInt(value);
 
 		// 音量をセットする。
@@ -421,7 +437,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 音声オブジェクトを作成する。
-	function SAI_sound_create(){
+	const SAI_sound_create = function(){
 		// 音声名がなければ音声オブジェクトなし。
 		if(!sai_sound_name){
 			if(sai_sound_object)
@@ -441,7 +457,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 音声の名前をセットし、音声オブジェクトを作成する。設定を保存する。
-	function SAI_sound_set_name(value){
+	const SAI_sound_set_name = function(value){
 		// 音声のバリデーション。
 		if(value.indexOf('sn') == 0)
 			value = '';
@@ -460,7 +476,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 映像切り替えの音の有無をセットする。
-	function SAI_set_type_sound(value, test = false){
+	const SAI_set_type_sound = function(value, test = false){
 		// ローカルストレージから来た値は文字列かもしれない。正規化。
 		switch(value){
 		case true:
@@ -488,7 +504,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 画面の明るさをセットする。
-	function SAI_screen_set_brightness(value){
+	const SAI_screen_set_brightness = function(value){
 		try{
 			// Android側で明るさをセット。Androidでなければ失敗。
 			android.setBrightness(value);
@@ -505,7 +521,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// メッセージの表示サイズをセットする。
-	function SAI_message_set_size(value){
+	const SAI_message_set_size = function(value){
 		// いったん、すべての文字サイズ設定クラスを削除。
 		sai_id_text_floating_1.classList.remove('sai_class_font_size_small');
 		sai_id_text_floating_1.classList.remove('sai_class_font_size_normal');
@@ -568,7 +584,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 映像スピードをセットする。
-	function SAI_speed_set_type(value){
+	const SAI_speed_set_type = function(value){
 		// まず「不規則」ではないことを仮定。
 		sai_speed_irregular = false;
 
@@ -633,7 +649,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 画面分割の種類をセットする。
-	function SAI_screen_set_split(value){
+	const SAI_screen_set_split = function(value){
 		value = parseInt(value); // 整数値に変換する。
 
 		// チェックボックスと変数を更新。
@@ -654,7 +670,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// カウントダウンの有無をセットする。なければカウントダウンしない。
-	function SAI_set_count_down(value){
+	const SAI_set_count_down = function(value){
 		// ローカルストレージから来た値は文字列かもしれない。複数の型に対応。
 		switch(value){
 		case "true":
@@ -680,20 +696,20 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 映像の進行を支配する関数。
-	function SAI_get_tick_count(){
+	const SAI_get_tick_count = function(){
 		return sai_counter;
 	}
-	function SAI_get_tick_count_2(){
+	const SAI_get_tick_count_2 = function(){
 		return sai_counter * 10000 / (1 + Math.min(sai_screen_width, sai_screen_height));
 	}
 
 	// 映像の種類を取得する。
-	function SAI_pic_get_type(){
+	const SAI_pic_get_type = function(){
 		return sai_pic_type;
 	};
 
 	// 映像の種類の整数値をセットする。
-	function SAI_pic_set_type(value){
+	const SAI_pic_set_type = function(value){
 		sai_pic_type = parseInt(value); // 整数に変換して変数に記憶。
 		if(sai_pic_type == -1){ // 「催眠解除」の場合。
 			// スピーチをキャンセル。
@@ -760,7 +776,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	};
 
 	// メッセージテキストをセットする。
-	function SAI_message_set_text(txt){
+	const SAI_message_set_text = function(txt){
 		console.log('SAI_message_set_text', txt);
 
 		// メッセージテキストを調整。
@@ -787,7 +803,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 映像の回転の向きをセットする。
-	function SAI_rotation_set(value){
+	const SAI_rotation_set = function(value){
 		// valueは文字列かもしれないし、ブール値かもしれない。
 		switch(value){
 		case 'normal':
@@ -810,7 +826,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// フルスクリーンモード。
-	function SAI_screen_set_fullscreen_mode(value){
+	const SAI_screen_set_fullscreen_mode = function(value){
 		switch(value){
 		case '1':
 		case 'true':
@@ -832,7 +848,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 音声の自動繰り返し。
-	function SAI_sound_set_auto_repeat(value){
+	const SAI_sound_set_auto_repeat = function(value){
 		switch(value){
 		case '1':
 		case 'true':
@@ -854,14 +870,14 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// スクリーンのサイズをセットする。必要ならキャンバスのサイズも変更する。
-	function SAI_screen_fit_canvas(){
+	const SAI_screen_fit_canvas = function(){
 		console.log('SAI_screen_fit_canvas');
 		sai_screen_width = sai_id_canvas_01.width = window.innerWidth;
 		sai_screen_height = sai_id_canvas_01.height = window.innerHeight;
 	}
 
 	// スクリーンのサイズをセットし、必要なら画面を復帰する。
-	function SAI_screen_fit(){
+	const SAI_screen_fit = function(){
 		SAI_screen_fit_canvas();
 		let position = { my: 'center', at: 'center', of: window };
 		if(localStorage.getItem('saiminHelpShowing')){
@@ -872,7 +888,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 「バージョン情報」にバージョン番号をセットする。
-	function SAI_update_version_display(){
+	const SAI_update_version_display = function(){
 		let nativeVersion = SAI_get_native_app_version();
 		let text = sai_id_text_version.textContent;
 		if(nativeVersion){
@@ -884,7 +900,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// ユーザを受け入れる。
-	function SAI_user_accepted(){
+	const SAI_user_accepted = function(){
 		// メインコントロール群を表示する。
 		SAI_show_main_controls(true);
 
@@ -905,7 +921,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 初期時の言語選択を自動化する。
-	function SAI_language_choose(){
+	const SAI_language_choose = function(){
 		// ローカルストレージから言語を取得。
 		let lang = localStorage.getItem('saiminLanguage3');
 		if(!lang){ // 取得できなければブラウザからデフォルトの言語を取得。
@@ -916,7 +932,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 「バージョン情報」ダイアログ。
-	function SAI_help_and_agreement(){
+	const SAI_help_and_agreement = function(){
 		// バージョン番号の表示を更新。
 		SAI_update_version_display();
 
@@ -944,7 +960,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 「設定」ダイアログ。
-	function SAI_config(){
+	const SAI_config = function(){
 		// ローカルストレージに表示状態を記憶。
 		localStorage.setItem('saiminConfigShowing', '1');
 
@@ -953,7 +969,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 円の描画。
-	function SAI_draw_circle(ctx, x, y, radius, is_fill = true){
+	const SAI_draw_circle = function(ctx, x, y, radius, is_fill = true){
 		ctx.beginPath();
 		ctx.arc(x, y, Math.abs(radius), 0, 2 * Math.PI);
 		ctx.closePath();
@@ -966,7 +982,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 円の描画２。
 	// いくつかの環境では大きな円を描くときにSAI_draw_circleを使うと遅くなる。
 	// こちらの関数は自前で円に近い図形（正多角形）を描画する。
-	function SAI_draw_circle_2(ctx, x, y, radius, is_fill = true, N = 16){
+	const SAI_draw_circle_2 = function(ctx, x, y, radius, is_fill = true, N = 16){
 		ctx.beginPath();
 		for(let i = 0; i < N; ++i){
 			let x0 = x + radius * Math.cos(2 * Math.PI * i / N);
@@ -985,7 +1001,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 線分の描画。
-	function SAI_draw_line(ctx, x0, y0, x1, y1, lineWidth){
+	const SAI_draw_line = function(ctx, x0, y0, x1, y1, lineWidth){
 		ctx.lineWidth = lineWidth;
 		ctx.beginPath();
 		ctx.moveTo(x0, y0);
@@ -996,7 +1012,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 線分の描画２。
 	// いくつかの環境ではSAI_draw_lineでかなり太い線を描くと時間がかかる。
 	// こちらの関数は自前で線をレンダリングする。
-	function SAI_draw_line_2(ctx, x0, y0, x1, y1, lineWidth){
+	const SAI_draw_line_2 = function(ctx, x0, y0, x1, y1, lineWidth){
 		let dx = x1 - x0, dy = y1 - y0;
 		let len = Math.sqrt(dx * dx + dy * dy);
 		let ux = dx / len, uy = dy / len;
@@ -1011,7 +1027,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// ハート形の描画。
-	function SAI_draw_heart(ctx, x0, y0, x1, y1){
+	const SAI_draw_heart = function(ctx, x0, y0, x1, y1){
 		let x2 = (0.6 * x0 + 0.4 * x1);
 		let y2 = (0.6 * y0 + 0.4 * y1);
 		let comp = new Complex({re:x1 - x0, im:y1 - y0});
@@ -1028,7 +1044,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 目の描画。
-	function SAI_draw_eye(ctx, x0, y0, r, opened = 1.0, alpha = 1.0){
+	const SAI_draw_eye = function(ctx, x0, y0, r, opened = 1.0, alpha = 1.0){
 		ctx.beginPath();
 		ctx.moveTo(x0 - r, y0);
 		const r025 = r * 0.25;
@@ -1055,7 +1071,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 目の描画２。
-	function SAI_draw_eye_2(ctx, x0, y0, r, opened = 1.0){
+	const SAI_draw_eye_2 = function(ctx, x0, y0, r, opened = 1.0){
 		ctx.beginPath();
 		ctx.moveTo(x0, y0 - r * 1.3);
 		const r025 = r * 0.25;
@@ -1076,7 +1092,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// きらめきの描画。
-	function SAI_draw_light(ctx, x0, y0, radius){
+	const SAI_draw_light = function(ctx, x0, y0, radius){
 		let r0 = radius;
 		let rmid = radius * 0.333;
 		ctx.beginPath();
@@ -1095,7 +1111,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 長方形領域(px, py, dx, dy)をクリッピングする。
-	function SAI_clip_rect(ctx, px, py, dx, dy){
+	const SAI_clip_rect = function(ctx, px, py, dx, dy){
 		ctx.beginPath();
 		ctx.moveTo(px, py);
 		ctx.lineTo(px + dx, py);
@@ -1106,7 +1122,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// サブリミナルの描画。
-	function SAI_draw_subliminal(ctx, px, py, dx, dy){
+	const SAI_draw_subliminal = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
@@ -1132,7 +1148,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像「画-1: 催眠解除」の描画。
 	// pic-1: Release Hyponosis
-	function SAI_draw_pic_minus_1(ctx, px, py, dx, dy){
+	const SAI_draw_pic_minus_1 = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
@@ -1184,7 +1200,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 1番目の色を取得。
-	function SAI_color_get_1st(){
+	const SAI_color_get_1st = function(){
 		if(sai_id_checkbox_color_1st_rainbow.checked){
 			let value = SAI_mod(SAI_get_tick_count() * 0.02, 1);
 			return `hsl(${value * 360 % 360}, 100%, 50%)`;
@@ -1194,7 +1210,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 2番目の色を取得。
-	function SAI_color_get_2nd(){
+	const SAI_color_get_2nd = function(){
 		if(sai_id_checkbox_color_2nd_rainbow.checked){
 			let value = SAI_mod(SAI_get_tick_count() * 0.02 + 0.5, 1);
 			return `hsl(${value * 360 % 360}, 100%, 50%)`;
@@ -1205,7 +1221,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像「画0: ダミー画面（練習用）」の描画。
 	// pic0: Dummy Screen (for practice)
-	function SAI_draw_pic_00(ctx, px, py, dx, dy){
+	const SAI_draw_pic_00 = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
@@ -1260,7 +1276,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像「画1: 対数らせん」の描画。
 	// pic1: Logarithmic Spiral
-	function SAI_draw_pic_01(ctx, px, py, dx, dy){
+	const SAI_draw_pic_01 = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
@@ -1327,7 +1343,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像「画2: 同心円状」の描画。
 	// pic2: Concentric Circles
-	function SAI_draw_pic_2_sub(ctx, px, py, dx, dy, flag=true){
+	const SAI_draw_pic_2_sub = function(ctx, px, py, dx, dy, flag=true){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
@@ -1381,14 +1397,14 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像「画2: 同心円状」の描画。
 	// pic2: Concentric Circles
-	function SAI_draw_pic_02(ctx, px, py, dx, dy){
+	const SAI_draw_pic_02 = function(ctx, px, py, dx, dy){
 		SAI_draw_pic_2_sub(ctx, px, py, dx, dy, true);
 		SAI_draw_pic_2_sub(ctx, px, py, dx, dy, false);
 	}
 
 	// 映像「画3: 目が回る」の描画。
 	// pic3: The Eyes
-	function SAI_draw_pic_03(ctx, px, py, dx, dy){
+	const SAI_draw_pic_03 = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
@@ -1518,7 +1534,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像「画4: アルキメデスのらせん」の描画。
 	// pic4: Archimedes' Spiral
-	function SAI_draw_pic_04(ctx, px, py, dx, dy){
+	const SAI_draw_pic_04 = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
@@ -1583,7 +1599,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像「画5: 広がるハート」の描画。
 	// pic5: Spreading Rainbow
-	function SAI_draw_pic_05(ctx, px, py, dx, dy){
+	const SAI_draw_pic_05 = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
@@ -1681,7 +1697,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像「画6: 五円玉」の描画。
 	// pic6: 5-yen coin
-	function SAI_draw_pic_06(ctx, px, py, dx, dy){
+	const SAI_draw_pic_06 = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
@@ -1776,7 +1792,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像「画7: ぼわんぼわん」の描画。
 	// pic7: Clamor Clamor
-	function SAI_draw_pic_07(ctx, px, py, dx, dy){
+	const SAI_draw_pic_07 = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
@@ -1851,7 +1867,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像「画8: クレージーな色」の描画。
 	// pic8: Crazy Colors
-	function SAI_draw_pic_08(ctx, px, py, dx, dy){
+	const SAI_draw_pic_08 = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
@@ -1927,7 +1943,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像「画9: 対数らせん2」の描画。
 	// pic9: Logarithmic Spiral 2
-	function SAI_draw_pic_09(ctx, px, py, dx, dy){
+	const SAI_draw_pic_09 = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
@@ -1996,7 +2012,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像「画10: アナログディスク」の描画。
 	// pic10: Analog Disc
-	function SAI_draw_pic_10(ctx, px, py, dx, dy){
+	const SAI_draw_pic_10 = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
@@ -2040,7 +2056,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像「画11: ミックス渦巻き」の描画。
 	// pic11: Mixed Spiral
-	function SAI_draw_pic_11(ctx, px, py, dx, dy){
+	const SAI_draw_pic_11 = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
@@ -2117,14 +2133,14 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 万華鏡のソースの多角形を作成する。
-	function SAI_create_kaleido_polygon(radius){
+	const SAI_create_kaleido_polygon = function(radius){
 		const ROTATE2 = true;
 		let counter = SAI_get_tick_count_2() * 2;
 		return Kaleido_regular_polygon(3, {x:0, y:0}, radius, ROTATE2 ? counter * 0.0005 : -Math.PI / 2);
 	}
 
 	// 円を描画する。
-	function SAI_draw_circle_3(ctx, radius, center, velocity, fillStyle){
+	const SAI_draw_circle_3 = function(ctx, radius, center, velocity, fillStyle){
 		let counter = SAI_get_tick_count_2();
 		let px = sai_kaleido_radius * Math.cos(counter * velocity.x * 0.0003) * 0.3;
 		let py = sai_kaleido_radius * Math.sin(counter * velocity.y * 0.0003) * 0.3;
@@ -2141,7 +2157,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 万華鏡のソースを描画する。
-	function draw_kaleido_source(ctx, px, py, dx, dy){
+	const draw_kaleido_source = function(ctx, px, py, dx, dy){
 		// 現在の状態を保存する。
 		ctx.save();
 
@@ -2205,7 +2221,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像「画12: 万華鏡」の描画。
 	// pic12: Kaleidoscope
-	function SAI_draw_pic_12(ctx, px, py, dx, dy){
+	const SAI_draw_pic_12 = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		if(false){
@@ -2237,7 +2253,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像「画13: 1番目の色の画面」の描画。
 	// pic13: 1st color screen
-	function SAI_draw_pic_13(ctx, px, py, dx, dy){
+	const SAI_draw_pic_13 = function(ctx, px, py, dx, dy){
 		// 1番目の色で長方形領域を塗りつぶす。
 		ctx.fillStyle = SAI_color_get_1st();
 		ctx.fillRect(px, py, dx, dy);
@@ -2245,7 +2261,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像「画14: 2番目の色の画面」の描画。
 	// pic14: 2st color screen
-	function SAI_draw_pic_14(ctx, px, py, dx, dy){
+	const SAI_draw_pic_14 = function(ctx, px, py, dx, dy){
 		// 2番目の色で長方形領域を塗りつぶす。
 		ctx.fillStyle = SAI_color_get_2nd();
 		ctx.fillRect(px, py, dx, dy);
@@ -2253,7 +2269,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像「画15: ただの黒い画面」の描画。
 	// pic15: Black screen
-	function SAI_draw_pic_15(ctx, px, py, dx, dy){
+	const SAI_draw_pic_15 = function(ctx, px, py, dx, dy){
 		// 黒で長方形領域を塗りつぶす。
 		ctx.fillStyle = '#000';
 		ctx.fillRect(px, py, dx, dy);
@@ -2261,14 +2277,14 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像「画16: ただの白い画面」の描画。
 	// pic16: White screen
-	function SAI_draw_pic_16(ctx, px, py, dx, dy){
+	const SAI_draw_pic_16 = function(ctx, px, py, dx, dy){
 		// 白で長方形領域を塗りつぶす。
 		ctx.fillStyle = '#fff';
 		ctx.fillRect(px, py, dx, dy);
 	}
 
 	// カウントダウン映像の描画。
-	function SAI_draw_pic_count_down(ctx, px, py, dx, dy){
+	const SAI_draw_pic_count_down = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
@@ -2328,7 +2344,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 映像の描画を一手に引き受ける。
-	function SAI_draw_pic(ctx, px, py, dx, dy){
+	const SAI_draw_pic = function(ctx, px, py, dx, dy){
 		if(sai_count_down){
 			SAI_draw_pic_count_down(ctx, px, py, dx, dy);
 			return;
@@ -2392,7 +2408,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 必要なら映像効果をつけて映像を描画。
-	function SAI_draw_pic_with_effects(ctx, px, py, dx, dy){
+	const SAI_draw_pic_with_effects = function(ctx, px, py, dx, dy){
 		// 一定の条件で画面点滅（サブリミナル）を表示。
 		if(!sai_stopping && !sai_count_down && sai_blinking_interval != 0 && sai_pic_type != -1){
 			if(SAI_mod(sai_old_time / 1000, sai_blinking_interval) < (sai_blinking_interval * 0.3)){
@@ -2420,7 +2436,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// メッセージテキストの位置をゆらゆら動かす。
-	function SAI_message_set_position(id, px, py, dx, dy, counter){
+	const SAI_message_set_position = function(id, px, py, dx, dy, counter){
 		let x = px + dx / 2 - id.clientWidth / 2;
 		let y = py + dy * 0.7 - id.clientHeight / 2 + (1 + 0.4 * Math.sin(counter * 0.1)) * dy * 0.1;
 		id.style.left = x + 'px';
@@ -2428,7 +2444,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 映像のキャプションを描画する。
-	function draw_caption(ctx){
+	const draw_caption = function(ctx){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 映像の種類のテキストを取得。
@@ -2487,7 +2503,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// FPSを描画する。
-	function draw_fps(ctx, diff_time){
+	const draw_fps = function(ctx, diff_time){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// FPSを描画する。
@@ -2507,7 +2523,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 映像をすべて描画する。
-	function SAI_draw_all(){
+	const SAI_draw_all = function(){
 		// 二次元の描画コンテキスト。キャンバスは不透明。
 		let ctx = sai_id_canvas_01.getContext('2d', { alpha: false });
 
@@ -2648,7 +2664,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// ローカルストレージから設定を読み込む。設定がなければ初期化する。
-	function SAI_load_local_storage(){
+	const SAI_load_local_storage = function(){
 		// ローカルストレージに催眠テキストがあれば読み込む。
 		let saiminText = localStorage.getItem('saiminText');
 		if(saiminText){
@@ -2778,14 +2794,14 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 必要ならば切り替え音を再生する。
-	function SAI_sound_play_switch(){
+	const SAI_sound_play_switch = function(){
 		if(sai_switch_sound_type == 1 && sai_switch_sound_object && sai_id_checkbox_switching_sound.checked){
 			sai_switch_sound_object.play();
 		}
 	}
 
 	// キャンバスがクリックされた。
-	function SAI_canvas_click(e){
+	const SAI_canvas_click = function(e){
 		if(sai_stopping) // 停止中なら無視。
 			return;
 
@@ -2822,13 +2838,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 	}
 
-	// 音声が再生中か？
-	function SAI_sound_is_playing(){
-		return sai_sound_object && !sai_sound_object.paused;
-	}
-
 	// 音声を再生開始。
-	function SAI_sound_start(is_mute = false){
+	const SAI_sound_start = function(is_mute = false){
 		// 必要ならば音声を作成。
 		if(!sai_sound_object)
 			SAI_sound_create();
@@ -2856,24 +2867,15 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_id_button_sound_play.classList.add('sai_class_checked');
 	}
 
-	// 音声を一時停止。
-	function SAI_sound_pause(){
-		// 再生中なら停止する。
-		if(SAI_sound_is_playing())
-			sai_sound_object.pause();
-		// 音声ボタンをチェックを外す。
-		sai_id_button_sound_play.classList.remove('sai_class_checked');
-	}
-
 	// 音声をミュート。
-	function SAI_sound_mute(){
+	const SAI_sound_mute = function(){
 		if(sai_sound_object){
 			sai_sound_object.volume = 0.0;
 		}
 	}
 
 	// メッセージリストに追加する。
-	function SAI_add_to_message_list(message){
+	const SAI_add_to_message_list = function(message){
 		// 空文字列は追加しない。
 		if(!message)
 			return;
@@ -2889,7 +2891,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// メッセージリストを読み込む。
-	function SAI_load_message_list(){
+	const SAI_load_message_list = function(){
 		let saiminMessageCount = localStorage.getItem('saiminMessageCount');
 		saiminMessageCount = parseInt(saiminMessageCount);
 		sai_user_message_list = [];
@@ -2900,7 +2902,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// メッセージリストを保存する。
-	function SAI_save_message_list(){
+	const SAI_save_message_list = function(){
 		localStorage.setItem('saiminMessageCount', sai_user_message_list.length.toString());
 		let i = 0;
 		for(let item of sai_user_message_list){
@@ -2910,7 +2912,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 画面のサイズが変わったときに呼び出される関数。
-	function SAI_screen_resize(){
+	const SAI_screen_resize = function(){
 		console.log(`innerWidth:${window.innerWidth}, innerHeight:${window.innerHeight}`);
 		sai_screen_width = window.innerWidth;
 		sai_screen_height = window.innerHeight;
@@ -2918,7 +2920,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// イベントリスナー群を登録する。
-	function SAI_register_event_listeners(){
+	const SAI_register_event_listeners = function(){
 		// 「メッセージ」ボタン。
 		sai_id_button_message.addEventListener('click', function(){
 			if(sai_pic_type == -1)
@@ -3355,7 +3357,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// キーボード操作を実装。
-	function SAI_register_key_bindings(){
+	const SAI_register_key_bindings = function(){
 		document.body.addEventListener('keydown', function(e){
 			if(e.ctrlKey || sai_id_page_main.classList.contains('sai_class_invisible'))
 				return;
@@ -3456,7 +3458,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// ツールボタンが見えるかどうか？
-	function SAI_are_tool_buttons_shown(){
+	const SAI_are_tool_buttons_shown = function(){
 		// ツールボタン群を取得する。ツールボタンは、sai_class_tool_buttonクラスを持つ要素。
 		let tool_buttons = document.getElementsByClassName('sai_class_tool_button');
 		for(let button of tool_buttons){
@@ -3467,7 +3469,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// メインのボタン群を表示または非表示にする。
-	function SAI_show_main_controls(show){
+	const SAI_show_main_controls = function(show){
 		// メインコントロール群を取得する。
 		// メインコントロールはsai_class_button_main_controlクラスを持つ要素。
 		let main_controls = document.getElementsByClassName('sai_class_button_main_control');
@@ -3496,7 +3498,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// メイン関数。
-	function SAI_main(){
+	const SAI_main = function(){
 		const argc = arguments.length, argv = arguments;
 
 		// スピーチをキャンセルする。
