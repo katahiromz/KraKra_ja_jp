@@ -93,6 +93,99 @@
 			</div>
 			<hr />
 			<div class="sai_class_ui_line">
+				<span id="sai_id_pic_type" class="sai_config_label">The type of picture:</span>
+			</div>
+			<div class="sai_class_ui_line">
+				<select id="sai_id_select_pic_type" title="sai_id_select_pic_type">
+					<option value="0" selected>pic0</option>
+					<option value="1">pic1</option>
+					<option value="2">pic2</option>
+					<option value="3">pic3</option>
+					<option value="4">pic4</option>
+					<option value="5">pic5</option>
+					<option value="6">pic6</option>
+					<option value="7">pic7</option>
+					<option value="8">pic8</option>
+					<option value="9">pic9</option>
+					<option value="10">pic10</option>
+					<option value="11">pic11</option>
+					<option value="12">pic12</option>
+					<option value="13">pic13</option>
+					<option value="14">pic14</option>
+					<option value="15">pic15</option>
+					<option value="16">pic16</option>
+				</select>
+			</div>
+			<hr />
+			<div class="sai_class_ui_line">
+				<span id="sai_id_text_split" class="sai_config_label">Screen splitting:</span>
+			</div>
+			<div class="sai_class_ui_line">
+				<label class="sai_class_toggle_button" title="Splitting">
+					<input type="checkbox" id="sai_id_checkbox_split" />
+					<span class="sai_class_slider"></span>
+					<span class="sai_class_toggle_label" data-on="ON" data-off="OFF"></span>
+				</label>
+			</div>
+			<hr />
+			<div class="sai_class_ui_line">
+				<span id="sai_id_text_count_down" class="sai_config_label">Count Down:</span>
+			</div>
+			<div class="sai_class_ui_line">
+				<label class="sai_class_toggle_button" title="Count Down">
+					<input type="checkbox" id="sai_id_checkbox_count_down" checked />
+					<span class="sai_class_slider"></span>
+					<span class="sai_class_toggle_label" data-on="ON" data-off="OFF"></span>
+				</label>
+			</div>
+			<hr />
+			<div class="sai_class_ui_line">
+				<span id="sai_id_text_speed" class="sai_config_label">Speed:</span>
+			</div>
+			<div class="sai_class_ui_line">
+				<span class="sai_class_nobr">
+					<input type="range" id="sai_id_range_speed_type" name="sai_id_range_speed_type" min="1" max="100" value="45.0" step="1" title="Speed" />
+					<label for="sai_id_checkbox_speed_irregular" class="sai_class_nobr">
+						<input type="checkbox" id="sai_id_checkbox_speed_irregular" name="sai_id_checkbox_speed_irregular" />
+						<span id="speed_irregular_label"></span>
+					</label>
+				</span><br />
+				<output id="sai_id_text_speed_output" name="sai_id_text_speed_output" for="sai_id_range_speed_type">Normal</output>
+			</div>
+			<hr />
+			<div class="sai_class_ui_line">
+				<span id="sai_id_text_blinking" class="sai_config_label">Screen flashing:</span>
+			</div>
+			<div class="sai_class_ui_line">
+				<span class="sai_class_nobr">
+					<input type="range" id="sai_id_range_blink_type" name="sai_id_range_blink_type" min="0" max="7" value="0" step="1" title="Blinking" /><br />
+					<output id="sai_id_text_blink_output" name="sai_id_text_blink_output" for="sai_id_range_blink_type">No blinking</output>
+				</span>
+			</div>
+			<hr />
+			<div class="sai_class_ui_line">
+				<span id="sai_id_text_fullscreen_mode" class="sai_config_label">Fullscreen mode:</span>
+			</div>
+			<div class="sai_class_ui_line">
+				<label class="sai_class_toggle_button">
+					<input type="checkbox" id="sai_id_checkbox_fullscreen" title="Fullscreen" />
+					<span class="sai_class_slider"></span>
+					<span class="sai_class_toggle_label" data-on="ON" data-off="OFF"></span>
+				</label>
+			</div>
+			<hr />
+			<div class="sai_class_ui_line">
+				<span id="sai_id_text_rotation" class="sai_config_label">Rotation:</span>
+			</div>
+			<div class="sai_class_ui_line">
+				<label class="sai_class_toggle_button">
+					<input type="checkbox" id="sai_id_checkbox_rotation" title="Rotation" />
+					<span class="sai_class_slider"></span>
+					<span class="sai_class_toggle_label" data-on="ON" data-off="OFF"></span>
+				</label>
+			</div>
+			<hr />
+			<div class="sai_class_ui_line">
 				<span id="sai_id_text_color_1st" class="sai_config_label">1st color:</span>
 			</div>
 			<div class="sai_class_ui_line">
@@ -190,81 +283,6 @@
 					</select>
 				</div>
 			</div>
-			<div class="sai_class_invisible">
-				<hr />
-				<div class="sai_class_ui_line">
-					<span id="sai_id_pic_type" class="sai_config_label">The type of picture:</span>
-				</div>
-				<div class="sai_class_ui_line">
-					<select id="sai_id_select_pic_type" title="sai_id_select_pic_type">
-						<option value="-1">pic-1</option>
-						<option value="0" selected>pic0</option>
-						<option value="1">pic1</option>
-						<option value="2">pic2</option>
-						<option value="3">pic3</option>
-						<option value="4">pic4</option>
-						<option value="5">pic5</option>
-						<option value="6">pic6</option>
-						<option value="7">pic7</option>
-						<option value="8">pic8</option>
-						<option value="9">pic9</option>
-						<option value="10">pic10</option>
-						<option value="11">pic11</option>
-						<option value="12">pic12</option>
-						<option value="13">pic13</option>
-						<option value="14">pic14</option>
-						<option value="15">pic15</option>
-						<option value="16">pic16</option>
-					</select>
-				</div>
-			</div>
-			<hr />
-			<div class="sai_class_ui_line">
-				<span id="sai_id_text_split" class="sai_config_label">Screen splitting:</span>
-			</div>
-			<div class="sai_class_ui_line">
-				<label class="sai_class_toggle_button" title="Splitting">
-					<input type="checkbox" id="sai_id_checkbox_split" />
-					<span class="sai_class_slider"></span>
-					<span class="sai_class_toggle_label" data-on="ON" data-off="OFF"></span>
-				</label>
-			</div>
-			<hr />
-			<div class="sai_class_ui_line">
-				<span id="sai_id_text_count_down" class="sai_config_label">Count Down:</span>
-			</div>
-			<div class="sai_class_ui_line">
-				<label class="sai_class_toggle_button" title="Count Down">
-					<input type="checkbox" id="sai_id_checkbox_count_down" checked />
-					<span class="sai_class_slider"></span>
-					<span class="sai_class_toggle_label" data-on="ON" data-off="OFF"></span>
-				</label>
-			</div>
-			<hr />
-			<div class="sai_class_ui_line">
-				<span id="sai_id_text_speed" class="sai_config_label">Speed:</span>
-			</div>
-			<div class="sai_class_ui_line">
-				<span class="sai_class_nobr">
-					<input type="range" id="sai_id_range_speed_type" name="sai_id_range_speed_type" min="1" max="100" value="45.0" step="1" title="Speed" />
-					<label for="sai_id_checkbox_speed_irregular" class="sai_class_nobr">
-						<input type="checkbox" id="sai_id_checkbox_speed_irregular" name="sai_id_checkbox_speed_irregular" />
-						<span id="speed_irregular_label"></span>
-					</label>
-				</span><br />
-				<output id="sai_id_text_speed_output" name="sai_id_text_speed_output" for="sai_id_range_speed_type">Normal</output>
-			</div>
-			<hr />
-			<div class="sai_class_ui_line">
-				<span id="sai_id_text_rotation" class="sai_config_label">Rotation:</span>
-			</div>
-			<div class="sai_class_ui_line">
-				<label class="sai_class_toggle_button">
-					<input type="checkbox" id="sai_id_checkbox_rotation" title="Rotation" />
-					<span class="sai_class_slider"></span>
-					<span class="sai_class_toggle_label" data-on="ON" data-off="OFF"></span>
-				</label>
-			</div>
 			<hr />
 			<div class="sai_class_ui_line">
 				<span id="sai_id_text_label_message_text" class="sai_config_label">Message Text:</span>
@@ -293,27 +311,6 @@
 			<div class="sai_class_ui_line">
 				<input id="sai_id_select_message_size" type="range" min="1" max="4" step="1" value="2" title="Message Size" /><br />
 				<output id="sai_id_select_message_size_output" for="sai_id_select_message_size">Normal</output>
-			</div>
-			<hr />
-			<div class="sai_class_ui_line">
-				<span id="sai_id_text_blinking" class="sai_config_label">Screen flashing:</span>
-			</div>
-			<div class="sai_class_ui_line">
-				<span class="sai_class_nobr">
-					<input type="range" id="sai_id_range_blink_type" name="sai_id_range_blink_type" min="0" max="7" value="0" step="1" title="Blinking" /><br />
-					<output id="sai_id_text_blink_output" name="sai_id_text_blink_output" for="sai_id_range_blink_type">No blinking</output>
-				</span>
-			</div>
-			<hr />
-			<div class="sai_class_ui_line">
-				<span id="sai_id_text_fullscreen_mode" class="sai_config_label">Fullscreen mode:</span>
-			</div>
-			<div class="sai_class_ui_line">
-				<label class="sai_class_toggle_button">
-					<input type="checkbox" id="sai_id_checkbox_fullscreen" title="Fullscreen" />
-					<span class="sai_class_slider"></span>
-					<span class="sai_class_toggle_label" data-on="ON" data-off="OFF"></span>
-				</label>
 			</div>
 		</div>
 		<div class="sai_class_config_navi_line">

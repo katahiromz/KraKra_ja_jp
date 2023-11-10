@@ -37,7 +37,9 @@ document.addEventListener('DOMContentLoaded', function(){
 	const sai_NUM_TYPE = 17; // 「画」の個数。
 	let sai_screen_width = 0; // スクリーンの幅（ピクセル単位）を覚えておく。
 	let sai_screen_height = 0; // スクリーンの高さ（ピクセル単位）を覚えておく。
+	let sai_pic_type = 0; // 映像の種類を表す整数値。
 	let sai_stopping = true; // 停止中か？
+	let sai_hypnosis_releasing_time = null; // 催眠解除中ならば時刻。さもなければnull。
 	let sai_old_time = (new Date()).getTime(); // 処理フレームの時刻を覚えておく。
 	let sai_counter = 0; // 映像を動かす変数。
 	let sai_clock = 0; // スピードが不規則のときに映像の速さを変化させる変数。
@@ -53,13 +55,11 @@ document.addEventListener('DOMContentLoaded', function(){
 	let sai_service_worker_registration = null; // サービスワーカーの登録。
 	let sai_coin_img = new Image(); // 五円玉のイメージ。
 	let sai_rotation_type = 'normal'; // 回転の種類。
-	let sai_hypnosis_released = false; // 催眠術を解放したか？
 	let sai_logo_img = new Image(); // KraKraのロゴ。
 	let sai_tap_here_img = new Image(); // 「ここをタップ」の画像。
 	let sai_hypno_releasing_img = new Image(); // 「催眠術を解放中」の画像。
 	let sai_all_released_img = new Image(); // 「催眠術を解放しました」の画像。
 	let sai_speed_irregular = false; // 映像スピードが不規則か？
-	let sai_pic_type = 0; // 映像の種類を表す整数値。
 	let sai_old_pic_type = 0; // 古い映像の種類。
 	let sai_blinking_interval = 0; // 画面点滅（サブリミナル）の間隔（秒）。
 	let sai_first_time = false; // 初回か？
@@ -304,6 +304,13 @@ document.addEventListener('DOMContentLoaded', function(){
 		localStorage.setItem('saiminBlinkType', value);
 	}
 
+	// 催眠が解除されたか？
+	const SAI_is_hypno_released = function(){
+		if(!sai_hypnosis_releasing_time)
+			return false;
+		return ((new Date().getTime()) - sai_hypnosis_releasing_time) >= 3000;
+	}
+
 	// KraKraの言語をセットして、UIをローカライズする。
 	const SAI_set_language = function(lang){
 		// 言語が指定されてなければとりあえず英語。
@@ -318,7 +325,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 「催眠解除中」の画像を更新。
 		sai_hypno_releasing_img = new Image();
-		if(sai_hypnosis_released){
+		if(SAI_is_hypno_released()){
 			sai_hypno_releasing_img.src = trans_getText('TEXT_HYPNOSIS_RELEASED_IMG');
 		}else{
 			sai_hypno_releasing_img.src = trans_getText('TEXT_KILLING_HYPNOSIS_IMG');
@@ -710,16 +717,22 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像の種類の整数値をセットする。
 	const SAI_pic_set_type = function(value){
-		sai_pic_type = parseInt(value); // 整数に変換して変数に記憶。
-		if(sai_pic_type == -1){ // 「催眠解除」の場合。
+		value = parseInt(value); // 整数に変換して変数に記憶。
+
+		if (value != -1){
+			sai_hypnosis_releasing_time = null;
+			sai_pic_type = value;
+		}else{
+			sai_hypnosis_releasing_time = (new Date()).getTime();
+		}
+
+		if(sai_hypnosis_releasing_time){ // 「催眠解除」の場合。
 			// スピーチをキャンセル。
 			SAI_speech_cancel();
 			sai_id_button_speech.classList.remove('sai_class_checked');
+
 			// 音声を停止。
 			SAI_sound_pause();
-
-			// 「催眠解除中」の変数を更新。
-			sai_hypnosis_released = false;
 
 			// 催眠解除クラスを追加。
 			sai_id_button_sound_play.classList.add('sai_class_releasing');
@@ -736,15 +749,6 @@ document.addEventListener('DOMContentLoaded', function(){
 				sai_releasing_sound.currentTime = 0;
 				sai_releasing_sound.play();
 			}
-
-			// 催眠解除まで時間がかかる。
-			setTimeout(function(){
-				// 3秒待った。解除されたと仮定。画像のソースを更新。
-				sai_hypno_releasing_img.src = trans_getText('TEXT_HYPNOSIS_RELEASED_IMG');
-				sai_all_released_img.src = trans_getText('TEXT_ALL_RELEASED_IMG');
-				// 解放された！
-				sai_hypnosis_released = true;
-			}, 3000);
 		}else{
 			if(sai_old_pic_type == -1){ // 「催眠解除中」か？
 				sai_message_text = ''; // メッセージテキストをクリア。
@@ -772,7 +776,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		}catch(error){
 			;
 		}
-		sai_old_pic_type = sai_pic_type;
+
+		sai_old_pic_type = value;
 	};
 
 	// メッセージテキストをセットする。
@@ -1167,7 +1172,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let count2 = -SAI_get_tick_count();
 		let factor = 1.2 * Math.abs(Math.sin(count2 * 0.05));
 
-		if(sai_hypnosis_released)
+		if(SAI_is_hypno_released())
 			factor = 1.0;
 
 		// 黄色っぽくて丸いグラデーションを描画する。
@@ -1190,7 +1195,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		// 「催眠解除完了」のイメージを描画する。
-		if(sai_hypnosis_released && sai_all_released_img.complete){
+		if(SAI_is_hypno_released() && sai_all_released_img.complete){
 			let x = px + (dx - sai_all_released_img.width) / 2;
 			let y = py + (dy - sai_all_released_img.height) / 2 + dy * 0.2;
 			ctx.drawImage(sai_all_released_img, x, y);
@@ -2349,10 +2354,11 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_draw_pic_count_down(ctx, px, py, dx, dy);
 			return;
 		}
-		switch (sai_pic_type){
-		case -1:
+		if(sai_hypnosis_releasing_time){
 			SAI_draw_pic_minus_1(ctx, px, py, dx, dy);
-			break;
+			return;
+		}
+		switch (sai_pic_type){
 		case 0:
 			SAI_draw_pic_00(ctx, px, py, dx, dy);
 			break;
@@ -2410,7 +2416,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 必要なら映像効果をつけて映像を描画。
 	const SAI_draw_pic_with_effects = function(ctx, px, py, dx, dy){
 		// 一定の条件で画面点滅（サブリミナル）を表示。
-		if(!sai_stopping && !sai_count_down && sai_blinking_interval != 0 && sai_pic_type != -1){
+		if(!sai_stopping && !sai_count_down && sai_blinking_interval != 0 && !sai_hypnosis_releasing){
 			if(SAI_mod(sai_old_time / 1000, sai_blinking_interval) < (sai_blinking_interval * 0.3)){
 				SAI_draw_subliminal(ctx, px, py, dx, dy);
 				return;
@@ -2571,10 +2577,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		// 浮遊するテキストを処理する。
-		if(sai_stopping || sai_count_down){
-			sai_id_text_floating_1.classList.add('sai_class_invisible');
-			sai_id_text_floating_2.classList.add('sai_class_invisible');
-		}else if(sai_pic_type == -1){
+		if(sai_stopping || sai_count_down || sai_hypnosis_releasing_time){
 			sai_id_text_floating_1.classList.add('sai_class_invisible');
 			sai_id_text_floating_2.classList.add('sai_class_invisible');
 		}else if(sai_message_text != ''){
@@ -2655,6 +2658,13 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 停止中なら映像のキャプションを表示する。
 		if(sai_stopping){
 			draw_caption(ctx);
+		}
+
+		// 時が過ぎたら催眠解除を完了する。
+		if(SAI_is_hypno_released()){
+			// 3秒待った。解除されたと仮定。画像のソースを更新。
+			sai_hypno_releasing_img.src = trans_getText('TEXT_HYPNOSIS_RELEASED_IMG');
+			sai_all_released_img.src = trans_getText('TEXT_ALL_RELEASED_IMG');
 		}
 
 		// 必要ならアニメーションを要求する。
@@ -2807,7 +2817,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// フルスクリーンモード、またはツールボタンが見えるか？
 		if(!sai_id_checkbox_fullscreen.checked || SAI_are_tool_buttons_shown()){
-			if(sai_pic_type == -1){ // 催眠解除の場合
+			if(sai_hypnosis_releasing_time){ // 催眠解除の場合
 				// ダミー画面に戻す。
 				SAI_pic_set_type(0);
 				// 催眠解除の音声を止める。
@@ -2923,7 +2933,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	const SAI_register_event_listeners = function(){
 		// 「メッセージ」ボタン。
 		sai_id_button_message.addEventListener('click', function(){
-			if(sai_pic_type == -1)
+			if(sai_hypnosis_releasing)
 				return;
 			let text = prompt(trans_getText('TEXT_INPUT_MESSAGE'), sai_message_text);
 			if(text !== null){
@@ -3009,7 +3019,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 「音声再生」ボタン。
 		sai_id_button_sound_play.addEventListener('click', function(){
-			if(sai_pic_type == -1){
+			if(sai_hypnosis_releasing){
 				let lang = localStorage.getItem('saiminLanguage3');
 				if(!sai_releasing_sound)
 					sai_releasing_sound = new Audio(trans_getText('TEXT_MP3_RELEASED_HYPNOSIS'));
@@ -3217,7 +3227,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// スピーチをクリック。
 		sai_id_button_speech.addEventListener('click', function(e){
-			if(sai_pic_type == -1){
+			if(sai_hypnosis_releasing){
 				// 催眠解除のときは反応しない。
 			}else{
 				SAI_choose_page(sai_id_page_message);
