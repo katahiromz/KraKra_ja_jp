@@ -3428,6 +3428,14 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_id_button_voice_play.addEventListener('click', function(e){
 			SAI_speech_start(sai_message_text, true);
 		});
+
+		// プレビュー設定。
+		sai_id_checkbox_preview.addEventListener('click', function(e){
+			if (sai_id_checkbox_preview.checked)
+				sai_id_canvas_preview.classList.remove('sai_class_invisible');
+			else
+				sai_id_canvas_preview.classList.add('sai_class_invisible');
+		});
 	}
 
 	// キーボード操作を実装。
