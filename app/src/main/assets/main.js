@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			page_id = document.getElementById(page_id);
 		page_id.classList.remove('sai_class_invisible');
 
-		if(page_id == sai_id_page_main){ // メインページなら
+		if(page_id == sai_id_page_main || page_id == sai_id_page_config){ // メインページか設定ページなら
 			// 必要ならアニメーションを要求する。
 			if(!sai_request_anime){
 				sai_request_anime = window.requestAnimationFrame(SAI_draw_all);
@@ -194,8 +194,8 @@ document.addEventListener('DOMContentLoaded', function(){
 	// きらめきに新しい星を追加する。
 	const SAI_star_add = function(x, y){
 		sai_stars.shift(); // 古い星を消す。
-
-		if(SAI_screen_is_large()){ // 画面が大きければ
+		let ctx = sai_id_canvas_01.getContext('2d', { alpha: false });
+		if(SAI_screen_is_large(ctx)){ // 画面が大きければ
 			// 大きな星を押し込む。
 			x += (Math.random() - 0.5) * 2 * 20 * 2;
 			y += (Math.random() - 0.5) * 2 * 20 * 2;
@@ -429,8 +429,8 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 大きな画面か？
-	const SAI_screen_is_large = function(){
-		return sai_screen_width >= 1200 || sai_screen_height >= 1200;
+	const SAI_screen_is_large = function(ctx){
+		return ctx.canvas.width >= 1200 || ctx.canvas.height >= 1200;
 	}
 
 	// 効果音の音量。
@@ -1283,10 +1283,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				width *= 0.75;
 				height *= 0.75;
 			}else{
-				if(SAI_screen_is_large() &&
-					sai_screen_width * 2 < width &&
-					sai_screen_height * 2 < height)
-				{
+				if(SAI_screen_is_large(ctx) && dx * 2 < width && dy * 2 < height){
 					width *= 2;
 					height *= 2;
 				}
@@ -1405,7 +1402,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// さまざまな計算をする。
 		let dr0 = 30;
-		if(SAI_screen_is_large()){
+		if(SAI_screen_is_large(ctx)){
 			dr0 *= 2;
 			count2 *= 2;
 			ctx.lineWidth = 30;
@@ -1648,7 +1645,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let factor = count2 * 0.16;
 
 		// 画面中央を少しずらす。
-		if(SAI_screen_is_large()){
+		if(SAI_screen_is_large(ctx)){
 			qx += 60 * Math.cos(factor * 0.8);
 			qy += 60 * Math.sin(factor * 0.8);
 		}else{
@@ -1660,7 +1657,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.translate(qx, qy);
 
 		// 星形のレインボーを描画する。外側から順番に。
-		let isLarge = SAI_screen_is_large();
+		let isLarge = SAI_screen_is_large(ctx);
 		for(let radius = isLarge ? ((dx + dy) * 0.2) : ((dx + dy) * 0.4); radius >= 10; radius *= 0.92){
 			// 虹色の指定はHSL色空間で。
 			ctx.fillStyle = `hsl(${((dxy + factor * 0.3 - radius * 0.015) * 360) % 360}deg, 100%, 50%)`;
@@ -1815,7 +1812,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			let angle = Math.PI * Math.sin(count2 * 0.1 - 0.05) * 0.078;
 			ctx.rotate(angle);
 
-			let ratio = SAI_screen_is_large() ? 1.4 : 1;
+			let ratio = SAI_screen_is_large(ctx) ? 1.4 : 1;
 			ctx.drawImage(sai_coin_img, 0, 0, sai_coin_img.width * ratio, sai_coin_img.height * ratio);
 		}
 
@@ -1841,7 +1838,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let factor1 = count2 * 0.13, factor2 = count2 * 0.075;
 
 		// 画面中央を少しずらす。
-		if(SAI_screen_is_large()){
+		if(SAI_screen_is_large(ctx)){
 			qx += 60 * Math.cos(count2 * 0.1);
 			qy += 60 * Math.sin(count2 * 0.1);
 		}else{
@@ -1919,7 +1916,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let count2 = SAI_get_tick_count();
 
 		// 画面中央を少しずらす。
-		if(SAI_screen_is_large()){
+		if(SAI_screen_is_large(ctx)){
 			qx += 40 * Math.cos(count2 * 0.08);
 			qy += 40 * Math.sin(count2 * 0.08);
 		}else{
@@ -2074,12 +2071,12 @@ document.addEventListener('DOMContentLoaded', function(){
 			let ratio = 2.5 * maxxy / (sai_spiral_img.width + sai_spiral_img.height);
 			ctx.scale(ratio, ratio);
 
-			if(!SAI_screen_is_large())
+			if(!SAI_screen_is_large(ctx))
 				ctx.globalAlpha = 0.5; // 透過効果を付ける。
 
 			ctx.drawImage(sai_spiral_img, x, y); // 渦巻きイメージを描画する。
 
-			if(!SAI_screen_is_large())
+			if(!SAI_screen_is_large(ctx))
 				ctx.globalAlpha = 1.0; // 透過効果を元に戻す。
 		}
 
@@ -2442,8 +2439,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 必要なら映像効果をつけて映像を描画。
 	const SAI_draw_pic_with_effects = function(ctx, px, py, dx, dy){
+		let drawing_config = !sai_id_page_config.classList.contains('sai_class_invisible');
 		// 一定の条件で画面点滅（サブリミナル）を表示。
-		if(!sai_stopping && !sai_count_down && sai_blinking_interval != 0 && !sai_hypnosis_releasing_time){
+		if((!sai_stopping || drawing_config) && !sai_count_down && sai_blinking_interval != 0 && !sai_hypnosis_releasing_time){
 			if(SAI_mod(sai_old_time / 1000, sai_blinking_interval) < (sai_blinking_interval * 0.3)){
 				SAI_draw_subliminal(ctx, px, py, dx, dy);
 				return;
@@ -2483,17 +2481,20 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 映像の種類のテキストを取得。
 		let text = trans_getSelectOptionText(sai_id_select_pic_type, sai_id_select_pic_type.value);
 
+		// キャンバスのサイズを取得。
+		const dx = ctx.canvas.width, dy = ctx.canvas.height;
+
 		// 小さければ拡大する。
 		let text_size = 10;
 		let measure;
 		for(;;){
 			ctx.font = text_size.toString() + 'px san-serif';
 			measure = ctx.measureText(text);
-			if(measure.width >= sai_screen_width * 0.9 ||
+			if(measure.width >= dx * 0.9 ||
 				measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent > 20) break;
 			text_size *= 1.1;
 		}
-		let x = sai_screen_width / 2, y = sai_screen_height * 0.15;
+		let x = dx / 2, y = dy * 0.15;
 
 		let width = measure.width;
 		let height = (measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent) * 1.5;
@@ -2537,6 +2538,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// FPSを描画する。
 	const draw_fps = function(ctx, diff_time){
+		if(ctx.canvas != sai_id_canvas_01)
+			return;
+
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// FPSを描画する。
@@ -2557,11 +2561,24 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像をすべて描画する。
 	const SAI_draw_all = function(){
+		// 描画対象は何か？
+		let drawing_main = !sai_id_page_main.classList.contains('sai_class_invisible');
+		let drawing_config = !sai_id_page_config.classList.contains('sai_class_invisible');
+
+		// 描画対象のキャンバスは何か？
+		let the_canvas;
+		if (drawing_main)
+			the_canvas = sai_id_canvas_01;
+		else if(drawing_config)
+			the_canvas = sai_id_canvas_preview;
+		else
+			the_canvas = null;
+
 		// 二次元の描画コンテキスト。キャンバスは不透明。
-		let ctx = sai_id_canvas_01.getContext('2d', { alpha: false });
+		let ctx = the_canvas.getContext('2d', { alpha: false });
 
 		// 画面のサイズ。
-		const dx = sai_screen_width, dy = sai_screen_height;
+		const dx = ctx.canvas.width, dy = ctx.canvas.height;
 
 		let splitted = false; // 画面分割したか？
 		if(sai_screen_split == 1){ // 画面分割なし。
@@ -2571,14 +2588,14 @@ document.addEventListener('DOMContentLoaded', function(){
 			if(dx >= dy * 1.75){ // 充分に横長。
 				SAI_draw_pic_with_effects(ctx, 0, 0, dx / 2, dy);
 				//SAI_draw_pic_with_effects(ctx, dx / 2, 0, dx / 2, dy); // drawImageで描画時間を節約。
-				ctx.drawImage(sai_id_canvas_01, 0, 0, dx / 2, dy, dx / 2, 0, dx / 2, dy);
+				ctx.drawImage(the_canvas, 0, 0, dx / 2, dy, dx / 2, 0, dx / 2, dy);
 				SAI_message_set_position(sai_id_text_floating_1, 0, 0, dx / 2, dy, sai_counter);
 				SAI_message_set_position(sai_id_text_floating_2, dx / 2, 0, dx / 2, dy, sai_counter);
 				splitted = true; // 画面分割した。
 			}else if(dy >= dx * 1.75){ // 充分に縦長。
 				SAI_draw_pic_with_effects(ctx, 0, 0, dx, dy / 2);
 				//SAI_draw_pic_with_effects(ctx, 0, dy / 2, dx, dy / 2); // drawImageで描画時間を節約。
-				ctx.drawImage(sai_id_canvas_01, 0, 0, dx, dy / 2, 0, dy / 2, dx, dy / 2);
+				ctx.drawImage(the_canvas, 0, 0, dx, dy / 2, 0, dy / 2, dx, dy / 2);
 				SAI_message_set_position(sai_id_text_floating_1, 0, 0, dx, dy / 2, sai_counter);
 				SAI_message_set_position(sai_id_text_floating_2, 0, dy / 2, dx, dy / 2, sai_counter);
 				splitted = true; // 画面分割した。
@@ -2590,13 +2607,13 @@ document.addEventListener('DOMContentLoaded', function(){
 			if(dx >= dy){ // 横長。
 				SAI_draw_pic_with_effects(ctx, 0, 0, dx / 2, dy);
 				//SAI_draw_pic_with_effects(ctx, dx / 2, 0, dx / 2, dy); // drawImageで描画時間を節約。
-				ctx.drawImage(sai_id_canvas_01, 0, 0, dx / 2, dy, dx / 2, 0, dx / 2, dy);
+				ctx.drawImage(the_canvas, 0, 0, dx / 2, dy, dx / 2, 0, dx / 2, dy);
 				SAI_message_set_position(sai_id_text_floating_1, 0, 0, dx / 2, dy, sai_counter);
 				SAI_message_set_position(sai_id_text_floating_2, dx / 2, 0, dx / 2, dy, sai_counter);
 			}else{ // 縦長。
 				SAI_draw_pic_with_effects(ctx, 0, 0, dx, dy / 2);
 				//SAI_draw_pic_with_effects(ctx, 0, dy / 2, dx, dy / 2); // drawImageで描画時間を節約。
-				ctx.drawImage(sai_id_canvas_01, 0, 0, dx, dy / 2, 0, dy / 2, dx, dy / 2);
+				ctx.drawImage(the_canvas, 0, 0, dx, dy / 2, 0, dy / 2, dx, dy / 2);
 				SAI_message_set_position(sai_id_text_floating_1, 0, 0, dx, dy / 2, sai_counter);
 				SAI_message_set_position(sai_id_text_floating_2, 0, dy / 2, dx, dy / 2, sai_counter);
 			}
@@ -2604,47 +2621,49 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		// 浮遊するテキストを処理する。
-		if(sai_stopping || sai_count_down || sai_hypnosis_releasing_time){
-			sai_id_text_floating_1.classList.add('sai_class_invisible');
-			sai_id_text_floating_2.classList.add('sai_class_invisible');
-		}else if(sai_message_text != ''){
-			if(splitted){
-				sai_id_text_floating_1.classList.remove('sai_class_invisible');
-				sai_id_text_floating_2.classList.remove('sai_class_invisible');
+		if(drawing_main){
+			if(sai_stopping || sai_count_down || sai_hypnosis_releasing_time){
+				sai_id_text_floating_1.classList.add('sai_class_invisible');
+				sai_id_text_floating_2.classList.add('sai_class_invisible');
+			}else if(sai_message_text != ''){
+				if(splitted){
+					sai_id_text_floating_1.classList.remove('sai_class_invisible');
+					sai_id_text_floating_2.classList.remove('sai_class_invisible');
+				}else{
+					sai_id_text_floating_1.classList.remove('sai_class_invisible');
+					sai_id_text_floating_2.classList.add('sai_class_invisible');
+				}
 			}else{
-				sai_id_text_floating_1.classList.remove('sai_class_invisible');
+				sai_id_text_floating_1.classList.add('sai_class_invisible');
 				sai_id_text_floating_2.classList.add('sai_class_invisible');
 			}
-		}else{
-			sai_id_text_floating_1.classList.add('sai_class_invisible');
-			sai_id_text_floating_2.classList.add('sai_class_invisible');
-		}
-		// テキストが大きすぎるなら少し小さくする。
-		let text_surface = sai_id_text_floating_1.clientWidth * sai_id_text_floating_1.clientHeight;
-		if(text_surface >= sai_screen_width * sai_screen_height / (splitted ? 2 : 1) / 3){
-			if(sai_message_size > 1){
-				sai_message_size -= 1;
-				SAI_message_set_size(sai_message_size);
-			}
-		}
-
-		// きらめきを描画する。
-		for(let iStar = 0; iStar < sai_stars.length; ++iStar){
-			let star = sai_stars[iStar];
-			if(star){
-				// 黄色い光を描く。
-				ctx.fillStyle = `rgb(255, 255, 0, 0.8)`;
-				SAI_draw_light(ctx, star[0], star[1], star[2]);
-
-				// きらめきの半径がだんだん小さくなる演出。
-				if(star[2] > 1.0){
-					star[2] *= 0.98;
+			// テキストが大きすぎるなら少し小さくする。
+			let text_surface = sai_id_text_floating_1.clientWidth * sai_id_text_floating_1.clientHeight;
+			if(text_surface >= sai_screen_width * sai_screen_height / (splitted ? 2 : 1) / 3){
+				if(sai_message_size > 1){
+					sai_message_size -= 1;
+					SAI_message_set_size(sai_message_size);
 				}
 			}
+
+			// きらめきを描画する。
+			for(let iStar = 0; iStar < sai_stars.length; ++iStar){
+				let star = sai_stars[iStar];
+				if(star){
+					// 黄色い光を描く。
+					ctx.fillStyle = `rgb(255, 255, 0, 0.8)`;
+					SAI_draw_light(ctx, star[0], star[1], star[2]);
+
+					// きらめきの半径がだんだん小さくなる演出。
+					if(star[2] > 1.0){
+						star[2] *= 0.98;
+					}
+				}
+			}
+			// きらめきがだんだん消えうせる演出。
+			sai_stars.shift();
+			sai_stars.push(null);
 		}
-		// きらめきがだんだん消えうせる演出。
-		sai_stars.shift();
-		sai_stars.push(null);
 
 		// 画面サイズが変わっていればキャンバスをフィットさせる。
 		if(window.innerWidth != sai_screen_width || window.innerHeight != sai_screen_height ||
@@ -2658,7 +2677,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let diff_time = (new_time - sai_old_time) / 1000.0;
 		if(sai_rotation_type == 'counter')
 			diff_time = -diff_time;
-		if(sai_stopping)
+		if(sai_stopping && !drawing_config)
 			diff_time = 0;
 		sai_counter += diff_time * sai_speed;
 		sai_old_time = new_time;
@@ -2683,7 +2702,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		// 停止中なら映像のキャプションを表示する。
-		if(sai_stopping){
+		if(sai_stopping && drawing_main){
 			draw_caption(ctx);
 		}
 
