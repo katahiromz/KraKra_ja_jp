@@ -27,10 +27,9 @@
 	<meta name="twitter:card" content="summary" />
 </head>
 <body>
+<!-- 【ページ群を納めるdivタグ】ここから -->
 <div id="sai_class_pages">
-	<div id="sai_id_page_initial" class="sai_class_page sai_class_invisible">
-		<!-- Reserved -->
-	</div>
+	<!-- 【アプリ開始時に言語選択をするページ】ここから -->
 	<div id="sai_id_page_choose_langauge" class="sai_class_page sai_class_center sai_class_config_page sai_class_invisible">
 		<h1>Choose a language</h1>
 		<div class="sai_class_ui_line">
@@ -53,29 +52,43 @@
 			<button type="button" id="sai_id_button_choose_language" class="sai_class_nav_button">OK</button>
 		</div>
 	</div>
+	<!-- 【アプリ開始時に言語選択をするページ】ここまで -->
+	<!-- 【ユーザーに同意を求めるページ】ここから -->
 	<div id="sai_id_page_agreement" class="sai_class_page sai_class_center sai_class_config_page sai_class_invisible">
-		<!-- The "back" button -->
+		<!-- 【ユーザーに同意を求めるページの戻るボタン】ここから -->
 		<button type="button" id="sai_id_button_agreement_back" class="sai_class_rounded_button sai_class_invisible">
 			<img src="img/back.svg" alt="back" loading="lazy" />
 		</button>
+		<!-- 【ユーザーに同意を求めるページの戻るボタン】ここまで -->
+		<!-- 【ユーザーに同意を求めるページのヘッダー】ここから -->
 		<h1 id="sai_id_page_agreement_header_1">About this app</h1>
 		<div id="sai_id_text_version">Hyponosis KraKra [[VERSION]]</div>
-		<div id="sai_id_text_notice" class="sai_class_scrollable_1">
-		</div>
+		<!-- 【ユーザーに同意を求めるページのヘッダー】ここまで -->
+		<!-- 【ユーザーに同意を求めるページのスクロール可能領域】ここから -->
+		<div id="sai_id_text_notice" class="sai_class_scrollable_1"></div>
+		<!-- 【ユーザーに同意を求めるページのスクロール可能領域】ここまで -->
+		<!-- 【ユーザーに同意を求めるページのフッター】ここから -->
 		<div class="sai_class_config_navi_line">
 			<hr />
 			<button type="button" id="sai_id_button_init_app" class="sai_class_nav_button sai_class_config_button sai_class_invisible">Init app</button>
 			<button type="button" id="sai_id_button_agree" class="sai_class_nav_button sai_class_config_button">I agree</button>
 		</div>
+		<!-- 【ユーザーに同意を求めるページのフッター】ここまで -->
 	</div>
+	<!-- 【ユーザーに同意を求めるページ】ここまで -->
+	<!-- 【アプリの各種設定を行うページ】ここから -->
 	<div id="sai_id_page_config" class="sai_class_page sai_class_center sai_class_config_page sai_class_invisible">
-		<!-- The "back" button -->
+		<!-- 【アプリの各種設定を行うページの戻るボタン】ここから -->
 		<button type="button" id="sai_id_button_config_back" class="sai_class_rounded_button">
 			<img src="img/back.svg" alt="back" loading="lazy" />
 		</button>
+		<!-- 【アプリの各種設定を行うページの戻るボタン】ここまで -->
+		<!-- 【アプリの各種設定を行うページのヘッダー】ここから -->
 		<h1 id="sai_id_page_config_header">Configuration</h1>
 		<img class="sai_class_img_config_logo" alt="" width="165" height="31" loading="lazy" />
+		<!-- 【アプリの各種設定を行うページのヘッダー】ここまで -->
 		<div id="sai_id_config_scrollable" class="sai_class_scrollable_2">
+			<!-- 【設定ページの言語設定】ここから -->
 			<div class="sai_class_ui_line">
 				<span id="sai_id_text_language" class="sai_config_label">Language (言語):</span>
 			</div>
@@ -91,7 +104,9 @@
 					<option value="ko-KR">Korean</option>
 				</select>
 			</div>
+			<!-- 【設定ページの言語設定】ここまで -->
 			<hr />
+			<!-- 【設定ページの映像選択】ここから -->
 			<div class="sai_class_ui_line">
 				<span id="sai_id_pic_type" class="sai_config_label">The type of picture:</span>
 			</div>
@@ -116,7 +131,9 @@
 					<option value="16">pic16</option>
 				</select>
 			</div>
+			<!-- 【設定ページの映像選択】ここまで -->
 			<hr />
+			<!-- 【設定ページの画面分割設定】ここから -->
 			<div class="sai_class_ui_line">
 				<span id="sai_id_text_split" class="sai_config_label">Screen splitting:</span>
 			</div>
@@ -127,7 +144,9 @@
 					<span class="sai_class_toggle_label" data-on="ON" data-off="OFF"></span>
 				</label>
 			</div>
+			<!-- 【設定ページの画面分割設定】ここまで -->
 			<hr />
+			<!-- 【設定ページのカウントダウン設定】ここから -->
 			<div class="sai_class_ui_line">
 				<span id="sai_id_text_count_down" class="sai_config_label">Count Down:</span>
 			</div>
@@ -138,7 +157,9 @@
 					<span class="sai_class_toggle_label" data-on="ON" data-off="OFF"></span>
 				</label>
 			</div>
+			<!-- 【設定ページのカウントダウン設定】ここまで -->
 			<hr />
+			<!-- 【設定ページの映像のスピード設定】ここから -->
 			<div class="sai_class_ui_line">
 				<span id="sai_id_text_speed" class="sai_config_label">Speed:</span>
 			</div>
@@ -152,7 +173,9 @@
 				</span><br />
 				<output id="sai_id_text_speed_output" name="sai_id_text_speed_output" for="sai_id_range_speed_type">Normal</output>
 			</div>
+			<!-- 【設定ページの映像のスピード設定】ここまで -->
 			<hr />
+			<!-- 【設定ページの映像の画面点滅設定】ここから -->
 			<div class="sai_class_ui_line">
 				<span id="sai_id_text_blinking" class="sai_config_label">Screen flashing:</span>
 			</div>
@@ -162,7 +185,9 @@
 					<output id="sai_id_text_blink_output" name="sai_id_text_blink_output" for="sai_id_range_blink_type">No blinking</output>
 				</span>
 			</div>
+			<!-- 【設定ページの映像の画面点滅設定】ここまで -->
 			<hr />
+			<!-- 【設定ページのフルスクリーンモードの設定】ここから -->
 			<div class="sai_class_ui_line">
 				<span id="sai_id_text_fullscreen_mode" class="sai_config_label">Fullscreen mode:</span>
 			</div>
@@ -173,7 +198,9 @@
 					<span class="sai_class_toggle_label" data-on="ON" data-off="OFF"></span>
 				</label>
 			</div>
+			<!-- 【設定ページのフルスクリーンモードの設定】ここまで -->
 			<hr />
+			<!-- 【設定ページの画面回転の設定】ここから -->
 			<div class="sai_class_ui_line">
 				<span id="sai_id_text_rotation" class="sai_config_label">Rotation:</span>
 			</div>
@@ -184,7 +211,9 @@
 					<span class="sai_class_toggle_label" data-on="ON" data-off="OFF"></span>
 				</label>
 			</div>
+			<!-- 【設定ページの画面回転の設定】ここまで -->
 			<hr />
+			<!-- 【設定ページの1番目の色の設定】ここから -->
 			<div class="sai_class_ui_line">
 				<span id="sai_id_text_color_1st" class="sai_config_label">1st color:</span>
 			</div>
@@ -194,7 +223,9 @@
 				<br />
 				<label><input type="checkbox" id="sai_id_checkbox_color_1st_rainbow" /> <span class="sai_class_rainbow">Rainbow</span></label>
 			</div>
+			<!-- 【設定ページの1番目の色の設定】ここまで -->
 			<hr />
+			<!-- 【設定ページの2番目の色の設定】ここから -->
 			<div class="sai_class_ui_line">
 				<span id="sai_id_text_color_2nd" class="sai_config_label">2nd color:</span>
 			</div>
@@ -204,7 +235,9 @@
 				<br />
 				<label><input type="checkbox" id="sai_id_checkbox_color_2nd_rainbow" /> <span class="sai_class_rainbow">Rainbow</span></label>
 			</div>
+			<!-- 【設定ページの2番目の色の設定】ここまで -->
 			<hr />
+			<!-- 【設定ページの効果音の設定】ここから -->
 			<div class="sai_class_ui_line">
 				<span id="sai_id_text_note" class="sai_config_label">Note button:</span>
 			</div>
@@ -228,7 +261,9 @@
 					<button id="sai_id_button_sound_config_play" type="button" class="sai_class_config_button"><img id="sai_id_image_play_pause" src="img/play.svg" alt="[Play]" loading="lazy" /></button>
 				</span>
 			</div>
+			<!-- 【設定ページの効果音の設定】ここまで -->
 			<hr />
+			<!-- 【設定ページの効果音の音量の設定】ここから -->
 			<div class="sai_class_ui_line">
 				<span id="sai_id_text_sound_volume" class="sai_config_label">Sound Volume:</span>
 			</div>
@@ -238,7 +273,9 @@
 				</span><br />
 				<output id="sai_id_text_sound_volume_output" name="sai_id_text_sound_volume_output" for="sai_id_range_sound_volume">100%</output>
 			</div>
+			<!-- 【設定ページの効果音の音量の設定】ここまで -->
 			<hr />
+			<!-- 【設定ページの効果音の自動再生の設定】ここから -->
 			<div class="sai_class_ui_line">
 				<span id="sai_id_text_auto_play_sound" class="sai_config_label">Auto-play sound:</span>
 			</div>
@@ -249,7 +286,9 @@
 					<span class="sai_class_toggle_label" data-on="ON" data-off="OFF"></span>
 				</label>
 			</div>
+			<!-- 【設定ページの効果音の自動再生の設定】ここまで -->
 			<hr />
+			<!-- 【設定ページの効果音の自動繰り返しの設定】ここから -->
 			<div class="sai_class_ui_line">
 				<span id="sai_id_text_auto_repeat_sound" class="sai_config_label">Auto-repeating sound:</span>
 			</div>
@@ -260,7 +299,9 @@
 					<span class="sai_class_toggle_label" data-on="ON" data-off="OFF"></span>
 				</label>
 			</div>
+			<!-- 【設定ページの効果音の自動繰り返しの設定】ここまで -->
 			<hr />
+			<!-- 【設定ページの切り替え音の設定】ここから -->
 			<div class="sai_class_ui_line">
 				<span id="sai_id_text_switch_sound" class="sai_config_label">Switching sound:</span>
 			</div>
@@ -271,8 +312,10 @@
 					<span class="sai_class_toggle_label" data-on="ON" data-off="OFF"></span>
 				</label>
 			</div>
+			<!-- 【設定ページの切り替え音の設定】ここまで -->
 			<div class="sai_class_native_app_only">
 				<hr />
+				<!-- 【設定ページの明るさの設定】ここから -->
 				<div class="sai_class_ui_line">
 					<span id="sai_id_text_brightness" class="sai_config_label">Brightness:</span>
 				</div>
@@ -282,8 +325,10 @@
 						<option value="brighter">Brighter</option>
 					</select>
 				</div>
+				<!-- 【設定ページの明るさの設定】ここまで -->
 			</div>
 			<hr />
+			<!-- 【設定ページのメッセージテキストの設定】ここから -->
 			<div class="sai_class_ui_line">
 				<span id="sai_id_text_label_message_text" class="sai_config_label">Message Text:</span>
 			</div>
@@ -293,7 +338,9 @@
 					Message...
 				</button>
 			</div>
+			<!-- 【設定ページのメッセージテキストの設定】ここまで -->
 			<hr />
+			<!-- 【設定ページのメッセージスピーチの設定】ここから -->
 			<div class="sai_class_ui_line">
 				<span id="sai_id_text_label_message_speech" class="sai_config_label">Message Speech:</span>
 			</div>
@@ -304,7 +351,9 @@
 					<span class="sai_class_toggle_label" data-on="ON" data-off="OFF"></span>
 				</label>
 			</div>
+			<!-- 【設定ページのメッセージスピーチの設定】ここまで -->
 			<hr />
+			<!-- 【設定ページのメッセージの大きさの設定】ここから -->
 			<div class="sai_class_ui_line">
 				<span id="sai_id_text_message_size" class="sai_config_label">Size of message:</span>
 			</div>
@@ -312,90 +361,122 @@
 				<input id="sai_id_select_message_size" type="range" min="1" max="4" step="1" value="2" title="Message Size" /><br />
 				<output id="sai_id_select_message_size_output" for="sai_id_select_message_size">Normal</output>
 			</div>
+			<!-- 【設定ページのメッセージの大きさの設定】ここまで -->
 		</div>
+		<!-- 【設定ページのフッター】ここから -->
 		<div class="sai_class_config_navi_line">
 			<hr />
 			<button type="button" id="sai_id_button_config_ok" class="sai_class_nav_button sai_class_config_button">OK</button>
 		</div>
+		<!-- 【設定ページのフッター】ここまで -->
 	</div>
+	<!-- 【アプリの各種設定を行うページ】ここまで -->
+	<!-- 【メッセージリストのページ】ここから -->
 	<div id="sai_id_page_message" class="sai_class_page sai_class_center sai_class_config_page sai_class_invisible">
-		<!-- The "back" button -->
+		<!-- 【メッセージリストのページの戻るボタン】ここから -->
 		<button type="button" id="sai_id_button_message_back" class="sai_class_rounded_button">
 			<img src="img/back.svg" alt="back" loading="lazy" />
 		</button>
+		<!-- 【メッセージリストのページの戻るボタン】ここまで -->
+		<!-- 【メッセージリストのヘッダー】ここから -->
 		<h1 id="sai_id_page_message_header">Message</h1>
 		<img class="sai_class_img_config_logo" alt="" width="165" height="31" loading="lazy" />
+		<!-- 【メッセージリストのヘッダー】ここまで -->
 		<form onsubmit="return false">
+			<!-- 【メッセージリストのテキストボックス】ここから -->
 			<input id="sai_id_text_message" type="text" placeholder="Input message" enterkeyhint="done" maxlength="80" />
+			<!-- 【メッセージリストのテキストボックス】ここまで -->
+			<!-- 【メッセージリストのスクロール可能領域】ここから -->
 			<div id="sai_id_message_scrollable" class="sai_class_scrollable_3">
 				<div id="sai_id_message_list">
 					<!-- Filled by SAI_populate_message_list -->
 				</div>
 			</div>
+			<!-- 【メッセージリストのスクロール可能領域】ここまで -->
+			<!-- 【メッセージリストのフッター】ここから -->
 			<div class="sai_class_config_navi_line">
 				<hr />
 				<button type="button" id="sai_id_button_mesage_reset" class="sai_class_nav_button sai_class_config_button">Reset</button>
 				<button type="button" id="sai_id_button_mesage_cancel" class="sai_class_nav_button sai_class_config_button">Cancel</button>
 				<button type="submit" id="sai_id_button_mesage_ok" class="sai_class_nav_button sai_class_config_button">OK</button>
 			</div>
+			<!-- 【メッセージリストのフッター】ここまで -->
 		</form>
 	</div>
+	<!-- 【メッセージリストのページ】ここまで -->
+	<!-- 【メインページ】ここから -->
 	<div id="sai_id_page_main" class="sai_class_page sai_class_invisible">
-		<!-- The "configuration" button -->
+		<!-- 【メインページの設定ボタン】ここから -->
 		<button type="button" id="sai_id_button_config" class="sai_class_rounded_button sai_class_button_main_control">
 			<img id="sai_id_img_gear" src="img/gear.svg" alt="cfg" loading="lazy" />
 		</button>
+		<!-- 【メインページの設定ボタン】ここまで -->
 
-		<!-- The help button -->
+		<!-- 【メインページのはてなボタン】ここから -->
 		<button type="button" id="sai_id_button_about" class="sai_class_rounded_button sai_class_button_main_control">
 			<img id="sai_id_img_question" src="img/question.svg" alt="?" loading="lazy" />
 		</button>
+		<!-- 【メインページのはてなボタン】ここまで -->
 
-		<!-- The previous image button -->
+		<!-- 【メインページの映像を一つ戻すボタン】ここから -->
 		<button type="button" id="sai_id_button_previous_image" class="sai_class_button_main_control sai_class_button_arrow">
 			<img src="img/arrow_left.svg" alt="&lt;" />
 		</button>
+		<!-- 【メインページの映像を一つ戻すボタン】ここまで -->
 
-		<!-- The next image button -->
+		<!-- 【メインページの映像を一つ進めるボタン】ここから -->
 		<button type="button" id="sai_id_button_next_image" class="sai_class_button_main_control sai_class_button_arrow">
 			<img src="img/arrow_right.svg" alt="&gt;" />
 		</button>
+		<!-- 【メインページの映像を一つ進めるボタン】ここまで -->
 
-		<!-- The start hypnosis button -->
+		<!-- 【メインページの催眠を開始するボタン】ここから -->
 		<button type="button" id="sai_id_button_start_hypnosis" class="sai_class_button_main_control">
 			Start hypnosis...
 		</button>
+		<!-- 【メインページの催眠を開始するボタン】ここまで -->
 
-		<!-- The release hypnosis button -->
+		<!-- 【メインページの催眠の解除を開始するボタン】ここから -->
 		<button type="button" id="sai_id_button_release_hypnosis" class="sai_class_button_main_control">
 			Release hypnosis...
 		</button>
+		<!-- 【メインページの催眠の解除を開始するボタン】ここまで -->
 
-		<!-- The "microphone" button -->
+		<!-- 【メインページのマイクボタン】ここから -->
 		<button type="button" id="sai_id_button_microphone" class="sai_class_navi_button sai_class_tool_button">
 			<img id="sai_id_img_mic" src="img/mic.svg" alt="mic" loading="lazy" />
 		</button>
+		<!-- 【メインページのマイクボタン】ここまで -->
 
-		<!-- The "note" button -->
+		<!-- 【メインページの音符ボタン】ここから -->
 		<button type="button" id="sai_id_button_sound_play" class="sai_class_navi_button sai_class_tool_button">
 			<img id="sai_id_img_sound" src="img/sound.svg" alt="play!" loading="lazy" />
 		</button>
+		<!-- 【メインページの音符ボタン】ここまで -->
 
-		<!-- The "speech" button -->
+		<!-- 【メインページのスピーチボタン】ここから -->
 		<button type="button" id="sai_id_button_speech" class="sai_class_navi_button sai_class_tool_button">
 			<img id="sai_id_img_speech" src="img/speak.svg" alt="spch" loading="lazy" />
 		</button>
+		<!-- 【メインページのスピーチボタン】ここまで -->
 
-		<!-- The canvas #1 -->
-		<canvas id="sai_id_canvas_01" class="sai_class_canvas">
-		</canvas>
+		<!-- 【メインページのキャンバス1】ここから -->
+		<canvas id="sai_id_canvas_01" class="sai_class_canvas"></canvas>
+		<!-- 【メインページのキャンバス1】ここまで -->
 
-		<!-- The canvas #2 -->
+		<!-- 【メインページのキャンバス2】ここから -->
 		<canvas id="sai_id_canvas_02" class="sai_class_canvas sai_class_invisible"></canvas>
+		<!-- 【メインページのキャンバス2】ここまで -->
 
-		<!-- The floating texts -->
+		<!-- 【メインページの浮遊するテキスト1】ここから -->
 		<div id="sai_id_text_floating_1" class="sai_class_invisible sai_class_floating_text sai_class_text_message sai_class_font_size_normal"></div>
+		<!-- 【メインページの浮遊するテキスト1】ここまで -->
+
+		<!-- 【メインページの浮遊するテキスト2】ここから -->
 		<div id="sai_id_text_floating_2" class="sai_class_invisible sai_class_floating_text sai_class_text_message sai_class_font_size_normal"></div>
+		<!-- 【メインページの浮遊するテキスト2】ここまで -->
 	</div>
+	<!-- 【メインページ】ここまで -->
 </div>
+<!-- 【ページ群を納めるdivタグ】ここまで -->
 </body></html>
