@@ -6,7 +6,6 @@ const sai_DEBUGGING = false; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
 
 // 【KraKra JavaScript 命名規則】
-//
 // - 関数名の頭に SAI_ を付ける。
 // - 変数名・定数名の頭に sai_ を付ける。
 // - 要素IDの頭に sai_id_ を付ける。
