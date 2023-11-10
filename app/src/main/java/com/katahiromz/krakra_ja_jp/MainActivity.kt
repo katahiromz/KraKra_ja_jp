@@ -217,6 +217,8 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         super.onStart() // 親にも伝える。
     }
 
+    var speech_voice_volume: Float = 1.0f;
+
     // アクティビティの復帰時。
     override fun onResume() {
         Timber.i("onResume")
@@ -227,7 +229,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
         // テキストがあればスピーチを再開。
         if (theText != "") {
-            speechText(theText)
+            speechText(theText, speech_voice_volume)
         }
 
         // 明るさを復帰。
@@ -348,10 +350,10 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     private fun initChromeClient() {
         // まず、クロームクライアントを作成する。
         chromeClient = MyWebChromeClient(this, object : MyWebChromeClient.Listener {
-            override fun onSpeech(text: String) {
+            override fun onSpeech(text: String, volume: Float) {
                 Timber.i("onSpeech")
                 theText = text // スピーチテキストをセットする。
-                speechText(text) // スピーチを開始する。
+                speechText(text, volume) // スピーチを開始する。
             }
 
             override fun onShowToast(text: String, typeOfToast: Int) {
@@ -475,13 +477,14 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
 
     // スピーチを開始する。
-    fun speechText(text: String) {
+    fun speechText(text: String, volume: Float) {
         if (isSpeechReady) {
             val params = Bundle()
-            val volume = 0.5f
             val speed = 0.3f
             val pitch = 0.8f
-            params.putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME, volume)
+            if (volume >= 0)
+                speech_voice_volume = volume
+            params.putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME, speech_voice_volume)
             tts?.setPitch(pitch)
             tts?.setSpeechRate(speed)
             tts?.speak(text, TextToSpeech.QUEUE_FLUSH, params, "utteranceId")

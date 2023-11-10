@@ -392,15 +392,19 @@ document.addEventListener('DOMContentLoaded', function(){
 		// スピーチ用にテキストを調整する。
 		text = SAI_adjust_text_for_speech(text);
 
+		// 音量。
+		let voice_volume = parseFloat(sai_id_range_voice_volume.value) / 100.0;
+
 		try{
 			// Android側のスピーチを開始する。Androidでなければ失敗。
-			android.speechLoop(text);
+			android.speechLoop(text, voice_volume);
 		}catch(error){ // Androidではない。Web側のスピーチを開始する。
 			if(window.speechSynthesis){ // 音声合成に対応していれば
 				text = text.repeat(32); // 32回繰り返す。
 				let speech = new SpeechSynthesisUtterance(text);
 				speech.pitch = 0.6; // 音声の高さ。
 				speech.rate = 0.4; // 音声の速さ。
+				speech.volume = voice_volume; // 音量。
 				// {{LANGUAGE_SPECIFIC}}: スピーチの言語をセットする。
 				if(trans_currentLanguage == 'ja' || trans_currentLanguage == 'ja-JP') // Japanese
 					speech.lang = 'ja-JP';
@@ -428,7 +432,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		return sai_screen_width >= 1200 || sai_screen_height >= 1200;
 	}
 
-	// 音量。
+	// 効果音の音量。
 	const SAI_sound_set_volume = function(value){
 		value = parseInt(value);
 
@@ -525,6 +529,28 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// ローカルストレージに記憶する。
 		localStorage.setItem('saiminScreenBrightness', value);
+	}
+
+	// メッセージボイスの音量を設定する関数。
+	const SAI_message_set_voice_volume = function(value){
+		value = parseFloat(value); // 値を浮動小数点数に変換。
+
+		// 音量を制限。
+		if (value >= 100)
+			value = 100;
+		if (value <= 0)
+			value = 0;
+		
+		// 必要ならUIを更新。
+		if(value != sai_id_range_voice_volume.value)
+			sai_id_range_voice_volume.value = value;
+
+		// outputのUIを更新。
+		let text = parseInt(value).toString() + "%";
+		trans_setHtmlText(sai_id_text_voice_volume_output, text);
+
+		// ローカルストレージに記憶。
+		localStorage.setItem('saiminMessageVolume', value.toString());
 	}
 
 	// メッセージの表示サイズをセットする。
@@ -2701,12 +2727,20 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_sound_set_name('Magic');
 		}
 
-		// ローカルストレージに音量の設定があれば読み込む。
+		// ローカルストレージに効果音の音量の設定があれば読み込む。
 		let saiminSoundVolume = localStorage.getItem('saiminSoundVolume');
 		if(saiminSoundVolume){
 			SAI_sound_set_volume(saiminSoundVolume);
 		}else{
 			SAI_sound_set_volume(100);
+		}
+
+		// ローカルストレージにスピーチの音量の設定があれば読み込む。
+		let saiminMessageVolume = localStorage.getItem('saiminMessageVolume');
+		if(saiminMessageVolume){
+			SAI_message_set_voice_volume(saiminMessageVolume);
+		}else{
+			SAI_message_set_voice_volume(100);
 		}
 
 		// ローカルストレージに映像切り替えの種類があれば読み込む。
@@ -3082,7 +3116,11 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// メッセージサイズ選択。
 		sai_id_select_message_size.addEventListener('input', function(){
-			SAI_message_set_size(sai_id_select_message_size.value, true);
+			SAI_message_set_size(sai_id_select_message_size.value);
+		}, false);
+
+		sai_id_range_voice_volume.addEventListener('input', function(){
+			SAI_message_set_voice_volume(sai_id_range_voice_volume.value);
 		}, false);
 
 		// 画面の明るさ選択。

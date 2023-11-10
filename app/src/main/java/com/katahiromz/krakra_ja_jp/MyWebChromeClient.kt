@@ -22,7 +22,7 @@ class MyWebChromeClient(private var activity: MainActivity?, private val listene
 
     // リスナ。
     interface Listener {
-        fun onSpeech(text: String)
+        fun onSpeech(text: String, volume: Float)
         fun onShowToast(text: String, typeOfToast: Int)
         fun onShowSnackbar(text: String, typeOfSnack: Int)
         fun onProgressChanged(view: WebView?, newProgress: Int)
@@ -64,13 +64,13 @@ class MyWebChromeClient(private var activity: MainActivity?, private val listene
     // スピーチをキャンセルする。
     @JavascriptInterface
     fun cancelSpeech() {
-        listener.onSpeech("")
+        listener.onSpeech("", -1.0f)
     }
 
     // スピーチをループする。実は32回まで。
     @JavascriptInterface
-    fun speechLoop(msg: String) {
-        listener.onSpeech(msg.repeat(32))
+    fun speechLoop(msg: String, volume: Float) {
+        listener.onSpeech(msg.repeat(32), volume)
     }
 
     // KraKraの設定をクリアする。
