@@ -7,6 +7,8 @@
     <string name="reset">Zurücksetzen</string>
     <string name="needs_microphone">Diese App benötigt eine Berechtigung, um auf das Mikrofon zuzugreifen.</string>
     <string name="cant_use_microphone">Diese App kann das Mikrofon nicht ohne Erlaubnis verwenden.</string>
+    <string name="needs_camera">Diese App benötigt eine Berechtigung für den Zugriff auf die Kamera.</string>
+    <string name="cant_use_camera">Diese App kann die Kamera nicht ohne Erlaubnis verwenden.</string>
 
     <!-- main -->
     <string name="app_name">KraKra</string>

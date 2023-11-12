@@ -162,6 +162,32 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         }
     }
 
+    private val cameraRecordingPermissionChecker =
+        PermissionChecker(
+            this,
+            android.Manifest.permission.CAMERA,
+            onDenied = {
+                showToast(getLocString(R.string.cant_use_camera), LONG_TOAST)
+            },
+            onShowRationale = { onRequest ->
+                val title = getLocString(R.string.app_name)
+                val message = getLocString(R.string.needs_camera)
+                MaterialAlertDialogBuilder(this, R.style.AlertDialogTheme)
+                    .setTitle(title)
+                    .setMessage(message)
+                    .setPositiveButton(getLocString(R.string.ok)) { _, _ -> onRequest() }
+                    .setCancelable(false)
+                    .show()
+            }
+        )
+
+    fun requestCamera() {
+        val cameraCheck = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
+        if (cameraCheck != PackageManager.PERMISSION_GRANTED) {
+            cameraRecordingPermissionChecker.runWithPermission {}
+        }
+    }
+
     /////////////////////////////////////////////////////////////////////
     // イベントハンドラ関連
 
@@ -185,9 +211,13 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         setCurLocale(Locale.getDefault())
 
         // 権限を確認する。
-        val granted = ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO)
+        var granted = ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO)
         if (granted != PackageManager.PERMISSION_GRANTED) {
             requestAudioRecoding()
+        }
+        granted = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
+        if (granted != PackageManager.PERMISSION_GRANTED) {
+            requestCamera()
         }
 
         // WebViewを初期化。

@@ -122,21 +122,27 @@ button {
 }
 #sai_id_button_microphone {
 	position: absolute;
-	left: calc(100% / 3 * 0 + 5px/2);
+	left: calc(100% / 4 * 0 + 5px/2);
 	bottom: 0;
-	width: calc(100% / 3 - 5px);
+	width: calc(100% / 4 - 5px);
+}
+#sai_id_button_target {
+	position: absolute;
+	left: calc(100% / 4 * 1 + 5px/2);
+	bottom: 0;
+	width: calc(100% / 4 - 5px);
 }
 #sai_id_button_sound_play {
 	position: absolute;
-	left: calc(100% / 3 * 1 + 5px/2);
+	left: calc(100% / 4 * 2 + 5px/2);
 	bottom: 0;
-	width: calc(100% / 3 - 5px);
+	width: calc(100% / 4 - 5px);
 }
 #sai_id_button_speech {
 	position: absolute;
-	left: calc(100% / 3 * 2 + 5px/2);
+	left: calc(100% / 4 * 3 + 5px/2);
 	bottom: 0;
-	width: calc(100% / 3 - 5px);
+	width: calc(100% / 4 - 5px);
 }
 .sai_class_config_button {
 	position: relative;
@@ -370,7 +376,7 @@ input[type='color'] {
 	color: black;
 }
 /* https://www.tutorialstonight.com/css-toggle-switch-with-text */
-/* BEGIN toggle switch */
+/* 【トグルスイッチ】ここから */
 .sai_class_toggle_button {
     --width: 80px;
     --height: 30px;
@@ -450,4 +456,74 @@ input[type='color'] {
 .sai_class_toggle_button input:checked~.sai_class_toggle_label::before {
     opacity: 1;
 }
-/* END toggle switch */
+/* 【トグルスイッチ】ここまで */
+/* 【顔認識のページ】ここから */
+#sai_id_button_side {
+	position: absolute;
+	right: 3px;
+	top: 3px;
+}
+#sai_id_button_face_getter_back {
+	position: absolute;
+	left: 3px;
+	top: 3px;
+}
+#sai_id_canvas_1 {
+	z-index: 1;
+	background-color: #222;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	width: 100dvw;
+	height: 100vh;
+	height: 100dvh;
+}
+#sai_id_button_lock_on {
+	position: absolute;
+	width: 50vw;
+	width: 50dvw;
+	height: 1cm;
+	left: calc(50vw - 50vw / 2);
+	left: calc(50dvw - 50dvw / 2);
+	top: calc(80vh - 1cm / 2);
+	top: calc(80dvh - 1cm / 2);
+	font-size: 0.6cm;
+}
+#sai_id_button_close {
+	position: absolute;
+	width: 50vw;
+	width: 50dvw;
+	height: 1cm;
+	left: calc(50vw - 50vw / 2);
+	left: calc(50dvw - 50dvw / 2);
+	top: calc(90vh - 1cm / 2);
+	top: calc(90dvh - 1cm / 2);
+	font-size: 0.6cm;
+}
+@media screen and (max-height: 360px) {
+	#sai_id_button_lock_on {
+		width: 20vw;
+		width: 20dvw;
+		height: 1cm;
+		left: calc(30vw - 20vw / 2);
+		left: calc(30dvw - 20dvw / 2);
+		top: calc(80vh - 1cm / 2);
+		top: calc(80dvh - 1cm / 2);
+	}
+	#sai_id_button_close {
+		width: 20vw;
+		width: 20dvw;
+		height: 1cm;
+		left: calc(70vw - 20vw / 2);
+		left: calc(70dvw - 20dvw / 2);
+		top: calc(80vh - 1cm / 2);
+		top: calc(80dvh - 1cm / 2);
+	}
+}
+.sai_class_face_button {
+	background: rgba(255, 255, 255, 60%);
+}
+.sai_class_face_button:disabled {
+	color: rgb(191, 191, 191);
+}
+/* 【顔認識のページ】ここまで */

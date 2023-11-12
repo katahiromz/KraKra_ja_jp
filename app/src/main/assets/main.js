@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	let sai_kaleido_radius = 50; // 万華鏡の細胞の半径。
 	let sai_kaleido_canvas_1 = null; // 万華鏡用の一時的なキャンバス1。
 	let sai_kaleido_canvas_2 = null; // 万華鏡用の一時的なキャンバス2。
+	let sai_face_getter = null; // 顔認識。
 
 	// このアプリはネイティブアプリか？
 	const SAI_is_native_app = function(){
@@ -156,6 +157,33 @@ document.addEventListener('DOMContentLoaded', function(){
 			sai_request_anime = null;
 			// 音声の再生を停止する。
 			SAI_sound_pause();
+		}
+
+		// 顔認識のページか？
+		if(page_id == sai_id_page_face_getter){
+			if (!sai_face_getter) {
+				sai_face_getter = new facelocker(sai_id_canvas_1, function(status){
+					switch(status){
+					case 0: // Unlocked
+						sai_id_button_lock_on.innerText = "Lock on";
+						sai_id_button_lock_on.disabled = true;
+						break;
+					case 1: // Candidate
+						sai_id_button_lock_on.innerText = "Lock on";
+						sai_id_button_lock_on.disabled = false;
+						break;
+					case 2: // Locked
+						sai_id_button_lock_on.innerText = "Unlock";
+						sai_id_button_lock_on.disabled = false;
+						break;
+					}
+				});
+			}
+			sai_face_getter.resume();
+		}else{
+			if(sai_face_getter){
+				sai_face_getter.stop();
+			}
 		}
 
 		if(page_id == sai_id_page_message){ // 「メッセージ」ページなら
@@ -3436,6 +3464,32 @@ document.addEventListener('DOMContentLoaded', function(){
 			else
 				sai_id_canvas_preview.classList.add('sai_class_invisible');
 		});
+
+		// 顔認識のページ。
+		sai_id_button_target.addEventListener('click', function(e){
+			localStorage.setItem('saiminFaceGetterShowing', "1");
+			SAI_choose_page(sai_id_page_face_getter);
+		});
+		sai_id_canvas_1.addEventListener('click', function(e){
+			if(sai_face_getter)
+				sai_face_getter.on_click(e);
+		});
+		sai_id_button_lock_on.addEventListener('click', function(e){
+			if(sai_face_getter)
+				sai_face_getter.lock_unlock();
+		});
+		sai_id_button_side.addEventListener('click', function(){
+			if(sai_face_getter)
+				sai_face_getter.set_side();
+		});
+		sai_id_button_face_getter_back.addEventListener('click', function(){
+			localStorage.removeItem('saiminFaceGetterShowing');
+			SAI_choose_page(sai_id_page_main);
+		});
+		sai_id_button_close.addEventListener('click', function(){
+			localStorage.removeItem('saiminFaceGetterShowing');
+			SAI_choose_page(sai_id_page_main);
+		});
 	}
 
 	// キーボード操作を実装。
@@ -3639,6 +3693,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_config();
 		}else if(localStorage.getItem('saiminMessageListShowing')){
 			SAI_message_list_show();
+		}else if(localStorage.getItem('saiminFaceGetterShowing')){
+			SAI_choose_page(sai_id_page_face_getter);
 		}
 
 		// フルスクリーンモードを復元する。

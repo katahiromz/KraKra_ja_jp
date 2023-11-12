@@ -10,11 +10,14 @@
 	<link rel="stylesheet" href="main.css" type="text/css" />
 	<!-- 【HTMLヘッダーの主要な設定】ここまで -->
 	<!-- 【HTMLヘッダーの外部スクリプト読み込み】ここから -->
-	<script defer src="complex.min.js"></script>
-	<script defer src="mic.js"></script>
-	<script defer src="translation.js"></script>
-	<script defer src="kaleido.js"></script>
-	<script defer src="main.js"></script>
+	<script defer src="complex.min.js" delay></script>
+	<script defer src="mic.js" delay></script>
+	<script defer src="translation.js" delay></script>
+	<script defer src="kaleido.js" delay></script>
+	<script defer src="pico.js" delay></script>
+	<script defer src="camvas.js" delay></script>
+	<script defer src="facelocker.js" delay></script>
+	<script defer src="main.js" delay></script>
 	<!-- 【HTMLヘッダーの外部スクリプト読み込み】ここまで -->
 	<!-- 【HTMLヘッダーのその他の設定】ここから -->
 	<link rel="icon" href="favicon.ico" />
@@ -440,6 +443,33 @@
 		</form>
 	</div>
 	<!-- 【メッセージリストのページ】ここまで -->
+	<!-- 【顔認識のページ】ここから -->
+	<div id="sai_id_page_face_getter" class="sai_class_page sai_class_invisible">
+		<!-- 【顔認識のページの戻るボタン】ここから -->
+		<button type="button" id="sai_id_button_face_getter_back" class="sai_class_rounded_button">
+			<img src="img/back.svg" alt="back" loading="lazy" />
+		</button>
+		<!-- 【顔認識のページの戻るボタン】ここまで -->
+		<!-- 【顔認識のページの裏表ボタン】ここから -->
+		<button id="sai_id_button_side" class="sai_class_rounded_button">
+			<img src="img/side.svg" alt="" />
+		</button>
+		<!-- 【顔認識のページの裏表ボタン】ここまで -->
+		<!-- 【顔認識のページのロックオンボタン】ここから -->
+		<button id="sai_id_button_lock_on" type="button" class="sai_class_face_button">
+			Lock on
+		</button>
+		<!-- 【顔認識のページのロックオンボタン】ここまで -->
+		<!-- 【顔認識のページの閉じるボタン】ここから -->
+		<button id="sai_id_button_close" type="button" class="sai_class_face_button">
+			Close
+		</button>
+		<!-- 【顔認識のページの閉じるボタン】ここまで -->
+		<!-- 【顔認識のページのキャンバス】ここから -->
+		<canvas id="sai_id_canvas_1"></canvas>
+		<!-- 【顔認識のページのキャンバス】ここまで -->
+	</div>
+	<!-- 【顔認識のページ】ここまで -->
 	<!-- 【メインページ】ここから -->
 	<div id="sai_id_page_main" class="sai_class_page sai_class_invisible">
 		<!-- 【メインページの設定ボタン】ここから -->
@@ -483,6 +513,12 @@
 			<img id="sai_id_img_mic" src="img/mic.svg" alt="mic" loading="lazy" />
 		</button>
 		<!-- 【メインページのマイクボタン】ここまで -->
+
+		<!-- 【メインページのターゲットボタン】ここから -->
+		<button type="button" id="sai_id_button_target" class="sai_class_navi_button sai_class_tool_button">
+			<img id="sai_id_img_aim" src="img/aim.svg" alt="play!" loading="lazy" />
+		</button>
+		<!-- 【メインページのターゲットボタン】ここまで -->
 
 		<!-- 【メインページの音符ボタン】ここから -->
 		<button type="button" id="sai_id_button_sound_play" class="sai_class_navi_button sai_class_tool_button">

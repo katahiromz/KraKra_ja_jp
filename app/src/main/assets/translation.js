@@ -896,6 +896,10 @@ const trans_getText = function(str_id){
 		case 'TEXT_SPEED_SUPER_FAST': return '超速い';
 		case 'TEXT_SPEED_IRREGULAR': return '不規則';
 		case 'TEXT_RAINBOW': return '虹色';
+		case 'TEXT_FACE_GETTER': return '顔認識';
+		case 'TEXT_TAP_ON_TARGET': return 'ターゲットをタップして下さい';
+		case 'TEXT_CAN_LOCK_ON': return 'ロックオンできます';
+		case 'TEXT_CANT_FIND_FACE': return '顔が見つかりません';
 		}
 	}else if(lang == 'zh-CN' || lang == 'cn'){ // Chinese (Simplified)
 		switch(str_id){
@@ -935,6 +939,10 @@ const trans_getText = function(str_id){
 		case 'TEXT_SPEED_SUPER_FAST': return '超级快';
 		case 'TEXT_SPEED_IRREGULAR': return '不规律的';
 		case 'TEXT_RAINBOW': return '彩虹色';
+		case 'TEXT_FACE_GETTER': return '人脸识别';
+		case 'TEXT_TAP_ON_TARGET': return '请点击目标';
+		case 'TEXT_CAN_LOCK_ON': return '可以锁定';
+		case 'TEXT_CANT_FIND_FACE': return '未找到面孔';
 		}
 	}else if(lang == 'zh-TW'){ // Chinese (Traditional)
 		switch(str_id){
@@ -974,6 +982,10 @@ const trans_getText = function(str_id){
 		case 'TEXT_SPEED_SUPER_FAST': return '超快';
 		case 'TEXT_SPEED_IRREGULAR': return '不規律的';
 		case 'TEXT_RAINBOW': return '彩虹色';
+		case 'TEXT_FACE_GETTER': return '人臉辨識';
+		case 'TEXT_TAP_ON_TARGET': return '請點選目標';
+		case 'TEXT_CAN_LOCK_ON': return '可以鎖定';
+		case 'TEXT_CANT_FIND_FACE': return '未找到臉孔';
 		}
 	}else if(lang == 'ko' || lang == 'kr' || lang == 'ko-KR'){ // Korean
 		switch(str_id){
@@ -1013,6 +1025,10 @@ const trans_getText = function(str_id){
 		case 'TEXT_SPEED_SUPER_FAST': return '매우 빠른';
 		case 'TEXT_SPEED_IRREGULAR': return '불규칙한';
 		case 'TEXT_RAINBOW': return '무지개 색';
+		case 'TEXT_FACE_GETTER': return '얼굴 인식';
+		case 'TEXT_TAP_ON_TARGET': return '타겟을 탭해주세요';
+		case 'TEXT_CAN_LOCK_ON': return '잠글 수 있습니다';
+		case 'TEXT_CANT_FIND_FACE': return '얼굴을 찾을 수 없음';
 		}
 	}else if(lang == 'it' || lang == 'it-IT'){ // Italian
 		switch(str_id){
@@ -1052,6 +1068,10 @@ const trans_getText = function(str_id){
 		case 'TEXT_SPEED_SUPER_FAST': return 'Super Veloce';
 		case 'TEXT_SPEED_IRREGULAR': return 'Irregolare';
 		case 'TEXT_RAINBOW': return 'Arcobaleno';
+		case 'TEXT_FACE_GETTER': return 'Riconoscimento Facciale';
+		case 'TEXT_TAP_ON_TARGET': return 'Per favore tocca il bersaglio';
+		case 'TEXT_CAN_LOCK_ON': return 'Può essere bloccato';
+		case 'TEXT_CANT_FIND_FACE': return 'Volto non trovato';
 		}
 	}else if(lang == 'de' || lang == 'de-DE'){ // German
 		switch(str_id){
@@ -1091,6 +1111,10 @@ const trans_getText = function(str_id){
 		case 'TEXT_SPEED_SUPER_FAST': return 'Super Schnell';
 		case 'TEXT_SPEED_IRREGULAR': return 'Irregulär';
 		case 'TEXT_RAINBOW': return 'Regenbogen';
+		case 'TEXT_FACE_GETTER': return 'Gesichtserkennung';
+		case 'TEXT_TAP_ON_TARGET': return 'Bitte tippen Sie auf das Ziel';
+		case 'TEXT_CAN_LOCK_ON': return 'Abschließbar';
+		case 'TEXT_CANT_FIND_FACE': return 'Gesicht nicht gefunden';
 		}
 	}else{ // English is default
 		switch(str_id){
@@ -1130,6 +1154,10 @@ const trans_getText = function(str_id){
 		case 'TEXT_SPEED_SUPER_FAST': return 'Super Fast';
 		case 'TEXT_SPEED_IRREGULAR': return 'Irregular';
 		case 'TEXT_RAINBOW': return 'Rainbow';
+		case 'TEXT_FACE_GETTER': return 'Face Recognition';
+		case 'TEXT_TAP_ON_TARGET': return 'Please tap on the target';
+		case 'TEXT_CAN_LOCK_ON': return 'Ready to lock on';
+		case 'TEXT_CANT_FIND_FACE': return 'Face not found';
 		}
 	}
 }
