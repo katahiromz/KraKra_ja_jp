@@ -120,13 +120,13 @@ button {
 .sai_class_font_size_huge {
 	font-size: 2.0cm;
 }
-#sai_id_button_microphone {
+#sai_id_button_target {
 	position: absolute;
 	left: calc(100% / 4 * 0 + 5px/2);
 	bottom: 0;
 	width: calc(100% / 4 - 5px);
 }
-#sai_id_button_target {
+#sai_id_button_microphone {
 	position: absolute;
 	left: calc(100% / 4 * 1 + 5px/2);
 	bottom: 0;
