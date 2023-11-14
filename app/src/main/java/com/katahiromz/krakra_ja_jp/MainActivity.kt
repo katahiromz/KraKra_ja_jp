@@ -237,7 +237,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             str += sysBarsVisible.toString()
             str += ")"
             Timber.i(str)
-            webView?.evaluateJavascript(str) {}
+            //webView?.evaluateJavascript(str) {} // 現在、無効。
             WindowInsetsCompat.toWindowInsetsCompat(view.onApplyWindowInsets(insets.toWindowInsets()))
         }
     }
