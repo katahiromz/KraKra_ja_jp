@@ -142,6 +142,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             android.Manifest.permission.RECORD_AUDIO,
             onDenied = {
                 showToast(getLocString(R.string.cant_use_microphone), LONG_TOAST)
+                requestCamera()
             },
             onShowRationale = { onRequest ->
                 val title = getLocString(R.string.app_name)
@@ -158,7 +159,11 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     fun requestAudioRecoding() {
         val audioCheck = ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO)
         if (audioCheck != PackageManager.PERMISSION_GRANTED) {
-            audioRecordingPermissionChecker.runWithPermission {}
+            audioRecordingPermissionChecker.runWithPermission {
+                requestCamera()
+            }
+        }else{
+            requestCamera()
         }
     }
 
@@ -214,10 +219,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         var granted = ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO)
         if (granted != PackageManager.PERMISSION_GRANTED) {
             requestAudioRecoding()
-        }
-        granted = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
-        if (granted != PackageManager.PERMISSION_GRANTED) {
-            requestCamera()
         }
 
         // WebViewを初期化。

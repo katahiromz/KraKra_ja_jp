@@ -43,7 +43,7 @@ class MyWebChromeClient(private var activity: MainActivity?, private val listene
     // パーミッション関連。
     override fun onPermissionRequest(request: PermissionRequest) {
         for (res in request.resources) {
-            if (res == PermissionRequest.RESOURCE_AUDIO_CAPTURE) {
+            if (res == PermissionRequest.RESOURCE_AUDIO_CAPTURE || res == PermissionRequest.RESOURCE_VIDEO_CAPTURE) {
                 request.grant(request.resources)
                 return
             }

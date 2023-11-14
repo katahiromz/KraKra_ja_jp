@@ -165,18 +165,19 @@ document.addEventListener('DOMContentLoaded', function(){
 				sai_face_getter = new facelocker(sai_id_canvas_1, function(status){
 					switch(status){
 					case 0: // Unlocked
-						sai_id_button_lock_on.innerText = "Lock on";
+						sai_id_button_lock_on.innerText = trans_getText('TEXT_LOCK_ON');
 						sai_id_button_lock_on.disabled = true;
 						break;
 					case 1: // Candidate
-						sai_id_button_lock_on.innerText = "Lock on";
+						sai_id_button_lock_on.innerText = trans_getText('TEXT_LOCK_ON');
 						sai_id_button_lock_on.disabled = false;
 						break;
 					case 2: // Locked
-						sai_id_button_lock_on.innerText = "Unlock";
+						sai_id_button_lock_on.innerText = trans_getText('TEXT_UNLOCK');
 						sai_id_button_lock_on.disabled = false;
 						break;
 					}
+					sai_id_button_close.innerText = trans_getText('TEXT_CLOSE');
 				});
 			}
 			sai_face_getter.resume();

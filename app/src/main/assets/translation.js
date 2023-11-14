@@ -900,6 +900,9 @@ const trans_getText = function(str_id){
 		case 'TEXT_TAP_ON_TARGET': return 'ターゲットをタップして下さい';
 		case 'TEXT_CAN_LOCK_ON': return 'ロックオンできます';
 		case 'TEXT_CANT_FIND_FACE': return '顔が見つかりません';
+		case 'TEXT_LOCK_ON': return 'ロックオン';
+		case 'TEXT_UNLOCK': return 'ロック解除';
+		case 'TEXT_CLOSE': return '閉じる';
 		}
 	}else if(lang == 'zh-CN' || lang == 'cn'){ // Chinese (Simplified)
 		switch(str_id){
@@ -943,6 +946,9 @@ const trans_getText = function(str_id){
 		case 'TEXT_TAP_ON_TARGET': return '请点击目标';
 		case 'TEXT_CAN_LOCK_ON': return '可以锁定';
 		case 'TEXT_CANT_FIND_FACE': return '未找到面孔';
+		case 'TEXT_LOCK_ON': return '锁上';
+		case 'TEXT_UNLOCK': return '开锁';
+		case 'TEXT_CLOSE': return '关闭';
 		}
 	}else if(lang == 'zh-TW'){ // Chinese (Traditional)
 		switch(str_id){
@@ -986,6 +992,9 @@ const trans_getText = function(str_id){
 		case 'TEXT_TAP_ON_TARGET': return '請點選目標';
 		case 'TEXT_CAN_LOCK_ON': return '可以鎖定';
 		case 'TEXT_CANT_FIND_FACE': return '未找到臉孔';
+		case 'TEXT_LOCK_ON': return '鎖上';
+		case 'TEXT_UNLOCK': return '開鎖';
+		case 'TEXT_CLOSE': return '關閉';
 		}
 	}else if(lang == 'ko' || lang == 'kr' || lang == 'ko-KR'){ // Korean
 		switch(str_id){
@@ -1029,6 +1038,9 @@ const trans_getText = function(str_id){
 		case 'TEXT_TAP_ON_TARGET': return '타겟을 탭해주세요';
 		case 'TEXT_CAN_LOCK_ON': return '잠글 수 있습니다';
 		case 'TEXT_CANT_FIND_FACE': return '얼굴을 찾을 수 없음';
+		case 'TEXT_LOCK_ON': return '잠금';
+		case 'TEXT_UNLOCK': return '잠금 해제';
+		case 'TEXT_CLOSE': return '닫다';
 		}
 	}else if(lang == 'it' || lang == 'it-IT'){ // Italian
 		switch(str_id){
@@ -1072,6 +1084,9 @@ const trans_getText = function(str_id){
 		case 'TEXT_TAP_ON_TARGET': return 'Per favore tocca il bersaglio';
 		case 'TEXT_CAN_LOCK_ON': return 'Può essere bloccato';
 		case 'TEXT_CANT_FIND_FACE': return 'Volto non trovato';
+		case 'TEXT_LOCK_ON': return 'Blocco su';
+		case 'TEXT_UNLOCK': return 'Sbloccare';
+		case 'TEXT_CLOSE': return 'Vicino';
 		}
 	}else if(lang == 'de' || lang == 'de-DE'){ // German
 		switch(str_id){
@@ -1115,6 +1130,9 @@ const trans_getText = function(str_id){
 		case 'TEXT_TAP_ON_TARGET': return 'Bitte tippen Sie auf das Ziel';
 		case 'TEXT_CAN_LOCK_ON': return 'Abschließbar';
 		case 'TEXT_CANT_FIND_FACE': return 'Gesicht nicht gefunden';
+		case 'TEXT_LOCK_ON': return 'Sperren';
+		case 'TEXT_UNLOCK': return 'Freischalten';
+		case 'TEXT_CLOSE': return 'Schließen';
 		}
 	}else{ // English is default
 		switch(str_id){
@@ -1158,6 +1176,9 @@ const trans_getText = function(str_id){
 		case 'TEXT_TAP_ON_TARGET': return 'Please tap on the target';
 		case 'TEXT_CAN_LOCK_ON': return 'Ready to lock on';
 		case 'TEXT_CANT_FIND_FACE': return 'Face not found';
+		case 'TEXT_LOCK_ON': return 'Lock on';
+		case 'TEXT_UNLOCK': return 'Unlock';
+		case 'TEXT_CLOSE': return 'Close';
 		}
 	}
 }
