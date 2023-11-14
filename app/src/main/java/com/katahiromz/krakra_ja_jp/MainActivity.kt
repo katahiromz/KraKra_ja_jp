@@ -167,7 +167,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         }
     }
 
-    private val cameraRecordingPermissionChecker =
+    private val cameraPermissionChecker =
         PermissionChecker(
             this,
             android.Manifest.permission.CAMERA,
@@ -189,7 +189,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     fun requestCamera() {
         val cameraCheck = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
         if (cameraCheck != PackageManager.PERMISSION_GRANTED) {
-            cameraRecordingPermissionChecker.runWithPermission {}
+            cameraPermissionChecker.runWithPermission {}
         }
     }
 
