@@ -459,9 +459,14 @@ const trans_NOTICE_EN = `=========================
 Hypnosis KraKra
 =========================
 
-This software is an application to enjoy hypnotic moving pictures.
-It generates hypnosis video in real time without using any video files.
-How you use it is up to you.
+"Hypnosis KraKra" is a full-fledged joke app equipped with 16 types of videos, 20 types of audio, microphone input, and face recognition.
+We provide real entertainment where you can enjoy hypnotic images and sounds.
+
+- It displays captivating images to fill the entire screen. There are no annoying ads.
+- You can lock on to the target with face recognition.
+- It delivers your voice to the target with microphone input.
+- Let's shake up your target's emotions by playing audio.
+- It displays the message you want to convey on the screen, and the app itself will speak.
 
 * Source: https://github.com/katahiromz/KraKra_ja_jp
 * Some OtoLogic audio material is used.
@@ -516,9 +521,14 @@ const trans_NOTICE_KO_KR = `=========================
 Hypnosis KraKra
 =========================
 
-이 소프트웨어는 최면 같은 영상을 즐기는 응용 프로그램입니다.
-동영상 파일을 일절 사용하지 않고 실시간으로 최면 영상을 생성합니다.
-사용법은 당신에게 달려 있습니다.
+"최면 크라크라" 는 16종의 동영상, 20종의 오디오, 마이크 입력, 얼굴 인식 기능을 갖춘 본격적인 농담 앱입니다.
+최면에 걸린 영상과 사운드를 즐길 수 있는 리얼 엔터테인먼트를 제공합니다.
+
+- 전체 화면이 가득한 매력적인 이미지를 표시합니다. 성가신 광고는 없습니다.
+- 얼굴인식으로 대상을 락온할 수 있습니다.
+- 마이크 입력을 통해 대상에게 음성을 전달합니다.
+- 오디오를 재생하여 대상의 감정을 움직입니다.
+- 전달하고 싶은 메시지를 화면에 표시하고, 앱 자체가 말을 하게 됩니다.
 
 ※ 소스 코드: https://github.com/katahiromz/KraKra_ja_jp
 ※ 일부, OtoLogic의 음성 소재를 사용.
@@ -574,9 +584,14 @@ const trans_NOTICE_JA = `=========================
 Hypnosis KraKra
 =========================
 
-本ソフトウェアは、催眠っぽい映像を楽しむアプリです。
-動画ファイルを一切使わず、リアルタイムで催眠映像を生成します。
-使い方はあなた次第。
+「催眠くらくら」は、16種類の映像と20種類の音声、マイク入力、顔認証を搭載した本格的なジョークアプリです。
+催眠っぽい映像や音声を楽しめる本物のエンターテインメントを提供します。
+
+- 画面いっぱいに魅惑の映像を表示します。邪魔な広告はありません。
+- 顔認証でターゲットをロックオンできます。
+- マイク入力であなたの声をターゲットに届けます。
+- 音声再生でターゲットの気持ちを揺さぶります。
+- 伝えたいメッセージを画面に表示し、アプリ自身がしゃべります。
 
 ※ ソース: https://github.com/katahiromz/KraKra_ja_jp
 ※ 一部、OtoLogicの音声素材を使用。
@@ -631,9 +646,14 @@ const trans_NOTICE_ZW_CN = `=========================
 Hypnosis KraKra
 =========================
 
-本软件是一款欣赏催眠动态图片的应用程序。
-它无需使用任何视频文件即可实时生成催眠视频。
-如何使用它取决于您。
+《催眠克拉克拉》是一款成熟的笑话应用程序，配备16种视频、20种音频、麦克风输入和面部识别。
+我们提供真正的娱乐，您可以享受催眠的图像和声音。
+
+- 它显示迷人的图像以填满整个屏幕。 没有烦人的广告。
+- 您可以通过人脸识别锁定目标。
+- 它通过麦克风输入将您的声音传递给目标。
+- 让我们通过播放音频来动摇目标的情绪。
+- 它会在屏幕上显示您想要传达的消息，并且应用程序本身会说话。
 
 * 来源: https://github.com/katahiromz/KraKra_ja_jp
 * 使用了一些 OtoLogic 音频材料。
@@ -688,9 +708,14 @@ const trans_NOTICE_ZH_TW = `=========================
 Hypnosis KraKra
 =========================
 
-該軟件是一款可以讓您享受催眠圖像的應用程序。
-無需使用任何視頻文件即可實時生成催眠視頻。
-如何使用它取決於您。
+《催眠克拉克拉》是一款成熟的笑話應用程序，配備16種視頻、20種音頻、麥克風輸入和麵部識別。
+我們提供真正的娛樂，您可以享受催眠的圖像和聲音。
+
+- 它顯示迷人的圖像以填滿整個螢幕。 沒有煩人的廣告。
+- 您可以透過人臉辨識鎖定目標。
+- 它透過麥克風輸入將您的聲音傳遞給目標。
+- 讓我們透過播放音訊來動搖目標的情緒。
+- 它會在螢幕上顯示您想要傳達的訊息，並且應用程式本身會說話。
 
 ※ 源代碼: https://github.com/katahiromz/KraKra_ja_jp
 ※ 部分使用 OtoLogic 音頻材料。
@@ -745,9 +770,14 @@ Ipnosi KraKra
 Hypnosis KraKra
 =========================
 
-Questo software è un'applicazione per godere di immagini in movimento ipnotiche.
-Genera video di ipnosi in tempo reale senza utilizzare alcun file video.
-Come lo usi dipende da te.
+"Ipnosi KraKra" è un'app per scherzi completa dotata di 16 tipi di video, 20 tipi di audio, ingresso microfono e riconoscimento facciale.
+Forniamo un vero intrattenimento in cui puoi goderti immagini e suoni ipnotici.
+
+- Visualizza immagini accattivanti per riempire l'intero schermo. Non ci sono annunci fastidiosi.
+- Puoi agganciare il bersaglio con il riconoscimento facciale.
+- Fornisce la tua voce al bersaglio con l'ingresso del microfono.
+- Scuotiamo le emozioni del tuo bersaglio riproducendo l'audio.
+- Visualizza sullo schermo il messaggio che vuoi trasmettere e l'app stessa parlerà.
 
 * Codice sorgente: https://github.com/katahiromz/KraKra_ja_jp
 * Viene utilizzato del materiale audio OtoLogic.
@@ -802,9 +832,14 @@ Hypnose KraKra
 Hypnosis KraKra
 =========================
 
-Diese Software ist eine Anwendung zum Genießen hypnotischer bewegter Bilder.
-Es generiert Hypnosevideos in Echtzeit, ohne dass Videodateien verwendet werden müssen.
-Wie Sie es nutzen, bleibt Ihnen überlassen.
+„Hypnose KraKra“ ist eine vollwertige Scherz-App, die mit 16 Arten von Videos, 20 Arten von Audio, Mikrofoneingang und Gesichtserkennung ausgestattet ist.
+Wir bieten echte Unterhaltung, bei der Sie hypnotische Bilder und Töne genießen können.
+
+- Es zeigt fesselnde Bilder an, die den gesamten Bildschirm ausfüllen. Es gibt keine störende Werbung.
+- Sie können das Ziel mithilfe der Gesichtserkennung erfassen.
+- Es überträgt Ihre Stimme über den Mikrofoneingang an das Ziel.
+- Lassen Sie uns die Emotionen Ihres Ziels wecken, indem wir Audio abspielen.
+- Die Nachricht, die Sie übermitteln möchten, wird auf dem Bildschirm angezeigt und die App selbst spricht.
 
 * Quellcode: https://github.com/katahiromz/KraKra_ja_jp
 * Es wird teilweise Audiomaterial von OtoLogic verwendet.
