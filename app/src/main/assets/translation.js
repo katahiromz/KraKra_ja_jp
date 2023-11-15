@@ -496,6 +496,7 @@ We provide real entertainment where you can enjoy hypnotic images and sounds.
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
+Copyright (c) 2021 Nenad Markuš
 Copyright (c) 2018 Robert Eisele
 `
 
@@ -543,6 +544,7 @@ Hypnosis KraKra
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
+Copyright (c) 2021 Nenad Markuš
 Copyright (c) 2018 Robert Eisele
 `
 
@@ -589,6 +591,7 @@ Hypnosis KraKra
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
+Copyright (c) 2021 Nenad Markuš
 Copyright (c) 2018 Robert Eisele
 `
 
@@ -635,6 +638,7 @@ Hypnosis KraKra
 Copyright (c) 2022-2023 片山博文MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
+Copyright (c) 2021 Nenad Markuš
 Copyright (c) 2018 Robert Eisele
 `
 
@@ -681,6 +685,7 @@ Hypnosis KraKra
 Copyright (c) 2022-2023 片山博文MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
+Copyright (c) 2021 Nenad Markuš
 Copyright (c) 2018 Robert Eisele
 `
 
@@ -727,6 +732,7 @@ Forniamo un vero intrattenimento in cui puoi goderti immagini e suoni ipnotici.
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
+Copyright (c) 2021 Nenad Markuš
 Copyright (c) 2018 Robert Eisele
 `
 
@@ -773,6 +779,7 @@ Wir bieten echte Unterhaltung, bei der Sie hypnotische Bilder und Töne genieße
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
+Copyright (c) 2021 Nenad Markuš
 Copyright (c) 2018 Robert Eisele
 `
 
