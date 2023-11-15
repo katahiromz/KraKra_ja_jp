@@ -175,6 +175,12 @@ document.addEventListener('DOMContentLoaded', function(){
 					case 2: // Locked
 						sai_id_button_lock_on.innerText = trans_getText('TEXT_UNLOCK');
 						sai_id_button_lock_on.disabled = false;
+						if(sai_id_checkbox_auto_play_sound.checked){
+							let lockon_sound = new Audio('sn/LockOn.mp3');
+							if(lockon_sound){
+								lockon_sound.play();
+							}
+						}
 						break;
 					}
 					sai_id_button_close.innerText = trans_getText('TEXT_CLOSE');
