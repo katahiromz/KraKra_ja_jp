@@ -493,22 +493,6 @@ We provide real entertainment where you can enjoy hypnotic images and sounds.
 - The 'gear' button will open Configuration.
 - When you run your finger on the screen, the screen sparks to attract their attention.
 
-[(Keyboard Operation)]
-
-When a keyboard is connected, the following operations are available:
-
-- Press [0] to [9] keys to switch pictures.
-- Press [C] key to open the configuration.
-- Press [H] key to open the version information.
-- Press [P] key to play sound.
-- Press [M] key to turn on/off the microphone (it needs permission).
-- Press [T] key to open the message settings.
-- Press [S] key to speak the current message automatically.
-- Press [X] key to pause.
-- Press [-] or [K] keys to kill hypnosis.
-- Press [D] key to split the screen.
-- Press [B] key to toggle display of the buttons.
-
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
@@ -556,22 +540,6 @@ Hypnosis KraKra
 - '기어' 버튼으로 일반 설정을 할 수 있습니다.
 - 화면을 손가락으로 추적하면 반짝임이 표시되어 상대방의 주의를 끌 수 있습니다.
 
-【키보드 조작】
-
-키보드를 연결하면 다음과 같은 조작을 할 수 있습니다.
-
-- "0"~"9" 키를 누르면 영상이 전환됩니다.
-- "C" 키를 누르면 일반 설정이 열립니다.
-- "H" 키를 누르면 버전 정보가 열립니다.
-- "P" 키를 누르면 소리가 납니다.
-- "M" 키를 누르면 마이크의 ON/OFF를 전환합니다(권한이 필요합니다).
-- "T" 키를 누르면 메시지 설정이 열립니다.
-- "S" 키를 누르면 현재 메시지를 자동 음성으로 말합니다.
-- "X" 키를 누르면 일시정지됩니다.
-- "-" 키 또는 "K" 키를 누르면 최면을 끕니다.
-- "D" 키를 누르면 화면 분할이 전환됩니다.
-- "B" 키를 누르면 버튼 표시가 전환됩니다.
-
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
@@ -617,22 +585,6 @@ Hypnosis KraKra
 - 「ふきだし」ボタンでメッセージを表示します。
 - 「歯車」ボタンで全般設定ができます。
 - 画面を指でなぞると、きらめきが表示され、相手の注意を引くことができます。
-
-【キーボード操作】
-
-キーボードを接続すると次のような操作ができます。
-
-- 「0」～「9」キーを押すと、映像が切り替わります。
-- 「C」キーを押すと全般設定が開きます。
-- 「H」キーを押すとバージョン情報を開きます。
-- 「P」キーを押すと音を鳴らします。
-- 「M」キーを押すとマイクのON/OFFを切り替えます(権限が必要です)。
-- 「T」キーを押すとメッセージの設定を開きます。
-- 「S」キーを押すと現在のメッセージを自動音声でしゃべります。
-- 「X」キーを押すと一時停止します。
-- 「-」キーか「K」キーを押すと催眠を消します。
-- 「D」キーを押すと画面分割が切り替わります。
-- 「B」キーを押すとボタンの表示が切り替わります。
 
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
@@ -680,22 +632,6 @@ Hypnosis KraKra
 - “齿轮”按钮将打开配置。
 - 当你的手指在屏幕上运行时，屏幕会产生火花，吸引他们的注意力。
 
-【键盘操作】
-
-当连接键盘时，可以进行以下操作：
-
-- 按[0]至[9]键切换图像。
-- 按[C]键打开配置。
-- 按[H]键打开版本信息。
-- 按[P]键播放声音。
-- 按[M]键打开/关闭麦克风（需要许可）。
-- 按[T]键打开消息设置。
-- 按[S]键自动说出当前消息。
-- 按[X]键暂停。
-- 按[-]或[K]键终止催眠。
-- 按[D]键分割屏幕。
-- 按[B]键切换按钮的显示。
-
 Copyright (c) 2022-2023 片山博文MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
@@ -741,22 +677,6 @@ Hypnosis KraKra
 - “氣泡”按鈕將顯示消息。
 - 用於常規設置的“齒輪”按鈕。
 - 在屏幕上滑動手指即可顯示閃爍的光芒，吸引對手的注意力。
-
-【鍵盤操作】
-
-連接鍵盤後，您可以執行以下操作。
-
-- 按“0”至“9”鍵切換圖像。
-- 按“C”鍵打開常規設置。
-- 按“H”鍵打開版本信息。
-- 按“P”鍵播放聲音。
-- 按“M”鍵打開/關閉麥克風（需要許可）。
-- 按“T”鍵打開消息設置。
-- 按“S”鍵以自動語音說出當前消息。
-- 按“X”鍵暫停。
-- 按“-”或“K”關閉催眠。
-- 按“D”鍵在屏幕分割之間切換。
-- 按“B”鍵切換按鈕顯示。
 
 Copyright (c) 2022-2023 片山博文MZ
 Copyright (c) 2023 Murayama Akira
@@ -804,22 +724,6 @@ Forniamo un vero intrattenimento in cui puoi goderti immagini e suoni ipnotici.
 - Il pulsante "ingranaggio" aprirà Configurazione.
 - Quando fai scorrere il dito sullo schermo, lo schermo si illumina per attirare la loro attenzione.
 
-[(Funzionamento della tastiera)]
-
-Quando è collegata una tastiera, sono disponibili le seguenti operazioni:
-
-- Premere i tasti da [0] a [9] per cambiare immagine.
-- Premere il tasto [C] per aprire la configurazione.
-- Premere il tasto [H] per aprire le informazioni sulla versione.
-- Premere il tasto [P] per riprodurre il suono.
-- Premere il tasto [M] per accendere/spegnere il microfono (è necessario il permesso).
-- Premere il tasto [T] per aprire le impostazioni del messaggio.
-- Premere il tasto [S] per pronunciare automaticamente il messaggio corrente.
-- Premere il tasto [X] per mettere in pausa.
-- Premi i tasti [-] o [K] per eliminare l'ipnosi.
-- Premere il tasto [D] per dividere lo schermo.
-- Premere il tasto [B] per alternare la visualizzazione dei pulsanti.
-
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
@@ -865,22 +769,6 @@ Wir bieten echte Unterhaltung, bei der Sie hypnotische Bilder und Töne genieße
 - Die Schaltfläche "Blasen" zeigt die Nachricht an.
 - Die Schaltfläche „Zahnrad“ öffnet die Konfiguration.
 - Wenn Sie mit dem Finger über den Bildschirm fahren, erzeugt der Bildschirm Funken, um ihre Aufmerksamkeit zu erregen.
-
-[(Tastaturbedienung)]
-
-Wenn eine Tastatur angeschlossen ist, stehen folgende Vorgänge zur Verfügung:
-
-- Drücken Sie die Tasten [0] bis [9], um zwischen den Bildern zu wechseln.
-- Drücken Sie die Taste [C], um die Konfiguration zu öffnen.
-- Drücken Sie die Taste [H], um die Versionsinformationen zu öffnen.
-- Drücken Sie die Taste [P], um den Ton abzuspielen.
-- Drücken Sie die Taste [M], um das Mikrofon ein-/auszuschalten (es erfordert eine Genehmigung).
-- Drücken Sie die Taste [T], um die Nachrichteneinstellungen zu öffnen.
-- Drücken Sie die Taste [S], um die aktuelle Nachricht automatisch vorzulesen.
-- Drücken Sie die Taste [X], um zu pausieren.
-- Drücken Sie die Tasten [-] oder [K], um die Hypnose zu beenden.
-- Drücken Sie die Taste [D], um den Bildschirm zu teilen.
-- Drücken Sie die Taste [B], um die Anzeige der Schaltflächen umzuschalten.
 
 Copyright (c) 2022-2023 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
