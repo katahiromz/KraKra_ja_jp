@@ -178,6 +178,7 @@ document.addEventListener('DOMContentLoaded', function(){
 						if(sai_id_checkbox_auto_play_sound.checked){
 							let lockon_sound = new Audio('sn/LockOn.mp3');
 							if(lockon_sound){
+								lockon_sound.volume = sai_id_range_sound_volume.value / 100.0;
 								lockon_sound.play();
 							}
 						}
