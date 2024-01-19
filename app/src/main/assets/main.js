@@ -1361,9 +1361,13 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 原点を中心として、これから描画する図形を回転する。
 		ctx.rotate(-count2 * 0.12);
 
-		// 少し回転のずれを表現する。
-		ctx.translate(25 * Math.cos(count2 * 0.01), 25 * Math.sin(count2 * 0.05));
-		ctx.rotate(count2 * 0.02);
+		// 画面の寸法を使って計算する。
+		let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
+
+		// 視覚的な酩酊感をもたらすために回転運動の中心点をすりこぎ運動させる。
+		let mxy = (maxxy + minxy) * 0.03;
+		ctx.translate(mxy * Math.cos(count2 * 0.007), mxy * Math.sin(count2 * 0.025));
+		ctx.rotate(count2 * 0.01);
 
 		const num_lines = 24; // これは偶数でなければならない。
 		const a = 1, b = 1.1; // らせんの係数。
@@ -1618,8 +1622,17 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 画面中央を原点とする。
 		ctx.translate(qx, qy);
 
+		let count2 = SAI_get_tick_count();
+
+		// 画面の寸法を使って計算する。
+		let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
+
+		// 視覚的な酩酊感をもたらすために回転運動の中心点をすりこぎ運動させる。
+		let mxy = (maxxy + minxy) * 0.04;
+		ctx.translate(mxy * Math.cos(count2 * 0.08), mxy * Math.sin(count2 * 0.05));
+
 		// これから描画する図形を回転する。
-		ctx.rotate(SAI_get_tick_count() * -0.28);
+		ctx.rotate(count2 * -0.25);
 
 		ctx.fillStyle = SAI_color_get_1st(); // 1番目の色で描画する。
 
@@ -2032,6 +2045,10 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 回転させる。
 		ctx.rotate(-count2 * 0.23);
+
+		// 視覚的な酩酊感をもたらすために回転運動の中心点をすりこぎ運動させる。
+		let mxy = (maxxy + minxy) * 0.015;
+		ctx.translate(mxy * Math.cos(count2 * 0.1), mxy * Math.sin(count2 * 0.013));
 
 		// 1番目の色で塗る。
 		ctx.fillStyle = SAI_color_get_1st();

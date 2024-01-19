@@ -493,7 +493,7 @@ We provide real entertainment where you can enjoy hypnotic images and sounds.
 - The 'gear' button will open Configuration.
 - When you run your finger on the screen, the screen sparks to attract their attention.
 
-Copyright (c) 2022-2023 Katayama Hirofumi MZ
+Copyright (c) 2022-2024 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
 Copyright (c) 2021 Nenad Markuš
@@ -541,7 +541,7 @@ Hypnosis KraKra
 - '기어' 버튼으로 일반 설정을 할 수 있습니다.
 - 화면을 손가락으로 추적하면 반짝임이 표시되어 상대방의 주의를 끌 수 있습니다.
 
-Copyright (c) 2022-2023 Katayama Hirofumi MZ
+Copyright (c) 2022-2024 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
 Copyright (c) 2021 Nenad Markuš
@@ -588,7 +588,7 @@ Hypnosis KraKra
 - 「歯車」ボタンで全般設定ができます。
 - 画面を指でなぞると、きらめきが表示され、相手の注意を引くことができます。
 
-Copyright (c) 2022-2023 Katayama Hirofumi MZ
+Copyright (c) 2022-2024 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
 Copyright (c) 2021 Nenad Markuš
@@ -635,7 +635,7 @@ Hypnosis KraKra
 - “齿轮”按钮将打开配置。
 - 当你的手指在屏幕上运行时，屏幕会产生火花，吸引他们的注意力。
 
-Copyright (c) 2022-2023 片山博文MZ
+Copyright (c) 2022-2024 片山博文MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
 Copyright (c) 2021 Nenad Markuš
@@ -682,7 +682,7 @@ Hypnosis KraKra
 - 用於常規設置的“齒輪”按鈕。
 - 在屏幕上滑動手指即可顯示閃爍的光芒，吸引對手的注意力。
 
-Copyright (c) 2022-2023 片山博文MZ
+Copyright (c) 2022-2024 片山博文MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
 Copyright (c) 2021 Nenad Markuš
@@ -729,7 +729,7 @@ Forniamo un vero intrattenimento in cui puoi goderti immagini e suoni ipnotici.
 - Il pulsante "ingranaggio" aprirà Configurazione.
 - Quando fai scorrere il dito sullo schermo, lo schermo si illumina per attirare la loro attenzione.
 
-Copyright (c) 2022-2023 Katayama Hirofumi MZ
+Copyright (c) 2022-2024 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
 Copyright (c) 2021 Nenad Markuš
@@ -776,7 +776,7 @@ Wir bieten echte Unterhaltung, bei der Sie hypnotische Bilder und Töne genieße
 - Die Schaltfläche „Zahnrad“ öffnet die Konfiguration.
 - Wenn Sie mit dem Finger über den Bildschirm fahren, erzeugt der Bildschirm Funken, um ihre Aufmerksamkeit zu erregen.
 
-Copyright (c) 2022-2023 Katayama Hirofumi MZ
+Copyright (c) 2022-2024 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
 Copyright (c) 2021 Nenad Markuš
