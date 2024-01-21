@@ -29,7 +29,7 @@ const facelocker = function(canvas, on_lock){
 		return gray;
 	};
 
-	self.myFillText = function(ctx, text,x, y){
+	const myFillText = function(ctx, text,x, y){
 		let fillStyle = ctx.fillStyle;
 		ctx.fillStyle = 'black';
 		for(dy = -3; dy <= +3; ++dy){
@@ -61,7 +61,7 @@ const facelocker = function(canvas, on_lock){
 			ctx.font = "bold 20px san-serif";
 			ctx.fillStyle = "#ff0";
 			ctx.textAlign = "center";
-			self.myFillText(ctx, "LOCK ON?", x, y - radius);
+			myFillText(ctx, "LOCK ON?", x, y - radius);
 			break;
 		case 2:
 			ctx.strokeStyle = 'red';
@@ -69,7 +69,7 @@ const facelocker = function(canvas, on_lock){
 			ctx.font = "bold 20px san-serif";
 			ctx.fillStyle = "#f99";
 			ctx.textAlign = "center";
-			self.myFillText(ctx, "LOCKED ON", x, y - radius);
+			myFillText(ctx, "LOCKED ON", x, y - radius);
 
 			let value = (new Date().getTime() % 1000) / 1000;
 			let cx = x + radius * Math.cos(value * (2 * Math.PI));
@@ -82,7 +82,7 @@ const facelocker = function(canvas, on_lock){
 		}
 	};
 
-	this.draw_detections = function(ctx, dets){
+	const draw_detections = function(ctx, dets){
 		if(!dets)
 			return;
 		if(self.target){
@@ -102,7 +102,7 @@ const facelocker = function(canvas, on_lock){
 		}
 	};
 
-	this.track_candidate = function(dets){
+	const track_candidate = function(dets){
 		let candidate = self.target_candidate;
 		if(!candidate)
 			return;
@@ -337,7 +337,7 @@ const facelocker = function(canvas, on_lock){
 
 			if (self.target != null){
 				ctx.putImageData(self.imageData, 0, 0);
-				self.draw_detections(ctx, self.dets);
+				draw_detections(ctx, self.dets);
 				return;
 			}
 
@@ -350,8 +350,8 @@ const facelocker = function(canvas, on_lock){
 			              self.zoomRatio * videoWidth, self.zoomRatio * videoHeight);
 			self.imageData = ctx.getImageData(0, 0, width, height);
 			self.dets = self.get_detections(self.imageData.data, width, height);
-			self.track_candidate(self.dets);
-			self.draw_detections(ctx, self.dets);
+			track_candidate(self.dets);
+			draw_detections(ctx, self.dets);
 
 			ctx.font = "bold 20px san-serif";
 			let text;
@@ -359,18 +359,18 @@ const facelocker = function(canvas, on_lock){
 				ctx.fillStyle = "red";
 				ctx.textAlign = "center";
 				text = trans_getText('TEXT_FACE_GETTER');
-				self.myFillText(ctx, text, width / 2, 20);
+				myFillText(ctx, text, width / 2, 20);
 				if(self.found_face()){
 					text = trans_getText('TEXT_TAP_ON_TARGET');
 				}else{
 					text = trans_getText('TEXT_CANT_FIND_FACE');
 				}
-				self.myFillText(ctx, text, width / 2, height - 20 / 2);
+				myFillText(ctx, text, width / 2, height - 20 / 2);
 			}else{
 				ctx.fillStyle = "#f0f";
 				ctx.textAlign = "center";
 				text = trans_getText('TEXT_CAN_LOCK_ON');
-				self.myFillText(ctx, text, width / 2, height - 20 / 2);
+				myFillText(ctx, text, width / 2, height - 20 / 2);
 			}
 		}
 
