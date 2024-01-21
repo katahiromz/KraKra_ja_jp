@@ -14,6 +14,7 @@ const facelocker = function(canvas, on_lock){
 	this.threshold = 50.0;
 	this.zoomRatio = 1.0;
 	const face_aspect = 1.3;
+	let error_message = null;
 
 	let self = this;
 
@@ -286,6 +287,24 @@ const facelocker = function(canvas, on_lock){
 		}
 	};
 
+	function load_facefinder(){
+		let url = './facefinder';
+		if(location.protocol == 'file:')
+			url = 'https://katahiromz.github.io/saimin/facefinder';
+		fetch(url)
+		.then(function(response){
+			response.arrayBuffer().then(function(buffer){
+				let bytes = new Int8Array(buffer);
+				self.classify_region = pico.unpack_cascade(bytes);
+				error_message = null;
+				console.log('* facefinder loaded');
+			})
+		}).catch((e) => {
+			error_message = trans_getText('TEXT_NO_WEBCONNECT');
+			setTimeout(load_facefinder, 10 * 1000);
+		});
+	};
+
 	this.init = function(canvas, on_lock){
 		if(typeof canvas == 'string')
 			canvas = document.getElementById(canvas);
@@ -305,16 +324,8 @@ const facelocker = function(canvas, on_lock){
 
 		// Initialize pico.js face detector
 		self.update_memory = pico.instantiate_detection_memory(5); // we will use the detecions of the last 5 frames
-		let url = './facefinder';
-		if(location.protocol == 'file:')
-			url = 'https://katahiromz.github.io/saimin/facefinder';
-		fetch(url).then(function(response){
-			response.arrayBuffer().then(function(buffer){
-				let bytes = new Int8Array(buffer);
-				self.classify_region = pico.unpack_cascade(bytes);
-				console.log('* facefinder loaded');
-			})
-		})
+
+		load_facefinder();
 
 		// Get the drawing context on the canvas and define a function to transform an RGBA image to grayscale
 		let ctx = self.canvas.getContext('2d', {
@@ -358,7 +369,12 @@ const facelocker = function(canvas, on_lock){
 
 			ctx.font = "bold 20px san-serif";
 			let text;
-			if (self.target_candidate == null){
+			if (error_message !== null){
+				ctx.fillStyle = "red";
+				ctx.textAlign = "center";
+				text = error_message;
+				myFillText(ctx, text, width / 2, height - 20 / 2);
+			}else if (self.target_candidate == null){
 				ctx.fillStyle = "red";
 				ctx.textAlign = "center";
 				text = trans_getText('TEXT_FACE_GETTER');

@@ -833,6 +833,7 @@ const trans_getText = function(str_id){
 		case 'TEXT_LOCK_ON': return 'ロックオン';
 		case 'TEXT_UNLOCK': return 'ロック解除';
 		case 'TEXT_CLOSE': return '閉じる';
+		case 'TEXT_NO_WEBCONNECT': return 'ネット接続が利用できません。';
 		}
 	}else if(lang == 'zh-CN' || lang == 'cn'){ // Chinese (Simplified)
 		switch(str_id){
@@ -879,6 +880,7 @@ const trans_getText = function(str_id){
 		case 'TEXT_LOCK_ON': return '锁上';
 		case 'TEXT_UNLOCK': return '开锁';
 		case 'TEXT_CLOSE': return '关闭';
+		case 'TEXT_NO_WEBCONNECT': return '无法连接互联网。';
 		}
 	}else if(lang == 'zh-TW'){ // Chinese (Traditional)
 		switch(str_id){
@@ -925,6 +927,7 @@ const trans_getText = function(str_id){
 		case 'TEXT_LOCK_ON': return '鎖上';
 		case 'TEXT_UNLOCK': return '開鎖';
 		case 'TEXT_CLOSE': return '關閉';
+		case 'TEXT_NO_WEBCONNECT': return '無法連接網路。';
 		}
 	}else if(lang == 'ko' || lang == 'kr' || lang == 'ko-KR'){ // Korean
 		switch(str_id){
@@ -971,6 +974,7 @@ const trans_getText = function(str_id){
 		case 'TEXT_LOCK_ON': return '잠금';
 		case 'TEXT_UNLOCK': return '잠금 해제';
 		case 'TEXT_CLOSE': return '닫다';
+		case 'TEXT_NO_WEBCONNECT': return '인터넷 연결을 사용할 수 없습니다.';
 		}
 	}else if(lang == 'it' || lang == 'it-IT'){ // Italian
 		switch(str_id){
@@ -1017,6 +1021,7 @@ const trans_getText = function(str_id){
 		case 'TEXT_LOCK_ON': return 'Blocco su';
 		case 'TEXT_UNLOCK': return 'Sbloccare';
 		case 'TEXT_CLOSE': return 'Vicino';
+		case 'TEXT_NO_WEBCONNECT': return 'La connessione Internet non è disponibile.';
 		}
 	}else if(lang == 'de' || lang == 'de-DE'){ // German
 		switch(str_id){
@@ -1063,6 +1068,7 @@ const trans_getText = function(str_id){
 		case 'TEXT_LOCK_ON': return 'Sperren';
 		case 'TEXT_UNLOCK': return 'Freischalten';
 		case 'TEXT_CLOSE': return 'Schließen';
+		case 'TEXT_NO_WEBCONNECT': return 'Die Internetverbindung ist nicht verfügbar.';
 		}
 	}else{ // English is default
 		switch(str_id){
@@ -1109,6 +1115,7 @@ const trans_getText = function(str_id){
 		case 'TEXT_LOCK_ON': return 'Lock on';
 		case 'TEXT_UNLOCK': return 'Unlock';
 		case 'TEXT_CLOSE': return 'Close';
+		case 'TEXT_NO_WEBCONNECT': return 'Internet connection is unavailable.';
 		}
 	}
 }
