@@ -391,6 +391,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 映像のスピードの種類のUIも更新。
 		SAI_speed_set_type(localStorage.getItem('saiminSpeedType'));
 
+		// スタイルシートも更新。
+		stylesheet_1.href = trans_getStyleSheet();
+
 		// Android側にも言語変更を通知する。
 		try{
 			android.setLanguage(lang);
@@ -1307,8 +1310,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// ピンク色の丸いグラデーションを描画する。
 		let grd = ctx.createRadialGradient(qx, qy, 0, qx, qy, dxy * 0.5);
-		grd.addColorStop(0, 'rgba(255, 0, 255, 0.0)');
-		grd.addColorStop(1, 'rgba(255, 0, 255, 1.0)');
+		grd.addColorStop(0, trans_getColor('COLOR_DUMMYPAGECOLOR0'));
+		grd.addColorStop(1, trans_getColor('COLOR_DUMMYPAGECOLOR1'));
 		ctx.fillStyle = grd;
 		SAI_draw_circle(ctx, qx, qy, dxy, true);
 

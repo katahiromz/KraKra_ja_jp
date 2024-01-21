@@ -2,6 +2,46 @@
 
 let trans_currentLanguage = 'en';
 
+// {{LANGUAGE_SPECIFIC}} {{COLOR_SPECIFIC}}
+const trans_getStyleSheet = function(){
+	switch (trans_currentLanguage){
+		case 'zh-CN':
+		case 'zh-TW':
+		case 'en':
+		case 'de':
+		case 'it':
+		case 'ja':
+		case 'ko-KR':
+		default:
+			return 'css/ja-JP.css';
+	}
+};
+
+// {{LANGUAGE_SPECIFIC}} {{COLOR_SPECIFIC}}
+const trans_getColor = function(colorName){
+	switch (trans_currentLanguage){
+		case 'en':
+		case 'de':
+		case 'it':
+			switch (colorName){
+			case 'COLOR_DUMMYPAGECOLOR0': return 'rgba(30, 30, 255, 0.0)';
+			case 'COLOR_DUMMYPAGECOLOR1': return 'rgba(30, 30, 255, 1.0)';
+			}
+			break;
+		case 'ja':
+		case 'ko-KR':
+		case 'zh-CN':
+		case 'zh-TW':
+			switch (colorName){
+			case 'COLOR_DUMMYPAGECOLOR0': return 'rgba(255, 0, 255, 0.0)';
+			case 'COLOR_DUMMYPAGECOLOR1': return 'rgba(255, 0, 255, 1.0)';
+			}
+			break;
+		default:
+			return trans_getColor('en', colorName);
+	}
+};
+
 // {{LANGUAGE_SPECIFIC}}
 const trans_DEFAULT_MESSAGE_LIST_EN = [
 	"It is dangerous. Run away quickly.",
