@@ -13,6 +13,7 @@ const facelocker = function(canvas, on_lock){
 	this.classify_region = null;
 	this.threshold = 50.0;
 	this.zoomRatio = 1.0;
+	const face_aspect = 1.3;
 
 	let self = this;
 
@@ -45,7 +46,7 @@ const facelocker = function(canvas, on_lock){
 	const draw_target = function(ctx, target, status){
 		let x = target.x, y = target.y, radius = target.radius;
 		ctx.beginPath();
-		ctx.ellipse(x, y, radius, radius * 1.3, 0, 0, 2 * Math.PI);
+		ctx.ellipse(x, y, radius, radius * face_aspect, 0, 0, 2 * Math.PI);
 		ctx.lineWidth = 5;
 		ctx.strokeStyle = 'black';
 		ctx.stroke();
@@ -225,7 +226,7 @@ const facelocker = function(canvas, on_lock){
 				continue;
 
 			let x = det[1], y = det[0], radius = det[2];
-			let rect = {x: x - radius/2, y: y - radius/2, width: radius, height: radius};
+			let rect = {x: x - radius/2, y: y - radius/2 * face_aspect, width: radius, height: radius * face_aspect};
 			if (pageX < rect.x || pageY < rect.y)
 				continue;
 			if (rect.x + rect.width < pageX || rect.y + rect.height < pageY)
