@@ -321,10 +321,10 @@ const facelocker = function(canvas, on_lock){
 		});
 
 		const get_best_zoom = function(width, height, videoWidth, videoHeight){
-			if (width / height < videoWidth / videoHeight){
-				return videoWidth / videoHeight;
+			if (videoHeight * width < height * videoWidth){
+				return height / videoHeight;
 			}else{
-				return width / height;
+				return width / videoWidth;
 			}
 		};
 

@@ -6,8 +6,8 @@ const camvas = function(ctx, callback){
 	this.connecting = false;
 	this.forbidden_side = null;
 	this.allowed_side = null;
-	this.videoWidth = 640;
-	this.videoHeight = 480;
+	this.videoWidth = 320;
+	this.videoHeight = 240;
 
 	let last = Date.now();
 	this.loop = function() {
@@ -17,6 +17,9 @@ const camvas = function(ctx, callback){
 		self.callback(self.video, Date.now() - last);
 		last = Date.now();
 		self.animation = requestAnimationFrame(self.loop);
+
+		self.videoWidth = self.video.videoWidth;
+		self.videoHeight = self.video.videoHeight;
 	};
 
 	this.cancelAnimation = function(){
