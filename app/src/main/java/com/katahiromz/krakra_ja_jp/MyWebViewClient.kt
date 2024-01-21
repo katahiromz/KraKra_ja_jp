@@ -31,10 +31,6 @@ class MyWebViewClient(private val listener: Listener) : WebViewClient() {
                 view.loadUrl(url)
                 return true;
             }
-            if (url == "https://raw.githubusercontent.com/nenadmarkus/pico/c2e81f9d23cc11d1a612fd21e4f9de0921a5d0d9/rnt/cascades/facefinder") {
-                view.loadUrl(url)
-                return true;
-            }
         }
         return true
     }
