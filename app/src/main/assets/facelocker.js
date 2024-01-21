@@ -12,10 +12,11 @@ const facelocker = function(canvas, on_lock){
 	this.update_memory = null;
 	this.classify_region = null;
 	this.threshold = 50.0;
+	this.zoomRatio = 1.0;
 
 	let self = this;
 
-	this.rgba_to_grayscale = function(rgba, nrows, ncols){
+	const rgba_to_grayscale = function(rgba, nrows, ncols){
 		let gray = new Uint8Array(nrows * ncols);
 		for(let r = 0; r < nrows; ++r){
 			for(let c = 0; c < ncols; ++c){
@@ -28,10 +29,23 @@ const facelocker = function(canvas, on_lock){
 		return gray;
 	};
 
-	this.draw_target = function(ctx, target, status){
+	self.myFillText = function(ctx, text,x, y){
+		let fillStyle = ctx.fillStyle;
+		ctx.fillStyle = 'black';
+		for(dy = -3; dy <= +3; ++dy){
+			for(dx = -3; dx <= +3; ++dx){
+				ctx.fillText(text, x + dx, y + dy);
+			}
+		}
+		ctx.fillText(text, x, y);
+		ctx.fillStyle = fillStyle;
+		ctx.fillText(text, x, y);
+	};
+
+	const draw_target = function(ctx, target, status){
 		let x = target.x, y = target.y, radius = target.radius;
 		ctx.beginPath();
-		ctx.rect(x - radius, y - radius, radius * 2, radius * 2);
+		ctx.ellipse(x, y, radius, radius * 1.3, 0, 0, 2 * Math.PI);
 		ctx.lineWidth = 5;
 		ctx.strokeStyle = 'black';
 		ctx.stroke();
@@ -47,7 +61,7 @@ const facelocker = function(canvas, on_lock){
 			ctx.font = "bold 20px san-serif";
 			ctx.fillStyle = "#ff0";
 			ctx.textAlign = "center";
-			ctx.fillText("LOCK ON?", x, y - radius);
+			self.myFillText(ctx, "LOCK ON?", x, y - radius);
 			break;
 		case 2:
 			ctx.strokeStyle = 'red';
@@ -55,7 +69,7 @@ const facelocker = function(canvas, on_lock){
 			ctx.font = "bold 20px san-serif";
 			ctx.fillStyle = "#f99";
 			ctx.textAlign = "center";
-			ctx.fillText("LOCKED ON", x, y - radius);
+			self.myFillText(ctx, "LOCKED ON", x, y - radius);
 
 			let value = (new Date().getTime() % 1000) / 1000;
 			let cx = x + radius * Math.cos(value * (2 * Math.PI));
@@ -72,7 +86,7 @@ const facelocker = function(canvas, on_lock){
 		if(!dets)
 			return;
 		if(self.target){
-			self.draw_target(ctx, self.target, 2);
+			draw_target(ctx, self.target, 2);
 			return;
 		}
 		for(let det of dets){
@@ -81,10 +95,10 @@ const facelocker = function(canvas, on_lock){
 
 			let x = det[1], y = det[0], radius = det[2] / 2;
 			let target = {x: x, y: y, radius: radius};
-			self.draw_target(ctx, target, 0);
+			draw_target(ctx, target, 0);
 		}
 		if(self.target_candidate){
-			self.draw_target(ctx, self.target_candidate, 1);
+			draw_target(ctx, self.target_candidate, 1);
 		}
 	};
 
@@ -117,7 +131,7 @@ const facelocker = function(canvas, on_lock){
 			return;
 
 		let image = {
-			pixels: self.rgba_to_grayscale(rgba, height, width),
+			pixels: rgba_to_grayscale(rgba, height, width),
 			nrows: height,
 			ncols: width,
 			ldim: width
@@ -306,6 +320,14 @@ const facelocker = function(canvas, on_lock){
 			alpha: false,
 		});
 
+		const get_best_zoom = function(width, height, videoWidth, videoHeight){
+			if (width / height < videoWidth / videoHeight){
+				return videoWidth / videoHeight;
+			}else{
+				return width / height;
+			}
+		};
+
 		// This function is called each time a video frame becomes available
 		let processfn = function(video, dt){
 			// The canvas size
@@ -319,7 +341,13 @@ const facelocker = function(canvas, on_lock){
 				return;
 			}
 
-			ctx.drawImage(video, 0, 0, width, height);
+			let camvas = self.camvas;
+			let videoWidth = camvas.videoWidth, videoHeight = camvas.videoHeight;
+			self.zoomRatio = get_best_zoom(width, height, videoWidth, videoHeight);
+			ctx.drawImage(video, 0, 0, videoWidth, videoHeight,
+			              width / 2 - self.zoomRatio * videoWidth / 2,
+			              height / 2 - self.zoomRatio * videoHeight / 2,
+			              self.zoomRatio * videoWidth, self.zoomRatio * videoHeight);
 			self.imageData = ctx.getImageData(0, 0, width, height);
 			self.dets = self.get_detections(self.imageData.data, width, height);
 			self.track_candidate(self.dets);
@@ -331,18 +359,18 @@ const facelocker = function(canvas, on_lock){
 				ctx.fillStyle = "red";
 				ctx.textAlign = "center";
 				text = trans_getText('TEXT_FACE_GETTER');
-				ctx.fillText(text, width / 2, 20);
+				self.myFillText(ctx, text, width / 2, 20);
 				if(self.found_face()){
 					text = trans_getText('TEXT_TAP_ON_TARGET');
 				}else{
 					text = trans_getText('TEXT_CANT_FIND_FACE');
 				}
-				ctx.fillText(text, width / 2, height - 20 / 2);
+				self.myFillText(ctx, text, width / 2, height - 20 / 2);
 			}else{
 				ctx.fillStyle = "#f0f";
 				ctx.textAlign = "center";
 				text = trans_getText('TEXT_CAN_LOCK_ON');
-				ctx.fillText(text, width / 2, height - 20 / 2);
+				self.myFillText(ctx, text, width / 2, height - 20 / 2);
 			}
 		}
 

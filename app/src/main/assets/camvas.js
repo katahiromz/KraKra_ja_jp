@@ -6,6 +6,8 @@ const camvas = function(ctx, callback){
 	this.connecting = false;
 	this.forbidden_side = null;
 	this.allowed_side = null;
+	this.videoWidth = 640;
+	this.videoHeight = 480;
 
 	let last = Date.now();
 	this.loop = function() {
@@ -50,6 +52,11 @@ const camvas = function(ctx, callback){
 		// The video should fill out all of the canvas
 		self.video.setAttribute('width', 1);
 		self.video.setAttribute('height', 1);
+
+		self.video.addEventListener('loadedmetadata', function(e){
+			self.videoWidth = this.videoWidth;
+			self.videoHeight = this.videoHeight;
+		}, false);
 
 		self.streamContainer.appendChild(self.video);
 		document.body.appendChild(self.streamContainer);
