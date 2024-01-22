@@ -27,7 +27,7 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      inkscape:zoom="4.7068235"
-     inkscape:cx="54.495351"
+     inkscape:cx="54.389123"
      inkscape:cy="19.439862"
      inkscape:window-width="1366"
      inkscape:window-height="705"
@@ -41,16 +41,15 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <circle
-       style="fill:#ffb5e6;stroke-width:0.79375;stroke-linecap:round;paint-order:fill markers stroke"
-       id="path1"
-       cx="4.7624998"
-       cy="4.7624998"
-       r="4.7624998" />
     <path
        id="rect1"
+       style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:1.05833;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
+       d="m 1.8471449,2.0564948 c -0.4940301,0 -0.89141842,0.3979051 -0.89141842,0.8919352 v 2.9527913 c 0,0.4940301 0.39738832,0.8919353 0.89141842,0.8919353 L 3.4623861,6.7369439 4.6500746,8.2400967 4.9581267,6.7931566 h 2.4948776 c 0.4940301,0 0.8914184,-0.3979052 0.8914184,-0.8919353 V 2.94843 c 0,-0.4940301 -0.3973883,-0.8919352 -0.8914184,-0.8919352 z"
+       sodipodi:nodetypes="sssscccsssss" />
+    <path
+       id="rect1-5"
        style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.529167;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
-       d="m 1.9595703,2.3608107 c -0.4940301,0 -0.8914184,0.3979051 -0.8914184,0.8919352 v 2.9527913 c 0,0.4940301 0.3973883,0.8919353 0.8914184,0.8919353 L 3.5748115,7.0412598 4.7625,8.5444126 5.0705521,7.0974725 h 2.4948776 c 0.4940301,0 0.8914184,-0.3979052 0.8914184,-0.8919353 V 3.2527459 c 0,-0.4940301 -0.3973883,-0.8919352 -0.8914184,-0.8919352 z"
+       d="m 1.8784076,2.0962276 c -0.4940301,0 -0.89141845,0.3979051 -0.89141845,0.8919352 v 2.9527913 c 0,0.4940301 0.39738835,0.8919351 0.89141845,0.8919351 l 1.6152412,-0.05621 1.1876885,1.503152 0.308052,-1.44694 h 2.494878 c 0.49403,0 0.891418,-0.397905 0.891418,-0.8919351 V 2.9881628 c 0,-0.4940301 -0.397388,-0.8919352 -0.891418,-0.8919352 z"
        sodipodi:nodetypes="sssscccsssss" />
     <circle
        style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.883256;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"

@@ -7,13 +7,15 @@ const trans_getStyleSheet = function(){
 	switch (trans_currentLanguage){
 		case 'zh-CN':
 		case 'zh-TW':
+			return 'css/golden.css';
 		case 'en':
 		case 'de':
 		case 'it':
+			return 'css/purple.css';
 		case 'ja':
 		case 'ko-KR':
 		default:
-			return 'css/ja-JP.css';
+			return 'css/pink.css';
 	}
 };
 
@@ -21,20 +23,38 @@ const trans_getStyleSheet = function(){
 const trans_getColor = function(colorName){
 	switch (trans_currentLanguage){
 		case 'en':
+			switch (colorName){
+			case 'COLOR_DUMMYPAGECOLOR0': return 'rgba(255, 30, 92, 0.0)';
+			case 'COLOR_DUMMYPAGECOLOR1': return 'rgba(92, 30, 255, 1.0)';
+			case 'COLOR_1ST': return '#3300ff';
+			case 'COLOR_2ND': return '#f01966';
+			}
+			break;
 		case 'de':
 		case 'it':
 			switch (colorName){
-			case 'COLOR_DUMMYPAGECOLOR0': return 'rgba(30, 30, 255, 0.0)';
-			case 'COLOR_DUMMYPAGECOLOR1': return 'rgba(30, 30, 255, 1.0)';
+			case 'COLOR_DUMMYPAGECOLOR0': return 'rgba(255, 30, 92, 0.0)';
+			case 'COLOR_DUMMYPAGECOLOR1': return 'rgba(192, 30, 255, 1.0)';
+			case 'COLOR_1ST': return '#cc1999';
+			case 'COLOR_2ND': return '#330066';
+			}
+			break;
+		case 'zh-CN':
+		case 'zh-TW':
+			switch (colorName){
+			case 'COLOR_DUMMYPAGECOLOR0': return 'rgba(91, 91, 91, 0.0)';
+			case 'COLOR_DUMMYPAGECOLOR1': return 'rgba(255, 255, 0, 1.0)';
+			case 'COLOR_1ST': return '#ffff00';
+			case 'COLOR_2ND': return '#666600';
 			}
 			break;
 		case 'ja':
 		case 'ko-KR':
-		case 'zh-CN':
-		case 'zh-TW':
 			switch (colorName){
 			case 'COLOR_DUMMYPAGECOLOR0': return 'rgba(255, 0, 255, 0.0)';
 			case 'COLOR_DUMMYPAGECOLOR1': return 'rgba(255, 0, 255, 1.0)';
+			case 'COLOR_1ST': return '#990034';
+			case 'COLOR_2ND': return '#ff00ff';
 			}
 			break;
 		default:

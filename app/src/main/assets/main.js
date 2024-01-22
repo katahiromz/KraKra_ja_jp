@@ -3374,6 +3374,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 言語選択のOKボタン。
 		sai_id_button_choose_language.addEventListener('click', function(e){
 			SAI_set_language(sai_id_select_language_2.value);
+			sai_id_color_1st.value = trans_getColor('COLOR_1ST');
+			sai_id_color_2nd.value = trans_getColor('COLOR_2ND');
+			localStorage.setItem('saimin1stColor', sai_id_color_1st.value);
+			localStorage.setItem('saimin2ndColor', sai_id_color_2nd.value);
 			if(localStorage.getItem('saiminUserAccepted'))
 				SAI_choose_page(sai_id_page_main);
 			else
@@ -3435,12 +3439,12 @@ document.addEventListener('DOMContentLoaded', function(){
 			localStorage.setItem('saimin2ndColor', sai_id_color_2nd.value);
 		});
 		sai_id_color_1st_reset.addEventListener('click', function(e){
-			sai_id_color_1st.value = "#ff00ff";
+			sai_id_color_1st.value = trans_getColor('COLOR_1ST');
 			sai_id_checkbox_color_1st_rainbow.checked = false;
 			localStorage.setItem('saimin1stColor', sai_id_color_1st.value);
 		});
 		sai_id_color_2nd_reset.addEventListener('click', function(e){
-			sai_id_color_2nd.value = "#000000";
+			sai_id_color_2nd.value = trans_getColor('COLOR_2ND');
 			sai_id_checkbox_color_2nd_rainbow.checked = false;
 			localStorage.setItem('saimin2ndColor', sai_id_color_2nd.value);
 		});
