@@ -391,9 +391,6 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 映像のスピードの種類のUIも更新。
 		SAI_speed_set_type(localStorage.getItem('saiminSpeedType'));
 
-		// スタイルシートも更新。
-		stylesheet_1.href = trans_getStyleSheet();
-
 		// Android側にも言語変更を通知する。
 		try{
 			android.setLanguage(lang);
@@ -401,6 +398,27 @@ document.addEventListener('DOMContentLoaded', function(){
 			;
 		}
 	}
+
+	// KraKraのスキンをセットする。
+	const SAI_set_skin = function(skin, reset_colors = false){
+		if(!skin)
+			skin = trans_getDefaultSkin();
+		trans_skin = skin = skin.toString();
+		sai_id_select_skin.value = skin;
+
+		// ローカルストレージに記憶。
+		localStorage.setItem('saiminSkin', skin);
+
+		// スタイルシートも更新。
+		stylesheet_1.href = trans_getStyleSheet();
+
+		if (reset_colors){
+			sai_id_color_1st.value = trans_getColor('COLOR_1ST');
+			sai_id_color_2nd.value = trans_getColor('COLOR_2ND');
+			localStorage.setItem('saimin1stColor', sai_id_color_1st.value);
+			localStorage.setItem('saimin2ndColor', sai_id_color_2nd.value);
+		}
+	};
 
 	// スピーチに対応するために、テキストを調整する。
 	const SAI_adjust_text_for_speech = function(text){
@@ -3374,10 +3392,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 言語選択のOKボタン。
 		sai_id_button_choose_language.addEventListener('click', function(e){
 			SAI_set_language(sai_id_select_language_2.value);
-			sai_id_color_1st.value = trans_getColor('COLOR_1ST');
-			sai_id_color_2nd.value = trans_getColor('COLOR_2ND');
-			localStorage.setItem('saimin1stColor', sai_id_color_1st.value);
-			localStorage.setItem('saimin2ndColor', sai_id_color_2nd.value);
+			SAI_set_skin(trans_getDefaultSkin(), true);
 			if(localStorage.getItem('saiminUserAccepted'))
 				SAI_choose_page(sai_id_page_main);
 			else
@@ -3521,6 +3536,11 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_id_button_close.addEventListener('click', function(){
 			localStorage.removeItem('saiminFaceGetterShowing');
 			SAI_choose_page(sai_id_page_main);
+		});
+
+		// スキン。
+		sai_id_select_skin.addEventListener('change', function(){
+			SAI_set_skin(sai_id_select_skin.value, true);
 		});
 	}
 
@@ -3698,9 +3718,12 @@ document.addEventListener('DOMContentLoaded', function(){
 		// ローカルストレージに応じて処理を行う。
 		let saiminUserAccepted = localStorage.getItem('saiminUserAccepted');
 		let saiminLanguage3 = localStorage.getItem('saiminLanguage3');
+		let saiminSkin = localStorage.getItem('saiminSkin');
 		if(saiminUserAccepted && saiminLanguage3){ // すでにアダルトチェックが完了しているか？
 			// 言語をセット。
 			SAI_set_language(saiminLanguage3);
+			// スキンをセット。
+			SAI_set_skin(saiminSkin);
 
 			// ユーザを受け入れる。
 			SAI_user_accepted();
@@ -3713,6 +3736,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		}else{ // 合意が必要。
 			// 言語をセット。
 			SAI_set_language(saiminLanguage3);
+			// スキンをセット。
+			SAI_set_skin(saiminSkin);
 
 			// 合意ページに移動。
 			SAI_help_and_agreement();
