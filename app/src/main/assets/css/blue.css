@@ -32,7 +32,7 @@ button { /* 通常のボタン */
 	width: 100dvw;
 	height: 100vh;
 	height: 100dvh;
-	background-color: #90f;
+	background-color: #60f;
 	color: #fff;
 }
 #sai_id_main_page { /* メインページ */
@@ -47,7 +47,7 @@ button { /* 通常のボタン */
 .sai_class_page h1 { /* ページの見出し */
 	font-size: 1.25rem; /* ① */
 	line-height: 1.25rem; /* ① */
-	background-color: #f0f;
+	background-color: #99f;
 	color: black;
 	margin: 0;
 }
