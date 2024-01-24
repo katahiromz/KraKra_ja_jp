@@ -45,8 +45,8 @@ const trans_getColor = function(colorName){
 		switch (colorName){
 		case 'COLOR_DUMMYPAGECOLOR0': return 'rgba(255, 30, 92, 0.0)';
 		case 'COLOR_DUMMYPAGECOLOR1': return 'rgba(92, 30, 255, 1.0)';
-		case 'COLOR_1ST': return '#3300ff';
-		case 'COLOR_2ND': return '#f01966';
+		case 'COLOR_1ST': return '#6600aa';
+		case 'COLOR_2ND': return '#cc11cc';
 		}
 		break;
 	case 'purple':
