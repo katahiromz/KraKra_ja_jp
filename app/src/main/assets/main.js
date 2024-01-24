@@ -401,8 +401,11 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// KraKraのスキンをセットする。
 	const SAI_set_skin = function(skin, reset_colors = false){
+		// スキン設定がなければデフォルトを使う。
 		if(!skin)
 			skin = trans_getDefaultSkin();
+
+		// 設定をUIに反映する。
 		trans_skin = skin = skin.toString();
 		sai_id_select_skin.value = skin;
 
@@ -412,6 +415,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		// スタイルシートも更新。
 		stylesheet_1.href = trans_getStyleSheet();
 
+		// 色をリセットするか？
 		if (reset_colors){
 			sai_id_color_1st.value = trans_getColor('COLOR_1ST');
 			sai_id_color_2nd.value = trans_getColor('COLOR_2ND');
