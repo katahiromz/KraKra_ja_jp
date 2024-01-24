@@ -566,6 +566,9 @@ We provide real entertainment where you can enjoy hypnotic images and sounds.
 - If you experience symptoms such as headache, dizzy, hyperpnea, nausea, gastrointestinal problems, or abnormal emotions, discontinue use immediately and consult a specialist.
 - The Operator may terminate the Service at any time if any reason arises that makes it difficult to continue the Service.
 - Please do not hypnotize others without their consent.
+- This app is not for medical use. We recommend medically effective standard care for sick people.
+- This app is not for sleeping. If you are not feeling well, please refrain from using the facility.
+- Hypnosis that attempts to make the subject do something that he or she does not know the meaning of or how to do or is unable to do is ineffective.
 
 [(How to use)]
 
@@ -613,6 +616,9 @@ Hypnosis KraKra
 - 두통, 현기증, 과호흡, 메스꺼움, 위장 장애, 이상한 감정 등의 증상이 발생한 경우에는 신속하게 사용을 중지하고 전문의의 진단을 받으십시오.
 - 운영자는 본 서비스의 계속이 곤란해지는 사유가 발생한 경우 언제든지 본 서비스를 종료할 수 있는 것으로 합니다.
 - 타인에게 동의없이 최면을 걸지 마십시오.
+- 이 응용 프로그램은 의료용이 아닙니다. 아픈 사람에게는 의학적으로 효과적인 표준 의료를 권장합니다.
+- 이 앱은 수면용이 아닙니다. 컨디션이 뛰어나지 않는 사람은 이용을 돌려주세요.
+- 피험자가 의미나 방법을 모르는 것, 실행의 불가능한 일을 하려고 하는 최면은 효과가 없습니다.
 
 【사용법】
 
@@ -661,6 +667,9 @@ Hypnosis KraKra
 - 頭痛、めまい、過呼吸、吐き気、胃腸の不具合、異常な感情などの症状が生じた場合は、速やかに使用を中止し、専門医の診断を受けて下さい。
 - 運営者は、本サービスの継続が困難となる事由が生じた場合、いつでも本サービスを終了することができるものとします。
 - 他人に同意なく催眠を掛けないで下さい。
+- このアプリは医療用ではありません。病気の人には医学的に効果のある標準医療を推奨します。
+- このアプリは睡眠用ではありません。体調がすぐれない人はご利用をひかえて下さい。
+- 被験者が意味または方法を知らないこと、実行の不可能なことをさせようとする催眠は効果がありません。
 
 【使い方】
 
@@ -708,6 +717,9 @@ Hypnosis KraKra
 - 如果出现头痛、头晕、呼吸急促、恶心、肠胃问题或情绪异常等症状，请立即停止使用并咨询专科医生。
 - 如果出现任何原因导致难以继续提供服务，运营商可以随时终止服务。
 - 未经他人同意，请勿催眠他人。
+- 此应用程序不用于医疗用途。 我们建议对病人进行有效的标准护理。
+- 这个应用程序不适合睡觉。 如果您感觉不舒服，请不要使用该设施。
+- 试图让受试者做一些他或她不知道其含义或如何做或无法做的事情的催眠是无效的。
 
 【如何使用】
 
@@ -755,6 +767,9 @@ Hypnosis KraKra
 - 如果出現頭痛、頭暈、換氣過度、噁心、腸胃不適或情緒異常等症狀，請立即停止使用並諮詢專科醫生。
 - 如果有理由難以繼續提供該服務，運營商可以隨時終止該服務。
 - 未經他人同意，請勿催眠他人。
+- 此應用程式不用於醫療用途。 我們建議對病人進行有效的標準護理。
+- 這個應用程式不適合睡覺。 如果您感覺不舒服，請不要使用該設施。
+- 試圖讓受試者做一些他或她不知道其含義或如何做或無法做的事情的催眠是無效的。
 
 【用法】
 
@@ -802,6 +817,9 @@ Forniamo un vero intrattenimento in cui puoi goderti immagini e suoni ipnotici.
 - Se si verificano sintomi come mal di testa, vertigini, iperpnea, nausea, problemi gastrointestinali o emozioni anormali, interrompere immediatamente l'uso e consultare uno specialista.
 - L'Operatore può interrompere il Servizio in qualsiasi momento se si verifica un motivo che rende difficile continuare il Servizio.
 - Per favore non ipnotizzare gli altri senza il loro consenso.
+- Questa app non è per uso medico. Raccomandiamo cure standard efficaci dal punto di vista medico per i malati.
+- Questa app non è per dormire. Se non ti senti bene, ti preghiamo di astenerti dall'utilizzare la struttura.
+- L'ipnosi che tenta di far fare al soggetto qualcosa di cui non conosce il significato o come fare o non è in grado di fare è inefficace.
 
 [(Come usare)]
 
@@ -849,6 +867,9 @@ Wir bieten echte Unterhaltung, bei der Sie hypnotische Bilder und Töne genieße
 - Wenn bei Ihnen Symptome wie Kopfschmerzen, Schwindel, Hyperpnoe, Übelkeit, Magen-Darm-Probleme oder abnormale Emotionen auftreten, brechen Sie die Anwendung sofort ab und konsultieren Sie einen Spezialisten.
 - Der Betreiber kann den Dienst jederzeit beenden, wenn ein Grund vorliegt, der die Fortsetzung des Dienstes erschwert.
 - Bitte hypnotisieren Sie andere nicht ohne deren Zustimmung.
+- Diese App ist nicht für medizinische Zwecke bestimmt. Für erkrankte Menschen empfehlen wir eine medizinisch wirksame Regelversorgung.
+- Diese App ist nicht zum Schlafen gedacht. Wenn Sie sich nicht wohl fühlen, sehen Sie bitte von der Nutzung der Einrichtung ab.
+- Hypnose, die versucht, den Probanden dazu zu bringen, etwas zu tun, dessen Bedeutung er oder sie nicht kennt oder wie er oder sie es tun soll oder zu dem er nicht in der Lage ist, ist wirkungslos.
 
 [(Wie benutzt man)]
 
