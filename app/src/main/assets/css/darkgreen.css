@@ -17,7 +17,7 @@ label { /* ラベル */
 	cursor: pointer;
 }
 select { /* コンボボックス */
-	background-color: #030;
+	background-color: #010;
 	color: #0f0;
 }
 button { /* 通常のボタン */
