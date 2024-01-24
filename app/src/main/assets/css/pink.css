@@ -318,6 +318,7 @@ input[type='color'] { /* 色選択ボタン */
 	border: solid 1px black;
 	padding: 0.2cm;
 	min-height: 0.8cm;
+	background-image: linear-gradient(to bottom, #313, #f06);
 }
 #sai_id_message_list div:hover { /* メッセージリスト */
 	background-color: #c0c;
