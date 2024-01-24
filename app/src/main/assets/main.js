@@ -159,34 +159,40 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_sound_pause();
 		}
 
+		// 顔認識の状態をUIに反映する。
+		const face_update_status = function(status){
+			switch(status){
+			case 0: // Unlocked
+				sai_id_button_lock_on.innerText = trans_getText('TEXT_LOCK_ON');
+				sai_id_button_lock_on.disabled = true;
+				break;
+			case 1: // Candidate
+				sai_id_button_lock_on.innerText = trans_getText('TEXT_LOCK_ON');
+				sai_id_button_lock_on.disabled = false;
+				break;
+			case 2: // Locked
+				sai_id_button_lock_on.innerText = trans_getText('TEXT_UNLOCK');
+				sai_id_button_lock_on.disabled = false;
+				if(sai_id_checkbox_auto_play_sound.checked){
+					let lockon_sound = new Audio('sn/LockOn.mp3');
+					if(lockon_sound){
+						lockon_sound.volume = sai_id_range_sound_volume.value / 100.0;
+						lockon_sound.play();
+					}
+				}
+				break;
+			}
+			sai_id_button_close.innerText = trans_getText('TEXT_CLOSE');
+		};
+
 		// 顔認識のページか？
 		if(page_id == sai_id_page_face_getter){
 			if (!sai_face_getter) {
 				sai_face_getter = new facelocker(sai_id_canvas_face, function(status){
-					switch(status){
-					case 0: // Unlocked
-						sai_id_button_lock_on.innerText = trans_getText('TEXT_LOCK_ON');
-						sai_id_button_lock_on.disabled = true;
-						break;
-					case 1: // Candidate
-						sai_id_button_lock_on.innerText = trans_getText('TEXT_LOCK_ON');
-						sai_id_button_lock_on.disabled = false;
-						break;
-					case 2: // Locked
-						sai_id_button_lock_on.innerText = trans_getText('TEXT_UNLOCK');
-						sai_id_button_lock_on.disabled = false;
-						if(sai_id_checkbox_auto_play_sound.checked){
-							let lockon_sound = new Audio('sn/LockOn.mp3');
-							if(lockon_sound){
-								lockon_sound.volume = sai_id_range_sound_volume.value / 100.0;
-								lockon_sound.play();
-							}
-						}
-						break;
-					}
-					sai_id_button_close.innerText = trans_getText('TEXT_CLOSE');
+					face_update_status(status);
 				});
 			}
+			face_update_status(sai_face_getter.get_status());
 			sai_face_getter.resume();
 		}else{
 			if(sai_face_getter){

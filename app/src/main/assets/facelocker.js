@@ -211,6 +211,15 @@ const facelocker = function(canvas, on_lock){
 		return self.intersect_rectangle(rect1, rect2);
 	};
 
+	this.get_status = function(){
+		if (self.target)
+			return 2;
+		else if(self.target_candidate)
+			return 1;
+		else
+			return 0;
+	};
+
 	this.on_click = function(e){
 		if(self.target)
 			return;
