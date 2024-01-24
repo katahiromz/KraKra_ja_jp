@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 顔認識のページか？
 		if(page_id == sai_id_page_face_getter){
 			if (!sai_face_getter) {
-				sai_face_getter = new facelocker(sai_id_canvas_1, function(status){
+				sai_face_getter = new facelocker(sai_id_canvas_face, function(status){
 					switch(status){
 					case 0: // Unlocked
 						sai_id_button_lock_on.innerText = trans_getText('TEXT_LOCK_ON');
@@ -3502,7 +3502,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			localStorage.setItem('saiminFaceGetterShowing', "1");
 			SAI_choose_page(sai_id_page_face_getter);
 		});
-		sai_id_canvas_1.addEventListener('click', function(e){
+		sai_id_canvas_face.addEventListener('click', function(e){
 			if(sai_face_getter)
 				sai_face_getter.on_click(e);
 		});
