@@ -371,7 +371,7 @@ input[type='color'] { /* 色選択ボタン */
 	font-size: 1.25rem;
 }
 #sai_id_text_notice { /* 同意契約書 */
-	font-size: 9pt;
+	font-size: 10.5pt;
 	white-space: pre-line;
 	text-align: left;
 	background-color: #fcf;
