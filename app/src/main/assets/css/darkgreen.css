@@ -288,20 +288,20 @@ input[type='color'] { /* 色選択ボタン */
 	background-color: rgba(0, 230, 0, 50%);
 	color: black;
 	padding: 4px;
-	height: 1.2cm;
-	line-height: 1.2cm;
 	z-index: 2;
 	font-size: 0.5cm;
 	font-weight: bold;
 	padding: 0;
 	text-align: center;
-}
-.sai_class_navi_button { /* ナビゲーションボタン */
 	vertical-align: top;
 	line-height: 0.5cm;
 }
 .sai_class_navi_button img { /* ナビゲーションボタンの画像 */
 	vertical-align: middle;
+	height: max(8vh, 1.0cm);
+	height: max(8dvh, 1.0cm);
+	line-height: max(8vh, 1.0cm);
+	line-height: max(8dvh, 1.0cm);
 }
 .sai_class_checked { /* ナビゲーションボタンをチェックした状態 */
 	background-color: rgba(0, 198, 0, 90%);
