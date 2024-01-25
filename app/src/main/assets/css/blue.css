@@ -18,7 +18,7 @@ label { /* ラベル */
 }
 select { /* コンボボックス */
 	background-color: #003;
-	color: #99c;
+	color: #ccf;
 }
 button { /* 通常のボタン */
 	font-weight: bold;
