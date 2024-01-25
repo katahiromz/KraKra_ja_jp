@@ -23,7 +23,7 @@ select { /* コンボボックス */
 button { /* 通常のボタン */
 	font-weight: bold;
 	background-color: #39f;
-	color: #00f;
+	color: #006;
 }
 .sai_class_page { /* ページ */
 	margin: 0;
@@ -234,6 +234,7 @@ input[type='color'] { /* 色選択ボタン */
 	top: calc(50vh - 15vh / 2);
 	top: calc(50dvh - 15dvh / 2);
 	font-size: 6vmin;
+	border-radius: 8px;
 }
 #sai_id_button_release_hypnosis { /* 催眠解除ボタン */
 	position: absolute;
@@ -246,6 +247,7 @@ input[type='color'] { /* 色選択ボタン */
 	top: calc(70vh - 15vh / 2);
 	top: calc(70dvh - 15dvh / 2);
 	font-size: 6vmin;
+	border-radius: 8px;
 }
 @media screen and (max-height: 360px) { /* スマホとタブレットでレイアウトを切り替える */
 	#sai_id_button_start_hypnosis {
@@ -280,7 +282,7 @@ input[type='color'] { /* 色選択ボタン */
 .sai_class_navi_button { /* ナビゲーションボタン */
 	outline: 1px solid white;
 	border-radius: 4px;
-	background-color: rgba(191, 181, 230, 50%);
+	background-color: rgba(91, 91, 230, 50%);
 	color: black;
 	padding: 4px;
 	height: 1.2cm;

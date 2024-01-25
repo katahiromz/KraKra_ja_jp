@@ -234,6 +234,7 @@ input[type='color'] { /* 色選択ボタン */
 	top: calc(50vh - 15vh / 2);
 	top: calc(50dvh - 15dvh / 2);
 	font-size: 6vmin;
+	border-radius: 8px;
 }
 #sai_id_button_release_hypnosis { /* 催眠解除ボタン */
 	position: absolute;
@@ -246,6 +247,7 @@ input[type='color'] { /* 色選択ボタン */
 	top: calc(70vh - 15vh / 2);
 	top: calc(70dvh - 15dvh / 2);
 	font-size: 6vmin;
+	border-radius: 8px;
 }
 @media screen and (max-height: 360px) { /* スマホとタブレットでレイアウトを切り替える */
 	#sai_id_button_start_hypnosis {
