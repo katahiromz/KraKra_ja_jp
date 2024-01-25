@@ -173,8 +173,8 @@ input[type='color'] { /* 色選択ボタン */
 	margin: 0;
 }
 .sai_class_rounded_button img { /* 丸いボタンの画像 */
-	height: max(5vw, 5vh, 0.8cm);
-	height: max(5dvw, 5dvh, 0.8cm);
+	height: max(7vw, 7vh, 1.0cm);
+	height: max(7dvw, 7dvh, 1.0cm);
 }
 #sai_id_button_config { /* メインページの設定ボタン */
 	position: absolute;
@@ -221,8 +221,8 @@ input[type='color'] { /* 色選択ボタン */
 .sai_class_button_arrow img { /* 映像を切り替えるボタンの画像 */
 	width: max(10vw, 1.0cm);
 	width: max(10dvw, 1.0cm);
-	height: max(5vw, 5vh, 0.8cm);
-	height: max(5dvw, 5dvh, 0.8cm);
+	height: max(7vw, 7vh, 1.0cm);
+	height: max(7dvw, 7dvh, 1.0cm);
 }
 #sai_id_button_start_hypnosis { /* 催眠開始ボタン */
 	position: absolute;
@@ -296,10 +296,10 @@ input[type='color'] { /* 色選択ボタン */
 }
 .sai_class_navi_button img { /* ナビゲーションボタンの画像 */
 	vertical-align: middle;
-	height: max(5vw, 5vh, 0.8cm);
-	height: max(5dvw, 5dvh, 0.8cm);
-	line-height: max(5vw, 5vh, 0.8cm);
-	line-height: max(5dvw, 5dvh, 0.8cm);
+	height: max(7vw, 7vh, 1.0cm);
+	height: max(7dvw, 7dvh, 1.0cm);
+	line-height: max(7vw, 7vh, 1.0cm);
+	line-height: max(7dvw, 7dvh, 1.0cm);
 }
 .sai_class_checked { /* ナビゲーションボタンをチェックした状態 */
 	background-color: rgba(204, 198, 101, 90%);
