@@ -502,7 +502,17 @@ input[type='color'] { /* 色選択ボタン */
 	top: calc(85dvh - 1cm / 2);
 	font-size: 0.6cm;
 }
-@media screen and (max-height: 360px) { /* スマホとタブレットのレイアウト使い分け */
+@media screen and (orientation: portrait) { /* スマホが縦向きの場合 */
+	#sai_id_button_lock_on { /* ロックオンボタン */
+		height: 1.5cm;
+		top: calc(75vh - 1.5cm / 2);
+		top: calc(75dvh - 1.5cm / 2);
+	}
+	#sai_id_button_close { /* 顔認識を閉じるボタン */
+		height: 1.5cm;
+	}
+}
+@media screen and (orientation: landscape) { /* スマホが横向きの場合 */
 	#sai_id_button_lock_on { /* ロックオンボタン */
 		width: 20vw;
 		width: 20dvw;
