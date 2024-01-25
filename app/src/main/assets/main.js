@@ -1346,14 +1346,13 @@ document.addEventListener('DOMContentLoaded', function(){
 		if(sai_logo_img.complete){ // ロゴイメージの読み込みが完了されたか？
 			// 寸法を調整する。
 			let width = sai_logo_img.width, height = sai_logo_img.height;
-			if(width > sai_screen_width){
+			while (width * 2 < sai_screen_width && height * 2 < sai_screen_height / 5){
+				width *= 1.25;
+				height *= 1.25;
+			}
+			while (width > sai_screen_width){
 				width *= 0.75;
 				height *= 0.75;
-			}else{
-				if(SAI_screen_is_large(ctx) && dx * 2 < width && dy * 2 < height){
-					width *= 2;
-					height *= 2;
-				}
 			}
 			// 描画するロゴの位置を計算する。
 			let x = px + (dx - width) / 2, y = py + (dy - height) * 0.4 - dy * 0.1;
