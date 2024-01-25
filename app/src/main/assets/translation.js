@@ -263,7 +263,7 @@ const trans_DEFAULT_MESSAGE_LIST_JA = [
 	"今からベッドで寝ます",
 	"今夜はどうですか",
 ];
-const trans_DEFAULT_MESSAGE_LIST_ZW_CN = [
+const trans_DEFAULT_MESSAGE_LIST_ZH_CN = [
 	"有危险。赶紧逃跑。",
 	"这是一场海啸。跑向更高的地方。",
 	"我需要帮助。",
@@ -688,7 +688,7 @@ Copyright (c) 2018 Robert Eisele
 `
 
 // {{LANGUAGE_SPECIFIC}}
-const trans_NOTICE_ZW_CN = `=========================
+const trans_NOTICE_ZH_CN = `=========================
 催眠克拉克拉
 Hypnosis KraKra
 =========================
@@ -1391,7 +1391,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_skin, 'pink', 'ピンク色');
 		trans_setSelectOptionText(sai_id_select_skin, 'darkgreen', '深緑色');
 	}else if(lang == 'zh-CN' || lang == 'cn'){ // Chinese (Simplified)
-		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_ZW_CN);
+		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_ZH_CN);
 		trans_setHtmlText(sai_id_text_language, '语言 (Language):');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
