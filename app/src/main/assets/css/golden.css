@@ -24,7 +24,7 @@ button { /* 通常のボタン */
 	font-weight: bold;
 	background-color: #ff9;
 	color: #003;
-	border-radius: 4px;
+	border-radius: 10%;
 }
 .sai_class_page { /* ページ */
 	margin: 0;
@@ -166,8 +166,6 @@ input[type='color'] { /* 色選択ボタン */
 	vertical-align: top;
 }
 .sai_class_rounded_button { /* 丸いボタン */
-	width: 1.3cm;
-	height: 1.3cm;
 	background-color: rgba(255, 230, 181, 75%);
 	border: 0;
 	border-radius: 100%;
@@ -175,8 +173,8 @@ input[type='color'] { /* 色選択ボタン */
 	margin: 0;
 }
 .sai_class_rounded_button img { /* 丸いボタンの画像 */
-	width: 1.3cm;
-	height: 1.3cm;
+	height: max(8vh, 1.0cm);
+	height: max(8dvh, 1.0cm);
 }
 #sai_id_button_config { /* メインページの設定ボタン */
 	position: absolute;
@@ -214,7 +212,7 @@ input[type='color'] { /* 色選択ボタン */
 .sai_class_button_arrow { /* 映像を切り替えるボタン */
 	vertical-align: middle;
 	outline: 1px solid white;
-	border-radius: 4px;
+	border-radius: 10%;
 	text-align: center;
 	background-color: rgba(255, 230, 181, 75%);
 	top: calc(50vh - 2.5rem / 2);
@@ -237,7 +235,7 @@ input[type='color'] { /* 色選択ボタン */
 	top: calc(50vh - 15vh / 2);
 	top: calc(50dvh - 15dvh / 2);
 	font-size: 6vmin;
-	border-radius: 8px;
+	border-radius: 5%;
 }
 #sai_id_button_release_hypnosis { /* 催眠解除ボタン */
 	position: absolute;
@@ -250,7 +248,7 @@ input[type='color'] { /* 色選択ボタン */
 	top: calc(70vh - 15vh / 2);
 	top: calc(70dvh - 15dvh / 2);
 	font-size: 6vmin;
-	border-radius: 8px;
+	border-radius: 5%;
 }
 @media screen and (max-height: 360px) { /* スマホとタブレットでレイアウトを切り替える */
 	#sai_id_button_start_hypnosis {
@@ -284,7 +282,7 @@ input[type='color'] { /* 色選択ボタン */
 }
 .sai_class_navi_button { /* ナビゲーションボタン */
 	outline: 1px solid white;
-	border-radius: 4px;
+	border-radius: 10%;
 	background-color: rgba(255, 230, 181, 75%);
 	color: black;
 	padding: 4px;
@@ -524,7 +522,7 @@ input[type='color'] { /* 色選択ボタン */
 }
 .sai_class_face_button { /* 顔認識のアクションボタン */
 	background: rgba(255, 255, 255, 50%);
-	border-radius: 8px;
+	border-radius: 10%;
 }
 .sai_class_face_button:disabled { /* 顔認識の無効のアクションボタン */
 	color: rgb(191, 191, 191);

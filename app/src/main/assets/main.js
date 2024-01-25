@@ -1408,7 +1408,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			let delta_theta = 2 * Math.PI * i / num_lines;
 			// 対数らせんの公式に従って頂点を追加していく。ただし偏角はdelta_thetaだけずらす。
 			let line = [[0, 0]];
-			for(let theta = 0; theta <= 2 * Math.PI; theta += 0.1){
+			for(let theta = 0; theta <= 2 * Math.PI * 1.2; theta += 0.1){
 				let r = a * Math.exp(b * theta);
 				let comp = new Complex({abs:r, arg:theta + delta_theta});
 				let x = comp.re, y = comp.im;
