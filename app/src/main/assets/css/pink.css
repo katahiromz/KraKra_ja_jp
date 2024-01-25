@@ -250,7 +250,7 @@ input[type='color'] { /* 色選択ボタン */
 	font-size: 6vmin;
 	border-radius: 5%;
 }
-@media screen and (max-height: 360px) { /* スマホとタブレットでレイアウトを切り替える */
+@media screen and (orientation: landscape) { /* 端末が横向きの場合 */
 	#sai_id_button_start_hypnosis {
 		width: 20vw;
 		width: 20dvw;
@@ -502,7 +502,7 @@ input[type='color'] { /* 色選択ボタン */
 	top: calc(85dvh - 1cm / 2);
 	font-size: 0.6cm;
 }
-@media screen and (orientation: portrait) { /* スマホが縦向きの場合 */
+@media screen and (orientation: portrait) { /* 端末が縦向きの場合 */
 	#sai_id_button_lock_on { /* ロックオンボタン */
 		height: 1.5cm;
 		top: calc(75vh - 1.5cm / 2);
@@ -512,7 +512,7 @@ input[type='color'] { /* 色選択ボタン */
 		height: 1.5cm;
 	}
 }
-@media screen and (orientation: landscape) { /* スマホが横向きの場合 */
+@media screen and (orientation: landscape) { /* 端末が横向きの場合 */
 	#sai_id_button_lock_on { /* ロックオンボタン */
 		width: 20vw;
 		width: 20dvw;
