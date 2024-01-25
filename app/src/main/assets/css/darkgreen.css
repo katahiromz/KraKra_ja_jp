@@ -24,6 +24,7 @@ button { /* 通常のボタン */
 	font-weight: bold;
 	background-color: #3f6;
 	color: #030;
+	border-radius: 4px;
 }
 .sai_class_page { /* ページ */
 	margin: 0;
