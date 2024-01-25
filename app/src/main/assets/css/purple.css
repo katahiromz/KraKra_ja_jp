@@ -487,8 +487,8 @@ input[type='color'] { /* 色選択ボタン */
 	height: 1.2cm;
 	left: calc(50vw - 50vw / 2);
 	left: calc(50dvw - 50dvw / 2);
-	top: calc(80vh - 1cm / 2);
-	top: calc(80dvh - 1cm / 2);
+	top: calc(70vh - 1cm / 2);
+	top: calc(70dvh - 1cm / 2);
 	font-size: 0.6cm;
 }
 #sai_id_button_close { /* 顔認識を閉じるボタン */
@@ -498,8 +498,8 @@ input[type='color'] { /* 色選択ボタン */
 	height: 1.2cm;
 	left: calc(50vw - 50vw / 2);
 	left: calc(50dvw - 50dvw / 2);
-	top: calc(90vh - 1cm / 2);
-	top: calc(90dvh - 1cm / 2);
+	top: calc(85vh - 1cm / 2);
+	top: calc(85dvh - 1cm / 2);
 	font-size: 0.6cm;
 }
 @media screen and (max-height: 360px) { /* スマホとタブレットのレイアウト使い分け */
