@@ -2574,7 +2574,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			ctx.font = text_size.toString() + 'px san-serif';
 			measure = ctx.measureText(text);
 			if(measure.width >= dx * 0.9 ||
-				measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent > 20) break;
+				measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent > dx * 0.03) break;
 			text_size *= 1.1;
 		}
 		let x = dx / 2, y = dy * 0.15;
