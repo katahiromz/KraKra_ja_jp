@@ -221,8 +221,10 @@ input[type='color'] { /* 色選択ボタン */
 	top: calc(50dvh - 2.5rem / 2);
 }
 .sai_class_button_arrow img { /* 映像を切り替えるボタンの画像 */
-	width: 100%;
-	height: 100%;
+	width: max(10vw, 1.0cm);
+	width: max(10dvw, 1.0cm);
+	height: max(8vh, 1.0cm);
+	height: max(8dvh, 1.0cm);
 }
 #sai_id_button_start_hypnosis { /* 催眠開始ボタン */
 	position: absolute;
