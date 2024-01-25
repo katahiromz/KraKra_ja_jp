@@ -2573,33 +2573,26 @@ document.addEventListener('DOMContentLoaded', function(){
 		for(;;){
 			ctx.font = text_size.toString() + 'px san-serif';
 			measure = ctx.measureText(text);
-			if(measure.width >= dx * 0.9 ||
-				measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent > dx * 0.03) break;
+			if((measure.width >= 15 && measure.width >= dx * 0.8) ||
+			   (measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent > 15 &&
+				measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent > dx * 0.025)) break;
 			text_size *= 1.1;
 		}
 		let x = dx / 2, y = dy * 0.15;
 
-		let width = measure.width;
-		let height = (measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent) * 1.5;
+		let width = measure.width * 0.6;
+		let height = (measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent);
 
-		// ひし形を描く。
+		// 半透明の長方形を描く。
 		ctx.beginPath();
-		ctx.moveTo(x - width, y);
-		ctx.lineTo(x, y - height);
-		ctx.lineTo(x + width, y);
-		ctx.lineTo(x, y + height);
+		ctx.moveTo(x - width, y - height);
+		ctx.lineTo(x + width, y - height);
+		ctx.lineTo(x + width, y + height);
+		ctx.lineTo(x - width, y + height);
 		ctx.closePath();
 		ctx.strokeStyle = '#fff';
 		ctx.lineWidth = 2;
 		ctx.stroke();
-
-		// ひし形を描く。
-		ctx.beginPath();
-		ctx.moveTo(x - width, y);
-		ctx.lineTo(x, y - height);
-		ctx.lineTo(x + width, y);
-		ctx.lineTo(x, y + height);
-		ctx.closePath();
 		ctx.fillStyle = "rgba(255, 255, 255, 30%)";
 		ctx.fill();
 
