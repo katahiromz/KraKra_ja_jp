@@ -12,11 +12,12 @@ const trans_getDefaultSkin = function(){
 	case 'en':
 		return 'blue';
 	case 'de':
-	case 'it':
 	default:
 		return 'purple';
-	case 'ja':
+	case 'it':
 	case 'ko-KR':
+		return 'red';
+	case 'ja':
 		return 'pink';
 	}
 };
@@ -33,6 +34,8 @@ const trans_getStyleSheet = function(){
 		return 'css/blue.css';
 	case 'pink':
 		return 'css/pink.css';
+	case 'red':
+		return 'css/red.css';
 	case 'darkgreen':
 		return 'css/darkgreen.css';
 	}
@@ -72,6 +75,14 @@ const trans_getColor = function(colorName){
 		case 'COLOR_DUMMYPAGECOLOR1': return 'rgba(255, 0, 255, 1.0)';
 		case 'COLOR_1ST': return '#990034';
 		case 'COLOR_2ND': return '#ff00ff';
+		}
+		break;
+	case 'red':
+		switch (colorName){
+		case 'COLOR_DUMMYPAGECOLOR0': return 'rgba(255, 0, 90, 0.0)';
+		case 'COLOR_DUMMYPAGECOLOR1': return 'rgba(255, 90, 90, 1.0)';
+		case 'COLOR_1ST': return '#990066';
+		case 'COLOR_2ND': return '#ff0000';
 		}
 		break;
 	case 'darkgreen':
@@ -1390,6 +1401,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_skin, 'blue', '青色');
 		trans_setSelectOptionText(sai_id_select_skin, 'pink', 'ピンク色');
 		trans_setSelectOptionText(sai_id_select_skin, 'darkgreen', '深緑色');
+		trans_setSelectOptionText(sai_id_select_skin, 'red', '赤色');
 	}else if(lang == 'zh-CN' || lang == 'cn'){ // Chinese (Simplified)
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_ZH_CN);
 		trans_setHtmlText(sai_id_text_language, '语言 (Language):');
@@ -1476,6 +1488,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_skin, 'blue', '蓝色的');
 		trans_setSelectOptionText(sai_id_select_skin, 'pink', '粉色');
 		trans_setSelectOptionText(sai_id_select_skin, 'darkgreen', '深绿色');
+		trans_setSelectOptionText(sai_id_select_skin, 'red', '红色的');
 	}else if(lang == 'zh-TW'){ // Chinese (Traditional)
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_ZH_TW);
 		trans_setHtmlText(sai_id_text_language, '語言 (Language):');
@@ -1562,6 +1575,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_skin, 'blue', '藍色的');
 		trans_setSelectOptionText(sai_id_select_skin, 'pink', '粉紅色');
 		trans_setSelectOptionText(sai_id_select_skin, 'darkgreen', '深綠色');
+		trans_setSelectOptionText(sai_id_select_skin, 'red', '紅色的');
 	}else if(lang == 'kr' || lang == 'ko' || lang == 'ko-KR'){ // Korean
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_KO_KR);
 		trans_setHtmlText(sai_id_text_language, '언어 (Language):');
@@ -1648,6 +1662,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_skin, 'blue', '청색');
 		trans_setSelectOptionText(sai_id_select_skin, 'pink', '핑크색');
 		trans_setSelectOptionText(sai_id_select_skin, 'darkgreen', '다크 그린');
+		trans_setSelectOptionText(sai_id_select_skin, 'red', '빨간색');
 	}else if(lang == 'it' || lang == 'it-IT'){ // Italian
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_IT);
 		trans_setHtmlText(sai_id_text_language, 'Lingua (Language):');
@@ -1734,6 +1749,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_skin, 'blue', 'Blu');
 		trans_setSelectOptionText(sai_id_select_skin, 'pink', 'Colore Rosa');
 		trans_setSelectOptionText(sai_id_select_skin, 'darkgreen', 'Verde Scuro');
+		trans_setSelectOptionText(sai_id_select_skin, 'red', 'Rosso');
 	}else if(lang == 'de' || lang == 'de-DE'){ // German
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_DE);
 		trans_setHtmlText(sai_id_text_language, 'Sprache (Language):');
@@ -1820,6 +1836,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_skin, 'blue', 'Blau');
 		trans_setSelectOptionText(sai_id_select_skin, 'pink', 'Pinke Farbe');
 		trans_setSelectOptionText(sai_id_select_skin, 'darkgreen', 'Dunkelgrün');
+		trans_setSelectOptionText(sai_id_select_skin, 'red', 'Rot');
 	}else{ // English is default
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_EN);
 		trans_setHtmlText(sai_id_text_language, 'Language (言語):');
@@ -1906,6 +1923,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_skin, 'blue', 'Blue');
 		trans_setSelectOptionText(sai_id_select_skin, 'pink', 'Pink');
 		trans_setSelectOptionText(sai_id_select_skin, 'darkgreen', 'Darkgreen');
+		trans_setSelectOptionText(sai_id_select_skin, 'red', 'Red');
 	}
 
 	trans_setHtmlText(sai_id_page_agreement_header_1, trans_getText('TEXT_ABOUT_APP'));

@@ -1024,8 +1024,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		// ローカルストレージから言語を取得。
 		let lang = localStorage.getItem('saiminLanguage3');
 		if(!lang){ // 取得できなければブラウザからデフォルトの言語を取得。
-			lang = trans_getDefaultLanguage();
 			sai_first_time = true; // これは初回時。
+			trans_currentLanguage = lang = trans_getDefaultLanguage();
+			SAI_set_skin(null);
 		}
 		sai_id_select_language_2.value = lang; // UIを更新。
 	}
