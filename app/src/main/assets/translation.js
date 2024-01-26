@@ -592,26 +592,6 @@ const trans_message_list = function(){
 		return trans_DEFAULT_MESSAGE_LIST_EN;
 }
 
-const trans_message_placefolder = function(){
-	// {{LANGUAGE_SPECIFIC}}
-	if(trans_currentLanguage == 'ja' || trans_currentLanguage == 'ja-JP') // Japanese
-		return "メッセージを入力";
-	else if(trans_currentLanguage == 'zh-CN') // Chinese (Simplified)
-		return "输入您的留言";
-	else if(trans_currentLanguage == 'zh-TW') // Chinese (Traditional)
-		return "輸入您的留言";
-	else if(trans_currentLanguage == 'ko-KR') // Korean
-		return "메시지 입력";
-	else if(trans_currentLanguage == 'it' || trans_currentLanguage == 'it-IT') // Italian
-		return "Inserisci il tuo messaggio";
-	else if(trans_currentLanguage == 'de' || trans_currentLanguage == 'de-DE') // German
-		return "Gib deine Nachricht ein";
-	else if(trans_currentLanguage == 'es' || trans_currentLanguage == 'es-ES') // Spanish
-		return "Ingrese su mensaje";
-	else // English is default
-		return "Input message";
-}
-
 // {{LANGUAGE_SPECIFIC}}
 const trans_NOTICE_EN = `=========================
 催眠くらくら
@@ -1064,6 +1044,7 @@ const trans_getText = function(str_id){
 		case 'TEXT_UNLOCK': return 'ロック解除';
 		case 'TEXT_CLOSE': return '閉じる';
 		case 'TEXT_NO_WEBCONNECT': return 'ネット接続が利用できません。';
+		case 'TEXT_INPUTMESSAGE': return "メッセージを入力";
 		}
 	}else if(lang == 'zh-CN' || lang == 'cn'){ // Chinese (Simplified)
 		switch(str_id){
@@ -1111,6 +1092,7 @@ const trans_getText = function(str_id){
 		case 'TEXT_UNLOCK': return '开锁';
 		case 'TEXT_CLOSE': return '关闭';
 		case 'TEXT_NO_WEBCONNECT': return '无法连接互联网。';
+		case 'TEXT_INPUTMESSAGE': return "输入您的留言";
 		}
 	}else if(lang == 'zh-TW'){ // Chinese (Traditional)
 		switch(str_id){
@@ -1158,6 +1140,7 @@ const trans_getText = function(str_id){
 		case 'TEXT_UNLOCK': return '開鎖';
 		case 'TEXT_CLOSE': return '關閉';
 		case 'TEXT_NO_WEBCONNECT': return '無法連接網路。';
+		case 'TEXT_INPUTMESSAGE': return "輸入您的留言";
 		}
 	}else if(lang == 'ko' || lang == 'kr' || lang == 'ko-KR'){ // Korean
 		switch(str_id){
@@ -1205,6 +1188,7 @@ const trans_getText = function(str_id){
 		case 'TEXT_UNLOCK': return '잠금 해제';
 		case 'TEXT_CLOSE': return '닫다';
 		case 'TEXT_NO_WEBCONNECT': return '인터넷 연결을 사용할 수 없습니다.';
+		case 'TEXT_INPUTMESSAGE': return "메시지 입력";
 		}
 	}else if(lang == 'it' || lang == 'it-IT'){ // Italian
 		switch(str_id){
@@ -1252,6 +1236,7 @@ const trans_getText = function(str_id){
 		case 'TEXT_UNLOCK': return 'Sbloccare';
 		case 'TEXT_CLOSE': return 'Vicino';
 		case 'TEXT_NO_WEBCONNECT': return 'La connessione Internet non è disponibile.';
+		case 'TEXT_INPUTMESSAGE': return "Inserisci il tuo messaggio";
 		}
 	}else if(lang == 'de' || lang == 'de-DE'){ // German
 		switch(str_id){
@@ -1299,6 +1284,7 @@ const trans_getText = function(str_id){
 		case 'TEXT_UNLOCK': return 'Freischalten';
 		case 'TEXT_CLOSE': return 'Schließen';
 		case 'TEXT_NO_WEBCONNECT': return 'Die Internetverbindung ist nicht verfügbar.';
+		case 'TEXT_INPUTMESSAGE': return "Gib deine Nachricht ein";
 		}
 	}else if(lang == 'es' || lang == 'es-ES'){ // Spanish
 		switch(str_id){
@@ -1346,6 +1332,7 @@ const trans_getText = function(str_id){
 		case 'TEXT_UNLOCK': return 'Desbloquear';
 		case 'TEXT_CLOSE': return 'Cerca';
 		case 'TEXT_NO_WEBCONNECT': return 'La conexión a Internet no está disponible.';
+		case 'TEXT_INPUTMESSAGE': return "Ingrese su mensaje";
 		}
 	}else{ // English is default
 		switch(str_id){
@@ -1393,6 +1380,7 @@ const trans_getText = function(str_id){
 		case 'TEXT_UNLOCK': return 'Unlock';
 		case 'TEXT_CLOSE': return 'Close';
 		case 'TEXT_NO_WEBCONNECT': return 'Internet connection is unavailable.';
+		case 'TEXT_INPUTMESSAGE': return "Input message";
 		}
 	}
 }

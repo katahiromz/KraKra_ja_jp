@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			// メッセージリストを埋める。
 			SAI_populate_message_list();
 			// メッセージテキストボックスのプレースホルダーをセットする。
-			sai_id_text_message.placeholder = trans_message_placefolder();
+			sai_id_text_message.placeholder = trans_getText('TEXT_INPUTMESSAGE');
 			// 現在のメッセージを設定する。
 			sai_id_text_message.value = localStorage.getItem('saiminText') || '';
 			// 100ミリ秒後に一番上にスクロールする。
