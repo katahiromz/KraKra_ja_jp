@@ -1,0 +1,21 @@
+<!-- {{LANGUAGE_SPECIFIC}} -->
+<resources>
+    <!-- common -->
+    <string name="ok">OK</string>
+    <string name="cancel">Cancelar</string>
+    <string name="clear">Claro</string>
+    <string name="reset">Reiniciar</string>
+    <string name="needs_microphone">Esta aplicación necesita permiso para acceder al micrófono.</string>
+    <string name="cant_use_microphone">Esta aplicación no puede usar el micrófono sin permiso.</string>
+    <string name="needs_camera">Esta aplicación necesita permiso para acceder a la cámara.</string>
+    <string name="cant_use_camera">Esta aplicación no puede usar la cámara sin permiso.</string>
+
+    <!-- main -->
+    <string name="app_name">KraKra</string>
+    <string name="web_view">VistaWeb</string>
+    <string name="progress_bar">BarraDeProgreso</string>
+    <string name="now_starting">Iniciando KraKra...</string>
+
+    <!-- URLs -->
+    <string name="url">file:///android_asset/index.html</string>
+</resources>

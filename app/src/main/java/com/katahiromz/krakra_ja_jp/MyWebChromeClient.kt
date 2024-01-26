@@ -112,6 +112,9 @@ class MyWebChromeClient(private var activity: MainActivity?, private val listene
             "de", "de-DE" -> { // German
                 locale = Locale.GERMAN
             }
+            "es", "es-ES" -> { // Spanish
+                locale = Locale.SPANISH
+            }
             else -> { // English is default
                 locale = Locale.ENGLISH
             }

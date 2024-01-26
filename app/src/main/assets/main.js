@@ -486,6 +486,8 @@ document.addEventListener('DOMContentLoaded', function(){
 					speech.lang = 'it-IT';
 				else if(trans_currentLanguage == 'de' || trans_currentLanguage == 'de-DE') // German
 					speech.lang = 'de-DE';
+				else if(trans_currentLanguage == 'es' || trans_currentLanguage == 'es-ES') // Spanish
+					speech.lang = 'es-ES';
 				else // English is default
 					speech.lang = 'en-US';
 				// 実際にスピーチを開始する。

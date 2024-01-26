@@ -1,0 +1,79 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Theme.KraKra_ja_jp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/themeColor</item>
+        <item name="colorPrimaryVariant">@color/themeColorDark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:textColorPrimary">@color/themeColor</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/themeColorDark</item>
+        <item name="colorSecondaryVariant">@color/themeColor</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
+        <!-- Navigation bar color. -->
+        <item name="android:navigationBarColor">@color/black</item>
+        <!-- Customize your theme here. -->
+    </style>
+    <!-- Splash theme -->
+    <style name="Theme.KraKra_ja_jp.Splash" parent="Theme.SplashScreen.IconBackground">
+        <item name="windowSplashScreenBackground">@color/themeColor</item>
+        <!-- <item name="windowSplashScreenIconBackgroundColor">@color/themeColor</item> -->
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <!-- <item name="windowSplashScreenAnimationDuration">0</item> -->
+        <item name="postSplashScreenTheme">@style/Theme.KraKra_ja_jp</item>
+        <!-- Navigation bar color. -->
+        <item name="android:navigationBarColor">@color/black</item>
+    </style>
+    <!-- BEGIN Styles for AlertDialogTheme -->
+    <style name="AlertDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="colorPrimary">@color/themeColor</item>
+        <item name="colorOnPrimary">@color/black_dialog</item>
+        <item name="colorPrimaryInverse">@color/themeColor</item>
+        <item name="colorPrimaryContainer">@color/black_dialog</item>
+        <item name="colorOnPrimaryContainer">@color/themeColor</item>
+        <item name="colorSecondary">@color/white</item>
+        <item name="colorOnSecondary">@color/black_dialog</item>
+        <item name="colorSecondaryContainer">@color/themeColor</item>
+        <item name="colorOnSecondaryContainer">@color/black_dialog</item>
+        <item name="colorTertiary">@color/themeColor</item>
+        <item name="colorOnTertiary">@color/black_dialog</item>
+        <item name="colorTertiaryContainer">@color/themeColor</item>
+        <item name="colorOnTertiaryContainer">@color/black_dialog</item>
+        <item name="android:colorBackground">@color/black_dialog</item>
+        <item name="colorOnBackground">@color/white</item>
+        <item name="colorSurface">@color/black_dialog</item>
+        <item name="colorOnSurface">@color/white</item>
+        <item name="colorSurfaceVariant">@color/white</item>
+        <item name="colorOnSurfaceVariant">@color/black_dialog</item>
+        <item name="colorSurfaceInverse">@color/themeColor</item>
+        <item name="colorOnSurfaceInverse">@color/black_dialog</item>
+        <item name="colorOutline">@color/themeColor</item>
+        <item name="colorError">@color/black_dialog</item>
+        <item name="colorOnError">@color/themeColor</item>
+        <item name="colorErrorContainer">@color/black_dialog</item>
+        <item name="colorOnErrorContainer">@color/themeColor</item>
+
+        <item name="materialAlertDialogTitleTextStyle">@style/TitleTextStyle</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/BodyTextStyle</item>
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
+        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
+    </style>
+    <style name="TitleTextStyle" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textColor">@color/themeColor</item>
+    </style>
+    <style name="BodyTextStyle" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
+        <item name="android:textColor">@color/themeColor</item>
+    </style>
+    <style name="PositiveButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/themeColor</item>
+        <item name="rippleColor">@color/themeColorDark</item>
+    </style>
+    <style name="NegativeButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/themeColor</item>
+        <item name="rippleColor">@color/themeColorDark</item>
+    </style>
+    <!-- END Styles for AlertDialogTheme -->
+</resources>
