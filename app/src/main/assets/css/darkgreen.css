@@ -412,12 +412,12 @@ input[type='color'] { /* 色選択ボタン */
     width: calc(var(--height));
     height: calc(var(--height));
     border-radius: calc(var(--height) / 2);
-    background-color: #fcf;
+    background-color: #cfc;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
     transition: all 0.4s ease-in-out;
 }
 .sai_class_toggle_button input:checked + .sai_class_slider {
-    background-color: #f0f;
+    background-color: #0c0;
     color: black;
 }
 .sai_class_toggle_button input:checked + .sai_class_slider::before {
