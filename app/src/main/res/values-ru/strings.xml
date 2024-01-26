@@ -1,0 +1,21 @@
+<!-- {{LANGUAGE_SPECIFIC}} -->
+<resources>
+    <!-- common -->
+    <string name="ok">Хорошо</string>
+    <string name="cancel">Отмена</string>
+    <string name="clear">Прозрачный</string>
+    <string name="reset">Перезагрузить</string>
+    <string name="needs_microphone">Этому приложению требуется разрешение на доступ к микрофону.</string>
+    <string name="cant_use_microphone">Это приложение не может использовать микрофон без разрешения.</string>
+    <string name="needs_camera">Этому приложению требуется разрешение на доступ к камере.</string>
+    <string name="cant_use_camera">Это приложение не может использовать камеру без разрешения.</string>
+
+    <!-- main -->
+    <string name="app_name">KraKra</string>
+    <string name="web_view">WebView</string>
+    <string name="progress_bar">ProgressBar</string>
+    <string name="now_starting">Запускаем КраКра...</string>
+
+    <!-- URLs -->
+    <string name="url">file:///android_asset/index.html</string>
+</resources>

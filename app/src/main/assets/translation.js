@@ -12,6 +12,7 @@ const trans_getDefaultSkin = function(){
 	case 'en':
 		return 'blue';
 	case 'de':
+	case 'ru':
 	default:
 		return 'purple';
 	case 'it':
@@ -571,6 +572,65 @@ const trans_DEFAULT_MESSAGE_LIST_ES = [
 	"Voy a dormir en la cama ahora",
 	"Que tal esta noche",
 ];
+const trans_DEFAULT_MESSAGE_LIST_RU = [
+	"Это опасно. Беги быстро.",
+	"Это цунами. Бегите на более высокое место.",
+	"Мне нужна помощь.",
+	"Есть пострадавшие. Вызовите скорую.",
+	"Есть человек без сознания. Вызовите скорую",
+	"Это извращенец.",
+	"все нормально.",
+	"ты становишься сонным",
+	"Я хочу учиться и получать хорошие оценки",
+	"Мне нравится работать в компании",
+	"Рад встрече",
+	"Доброе утро",
+	"Привет",
+	"Добрый вечер",
+	"Спасибо",
+	"Давно не виделись",
+	"Я собираюсь работать сейчас",
+	"Я иду в школу",
+	"Заботиться",
+	"Я дома",
+	"Мне очень жаль, я раскаиваюсь",
+	"Простите за это",
+	"Нужна помощь?",
+	"Вы о чем-то беспокоитесь?",
+	"Не заставляйте себя",
+	"Не нервничай",
+	"Не стесняйся",
+	"Я не буду запугивать тебя",
+	"Не бойтесь",
+	"Пожалуйста, успокойся",
+	"Давай поговорим со мной",
+	"Давайте подумаем об этом вместе",
+	"Есть ли у вас жалобы?",
+	"Пожалуйста, помогите мне",
+	"Пожалуйста, исполни мое желание",
+	"Влюбиться в меня",
+	"Ничего",
+	"Пойдем поедим сейчас",
+	"Я куплю тебе банку сока.",
+	"Пойдем в ресторан",
+	"Я дам это тебе",
+	"Было очень вкусно",
+	"Это было так весело",
+	"Это было очень хорошо",
+	"Учитесь больше и получайте более высокие оценки",
+	"Работайте усерднее и получайте более высокие оценки.",
+	"Это круто",
+	"Ты красивый",
+	"Ты друг",
+	"Молния открыта",
+	"Давай повеселимся сегодня",
+	"На столе есть еда",
+	"В холодильнике есть еда",
+	"Пожалуйста, помогите мне с работой по дому",
+	"Я устал, поэтому собираюсь отдохнуть",
+	"Я сейчас пойду спать в кровати",
+	"Как насчет сегодняшнего вечера",
+];
 
 const trans_message_list = function(){
 	// {{LANGUAGE_SPECIFIC}}
@@ -588,6 +648,8 @@ const trans_message_list = function(){
 		return trans_DEFAULT_MESSAGE_LIST_DE;
 	else if(trans_currentLanguage == 'es' || trans_currentLanguage == 'es-ES') // Spanish
 		return trans_DEFAULT_MESSAGE_LIST_ES;
+	else if(trans_currentLanguage == 'ru' || trans_currentLanguage == 'ru-RU') // Russian
+		return trans_DEFAULT_MESSAGE_LIST_RU;
 	else // English is default
 		return trans_DEFAULT_MESSAGE_LIST_EN;
 }
@@ -994,6 +1056,56 @@ Copyright (c) 2018 Robert Eisele
 `
 
 // {{LANGUAGE_SPECIFIC}}
+const trans_NOTICE_RU = `=========================
+Гипнотическая КраКра
+Hypnosis KraKra
+=========================
+
+«Гипнотическая КраКра» — полноценное приложение-шутка, оснащенное 16 типами видео, 20 типами звука, микрофонным входом и распознаванием лиц.
+Мы предоставляем настоящее развлечение, где вы сможете насладиться гипнотическими изображениями и звуками.
+
+- Отображение захватывающих изображений на весь экран. Назойливой рекламы нет.
+- Вы можете зафиксировать цель с помощью распознавания лиц.
+- Вход микрофона доставляет ваш голос к цели.
+- Встряхните эмоции цели, воспроизведя звук.
+- Отобразите сообщение, которое вы хотите передать, на экране, и приложение само заговорит.
+
+* Источник: https://github.com/kathiromz/KraKra_ja_jp.
+* Использованы некоторые аудиоматериалы от OtoLogic.
+* Изменения могут вноситься свободно по лицензии Apache 2.0.
+
+[(Меры предосторожности при использовании)]
+
+- Это программное обеспечение представляет собой шутку, и его работа не гарантируется.
+- Не используйте, если у вас есть симптомы эпилепсии.
+- Если в вашей стране/школе/религии/регионе гипноз запрещен, не используйте это приложение.
+- Не применять у пациентов с острой шизофренией.
+- Избегайте вождения автомобиля сразу после использования.
+- Пожалуйста, не используйте этот продукт, если вы боитесь коллективов.
+- Если у вас возникли такие симптомы, как головная боль, головокружение, гипервентиляция, тошнота, проблемы с желудочно-кишечным трактом или необычные эмоции, немедленно прекратите использование продукта и обратитесь к специалисту.
+- Оператор может прекратить предоставление данной услуги в любое время, если возникнет какая-либо причина, затрудняющая продолжение предоставления данной услуги.
+- Пожалуйста, не гипнотизируйте других без их согласия.
+- Это приложение не предназначено для медицинского использования. Мы рекомендуем больным людям эффективный стандартный уход.
+- Это приложение не для сна. Если вы плохо себя чувствуете, пожалуйста, воздержитесь от использования этого объекта.
+- Гипноз, который пытается заставить субъекта сделать что-то, что он или она не знает значения или того, как сделать, или не может сделать, неэффективен.
+
+[(Как использовать)]
+
+- По сути, это приложение для удовольствия от просмотра экрана.
+- Вы можете использовать микрофон с помощью кнопки «Микрофон» (требуются разрешения).
+- Нажмите кнопку «♪», чтобы издать звук.
+- Отображение сообщения с помощью кнопки «речевой пузырь».
+- Общие настройки можно произвести с помощью кнопки «шестеренка».
+- Проведите пальцем по экрану, и появится искорка, привлекающая внимание собеседника.
+
+Copyright (c) 2022-2024 Katayama Hirofumi MZ
+Copyright (c) 2023 Murayama Akira
+Copyright (c) 2023 TT
+Copyright (c) 2021 Nenad Markuš
+Copyright (c) 2018 Robert Eisele
+`
+
+// {{LANGUAGE_SPECIFIC}}
 const trans_getText = function(str_id){
 	let lang = localStorage.getItem('saiminLanguage3');
 	if(!lang)
@@ -1334,6 +1446,54 @@ const trans_getText = function(str_id){
 		case 'TEXT_NO_WEBCONNECT': return 'La conexión a Internet no está disponible.';
 		case 'TEXT_INPUTMESSAGE': return "Ingrese su mensaje";
 		}
+	}else if(lang == 'ru' || lang == 'ru-RU'){ // Russian
+		switch(str_id){
+		case 'TEXT_PIC': return 'Картина';
+		case 'TEXT_OK': return 'Хорошо';
+		case 'TEXT_CANCEL': return 'Отмена';
+		case 'TEXT_YES': return 'Да';
+		case 'TEXT_NO': return 'Нет';
+		case 'TEXT_CHOOSE_LANGUAGE': return '言語選択 (Choose a language)';
+		case 'TEXT_ABOUT_APP': return 'Информация о версии';
+		case 'TEXT_INIT_APP': return 'Вы хотите инициализировать это приложение?';
+		case 'TEXT_INITTED_APP': return 'Приложение инициализировано.';
+		case 'TEXT_CONFIGURATION': return 'Общие настройки';
+		case 'TEXT_APPEARANCE': return 'Настройки внешнего вида';
+		case 'TEXT_INPUT_MESSAGE': return 'Пожалуйста, введите строку сообщения.';
+		case 'TEXT_FULLWIDTH_SPACE': return '　';
+		case 'TEXT_PERIOD': return '.';
+		case 'TEXT_PERIOD_SPACE': return '. ';
+		case 'TEXT_RELEASE_HYPNOSIS': return 'Освободиться от гипноза';
+		case 'TEXT_HYPNOSIS_RELEASED': return 'Я выпустил гипноз.';
+		case 'TEXT_KILLING_HYPNOSIS_IMG': return 'img/killing-hypnosis_ru.svg';
+		case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'img/hypnosis-released_ru.svg';
+		case 'TEXT_ALL_RELEASED_IMG': return 'img/all-released_ru.svg';
+		case 'TEXT_NO_BLINKING': return 'Нет мигания';
+		case 'TEXT_LOGO': return 'img/logo_ru.svg';
+		case 'TEXT_TAP_HERE': return 'img/please-tap-here_ru.svg';
+		case 'TEXT_MP3_RELEASED_HYPNOSIS': return 'sn/ReleasedHypnosis_ru.mp3';
+		case 'TEXT_I_AGREE': return 'Я согласен';
+		case 'TEXT_SIZE_SMALL': return 'Маленький';
+		case 'TEXT_SIZE_NORMAL': return 'Нормальный размер';
+		case 'TEXT_SIZE_LARGE': return 'Большой';
+		case 'TEXT_SIZE_HUGE': return 'Огромный';
+		case 'TEXT_SPEED_ZERO': return 'Остановлено';
+		case 'TEXT_SPEED_SLOW': return 'Медленный';
+		case 'TEXT_SPEED_NORMAL': return 'Нормальная скорость';
+		case 'TEXT_SPEED_FAST': return 'Быстрый';
+		case 'TEXT_SPEED_SUPER_FAST': return 'Сверх быстрый';
+		case 'TEXT_SPEED_IRREGULAR': return 'Нерегулярный';
+		case 'TEXT_RAINBOW': return 'Радужный';
+		case 'TEXT_FACE_GETTER': return 'Распознавание лица';
+		case 'TEXT_TAP_ON_TARGET': return 'Коснитесь цели';
+		case 'TEXT_CAN_LOCK_ON': return 'Можно заблокировать';
+		case 'TEXT_CANT_FIND_FACE': return 'Лицо не найдено';
+		case 'TEXT_LOCK_ON': return 'Блокировка';
+		case 'TEXT_UNLOCK': return 'Разблокировать';
+		case 'TEXT_CLOSE': return 'Закрывать';
+		case 'TEXT_NO_WEBCONNECT': return 'Подключение к Интернету недоступно.';
+		case 'TEXT_INPUTMESSAGE': return "Введите ваше сообщение";
+		}
 	}else{ // English is default
 		switch(str_id){
 		case 'TEXT_PIC': return 'pic';
@@ -1460,6 +1620,22 @@ const trans_getDefaultLanguage = function(){
 	case 'es-ES':
 	case 'es-es':
 		return 'es'; // Spanish
+	case 'ru':
+	case 'ru-RU':
+	case 'ru-ru':
+	case 'os-RU':
+	case 'os-ru':
+	case 'ru-KZ':
+	case 'ru-kz':
+	case 'ru-UA':
+	case 'ru-ua':
+	case 'ru-BY':
+	case 'ru-by':
+	case 'ru-KG':
+	case 'ru-kg':
+	case 'ru-MD':
+	case 'ru-md':
+		return 'ru'; // Russian
 	default:
 		return 'en'; // English
 	}
@@ -1480,6 +1656,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_language_1, 'it', 'Italian (Italiano)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'ja', 'Japanese (日本語)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'ko-KR', 'Korean (한국어)');
+		trans_setSelectOptionText(sai_id_select_language_1, 'ru', 'Russian (Русский)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'en', 'English (英語)');
@@ -1488,6 +1665,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_language_2, 'it', 'Italian (Italiano)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'ja', 'Japanese (日本語)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Korean (한국어)');
+		trans_setSelectOptionText(sai_id_select_language_2, 'ru', 'Russian (Русский)');
 		trans_setHtmlText(sai_id_pic_type, '映像の種類:');
 		trans_setSelectOptionText(sai_id_select_pic_type, '0', '画0: ダミー画面（練習用）');
 		trans_setSelectOptionText(sai_id_select_pic_type, '1', '画1: 対数らせん');
@@ -1569,6 +1747,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_language_1, 'it', 'Italian (Italiano)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'ja', 'Japanese (日本語)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'ko-KR', 'Korean (한국어)');
+		trans_setSelectOptionText(sai_id_select_language_1, 'ru', 'Russian (Русский)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'en', 'English (英语)');
@@ -1577,6 +1756,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_language_2, 'it', 'Italian (Italiano)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'ja', 'Japanese (日本語)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Korean (한국어)');
+		trans_setSelectOptionText(sai_id_select_language_2, 'ru', 'Russian (Русский)');
 		trans_setHtmlText(sai_id_pic_type, '视频类型：');
 		trans_setSelectOptionText(sai_id_select_pic_type, '0', '图0: 虚拟屏幕（用于练习）');
 		trans_setSelectOptionText(sai_id_select_pic_type, '1', '图1: 对数螺线');
@@ -1658,6 +1838,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_language_1, 'it', 'Italian (Italiano)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'ja', 'Japanese (日本語)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'ko-KR', 'Korean (한국어)');
+		trans_setSelectOptionText(sai_id_select_language_1, 'ru', 'Russian (Русский)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'en', 'English (英語)');
@@ -1666,6 +1847,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_language_2, 'it', 'Italian (Italiano)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'ja', 'Japanese (日本語)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Korean (한국어)');
+		trans_setSelectOptionText(sai_id_select_language_2, 'ru', 'Russian (Русский)');
 		trans_setHtmlText(sai_id_pic_type, '視頻類型：');
 		trans_setSelectOptionText(sai_id_select_pic_type, '0', '圖0: 虛擬螢幕（用於練習）');
 		trans_setSelectOptionText(sai_id_select_pic_type, '1', '圖1: 對數螺線');
@@ -1747,6 +1929,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_language_1, 'it', 'Italian (Italiano)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'ja', 'Japanese (日本語)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'ko-KR', 'Korean (한국어)');
+		trans_setSelectOptionText(sai_id_select_language_1, 'ru', 'Russian (Русский)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'en', 'English (영어)');
@@ -1755,6 +1938,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_language_2, 'it', 'Italian (Italiano)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'ja', 'Japanese (日本語)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Korean (한국어)');
+		trans_setSelectOptionText(sai_id_select_language_2, 'ru', 'Russian (Русский)');
 		trans_setHtmlText(sai_id_pic_type, '그림 유형:');
 		trans_setSelectOptionText(sai_id_select_pic_type, '0', 'pic0: 더미 화면 (연습용)');
 		trans_setSelectOptionText(sai_id_select_pic_type, '1', 'pic1: 로그 나선');
@@ -1836,6 +2020,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_language_1, 'it', 'Italian (Italiano)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'ja', 'Japanese (日本語)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'ko-KR', 'Korean (한국어)');
+		trans_setSelectOptionText(sai_id_select_language_1, 'ru', 'Russian (Русский)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'en', 'English (Inglese)');
@@ -1844,6 +2029,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_language_2, 'it', 'Italian (Italiano)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'ja', 'Japanese (日本語)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Korean (한국어)');
+		trans_setSelectOptionText(sai_id_select_language_2, 'ru', 'Russian (Русский)');
 		trans_setHtmlText(sai_id_pic_type, 'Il tipo di immagine:');
 		trans_setSelectOptionText(sai_id_select_pic_type, '0', 'pic0: Schermata fittizia (per esercitarsi)');
 		trans_setSelectOptionText(sai_id_select_pic_type, '1', 'pic1: Spirale Logaritmica');
@@ -1925,6 +2111,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_language_1, 'it', 'Italian (Italiano)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'ja', 'Japanese (日本語)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'ko-KR', 'Korean (한국어)');
+		trans_setSelectOptionText(sai_id_select_language_1, 'ru', 'Russian (Русский)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'en', 'English (Englisch)');
@@ -1933,6 +2120,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_language_2, 'it', 'Italian (Italiano)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'ja', 'Japanese (日本語)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Korean (한국어)');
+		trans_setSelectOptionText(sai_id_select_language_2, 'ru', 'Russian (Русский)');
 		trans_setHtmlText(sai_id_pic_type, 'Die Art des Bildes:');
 		trans_setSelectOptionText(sai_id_select_pic_type, '0', 'pic0: Dummy-Bildschirm (zum Üben)');
 		trans_setSelectOptionText(sai_id_select_pic_type, '1', 'pic1: Logarithmische Spirale');
@@ -2014,6 +2202,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_language_1, 'it', 'Italiano (Italiano)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'ja', 'Japonés (日本語)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'ko-KR', 'Coreano (한국어)');
+		trans_setSelectOptionText(sai_id_select_language_1, 'ru', 'Russian (Русский)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'zh-CN', 'Chino (Simplificado) (简体中文)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'zh-TW', 'Chino (Tradicional) (繁體中文)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'en', 'Inglés (英語)');
@@ -2022,6 +2211,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_language_2, 'it', 'Italiano (Italiano)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'ja', 'Japonés (日本語)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Coreano (한국어)');
+		trans_setSelectOptionText(sai_id_select_language_2, 'ru', 'Russian (Русский)');
 		trans_setHtmlText(sai_id_pic_type, 'Tipo de vídeo:');
 		trans_setSelectOptionText(sai_id_select_pic_type, '0', 'Imagen 0: Pantalla ficticia (para practicar)');
 		trans_setSelectOptionText(sai_id_select_pic_type, '1', 'Imagen 1: Espiral logarítmica');
@@ -2092,6 +2282,97 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_skin, 'pink', 'Color rosa');
 		trans_setSelectOptionText(sai_id_select_skin, 'darkgreen', 'Verde oscuro');
 		trans_setSelectOptionText(sai_id_select_skin, 'red', 'Rojo');
+	}else if(lang == 'ru' || lang == 'RU'){ // Russian
+		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_RU);
+		trans_setHtmlText(sai_id_text_language, '言語 (Language):');
+		trans_setSelectOptionText(sai_id_select_language_1, 'zh-CN', 'Chinese (Simplified) (简体中文)');
+		trans_setSelectOptionText(sai_id_select_language_1, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
+		trans_setSelectOptionText(sai_id_select_language_1, 'en', 'English (英語)');
+		trans_setSelectOptionText(sai_id_select_language_1, 'es', 'Spanish (Español)');
+		trans_setSelectOptionText(sai_id_select_language_1, 'de', 'German (Deutsch)');
+		trans_setSelectOptionText(sai_id_select_language_1, 'it', 'Italian (Italiano)');
+		trans_setSelectOptionText(sai_id_select_language_1, 'ja', 'Japanese (日本語)');
+		trans_setSelectOptionText(sai_id_select_language_1, 'ko-KR', 'Korean (한국어)');
+		trans_setSelectOptionText(sai_id_select_language_1, 'ru', 'Russian (Русский)');
+		trans_setSelectOptionText(sai_id_select_language_2, 'zh-CN', 'Chinese (Simplified) (简体中文)');
+		trans_setSelectOptionText(sai_id_select_language_2, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
+		trans_setSelectOptionText(sai_id_select_language_2, 'en', 'English (英語)');
+		trans_setSelectOptionText(sai_id_select_language_2, 'es', 'Spanish (Español)');
+		trans_setSelectOptionText(sai_id_select_language_2, 'de', 'German (Deutsch)');
+		trans_setSelectOptionText(sai_id_select_language_2, 'it', 'Italian (Italiano)');
+		trans_setSelectOptionText(sai_id_select_language_2, 'ja', 'Japanese (日本語)');
+		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Korean (한국어)');
+		trans_setSelectOptionText(sai_id_select_language_2, 'ru', 'Russian (Русский)');
+		trans_setHtmlText(sai_id_pic_type, 'Тип видео:');
+		trans_setSelectOptionText(sai_id_select_pic_type, '0', 'Рисунок 0: Пустой экран (для практики)');
+		trans_setSelectOptionText(sai_id_select_pic_type, '1', 'Рисунок 1: Логарифмическая спираль');
+		trans_setSelectOptionText(sai_id_select_pic_type, '2', 'Рисунок 2: Концентрические круги');
+		trans_setSelectOptionText(sai_id_select_pic_type, '3', 'Рисунок 3: Вращающиеся глаза');
+		trans_setSelectOptionText(sai_id_select_pic_type, '4', 'Рисунок 4: Спираль Архимеда');
+		trans_setSelectOptionText(sai_id_select_pic_type, '5', 'Рисунок 5: Расширяющееся сердце');
+		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'Рисунок 6: Монета пять иен');
+		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'Рисунок 7: Боуэн Боуэн');
+		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'Рисунок 8: Сумасшедшие цвета');
+		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'Рисунок 9: Логарифмическая спираль 2');
+		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'Рисунок 10: Аналоговый диск');
+		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'Рисунок 11: Смешайте вихрь');
+		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'Рисунок 12: Калейдоскоп');
+		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'Рисунок 13: Первый цветной экран');
+		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'Рисунок 14: Второй цветной экран');
+		trans_setSelectOptionText(sai_id_select_pic_type, '15', 'Рисунок 15: Просто черный экран');
+		trans_setSelectOptionText(sai_id_select_pic_type, '16', 'Рисунок 16: Просто белый экран');
+		trans_setHtmlText(sai_id_text_split, 'Разделенный экран:');
+		trans_setHtmlText(sai_id_text_speed, 'Скорость:');
+		trans_setHtmlText(speed_irregular_label, 'Нерегулярный');
+		trans_setHtmlText(sai_id_text_rotation, 'Назад реверс:');
+		trans_setHtmlText(sai_id_text_blinking, 'Мигание экрана:');
+		trans_setHtmlText(sai_id_text_fullscreen_mode, 'Полноэкранный режим:');
+		trans_setHtmlText(sai_id_page_message_header, 'Сообщение');
+		trans_setHtmlText(sai_id_button_mesage_reset, 'Перезагрузить');
+		trans_setHtmlText(sai_id_color_1st_reset, 'Перезагрузить');
+		trans_setHtmlText(sai_id_color_2nd_reset, 'Перезагрузить');
+		trans_setHtmlText(sai_id_button_mesage_cancel, 'Отмена');
+		trans_setHtmlText(sai_id_button_mesage_ok, 'Хорошо');
+		trans_setHtmlText(sai_id_text_message_size, 'Размер сообщения:');
+		trans_setHtmlText(sai_id_text_note, 'Кнопка музыкальной ноты:');
+		trans_setSelectOptionText(sai_id_select_sound, '', '(Никто)');
+		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', 'Кошачий');
+		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', 'Возбуждение');
+		trans_setSelectOptionText(sai_id_select_sound, 'Horror', 'Страх');
+		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', 'Охотник');
+		trans_setSelectOptionText(sai_id_select_sound, 'Longing', 'Стремятся к');
+		trans_setSelectOptionText(sai_id_select_sound, 'Lovely', 'Восхитительный');
+		trans_setSelectOptionText(sai_id_select_sound, 'Magic', 'Магия');
+		trans_setSelectOptionText(sai_id_select_sound, 'OraSaimin', 'Ora! Saimin!');
+		trans_setSelectOptionText(sai_id_select_sound, 'Noise', 'Шум');
+		trans_setSelectOptionText(sai_id_select_sound, '432Hz', '432Hz');
+		trans_setSelectOptionText(sai_id_select_sound, 'Heli', 'Вертолет');
+		trans_setSelectOptionText(sai_id_select_sound, 'HeliPlus432Hz', 'Вертолет+432Hz');
+		trans_setHtmlText(sai_id_text_sound_volume, 'Объем:');
+		trans_setHtmlText(sai_id_text_auto_play_sound, 'Автовоспроизведение звука:');
+		trans_setHtmlText(sai_id_text_auto_repeat_sound, 'Автоповтор аудио:');
+		trans_setHtmlText(sai_id_text_switch_sound, 'Переключение звука:');
+		trans_setHtmlText(sai_id_text_brightness, 'Яркость экрана:');
+		trans_setSelectOptionText(sai_id_select_brightness, 'normal', 'Нормальная яркость');
+		trans_setSelectOptionText(sai_id_select_brightness, 'brighter', 'Украсить');
+		trans_setHtmlText(sai_id_page_config_header, 'Параметр');
+		trans_setHtmlText(sai_id_text_label_message_text, 'Текст сообщения:');
+		trans_setHtmlText(sai_id_button_message, 'Сообщение...');
+		trans_setHtmlText(sai_id_button_start_hypnosis, 'Начать гипноз...');
+		trans_setHtmlText(sai_id_button_release_hypnosis, 'Освободиться от гипноза');
+		trans_setHtmlText(sai_id_text_count_down, 'Обратный отсчет:');
+		trans_setHtmlText(sai_id_text_label_message_speech, 'Произнесите сообщение:');
+		trans_setHtmlText(sai_id_text_color_1st, "1-й цвет:");
+		trans_setHtmlText(sai_id_text_color_2nd, "Второй цвет:");
+		trans_setHtmlText(sai_id_button_init_app, "Инициализация");
+		trans_setHtmlText(sai_id_text_label_message_volume, "Громкость голоса сообщения:");
+		trans_setHtmlText(sai_id_text_skin, "Кожа:");
+		trans_setSelectOptionText(sai_id_select_skin, 'golden', 'Золотой');
+		trans_setSelectOptionText(sai_id_select_skin, 'purple', 'Фиолетовый');
+		trans_setSelectOptionText(sai_id_select_skin, 'blue', 'Синий');
+		trans_setSelectOptionText(sai_id_select_skin, 'pink', 'Розовый цвет');
+		trans_setSelectOptionText(sai_id_select_skin, 'darkgreen', 'Темно-зеленый');
+		trans_setSelectOptionText(sai_id_select_skin, 'red', 'Красный');
 	}else{ // English is default
 		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_EN);
 		trans_setHtmlText(sai_id_text_language, 'Language (言語):');
@@ -2103,6 +2384,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_language_1, 'it', 'Italian (Italiano)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'ja', 'Japanese (日本語)');
 		trans_setSelectOptionText(sai_id_select_language_1, 'ko-KR', 'Korean (한국어)');
+		trans_setSelectOptionText(sai_id_select_language_1, 'ru', 'Russian (Русский)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'zh-CN', 'Chinese (Simplified) (简体中文)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'en', 'English');
@@ -2111,6 +2393,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_language_2, 'it', 'Italian (Italiano)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'ja', 'Japanese (日本語)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Korean (한국어)');
+		trans_setSelectOptionText(sai_id_select_language_2, 'ru', 'Russian (Русский)');
 		trans_setHtmlText(sai_id_pic_type, 'The type of picture:');
 		trans_setSelectOptionText(sai_id_select_pic_type, '0', 'pic0: Dummy Screen (for practice)');
 		trans_setSelectOptionText(sai_id_select_pic_type, '1', 'pic1: Logarithmic Spiral');
