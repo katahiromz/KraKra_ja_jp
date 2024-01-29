@@ -1729,6 +1729,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_sound, '432Hz', '432Hz');
 		trans_setSelectOptionText(sai_id_select_sound, 'Heli', 'ヘリコプター');
 		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical-1', '機械音1');
+		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical-2', '機械音2');
 		trans_setHtmlText(sai_id_text_sound_volume, '音量:');
 		trans_setHtmlText(sai_id_text_auto_play_sound, '音声の自動再生:');
 		trans_setHtmlText(sai_id_text_auto_repeat_sound, '音声の自動繰り返し:');
@@ -1820,6 +1821,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_sound, '432Hz', '432Hz');
 		trans_setSelectOptionText(sai_id_select_sound, 'Heli', '直升机');
 		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical-1', '机械声1');
+		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical-2', '机械声2');
 		trans_setHtmlText(sai_id_text_sound_volume, '音量：');
 		trans_setHtmlText(sai_id_text_auto_play_sound, '自动播放音频：');
 		trans_setHtmlText(sai_id_text_auto_repeat_sound, '自动重复音频：');
@@ -1911,6 +1913,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_sound, '432Hz', '432Hz');
 		trans_setSelectOptionText(sai_id_select_sound, 'Heli', '直升機');
 		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical-1', '機械聲1');
+		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical-2', '機械聲2');
 		trans_setHtmlText(sai_id_text_sound_volume, '音量：');
 		trans_setHtmlText(sai_id_text_auto_play_sound, '自動播放音訊：');
 		trans_setHtmlText(sai_id_text_auto_repeat_sound, '自動重複音訊：');
@@ -2002,6 +2005,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_sound, '432Hz', '432Hz');
 		trans_setSelectOptionText(sai_id_select_sound, 'Heli', '헬리콥터');
 		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical-1', '기계음 1');
+		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical-2', '기계음 2');
 		trans_setHtmlText(sai_id_text_sound_volume, '사운드 볼륨:');
 		trans_setHtmlText(sai_id_text_auto_play_sound, '오디오 자동 재생:');
 		trans_setHtmlText(sai_id_text_auto_repeat_sound, '음성 자동 반복:');
@@ -2092,7 +2096,8 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'Noise', 'Rumore');
 		trans_setSelectOptionText(sai_id_select_sound, '432Hz', '432Hz');
 		trans_setSelectOptionText(sai_id_select_sound, 'Heli', 'Elicottero');
-		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical-1', 'meccanico 1');
+		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical-1', 'Meccanico 1');
+		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical-2', 'Meccanico 2');
 		trans_setHtmlText(sai_id_text_sound_volume, 'Volume del suono:');
 		trans_setHtmlText(sai_id_text_auto_play_sound, 'Riproduzione automatica dell\'audio:');
 		trans_setHtmlText(sai_id_text_auto_repeat_sound, 'Ripetere l\'audio:');
@@ -2184,6 +2189,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_sound, '432Hz', '432Hz');
 		trans_setSelectOptionText(sai_id_select_sound, 'Heli', 'Hubschrauber');
 		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical-1', 'Mechanischer 1');
+		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical-2', 'Mechanischer 2');
 		trans_setHtmlText(sai_id_text_sound_volume, 'Lautstärke:');
 		trans_setHtmlText(sai_id_text_auto_play_sound, 'Audio automatisch abspielen:');
 		trans_setHtmlText(sai_id_text_auto_repeat_sound, 'Sich Wiederholender Ton:');
@@ -2275,6 +2281,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_sound, '432Hz', '432Hz');
 		trans_setSelectOptionText(sai_id_select_sound, 'Heli', 'Helicóptero');
 		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical-1', 'Mecánico 1');
+		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical-2', 'Mecánico 2');
 		trans_setHtmlText(sai_id_text_sound_volume, 'Volumen:');
 		trans_setHtmlText(sai_id_text_auto_play_sound, 'Reproducción automática de audio:');
 		trans_setHtmlText(sai_id_text_auto_repeat_sound, 'Audio de repetición automática:');
@@ -2365,7 +2372,8 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'Noise', 'Шум');
 		trans_setSelectOptionText(sai_id_select_sound, '432Hz', '432Hz');
 		trans_setSelectOptionText(sai_id_select_sound, 'Heli', 'Вертолет');
-		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical-1', 'механический 1');
+		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical-1', 'Механический 1');
+		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical-2', 'Механический 2');
 		trans_setHtmlText(sai_id_text_sound_volume, 'Объем:');
 		trans_setHtmlText(sai_id_text_auto_play_sound, 'Автовоспроизведение звука:');
 		trans_setHtmlText(sai_id_text_auto_repeat_sound, 'Автоповтор аудио:');
@@ -2457,6 +2465,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_sound, '432Hz', '432Hz');
 		trans_setSelectOptionText(sai_id_select_sound, 'Heli', 'Helicopter');
 		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical-1', 'Mechanical 1');
+		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical-2', 'Mechanical 2');
 		trans_setHtmlText(sai_id_text_sound_volume, 'Sound volume:');
 		trans_setHtmlText(sai_id_text_auto_play_sound, 'Auto-play audio:');
 		trans_setHtmlText(sai_id_text_auto_repeat_sound, 'Repeating audio:');
