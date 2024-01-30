@@ -78,16 +78,30 @@ const facelocker = function(canvas, on_lock){
 			ctx.textAlign = "center";
 			myFillText(ctx, "LOCKED ON", x, y - radius);
 
+			// 回転するハート群を描画する。
 			if (self.heart_img.complete){
 				let value = (new Date().getTime() % 2500) / 2500;
 				const num = 8;
 				for (let i = 0; i < num; ++i){
 					let radian = (value + i / num) * (2 * Math.PI);
-					let cx = x - self.heart_img.width / 2 + radius * Math.cos(radian);
-					let cy = y - self.heart_img.height / 2 + radius * Math.sin(radian) * face_aspect;
-					ctx.drawImage(self.heart_img, cx, cy);
+					let heart_width = self.heart_img.width * (4 + Math.sin(value * 2 * Math.PI)) * 0.3;
+					let heart_height = self.heart_img.height * (4 + Math.sin(value * 2 * Math.PI)) * 0.3;
+					let cx = x - heart_width / 2 + radius * Math.cos(radian);
+					let cy = y - heart_height / 2 + radius * Math.sin(radian) * face_aspect;
+					ctx.drawImage(self.heart_img, cx, cy, heart_width, heart_height);
 				}
 			}
+
+			// 中央から離れるにつれ黄色を深めるグラデーション。
+			let dxy = (ctx.canvas.width + ctx.canvas.height) / 2;
+			let grd = ctx.createRadialGradient(x, y, dxy * 0.25, x, y, dxy * 0.5);
+			let value2 = (new Date().getTime() % 400) / 400;
+			grd.addColorStop(0, 'rgba(255, 255, 255, 0.0)');
+			grd.addColorStop(1, `rgba(255, 255, 0, ${0.65 + 0.20 * Math.sin(value2 * 2 * Math.PI)})`);
+			ctx.fillStyle = grd;
+			ctx.beginPath();
+			ctx.arc(x, y, dxy, 0, 2 * Math.PI);
+			ctx.fill();
 			break;
 		}
 	};
