@@ -1919,7 +1919,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let count2 = SAI_get_tick_count();
 		let factor1 = count2 * 0.01, factor2 = count2 * 0.07;
 
-		// 黒で長方形領域を塗りつぶす。
+		// 長方形領域を塗りつぶす。
 		ctx.fillStyle = SAI_color_get_1st(); // 1番目の色で塗りつぶす。
 		ctx.fillRect(px, py, dx, dy);
 
@@ -2185,7 +2185,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let count2 = SAI_get_tick_count();
 		let factor1 = count2 * 0.03, factor2 = count2 * 0.06;
 
-		// 黒で長方形領域を塗りつぶす。
+		// 長方形領域を塗りつぶす。
 		ctx.fillStyle = SAI_color_get_1st(); // 1番目の色で塗りつぶす。
 		ctx.fillRect(px, py, dx, dy);
 
