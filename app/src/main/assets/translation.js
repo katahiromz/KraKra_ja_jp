@@ -1736,7 +1736,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', '画8: クレージーな色');
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', '画9: 対数らせん2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', '画10: アナログディスク');
-		trans_setSelectOptionText(sai_id_select_pic_type, '11', '画11: ミックス渦巻き');
+		trans_setSelectOptionText(sai_id_select_pic_type, '11', '画11: 奇妙な渦巻き 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '12', '画12: 万華鏡');
 		trans_setSelectOptionText(sai_id_select_pic_type, '13', '画13: 1番目の色の画面');
 		trans_setSelectOptionText(sai_id_select_pic_type, '14', '画14: 2番目の色の画面');
@@ -1829,7 +1829,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', '图8: 疯狂的颜色');
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', '图9: 对数螺线 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', '图10: 模拟光盘');
-		trans_setSelectOptionText(sai_id_select_pic_type, '11', '图11: ミックス渦巻き');
+		trans_setSelectOptionText(sai_id_select_pic_type, '11', '图11: 奇怪的漩涡 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '12', '图12: 万花筒');
 		trans_setSelectOptionText(sai_id_select_pic_type, '13', '图13: 第一个彩色屏幕');
 		trans_setSelectOptionText(sai_id_select_pic_type, '14', '图14: 第二个彩色屏幕');
@@ -1922,7 +1922,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', '圖8: 瘋狂的顏色');
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', '圖9: 對數螺線 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', '圖10: 類比光碟');
-		trans_setSelectOptionText(sai_id_select_pic_type, '11', '圖11: 混合漩涡');
+		trans_setSelectOptionText(sai_id_select_pic_type, '11', '圖11: 奇怪的漩渦 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '12', '圖12: 萬花筒');
 		trans_setSelectOptionText(sai_id_select_pic_type, '13', '圖13: 第一个彩色屏幕');
 		trans_setSelectOptionText(sai_id_select_pic_type, '14', '圖14: 第二个彩色屏幕');
@@ -2015,7 +2015,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'pic8: 미친 색');
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'pic9: 로그 나선 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'pic10: 아날로그 디스크');
-		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'pic11: 믹스 소용돌이');
+		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'pic11: 이상한 소용돌이 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'pic12: 만화경');
 		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'pic13: 첫 번째 컬러 화면');
 		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'pic14: 두 번째 색상 화면');
@@ -2108,7 +2108,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'pic8: Colori Pazzi');
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'pic9: Spirale Logaritmica 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'pic10: Disco Analogico');
-		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'pic11: Mescolare il turbinio');
+		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'pic11: Strano Turbinio 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'pic12: Caleidoscopio');
 		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'pic13: 1° schermo a colori');
 		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'pic14: 2° schermo a colori');
@@ -2201,7 +2201,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'pic8: Verrückte Farben');
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'pic9: Logarithmische Spirale 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'pic10: Analoge Scheibe');
-		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'pic11: Mischwirbel');
+		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'pic11: Seltsamer Wirbel 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'pic12: Kaleidoskop');
 		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'pic13: 1. Farbbildschirm');
 		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'pic14: Zweiter Farbbildschirm');
@@ -2294,7 +2294,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'Imagen 8: Colores locos');
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'Imagen 9: Espiral logarítmica 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'Imagen 10: Disco analógico');
-		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'Imagen 11: Mezcla de remolino');
+		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'Imagen 11: Extraño Remolino 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'Imagen 12: Caleidoscopio');
 		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'Imagen 13: Primera pantalla a color');
 		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'Imagen 14: Segunda pantalla a color');
@@ -2387,7 +2387,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'Рисунок 8: Сумасшедшие цвета');
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'Рисунок 9: Логарифмическая спираль 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'Рисунок 10: Аналоговый диск');
-		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'Рисунок 11: Смешайте вихрь');
+		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'Рисунок 11: Странный Водоворот 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'Рисунок 12: Калейдоскоп');
 		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'Рисунок 13: Первый цветной экран');
 		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'Рисунок 14: Второй цветной экран');
@@ -2480,7 +2480,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'pic8: Crazy Colors');
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'pic9: Logarithmic Spiral 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'pic10: Analog Disc');
-		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'pic11: Mixed Spiral');
+		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'pic11: Strange Swirl 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'pic12: Kaleidoscope');
 		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'pic13: 1st color screen');
 		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'pic14: 2st color screen');
