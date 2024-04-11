@@ -1732,7 +1732,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '4', '画4: アルキメデスのらせん');
 		trans_setSelectOptionText(sai_id_select_pic_type, '5', '画5: 広がるハート');
 		trans_setSelectOptionText(sai_id_select_pic_type, '6', '画6: 五円玉');
-		trans_setSelectOptionText(sai_id_select_pic_type, '7', '画7: ぼわんぼわん');
+		trans_setSelectOptionText(sai_id_select_pic_type, '7', '画7: 奇妙な渦巻き');
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', '画8: クレージーな色');
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', '画9: 対数らせん2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', '画10: アナログディスク');
@@ -1825,7 +1825,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '4', '图4: 阿基米德螺旋线');
 		trans_setSelectOptionText(sai_id_select_pic_type, '5', '图5: 扩展的心');
 		trans_setSelectOptionText(sai_id_select_pic_type, '6', '图6: 5日元硬币');
-		trans_setSelectOptionText(sai_id_select_pic_type, '7', '图7: 头晕 头晕');
+		trans_setSelectOptionText(sai_id_select_pic_type, '7', '图7: 奇怪的漩涡');
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', '图8: 疯狂的颜色');
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', '图9: 对数螺线 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', '图10: 模拟光盘');
@@ -1918,7 +1918,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '4', '圖4: 阿基米德螺旋線');
 		trans_setSelectOptionText(sai_id_select_pic_type, '5', '圖5: 擴展的心');
 		trans_setSelectOptionText(sai_id_select_pic_type, '6', '圖6: 5日元硬幣');
-		trans_setSelectOptionText(sai_id_select_pic_type, '7', '圖7: 頭暈 頭暈');
+		trans_setSelectOptionText(sai_id_select_pic_type, '7', '画7: 奇怪的漩渦');
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', '圖8: 瘋狂的顏色');
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', '圖9: 對數螺線 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', '圖10: 類比光碟');
@@ -2011,7 +2011,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '4', 'pic4: 아르키메데스의 나선');
 		trans_setSelectOptionText(sai_id_select_pic_type, '5', 'pic5: 퍼지는 하트들');
 		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'pic6: 오엔 구슬');
-		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'pic7: 보완 보완');
+		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'pic7: 이상한 소용돌이');
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'pic8: 미친 색');
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'pic9: 로그 나선 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'pic10: 아날로그 디스크');
@@ -2104,7 +2104,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '4', 'pic4: Spirale di Archimede');
 		trans_setSelectOptionText(sai_id_select_pic_type, '5', 'pic5: Cuori che si diffondono');
 		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'pic6: Moneta da 5 Yen');
-		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'pic7: Clamore Clamore');
+		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'pic7: Strano Turbinio');
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'pic8: Colori Pazzi');
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'pic9: Spirale Logaritmica 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'pic10: Disco Analogico');
@@ -2197,7 +2197,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '4', 'pic4: Die Spirale des Archimedes');
 		trans_setSelectOptionText(sai_id_select_pic_type, '5', 'pic5: Herzen verbreiten');
 		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'pic6: 5-Yen-Münze');
-		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'pic7: Lärm, Lärm');
+		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'pic7: Seltsamer Wirbel');
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'pic8: Verrückte Farben');
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'pic9: Logarithmische Spirale 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'pic10: Analoge Scheibe');
@@ -2290,7 +2290,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '4', 'Imagen 4: Espiral de Arquímedes');
 		trans_setSelectOptionText(sai_id_select_pic_type, '5', 'Imagen 5: Corazón en expansión');
 		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'Imagen 6: Moneda de cinco yenes');
-		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'Imagen 7: Bowan Bowan');
+		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'Imagen 7: Extraño Remolino');
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'Imagen 8: Colores locos');
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'Imagen 9: Espiral logarítmica 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'Imagen 10: Disco analógico');
@@ -2383,7 +2383,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '4', 'Рисунок 4: Спираль Архимеда');
 		trans_setSelectOptionText(sai_id_select_pic_type, '5', 'Рисунок 5: Расширяющееся сердце');
 		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'Рисунок 6: Монета пять иен');
-		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'Рисунок 7: Боуэн Боуэн');
+		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'Рисунок 7: Странный Водоворот');
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'Рисунок 8: Сумасшедшие цвета');
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'Рисунок 9: Логарифмическая спираль 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'Рисунок 10: Аналоговый диск');
@@ -2476,7 +2476,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '4', 'pic4: Archimedes\' Spiral');
 		trans_setSelectOptionText(sai_id_select_pic_type, '5', 'pic5: Spreading Hearts');
 		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'pic6: 5-Yen Coin');
-		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'pic7: Clamor Clamor');
+		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'pic7: Strange Swirl');
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'pic8: Crazy Colors');
 		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'pic9: Logarithmic Spiral 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'pic10: Analog Disc');
