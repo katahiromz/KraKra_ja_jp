@@ -2160,8 +2160,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
-	// 映像「画11: ミックス渦巻き」の描画。
-	// pic11: Mixed Spiral
+	// 映像「画11: 奇妙な渦巻き 2」の描画。
+	// pic11: Strange Swirl 2
 	const SAI_draw_pic_11 = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
@@ -2197,8 +2197,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			let delta_theta = 2 * Math.PI * i / num_lines;
 			let line = [[0, 0]];
 			for(let theta = 0; theta <= 2 * Math.PI * 1.2; theta += 0.02){
-				let r = a * Math.exp(b * theta) * Math.abs(1.0 + 0.2 * Math.abs(Math.sin(factor1 * 2)));
-				let t = delta_theta - Math.sqrt(Math.sqrt(r)) * (Math.sin(theta * 2 - factor2)) + factor1;
+				let r = a * Math.exp(b * theta);
+				let t = delta_theta - Math.sqrt(Math.sqrt(r)) * Math.abs(Math.sin(theta * 2 - factor2)) + factor1;
 				let comp = new Complex({abs:r, arg:t});
 				let x = comp.re, y = comp.im;
 				line.push([x, y]);
