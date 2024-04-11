@@ -104,10 +104,10 @@ const trans_getColor = function(colorName){
 		break;
 	case 'black':
 		switch (colorName){
-		case 'COLOR_DUMMYPAGECOLOR0': return 'rgba(0, 0, 0, 0.0)';
-		case 'COLOR_DUMMYPAGECOLOR1': return 'rgba(191, 191, 191, 1.0)';
+		case 'COLOR_DUMMYPAGECOLOR0': return 'rgba(190, 190, 190, 0.0)';
+		case 'COLOR_DUMMYPAGECOLOR1': return 'rgba(10, 10, 10, 1.0)';
 		case 'COLOR_1ST': return '#000000';
-		case 'COLOR_2ND': return '#999999';
+		case 'COLOR_2ND': return '#ffffff';
 		}
 		break;
 	case 'white':
