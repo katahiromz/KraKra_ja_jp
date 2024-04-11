@@ -2160,6 +2160,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
+	function SAI_flower_graph(x, radius){
+		return radius * Math.sin(x * Math.PI / radius / 2);
+	}
+
 	// 映像「画11: 奇妙な渦巻き 2」の描画。
 	// pic11: Strange Swirl 2
 	const SAI_draw_pic_11 = function(ctx, px, py, dx, dy){
@@ -2174,9 +2178,12 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
 		SAI_clip_rect(ctx, px, py, dx, dy);
 
+		// 画面の寸法を使って計算する。
+		let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
+
 		// 映像の進行を表す変数。
 		let count2 = SAI_get_tick_count();
-		let factor1 = count2 * 0.08, factor2 = count2 * 0.02;
+		let factor1 = count2 * 0.03, factor2 = count2 * 0.06;
 
 		// 黒で長方形領域を塗りつぶす。
 		ctx.fillStyle = SAI_color_get_1st(); // 1番目の色で塗りつぶす。
@@ -2185,11 +2192,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 画面中央を原点とする。
 		ctx.translate(qx, qy);
 
-		const num_lines = 12; // これは偶数でなければならない。
+		const num_lines = 14; // これは偶数でなければならない。
 		const a = 1, b = 1.01; // らせんの係数。
-
-		// 酩酊感を出すために、上下に振動する。
-		ctx.translate(0, -dxy * 0.02 * Math.abs(Math.sin(factor1 * 2)));
 
 		// 発散する渦巻きを表す多角形の頂点を構築する。
 		let lines = [];
@@ -2198,7 +2202,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			let line = [[0, 0]];
 			for(let theta = 0; theta <= 2 * Math.PI * 1.2; theta += 0.02){
 				let r = a * Math.exp(b * theta);
-				let t = delta_theta - Math.sqrt(Math.sqrt(r)) * Math.abs(Math.sin(theta * 2 - factor2)) + factor1;
+				let t = delta_theta + 2 * Math.sin(theta - factor2) + Math.sin(factor1) * Math.PI;
 				let comp = new Complex({abs:r, arg:t});
 				let x = comp.re, y = comp.im;
 				line.push([x, y]);
@@ -2225,18 +2229,6 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.closePath();
 		ctx.fillStyle = SAI_color_get_2nd(); // 2番目の色で塗りつぶす。
 		ctx.fill();
-
-		// 中央に赤い丸を描く。
-		ctx.fillStyle = 'red';
-		SAI_draw_circle(ctx, 0, Math.sin(factor1 * 4) * dxy * 0.02, dxy * 0.01);
-		ctx.fill();
-		ctx.strokeStyle = '#f66';
-		ctx.lineWidth = 3;
-		SAI_draw_circle(ctx, 0, 0, dxy * 0.05, false);
-		ctx.lineWidth = 4;
-		ctx.strokeStyle = 'red';
-		SAI_draw_circle(ctx, 0, 0, dxy * 0.1 * Math.abs(0.9 + 0.2 * Math.sin(factor1)), false);
-		ctx.stroke();
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
