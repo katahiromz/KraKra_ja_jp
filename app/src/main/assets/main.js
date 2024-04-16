@@ -623,6 +623,17 @@ document.addEventListener('DOMContentLoaded', function(){
 		localStorage.setItem('saiminMessageVolume', value.toString());
 	}
 
+	// モーションブラーを設定する関数。
+	const SAI_set_motion_blur = function(value){
+		value = parseInt(value);
+		if(value < sai_id_range_motion_blur.min) value = sai_id_range_motion_blur.min;
+		else if(value > sai_id_range_motion_blur.max) value = sai_id_range_motion_blur.max;
+		sai_id_range_motion_blur.value = value;
+		sai_id_text_motion_blur_output.textContent = (value * 10) + '%';
+		// ローカルストレージに記憶。
+		localStorage.setItem('saiminMotionBlur', value.toString());
+	}
+
 	// メッセージの表示サイズをセットする。
 	const SAI_message_set_size = function(value){
 		// いったん、すべての文字サイズ設定クラスを削除。
@@ -1380,10 +1391,6 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
 		SAI_clip_rect(ctx, px, py, dx, dy);
 
-		// 2番目の色で塗りつぶす。
-		ctx.fillStyle = SAI_color_get_2nd();
-		ctx.fillRect(px, py, dx, dy);
-
 		// 画面中央を原点とする。
 		let qx = px + dx / 2, qy = py + dy / 2;
 		ctx.translate(qx, qy);
@@ -1391,16 +1398,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 映像の進行を表す変数。
 		let count2 = -SAI_get_tick_count();
 
-		// 原点を中心として、これから描画する図形を回転する。
-		ctx.rotate(-count2 * 0.12);
-
 		// 画面の寸法を使って計算する。
 		let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
-
-		// 視覚的な酩酊感をもたらすために回転運動の中心点をすりこぎ運動させる。
-		let mxy = (maxxy + minxy) * 0.03;
-		ctx.translate(mxy * Math.cos(count2 * 0.007), mxy * Math.sin(count2 * 0.025));
-		ctx.rotate(count2 * 0.01);
+		let mxy = (maxxy + minxy) * 0.04;
 
 		const num_lines = 24; // これは偶数でなければならない。
 		const a = 1, b = 1.1; // らせんの係数。
@@ -1413,8 +1413,14 @@ document.addEventListener('DOMContentLoaded', function(){
 			let line = [[0, 0]];
 			for(let theta = 0; theta <= 2 * Math.PI * 1.2; theta += 0.1){
 				let r = a * Math.exp(b * theta);
-				let comp = new Complex({abs:r, arg:theta + delta_theta});
+				let t = theta + delta_theta;
+				// 原点を中心として、これから描画する図形を回転する。
+				t += -count2 * 0.12;
+				let comp = new Complex({abs:r, arg:t});
 				let x = comp.re, y = comp.im;
+				// 視覚的な酩酊感をもたらすために回転運動の中心点をすりこぎ運動させる。
+				x += mxy * Math.cos(count2 * 0.07);
+				y += mxy * Math.sin(count2 * 0.15);
 				line.push([x, y]);
 			}
 			lines.push(line);
@@ -1437,8 +1443,13 @@ document.addEventListener('DOMContentLoaded', function(){
 			even = !even;
 		}
 		ctx.closePath();
+		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.fillStyle = SAI_color_get_1st(); // 1番目の色で塗りつぶす。
-		ctx.fill();
+		ctx.fill('evenodd');
+		ctx.rect(-dx/2, -dy/2, dx, dy);
+		ctx.fillStyle = SAI_color_get_2nd(); // 2番目の色で塗りつぶす。
+		ctx.fill('evenodd');
+		ctx.globalAlpha = 1; // 元に戻す。
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
@@ -1469,10 +1480,6 @@ document.addEventListener('DOMContentLoaded', function(){
 			ctx.clip();
 		}
 
-		// 長方形領域を塗りつぶす。
-		ctx.fillStyle = SAI_color_get_1st();
-		ctx.fillRect(px, py, dx, dy);
-
 		// さまざまな計算をする。
 		let dr0 = 30;
 		if(SAI_screen_is_large(ctx)){
@@ -1489,10 +1496,18 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 同心円状に描画する。
 		let size = (dx + dy) * 0.4;
-		ctx.strokeStyle = SAI_color_get_2nd();
+		ctx.beginPath();
 		for(; radius < size; radius += dr0){
-			SAI_draw_circle(ctx, qx, qy, radius, false);
+			ctx.arc(qx, qy, Math.abs(radius - ctx.lineWidth*0.5), 0, 2 * Math.PI);
+			ctx.arc(qx, qy, Math.abs(radius + ctx.lineWidth*0.5), 0, 2 * Math.PI);
 		}
+		ctx.fillStyle = SAI_color_get_2nd();
+		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
+		ctx.fill('evenodd');
+		ctx.rect(0, 0, dx, dy);
+		ctx.fillStyle = SAI_color_get_1st();
+		ctx.fill('evenodd');
+		ctx.globalAlpha = 1; // 元に戻す。
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
@@ -1648,26 +1663,11 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
 		SAI_clip_rect(ctx, px, py, dx, dy);
 
-		// 黒で長方形領域を塗りつぶす。
-		ctx.fillStyle = SAI_color_get_2nd();
-		ctx.fillRect(px, py, dx, dy);
-
-		// 画面中央を原点とする。
-		ctx.translate(qx, qy);
-
 		let count2 = SAI_get_tick_count();
 
 		// 画面の寸法を使って計算する。
 		let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
-
-		// 視覚的な酩酊感をもたらすために回転運動の中心点をすりこぎ運動させる。
 		let mxy = (maxxy + minxy) * 0.04;
-		ctx.translate(mxy * Math.cos(count2 * 0.08), mxy * Math.sin(count2 * 0.05));
-
-		// これから描画する図形を回転する。
-		ctx.rotate(count2 * -0.25);
-
-		ctx.fillStyle = SAI_color_get_1st(); // 1番目の色で描画する。
 
 		// 発散する渦巻きを描画する。
 		let ci = 8; // これは偶数でなければならない。
@@ -1680,8 +1680,17 @@ document.addEventListener('DOMContentLoaded', function(){
 			line.push([0, 0]);
 			for(let theta = 0; theta <= 2 * Math.PI * 10; theta += 0.1){
 				let r = a * theta;
-				let comp = new Complex({abs:r, arg:theta + delta_theta});
+				let t = theta + delta_theta;
+				// 回転する。
+				t += count2 * -0.25;
+				let comp = new Complex({abs:r, arg:t});
 				let x = comp.re, y = comp.im;
+				// 画面中央を原点とする。
+				x += qx;
+				y += qy;
+				// 視覚的な酩酊感をもたらすために回転運動の中心点をすりこぎ運動させる。
+				x += mxy * Math.cos(count2 * 0.08);
+				y += mxy * Math.sin(count2 * 0.05);
 				line.push([x, y]);
 			}
 			lines.push(line);
@@ -1703,7 +1712,13 @@ document.addEventListener('DOMContentLoaded', function(){
 			even = !even;
 		}
 		ctx.closePath();
-		ctx.fill();
+		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
+		ctx.fillStyle = SAI_color_get_1st(); // 1番目の色で描画する。
+		ctx.fill('evenodd');
+		ctx.fillStyle = SAI_color_get_2nd(); // 2番目の色で塗りつぶす。
+		ctx.rect(0, 0, dx, dy);
+		ctx.fill('evenodd');
+		ctx.globalAlpha = 1; // 元に戻す。
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
@@ -1919,13 +1934,6 @@ document.addEventListener('DOMContentLoaded', function(){
 		let count2 = SAI_get_tick_count();
 		let factor1 = count2 * 0.01, factor2 = count2 * 0.07;
 
-		// 長方形領域を塗りつぶす。
-		ctx.fillStyle = SAI_color_get_1st(); // 1番目の色で塗りつぶす。
-		ctx.fillRect(px, py, dx, dy);
-
-		// 画面中央を原点とする。
-		ctx.translate(qx, qy);
-
 		const num_lines = 10; // これは偶数でなければならない。
 		const a = 1, b = 1.1; // らせんの係数。
 
@@ -1933,12 +1941,15 @@ document.addEventListener('DOMContentLoaded', function(){
 		let lines = [];
 		for(let i = 0; i < num_lines; ++i){
 			let delta_theta = 2 * Math.PI * i / num_lines;
-			let line = [[0, 0]];
+			let line = [[qx, qy]];
 			for(let theta = 0; theta <= 2 * Math.PI * 1.2; theta += 0.02){
 				let r = a * Math.exp(b * theta);
 				let t = delta_theta + Math.sqrt(Math.sqrt(r)) * Math.sin(theta - factor2) + factor1;
 				let comp = new Complex({abs:r, arg:t});
 				let x = comp.re, y = comp.im;
+				// 画面中央を原点とする。
+				x += qx;
+				y += qy;
 				line.push([x, y]);
 			}
 			lines.push(line);
@@ -1947,7 +1958,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 多角形を描画する。
 		let even = true;
 		ctx.beginPath();
-		ctx.moveTo(0, 0);
+		ctx.moveTo(qx, qy);
 		for(let i = 0; i < num_lines; ++i){
 			let line = lines[i];
 			if(even){ // 偶数回目はそのままの向き。
@@ -1961,8 +1972,13 @@ document.addEventListener('DOMContentLoaded', function(){
 			even = !even;
 		}
 		ctx.closePath();
+		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.fillStyle = SAI_color_get_2nd(); // 2番目の色で塗りつぶす。
-		ctx.fill();
+		ctx.fill('evenodd');
+		ctx.rect(0, 0, dx, dy);
+		ctx.fillStyle = SAI_color_get_1st(); // 1番目の色で塗りつぶす。
+		ctx.fill('evenodd');
+		ctx.globalAlpha = 1; // 元に戻す。
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
@@ -2053,29 +2069,13 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 画面の寸法を使って計算する。
 		let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
-
-		// 黒で長方形領域を塗りつぶす。
-		ctx.fillStyle = SAI_color_get_2nd();
-		ctx.fillRect(px, py, dx, dy);
+		let mxy = (maxxy + minxy) * 0.015;
 
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
 		SAI_clip_rect(ctx, px, py, dx, dy);
 
 		// 映像の進行を表す変数。
 		let count2 = SAI_get_tick_count();
-
-		// 画面中央を原点とする。
-		ctx.translate(qx, qy);
-
-		// 回転させる。
-		ctx.rotate(-count2 * 0.23);
-
-		// 視覚的な酩酊感をもたらすために回転運動の中心点をすりこぎ運動させる。
-		let mxy = (maxxy + minxy) * 0.015;
-		ctx.translate(mxy * Math.cos(count2 * 0.1), mxy * Math.sin(count2 * 0.013));
-
-		// 1番目の色で塗る。
-		ctx.fillStyle = SAI_color_get_1st();
 
 		// 発散する渦巻きを描画する。
 		let ci = 8; // これは偶数でなければならない。
@@ -2085,11 +2085,19 @@ document.addEventListener('DOMContentLoaded', function(){
 			// 黄金らせんの公式に従って描画する。ただしtheta_deltaだけ偏角をずらす。
 			let a = 1, b = 0.3063489;
 			let line = [];
-			line.push([0, 0]);
+			line.push([qx, qy]);
 			for(let theta = 0; theta <= 2 * Math.PI * 10; theta += 0.1){
 				let r = a * Math.exp(b * theta);
-				let comp = new Complex({abs:r, arg:theta + delta_theta});
+				let t = theta + delta_theta;
+				t += -count2 * 0.23;
+				let comp = new Complex({abs:r, arg:t});
 				let x = comp.re, y = comp.im;
+				// 画面中央を原点とする。
+				x += qx;
+				y += qy;
+				// 視覚的な酩酊感をもたらすために回転運動の中心点をすりこぎ運動させる。
+				x += mxy * Math.cos(count2 * 0.1);
+				y += mxy * Math.sin(count2 * 0.2);
 				line.push([x, y]);
 			}
 			lines.push(line);
@@ -2111,7 +2119,13 @@ document.addEventListener('DOMContentLoaded', function(){
 			even = !even;
 		}
 		ctx.closePath();
-		ctx.fill();
+		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
+		ctx.fillStyle = SAI_color_get_1st();
+		ctx.fill('evenodd');
+		ctx.rect(0, 0, dx, dy);
+		ctx.fillStyle = SAI_color_get_2nd();
+		ctx.fill('evenodd');
+		ctx.globalAlpha = 1; // 元に戻す。
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
@@ -2148,13 +2162,11 @@ document.addEventListener('DOMContentLoaded', function(){
 			let ratio = 2.5 * maxxy / (sai_spiral_img.width + sai_spiral_img.height);
 			ctx.scale(ratio, ratio);
 
-			if(!SAI_screen_is_large(ctx))
-				ctx.globalAlpha = 0.5; // 透過効果を付ける。
+			ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 
 			ctx.drawImage(sai_spiral_img, x, y); // 渦巻きイメージを描画する。
 
-			if(!SAI_screen_is_large(ctx))
-				ctx.globalAlpha = 1.0; // 透過効果を元に戻す。
+			ctx.globalAlpha = 1.0; // 透過効果を元に戻す。
 		}
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
@@ -2185,13 +2197,6 @@ document.addEventListener('DOMContentLoaded', function(){
 		let count2 = SAI_get_tick_count();
 		let factor1 = count2 * 0.03, factor2 = count2 * 0.06;
 
-		// 長方形領域を塗りつぶす。
-		ctx.fillStyle = SAI_color_get_1st(); // 1番目の色で塗りつぶす。
-		ctx.fillRect(px, py, dx, dy);
-
-		// 画面中央を原点とする。
-		ctx.translate(qx, qy);
-
 		const num_lines = 14; // これは偶数でなければならない。
 		const a = 1, b = 1.01; // らせんの係数。
 
@@ -2199,12 +2204,15 @@ document.addEventListener('DOMContentLoaded', function(){
 		let lines = [];
 		for(let i = 0; i < num_lines; ++i){
 			let delta_theta = 2 * Math.PI * i / num_lines;
-			let line = [[0, 0]];
+			let line = [[qx, qy]];
 			for(let theta = 0; theta <= 2 * Math.PI * 1.2; theta += 0.02){
 				let r = a * Math.exp(b * theta);
 				let t = delta_theta + 2 * Math.sin(theta - factor2) + Math.sin(factor1) * Math.PI;
 				let comp = new Complex({abs:r, arg:t});
 				let x = comp.re, y = comp.im;
+				// 画面中央を原点とする。
+				x += qx;
+				y += qy;
 				line.push([x, y]);
 			}
 			lines.push(line);
@@ -2213,7 +2221,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 多角形を描画する。
 		let even = true;
 		ctx.beginPath();
-		ctx.moveTo(0, 0);
+		ctx.moveTo(qx, qy);
 		for(let i = 0; i < num_lines; ++i){
 			let line = lines[i];
 			if(even){ // 偶数回目はそのままの向き。
@@ -2227,8 +2235,13 @@ document.addEventListener('DOMContentLoaded', function(){
 			even = !even;
 		}
 		ctx.closePath();
+		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.fillStyle = SAI_color_get_2nd(); // 2番目の色で塗りつぶす。
-		ctx.fill();
+		ctx.fill('evenodd');
+		ctx.rect(0, 0, dx, dy);
+		ctx.fillStyle = SAI_color_get_1st(); // 1番目の色で塗りつぶす。
+		ctx.fill('evenodd');
+		ctx.globalAlpha = 1; // 元に戻す。
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
@@ -2828,6 +2841,13 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_message_set_voice_volume(100);
 		}
 
+		let saiminMotionBlur = localStorage.getItem('saiminMotionBlur');
+		if(saiminMotionBlur){
+			SAI_set_motion_blur(saiminMotionBlur);
+		}else{
+			SAI_set_motion_blur(2);
+		}
+
 		// ローカルストレージに映像切り替えの種類があれば読み込む。
 		let saiminSwitchSound = localStorage.getItem('saiminSwitchSound');
 		if(saiminSwitchSound){
@@ -3206,6 +3226,11 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		sai_id_range_voice_volume.addEventListener('input', function(){
 			SAI_message_set_voice_volume(sai_id_range_voice_volume.value);
+		}, false);
+
+		// モーションブラーの設定。
+		sai_id_range_motion_blur.addEventListener('input', function(){
+			SAI_set_motion_blur(sai_id_range_motion_blur.value);
 		}, false);
 
 		// 画面の明るさ選択。

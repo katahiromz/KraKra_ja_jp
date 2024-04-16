@@ -1756,6 +1756,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
 		trans_setHtmlText(sai_id_text_message_size, 'メッセージの大きさ:');
 		trans_setHtmlText(sai_id_text_note, '音符ボタン:');
+		trans_setHtmlText(sai_id_text_motion_blur, 'モーション ブラー:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(なし)');
 		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', 'ネコっぽい');
 		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', '興奮');
@@ -1849,6 +1850,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
 		trans_setHtmlText(sai_id_text_message_size, '消息大小：');
 		trans_setHtmlText(sai_id_text_note, '声音按钮：');
+		trans_setHtmlText(sai_id_text_motion_blur, '运动模糊：');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(无)');
 		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', '像猫一样');
 		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', '激发');
@@ -1942,6 +1944,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
 		trans_setHtmlText(sai_id_text_message_size, '消息大小：');
 		trans_setHtmlText(sai_id_text_note, '聲音按鈕：');
+		trans_setHtmlText(sai_id_text_motion_blur, '運動模糊：');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(無)');
 		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', '像貓一樣');
 		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', '激發');
@@ -2035,6 +2038,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
 		trans_setHtmlText(sai_id_text_message_size, '메시지 크기:');
 		trans_setHtmlText(sai_id_text_note, '사운드 버튼:');
+		trans_setHtmlText(sai_id_text_motion_blur, '모션 블러:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(없음)');
 		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', '고양이 같은');
 		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', '일으키다');
@@ -2128,6 +2132,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
 		trans_setHtmlText(sai_id_text_message_size, 'Dimensione del messaggio:');
 		trans_setHtmlText(sai_id_text_note, 'Pulsante audio:');
+		trans_setHtmlText(sai_id_text_motion_blur, 'Sfocatura movimento:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(Nessuno)');
 		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', 'Simile a un gatto');
 		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', 'Eccitare');
@@ -2221,6 +2226,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
 		trans_setHtmlText(sai_id_text_message_size, 'Größe der Nachricht:');
 		trans_setHtmlText(sai_id_text_note, 'Sound-Taste:');
+		trans_setHtmlText(sai_id_text_motion_blur, 'Bewegungsunschärfe:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(Kein)');
 		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', 'Katzenartig');
 		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', 'Anregen');
@@ -2314,6 +2320,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
 		trans_setHtmlText(sai_id_text_message_size, 'Tamaño del mensaje:');
 		trans_setHtmlText(sai_id_text_note, 'Botón de nota musical:');
+		trans_setHtmlText(sai_id_text_motion_blur, 'Desenfoque de movimiento:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(Ninguno)');
 		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', 'Felino');
 		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', 'Excitación');
@@ -2407,6 +2414,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_button_mesage_ok, 'Хорошо');
 		trans_setHtmlText(sai_id_text_message_size, 'Размер сообщения:');
 		trans_setHtmlText(sai_id_text_note, 'Кнопка музыкальной ноты:');
+		trans_setHtmlText(sai_id_text_motion_blur, 'Размытость:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(Никто)');
 		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', 'Кошачий');
 		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', 'Возбуждение');
@@ -2500,6 +2508,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
 		trans_setHtmlText(sai_id_text_message_size, 'Size of message:');
 		trans_setHtmlText(sai_id_text_note, 'Sound button:');
+		trans_setHtmlText(sai_id_text_motion_blur, 'Motion Blur:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(None)');
 		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', 'Cattish');
 		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', 'Exciting');
