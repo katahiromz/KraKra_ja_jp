@@ -1526,7 +1526,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像「画3: 目が回る」の描画。
 	// pic3: The Eyes
-	const SAI_draw_pic_03 = function(ctx, px, py, dx, dy){
+	const SAI_draw_pic_03_sub = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
@@ -1626,15 +1626,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		const N = 4;
 		let radian = factor * 1.3;
 		for(i = 0; i < N; ++i){
-			let x = cxy * Math.cos(radian + 0.4) * 0.3, y = cxy * Math.sin(radian + 0.4) * 0.3;
-			SAI_draw_eye(ctx, x, y, cxy / 10, opened, 0.25); // アルファ値0.25により透過する。
-
-			x = cxy * Math.cos(radian + 0.2) * 0.3;
-			y = cxy * Math.sin(radian + 0.2) * 0.3;
-			SAI_draw_eye(ctx, x, y, cxy / 10, opened, 0.65); // アルファ値0.65により透過する。
-
-			x = cxy * Math.cos(radian) * 0.3;
-			y = cxy * Math.sin(radian) * 0.3;
+			let x = cxy * Math.cos(radian) * 0.3;
+			let y = cxy * Math.sin(radian) * 0.3;
 			SAI_draw_eye(ctx, x, y, cxy / 10, opened); // 透過しない。
 
 			// 目の中にハート型を描画する。
@@ -1652,6 +1645,16 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_circle(ctx, 0, 0, dxy, true);
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
+	}
+
+	// 映像「画3: 目が回る」の描画。
+	// pic3: The Eyes
+	const SAI_draw_pic_03 = function(ctx, px, py, dx, dy){
+		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		SAI_draw_pic_03_sub(ctx2, px, py, dx, dy, true);
+		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
+		ctx.drawImage(sai_id_canvas_02, px, py, dx, dy);
+		ctx.globalAlpha = 1; // 元に戻す。
 	}
 
 	// 映像「画4: アルキメデスのらせん」の描画。
