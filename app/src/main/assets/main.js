@@ -2113,6 +2113,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 映像の進行を表す変数。
 		let count2 = SAI_get_tick_count();
 
+		// 視覚的な酩酊感をもたらすために回転運動の中心点をすりこぎ運動させる。
+		qx += mxy * Math.cos(count2 * 0.1);
+		qy += mxy * Math.sin(count2 * 0.2);
+
 		// 発散する渦巻きを描画する。
 		let ci = 8; // これは偶数でなければならない。
 		let lines = [];
@@ -2131,9 +2135,6 @@ document.addEventListener('DOMContentLoaded', function(){
 				// 画面中央を原点とする。
 				x += qx;
 				y += qy;
-				// 視覚的な酩酊感をもたらすために回転運動の中心点をすりこぎ運動させる。
-				x += mxy * Math.cos(count2 * 0.1);
-				y += mxy * Math.sin(count2 * 0.2);
 				line.push([x, y]);
 			}
 			lines.push(line);
@@ -2142,7 +2143,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 多角形を描画する。
 		let even = true;
 		ctx.beginPath();
-		ctx.moveTo(0, 0);
+		ctx.moveTo(qx, qx);
 		for(let i = 0; i < ci; ++i){
 			let line = lines[i];
 			if(even){ // 偶数回目はそのままの向き。
