@@ -984,8 +984,8 @@ document.addEventListener('DOMContentLoaded', function(){
 	// スクリーンのサイズをセットする。必要ならキャンバスのサイズも変更する。
 	const SAI_screen_fit_canvas = function(){
 		console.log('SAI_screen_fit_canvas');
-		sai_screen_width = sai_id_canvas_01.width = window.innerWidth;
-		sai_screen_height = sai_id_canvas_01.height = window.innerHeight;
+		sai_screen_width = sai_id_canvas_01.width = sai_id_canvas_02.width = window.innerWidth;
+		sai_screen_height = sai_id_canvas_01.height = sai_id_canvas_02.height = window.innerHeight;
 	}
 
 	// スクリーンのサイズをセットし、必要なら画面を復帰する。
@@ -1480,6 +1480,11 @@ document.addEventListener('DOMContentLoaded', function(){
 			ctx.clip();
 		}
 
+		// 1番目の色で塗りつぶす。
+		ctx.beginPath();
+		ctx.fillStyle = SAI_color_get_1st();
+		ctx.fillRect(px, py, dx, dy);
+
 		// さまざまな計算をする。
 		let dr0 = 30;
 		if(SAI_screen_is_large(ctx)){
@@ -1502,12 +1507,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			ctx.arc(qx, qy, Math.abs(radius + ctx.lineWidth*0.5), 0, 2 * Math.PI);
 		}
 		ctx.fillStyle = SAI_color_get_2nd();
-		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.fill('evenodd');
-		ctx.rect(0, 0, dx, dy);
-		ctx.fillStyle = SAI_color_get_1st();
-		ctx.fill('evenodd');
-		ctx.globalAlpha = 1; // 元に戻す。
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
@@ -1515,8 +1515,13 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 映像「画2: 同心円状」の描画。
 	// pic2: Concentric Circles
 	const SAI_draw_pic_02 = function(ctx, px, py, dx, dy){
-		SAI_draw_pic_2_sub(ctx, px, py, dx, dy, true);
-		SAI_draw_pic_2_sub(ctx, px, py, dx, dy, false);
+		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+
+		SAI_draw_pic_2_sub(ctx2, px, py, dx, dy, true);
+		SAI_draw_pic_2_sub(ctx2, px, py, dx, dy, false);
+		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
+		ctx.drawImage(sai_id_canvas_02, px, py, dx, dy);
+		ctx.globalAlpha = 1; // 元に戻す。
 	}
 
 	// 映像「画3: 目が回る」の描画。
@@ -2845,7 +2850,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		if(saiminMotionBlur){
 			SAI_set_motion_blur(saiminMotionBlur);
 		}else{
-			SAI_set_motion_blur(2);
+			SAI_set_motion_blur(6);
 		}
 
 		// ローカルストレージに映像切り替えの種類があれば読み込む。
