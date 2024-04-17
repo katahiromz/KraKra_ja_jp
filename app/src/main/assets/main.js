@@ -1391,18 +1391,19 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
 		SAI_clip_rect(ctx, px, py, dx, dy);
 
-		// 画面中央を原点とする。
-		let qx = px + dx / 2, qy = py + dy / 2;
-		ctx.translate(qx, qy);
-
 		// 映像の進行を表す変数。
 		let count2 = -SAI_get_tick_count();
 
 		// 画面の寸法を使って計算する。
+		let qx = px + dx / 2, qy = py + dy / 2;
 		let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
 		let mxy = (maxxy + minxy) * 0.04;
 
-		const num_lines = 24; // これは偶数でなければならない。
+		// 視覚的な酩酊感をもたらすために回転運動の中心点をすりこぎ運動させる。
+		qx += mxy * Math.cos(count2 * 0.07);
+		qy += mxy * Math.sin(count2 * 0.15);
+
+		const num_lines = 20; // これは偶数でなければならない。
 		const a = 1, b = 1.1; // らせんの係数。
 
 		// 発散する渦巻きを表す多角形の頂点を構築する。
@@ -1410,7 +1411,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		for(let i = 0; i < num_lines; ++i){
 			let delta_theta = 2 * Math.PI * i / num_lines;
 			// 対数らせんの公式に従って頂点を追加していく。ただし偏角はdelta_thetaだけずらす。
-			let line = [[0, 0]];
+			let line = [[qx, qy]];
 			for(let theta = 0; theta <= 2 * Math.PI * 1.2; theta += 0.1){
 				let r = a * Math.exp(b * theta);
 				let t = theta + delta_theta;
@@ -1418,9 +1419,9 @@ document.addEventListener('DOMContentLoaded', function(){
 				t += -count2 * 0.12;
 				let comp = new Complex({abs:r, arg:t});
 				let x = comp.re, y = comp.im;
-				// 視覚的な酩酊感をもたらすために回転運動の中心点をすりこぎ運動させる。
-				x += mxy * Math.cos(count2 * 0.07);
-				y += mxy * Math.sin(count2 * 0.15);
+				// 画面中央を原点とする。
+				x += qx;
+				y += qy;
 				line.push([x, y]);
 			}
 			lines.push(line);
@@ -1429,7 +1430,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 多角形を描画する。
 		let even = true;
 		ctx.beginPath();
-		ctx.moveTo(0, 0);
+		ctx.moveTo(qx, qy);
 		for(let i = 0; i < num_lines; ++i){
 			let line = lines[i];
 			if(even){ // 偶数回目はそのままの向き。
@@ -1446,7 +1447,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.fillStyle = SAI_color_get_1st(); // 1番目の色で塗りつぶす。
 		ctx.fill('evenodd');
-		ctx.rect(-dx/2, -dy/2, dx, dy);
+		ctx.rect(px, py, dx, dy);
 		ctx.fillStyle = SAI_color_get_2nd(); // 2番目の色で塗りつぶす。
 		ctx.fill('evenodd');
 		ctx.globalAlpha = 1; // 元に戻す。
