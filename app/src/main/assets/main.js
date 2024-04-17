@@ -2013,7 +2013,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像「画8: クレージーな色」の描画。
 	// pic8: Crazy Colors
-	const SAI_draw_pic_08 = function(ctx, px, py, dx, dy){
+	const SAI_draw_pic_08_sub = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
@@ -2156,6 +2156,16 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.globalAlpha = 1; // 元に戻す。
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
+	}
+
+	// 映像「画8: クレージーな色」の描画。
+	// pic8: Crazy Colors
+	const SAI_draw_pic_08 = function(ctx, px, py, dx, dy){
+		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		SAI_draw_pic_08_sub(ctx2, px, py, dx, dy, true);
+		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
+		ctx.drawImage(sai_id_canvas_02, px, py, dx, dy);
+		ctx.globalAlpha = 1; // 元に戻す。
 	}
 
 	// 映像「画10: アナログディスク」の描画。
@@ -2363,7 +2373,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像「画12: 万華鏡」の描画。
 	// pic12: Kaleidoscope
-	const SAI_draw_pic_12 = function(ctx, px, py, dx, dy){
+	const SAI_draw_pic_12_sub = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		if(false){
@@ -2391,6 +2401,16 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
+	}
+
+	// 映像「画12: 万華鏡」の描画。
+	// pic12: Kaleidoscope
+	const SAI_draw_pic_12 = function(ctx, px, py, dx, dy){
+		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		SAI_draw_pic_12_sub(ctx2, px, py, dx, dy, true);
+		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
+		ctx.drawImage(sai_id_canvas_02, px, py, dx, dy);
+		ctx.globalAlpha = 1; // 元に戻す。
 	}
 
 	// 映像「画13: 1番目の色の画面」の描画。
