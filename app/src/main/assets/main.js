@@ -1516,8 +1516,10 @@ document.addEventListener('DOMContentLoaded', function(){
 	// pic2: Concentric Circles
 	const SAI_draw_pic_02 = function(ctx, px, py, dx, dy){
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		ctx2.save();
 		SAI_draw_pic_2_sub(ctx2, 0, 0, dx, dy, true);
 		SAI_draw_pic_2_sub(ctx2, 0, 0, dx, dy, false);
+		ctx2.restore();
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
@@ -1650,7 +1652,9 @@ document.addEventListener('DOMContentLoaded', function(){
 	// pic3: The Eyes
 	const SAI_draw_pic_03 = function(ctx, px, py, dx, dy){
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		ctx2.save();
 		SAI_draw_pic_03_sub(ctx2, 0, 0, dx, dy);
+		ctx2.restore();
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
@@ -1676,6 +1680,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
 		let mxy = (maxxy + minxy) * 0.04;
 
+		// 視覚的な酩酊感をもたらすために回転運動の中心点をすりこぎ運動させる。
+		qx += mxy * Math.cos(count2 * 0.08);
+		qy += mxy * Math.sin(count2 * 0.05);
+
 		// 発散する渦巻きを描画する。
 		let ci = 8; // これは偶数でなければならない。
 		let lines = [];
@@ -1684,7 +1692,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			let delta_theta = 2 * Math.PI * i / ci;
 			// アルキメデスのらせんの公式に従って描画する。ただし偏角はdelta_thetaだけずらす。
 			let line = [];
-			line.push([0, 0]);
+			line.push([qx, qy]);
 			for(let theta = 0; theta <= 2 * Math.PI * 10; theta += 0.1){
 				let r = a * theta;
 				let t = theta + delta_theta;
@@ -1695,9 +1703,6 @@ document.addEventListener('DOMContentLoaded', function(){
 				// 画面中央を原点とする。
 				x += qx;
 				y += qy;
-				// 視覚的な酩酊感をもたらすために回転運動の中心点をすりこぎ運動させる。
-				x += mxy * Math.cos(count2 * 0.08);
-				y += mxy * Math.sin(count2 * 0.05);
 				line.push([x, y]);
 			}
 			lines.push(line);
@@ -1706,7 +1711,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 線を描画する。
 		let even = true;
 		ctx.beginPath();
-		ctx.moveTo(0, 0);
+		ctx.moveTo(qx, qy);
 		for(let i = 0; i < ci; ++i){
 			let line = lines[i];
 			if(even){ // 偶数回目はそのままの向き。
@@ -1832,7 +1837,9 @@ document.addEventListener('DOMContentLoaded', function(){
 	// pic5: Spreading Rainbow
 	const SAI_draw_pic_05 = function(ctx, px, py, dx, dy){
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		ctx2.save();
 		SAI_draw_pic_05_sub(ctx2, 0, 0, dx, dy);
+		ctx2.restore();
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
@@ -1937,7 +1944,9 @@ document.addEventListener('DOMContentLoaded', function(){
 	// pic6: 5-yen coin
 	const SAI_draw_pic_06 = function(ctx, px, py, dx, dy){
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		ctx2.save();
 		SAI_draw_pic_06_sub(ctx2, 0, 0, dx, dy);
+		ctx2.restore();
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
@@ -2161,7 +2170,9 @@ document.addEventListener('DOMContentLoaded', function(){
 	// pic8: Crazy Colors
 	const SAI_draw_pic_08 = function(ctx, px, py, dx, dy){
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		ctx2.save();
 		SAI_draw_pic_08_sub(ctx2, 0, 0, dx, dy);
+		ctx2.restore();
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
@@ -2406,7 +2417,9 @@ document.addEventListener('DOMContentLoaded', function(){
 	// pic12: Kaleidoscope
 	const SAI_draw_pic_12 = function(ctx, px, py, dx, dy){
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		ctx2.save();
 		SAI_draw_pic_12_sub(ctx2, 0, 0, dx, dy);
+		ctx2.restore();
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
