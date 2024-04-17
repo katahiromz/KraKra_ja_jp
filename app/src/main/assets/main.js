@@ -1521,7 +1521,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_pic_2_sub(ctx2, 0, 0, dx, dy, false);
 		ctx2.restore();
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-		ctx.drawImage(sai_id_canvas_02, px, py, dx, dy);
+		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 	}
 
@@ -1656,7 +1656,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_pic_03_sub(ctx2, 0, 0, dx, dy);
 		ctx2.restore();
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-		ctx.drawImage(sai_id_canvas_02, px, py, dx, dy);
+		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 	}
 
@@ -1841,7 +1841,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_pic_05_sub(ctx2, 0, 0, dx, dy);
 		ctx2.restore();
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-		ctx.drawImage(sai_id_canvas_02, px, py, dx, dy);
+		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 	}
 
@@ -1948,7 +1948,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_pic_06_sub(ctx2, 0, 0, dx, dy);
 		ctx2.restore();
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-		ctx.drawImage(sai_id_canvas_02, px, py, dx, dy);
+		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 	}
 
@@ -2172,10 +2172,10 @@ document.addEventListener('DOMContentLoaded', function(){
 	const SAI_draw_pic_08 = function(ctx, px, py, dx, dy){
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
 		ctx2.save();
-		SAI_draw_pic_08_sub(ctx2, 0, 0, dx, dy);
+		SAI_draw_pic_08_sub(ctx2, 0, 0, dx / 2, dy / 2);
 		ctx2.restore();
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-		ctx.drawImage(sai_id_canvas_02, px, py, dx, dy);
+		ctx.drawImage(sai_id_canvas_02, 0, 0, dx / 2, dy / 2, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 	}
 
@@ -2422,7 +2422,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_pic_12_sub(ctx2, 0, 0, dx, dy);
 		ctx2.restore();
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-		ctx.drawImage(sai_id_canvas_02, px, py, dx, dy);
+		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 	}
 
@@ -2594,22 +2594,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			}
 		}
 
-		if(sai_pic_type == 8){
-			// pic8の場合は描画に時間がかかるので、解像度の低い映像としてレンダリングする。
-			if(!sai_count_down){
-				let ratio = 0.5;
-				sai_id_canvas_02.width = dx * ratio;
-				sai_id_canvas_02.height = dy * ratio;
-				let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
-				SAI_draw_pic(ctx2, 0, 0, dx * ratio, dy * ratio);
-				ctx.drawImage(sai_id_canvas_02, 0, 0, dx * ratio, dy * ratio, px, py, dx, dy);
-			}else{
-				SAI_draw_pic(ctx, px, py, dx, dy);
-			}
-		}else{
-			// それ以外は普通に描画する。
-			SAI_draw_pic(ctx, px, py, dx, dy);
-		}
+		// 普通に描画する。
+		SAI_draw_pic(ctx, px, py, dx, dy);
 	}
 
 	// メッセージテキストの位置をゆらゆら動かす。
