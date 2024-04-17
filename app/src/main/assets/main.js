@@ -991,7 +991,6 @@ document.addEventListener('DOMContentLoaded', function(){
 	// スクリーンのサイズをセットし、必要なら画面を復帰する。
 	const SAI_screen_fit = function(){
 		SAI_screen_fit_canvas();
-		let position = { my: 'center', at: 'center', of: window };
 		if(localStorage.getItem('saiminHelpShowing')){
 			SAI_choose_page(sai_id_page_agreement);
 		}else if(localStorage.getItem('saiminConfigShowing')){
@@ -1517,9 +1516,8 @@ document.addEventListener('DOMContentLoaded', function(){
 	// pic2: Concentric Circles
 	const SAI_draw_pic_02 = function(ctx, px, py, dx, dy){
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
-
-		SAI_draw_pic_2_sub(ctx2, px, py, dx, dy, true);
-		SAI_draw_pic_2_sub(ctx2, px, py, dx, dy, false);
+		SAI_draw_pic_2_sub(ctx2, 0, 0, dx, dy, true);
+		SAI_draw_pic_2_sub(ctx2, 0, 0, dx, dy, false);
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
@@ -1652,7 +1650,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	// pic3: The Eyes
 	const SAI_draw_pic_03 = function(ctx, px, py, dx, dy){
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
-		SAI_draw_pic_03_sub(ctx2, px, py, dx, dy, true);
+		SAI_draw_pic_03_sub(ctx2, 0, 0, dx, dy);
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
@@ -1834,7 +1832,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	// pic5: Spreading Rainbow
 	const SAI_draw_pic_05 = function(ctx, px, py, dx, dy){
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
-		SAI_draw_pic_05_sub(ctx2, px, py, dx, dy, true);
+		SAI_draw_pic_05_sub(ctx2, 0, 0, dx, dy);
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
@@ -1939,7 +1937,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	// pic6: 5-yen coin
 	const SAI_draw_pic_06 = function(ctx, px, py, dx, dy){
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
-		SAI_draw_pic_06_sub(ctx2, px, py, dx, dy, true);
+		SAI_draw_pic_06_sub(ctx2, 0, 0, dx, dy);
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
@@ -2163,7 +2161,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	// pic8: Crazy Colors
 	const SAI_draw_pic_08 = function(ctx, px, py, dx, dy){
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
-		SAI_draw_pic_08_sub(ctx2, px, py, dx, dy, true);
+		SAI_draw_pic_08_sub(ctx2, 0, 0, dx, dy);
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
@@ -2408,7 +2406,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	// pic12: Kaleidoscope
 	const SAI_draw_pic_12 = function(ctx, px, py, dx, dy){
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
-		SAI_draw_pic_12_sub(ctx2, px, py, dx, dy, true);
+		SAI_draw_pic_12_sub(ctx2, 0, 0, dx, dy);
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
