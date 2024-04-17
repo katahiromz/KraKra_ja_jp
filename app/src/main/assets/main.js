@@ -1841,7 +1841,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像「画6: 五円玉」の描画。
 	// pic6: 5-yen coin
-	const SAI_draw_pic_06 = function(ctx, px, py, dx, dy){
+	const SAI_draw_pic_06_sub = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
@@ -1932,6 +1932,16 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
+	}
+
+	// 映像「画6: 五円玉」の描画。
+	// pic6: 5-yen coin
+	const SAI_draw_pic_06 = function(ctx, px, py, dx, dy){
+		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		SAI_draw_pic_06_sub(ctx2, px, py, dx, dy, true);
+		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
+		ctx.drawImage(sai_id_canvas_02, px, py, dx, dy);
+		ctx.globalAlpha = 1; // 元に戻す。
 	}
 
 	// 映像「画7: 奇妙な渦巻き」の描画。
