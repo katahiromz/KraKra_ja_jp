@@ -1733,7 +1733,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像「画5: 広がるハート」の描画。
 	// pic5: Spreading Rainbow
-	const SAI_draw_pic_05 = function(ctx, px, py, dx, dy){
+	const SAI_draw_pic_05_sub = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
@@ -1827,6 +1827,16 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
+	}
+
+	// 映像「画5: 広がるハート」の描画。
+	// pic5: Spreading Rainbow
+	const SAI_draw_pic_05 = function(ctx, px, py, dx, dy){
+		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		SAI_draw_pic_05_sub(ctx2, px, py, dx, dy, true);
+		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
+		ctx.drawImage(sai_id_canvas_02, px, py, dx, dy);
+		ctx.globalAlpha = 1; // 元に戻す。
 	}
 
 	// 映像「画6: 五円玉」の描画。
