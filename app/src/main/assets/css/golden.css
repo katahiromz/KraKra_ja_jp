@@ -304,8 +304,11 @@ input[type='color'] { /* 色選択ボタン */
 .sai_class_checked { /* ナビゲーションボタンをチェックした状態 */
 	background-color: rgba(204, 198, 101, 90%);
 }
-.sai_class_config_navi_line { /* ナビゲーション行 */
+.sai_class_config_navi_line { /* 設定ページのナビゲーション行 */
 	height: 5rem; /* ③ */
+}
+.sai_class_message_navi_line { /* メッセージのページのナビゲーション行 */
+	height: 7rem; /* ⑥ */
 }
 .sai_class_img_config_logo { /* 設定ページの小さなロゴ */
 	height: 31px; /* ④ */
@@ -357,8 +360,8 @@ input[type='color'] { /* 色選択ボタン */
 	overflow-y: scroll;
 	width: 98vw;
 	width: 98dvw;
-	height: calc(100vh - 1.25rem - (0.9cm + 2px) - 31px - 5rem); /* 全体 - ① - ⑤ - ④ - ③ */
-	height: calc(100dvh - 1.25rem - (0.9cm + 2px) - 31px - 5rem); /* 全体 - ① - ⑤ - ④ - ③ */
+	height: calc(100vh - 1.25rem - (0.9cm + 2px) - 31px - 7rem); /* 全体 - ① - ⑤ - ④ - ⑥ */
+	height: calc(100dvh - 1.25rem - (0.9cm + 2px) - 31px - 7rem); /* 全体 - ① - ⑤ - ④ - ⑥ */
 	margin-left: auto;
 	margin-right: auto;
 }

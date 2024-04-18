@@ -209,6 +209,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			sai_id_text_message.placeholder = trans_getText('TEXT_INPUTMESSAGE');
 			// 現在のメッセージを設定する。
 			sai_id_text_message.value = localStorage.getItem('saiminText') || '';
+			// メッセージをしゃべるか？
+			sai_id_checkbox_message_speech.checked = sai_id_checkbox_speech_on_off.checked;
 			// 100ミリ秒後に一番上にスクロールする。
 			setTimeout(function(){
 				sai_id_message_scrollable.scrollLeft = sai_id_message_scrollable.scrollTop = 0;
@@ -3474,10 +3476,24 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// メッセージをOK。
 		sai_id_button_mesage_ok.addEventListener('click', function(e){
+			// メッセージテキストを設定する。
 			SAI_message_set_text(sai_id_text_message.value);
+			// メッセージリストに追加する。
 			SAI_add_to_message_list(sai_message_text);
+			// メッセージリストを保存する。
 			SAI_save_message_list();
+			// しゃべるかしゃべらないかを設定。
+			if(sai_id_checkbox_message_speech.checked){
+				SAI_speech_set(true);
+				if(!sai_stopping)
+					SAI_speech_start(sai_message_text);
+			}else{
+				SAI_speech_set(false);
+				SAI_speech_cancel();
+			}
+			// 現在のページが閉じたことをローカルストレージに設定。
 			localStorage.removeItem('saiminMessageListShowing');
+			// メインページに移動。
 			SAI_choose_page(sai_id_page_main);
 		});
 
