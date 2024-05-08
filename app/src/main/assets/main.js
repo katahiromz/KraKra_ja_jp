@@ -1159,29 +1159,42 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 目の描画。
 	const SAI_draw_eye = function(ctx, x0, y0, r, opened = 1.0, alpha = 1.0){
-		ctx.beginPath();
-		ctx.moveTo(x0 - r, y0);
 		const r025 = r * 0.25;
 		const r05 = r025 * 2 * opened;
+
+		ctx.strokeStyle = `rgba(0, 0, 0, ${alpha * 100.0}%)`;
+		ctx.lineWidth = r * 0.10;
+
+		ctx.beginPath();
+		ctx.moveTo(x0, y0 - r * 0.75);
+		ctx.lineTo(x0, y0 + r * 0.75);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.moveTo(x0 - r05, y0 - r05);
+		ctx.lineTo(x0 + r05, y0 + r05);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.moveTo(x0 + r05, y0 - r05);
+		ctx.lineTo(x0 - r05, y0 + r05);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.moveTo(x0 - r, y0);
 		ctx.bezierCurveTo(x0 - r025, y0 - r05, x0 + r025, y0 - r05, x0 + r, y0);
 		ctx.bezierCurveTo(x0 + r025, y0 + r05, x0 - r025, y0 + r05, x0 - r, y0);
 		ctx.closePath();
-		if(alpha == 1.0){
-			ctx.strokeStyle = "#000";
-		}else{
-			ctx.strokeStyle = `rgba(0, 0, 0, ${alpha * 100.0}%)`;
-		}
-		ctx.lineWidth = r * 0.15;
+
+		ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 100.0}%)`;
+		ctx.fill();
+
+		ctx.strokeStyle = `rgba(0, 0, 0, ${alpha * 100.0}%)`;
+		ctx.lineWidth = r * 0.10;
 		ctx.stroke();
 
-		if(alpha == 1.0){
-			ctx.fillStyle = "#000";
-		}else{
-			ctx.fillStyle = `rgba(0, 0, 0, ${alpha * 100.0}%)`;
-		}
-		ctx.save();
+		ctx.fillStyle = `rgba(0, 0, 0, ${alpha * 100.0}%)`;
 		SAI_draw_circle(ctx, x0, y0, r / 3 * opened, true);
-		ctx.restore();
 	}
 
 	// 目の描画２。
@@ -1196,7 +1209,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.fillStyle = "#faa";
 		ctx.fill();
 		ctx.strokeStyle = "#c00";
-		ctx.lineWidth = r * 0.15;
+		ctx.lineWidth = r * 0.10;
 		ctx.stroke();
 
 		ctx.fillStyle = "#000";
