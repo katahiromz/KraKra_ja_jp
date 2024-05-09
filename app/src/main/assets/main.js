@@ -1193,8 +1193,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.lineWidth = r * 0.10;
 		ctx.stroke();
 
-		ctx.fillStyle = `rgba(0, 0, 0, ${alpha * 100.0}%)`;
+		ctx.fillStyle = `rgba(0, 0, 80, ${alpha * 100.0}%)`;
 		SAI_draw_circle(ctx, x0, y0, r / 3 * opened, true);
+		ctx.fillStyle = `rgba(100, 0, 200, ${alpha * 100.0}%)`;
+		SAI_draw_circle(ctx, x0, y0, r / 4 * opened, true);
 	}
 
 	// 目の描画２。
@@ -1212,10 +1214,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.lineWidth = r * 0.10;
 		ctx.stroke();
 
-		ctx.fillStyle = "#000";
-		ctx.save();
+		ctx.fillStyle = "#404";
 		SAI_draw_circle(ctx, x0, y0, r / 3 * opened, true);
-		ctx.restore();
+		ctx.fillStyle = "#508";
+		SAI_draw_circle(ctx, x0, y0, r / 4 * opened, true);
 	}
 
 	// きらめきの描画。
