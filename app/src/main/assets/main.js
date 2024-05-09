@@ -2138,7 +2138,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			// 黄金らせんの公式に従って描画する。ただしtheta_deltaだけ偏角をずらす。
 			let a = 1, b = 0.3063489;
 			let line = [[qx, qy]];
-			for(let theta = 0; theta <= 2 * Math.PI * 10; theta += 0.1){
+			for(let theta = 0; theta <= 2 * Math.PI * 5; theta += 0.125){
 				let r = a * Math.exp(b * theta);
 				let t = theta + delta_theta;
 				t += -count2 * 0.23;
