@@ -1734,7 +1734,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '6', '画6: 五円玉');
 		trans_setSelectOptionText(sai_id_select_pic_type, '7', '画7: 奇妙な渦巻き');
 		trans_setSelectOptionText(sai_id_select_pic_type, '8', '画8: クレージーな色');
-		trans_setSelectOptionText(sai_id_select_pic_type, '9', '画9: 対数らせん2');
+		trans_setSelectOptionText(sai_id_select_pic_type, '9', '画9: 対数らせん 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '10', '画10: アナログディスク');
 		trans_setSelectOptionText(sai_id_select_pic_type, '11', '画11: 奇妙な渦巻き 2');
 		trans_setSelectOptionText(sai_id_select_pic_type, '12', '画12: 万華鏡');

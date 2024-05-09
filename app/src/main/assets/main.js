@@ -1,7 +1,7 @@
 // 催眠アプリ「催眠くらくら」のJavaScriptのメインコード。
 // 暗号名はKraKra。
 
-const sai_VERSION = '3.6.5'; // KraKraバージョン番号。
+const sai_VERSION = '3.6.6'; // KraKraバージョン番号。
 const sai_DEBUGGING = false; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
 
@@ -2110,17 +2110,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
-	// 映像「画9: 対数らせん2」の描画。
+	// 映像「画9: 対数らせん 2」の描画。
 	// pic9: Logarithmic Spiral 2
-	const SAI_draw_pic_09 = function(ctx, px, py, dx, dy){
+	const SAI_draw_pic_09_sub = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
-
-		// 画面中央の座標を計算する。
-		let qx = px + dx / 2, qy = py + dy / 2;
-
-		// 画面の寸法を使って計算する。
-		let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
-		let mxy = (maxxy + minxy) * 0.015;
 
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
 		SAI_clip_rect(ctx, px, py, dx, dy);
@@ -2128,19 +2121,23 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 映像の進行を表す変数。
 		let count2 = SAI_get_tick_count();
 
+		// 画面の寸法を使って計算する。
+		let qx = px + dx / 2, qy = py + dy / 2;
+		let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
+		let mxy = (maxxy + minxy) * 0.015;
+
 		// 視覚的な酩酊感をもたらすために回転運動の中心点をすりこぎ運動させる。
 		qx += mxy * Math.cos(count2 * 0.1);
 		qy += mxy * Math.sin(count2 * 0.2);
 
 		// 発散する渦巻きを描画する。
-		let ci = 8; // これは偶数でなければならない。
+		let num_lines = 8; // これは偶数でなければならない。
 		let lines = [];
-		for(let i = 0; i < ci; ++i){
-			let delta_theta = 2 * Math.PI * i / ci;
+		for(let i = 0; i < num_lines; ++i){
+			let delta_theta = 2 * Math.PI * i / num_lines;
 			// 黄金らせんの公式に従って描画する。ただしtheta_deltaだけ偏角をずらす。
 			let a = 1, b = 0.3063489;
-			let line = [];
-			line.push([qx, qy]);
+			let line = [[qx, qy]];
 			for(let theta = 0; theta <= 2 * Math.PI * 10; theta += 0.1){
 				let r = a * Math.exp(b * theta);
 				let t = theta + delta_theta;
@@ -2159,7 +2156,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let even = true;
 		ctx.beginPath();
 		ctx.moveTo(qx, qx);
-		for(let i = 0; i < ci; ++i){
+		for(let i = 0; i < num_lines; ++i){
 			let line = lines[i];
 			if(even){ // 偶数回目はそのままの向き。
 				for(let k = 0; k < line.length; ++k)
@@ -2171,15 +2168,25 @@ document.addEventListener('DOMContentLoaded', function(){
 			even = !even;
 		}
 		ctx.closePath();
-		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.fillStyle = SAI_color_get_1st();
 		ctx.fill('evenodd');
 		ctx.rect(0, 0, dx, dy);
 		ctx.fillStyle = SAI_color_get_2nd();
 		ctx.fill('evenodd');
-		ctx.globalAlpha = 1; // 元に戻す。
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
+	}
+
+	// 映像「画9: 対数らせん 2」の描画。
+	// pic9: Logarithmic Spiral 2
+	const SAI_draw_pic_09 = function(ctx, px, py, dx, dy){
+		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		ctx2.save();
+		SAI_draw_pic_09_sub(ctx2, 0, 0, dx, dy);
+		ctx2.restore();
+		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
+		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
+		ctx.globalAlpha = 1; // 元に戻す。
 	}
 
 	// 映像「画8: クレージーな色」の描画。
