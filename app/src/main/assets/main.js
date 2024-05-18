@@ -1229,10 +1229,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.lineWidth = r * 0.10;
 		ctx.stroke();
 
-		ctx.fillStyle = `rgba(80, 0, 0, ${alpha * 100.0}%)`;
+		ctx.fillStyle = `rgba(50, 0, 80, ${alpha * 100.0}%)`;
 		SAI_draw_circle(ctx, x0, y0, r / 3 * opened, true);
-		ctx.fillStyle = `rgba(100, 0, 50, ${alpha * 100.0}%)`;
-		SAI_draw_circle(ctx, x0, y0, r / 4 * opened, true);
+		ctx.fillStyle = `rgba(40, 0, 0, ${alpha * 100.0}%)`;
+		SAI_draw_circle(ctx, x0, y0, r / 5 * opened, true);
 	}
 
 	// 目の描画２。
