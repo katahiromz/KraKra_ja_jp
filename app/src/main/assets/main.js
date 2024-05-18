@@ -603,6 +603,17 @@ document.addEventListener('DOMContentLoaded', function(){
 		localStorage.setItem('saiminScreenBrightness', value);
 	}
 
+	// 渦の向きをセットする。
+	const SAI_set_vortex_direction = function(value){
+		switch(value){
+		case 'clockwise': case 'counterclockwise': break;
+		default: value = 'clockwise';
+		}
+		sai_id_select_vortex_direction.value = value;
+		// ローカルストレージに記憶する。
+		localStorage.setItem('saiminVortexDirection', value);
+	};
+
 	// メッセージボイスの音量を設定する関数。
 	const SAI_message_set_voice_volume = function(value){
 		value = parseFloat(value); // 値を浮動小数点数に変換。
@@ -1431,6 +1442,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			for(let theta = 0; theta <= 2 * Math.PI * 1.2; theta += 0.1){
 				let r = a * Math.exp(b * theta);
 				let t = theta + delta_theta;
+				if (sai_id_select_vortex_direction.value == 'counterclockwise')
+					t = -t;
 				// 原点を中心として、これから描画する図形を回転する。
 				t += -count2 * 0.12;
 				let comp = new Complex({abs:r, arg:t});
@@ -1713,6 +1726,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			for(let theta = 0; theta <= 2 * Math.PI * 10; theta += 0.1){
 				let r = a * theta;
 				let t = theta + delta_theta;
+				if (sai_id_select_vortex_direction.value == 'counterclockwise')
+					t = -t;
 				// 回転する。
 				t += count2 * -0.25;
 				let comp = new Complex({abs:r, arg:t});
@@ -1998,6 +2013,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			for(let theta = 0; theta <= 2 * Math.PI * 1.2; theta += 0.02){
 				let r = a * Math.exp(b * theta);
 				let t = delta_theta + Math.sqrt(Math.sqrt(r)) * Math.sin(theta - factor2) + factor1;
+				if (sai_id_select_vortex_direction.value == 'counterclockwise')
+					t = -t;
 				let comp = new Complex({abs:r, arg:t});
 				let x = comp.re, y = comp.im;
 				// 画面中央を原点とする。
@@ -2072,6 +2089,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 座標計算用のヘルパー関数。
 		const rotation = 8, width = dxy * 0.1;
 		let calc_point = function(radius, radian){
+			if (sai_id_select_vortex_direction.value == 'counterclockwise')
+				radian = -radian;
 			return [radius * Math.cos(radian), radius * Math.sin(radian)];
 		}
 
@@ -2112,6 +2131,18 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
+	// 映像「画8: クレージーな色」の描画。
+	// pic8: Crazy Colors
+	const SAI_draw_pic_08 = function(ctx, px, py, dx, dy){
+		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		ctx2.save();
+		SAI_draw_pic_08_sub(ctx2, 0, 0, dx / 2, dy / 2);
+		ctx2.restore();
+		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
+		ctx.drawImage(sai_id_canvas_02, 0, 0, dx / 2, dy / 2, px, py, dx, dy);
+		ctx.globalAlpha = 1; // 元に戻す。
+	}
+
 	// 映像「画9: 対数らせん 2」の描画。
 	// pic9: Logarithmic Spiral 2
 	const SAI_draw_pic_09_sub = function(ctx, px, py, dx, dy){
@@ -2144,6 +2175,8 @@ document.addEventListener('DOMContentLoaded', function(){
 				let r = a * Math.exp(b * theta);
 				let t = theta + delta_theta;
 				t += -count2 * 0.23;
+				if (sai_id_select_vortex_direction.value == 'counterclockwise')
+					t = -t;
 				let comp = new Complex({abs:r, arg:t});
 				let x = comp.re, y = comp.im;
 				// 画面中央を原点とする。
@@ -2188,18 +2221,6 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx2.restore();
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
-		ctx.globalAlpha = 1; // 元に戻す。
-	}
-
-	// 映像「画8: クレージーな色」の描画。
-	// pic8: Crazy Colors
-	const SAI_draw_pic_08 = function(ctx, px, py, dx, dy){
-		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
-		ctx2.save();
-		SAI_draw_pic_08_sub(ctx2, 0, 0, dx / 2, dy / 2);
-		ctx2.restore();
-		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-		ctx.drawImage(sai_id_canvas_02, 0, 0, dx / 2, dy / 2, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 	}
 
@@ -2281,6 +2302,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			for(let theta = 0; theta <= 2 * Math.PI * 1.2; theta += 0.02){
 				let r = a * Math.exp(b * theta);
 				let t = delta_theta + 2 * Math.sin(theta - factor2) + Math.sin(factor1) * Math.PI;
+				if (sai_id_select_vortex_direction.value == 'counterclockwise')
+					t = -t;
 				let comp = new Complex({abs:r, arg:t});
 				let x = comp.re, y = comp.im;
 				// 画面中央を原点とする。
@@ -2965,6 +2988,14 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_screen_set_brightness('normal');
 		}
 
+		// ローカルストレージに渦の向きがあれば読み込む。
+		let saiminVortexDirection = localStorage.getItem('saiminVortexDirection');
+		if(saiminVortexDirection){
+			SAI_set_vortex_direction(saiminVortexDirection);
+		}else{
+			SAI_set_vortex_direction('clockwise');
+		}
+
 		// ローカルストレージにスピーチがあれば読み込む。
 		let saiminSpeech = localStorage.getItem('saiminSpeech');
 		if(saiminSpeech){
@@ -3307,6 +3338,11 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 画面の明るさ選択。
 		sai_id_select_brightness.addEventListener('change', function(){
 			SAI_screen_set_brightness(sai_id_select_brightness.value, true);
+		}, false);
+
+		// 渦の向き選択。
+		sai_id_select_vortex_direction.addEventListener('change', function(){
+			SAI_set_vortex_direction(sai_id_select_vortex_direction.value);
 		}, false);
 
 		// 音声選択。

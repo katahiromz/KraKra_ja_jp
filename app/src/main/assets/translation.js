@@ -1746,6 +1746,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_speed, 'スピード:');
 		trans_setHtmlText(speed_irregular_label, '不規則');
 		trans_setHtmlText(sai_id_text_rotation, '逆再生:');
+		trans_setHtmlText(sai_id_text_vortex_direction, '渦の向き:');
 		trans_setHtmlText(sai_id_text_blinking, '画面点滅:');
 		trans_setHtmlText(sai_id_text_fullscreen_mode, 'フルスクリーン モード:');
 		trans_setHtmlText(sai_id_page_message_header, 'メッセージ');
@@ -1777,6 +1778,8 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_brightness, '画面の明るさ:');
 		trans_setSelectOptionText(sai_id_select_brightness, 'normal', '普通');
 		trans_setSelectOptionText(sai_id_select_brightness, 'brighter', '明るくする');
+		trans_setSelectOptionText(sai_id_select_vortex_direction, 'clockwise', '時計回り');
+		trans_setSelectOptionText(sai_id_select_vortex_direction, 'counterclockwise', '反時計回り');
 		trans_setHtmlText(sai_id_page_config_header, '設定');
 		trans_setHtmlText(sai_id_text_label_message_text, 'メッセージ テキスト:');
 		trans_setHtmlText(sai_id_button_message, 'メッセージ...');
@@ -1841,6 +1844,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_speed, '速度：');
 		trans_setHtmlText(speed_irregular_label, '不规律的');
 		trans_setHtmlText(sai_id_text_rotation, '倒放：');
+		trans_setHtmlText(sai_id_text_vortex_direction, '涡流方向：');
 		trans_setHtmlText(sai_id_text_blinking, '屏幕闪烁：');
 		trans_setHtmlText(sai_id_text_fullscreen_mode, '全屏模式：');
 		trans_setHtmlText(sai_id_page_message_header, '信息');
@@ -1872,6 +1876,8 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_brightness, '屏幕亮度：');
 		trans_setSelectOptionText(sai_id_select_brightness, 'normal', '通常');
 		trans_setSelectOptionText(sai_id_select_brightness, 'brighter', '明亮');
+		trans_setSelectOptionText(sai_id_select_vortex_direction, 'clockwise', '顺时针');
+		trans_setSelectOptionText(sai_id_select_vortex_direction, 'counterclockwise', '逆时针');
 		trans_setHtmlText(sai_id_page_config_header, '配置');
 		trans_setHtmlText(sai_id_text_label_message_text, '留言内容：');
 		trans_setHtmlText(sai_id_button_message, '信息...');
@@ -1936,6 +1942,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_speed, '速度：');
 		trans_setHtmlText(speed_irregular_label, '不規律的');
 		trans_setHtmlText(sai_id_text_rotation, '倒放：');
+		trans_setHtmlText(sai_id_text_vortex_direction, '渦流方向：');
 		trans_setHtmlText(sai_id_text_blinking, '螢幕閃爍：');
 		trans_setHtmlText(sai_id_text_fullscreen_mode, '全螢幕模式：');
 		trans_setHtmlText(sai_id_page_message_header, '資訊');
@@ -1967,6 +1974,8 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_brightness, '屏幕亮度：');
 		trans_setSelectOptionText(sai_id_select_brightness, 'normal', '正常亮度');
 		trans_setSelectOptionText(sai_id_select_brightness, 'brighter', '提亮');
+		trans_setSelectOptionText(sai_id_select_vortex_direction, 'clockwise', '順時針');
+		trans_setSelectOptionText(sai_id_select_vortex_direction, 'counterclockwise', '逆時針');
 		trans_setHtmlText(sai_id_page_config_header, '配置');
 		trans_setHtmlText(sai_id_text_label_message_text, '留言內容：');
 		trans_setHtmlText(sai_id_button_message, '訊息...');
@@ -2031,6 +2040,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_speed, '속도:');
 		trans_setHtmlText(speed_irregular_label, '불규칙');
 		trans_setHtmlText(sai_id_text_rotation, '역 재생:');
+		trans_setHtmlText(sai_id_text_vortex_direction, '소용돌이 방향:');
 		trans_setHtmlText(sai_id_text_blinking, '화면 깜박임:');
 		trans_setHtmlText(sai_id_text_fullscreen_mode, '전체 화면 모드:');
 		trans_setHtmlText(sai_id_page_message_header, '메시지');
@@ -2062,6 +2072,8 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_brightness, '화면 밝기:');
 		trans_setSelectOptionText(sai_id_select_brightness, 'normal', '일반 밝기');
 		trans_setSelectOptionText(sai_id_select_brightness, 'brighter', '밝게 하다');
+		trans_setSelectOptionText(sai_id_select_vortex_direction, 'clockwise', '시계 방향');
+		trans_setSelectOptionText(sai_id_select_vortex_direction, 'counterclockwise', '반시계 방향');
 		trans_setHtmlText(sai_id_page_config_header, '구성');
 		trans_setHtmlText(sai_id_text_label_message_text, '메시지 텍스트:');
 		trans_setHtmlText(sai_id_button_message, '메시지...');
@@ -2126,6 +2138,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_speed, 'Velocità:');
 		trans_setHtmlText(speed_irregular_label, 'Irregolare');
 		trans_setHtmlText(sai_id_text_rotation, 'Riproduzione inversa:');
+		trans_setHtmlText(sai_id_text_vortex_direction, 'Direzione del vortice:');
 		trans_setHtmlText(sai_id_text_blinking, 'Schermo lampeggiante:');
 		trans_setHtmlText(sai_id_text_fullscreen_mode, 'Modalità schermo intero:');
 		trans_setHtmlText(sai_id_page_message_header, 'Messaggio');
@@ -2157,6 +2170,8 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_brightness, 'Luminosità:');
 		trans_setSelectOptionText(sai_id_select_brightness, 'normal', 'Normale');
 		trans_setSelectOptionText(sai_id_select_brightness, 'brighter', 'Più luminoso');
+		trans_setSelectOptionText(sai_id_select_vortex_direction, 'clockwise', 'Senso Orario');
+		trans_setSelectOptionText(sai_id_select_vortex_direction, 'counterclockwise', 'Antiorario');
 		trans_setHtmlText(sai_id_page_config_header, 'Configurazione');
 		trans_setHtmlText(sai_id_text_label_message_text, 'Messaggio di testo:');
 		trans_setHtmlText(sai_id_button_message, 'Messaggio...');
@@ -2221,6 +2236,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_speed, 'Geschwindigkeit:');
 		trans_setHtmlText(speed_irregular_label, 'Irregulär');
 		trans_setHtmlText(sai_id_text_rotation, 'Rückwärtswiedergabe:');
+		trans_setHtmlText(sai_id_text_vortex_direction, 'Wirbelrichtung:');
 		trans_setHtmlText(sai_id_text_blinking, 'Bildschirm blinkt:');
 		trans_setHtmlText(sai_id_text_fullscreen_mode, 'Vollbildmodus:');
 		trans_setHtmlText(sai_id_page_message_header, 'Nachricht');
@@ -2252,6 +2268,8 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_brightness, 'Helligkeit:');
 		trans_setSelectOptionText(sai_id_select_brightness, 'normal', 'Normal');
 		trans_setSelectOptionText(sai_id_select_brightness, 'brighter', 'Heller');
+		trans_setSelectOptionText(sai_id_select_vortex_direction, 'clockwise', 'im Uhrzeigersinn');
+		trans_setSelectOptionText(sai_id_select_vortex_direction, 'counterclockwise', '反時計回り');
 		trans_setHtmlText(sai_id_page_config_header, 'Aufbau');
 		trans_setHtmlText(sai_id_text_label_message_text, 'Nachrichtentext:');
 		trans_setHtmlText(sai_id_button_message, 'Nachricht...');
@@ -2316,6 +2334,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_speed, 'Velocidad:');
 		trans_setHtmlText(speed_irregular_label, 'Irregular');
 		trans_setHtmlText(sai_id_text_rotation, 'Reproducción inversa:');
+		trans_setHtmlText(sai_id_text_vortex_direction, 'Dirección del vórtice:');
 		trans_setHtmlText(sai_id_text_blinking, 'Pantalla parpadeando:');
 		trans_setHtmlText(sai_id_text_fullscreen_mode, 'Modo de pantalla completa:');
 		trans_setHtmlText(sai_id_page_message_header, 'Mensaje');
@@ -2347,6 +2366,8 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_brightness, 'Brillo de la pantalla:');
 		trans_setSelectOptionText(sai_id_select_brightness, 'normal', 'Brillo normal');
 		trans_setSelectOptionText(sai_id_select_brightness, 'brighter', 'Aclarar');
+		trans_setSelectOptionText(sai_id_select_vortex_direction, 'clockwise', 'Agujas del reloj');
+		trans_setSelectOptionText(sai_id_select_vortex_direction, 'counterclockwise', 'Gegen den Uhrzeigersinn');
 		trans_setHtmlText(sai_id_page_config_header, 'Configuración');
 		trans_setHtmlText(sai_id_text_label_message_text, 'Mensaje de texto:');
 		trans_setHtmlText(sai_id_button_message, 'Mensaje...');
@@ -2411,6 +2432,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_speed, 'Скорость:');
 		trans_setHtmlText(speed_irregular_label, 'Нерегулярный');
 		trans_setHtmlText(sai_id_text_rotation, 'Обратное воспроизведение:');
+		trans_setHtmlText(sai_id_text_vortex_direction, 'Направление вихря:');
 		trans_setHtmlText(sai_id_text_blinking, 'Мигание экрана:');
 		trans_setHtmlText(sai_id_text_fullscreen_mode, 'Полноэкранный режим:');
 		trans_setHtmlText(sai_id_page_message_header, 'Сообщение');
@@ -2442,6 +2464,8 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_brightness, 'Яркость экрана:');
 		trans_setSelectOptionText(sai_id_select_brightness, 'normal', 'Нормальная яркость');
 		trans_setSelectOptionText(sai_id_select_brightness, 'brighter', 'Украсить');
+		trans_setSelectOptionText(sai_id_select_vortex_direction, 'clockwise', 'По часовой стрелке');
+		trans_setSelectOptionText(sai_id_select_vortex_direction, 'counterclockwise', 'Против часовой');
 		trans_setHtmlText(sai_id_page_config_header, 'Параметр');
 		trans_setHtmlText(sai_id_text_label_message_text, 'Текст сообщения:');
 		trans_setHtmlText(sai_id_button_message, 'Сообщение...');
@@ -2506,6 +2530,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_speed, 'Speed:');
 		trans_setHtmlText(speed_irregular_label, 'Irregular');
 		trans_setHtmlText(sai_id_text_rotation, 'Reverse playback:');
+		trans_setHtmlText(sai_id_text_vortex_direction, 'Direction of vortex:');
 		trans_setHtmlText(sai_id_text_blinking, 'Screen flashing:');
 		trans_setHtmlText(sai_id_text_fullscreen_mode, 'Fullscreen mode:');
 		trans_setHtmlText(sai_id_page_message_header, 'Message');
@@ -2537,6 +2562,8 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_brightness, 'Brightness:');
 		trans_setSelectOptionText(sai_id_select_brightness, 'normal', 'Normal');
 		trans_setSelectOptionText(sai_id_select_brightness, 'brighter', 'Brighter');
+		trans_setSelectOptionText(sai_id_select_vortex_direction, 'clockwise', 'Clockwise');
+		trans_setSelectOptionText(sai_id_select_vortex_direction, 'counterclockwise', 'Counterclockwise');
 		trans_setHtmlText(sai_id_page_config_header, 'Configuration');
 		trans_setHtmlText(sai_id_text_label_message_text, 'Message Text:');
 		trans_setHtmlText(sai_id_button_message, 'Message...');
