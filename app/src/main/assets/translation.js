@@ -1745,7 +1745,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_split, '画面分割:');
 		trans_setHtmlText(sai_id_text_speed, 'スピード:');
 		trans_setHtmlText(speed_irregular_label, '不規則');
-		trans_setHtmlText(sai_id_text_rotation, '逆回転:');
+		trans_setHtmlText(sai_id_text_rotation, '逆再生:');
 		trans_setHtmlText(sai_id_text_blinking, '画面点滅:');
 		trans_setHtmlText(sai_id_text_fullscreen_mode, 'フルスクリーン モード:');
 		trans_setHtmlText(sai_id_page_message_header, 'メッセージ');
@@ -1840,7 +1840,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_split, '分屏：');
 		trans_setHtmlText(sai_id_text_speed, '速度：');
 		trans_setHtmlText(speed_irregular_label, '不规律的');
-		trans_setHtmlText(sai_id_text_rotation, '反向旋转：');
+		trans_setHtmlText(sai_id_text_rotation, '倒放：');
 		trans_setHtmlText(sai_id_text_blinking, '屏幕闪烁：');
 		trans_setHtmlText(sai_id_text_fullscreen_mode, '全屏模式：');
 		trans_setHtmlText(sai_id_page_message_header, '信息');
@@ -1935,7 +1935,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_split, '分屏：');
 		trans_setHtmlText(sai_id_text_speed, '速度：');
 		trans_setHtmlText(speed_irregular_label, '不規律的');
-		trans_setHtmlText(sai_id_text_rotation, '反向旋轉：');
+		trans_setHtmlText(sai_id_text_rotation, '倒放：');
 		trans_setHtmlText(sai_id_text_blinking, '螢幕閃爍：');
 		trans_setHtmlText(sai_id_text_fullscreen_mode, '全螢幕模式：');
 		trans_setHtmlText(sai_id_page_message_header, '資訊');
@@ -2030,7 +2030,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_split, '화면 분할:');
 		trans_setHtmlText(sai_id_text_speed, '속도:');
 		trans_setHtmlText(speed_irregular_label, '불규칙');
-		trans_setHtmlText(sai_id_text_rotation, '역회전:');
+		trans_setHtmlText(sai_id_text_rotation, '역 재생:');
 		trans_setHtmlText(sai_id_text_blinking, '화면 깜박임:');
 		trans_setHtmlText(sai_id_text_fullscreen_mode, '전체 화면 모드:');
 		trans_setHtmlText(sai_id_page_message_header, '메시지');
@@ -2125,7 +2125,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_split, 'Divisione dello schermo:');
 		trans_setHtmlText(sai_id_text_speed, 'Velocità:');
 		trans_setHtmlText(speed_irregular_label, 'Irregolare');
-		trans_setHtmlText(sai_id_text_rotation, 'Controrotazione:');
+		trans_setHtmlText(sai_id_text_rotation, 'Riproduzione inversa:');
 		trans_setHtmlText(sai_id_text_blinking, 'Schermo lampeggiante:');
 		trans_setHtmlText(sai_id_text_fullscreen_mode, 'Modalità schermo intero:');
 		trans_setHtmlText(sai_id_page_message_header, 'Messaggio');
@@ -2220,7 +2220,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_split, 'Bildschirmaufteilung:');
 		trans_setHtmlText(sai_id_text_speed, 'Geschwindigkeit:');
 		trans_setHtmlText(speed_irregular_label, 'Irregulär');
-		trans_setHtmlText(sai_id_text_rotation, 'Gegenrotation:');
+		trans_setHtmlText(sai_id_text_rotation, 'Rückwärtswiedergabe:');
 		trans_setHtmlText(sai_id_text_blinking, 'Bildschirm blinkt:');
 		trans_setHtmlText(sai_id_text_fullscreen_mode, 'Vollbildmodus:');
 		trans_setHtmlText(sai_id_page_message_header, 'Nachricht');
@@ -2315,7 +2315,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_split, 'Pantalla dividida:');
 		trans_setHtmlText(sai_id_text_speed, 'Velocidad:');
 		trans_setHtmlText(speed_irregular_label, 'Irregular');
-		trans_setHtmlText(sai_id_text_rotation, 'Atrás atrás:');
+		trans_setHtmlText(sai_id_text_rotation, 'Reproducción inversa:');
 		trans_setHtmlText(sai_id_text_blinking, 'Pantalla parpadeando:');
 		trans_setHtmlText(sai_id_text_fullscreen_mode, 'Modo de pantalla completa:');
 		trans_setHtmlText(sai_id_page_message_header, 'Mensaje');
@@ -2410,7 +2410,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_split, 'Разделенный экран:');
 		trans_setHtmlText(sai_id_text_speed, 'Скорость:');
 		trans_setHtmlText(speed_irregular_label, 'Нерегулярный');
-		trans_setHtmlText(sai_id_text_rotation, 'Назад реверс:');
+		trans_setHtmlText(sai_id_text_rotation, 'Обратное воспроизведение:');
 		trans_setHtmlText(sai_id_text_blinking, 'Мигание экрана:');
 		trans_setHtmlText(sai_id_text_fullscreen_mode, 'Полноэкранный режим:');
 		trans_setHtmlText(sai_id_page_message_header, 'Сообщение');
@@ -2505,7 +2505,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_split, 'Screen splitting:');
 		trans_setHtmlText(sai_id_text_speed, 'Speed:');
 		trans_setHtmlText(speed_irregular_label, 'Irregular');
-		trans_setHtmlText(sai_id_text_rotation, 'Counterrotation:');
+		trans_setHtmlText(sai_id_text_rotation, 'Reverse playback:');
 		trans_setHtmlText(sai_id_text_blinking, 'Screen flashing:');
 		trans_setHtmlText(sai_id_text_fullscreen_mode, 'Fullscreen mode:');
 		trans_setHtmlText(sai_id_page_message_header, 'Message');
