@@ -610,6 +610,11 @@ document.addEventListener('DOMContentLoaded', function(){
 		default: value = 'clockwise';
 		}
 		sai_id_select_vortex_direction.value = value;
+		// スパイラルの画像も更新。
+		if (value == 'counterclockwise')
+			sai_spiral_img.src = 'img/spiral2.svg';
+		else
+			sai_spiral_img.src = 'img/spiral.svg';
 		// ローカルストレージに記憶する。
 		localStorage.setItem('saiminVortexDirection', value);
 	};
@@ -3831,7 +3836,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_coin_img.src = 'img/coin5yen.png';
 
 		// スパイラルの画像も更新。
-		sai_spiral_img.src = "img/spiral.svg";
+		if (sai_id_select_vortex_direction.value == 'counterclockwise')
+			sai_spiral_img.src = 'img/spiral2.svg';
+		else
+			sai_spiral_img.src = 'img/spiral.svg';
 
 		// 設定をローカルストレージから読み込む。
 		SAI_load_local_storage();
