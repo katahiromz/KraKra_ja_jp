@@ -1177,17 +1177,21 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 目の描画。
 	const SAI_draw_eye = function(ctx, x0, y0, r, opened = 1.0, alpha = 1.0, right = true){
-		const r025 = r * 0.25;
-		const r05 = r025 * 2 * opened;
+		let r025 = r * 0.25;
+		let r05 = r025 * 2 * opened;
 
 		if (SAI_mod(sai_counter, 200) > 150){
 			if (right){
 				if (sai_eye_right_img.complete){
+					r *= 1.5;
+					r05 *= 1.5;
 					ctx.drawImage(sai_eye_right_img, x0 - r, y0 - r05, 2 * r, 2 * r05);
 					return;
 				}
 			}else{
 				if (sai_eye_left_img.complete){
+					r *= 1.5;
+					r05 *= 1.5;
 					ctx.drawImage(sai_eye_left_img, x0 - r, y0 - r05, 2 * r, 2 * r05);
 					return;
 				}
