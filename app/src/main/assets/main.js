@@ -1,7 +1,7 @@
 // 催眠アプリ「催眠くらくら」のJavaScriptのメインコード。
 // 暗号名はKraKra。
 
-const sai_VERSION = '3.6.9'; // KraKraバージョン番号。
+const sai_VERSION = '3.7.0'; // KraKraバージョン番号。
 const sai_DEBUGGING = false; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
 
@@ -66,6 +66,8 @@ document.addEventListener('DOMContentLoaded', function(){
 	let sai_request_anime = null; // アニメーションの要求。
 	let sai_count_down = null; // カウントダウンの時刻またはnull。
 	let sai_spiral_img = new Image();
+	let sai_eye_left_img = new Image();
+	let sai_eye_right_img = new Image();
 	let sai_user_message_list = []; // メッセージリスト。
 	let sai_releasing_sound = null; // 催眠解除の音声。
 	let sai_message_size = 2; // メッセージの寸法。
@@ -1174,9 +1176,23 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 目の描画。
-	const SAI_draw_eye = function(ctx, x0, y0, r, opened = 1.0, alpha = 1.0){
+	const SAI_draw_eye = function(ctx, x0, y0, r, opened = 1.0, alpha = 1.0, right = true){
 		const r025 = r * 0.25;
 		const r05 = r025 * 2 * opened;
+
+		if (SAI_mod(sai_counter, 200) > 150){
+			if (right){
+				if (sai_eye_right_img.complete){
+					ctx.drawImage(sai_eye_right_img, x0 - r, y0 - r05, 2 * r, 2 * r05);
+					return;
+				}
+			}else{
+				if (sai_eye_left_img.complete){
+					ctx.drawImage(sai_eye_left_img, x0 - r, y0 - r05, 2 * r, 2 * r05);
+					return;
+				}
+			}
+		}
 
 		ctx.strokeStyle = `rgba(0, 0, 0, ${alpha * 100.0}%)`;
 		ctx.lineWidth = r * 0.10;
@@ -1209,9 +1225,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.lineWidth = r * 0.10;
 		ctx.stroke();
 
-		ctx.fillStyle = `rgba(0, 0, 80, ${alpha * 100.0}%)`;
+		ctx.fillStyle = `rgba(80, 0, 0, ${alpha * 100.0}%)`;
 		SAI_draw_circle(ctx, x0, y0, r / 3 * opened, true);
-		ctx.fillStyle = `rgba(100, 0, 200, ${alpha * 100.0}%)`;
+		ctx.fillStyle = `rgba(100, 0, 50, ${alpha * 100.0}%)`;
 		SAI_draw_circle(ctx, x0, y0, r / 4 * opened, true);
 	}
 
@@ -1664,13 +1680,18 @@ document.addEventListener('DOMContentLoaded', function(){
 		for(i = 0; i < N; ++i){
 			let x = cxy * Math.cos(radian) * 0.3;
 			let y = cxy * Math.sin(radian) * 0.3;
-			SAI_draw_eye(ctx, x, y, cxy / 10, opened); // 透過しない。
-
-			// 目の中にハート型を描画する。
-			ctx.fillStyle = '#f00';
-			SAI_draw_heart(ctx, x, y - cxy * opened / 50, x, y + cxy * opened / 50);
+			SAI_draw_eye(ctx, x, y, cxy / 10, opened, 1.0, x >= 0); // 透過しない。
 
 			radian += (2 * Math.PI) / N;
+		}
+
+		// その外側に９つの目を描画する。
+		for(i = 0; i < 9; ++i){
+			let x = 2 * cxy * Math.cos(1.5 * radian) * 0.3;
+			let y = 2 * cxy * Math.sin(1.5 * radian) * 0.3;
+			SAI_draw_eye(ctx, x, y, cxy / 10, opened, 1.0, x >= 0); // 透過しない。
+
+			radian += (2 * Math.PI) / 9;
 		}
 
 		// 中央から離れるにつれ黄色を深めるグラデーション。
@@ -3840,6 +3861,10 @@ document.addEventListener('DOMContentLoaded', function(){
 			sai_spiral_img.src = 'img/spiral2.svg';
 		else
 			sai_spiral_img.src = 'img/spiral.svg';
+
+		// 両目の画像を読み込む。
+		sai_eye_left_img.src = 'img/eye-left.svg'
+		sai_eye_right_img.src = 'img/eye-right.svg'
 
 		// 設定をローカルストレージから読み込む。
 		SAI_load_local_storage();
