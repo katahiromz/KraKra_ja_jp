@@ -2075,13 +2075,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		let count2 = SAI_get_tick_count();
 
 		// 画面中央を少しずらす。
-		if(SAI_screen_is_large(ctx)){
-			qx += 40 * Math.cos(count2 * 0.08);
-			qy += 40 * Math.sin(count2 * 0.08);
-		}else{
-			qx += 20 * Math.cos(count2 * 0.08);
-			qy += 20 * Math.sin(count2 * 0.08);
-		}
+		qx += dxy * 0.1 * Math.cos(count2 * 0.08);
+		qy += dxy * 0.1 * Math.sin(count2 * 0.08);
 
 		// 画面中央を原点とする。
 		ctx.translate(qx, qy);
