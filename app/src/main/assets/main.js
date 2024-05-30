@@ -2493,11 +2493,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
 
 			// 映像の進行をつかさどる変数。
-			let counter = SAI_get_tick_count_2() * 0.4;
-
-			// 画面が大きかったら速くする。
-			if (minxy > 400)
-				counter *= 2;
+			let counter = SAI_get_tick_count_2() * 0.65;
 
 			// 半径を振動させる。
 			let r = sai_kaleido_radius * (0.7 + 0.25 * Math.sin(counter * 0.0052));
