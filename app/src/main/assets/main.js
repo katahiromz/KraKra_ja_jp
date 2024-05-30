@@ -2495,7 +2495,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			// 映像の進行をつかさどる変数。
 			let counter = SAI_get_tick_count_2() * 0.4;
 
-			if (maxxy > 600)
+			// 画面が大きかったら速くする。
+			if (minxy > 400)
 				counter *= 2;
 
 			// 半径を振動させる。
