@@ -1,7 +1,7 @@
 // 催眠アプリ「催眠くらくら」のJavaScriptのメインコード。
 // 暗号名はKraKra。
 
-const sai_VERSION = '3.7.0'; // KraKraバージョン番号。
+const sai_VERSION = '3.7.1'; // KraKraバージョン番号。
 const sai_DEBUGGING = false; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
 
@@ -1006,6 +1006,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		console.log('SAI_screen_fit_canvas');
 		sai_screen_width = sai_id_canvas_01.width = sai_id_canvas_02.width = window.innerWidth;
 		sai_screen_height = sai_id_canvas_01.height = sai_id_canvas_02.height = window.innerHeight;
+		// 万華鏡の半径。
+		sai_kaleido_radius = (sai_screen_width + sai_screen_height) * 0.1;
 	}
 
 	// スクリーンのサイズをセットし、必要なら画面を復帰する。
@@ -2368,20 +2370,17 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 万華鏡のソースの多角形を作成する。
-	const SAI_create_kaleido_polygon = function(radius){
+	const SAI_create_kaleido_polygon = function(counter, x, y, radius){
 		const ROTATE2 = true;
-		let counter = SAI_get_tick_count_2() * 2;
-		return Kaleido_regular_polygon(3, {x:0, y:0}, radius, ROTATE2 ? counter * 0.0005 : -Math.PI / 2);
+		return Kaleido_regular_polygon(3, {x:x, y:y}, radius, counter * 0.003);
 	}
 
 	// 円を描画する。
-	const SAI_draw_circle_3 = function(ctx, radius, center, velocity, fillStyle){
-		let counter = SAI_get_tick_count_2();
-		let px = sai_kaleido_radius * Math.cos(counter * velocity.x * 0.0003) * 0.3;
-		let py = sai_kaleido_radius * Math.sin(counter * velocity.y * 0.0003) * 0.3;
-		let radius2 = radius * (3 + Math.sin(counter * 0.001 + (velocity.x + velocity.y) % Math.PI));
-		radius2 *= sai_kaleido_radius / 1000;
-		radius2 += 20;
+	const SAI_draw_circle_3 = function(ctx, counter, radius, center, velocity, fillStyle){
+		velocity *= 0.1;
+		let px = radius * Math.cos(counter * velocity) * 0.7;
+		let py = radius * Math.sin(counter * velocity) * 0.7;
+		let radius2 = radius * 0.75;
 		if(false){
 			SAI_draw_circle_2(ctx, px, py, radius2);
 		}else{
@@ -2397,27 +2396,37 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.save();
 
 		// 映像の進行をつかさどる変数。
-		let counter = SAI_get_tick_count_2();
+		let counter = SAI_get_tick_count_2() * 0.02;
 
 		// 背景を塗りつぶす。
-		ctx.fillStyle = `hsl(${(counter * 0.1 + 0.2) % 360}deg, 40%, 50%)`;
+		ctx.fillStyle = `hsl(${(counter * 10) % 360}deg, 80%, 50%)`;
 		ctx.fillRect(px, py, dx, dy);
 
 		// 中心を原点とする。
 		let cx = px + dx / 2, cy = py + dy / 2;
 		ctx.translate(cx, cy);
 
+		// 画面の寸法を使って計算する。
+		let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
+		let avgxy = (maxxy + minxy) / 2;
+
+		// 半径を振動させる。
+		let r = sai_kaleido_radius * (0.8 + 0.4 * Math.sin(counter * 0.01));
+
+		// 回転する。
+		ctx.rotate(counter * 0.1);
+
 		// 格子状の模様を描画する。
 		const GRIDS = true;
 		if(GRIDS){
-			ctx.lineWidth = 3;
-			ctx.strokeStyle = SAI_color_get_1st();
+			ctx.lineWidth = avgxy * 0.02;
+			ctx.strokeStyle = "rgba(255, 0, 0, 75%)";
 			let factor = Math.abs(Math.sin(counter * 0.003) + 3);
 			const ROTATE1 = true;
 			if(ROTATE1){
 				ctx.rotate((counter * 0.0002 % 1) * 2 * Math.PI);
 			}
-			const dxy = Math.min(dx, dy) * 0.2;
+			const dxy = avgxy * 0.2;
 			ctx.fillStyle = "pink";
 			for(let y = factor; y < dxy; y += 10 * factor){
 				SAI_draw_line_2(ctx, -dx / 2, y, +dx / 2, y, 5);
@@ -2430,7 +2439,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		// ポリゴンを構築する。
-		let polygon = SAI_create_kaleido_polygon(sai_kaleido_radius);
+		let polygon = SAI_create_kaleido_polygon(counter, 0, 0, r);
 		if(true){
 			// ポリゴンを描画する。
 			Kaleido_draw_polygon(ctx, polygon);
@@ -2440,15 +2449,20 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 泡を描画する。
 		const BUBBLES = true;
 		if(BUBBLES){
-			const s = Math.min(ctx.canvas.width, ctx.canvas.height);
-			const color1 = `hsla(${(counter * 0.15 + 2) % 360}deg, 100%, 50%, 60%)`;
-			const color2 = `hsla(${(counter * 0.2 + 0.5) % 360}deg, 100%, 50%, 40%)`;
-			const color3 = `hsla(${(counter * 0.1333 + 1) % 360}deg, 100%, 50%, 60%)`;
-			const color4 = `hsla(${(counter * 0.3 + 2.3) % 360}deg, 100%, 50%, 40%)`;
-			SAI_draw_circle_3(ctx, s * 2 / 24, { x: s * 0.125 * 1, y: s * 0.125 * 5 }, { x: 0.01 * s, y: 0.02 * s }, color1);
-			SAI_draw_circle_3(ctx, s * 3 / 24, { x: s * 0.125 * 4, y: s * 0.125 * 2 }, { x: 0.02 * s, y: 0.01 * s }, color2);
-			SAI_draw_circle_3(ctx, s * 1 / 24, { x: s * 0.125 * 5, y: s * 0.125 * 5 }, { x: -0.02 * s, y: 0.02 * s }, color3);
-			SAI_draw_circle_3(ctx, s * 1.5 / 20, { x: s * 0.125 * 3, y: s * 0.125 * 7 }, { x: -0.015 * s, y: 0.03 * s }, color4);
+			const s = r;
+			const color1 = `hsla(${(counter * 15 + 2) % 360}deg, 100%, 50%, 60%)`;
+			const color2 = `hsla(${(counter * 12 + 0.5) % 360}deg, 100%, 50%, 40%)`;
+			const color3 = `hsla(${(counter * 11 + 1) % 360}deg, 100%, 50%, 60%)`;
+			const color4 = `hsla(${(counter * 33 + 2.3) % 360}deg, 100%, 50%, 40%)`;
+			const color5 = `hsla(${(counter * 14) % 360}deg, 0%, 100%, 30%)`;
+			const color6 = `hsla(360deg, 100%, 0%, 60%)`;
+			SAI_draw_circle_3(ctx, counter, s * 0.2, { x: s * 0.125 * 1, y: s * 0.125 * 5 }, 4, color1);
+			SAI_draw_circle_3(ctx, counter, s * 0.3, { x: s * 0.125 * 4, y: s * 0.125 * 2 }, 3, color2);
+			SAI_draw_circle_3(ctx, -counter, s * 0.1, { x: s * 0.125 * 5, y: s * 0.125 * 5 }, 5, color3);
+			SAI_draw_circle_3(ctx, counter, s * 0.2, { x: s * 0.125 * 3, y: s * 0.125 * 7 }, 7, color4);
+			SAI_draw_circle_3(ctx, -counter, s * 0.4, { x: s * 0.125 * 1, y: s * 0.125 * 2 }, 2, color3);
+			SAI_draw_circle_3(ctx, counter, s * 0.1, { x: s * 0.120 * 2, y: s * 0.1 * 1 }, 1, color5);
+			SAI_draw_circle_3(ctx, -counter, s * 0.3, { x: s * 0.120 * 2, y: s * 0.1 * 1 }, 5, color6);
 		}
 
 		ctx.restore();
@@ -2463,7 +2477,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			// 万華鏡のソースを描画する。
 			draw_kaleido_source(ctx, px, py, dx, dy);
 		}else{
-			// 1番目の色で長方形領域を塗りつぶす。
+			// 黒色で長方形領域を塗りつぶす。
 			ctx.fillStyle = 'black';
 			ctx.fillRect(px, py, dx, dy);
 
@@ -2475,8 +2489,20 @@ document.addEventListener('DOMContentLoaded', function(){
 			// 中点を原点とする。
 			ctx1.translate(dx / 2, dy / 2);
 
+			// 画面の寸法を使って計算する。
+			let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
+
+			// 映像の進行をつかさどる変数。
+			let counter = SAI_get_tick_count_2() * 0.4;
+
+			if (maxxy > 600)
+				counter *= 2;
+
+			// 半径を振動させる。
+			let r = sai_kaleido_radius * (0.7 + 0.25 * Math.sin(counter * 0.0052));
+
 			// 万華鏡のキャンバスを作成し、万華鏡を描画する。
-			let polygon = SAI_create_kaleido_polygon(sai_kaleido_radius);
+			let polygon = SAI_create_kaleido_polygon(counter, 0, 0, r);
 			sai_kaleido_canvas_2 =
 				Kaleido_create_drawn_canvas(sai_kaleido_canvas_2,
 					sai_kaleido_radius, dx, dy, ctx1, polygon);
@@ -3192,7 +3218,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		console.log(`innerWidth:${window.innerWidth}, innerHeight:${window.innerHeight}`);
 		sai_screen_width = window.innerWidth;
 		sai_screen_height = window.innerHeight;
-		sai_kaleido_radius = Math.min(window.innerWidth, window.innerHeight) * 0.2;
+		// 万華鏡の半径。
+		sai_kaleido_radius = (sai_screen_width + sai_screen_height) * 0.1;
 	}
 
 	// イベントリスナー群を登録する。
