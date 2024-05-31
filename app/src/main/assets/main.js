@@ -1576,12 +1576,12 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 映像「画1: 対数らせん」の描画。
 	// pic1: Logarithmic Spiral
 	const SAI_draw_pic_01 = function(ctx, px, py, dx, dy){
-		let ctx2 = sai_id_canvas_01.getContext('2d', { alpha: false });
+		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
 		ctx2.save();
 		SAI_draw_pic_1_sub(ctx2, 0, 0, dx, dy);
 		ctx2.restore();
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-		ctx.drawImage(sai_id_canvas_01, 0, 0, dx, dy, px, py, dx, dy);
+		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 
 		// 矢印を描画する。
