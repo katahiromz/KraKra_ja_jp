@@ -3734,7 +3734,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// キャンバスのクリック。
 		sai_id_canvas_01.addEventListener('click', function(e){
-			if(!sai_not_click && sai_touch_time && ((new Date()).getTime() - sai_touch_time) < 500)
+			if(!sai_not_click && sai_touch_time && ((new Date()).getTime() - sai_touch_time) < 300)
 				SAI_canvas_click(e);
 			sai_not_click = false;
 			sai_touch_position = null;
