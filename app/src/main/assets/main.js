@@ -3734,7 +3734,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// キャンバスのクリック。
 		sai_id_canvas_01.addEventListener('click', function(e){
-			if(!sai_not_click && sai_touch_time && ((new Date()).getTime() - sai_touch_time) < 300)
+			if(!sai_not_click && sai_touch_time && ((new Date()).getTime() - sai_touch_time) < 500)
 				SAI_canvas_click(e);
 			sai_not_click = false;
 			sai_touch_position = null;
@@ -3767,6 +3767,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_id_canvas_01.addEventListener('touchstart', function(e){
 			sai_touchmoving = true;
 			sai_touch_time = new Date().getTime();
+			let touches = e.touches;
+			if(touches && touches.length == 1){
+				sai_touch_position = [touches[0].clientX, touches[0].clientY];
+			}
 		}, {passive: true});
 		sai_id_canvas_01.addEventListener('touchmove', function(e){
 			if(sai_touchmoving){
