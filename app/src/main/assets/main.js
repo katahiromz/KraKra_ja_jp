@@ -3207,7 +3207,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		if(saiminMotionBlur){
 			SAI_set_motion_blur(saiminMotionBlur);
 		}else{
-			SAI_set_motion_blur(6);
+			SAI_set_motion_blur(5);
 		}
 
 		// ローカルストレージに映像切り替えの種類があれば読み込む。
