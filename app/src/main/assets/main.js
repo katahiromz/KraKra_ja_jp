@@ -3175,6 +3175,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		let saiminShowArrows = localStorage.getItem('saiminShowArrows');
 		if(saiminShowArrows){
 			SAI_set_arrows(saiminShowArrows);
+		} else {
+			SAI_set_arrows(true);
 		}
 
 		// ローカルストレージに音声の名前があれば読み込む。
