@@ -1188,15 +1188,17 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 矢印の描画。
 	const SAI_draw_arrow = function(ctx, x0, y0, x1, y1, lineWidth){
-		SAI_draw_line_2(ctx, x0, y0, x1, y1, lineWidth);
+		ctx.strokeStyle = ctx.fillStyle;
+		ctx.lineCap = 'round';
+		SAI_draw_line(ctx, x0, y0, x1, y1, lineWidth);
 		let comp0 = new Complex({re:x1 - x0, im:y1 - y0});
 		let abs = comp0.abs();
 		comp0 = comp0.div(abs);
 		let comp1 = new Complex({abs:1, arg:Math.PI * 30 / 180});
 		let comp2 = comp0.div(comp1).mul(abs / 3);
 		let comp3 = comp0.mul(comp1).mul(abs / 3);
-		SAI_draw_line_2(ctx, x1, y1, x1 - comp2.re, y1 - comp2.im, lineWidth);
-		SAI_draw_line_2(ctx, x1, y1, x1 - comp3.re, y1 - comp3.im, lineWidth);
+		SAI_draw_line(ctx, x1, y1, x1 - comp2.re, y1 - comp2.im, lineWidth);
+		SAI_draw_line(ctx, x1, y1, x1 - comp3.re, y1 - comp3.im, lineWidth);
 	}
 
 	// ハート形の描画。
