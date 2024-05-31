@@ -2119,12 +2119,12 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// ヒモのついた五円玉を回転させて描画する。
 		if(sai_coin_img.complete){
-			ctx.translate(qx - sai_coin_img.width * 0.5, qy - sai_coin_img.height * 0.75);
+			ctx.translate(qx - sai_coin_img.width * 0.5, qy - sai_coin_img.height * 0.7);
 
 			let angle = Math.PI * Math.sin(count2 * 0.1 - 0.05) * 0.078;
 			ctx.rotate(angle);
 
-			let ratio = SAI_screen_is_large(ctx) ? 1.4 : 1;
+			let ratio = 1;
 			ctx.drawImage(sai_coin_img, 0, 0, sai_coin_img.width * ratio, sai_coin_img.height * ratio);
 		}
 
@@ -2142,17 +2142,21 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 
-		// 矢印を描画する。
+		// フォーカス矢印を描画する。
 		if(sai_id_checkbox_arrows.checked){
 			let count2 = SAI_get_tick_count();
 			let angle = Math.PI * Math.sin(count2 * 0.1 - 0.05) * 0.078;
 			let qx = px + dx / 2, qy = py + dy / 2;
-			let tx = -dx * 0.4 * Math.sin(angle);
-			let ty = dy * 0.4;
+			qx -= sai_coin_img.width * 0.1;
+			qy -= sai_coin_img.height * 0.08;
+			let ratio = 1;
+			let width = -sai_coin_img.width * ratio * Math.sin(angle) * 3.5;
+			let tx = 0;
+			let ty = 0;
 			ctx.fillStyle = 'yellow';
-			SAI_draw_arrow(ctx, qx + tx, qy + ty, qx + tx, qy + ty * 0.6, 14);
+			SAI_draw_arrow(ctx, qx + width, qy, qx + width, qy + sai_coin_img.height * 0.08, 14);
 			ctx.fillStyle = 'black';
-			SAI_draw_arrow(ctx, qx + tx, qy + ty, qx + tx, qy + ty * 0.6, 5);
+			SAI_draw_arrow(ctx, qx + width, qy, qx + width, qy + sai_coin_img.height * 0.08, 5);
 		}
 	}
 
