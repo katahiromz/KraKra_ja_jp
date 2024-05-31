@@ -1849,7 +1849,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			// アルキメデスのらせんの公式に従って描画する。ただし偏角はdelta_thetaだけずらす。
 			let line = [];
 			line.push([qx, qy]);
-			for(let theta = 0; theta <= 2 * Math.PI * 10; theta += 0.1){
+			for(let theta = 0; theta <= 2 * Math.PI * 6; theta += 0.1){
 				let r = a * theta;
 				let t = theta + delta_theta;
 				if (sai_id_select_vortex_direction.value == 'counterclockwise')
@@ -1896,10 +1896,11 @@ document.addEventListener('DOMContentLoaded', function(){
 	const SAI_draw_pic_04 = function(ctx, px, py, dx, dy){
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
 		ctx2.save();
-		SAI_draw_pic_04_sub(ctx2, 0, 0, dx, dy);
+		let shrink = 0.75;
+		SAI_draw_pic_04_sub(ctx2, 0, 0, dx * shrink, dy * shrink);
 		ctx2.restore();
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
+		ctx.drawImage(sai_id_canvas_02, 0, 0, dx * shrink, dy * shrink, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 
 		// 矢印を描画する。
