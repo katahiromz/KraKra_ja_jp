@@ -1435,10 +1435,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		let cnt = SAI_get_tick_count() * 0.02;
 		let rx = dxy * 0.05 * Math.cos(cnt) * (2.0 + Math.sin(cnt * 4.0));
 		let ry = dxy * 0.05 * Math.sin(cnt) * (2.0 + Math.sin(cnt * 4.0));
-		let rx0 = rx * 3;
-		let ry0 = ry * 3;
-		let rx1 = rx * 2;
-		let ry1 = ry * 2;
+		let rx0 = rx * 2.6;
+		let ry0 = ry * 2.6;
+		let rx1 = rx * 1.5;
+		let ry1 = ry * 1.5;
 		ctx.fillStyle = 'yellow';
 		SAI_draw_arrow(ctx, qx + rx0, qy + ry0, qx + rx1, qy + ry1, 14);
 		SAI_draw_arrow(ctx, qx - rx0, qy - ry0, qx - rx1, qy - ry1, 14);
@@ -3203,6 +3203,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_message_set_voice_volume(100);
 		}
 
+		// ローカルストレージにモーションブラーの設定があれば読み込む。
 		let saiminMotionBlur = localStorage.getItem('saiminMotionBlur');
 		if(saiminMotionBlur){
 			SAI_set_motion_blur(saiminMotionBlur);
