@@ -1578,8 +1578,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	const SAI_draw_pic_01 = function(ctx, px, py, dx, dy){
 		let ctx2 = sai_id_canvas_01.getContext('2d', { alpha: false });
 		ctx2.save();
-		SAI_draw_pic_1_sub(ctx2, 0, 0, dx, dy, true);
-		SAI_draw_pic_1_sub(ctx2, 0, 0, dx, dy, false);
+		SAI_draw_pic_1_sub(ctx2, 0, 0, dx, dy);
 		ctx2.restore();
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_01, 0, 0, dx, dy, px, py, dx, dy);
