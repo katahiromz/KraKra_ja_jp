@@ -829,6 +829,32 @@ document.addEventListener('DOMContentLoaded', function(){
 		localStorage.setItem('saiminCountDown', value.toString());
 	}
 
+	// 矢印の表示設定をセットする。
+	const SAI_set_arrows = function(value){
+		// ローカルストレージから来た値は文字列かもしれない。複数の型に対応。
+		switch(value){
+		case "true":
+		case true:
+		case "1":
+			value = 1;
+			break;
+		case "false":
+		case false:
+		case "0":
+			value = 0;
+			break;
+		}
+
+		// UIを更新。
+		if(value)
+			sai_id_checkbox_arrows.checked = true;
+		else
+			sai_id_checkbox_arrows.checked = false;
+
+		// ローカルストレージに記憶。
+		localStorage.setItem('saiminShowArrows', value.toString());
+	}
+
 	// 映像の進行を支配する関数。
 	const SAI_get_tick_count = function(){
 		return sai_counter;
@@ -1160,6 +1186,19 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_circle_2(ctx, x0, y0, lineWidth / 2, true, 15);
 	}
 
+	// 矢印の描画。
+	const SAI_draw_arrow = function(ctx, x0, y0, x1, y1, lineWidth){
+		SAI_draw_line_2(ctx, x0, y0, x1, y1, lineWidth);
+		let comp0 = new Complex({re:x1 - x0, im:y1 - y0});
+		let abs = comp0.abs();
+		comp0 = comp0.div(abs);
+		let comp1 = new Complex({abs:1, arg:Math.PI * 30 / 180});
+		let comp2 = comp0.div(comp1).mul(abs / 3);
+		let comp3 = comp0.mul(comp1).mul(abs / 3);
+		SAI_draw_line_2(ctx, x1, y1, x1 - comp2.re, y1 - comp2.im, lineWidth);
+		SAI_draw_line_2(ctx, x1, y1, x1 - comp3.re, y1 - comp3.im, lineWidth);
+	}
+
 	// ハート形の描画。
 	const SAI_draw_heart = function(ctx, x0, y0, x1, y1){
 		let x2 = (0.6 * x0 + 0.4 * x1);
@@ -1386,6 +1425,26 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 	}
 
+	// 矢印（複数）を描画する。
+	const SAI_draw_arrows = function(ctx, qx, qy, dx, dy){
+		if(!sai_id_checkbox_arrows.checked)
+			return;
+		let dxy = (dx + dy) / 2;
+		let cnt = SAI_get_tick_count() * 0.02;
+		let rx = dxy * 0.05 * Math.cos(cnt) * (2.0 + Math.sin(cnt * 4.0));
+		let ry = dxy * 0.05 * Math.sin(cnt) * (2.0 + Math.sin(cnt * 4.0));
+		let rx0 = rx * 3;
+		let ry0 = ry * 3;
+		let rx1 = rx * 2;
+		let ry1 = ry * 2;
+		ctx.fillStyle = 'yellow';
+		SAI_draw_arrow(ctx, qx + rx0, qy + ry0, qx + rx1, qy + ry1, 14);
+		SAI_draw_arrow(ctx, qx - rx0, qy - ry0, qx - rx1, qy - ry1, 14);
+		ctx.fillStyle = 'black';
+		SAI_draw_arrow(ctx, qx + rx0, qy + ry0, qx + rx1, qy + ry1, 5);
+		SAI_draw_arrow(ctx, qx - rx0, qy - ry0, qx - rx1, qy - ry1, 5);
+	};
+
 	// 映像「画0: ダミー画面（練習用）」の描画。
 	// pic0: Dummy Screen (for practice)
 	const SAI_draw_pic_00 = function(ctx, px, py, dx, dy){
@@ -1434,12 +1493,15 @@ document.addEventListener('DOMContentLoaded', function(){
 			ctx.drawImage(sai_tap_here_img, x, y);
 		}
 
+		// 矢印を描画する。
+		SAI_draw_arrows(ctx, qx, qy, dx, dy);
+
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
 	// 映像「画1: 対数らせん」の描画。
 	// pic1: Logarithmic Spiral
-	const SAI_draw_pic_01 = function(ctx, px, py, dx, dy){
+	const SAI_draw_pic_1_sub = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
@@ -1500,15 +1562,38 @@ document.addEventListener('DOMContentLoaded', function(){
 			even = !even;
 		}
 		ctx.closePath();
-		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.fillStyle = SAI_color_get_1st(); // 1番目の色で塗りつぶす。
 		ctx.fill('evenodd');
 		ctx.rect(px, py, dx, dy);
 		ctx.fillStyle = SAI_color_get_2nd(); // 2番目の色で塗りつぶす。
 		ctx.fill('evenodd');
-		ctx.globalAlpha = 1; // 元に戻す。
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
+	}
+
+	// 映像「画1: 対数らせん」の描画。
+	// pic1: Logarithmic Spiral
+	const SAI_draw_pic_01 = function(ctx, px, py, dx, dy){
+		let ctx2 = sai_id_canvas_01.getContext('2d', { alpha: false });
+		ctx2.save();
+		SAI_draw_pic_1_sub(ctx2, 0, 0, dx, dy, true);
+		SAI_draw_pic_1_sub(ctx2, 0, 0, dx, dy, false);
+		ctx2.restore();
+		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
+		ctx.drawImage(sai_id_canvas_01, 0, 0, dx, dy, px, py, dx, dy);
+		ctx.globalAlpha = 1; // 元に戻す。
+
+		// 矢印を描画する。
+		let qx = px + dx / 2;
+		let qy = py + dy / 2;
+		let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
+		let mxy = (maxxy + minxy) * 0.04;
+		// 映像の進行を表す変数。
+		let count2 = -SAI_get_tick_count();
+		// 視覚的な酩酊感をもたらすために回転運動の中心点をすりこぎ運動させる。
+		qx += mxy * Math.cos(count2 * 0.07);
+		qy += mxy * Math.sin(count2 * 0.15);
+		SAI_draw_arrows(ctx, qx, qy, dx, dy);
 	}
 
 	// 映像「画2: 同心円状」の描画。
@@ -1580,6 +1665,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
+
+		// 矢印を描画する。
+		let qx = px + dx / 2, qy = py + dy / 2;
+		SAI_draw_arrows(ctx, qx, qy, dx, dy);
 	}
 
 	// 映像「画3: 目が回る」の描画。
@@ -1720,11 +1809,15 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
+
+		// 矢印を描画する。
+		let qx = px + dx / 2, qy = py + dy / 2;
+		SAI_draw_arrows(ctx, qx, qy, dx, dy);
 	}
 
 	// 映像「画4: アルキメデスのらせん」の描画。
 	// pic4: Archimedes' Spiral
-	const SAI_draw_pic_04 = function(ctx, px, py, dx, dy){
+	const SAI_draw_pic_04_sub = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
@@ -1788,15 +1881,34 @@ document.addEventListener('DOMContentLoaded', function(){
 			even = !even;
 		}
 		ctx.closePath();
-		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.fillStyle = SAI_color_get_1st(); // 1番目の色で描画する。
 		ctx.fill('evenodd');
 		ctx.fillStyle = SAI_color_get_2nd(); // 2番目の色で塗りつぶす。
 		ctx.rect(0, 0, dx, dy);
 		ctx.fill('evenodd');
-		ctx.globalAlpha = 1; // 元に戻す。
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
+	}
+
+	// 映像「画4: アルキメデスのらせん」の描画。
+	// pic4: Archimedes' Spiral
+	const SAI_draw_pic_04 = function(ctx, px, py, dx, dy){
+		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		ctx2.save();
+		SAI_draw_pic_04_sub(ctx2, 0, 0, dx, dy);
+		ctx2.restore();
+		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
+		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
+		ctx.globalAlpha = 1; // 元に戻す。
+
+		// 矢印を描画する。
+		let count2 = SAI_get_tick_count();
+		let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
+		let mxy = (maxxy + minxy) * 0.04;
+		let qx = px + dx / 2, qy = py + dy / 2;
+		qx += mxy * Math.cos(count2 * 0.08);
+		qy += mxy * Math.sin(count2 * 0.05);
+		SAI_draw_arrows(ctx, qx, qy, dx, dy);
 	}
 
 	// 映像「画5: 広がるハート」の描画。
@@ -1907,6 +2019,19 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
+
+		// 矢印を描画する。
+		let count2 = SAI_get_tick_count();
+		let qx = px + dx / 2, qy = py + dy / 2;
+		let factor = count2 * 0.16;
+		if(SAI_screen_is_large(ctx)){
+			qx += 60 * Math.cos(factor * 0.8);
+			qy += 60 * Math.sin(factor * 0.8);
+		}else{
+			qx += 30 * Math.cos(factor * 0.8);
+			qy += 30 * Math.sin(factor * 0.8);
+		}
+		SAI_draw_arrows(ctx, qx, qy, dx, dy);
 	}
 
 	// 映像「画6: 五円玉」の描画。
@@ -2014,11 +2139,24 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
+
+		// 矢印を描画する。
+		if(sai_id_checkbox_arrows.checked){
+			let count2 = SAI_get_tick_count();
+			let angle = Math.PI * Math.sin(count2 * 0.1 - 0.05) * 0.078;
+			let qx = px + dx / 2, qy = py + dy / 2;
+			let tx = -dx * 0.4 * Math.sin(angle);
+			let ty = dy * 0.4;
+			ctx.fillStyle = 'yellow';
+			SAI_draw_arrow(ctx, qx + tx, qy + ty, qx + tx, qy + ty * 0.6, 14);
+			ctx.fillStyle = 'black';
+			SAI_draw_arrow(ctx, qx + tx, qy + ty, qx + tx, qy + ty * 0.6, 5);
+		}
 	}
 
 	// 映像「画7: 奇妙な渦巻き」の描画。
 	// pic7: Strange Swirl
-	const SAI_draw_pic_07 = function(ctx, px, py, dx, dy){
+	const SAI_draw_pic_07_sub = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
@@ -2074,15 +2212,29 @@ document.addEventListener('DOMContentLoaded', function(){
 			even = !even;
 		}
 		ctx.closePath();
-		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.fillStyle = SAI_color_get_2nd(); // 2番目の色で塗りつぶす。
 		ctx.fill('evenodd');
 		ctx.rect(0, 0, dx, dy);
 		ctx.fillStyle = SAI_color_get_1st(); // 1番目の色で塗りつぶす。
 		ctx.fill('evenodd');
-		ctx.globalAlpha = 1; // 元に戻す。
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
+	}
+
+	// 映像「画7: 奇妙な渦巻き」の描画。
+	// pic7: Strange Swirl
+	const SAI_draw_pic_07 = function(ctx, px, py, dx, dy){
+		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		ctx2.save();
+		SAI_draw_pic_07_sub(ctx2, 0, 0, dx, dy);
+		ctx2.restore();
+		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
+		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
+		ctx.globalAlpha = 1; // 元に戻す。
+
+		// 矢印を描画する。
+		let qx = px + dx / 2, qy = py + dy / 2;
+		SAI_draw_arrows(ctx, qx, qy, dx, dy);
 	}
 
 	// 映像「画8: クレージーな色」の描画。
@@ -2168,6 +2320,14 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, 0, 0, dx / 2, dy / 2, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
+
+		// 矢印を描画する。
+		let qx = px + dx / 2, qy = py + dy / 2;
+		let count2 = SAI_get_tick_count();
+		let dxy = (dx + dy) / 2;
+		qx += dxy * 0.1 * Math.cos(count2 * 0.08);
+		qy += dxy * 0.1 * Math.sin(count2 * 0.08);
+		SAI_draw_arrows(ctx, qx, qy, dx, dy);
 	}
 
 	// 映像「画9: 対数らせん 2」の描画。
@@ -2249,11 +2409,20 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
+
+		// 矢印を描画する。
+		let count2 = SAI_get_tick_count();
+		let qx = px + dx / 2, qy = py + dy / 2;
+		let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
+		let mxy = (maxxy + minxy) * 0.015;
+		qx += mxy * Math.cos(count2 * 0.1);
+		qy += mxy * Math.sin(count2 * 0.2);
+		SAI_draw_arrows(ctx, qx, qy, dx, dy);
 	}
 
 	// 映像「画10: アナログディスク」の描画。
 	// pic10: Analog Disc
-	const SAI_draw_pic_10 = function(ctx, px, py, dx, dy){
+	const SAI_draw_pic_10_sub = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
@@ -2283,14 +2452,30 @@ document.addEventListener('DOMContentLoaded', function(){
 			let ratio = 2.5 * maxxy / (sai_spiral_img.width + sai_spiral_img.height);
 			ctx.scale(ratio, ratio);
 
-			ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-
 			ctx.drawImage(sai_spiral_img, x, y); // 渦巻きイメージを描画する。
-
-			ctx.globalAlpha = 1.0; // 透過効果を元に戻す。
 		}
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
+	}
+
+	// 映像「画10: アナログディスク」の描画。
+	// pic10: Analog Disc
+	const SAI_draw_pic_10 = function(ctx, px, py, dx, dy){
+		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		ctx2.save();
+		SAI_draw_pic_10_sub(ctx2, 0, 0, dx, dy);
+		ctx2.restore();
+		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
+		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
+		ctx.globalAlpha = 1; // 元に戻す。
+
+		// 矢印を描画する。
+		let qx = px + dx / 2, qy = py + dy / 2;
+		let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
+		let count2 = SAI_get_tick_count();
+		let updown = minxy * Math.sin(count2 * 0.2) * 0.16;
+		qy += updown;
+		SAI_draw_arrows(ctx, qx, qy, dx, dy);
 	}
 
 	function SAI_flower_graph(x, radius){
@@ -2299,7 +2484,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像「画11: 奇妙な渦巻き 2」の描画。
 	// pic11: Strange Swirl 2
-	const SAI_draw_pic_11 = function(ctx, px, py, dx, dy){
+	const SAI_draw_pic_11_sub = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
@@ -2358,15 +2543,29 @@ document.addEventListener('DOMContentLoaded', function(){
 			even = !even;
 		}
 		ctx.closePath();
-		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.fillStyle = SAI_color_get_2nd(); // 2番目の色で塗りつぶす。
 		ctx.fill('evenodd');
 		ctx.rect(0, 0, dx, dy);
 		ctx.fillStyle = SAI_color_get_1st(); // 1番目の色で塗りつぶす。
 		ctx.fill('evenodd');
-		ctx.globalAlpha = 1; // 元に戻す。
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
+	}
+
+	// 映像「画11: 奇妙な渦巻き 2」の描画。
+	// pic11: Strange Swirl 2
+	const SAI_draw_pic_11 = function(ctx, px, py, dx, dy){
+		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		ctx2.save();
+		SAI_draw_pic_11_sub(ctx2, 0, 0, dx, dy);
+		ctx2.restore();
+		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
+		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
+		ctx.globalAlpha = 1; // 元に戻す。
+
+		// 矢印を描画する。
+		let qx = px + dx / 2, qy = py + dy / 2;
+		SAI_draw_arrows(ctx, qx, qy, dx, dy);
 	}
 
 	// 万華鏡のソースの多角形を作成する。
@@ -2522,6 +2721,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
+
+		// 矢印を描画する。
+		let qx = px + dx / 2, qy = py + dy / 2;
+		SAI_draw_arrows(ctx, qx, qy, dx, dy);
 	}
 
 	// 映像「画13: 1番目の色の画面」の描画。
@@ -2960,6 +3163,12 @@ document.addEventListener('DOMContentLoaded', function(){
 		let saiminCountDown = localStorage.getItem('saiminCountDown');
 		if(saiminCountDown){
 			SAI_set_count_down(saiminCountDown);
+		}
+
+		// ローカルストレージに矢印表示の設定があれば読み込む。
+		let saiminShowArrows = localStorage.getItem('saiminShowArrows');
+		if(saiminShowArrows){
+			SAI_set_arrows(saiminShowArrows);
 		}
 
 		// ローカルストレージに音声の名前があれば読み込む。
@@ -3450,6 +3659,14 @@ document.addEventListener('DOMContentLoaded', function(){
 		}, false);
 		sai_id_checkbox_count_down.addEventListener('click', function(e){
 			SAI_set_count_down(sai_id_checkbox_count_down.checked);
+		}, false);
+
+		// 矢印表示のチェックボックス。
+		sai_id_checkbox_arrows.addEventListener('change', function(e){
+			SAI_set_arrows(sai_id_checkbox_arrows.checked);
+		}, false);
+		sai_id_checkbox_arrows.addEventListener('click', function(e){
+			SAI_set_arrows(sai_id_checkbox_arrows.checked);
 		}, false);
 
 		// 映像スピードの選択。

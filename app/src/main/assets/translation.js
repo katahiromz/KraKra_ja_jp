@@ -1786,6 +1786,7 @@ const trans_localize = function(lang){
 		sai_id_button_start_hypnosis.innerHTML = '<nobr>催眠</nobr><nobr>スタート</nobr>';
 		trans_setHtmlText(sai_id_button_release_hypnosis, '催眠解除');
 		trans_setHtmlText(sai_id_text_count_down, 'カウントダウン:');
+		trans_setHtmlText(sai_id_text_arrows, '矢印:');
 		trans_setHtmlText(sai_id_text_label_message_speech, 'メッセージをしゃべる:');
 		trans_setHtmlText(sai_id_text_message_speech, 'メッセージをしゃべる');
 		trans_setHtmlText(sai_id_text_color_1st, "1番目の色:");
@@ -1884,6 +1885,7 @@ const trans_localize = function(lang){
 		sai_id_button_start_hypnosis.innerHTML = '<nobr>开始</nobr><nobr>催眠</nobr>';
 		trans_setHtmlText(sai_id_button_release_hypnosis, '释放催眠');
 		trans_setHtmlText(sai_id_text_count_down, '倒数：');
+		trans_setHtmlText(sai_id_text_arrows, '箭：');
 		trans_setHtmlText(sai_id_text_label_message_speech, '留言演讲：');
 		trans_setHtmlText(sai_id_text_message_speech, '留言演讲');
 		trans_setHtmlText(sai_id_text_color_1st, "第一种颜色：");
@@ -1982,6 +1984,7 @@ const trans_localize = function(lang){
 		sai_id_button_start_hypnosis.innerHTML = '<nobr>開始</nobr><nobr>催眠</nobr>';
 		trans_setHtmlText(sai_id_button_release_hypnosis, '釋放催眠');
 		trans_setHtmlText(sai_id_text_count_down, '倒數：');
+		trans_setHtmlText(sai_id_text_arrows, '箭頭：');
 		trans_setHtmlText(sai_id_text_label_message_speech, '留言演講：');
 		trans_setHtmlText(sai_id_text_message_speech, '留言演講');
 		trans_setHtmlText(sai_id_text_color_1st, "第一種顏色：");
@@ -2080,6 +2083,7 @@ const trans_localize = function(lang){
 		sai_id_button_start_hypnosis.innerHTML = '<nobr>최면</nobr> <nobr>시작</nobr>';
 		trans_setHtmlText(sai_id_button_release_hypnosis, '최면 해제');
 		trans_setHtmlText(sai_id_text_count_down, '카운트다운:');
+		trans_setHtmlText(sai_id_text_arrows, '화살표:');
 		trans_setHtmlText(sai_id_text_label_message_speech, '메시지 연설:');
 		trans_setHtmlText(sai_id_text_message_speech, '메시지 연설');
 		trans_setHtmlText(sai_id_text_color_1st, "첫 번째 색상:");
@@ -2178,6 +2182,7 @@ const trans_localize = function(lang){
 		sai_id_button_start_hypnosis.innerHTML = 'Inizia l\'ipnosi';
 		trans_setHtmlText(sai_id_button_release_hypnosis, 'Rilascia l\'ipnosi');
 		trans_setHtmlText(sai_id_text_count_down, 'Conto alla rovescia:');
+		trans_setHtmlText(sai_id_text_arrows, 'Frecce:');
 		trans_setHtmlText(sai_id_text_label_message_speech, 'Discorso del messaggio:');
 		trans_setHtmlText(sai_id_text_message_speech, 'Discorso del messaggio');
 		trans_setHtmlText(sai_id_text_color_1st, "1° colore:");
@@ -2276,6 +2281,7 @@ const trans_localize = function(lang){
 		sai_id_button_start_hypnosis.innerHTML = 'Hypnose beginnen';
 		trans_setHtmlText(sai_id_button_release_hypnosis, 'Hypnose loslassen');
 		trans_setHtmlText(sai_id_text_count_down, 'Countdown:');
+		trans_setHtmlText(sai_id_text_arrows, 'Pfeile:');
 		trans_setHtmlText(sai_id_text_label_message_speech, 'Nachrichtenansprache:');
 		trans_setHtmlText(sai_id_text_message_speech, 'Nachrichtenansprache');
 		trans_setHtmlText(sai_id_text_color_1st, "1. Farbe:");
@@ -2374,6 +2380,7 @@ const trans_localize = function(lang){
 		sai_id_button_start_hypnosis.innerHTML = 'Iniciar la hipnosis';
 		trans_setHtmlText(sai_id_button_release_hypnosis, 'Iiberar hipnosis');
 		trans_setHtmlText(sai_id_text_count_down, 'Cuenta regresiva:');
+		trans_setHtmlText(sai_id_text_arrows, 'Flechas:');
 		trans_setHtmlText(sai_id_text_label_message_speech, 'Di el mensaje:');
 		trans_setHtmlText(sai_id_text_message_speech, 'Di el mensaje');
 		trans_setHtmlText(sai_id_text_color_1st, "1er color:");
@@ -2472,6 +2479,7 @@ const trans_localize = function(lang){
 		sai_id_button_start_hypnosis.innerHTML = 'Начать гипноз';
 		trans_setHtmlText(sai_id_button_release_hypnosis, 'Освободиться от гипноза');
 		trans_setHtmlText(sai_id_text_count_down, 'Обратный отсчет:');
+		trans_setHtmlText(sai_id_text_arrows, 'Стрелки:');
 		trans_setHtmlText(sai_id_text_label_message_speech, 'Произнесите сообщение:');
 		trans_setHtmlText(sai_id_text_message_speech, 'Произнесите сообщение');
 		trans_setHtmlText(sai_id_text_color_1st, "1-й цвет:");
@@ -2570,6 +2578,7 @@ const trans_localize = function(lang){
 		sai_id_button_start_hypnosis.innerHTML = 'Start Hypnosis';
 		trans_setHtmlText(sai_id_button_release_hypnosis, 'Release Hypnosis');
 		trans_setHtmlText(sai_id_text_count_down, 'Count Down:');
+		trans_setHtmlText(sai_id_text_arrows, 'Arrows:');
 		trans_setHtmlText(sai_id_text_label_message_speech, 'Message Speech:');
 		trans_setHtmlText(sai_id_text_message_speech, 'Message Speech');
 		trans_setHtmlText(sai_id_text_color_1st, "1st color:");
