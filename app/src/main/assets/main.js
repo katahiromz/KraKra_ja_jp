@@ -52,6 +52,10 @@ document.addEventListener('DOMContentLoaded', function(){
 	let sai_switch_sound_type = 1; // 切り替えの音声の種類。
 	let sai_stars = new Array(32); // 画面を指でなぞったときのきらめきを保存する。
 	let sai_touchmoving = false; // 画面を指でなぞっているかどうか？
+	let sai_touch_time = null; // 触れた時間。
+	let sai_not_click = false; // クリックではない？
+	let sai_touch_position = null; // 触っている位置。
+	let sai_touching_coin = false; // コインを触っているかどうか？
 	let sai_service_worker_registration = null; // サービスワーカーの登録。
 	let sai_coin_img = new Image(); // 五円玉のイメージ。
 	let sai_rotation_type = 'normal'; // 回転の種類。
@@ -2154,9 +2158,25 @@ document.addEventListener('DOMContentLoaded', function(){
 			let tx = 0;
 			let ty = 0;
 			ctx.fillStyle = 'yellow';
-			SAI_draw_arrow(ctx, qx + width, qy, qx + width, qy + sai_coin_img.height * 0.08, 14);
+			let x = qx + width;
+			SAI_draw_arrow(ctx, x, qy, x, qy + sai_coin_img.height * 0.08, 14);
 			ctx.fillStyle = 'black';
-			SAI_draw_arrow(ctx, qx + width, qy, qx + width, qy + sai_coin_img.height * 0.08, 5);
+			SAI_draw_arrow(ctx, x, qy, x, qy + sai_coin_img.height * 0.08, 5);
+			sai_touching_coin = false;
+			if(sai_touch_position){
+				qx += width;
+				qy += sai_coin_img.height * 0.2;
+				let x0 = sai_touch_position[0] - sai_coin_img.width * 0.6;
+				let x1 = sai_touch_position[0] + sai_coin_img.width * 0.6;
+				let y0 = sai_touch_position[1] - sai_coin_img.width * 0.6;
+				let y1 = sai_touch_position[1] + sai_coin_img.width * 0.6;
+				if(x0 <= qx && qx <= x1 && y0 <= qy && qy <= y1){
+					sai_touching_coin = true;
+				}
+				//ctx.fillRect(x0, y0, x1 - x0, y1 - y0);
+				//ctx.fillStyle = 'red';
+				//ctx.fillRect(qx - 5, qy - 5, 10, 10);
+			}
 		}
 	}
 
@@ -3109,7 +3129,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let diff_time = (new_time - sai_old_time) / 1000.0;
 		if(sai_rotation_type == 'counter')
 			diff_time = -diff_time;
-		if(sai_stopping && !drawing_config)
+		if((sai_stopping && !drawing_config) || (sai_pic_type == 6 && sai_touching_coin))
 			diff_time = 0;
 		sai_counter += diff_time * sai_speed;
 		sai_old_time = new_time;
@@ -3714,31 +3734,58 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// キャンバスのクリック。
 		sai_id_canvas_01.addEventListener('click', function(e){
-			SAI_canvas_click(e);
+			if(!sai_not_click && sai_touch_time && ((new Date()).getTime() - sai_touch_time) < 500)
+				SAI_canvas_click(e);
+			sai_not_click = false;
+			sai_touch_position = null;
 		}, false);
 
 		// キャンバスでマウス移動。
 		sai_id_canvas_01.addEventListener('mousemove', function(e){
 			SAI_star_add(e.clientX, e.clientY);
+			if(sai_touchmoving){
+				sai_touch_position = [e.clientX, e.clientY];
+				sai_not_click = true;
+			}
+		}, false);
+
+		// キャンバスでマウスボタンが押された。
+		sai_id_canvas_01.addEventListener('mousedown', function(e){
+			sai_touchmoving = true;
+			sai_not_click = false;
+			sai_touch_position = [e.clientX, e.clientY];
+			sai_touch_time = new Date().getTime();
+		}, false);
+		// キャンバスでマウスボタンが離された。
+		sai_id_canvas_01.addEventListener('mouseup', function(e){
+			sai_touchmoving = false;
+			sai_touch_position = null;
+			sai_not_click = false;
 		}, false);
 
 		// キャンバスでタッチ操作。きらめきを表示。
 		sai_id_canvas_01.addEventListener('touchstart', function(e){
 			sai_touchmoving = true;
+			sai_touch_time = new Date().getTime();
 		}, {passive: true});
 		sai_id_canvas_01.addEventListener('touchmove', function(e){
 			if(sai_touchmoving){
 				let touches = e.touches;
 				if(touches && touches.length == 1){
 					SAI_star_add(touches[0].clientX, touches[0].clientY);
+					sai_touch_position = [touches[0].clientX, touches[0].clientY];
+				}else{
+					sai_touch_position = null;
 				}
 			}
 		}, {passive: true});
 		sai_id_canvas_01.addEventListener('touchend', function(e){
 			sai_touchmoving = false;
+			sai_touch_position = null;
 		}, {passive: true});
 		sai_id_canvas_01.addEventListener('touchcancel', function(e){
 			sai_touchmoving = false;
+			sai_touch_position = null;
 		}, {passive: true});
 
 		// キャンバスでマウスホイール回転。
