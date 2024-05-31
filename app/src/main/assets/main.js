@@ -1427,8 +1427,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 	}
 
-	// 矢印（複数）を描画する。
-	const SAI_draw_arrows = function(ctx, qx, qy, dx, dy){
+	// フォーカス矢印（複数）を描画する。
+	const SAI_draw_focus_arrows = function(ctx, qx, qy, dx, dy){
 		if(!sai_id_checkbox_arrows.checked)
 			return;
 		let dxy = (dx + dy) / 2;
@@ -1496,7 +1496,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		// 矢印を描画する。
-		SAI_draw_arrows(ctx, qx, qy, dx, dy);
+		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
@@ -1595,7 +1595,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 視覚的な酩酊感をもたらすために回転運動の中心点をすりこぎ運動させる。
 		qx += mxy * Math.cos(count2 * 0.07);
 		qy += mxy * Math.sin(count2 * 0.15);
-		SAI_draw_arrows(ctx, qx, qy, dx, dy);
+		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	}
 
 	// 映像「画2: 同心円状」の描画。
@@ -1670,7 +1670,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 矢印を描画する。
 		let qx = px + dx / 2, qy = py + dy / 2;
-		SAI_draw_arrows(ctx, qx, qy, dx, dy);
+		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	}
 
 	// 映像「画3: 目が回る」の描画。
@@ -1814,7 +1814,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 矢印を描画する。
 		let qx = px + dx / 2, qy = py + dy / 2;
-		SAI_draw_arrows(ctx, qx, qy, dx, dy);
+		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	}
 
 	// 映像「画4: アルキメデスのらせん」の描画。
@@ -1910,7 +1910,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let qx = px + dx / 2, qy = py + dy / 2;
 		qx += mxy * Math.cos(count2 * 0.08);
 		qy += mxy * Math.sin(count2 * 0.05);
-		SAI_draw_arrows(ctx, qx, qy, dx, dy);
+		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	}
 
 	// 映像「画5: 広がるハート」の描画。
@@ -2033,7 +2033,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			qx += 30 * Math.cos(factor * 0.8);
 			qy += 30 * Math.sin(factor * 0.8);
 		}
-		SAI_draw_arrows(ctx, qx, qy, dx, dy);
+		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	}
 
 	// 映像「画6: 五円玉」の描画。
@@ -2236,7 +2236,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 矢印を描画する。
 		let qx = px + dx / 2, qy = py + dy / 2;
-		SAI_draw_arrows(ctx, qx, qy, dx, dy);
+		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	}
 
 	// 映像「画8: クレージーな色」の描画。
@@ -2329,7 +2329,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let dxy = (dx + dy) / 2;
 		qx += dxy * 0.1 * Math.cos(count2 * 0.08);
 		qy += dxy * 0.1 * Math.sin(count2 * 0.08);
-		SAI_draw_arrows(ctx, qx, qy, dx, dy);
+		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	}
 
 	// 映像「画9: 対数らせん 2」の描画。
@@ -2419,7 +2419,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let mxy = (maxxy + minxy) * 0.015;
 		qx += mxy * Math.cos(count2 * 0.1);
 		qy += mxy * Math.sin(count2 * 0.2);
-		SAI_draw_arrows(ctx, qx, qy, dx, dy);
+		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	}
 
 	// 映像「画10: アナログディスク」の描画。
@@ -2477,7 +2477,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let count2 = SAI_get_tick_count();
 		let updown = minxy * Math.sin(count2 * 0.2) * 0.16;
 		qy += updown;
-		SAI_draw_arrows(ctx, qx, qy, dx, dy);
+		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	}
 
 	function SAI_flower_graph(x, radius){
@@ -2567,7 +2567,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 矢印を描画する。
 		let qx = px + dx / 2, qy = py + dy / 2;
-		SAI_draw_arrows(ctx, qx, qy, dx, dy);
+		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	}
 
 	// 万華鏡のソースの多角形を作成する。
@@ -2726,7 +2726,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 矢印を描画する。
 		let qx = px + dx / 2, qy = py + dy / 2;
-		SAI_draw_arrows(ctx, qx, qy, dx, dy);
+		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	}
 
 	// 映像「画13: 1番目の色の画面」の描画。
