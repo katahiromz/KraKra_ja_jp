@@ -2163,7 +2163,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			ctx.fillStyle = 'black';
 			SAI_draw_arrow(ctx, x, qy, x, qy + sai_coin_img.height * 0.08, 5);
 			sai_touching_coin = false;
-			const TOUCH_DEBUGGING = false;
+			const TOUCH_DEBUGGING = true;
 			if(sai_touch_position){
 				qx += width;
 				qy += sai_coin_img.height * 0.2;
@@ -2185,7 +2185,7 @@ document.addEventListener('DOMContentLoaded', function(){
 						ctx.fillRect(qx - 5, qy - 5, 10, 10);
 					}
 					if(sai_screen_split == 1){ // 画面分割なし。
-						;
+						break;
 					}else if(sai_screen_split == -1){ // 画面分割自動。
 						if(dx >= dy * 1.75){ // 充分に横長。
 							if(flag0){
