@@ -2171,15 +2171,15 @@ document.addEventListener('DOMContentLoaded', function(){
 				let y0 = sai_touch_position[1] - sai_coin_img.width * 0.6;
 				let y1 = sai_touch_position[1] + sai_coin_img.width * 0.6;
 				for (let i = 0; i < 2; ++i){
-					if(x0 <= qx && qx <= x1 && y0 <= qy && qy <= y1){
-						sai_touching_coin = true;
-						break;
-					}
 					if(false){
 						ctx.fillStyle = 'black';
 						ctx.fillRect(x0, y0, x1 - x0, y1 - y0);
 						ctx.fillStyle = 'green';
 						ctx.fillRect(qx - 5, qy - 5, 10, 10);
+					}
+					if(x0 <= qx && qx <= x1 && y0 <= qy && qy <= y1){
+						sai_touching_coin = true;
+						break;
 					}
 					if(sai_screen_split == 1){ // 画面分割なし。
 						break;
