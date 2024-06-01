@@ -1499,7 +1499,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			ctx.drawImage(sai_tap_here_img, x, y);
 		}
 
-		// 矢印を描画する。
+		// フォーカス矢印を描画する。
 		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
@@ -1580,22 +1580,23 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 映像「画1: 対数らせん」の描画。
 	// pic1: Logarithmic Spiral
 	const SAI_draw_pic_01 = function(ctx, px, py, dx, dy){
+		// 別のキャンバスに普通に描画する。
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
 		ctx2.save();
 		SAI_draw_pic_1_sub(ctx2, 0, 0, dx, dy);
 		ctx2.restore();
+
+		// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 
-		// 矢印を描画する。
+		// フォーカス矢印を描画する。
 		let qx = px + dx / 2;
 		let qy = py + dy / 2;
 		let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
 		let mxy = (maxxy + minxy) * 0.04;
-		// 映像の進行を表す変数。
 		let count2 = -SAI_get_tick_count();
-		// 視覚的な酩酊感をもたらすために回転運動の中心点をすりこぎ運動させる。
 		qx += mxy * Math.cos(count2 * 0.07);
 		qy += mxy * Math.sin(count2 * 0.15);
 		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
@@ -1603,7 +1604,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 映像「画2: 同心円状」の描画。
 	// pic2: Concentric Circles
-	const SAI_draw_pic_2_sub = function(ctx, px, py, dx, dy, flag=true){
+	const SAI_draw_pic_2_sub = function(ctx, px, py, dx, dy, outside=true){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 画面中央の座標を計算する。
@@ -1616,8 +1617,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		let count2 = SAI_get_tick_count();
 		let factor = (0.99 + Math.abs(Math.sin(count2 * 0.2)) * 0.01);
 
-		// クリッピングする。!flagならば円形に切り抜く。円形の半径は時刻により変動する。
-		if(flag){
+		// クリッピングする。!outsideならば円形に切り抜く。円形の半径は時刻により変動する。
+		if(outside){
 			SAI_clip_rect(ctx, px, py, dx, dy);
 		}else{
 			ctx.beginPath();
@@ -1643,7 +1644,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 		let dr = dr0 / 2 * factor;
 		let radius = SAI_mod(count2 * 4, dr0);
-		if(flag)
+		if(outside)
 			radius = dr0 - radius;
 
 		// 同心円状に描画する。
@@ -1662,16 +1663,19 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 映像「画2: 同心円状」の描画。
 	// pic2: Concentric Circles
 	const SAI_draw_pic_02 = function(ctx, px, py, dx, dy){
+		// 別のキャンバスに描画する。必要に応じてクリッピングを掛ける。
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
 		ctx2.save();
-		SAI_draw_pic_2_sub(ctx2, 0, 0, dx, dy, true);
-		SAI_draw_pic_2_sub(ctx2, 0, 0, dx, dy, false);
+		SAI_draw_pic_2_sub(ctx2, 0, 0, dx, dy, true); // 外側を描画。
+		SAI_draw_pic_2_sub(ctx2, 0, 0, dx, dy, false); // 内側を描画。
 		ctx2.restore();
+
+		// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 
-		// 矢印を描画する。
+		// フォーカス矢印を描画する。
 		let qx = px + dx / 2, qy = py + dy / 2;
 		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	}
@@ -1807,15 +1811,18 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 映像「画3: 目が回る」の描画。
 	// pic3: The Eyes
 	const SAI_draw_pic_03 = function(ctx, px, py, dx, dy){
+		// 別のキャンバスに普通に描画する。
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
 		ctx2.save();
 		SAI_draw_pic_03_sub(ctx2, 0, 0, dx, dy);
 		ctx2.restore();
+
+		// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 
-		// 矢印を描画する。
+		// フォーカス矢印を描画する。
 		let qx = px + dx / 2, qy = py + dy / 2;
 		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	}
@@ -1898,16 +1905,19 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 映像「画4: アルキメデスのらせん」の描画。
 	// pic4: Archimedes' Spiral
 	const SAI_draw_pic_04 = function(ctx, px, py, dx, dy){
+		// 別のキャンバスに普通に描画する。
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
 		ctx2.save();
 		let shrink = 0.75;
 		SAI_draw_pic_04_sub(ctx2, 0, 0, dx * shrink, dy * shrink);
 		ctx2.restore();
+
+		// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, 0, 0, dx * shrink, dy * shrink, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 
-		// 矢印を描画する。
+		// フォーカス矢印を描画する。
 		let count2 = SAI_get_tick_count();
 		let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
 		let mxy = (maxxy + minxy) * 0.04;
@@ -2018,15 +2028,18 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 映像「画5: 広がるハート」の描画。
 	// pic5: Spreading Rainbow
 	const SAI_draw_pic_05 = function(ctx, px, py, dx, dy){
+		// 別のキャンバスに普通に描画する。
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
 		ctx2.save();
 		SAI_draw_pic_05_sub(ctx2, 0, 0, dx, dy);
 		ctx2.restore();
+
+		// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 
-		// 矢印を描画する。
+		// フォーカス矢印を描画する。
 		let count2 = SAI_get_tick_count();
 		let qx = px + dx / 2, qy = py + dy / 2;
 		let factor = count2 * 0.16;
@@ -2138,10 +2151,13 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 映像「画6: 五円玉」の描画。
 	// pic6: 5-yen coin
 	const SAI_draw_pic_06 = function(ctx, px, py, dx, dy){
+		// 別のキャンバスに普通に描画する。
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
 		ctx2.save();
 		SAI_draw_pic_06_sub(ctx2, 0, 0, dx, dy);
 		ctx2.restore();
+
+		// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
@@ -2153,23 +2169,30 @@ document.addEventListener('DOMContentLoaded', function(){
 			let qx = px + dx / 2, qy = py + dy / 2;
 			qx -= sai_coin_img.width * 0.1;
 			qy -= sai_coin_img.height * 0.08;
+
+			// コインの横方向のずれの近似値を求める。
 			let ratio = 1;
-			let width = -sai_coin_img.width * ratio * Math.sin(angle) * 3.5;
-			let tx = 0;
-			let ty = 0;
+			let wx = -sai_coin_img.width * ratio * Math.sin(angle) * 3.5;
+
+			// フォーカス矢印を描画。
+			let x = qx + wx;
 			ctx.fillStyle = 'yellow';
-			let x = qx + width;
 			SAI_draw_arrow(ctx, x, qy, x, qy + sai_coin_img.height * 0.08, 14);
 			ctx.fillStyle = 'black';
 			SAI_draw_arrow(ctx, x, qy, x, qy + sai_coin_img.height * 0.08, 5);
+
+			// 当たり判定を行って、sai_touching_coinに結果を格納する。
 			sai_touching_coin = false;
 			if(sai_touch_position){
-				qx += width;
+				qx += wx;
 				qy += sai_coin_img.height * 0.2;
+				// (x0, y0)～(x1, y1)が当たり判定の対象。
 				let x0 = sai_touch_position[0] - sai_coin_img.width * 0.6;
 				let x1 = sai_touch_position[0] + sai_coin_img.width * 0.6;
 				let y0 = sai_touch_position[1] - sai_coin_img.width * 0.6;
 				let y1 = sai_touch_position[1] + sai_coin_img.width * 0.6;
+				// 画面分割があるので、当たり判定がややこしいことになります。
+				// ループを使って失敗したときのやり直しを行う。
 				for (let i = 0; i < 3; ++i){
 					if(false){ // デバッグ用。
 						ctx.fillStyle = 'black';
@@ -2178,27 +2201,24 @@ document.addEventListener('DOMContentLoaded', function(){
 						ctx.fillRect(qx - 5, qy - 5, 10, 10);
 					}
 					if(x0 <= qx && qx <= x1 && y0 <= qy && qy <= y1){
-						sai_touching_coin = true;
+						sai_touching_coin = true; // 当たり判定あり。
 						break;
 					}
 					if(sai_screen_split == 1){ // 画面分割なし。
 						break;
 					}else{ // 画面２分割。
-						if(sai_screen_width >= sai_screen_height){ // 横長。
+						// 座標を補正してやり直し。
+						if(sai_screen_width >= sai_screen_height){ // 画面が横長。
 							if(i == 0){
-								x0 += dx;
-								x1 += dx;
+								qx += dx;
 							}else{
-								x0 -= 2 * dx;
-								x1 -= 2 * dx;
+								qx -= 2 * dx;
 							}
 						}else{ // 縦長。
 							if(i == 0){
-								y0 += dy;
-								y1 += dy;
+								qy += dy;
 							}else{
-								y0 -= 2 * dy;
-								y1 -= 2 * dy;
+								qy -= 2 * dy;
 							}
 						}
 					}
@@ -2277,15 +2297,18 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 映像「画7: 奇妙な渦巻き」の描画。
 	// pic7: Strange Swirl
 	const SAI_draw_pic_07 = function(ctx, px, py, dx, dy){
+		// 別のキャンバスに普通に描画する。
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
 		ctx2.save();
 		SAI_draw_pic_07_sub(ctx2, 0, 0, dx, dy);
 		ctx2.restore();
+
+		// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 
-		// 矢印を描画する。
+		// フォーカス矢印を描画する。
 		let qx = px + dx / 2, qy = py + dy / 2;
 		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	}
@@ -2366,15 +2389,18 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 映像「画8: クレージーな色」の描画。
 	// pic8: Crazy Colors
 	const SAI_draw_pic_08 = function(ctx, px, py, dx, dy){
+		// 別のキャンバスに普通に描画する。
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
 		ctx2.save();
 		SAI_draw_pic_08_sub(ctx2, 0, 0, dx / 2, dy / 2);
 		ctx2.restore();
+
+		// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, 0, 0, dx / 2, dy / 2, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 
-		// 矢印を描画する。
+		// フォーカス矢印を描画する。
 		let qx = px + dx / 2, qy = py + dy / 2;
 		let count2 = SAI_get_tick_count();
 		let dxy = (dx + dy) / 2;
@@ -2455,15 +2481,18 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 映像「画9: 対数らせん 2」の描画。
 	// pic9: Logarithmic Spiral 2
 	const SAI_draw_pic_09 = function(ctx, px, py, dx, dy){
+		// 別のキャンバスに普通に描画する。
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
 		ctx2.save();
 		SAI_draw_pic_09_sub(ctx2, 0, 0, dx, dy);
 		ctx2.restore();
+
+		// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 
-		// 矢印を描画する。
+		// フォーカス矢印を描画する。
 		let count2 = SAI_get_tick_count();
 		let qx = px + dx / 2, qy = py + dy / 2;
 		let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
@@ -2514,15 +2543,18 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 映像「画10: アナログディスク」の描画。
 	// pic10: Analog Disc
 	const SAI_draw_pic_10 = function(ctx, px, py, dx, dy){
+		// 別のキャンバスに普通に描画する。
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
 		ctx2.save();
 		SAI_draw_pic_10_sub(ctx2, 0, 0, dx, dy);
 		ctx2.restore();
+
+		// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 
-		// 矢印を描画する。
+		// フォーカス矢印を描画する。
 		let qx = px + dx / 2, qy = py + dy / 2;
 		let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
 		let count2 = SAI_get_tick_count();
@@ -2608,15 +2640,18 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 映像「画11: 奇妙な渦巻き 2」の描画。
 	// pic11: Strange Swirl 2
 	const SAI_draw_pic_11 = function(ctx, px, py, dx, dy){
+		// 別のキャンバスに普通に描画する。
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
 		ctx2.save();
 		SAI_draw_pic_11_sub(ctx2, 0, 0, dx, dy);
 		ctx2.restore();
+
+		// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 
-		// 矢印を描画する。
+		// フォーカス矢印を描画する。
 		let qx = px + dx / 2, qy = py + dy / 2;
 		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	}
@@ -2767,15 +2802,18 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 映像「画12: 万華鏡」の描画。
 	// pic12: Kaleidoscope
 	const SAI_draw_pic_12 = function(ctx, px, py, dx, dy){
+		// 別のキャンバスに普通に描画する。
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
 		ctx2.save();
 		SAI_draw_pic_12_sub(ctx2, 0, 0, dx, dy);
 		ctx2.restore();
+
+		// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
 		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 
-		// 矢印を描画する。
+		// フォーカス矢印を描画する。
 		let qx = px + dx / 2, qy = py + dy / 2;
 		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	}
@@ -3986,27 +4024,37 @@ document.addEventListener('DOMContentLoaded', function(){
 				sai_id_canvas_preview.classList.add('sai_class_invisible');
 		});
 
-		// 顔認識のページ。
+		// 顔認識のページに移動するボタン。
 		sai_id_button_target.addEventListener('click', function(e){
 			localStorage.setItem('saiminFaceGetterShowing', "1");
 			SAI_choose_page(sai_id_page_face_getter);
 		});
+
+		// 顔認識のページをクリックしたら発火。
 		sai_id_canvas_face.addEventListener('click', function(e){
 			if(sai_face_getter)
 				sai_face_getter.on_click(e);
 		});
+
+		// 顔認識のページの「ロックオン」ボタン。
 		sai_id_button_lock_on.addEventListener('click', function(e){
 			if(sai_face_getter)
 				sai_face_getter.lock_unlock();
 		});
+
+		// 顔認識のページの「カメラの向き」ボタン。
 		sai_id_button_side.addEventListener('click', function(){
 			if(sai_face_getter)
 				sai_face_getter.set_side();
 		});
+
+		// 顔認識のページの「戻る」ボタン。
 		sai_id_button_face_getter_back.addEventListener('click', function(){
 			localStorage.removeItem('saiminFaceGetterShowing');
 			SAI_choose_page(sai_id_page_main);
 		});
+
+		// 顔認識のページの「閉じる」ボタン。
 		sai_id_button_close.addEventListener('click', function(){
 			localStorage.removeItem('saiminFaceGetterShowing');
 			SAI_choose_page(sai_id_page_main);
@@ -4062,8 +4110,6 @@ document.addEventListener('DOMContentLoaded', function(){
 			if(e.key == 'd' || e.key == 'D'){ // Division (screen split)
 				if(sai_screen_split == 1){
 					SAI_screen_set_split(2);
-				}else if(sai_screen_split == 2){
-					SAI_screen_set_split(1);
 				}else{
 					SAI_screen_set_split(1);
 				}
@@ -4140,6 +4186,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		// ツールボタンは、sai_class_tool_buttonクラスを持つ要素。
 		let tool_buttons = document.getElementsByClassName('sai_class_tool_button');
 
+		// sai_class_invisibleクラスを除去または追加することで、コントロールボタンの表示を切り替える。
 		if(show){
 			for(let control of main_controls){
 				control.classList.remove('sai_class_invisible');
