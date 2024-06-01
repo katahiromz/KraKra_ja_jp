@@ -2187,7 +2187,10 @@ document.addEventListener('DOMContentLoaded', function(){
 						if(dx >= dy){ // 横長。
 							qx += dx;
 						}else{ // 縦長。
-							qy += dy;
+							if(px > 0)
+								qy -= dy;
+							else
+								qy += dy;
 						}
 					}
 				}
