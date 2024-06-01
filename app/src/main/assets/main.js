@@ -2177,10 +2177,10 @@ document.addEventListener('DOMContentLoaded', function(){
 						sai_touching_coin = true;
 						break;
 					}
-					if(true){
+					if(false){
 						ctx.fillStyle = 'black';
 						ctx.fillRect(x0, y0, x1 - x0, y1 - y0);
-						ctx.fillStyle = 'red';
+						ctx.fillStyle = 'green';
 						ctx.fillRect(qx - 5, qy - 5, 10, 10);
 					}
 					if(sai_screen_split == 1){ // 画面分割なし。
@@ -2188,19 +2188,15 @@ document.addEventListener('DOMContentLoaded', function(){
 					}else{ // 画面２分割。
 						if(dx >= dy){ // 横長。
 							if(flag0){
-								x0 -= dx;
-								x1 -= dx;
+								qx += dx;
 							}else{
-								x0 += dx;
-								x1 += dx;
+								qx -= dx;
 							}
 						}else{ // 縦長。
 							if(flag1){
-								y0 -= dy;
-								y1 -= dy;
+								qy += dy;
 							}else{
-								y0 += dy;
-								y1 += dy;
+								qy -= dy;
 							}
 						}
 					}
