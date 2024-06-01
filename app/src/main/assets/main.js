@@ -2170,8 +2170,6 @@ document.addEventListener('DOMContentLoaded', function(){
 				let x1 = sai_touch_position[0] + sai_coin_img.width * 0.6;
 				let y0 = sai_touch_position[1] - sai_coin_img.width * 0.6;
 				let y1 = sai_touch_position[1] + sai_coin_img.width * 0.6;
-				let flag0 = sai_touch_position[0] >= px + dx;
-				let flag1 = sai_touch_position[1] >= py + dy;
 				for (let i = 0; i < 2; ++i){
 					if(x0 <= qx && qx <= x1 && y0 <= qy && qy <= y1){
 						sai_touching_coin = true;
@@ -2187,17 +2185,9 @@ document.addEventListener('DOMContentLoaded', function(){
 						break;
 					}else{ // 画面２分割。
 						if(dx >= dy){ // 横長。
-							if(flag0){
-								qx += dx;
-							}else{
-								qx -= dx;
-							}
+							qx += dx;
 						}else{ // 縦長。
-							if(flag1){
-								qy += dy;
-							}else{
-								qy -= dy;
-							}
+							qy += dy;
 						}
 					}
 				}
