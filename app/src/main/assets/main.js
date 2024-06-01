@@ -2163,7 +2163,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			ctx.fillStyle = 'black';
 			SAI_draw_arrow(ctx, x, qy, x, qy + sai_coin_img.height * 0.08, 5);
 			sai_touching_coin = false;
-			const TOUCH_DEBUGGING = true;
+			const TOUCH_DEBUGGING = false;
 			if(sai_touch_position){
 				qx += width;
 				qy += sai_coin_img.height * 0.2;
@@ -2171,8 +2171,8 @@ document.addEventListener('DOMContentLoaded', function(){
 				let x1 = sai_touch_position[0] + sai_coin_img.width * 0.6;
 				let y0 = sai_touch_position[1] - sai_coin_img.width * 0.6;
 				let y1 = sai_touch_position[1] + sai_coin_img.width * 0.6;
-				let flag0 = sai_touch_position[0] >= qx;
-				let flag1 = sai_touch_position[1] >= qy;
+				let flag0 = sai_touch_position[0] >= dx;
+				let flag1 = sai_touch_position[1] >= dy;
 				for (let i = 0; i < 2; ++i){
 					if(x0 <= qx && qx <= x1 && y0 <= qy && qy <= y1){
 						sai_touching_coin = true;
