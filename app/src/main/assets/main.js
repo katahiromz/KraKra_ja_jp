@@ -2171,11 +2171,16 @@ document.addEventListener('DOMContentLoaded', function(){
 				let y0 = sai_touch_position[1] - sai_coin_img.width * 0.6;
 				let y1 = sai_touch_position[1] + sai_coin_img.width * 0.6;
 				for (let i = 0; i < 2; ++i){
-					if(false){
+					if(true && i == 0){
 						ctx.fillStyle = 'black';
 						ctx.fillRect(x0, y0, x1 - x0, y1 - y0);
 						ctx.fillStyle = 'green';
 						ctx.fillRect(qx - 5, qy - 5, 10, 10);
+						ctx.font = `12px san-serif`;
+						ctx.textAlign = 'left';
+						ctx.textBaseline = 'top';
+						ctx.fillStyle = "white";
+						ctx.fillText(`(${px}, ${py}, ${dx}, ${dy}, ${Math.trunc(qx)}, ${Math.trunc(qy)}, ${sai_touch_position[0]}, ${sai_touch_position[1]})`, px, py);
 					}
 					if(x0 <= qx && qx <= x1 && y0 <= qy && qy <= y1){
 						sai_touching_coin = true;
@@ -2187,10 +2192,7 @@ document.addEventListener('DOMContentLoaded', function(){
 						if(dx >= dy){ // 横長。
 							qx += dx;
 						}else{ // 縦長。
-							if(px > 0)
-								qy -= dy;
-							else
-								qy += dy;
+							qy += dy;
 						}
 					}
 				}
