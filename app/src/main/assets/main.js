@@ -2171,7 +2171,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				let y0 = sai_touch_position[1] - sai_coin_img.width * 0.6;
 				let y1 = sai_touch_position[1] + sai_coin_img.width * 0.6;
 				for (let i = 0; i < 3; ++i){
-					if(true){ // デバッグ用。
+					if(false){ // デバッグ用。
 						ctx.fillStyle = 'black';
 						ctx.fillRect(x0, y0, x1 - x0, y1 - y0);
 						ctx.fillStyle = 'green';
@@ -2184,7 +2184,7 @@ document.addEventListener('DOMContentLoaded', function(){
 					if(sai_screen_split == 1){ // 画面分割なし。
 						break;
 					}else{ // 画面２分割。
-						if(dx >= dy){ // 横長。
+						if(sai_screen_width >= sai_screen_height){ // 横長。
 							if(i == 0){
 								x0 += dx;
 								x1 += dx;
