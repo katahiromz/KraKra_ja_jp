@@ -2170,8 +2170,8 @@ document.addEventListener('DOMContentLoaded', function(){
 				let x1 = sai_touch_position[0] + sai_coin_img.width * 0.6;
 				let y0 = sai_touch_position[1] - sai_coin_img.width * 0.6;
 				let y1 = sai_touch_position[1] + sai_coin_img.width * 0.6;
-				let flag0 = sai_touch_position[0] >= dx;
-				let flag1 = sai_touch_position[1] >= dy;
+				let flag0 = sai_touch_position[0] >= px + dx;
+				let flag1 = sai_touch_position[1] >= py + dy;
 				for (let i = 0; i < 2; ++i){
 					if(x0 <= qx && qx <= x1 && y0 <= qy && qy <= y1){
 						sai_touching_coin = true;
@@ -2185,24 +2185,6 @@ document.addEventListener('DOMContentLoaded', function(){
 					}
 					if(sai_screen_split == 1){ // 画面分割なし。
 						break;
-					}else if(sai_screen_split == -1){ // 画面分割自動。
-						if(dx >= dy * 1.75){ // 充分に横長。
-							if(flag0){
-								x0 -= dx;
-								x1 -= dx;
-							}else{
-								x0 += dx;
-								x1 += dx;
-							}
-						}else if(dy >= dx * 1.75){ // 充分に縦長。
-							if(flag1){
-								y0 -= dy;
-								y1 -= dy;
-							}else{
-								y0 += dy;
-								y1 += dy;
-							}
-						}
 					}else{ // 画面２分割。
 						if(dx >= dy){ // 横長。
 							if(flag0){
@@ -3083,25 +3065,6 @@ document.addEventListener('DOMContentLoaded', function(){
 		if(sai_screen_split == 1){ // 画面分割なし。
 			SAI_draw_pic_with_effects(ctx, 0, 0, dx, dy);
 			SAI_message_set_position(sai_id_text_floating_1, 0, 0, dx, dy, sai_counter);
-		}else if(sai_screen_split == -1){ // 画面分割自動。
-			if(dx >= dy * 1.75){ // 充分に横長。
-				SAI_draw_pic_with_effects(ctx, 0, 0, dx / 2, dy);
-				//SAI_draw_pic_with_effects(ctx, dx / 2, 0, dx / 2, dy); // drawImageで描画時間を節約。
-				ctx.drawImage(the_canvas, 0, 0, dx / 2, dy, dx / 2, 0, dx / 2, dy);
-				SAI_message_set_position(sai_id_text_floating_1, 0, 0, dx / 2, dy, sai_counter);
-				SAI_message_set_position(sai_id_text_floating_2, dx / 2, 0, dx / 2, dy, sai_counter);
-				splitted = true; // 画面分割した。
-			}else if(dy >= dx * 1.75){ // 充分に縦長。
-				SAI_draw_pic_with_effects(ctx, 0, 0, dx, dy / 2);
-				//SAI_draw_pic_with_effects(ctx, 0, dy / 2, dx, dy / 2); // drawImageで描画時間を節約。
-				ctx.drawImage(the_canvas, 0, 0, dx, dy / 2, 0, dy / 2, dx, dy / 2);
-				SAI_message_set_position(sai_id_text_floating_1, 0, 0, dx, dy / 2, sai_counter);
-				SAI_message_set_position(sai_id_text_floating_2, 0, dy / 2, dx, dy / 2, sai_counter);
-				splitted = true; // 画面分割した。
-			}else{ // それ以外は分割しない。
-				SAI_draw_pic_with_effects(ctx, 0, 0, dx, dy);
-				SAI_message_set_position(sai_id_text_floating_1, 0, 0, dx, dy, sai_counter);
-			}
 		}else{ // 画面２分割。
 			if(dx >= dy){ // 横長。
 				SAI_draw_pic_with_effects(ctx, 0, 0, dx / 2, dy);
