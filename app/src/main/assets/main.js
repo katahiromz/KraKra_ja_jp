@@ -1,7 +1,7 @@
 // 催眠アプリ「催眠くらくら」のJavaScriptのメインコード。
 // 暗号名はKraKra。
 
-const sai_VERSION = '3.7.1'; // KraKraバージョン番号。
+const sai_VERSION = '3.7.2'; // KraKraバージョン番号。
 const sai_DEBUGGING = false; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
 
@@ -2162,64 +2162,62 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 
-		// フォーカス矢印を描画する。
+		// コインの位置を計算する。
+		let count2 = SAI_get_tick_count();
+		let angle = Math.PI * Math.sin(count2 * 0.1 - 0.05) * 0.078;
+		let qx = px + dx / 2, qy = py + dy / 2;
+		qx -= sai_coin_img.width * 0.1;
+		qy -= sai_coin_img.height * 0.08;
+		let ratio = 1;
+		let wx = -sai_coin_img.width * ratio * Math.sin(angle) * 3.5;
+
+		// 必要ならフォーカス矢印を描画。
 		if(sai_id_checkbox_arrows.checked){
-			let count2 = SAI_get_tick_count();
-			let angle = Math.PI * Math.sin(count2 * 0.1 - 0.05) * 0.078;
-			let qx = px + dx / 2, qy = py + dy / 2;
-			qx -= sai_coin_img.width * 0.1;
-			qy -= sai_coin_img.height * 0.08;
-
-			// コインの横方向のずれの近似値を求める。
-			let ratio = 1;
-			let wx = -sai_coin_img.width * ratio * Math.sin(angle) * 3.5;
-
-			// フォーカス矢印を描画。
-			let x = qx + wx;
+			let rx = qx + wx;
 			ctx.fillStyle = 'yellow';
-			SAI_draw_arrow(ctx, x, qy, x, qy + sai_coin_img.height * 0.08, 14);
+			SAI_draw_arrow(ctx, rx, qy, rx, qy + sai_coin_img.height * 0.08, 14);
 			ctx.fillStyle = 'black';
-			SAI_draw_arrow(ctx, x, qy, x, qy + sai_coin_img.height * 0.08, 5);
+			SAI_draw_arrow(ctx, rx, qy, rx, qy + sai_coin_img.height * 0.08, 5);
+		}
 
-			// 当たり判定を行って、sai_touching_coinに結果を格納する。
-			sai_touching_coin = false;
-			if(sai_touch_position){
-				qx += wx;
-				qy += sai_coin_img.height * 0.2;
-				// (x0, y0)～(x1, y1)が当たり判定の対象。
-				let x0 = sai_touch_position[0] - sai_coin_img.width * 0.6;
-				let x1 = sai_touch_position[0] + sai_coin_img.width * 0.6;
-				let y0 = sai_touch_position[1] - sai_coin_img.width * 0.6;
-				let y1 = sai_touch_position[1] + sai_coin_img.width * 0.6;
-				// 画面分割があるので、当たり判定がややこしいことになります。
-				// ループを使って失敗したときのやり直しを行う。
-				for (let i = 0; i < 3; ++i){
-					if(false){ // デバッグ用。
-						ctx.fillStyle = 'black';
-						ctx.fillRect(x0, y0, x1 - x0, y1 - y0);
-						ctx.fillStyle = 'green';
-						ctx.fillRect(qx - 5, qy - 5, 10, 10);
-					}
-					if(x0 <= qx && qx <= x1 && y0 <= qy && qy <= y1){
-						sai_touching_coin = true; // 当たり判定あり。
-						break;
-					}
-					if(sai_screen_split == 1){ // 画面分割なし。
-						break;
-					}else{ // 画面２分割。
-						// 座標を補正してやり直し。
-						if(sai_screen_width >= sai_screen_height){ // 画面が横長。
-							if(i == 0){
-								qx += dx;
-							}else{
-								qx -= 2 * dx;
-							}
-						}else{ // 縦長。
-							if(i == 0){
-								qy += dy;
-							}else{
-								qy -= 2 * dy;
-							}
+		// 当たり判定を行って、sai_touching_coinに結果を格納する。
+		sai_touching_coin = false;
+		if(sai_touch_position){
+			qx += wx;
+			qy += sai_coin_img.height * 0.2;
+			// (x0, y0)～(x1, y1)が当たり判定の対象。
+			let x0 = sai_touch_position[0] - sai_coin_img.width * 0.6;
+			let x1 = sai_touch_position[0] + sai_coin_img.width * 0.6;
+			let y0 = sai_touch_position[1] - sai_coin_img.width * 0.6;
+			let y1 = sai_touch_position[1] + sai_coin_img.width * 0.6;
+			// 画面分割があるので、当たり判定がややこしいことになります。
+			// ループを使って失敗したときのやり直しを行う。
+			for (let i = 0; i < 3; ++i){
+				if(false){ // デバッグ用。
+					ctx.fillStyle = 'black';
+					ctx.fillRect(x0, y0, x1 - x0, y1 - y0);
+					ctx.fillStyle = 'green';
+					ctx.fillRect(qx - 5, qy - 5, 10, 10);
+				}
+				if(x0 <= qx && qx <= x1 && y0 <= qy && qy <= y1){
+					sai_touching_coin = true; // 当たり判定あり。
+					break;
+				}
+				if(sai_screen_split == 1){ // 画面分割なし。
+					break;
+				}else{ // 画面２分割。
+					// 座標を補正してやり直し。
+					if(sai_screen_width >= sai_screen_height){ // 画面が横長。
+						if(i == 0){
+							qx += dx;
+						}else{
+							qx -= 2 * dx;
+						}
+					}else{ // 縦長。
+						if(i == 0){
+							qy += dy;
+						}else{
+							qy -= 2 * dy;
 						}
 					}
 				}
