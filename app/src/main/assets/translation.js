@@ -734,7 +734,7 @@ We provide real entertainment where you can enjoy hypnotic images and sounds.
 [(Precautions for use)]
 
 - This software is a joke application and its operation is not guaranteed.
-- Do not use this software if you have epilepsy symptoms.
+- This software may contain images that may cause epilepsy. Epilepsy is a disease caused by abnormal electrical signals in the brain, which may lead to death in the worst case. Children, adolescents, and the elderly are considered to be more susceptible to epilepsy. Therefore, this software should never be used by these age groups.
 - If your country, school, religion or region prohibits hypnosis, do not use this application.
 - Acute schizophrenic patients should not use this software.
 - Avoid driving a car immediately after using this software.
@@ -784,7 +784,7 @@ Hypnosis KraKra
 【사용상의 주의】
 
 - 본 소프트웨어는 농담 앱이며 동작은 무보증입니다.
-- 간질 증상이 있는 분은 사용하지 마십시오.
+- 본 소프트웨어는 간질을 일으키는 영상을 포함할 수 있습니다. 간질은 뇌의 전기 신호의 이상으로 인해 발생하는 질병이며, 최악의 경우 죽음으로 이어집니다. 유아, 청소년기의 젊은이, 노인은 간질을 발병하기 쉽다고 생각됩니다. 따라서 이러한 연령대에 본 소프트웨어를 사용하는 것은 절대로 하지 마십시오.
 - 귀하의 국가, 학교, 종교 및 지역이 최면을 금지하는 경우이 응용 프로그램을 사용하지 마십시오.
 - 급성기 정신분열증 환자는 사용 금지입니다.
 - 사용 직후에는 자동차 운전을 피하십시오.
@@ -835,7 +835,7 @@ Hypnosis KraKra
 【使用上の注意】
 
 - 本ソフトウェアはジョークアプリであり、動作は無保証です。
-- てんかんの症状のある方は使用しないで下さい。
+- 本ソフトウェアは、てんかんを引き起こす映像を含むかもしれません。てんかんとは、脳の電気信号の異常によって起こる病気であり、最悪の場合、死に至ります。幼児、思春期の若者、高齢者はてんかんを発症しやすいと考えられています。よって、これらの年齢層に本ソフトウェアを使用することは絶対にしないでください。
 - あなたの国・学校・宗教・地域が催眠を禁じている場合は、本アプリを使用しないで下さい。
 - 急性期の統合失調症患者は使用禁止です。
 - 使用直後は、自動車の運転を避けて下さい。
@@ -885,7 +885,7 @@ Hypnosis KraKra
 【使用注意事项】
 
 - 该软件是一个玩笑应用程序，不保证其运行。
-- 如果您有癫痫症状，请勿使用本软件。
+- 该软件可能包含可能导致癫痫的图像。癫痫是一种由大脑异常电信号引起的疾病，严重时可能会致命。人们认为幼儿、青少年和老年人更容易患上癫痫。因此，这个年龄段的人绝对不应该使用该软件。
 - 如果您的国家、学校、宗教或地区禁止催眠，请勿使用此应用程序。
 - 急性精神分裂症患者不应使用此软件。
 - 使用本软件后避免立即开车。
@@ -935,7 +935,7 @@ Hypnosis KraKra
 【使用注意事項】
 
 - 該軟件是一個玩笑應用程序，不保證其運行。
-- 如果您患有癲癇症，請勿使用。
+- 該軟體可能包含可能導致癲癇的圖像。癲癇是一種由大腦異常電訊號引起的疾病，嚴重時可能會致命。人們認為幼兒、青少年和老年人更容易患上癲癇。因此，這個年齡層的人絕對不應該使用該軟體。
 - 如果您的國家/學校/宗教/地區禁止催眠，請不要使用此應用程序。
 - 請勿用於急性精神分裂症患者。
 - 使用後避免立即開車。
@@ -985,7 +985,7 @@ Forniamo un vero intrattenimento in cui puoi goderti immagini e suoni ipnotici.
 [(Precauzioni per l'uso)]
 
 - Questo software è un'applicazione scherzosa e il suo funzionamento non è garantito.
-- Non utilizzare questo software se si hanno sintomi di epilessia.
+- Il Software potrebbe contenere immagini che potrebbero causare epilessia. L'epilessia è una malattia causata da segnali elettrici anomali nel cervello e, nei casi gravi, può essere fatale. Si ritiene che i bambini piccoli, gli adolescenti e gli anziani siano più predisposti a sviluppare l'epilessia. Pertanto, questo software non dovrebbe mai essere utilizzato da persone di questa fascia d'età.
 - Se il tuo paese, scuola, religione o regione vieta l'ipnosi, non utilizzare questa applicazione.
 - I pazienti schizofrenici acuti non dovrebbero utilizzare questo software.
 - Evita di guidare un'auto subito dopo aver utilizzato questo software.
@@ -1035,7 +1035,7 @@ Wir bieten echte Unterhaltung, bei der Sie hypnotische Bilder und Töne genieße
 [(Vorsichtsmaßnahmen für den Gebrauch)]
 
 - Bei dieser Software handelt es sich um eine Scherzanwendung, für deren Funktionsfähigkeit keine Garantie übernommen wird.
-- Verwenden Sie diese Software nicht, wenn Sie Epilepsiesymptome haben.
+- Die Software kann Bilder enthalten, die Epilepsie verursachen können. Epilepsie ist eine Krankheit, die durch anormale elektrische Signale im Gehirn verursacht wird und in schweren Fällen tödlich sein kann. Kleine Kinder, Jugendliche und ältere Menschen gelten als anfälliger für die Entwicklung einer Epilepsie. Daher sollte diese Software niemals von Personen dieser Altersgruppe verwendet werden.
 - Wenn Ihr Land, Ihre Schule, Religion oder Region Hypnose verbietet, verwenden Sie diese Anwendung nicht.
 - Patienten mit akuter Schizophrenie sollten diese Software nicht verwenden.
 - Vermeiden Sie es, unmittelbar nach der Verwendung dieser Software Auto zu fahren.
@@ -1085,7 +1085,7 @@ Brindamos entretenimiento real donde podrás disfrutar de imágenes y sonidos hi
 [(Precauciones de uso)]
 
 - Este software es una aplicación de broma y su funcionamiento no está garantizado.
-- No utilizar si tiene síntomas de epilepsia.
+- El Software puede contener imágenes que pueden causar epilepsia. La epilepsia es una enfermedad causada por señales eléctricas anormales en el cerebro y, en casos graves, puede ser mortal. Se cree que los niños pequeños, los adolescentes y los ancianos son más susceptibles a desarrollar epilepsia. Por lo tanto, este software nunca debe ser utilizado por ninguna persona en este grupo de edad.
 - Si su país/escuela/religión/región prohíbe la hipnosis, no utilice esta aplicación.
 - No utilizar en pacientes con esquizofrenia aguda.
 - Evite conducir un coche inmediatamente después de su uso.
@@ -1135,7 +1135,7 @@ Hypnosis KraKra
 [(Меры предосторожности при использовании)]
 
 - Это программное обеспечение представляет собой шутку, и его работа не гарантируется.
-- Не используйте, если у вас есть симптомы эпилепсии.
+- Программное обеспечение может содержать изображения, способные вызвать эпилепсию. Эпилепсия — это заболевание, вызванное аномальными электрическими сигналами в мозге, которое в тяжелых случаях может привести к летальному исходу. Считается, что маленькие дети, подростки и пожилые люди более подвержены развитию эпилепсии. Поэтому данное программное обеспечение ни в коем случае не должно использоваться лицами этой возрастной группы.
 - Если в вашей стране/школе/религии/регионе гипноз запрещен, не используйте это приложение.
 - Не применять у пациентов с острой шизофренией.
 - Избегайте вождения автомобиля сразу после использования.
