@@ -1,7 +1,7 @@
 // 催眠アプリ「催眠くらくら」のJavaScriptのメインコード。
 // 暗号名はKraKra。
 
-const sai_VERSION = '3.7.3'; // KraKraバージョン番号。
+const sai_VERSION = '3.7.4'; // KraKraバージョン番号。
 const sai_DEBUGGING = false; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
 
@@ -132,8 +132,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 再生中なら停止する。
 		if(SAI_sound_is_playing())
 			sai_sound_object.pause();
-		// 音声ボタンをチェックを外す。
+		// UIを更新。
 		sai_id_button_sound_play.classList.remove('sai_class_checked');
+		sai_id_image_config_play_pause.classList.remove('playing');
 	}
 
 	// ページを選択。
@@ -527,20 +528,19 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 音声オブジェクトを作成する。
 	const SAI_sound_create = function(){
+		// 音があった場合、まずは止める。
+		if(sai_sound_object)
+			sai_sound_object.pause();
 		// 音声名がなければ音声オブジェクトなし。
 		if(!sai_sound_name){
-			if(sai_sound_object)
-				sai_sound_object.pause();
 			sai_sound_object = null;
 			return;
 		}
 
 		sai_sound_object = new Audio('sn/' + sai_sound_name + '.mp3');
 		sai_sound_object.addEventListener('ended', function(e){ // 音声が停止した？
-			// 音声再生ボタンのイメージを更新する。
-			sai_id_image_play_pause.src = 'img/play.svg';
-
-			// チェックを外す。
+			// UIを更新する。
+			sai_id_image_config_play_pause.classList.remove('playing');
 			sai_id_button_sound_play.classList.remove('sai_class_checked');
 		});
 	}
@@ -550,16 +550,14 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 音声のバリデーション。
 		if(value.indexOf('sn') == 0)
 			value = '';
-
+		// 音声を停止する。
+		SAI_sound_pause();
 		// 変数に音声の名前を記憶。
 		sai_sound_name = value;
-
 		// 必要なら音声オブジェクトを作成するか、破棄する。
 		SAI_sound_create();
-
 		// 音声の選択を更新。
 		sai_id_select_sound.value = value;
-
 		// ローカルストレージに記憶する。
 		localStorage.setItem('saiminSoundName', sai_sound_name);
 	}
@@ -1118,7 +1116,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// ローカルストレージに表示状態を記憶。
 		localStorage.setItem('saiminHelpShowing', '1');
-
+		// 画面遷移前に音声の停止。
+		SAI_sound_pause();
 		// 同意ページに移動。
 		SAI_choose_page(sai_id_page_agreement);
 	}
@@ -1127,7 +1126,8 @@ document.addEventListener('DOMContentLoaded', function(){
 	const SAI_config = function(){
 		// ローカルストレージに表示状態を記憶。
 		localStorage.setItem('saiminConfigShowing', '1');
-
+		// 画面遷移前に音声の停止。
+		SAI_sound_pause();
 		// 「設定」ページに飛ばす。
 		SAI_choose_page(sai_id_page_config);
 	}
@@ -2879,9 +2879,8 @@ document.addEventListener('DOMContentLoaded', function(){
 				if(sai_sound_object && !sai_sound_object.paused)
 					sai_sound_object.volume = sai_id_range_sound_volume.value / 100.0;
 				// 必要なら再開する。
-				if(sai_id_checkbox_auto_play_sound.checked){
-					SAI_sound_start();
-				}
+				if(sai_id_checkbox_auto_play_sound.checked)
+					SAI_sound_start(true);
 			}else{
 				// 数字を画面中央に描画する。
 				let value = Math.floor(diff_time);
@@ -3423,32 +3422,43 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 音声を再生開始。
-	const SAI_sound_start = function(is_mute = false){
+	const SAI_sound_start = function(is_loop = false){
 		// 必要ならば音声を作成。
 		if(!sai_sound_object)
 			SAI_sound_create();
 		// 音声なしなら
 		if(!sai_sound_object){
-			// 音声ボタンのチェックを外す。
+			// UIを更新。
 			sai_id_button_sound_play.classList.remove('sai_class_checked');
+			sai_id_image_config_play_pause.classList.remove('playing');
 			return;
 		}
 
 		// 音量と再生位置の設定。
-		if(is_mute)
-			sai_sound_object.volume = 0;
-		else
-			sai_sound_object.volume = sai_id_range_sound_volume.value / 100.0;
+		sai_sound_object.volume = sai_id_range_sound_volume.value / 100.0;
 		sai_sound_object.currentTime = 0;
 
 		// 必要ならループする。
-		sai_sound_object.loop = sai_id_checkbox_auto_repeat_sound.checked;
+		if(is_loop)
+			sai_sound_object.loop = sai_id_checkbox_auto_repeat_sound.checked;
+		else
+			sai_sound_object.loop = false;
 
 		// 再生を開始する。
 		sai_sound_object.play();
 
-		// 音声ボタンをチェックする。
+		// UIを更新。
 		sai_id_button_sound_play.classList.add('sai_class_checked');
+		sai_id_image_config_play_pause.classList.add('playing');
+	}
+
+	// 音声の再生と停止を切り替える。
+	const SAI_sound_toggle = function(is_loop = false){
+		if(SAI_sound_is_playing()){
+			SAI_sound_pause();
+		}else{
+			SAI_sound_start(is_loop);
+		}
 	}
 
 	// 音声をミュート。
@@ -3526,7 +3536,11 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 「設定」画面のOKボタン。
 		sai_id_button_config_ok.addEventListener('click', function(e){
+			// 画面遷移前に音声を停止。
+			SAI_sound_pause();
+			// 設定を閉じたことを覚えておく。
 			localStorage.removeItem('saiminConfigShowing');
+			// 画面遷移。
 			SAI_choose_page(sai_id_page_main);
 			// 必要ならば切り替え音を再生する。
 			SAI_sound_play_switch();
@@ -3558,17 +3572,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			// 必要ならカウントダウンを開始する。
 			if(sai_id_checkbox_count_down.checked){
 				sai_count_down = new Date().getTime();
-				if(SAI_sound_is_playing()){ // 再生中なら
-					// 音声をミュートする。
-					SAI_sound_mute();
-				}else if(sai_id_checkbox_auto_play_sound.checked){ // 自動再生なら
-					// 必要ならば音声を作成。
-					if(!sai_sound_object)
-						SAI_sound_create();
-					// 必要ならミュートしながら音声を再生する。
-					if(sai_id_checkbox_auto_play_sound.checked)
-						SAI_sound_start(true);
-				}
+				// 音声をミュートする。
+				SAI_sound_mute();
 			}else{
 				// 必要ならスピーチを開始する。
 				if(sai_id_checkbox_speech_on_off.checked){
@@ -3577,7 +3582,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				// 再生中ではなく、自動再生なら
 				if(!SAI_sound_is_playing() && sai_id_checkbox_auto_play_sound.checked){
 					// 音声を再生する。
-					SAI_sound_start();
+					SAI_sound_start(true);
 				}
 			}
 		});
@@ -3612,14 +3617,8 @@ document.addEventListener('DOMContentLoaded', function(){
 				// 必要ならば音声を作成。
 				if(!sai_sound_object)
 					SAI_sound_create();
-				// 音声ありなら
-				if(sai_sound_object){
-					// 再生と停止を切り替える。
-					if(SAI_sound_is_playing())
-						SAI_sound_pause();
-					else
-						SAI_sound_start();
-				}
+				// 再生と停止を切り替える。
+				SAI_sound_toggle(true);
 			}else{
 				SAI_config();
 			}
@@ -3689,25 +3688,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 設定の音声再生ボタン。
 		sai_id_button_sound_config_play.addEventListener('click', function(){
-			if(!sai_sound_object)
-				return;
-
-			// ループを外す。
-			sai_sound_object.loop = false;
-			// 停止中なら
-			if(sai_sound_object.paused){
-				// 再生を再開する。
-				sai_sound_object.volume = sai_id_range_sound_volume.value / 100.0;
-				sai_sound_object.currentTime = 0;
-				sai_sound_object.play();
-				// 再生ボタンのイメージを更新する。
-				sai_id_image_play_pause.src = 'img/stop.svg';
-			}else{ // 再生中なら
-				// 停止する。
-				sai_sound_object.pause();
-				// 再生ボタンのイメージを更新する。
-				sai_id_image_play_pause.src = 'img/play.svg';
-			}
+			// 再生停止を切り替える。
+			SAI_sound_toggle(false);
 		}, false);
 
 		// 映像切り替えの音声の有無に関するボタン。
@@ -3858,7 +3840,6 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_id_button_speech.addEventListener('click', function(e){
 			if(sai_hypnosis_releasing_time)
 				return; // 催眠解除中のときは反応しない。
-
 			// メッセージリストダイアログを表示。
 			SAI_choose_page(sai_id_page_message);
 		});
@@ -3948,7 +3929,11 @@ document.addEventListener('DOMContentLoaded', function(){
 			sai_id_button_mesage_ok.click();
 		});
 		sai_id_button_config_back.addEventListener('click', function(e){
+			// 画面遷移前に音声を停止。
+			SAI_sound_pause();
+			// 設定を閉じたことを覚えておく。
 			localStorage.removeItem('saiminConfigShowing');
+			// 画面遷移。
 			SAI_choose_page(sai_id_page_main);
 		});
 		sai_id_button_agreement_back.addEventListener('click', function(e){
