@@ -10,8 +10,8 @@ android {
         applicationId "com.katahiromz.krakra_ja_jp"
         minSdkVersion 28
         targetSdkVersion 34
-        versionCode 374
-        versionName "3.7.4"
+        versionCode 376
+        versionName "3.7.6"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

@@ -733,18 +733,18 @@ We provide real entertainment where you can enjoy hypnotic images and sounds.
 
 [(Precautions for use)]
 
-- This software is a joke application and its operation is not guaranteed.
-- This software may contain images that may cause epilepsy. Epilepsy is a disease caused by abnormal electrical signals in the brain, which may lead to death in the worst case. Children, adolescents, and the elderly are considered to be more susceptible to epilepsy. Therefore, this software should never be used by these age groups.
-- If your country, school, religion or region prohibits hypnosis, do not use this application.
-- Acute schizophrenic patients should not use this software.
-- Avoid driving a car immediately after using this software.
-- People with trypophobia should not use this software.
-- If you experience symptoms such as headache, dizzy, hyperpnea, nausea, gastrointestinal problems, or abnormal emotions, discontinue use immediately and consult a specialist.
-- The Operator may terminate the Service at any time if any reason arises that makes it difficult to continue the Service.
-- Please do not hypnotize others without their consent.
-- This app is not for medical use. We recommend medically effective standard care for sick people.
-- This app is not for sleeping. If you are not feeling well, please refrain from using the facility.
-- Hypnosis that attempts to make the subject do something that he or she does not know the meaning of or how to do or is unable to do is ineffective.
+- This software is a joke app, and there is no guarantee that it will work.
+- This software may contain images that cause epilepsy. Epilepsy is a disease caused by abnormal electrical signals in the brain, and in the worst case, can lead to death. It is believed that young children, teenagers, and the elderly are more likely to develop epilepsy. Therefore, this software should never be used on these age groups.
+- Do not use this app if your country, school, religion, or region prohibits hypnosis.
+- Patients with acute schizophrenia are prohibited from using this app.
+- Avoid driving a car or operating dangerous machinery immediately after use.
+- Do not use this app if you suffer from phobia of clusters.
+- If you experience symptoms such as headaches, dizziness, hyperventilation, nausea, gastrointestinal problems, or abnormal emotions, immediately discontinue use and consult a specialist.
+- The operator may terminate this service at any time if a reason arises that makes it difficult to continue this service.
+- Do not hypnotize others without their consent.
+- This app is not for medical use. For sick people, we recommend standard medical treatment that is medically effective.
+- This app is not for sleeping. If you are not feeling well, please refrain from using it.
+- Hypnosis that tries to make the subject do things that they do not know the meaning or method of, or that are impossible to perform, is ineffective.
 
 [(How to use)]
 
@@ -755,7 +755,7 @@ We provide real entertainment where you can enjoy hypnotic images and sounds.
 - The 'gear' button will open Configuration.
 - When you run your finger on the screen, the screen sparks to attract their attention.
 
-Copyright (c) 2022-2024 Katayama Hirofumi MZ
+Copyright (c) 2022-2025 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
 Copyright (c) 2021 Nenad Markuš
@@ -784,16 +784,16 @@ Hypnosis KraKra
 【사용상의 주의】
 
 - 본 소프트웨어는 농담 앱이며 동작은 무보증입니다.
-- 본 소프트웨어는 간질을 일으키는 영상을 포함할 수 있습니다. 간질은 뇌의 전기 신호의 이상으로 인해 발생하는 질병이며, 최악의 경우 죽음으로 이어집니다. 유아, 청소년기의 젊은이, 노인은 간질을 발병하기 쉽다고 생각됩니다. 따라서 이러한 연령대에 본 소프트웨어를 사용하는 것은 절대로 하지 마십시오.
+- 본 소프트웨어는 간질을 일으키는 영상을 포함할지도 모릅니다. 간질이란 뇌의 전기신호의 이상으로 인한 병이며, 최악의 경우 죽음에 이르게 됩니다.
 - 귀하의 국가, 학교, 종교 및 지역이 최면을 금지하는 경우이 응용 프로그램을 사용하지 마십시오.
-- 급성기 정신분열증 환자는 사용 금지입니다.
-- 사용 직후에는 자동차 운전을 피하십시오.
+- 급성기 정신 분열증 환자는 사용 금지입니다.
+- 사용 직후에는 자동차의 운전이나 위험이 있는 기계의 조작 등을 피해 주십시오.
 - 집합체 공포증을 가진 사람은 사용하지 마십시오.
 - 두통, 현기증, 과호흡, 메스꺼움, 위장 장애, 이상한 감정 등의 증상이 발생한 경우에는 신속하게 사용을 중지하고 전문의의 진단을 받으십시오.
 - 운영자는 본 서비스의 계속이 곤란해지는 사유가 발생한 경우 언제든지 본 서비스를 종료할 수 있는 것으로 합니다.
 - 타인에게 동의없이 최면을 걸지 마십시오.
-- 이 응용 프로그램은 의료용이 아닙니다. 아픈 사람에게는 의학적으로 효과적인 표준 의료를 권장합니다.
-- 이 앱은 수면용이 아닙니다. 컨디션이 뛰어나지 않는 사람은 이용을 돌려주세요.
+- 이 앱은 의료용이 아닙니다. 아픈 사람에게는 의학적으로 효과가 있는 표준 의료를 권장합니다.
+- 이 앱은 수면용이 아닙니다.
 - 피험자가 의미나 방법을 모르는 것, 실행의 불가능한 일을 하려고 하는 최면은 효과가 없습니다.
 
 【사용법】
@@ -806,7 +806,7 @@ Hypnosis KraKra
 - '기어' 버튼으로 일반 설정을 할 수 있습니다.
 - 화면을 손가락으로 추적하면 반짝임이 표시되어 상대방의 주의를 끌 수 있습니다.
 
-Copyright (c) 2022-2024 Katayama Hirofumi MZ
+Copyright (c) 2022-2025 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
 Copyright (c) 2021 Nenad Markuš
@@ -838,7 +838,7 @@ Hypnosis KraKra
 - 本ソフトウェアは、てんかんを引き起こす映像を含むかもしれません。てんかんとは、脳の電気信号の異常によって起こる病気であり、最悪の場合、死に至ります。幼児、思春期の若者、高齢者はてんかんを発症しやすいと考えられています。よって、これらの年齢層に本ソフトウェアを使用することは絶対にしないでください。
 - あなたの国・学校・宗教・地域が催眠を禁じている場合は、本アプリを使用しないで下さい。
 - 急性期の統合失調症患者は使用禁止です。
-- 使用直後は、自動車の運転を避けて下さい。
+- 使用直後は、自動車の運転や、危険の伴う機械の操作などを避けて下さい。
 - 集合体恐怖症の人は使用しないで下さい。
 - 頭痛、めまい、過呼吸、吐き気、胃腸の不具合、異常な感情などの症状が生じた場合は、速やかに使用を中止し、専門医の診断を受けて下さい。
 - 運営者は、本サービスの継続が困難となる事由が生じた場合、いつでも本サービスを終了することができるものとします。
@@ -856,7 +856,7 @@ Hypnosis KraKra
 - 「歯車」ボタンで全般設定ができます。
 - 画面を指でなぞると、きらめきが表示され、相手の注意を引くことができます。
 
-Copyright (c) 2022-2024 Katayama Hirofumi MZ
+Copyright (c) 2022-2025 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
 Copyright (c) 2021 Nenad Markuš
@@ -884,18 +884,18 @@ Hypnosis KraKra
 
 【使用注意事项】
 
-- 该软件是一个玩笑应用程序，不保证其运行。
-- 该软件可能包含可能导致癫痫的图像。癫痫是一种由大脑异常电信号引起的疾病，严重时可能会致命。人们认为幼儿、青少年和老年人更容易患上癫痫。因此，这个年龄段的人绝对不应该使用该软件。
-- 如果您的国家、学校、宗教或地区禁止催眠，请勿使用此应用程序。
-- 急性精神分裂症患者不应使用此软件。
-- 使用本软件后避免立即开车。
-- 有密集恐惧症的人不应使用此软件。
-- 如果出现头痛、头晕、呼吸急促、恶心、肠胃问题或情绪异常等症状，请立即停止使用并咨询专科医生。
-- 如果出现任何原因导致难以继续提供服务，运营商可以随时终止服务。
-- 未经他人同意，请勿催眠他人。
-- 此应用程序不用于医疗用途。 我们建议对病人进行有效的标准护理。
-- 这个应用程序不适合睡觉。 如果您感觉不舒服，请不要使用该设施。
-- 试图让受试者做一些他或她不知道其含义或如何做或无法做的事情的催眠是无效的。
+- 该软件是一个笑话应用程序，不能保证它会起作用。
+- 该软件可能包含可能导致癫痫的图像。癫痫是一种由大脑异常电信号引起的疾病，严重时可能致命。人们认为幼儿、青少年和老年人更容易患上癫痫。因此，这个年龄段的人绝对不应该使用该软件。
+- 如果您的国家、学校、宗教或地区禁止催眠，请不要使用此应用程序。
+- 患有急性精神分裂症的患者不可以使用。
+- 使用后立即避免驾驶汽车或操作危险机械。
+- 如果您患有幽闭恐惧症，请勿使用。
+- 如果您出现以下任何症状，请停止使用并咨询医疗专业人员：头痛、头晕、过度换气、恶心、胃肠道问题或情绪异常。
+- 如果情况导致继续提供服务困难，运营商保留随时终止服务的权利。
+- 未经他人同意，请勿对他人实施催眠。
+- 此应用程序不可用于医疗用途。为患病者推荐医学上有效的标准护理。
+- 此应用程序不适用于睡觉。如果您感觉不适，请不要使用该设施。
+- 如果催眠试图让受试者做一些他不知道其意义或如何做，或不可能做的事情，那么催眠是不会起作用的。
 
 【如何使用】
 
@@ -906,7 +906,7 @@ Hypnosis KraKra
 - “齿轮”按钮将打开配置。
 - 当你的手指在屏幕上运行时，屏幕会产生火花，吸引他们的注意力。
 
-Copyright (c) 2022-2024 片山博文MZ
+Copyright (c) 2022-2025 片山博文MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
 Copyright (c) 2021 Nenad Markuš
@@ -934,18 +934,18 @@ Hypnosis KraKra
 
 【使用注意事項】
 
-- 該軟件是一個玩笑應用程序，不保證其運行。
-- 該軟體可能包含可能導致癲癇的圖像。癲癇是一種由大腦異常電訊號引起的疾病，嚴重時可能會致命。人們認為幼兒、青少年和老年人更容易患上癲癇。因此，這個年齡層的人絕對不應該使用該軟體。
-- 如果您的國家/學校/宗教/地區禁止催眠，請不要使用此應用程序。
-- 請勿用於急性精神分裂症患者。
-- 使用後避免立即開車。
-- 如果您有廣場恐懼症，請勿使用。
-- 如果出現頭痛、頭暈、換氣過度、噁心、腸胃不適或情緒異常等症狀，請立即停止使用並諮詢專科醫生。
-- 如果有理由難以繼續提供該服務，運營商可以隨時終止該服務。
-- 未經他人同意，請勿催眠他人。
-- 此應用程式不用於醫療用途。 我們建議對病人進行有效的標準護理。
-- 這個應用程式不適合睡覺。 如果您感覺不舒服，請不要使用該設施。
-- 試圖讓受試者做一些他或她不知道其含義或如何做或無法做的事情的催眠是無效的。
+- 該軟體是一個笑話應用程序，不能保證它會起作用。
+- 該軟體可能包含可能導致癲癇的圖像。癲癇是一種由大腦異常電訊號引起的疾病，嚴重時可能致命。人們認為幼兒、青少年和老年人更容易患上癲癇。因此，這個年齡層的人絕對不應該使用該軟體。
+- 如果您的國家、學校、宗教或地區禁止催眠，請不要使用此應用程式。
+- 患有急性精神分裂症的患者不可以使用。
+- 使用後立即避免駕駛汽車或操作危險機械。
+- 若您患有幽閉恐懼症，請勿使用。
+- 如果您有以下任何症狀，請停止使用並諮詢醫療專業人員：頭痛、頭暈、過度換氣、噁心、胃腸道問題或情緒異常。
+- 如果情況導致繼續提供服務困難，營運商保留隨時終止服務的權利。
+- 未經他人同意，請勿對他人實施催眠。
+- 此應用程式不可用於醫療用途。為患病者推薦醫學上有效的標準護理。
+- 此應用程式不適用於睡覺。如果您感覺不適，請不要使用該設施。
+- 如果催眠試圖讓受試者做一些他不知道其意義或如何做，或不可能做的事情，那麼催眠是不會起作用的。
 
 【用法】
 
@@ -956,7 +956,7 @@ Hypnosis KraKra
 - 用於常規設置的“齒輪”按鈕。
 - 在屏幕上滑動手指即可顯示閃爍的光芒，吸引對手的注意力。
 
-Copyright (c) 2022-2024 片山博文MZ
+Copyright (c) 2022-2025 片山博文MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
 Copyright (c) 2021 Nenad Markuš
@@ -984,18 +984,18 @@ Forniamo un vero intrattenimento in cui puoi goderti immagini e suoni ipnotici.
 
 [(Precauzioni per l'uso)]
 
-- Questo software è un'applicazione scherzosa e il suo funzionamento non è garantito.
-- Il Software potrebbe contenere immagini che potrebbero causare epilessia. L'epilessia è una malattia causata da segnali elettrici anomali nel cervello e, nei casi gravi, può essere fatale. Si ritiene che i bambini piccoli, gli adolescenti e gli anziani siano più predisposti a sviluppare l'epilessia. Pertanto, questo software non dovrebbe mai essere utilizzato da persone di questa fascia d'età.
-- Se il tuo paese, scuola, religione o regione vieta l'ipnosi, non utilizzare questa applicazione.
-- I pazienti schizofrenici acuti non dovrebbero utilizzare questo software.
-- Evita di guidare un'auto subito dopo aver utilizzato questo software.
-- Le persone con tripofobia non dovrebbero usare questo software.
-- Se si verificano sintomi come mal di testa, vertigini, iperpnea, nausea, problemi gastrointestinali o emozioni anormali, interrompere immediatamente l'uso e consultare uno specialista.
-- L'Operatore può interrompere il Servizio in qualsiasi momento se si verifica un motivo che rende difficile continuare il Servizio.
-- Per favore non ipnotizzare gli altri senza il loro consenso.
-- Questa app non è per uso medico. Raccomandiamo cure standard efficaci dal punto di vista medico per i malati.
-- Questa app non è per dormire. Se non ti senti bene, ti preghiamo di astenerti dall'utilizzare la struttura.
-- L'ipnosi che tenta di far fare al soggetto qualcosa di cui non conosce il significato o come fare o non è in grado di fare è inefficace.
+- Questo software è un'app scherzosa e non vi è alcuna garanzia che funzioni.
+- Questo software potrebbe contenere immagini che potrebbero causare epilessia. L'epilessia è una malattia causata da segnali elettrici anomali nel cervello e, nei casi gravi, può essere fatale. Si ritiene che i bambini piccoli, gli adolescenti e gli anziani siano più predisposti a sviluppare l'epilessia. Pertanto, questo software non dovrebbe mai essere utilizzato da persone di questa fascia d'età.
+- Se l'ipnosi è proibita nel tuo Paese, nella tua scuola, nella tua religione o nella tua regione, ti preghiamo di non utilizzare questa app.
+- Non adatto all'uso da parte di pazienti affetti da schizofrenia acuta.
+- Subito dopo l'uso, evitare di guidare veicoli o di utilizzare macchinari pericolosi.
+- Non utilizzare se si soffre di claustrofobia.
+- Se si verifica uno qualsiasi dei seguenti sintomi, interrompere l'uso e consultare un medico: mal di testa, vertigini, iperventilazione, nausea, problemi gastrointestinali o emozioni anomale.
+- L'Operatore si riserva il diritto di interrompere il Servizio in qualsiasi momento qualora le circostanze rendessero difficile la continuazione del Servizio.
+- Non ipnotizzare gli altri senza il loro consenso.
+- Questa app non è destinata all'uso medico. Consigliare cure standard efficaci dal punto di vista medico ai malati.
+- Questa app non è adatta per dormire. Se non vi sentite bene, vi preghiamo di astenervi dall'utilizzare la struttura.
+- L'ipnosi non funziona se cerca di indurre il soggetto a fare qualcosa di cui non sa il significato o come fare, oppure che è impossibile da realizzare.
 
 [(Come usare)]
 
@@ -1006,7 +1006,7 @@ Forniamo un vero intrattenimento in cui puoi goderti immagini e suoni ipnotici.
 - Il pulsante "ingranaggio" aprirà Configurazione.
 - Quando fai scorrere il dito sullo schermo, lo schermo si illumina per attirare la loro attenzione.
 
-Copyright (c) 2022-2024 Katayama Hirofumi MZ
+Copyright (c) 2022-2025 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
 Copyright (c) 2021 Nenad Markuš
@@ -1034,18 +1034,18 @@ Wir bieten echte Unterhaltung, bei der Sie hypnotische Bilder und Töne genieße
 
 [(Vorsichtsmaßnahmen für den Gebrauch)]
 
-- Bei dieser Software handelt es sich um eine Scherzanwendung, für deren Funktionsfähigkeit keine Garantie übernommen wird.
-- Die Software kann Bilder enthalten, die Epilepsie verursachen können. Epilepsie ist eine Krankheit, die durch anormale elektrische Signale im Gehirn verursacht wird und in schweren Fällen tödlich sein kann. Kleine Kinder, Jugendliche und ältere Menschen gelten als anfälliger für die Entwicklung einer Epilepsie. Daher sollte diese Software niemals von Personen dieser Altersgruppe verwendet werden.
-- Wenn Ihr Land, Ihre Schule, Religion oder Region Hypnose verbietet, verwenden Sie diese Anwendung nicht.
-- Patienten mit akuter Schizophrenie sollten diese Software nicht verwenden.
-- Vermeiden Sie es, unmittelbar nach der Verwendung dieser Software Auto zu fahren.
-- Personen mit Trypophobie sollten diese Software nicht verwenden.
-- Wenn bei Ihnen Symptome wie Kopfschmerzen, Schwindel, Hyperpnoe, Übelkeit, Magen-Darm-Probleme oder abnormale Emotionen auftreten, brechen Sie die Anwendung sofort ab und konsultieren Sie einen Spezialisten.
-- Der Betreiber kann den Dienst jederzeit beenden, wenn ein Grund vorliegt, der die Fortsetzung des Dienstes erschwert.
-- Bitte hypnotisieren Sie andere nicht ohne deren Zustimmung.
-- Diese App ist nicht für medizinische Zwecke bestimmt. Für erkrankte Menschen empfehlen wir eine medizinisch wirksame Regelversorgung.
-- Diese App ist nicht zum Schlafen gedacht. Wenn Sie sich nicht wohl fühlen, sehen Sie bitte von der Nutzung der Einrichtung ab.
-- Hypnose, die versucht, den Probanden dazu zu bringen, etwas zu tun, dessen Bedeutung er oder sie nicht kennt oder wie er oder sie es tun soll oder zu dem er nicht in der Lage ist, ist wirkungslos.
+- Diese Software ist eine Scherz-App und es gibt keine Garantie, dass sie funktioniert.
+- Diese Software kann Bilder enthalten, die Epilepsie verursachen können. Epilepsie ist eine Krankheit, die durch abnorme elektrische Signale im Gehirn verursacht wird und in schweren Fällen tödlich sein kann. Kleine Kinder, Jugendliche und ältere Menschen gelten als anfälliger für die Entwicklung einer Epilepsie. Daher sollte diese Software niemals von Personen dieser Altersgruppe verwendet werden.
+- Wenn Hypnose in Ihrem Land, Ihrer Schule, Religion oder Region verboten ist, verwenden Sie diese App bitte nicht.
+- Nicht zur Anwendung bei Patienten mit akuter Schizophrenie.
+- Vermeiden Sie unmittelbar nach der Anwendung das Autofahren oder die Bedienung gefährlicher Maschinen.
+- Nicht verwenden, wenn Sie unter Klaustrophobie leiden.
+- Wenn eines der folgenden Symptome bei Ihnen auftritt, beenden Sie die Anwendung und suchen Sie einen Arzt auf: Kopfschmerzen, Schwindel, Hyperventilation, Übelkeit, Magen-Darm-Probleme oder abnorme Emotionen.
+- Der Betreiber behält sich das Recht vor, den Dienst jederzeit zu beenden, wenn die Umstände eine Fortsetzung des Dienstes erschweren.
+- Hypnotisieren Sie andere nicht ohne deren Zustimmung.
+- Diese App ist nicht für medizinische Zwecke bestimmt. Empfehlen Sie medizinisch wirksame Standardbehandlungen für Kranke.
+- Diese App ist nicht zum Schlafen gedacht. Sollten Sie sich unwohl fühlen, bitten wir Sie, von der Nutzung der Anlage abzusehen.
+- Hypnose funktioniert nicht, wenn sie versucht, den Probanden dazu zu bringen, etwas zu tun, dessen Bedeutung oder Vorgehensweise er nicht kennt oder was unmöglich auszuführen ist.
 
 [(Wie benutzt man)]
 
@@ -1056,7 +1056,7 @@ Wir bieten echte Unterhaltung, bei der Sie hypnotische Bilder und Töne genieße
 - Die Schaltfläche „Zahnrad“ öffnet die Konfiguration.
 - Wenn Sie mit dem Finger über den Bildschirm fahren, erzeugt der Bildschirm Funken, um ihre Aufmerksamkeit zu erregen.
 
-Copyright (c) 2022-2024 Katayama Hirofumi MZ
+Copyright (c) 2022-2025 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
 Copyright (c) 2021 Nenad Markuš
@@ -1084,18 +1084,18 @@ Brindamos entretenimiento real donde podrás disfrutar de imágenes y sonidos hi
 
 [(Precauciones de uso)]
 
-- Este software es una aplicación de broma y su funcionamiento no está garantizado.
-- El Software puede contener imágenes que pueden causar epilepsia. La epilepsia es una enfermedad causada por señales eléctricas anormales en el cerebro y, en casos graves, puede ser mortal. Se cree que los niños pequeños, los adolescentes y los ancianos son más susceptibles a desarrollar epilepsia. Por lo tanto, este software nunca debe ser utilizado por ninguna persona en este grupo de edad.
-- Si su país/escuela/religión/región prohíbe la hipnosis, no utilice esta aplicación.
-- No utilizar en pacientes con esquizofrenia aguda.
-- Evite conducir un coche inmediatamente después de su uso.
-- No utilice este producto si tiene miedo a los colectivos.
-- Si experimenta síntomas como dolor de cabeza, mareos, hiperventilación, náuseas, problemas gastrointestinales o emociones inusuales, suspenda inmediatamente el uso del producto y consulte a un especialista.
-- El operador podrá dar por terminado este servicio en cualquier momento si surge cualquier motivo que dificulte la continuidad de este servicio.
-- Por favor, no hipnotices a otros sin su consentimiento.
-- Esta aplicación no es para uso médico. Recomendamos una atención estándar médicamente eficaz para las personas enfermas.
+- Este software es una aplicación de broma y no hay garantía de que funcione.
+- Este software puede contener imágenes que pueden causar epilepsia. La epilepsia es una enfermedad causada por señales eléctricas anormales en el cerebro y, en casos graves, puede ser mortal. Se cree que los niños pequeños, los adolescentes y los ancianos son más susceptibles a desarrollar epilepsia. Por lo tanto, este software nunca debe ser utilizado por ninguna persona en este grupo de edad.
+- Si la hipnosis está prohibida en tu país, escuela, religión o región, no uses esta aplicación.
+- No debe utilizarse en pacientes con esquizofrenia aguda.
+- Inmediatamente después de su uso, evite conducir un vehículo o manejar maquinaria peligrosa.
+- No usar si sufre de claustrofobia.
+- Si experimenta alguno de los siguientes síntomas, suspenda su uso y consulte a un profesional médico: dolor de cabeza, mareos, hiperventilación, náuseas, problemas gastrointestinales o emociones anormales.
+- El Operador se reserva el derecho de terminar el Servicio en cualquier momento si las circunstancias dificultan la continuación del Servicio.
+- No hipnotice a otros sin su consentimiento.
+- Esta aplicación no es para uso médico. Recomendar cuidados estándar médicamente efectivos para aquellos que están enfermos.
 - Esta aplicación no es para dormir. Si no se siente bien, absténgase de utilizar las instalaciones.
-- La hipnosis que intenta hacer que el sujeto haga algo que no sabe el significado o cómo hacer o no puede hacer es ineficaz.
+- La hipnosis no funciona si intenta que el sujeto haga algo que no sabe el significado o cómo hacer, o que es imposible de realizar.
 
 [(Cómo utilizar)]
 
@@ -1106,7 +1106,7 @@ Brindamos entretenimiento real donde podrás disfrutar de imágenes y sonidos hi
 - Los ajustes generales se pueden realizar utilizando el botón "engranaje".
 - Pasa el dedo por la pantalla y aparecerá un brillo para atraer la atención de la otra persona.
 
-Copyright (c) 2022-2024 Katayama Hirofumi MZ
+Copyright (c) 2022-2025 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
 Copyright (c) 2021 Nenad Markuš
@@ -1134,18 +1134,18 @@ Hypnosis KraKra
 
 [(Меры предосторожности при использовании)]
 
-- Это программное обеспечение представляет собой шутку, и его работа не гарантируется.
-- Программное обеспечение может содержать изображения, способные вызвать эпилепсию. Эпилепсия — это заболевание, вызванное аномальными электрическими сигналами в мозге, которое в тяжелых случаях может привести к летальному исходу. Считается, что маленькие дети, подростки и пожилые люди более подвержены развитию эпилепсии. Поэтому данное программное обеспечение ни в коем случае не должно использоваться лицами этой возрастной группы.
-- Если в вашей стране/школе/религии/регионе гипноз запрещен, не используйте это приложение.
-- Не применять у пациентов с острой шизофренией.
-- Избегайте вождения автомобиля сразу после использования.
-- Пожалуйста, не используйте этот продукт, если вы боитесь коллективов.
-- Если у вас возникли такие симптомы, как головная боль, головокружение, гипервентиляция, тошнота, проблемы с желудочно-кишечным трактом или необычные эмоции, немедленно прекратите использование продукта и обратитесь к специалисту.
-- Оператор может прекратить предоставление данной услуги в любое время, если возникнет какая-либо причина, затрудняющая продолжение предоставления данной услуги.
-- Пожалуйста, не гипнотизируйте других без их согласия.
-- Это приложение не предназначено для медицинского использования. Мы рекомендуем больным людям эффективный стандартный уход.
-- Это приложение не для сна. Если вы плохо себя чувствуете, пожалуйста, воздержитесь от использования этого объекта.
-- Гипноз, который пытается заставить субъекта сделать что-то, что он или она не знает значения или того, как сделать, или не может сделать, неэффективен.
+- Это программное обеспечение является шуточным приложением, и нет никаких гарантий, что оно будет работать.
+- Данное программное обеспечение может содержать изображения, способные вызвать эпилепсию. Эпилепсия — это заболевание, вызванное аномальными электрическими сигналами в мозге, которое в тяжелых случаях может привести к летальному исходу. Считается, что маленькие дети, подростки и пожилые люди более подвержены развитию эпилепсии. Поэтому данное программное обеспечение ни в коем случае не должно использоваться лицами этой возрастной группы.
+- Если гипноз запрещён в вашей стране, школе, религии или регионе, пожалуйста, не используйте это приложение.
+- Не предназначено для пациентов с острой шизофренией.
+- Сразу после использования воздержитесь от вождения автомобиля или управления опасными механизмами.
+- Не используйте, если вы страдаете клаустрофобией.
+- Если у вас возникнут какие-либо из следующих симптомов, прекратите использование и обратитесь к врачу: головная боль, головокружение, гипервентиляция, тошнота, желудочно-кишечные проблемы или ненормальные эмоции.
+- Оператор оставляет за собой право прекратить оказание Услуги в любое время, если обстоятельства затрудняют продолжение оказания Услуги.
+- Не гипнотизируйте других без их согласия.
+- Это приложение не предназначено для медицинского использования. Рекомендовать эффективные с медицинской точки зрения стандартные методы лечения для больных.
+- Это приложение не для сна. Если вы плохо себя чувствуете, пожалуйста, воздержитесь от посещения учреждения.
+- Гипноз не работает, если он пытается заставить субъекта сделать что-то, смысла или способа сделать что-то, что он не знает, или что невозможно выполнить.
 
 [(Как использовать)]
 
@@ -1156,7 +1156,7 @@ Hypnosis KraKra
 - Общие настройки можно произвести с помощью кнопки «шестеренка».
 - Проведите пальцем по экрану, и появится искорка, привлекающая внимание собеседника.
 
-Copyright (c) 2022-2024 Katayama Hirofumi MZ
+Copyright (c) 2022-2025 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
 Copyright (c) 2021 Nenad Markuš
@@ -1760,7 +1760,6 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_motion_blur, 'モーション ブラー:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(なし)');
 		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', 'ネコっぽい');
-		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', '興奮');
 		trans_setSelectOptionText(sai_id_select_sound, 'Horror', '恐怖');
 		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', '狩人');
 		trans_setSelectOptionText(sai_id_select_sound, 'Longing', 'あこがれ');
@@ -1773,6 +1772,8 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'Pachi', 'パチ');
 		trans_setSelectOptionText(sai_id_select_sound, 'WahWah', 'ワウワウ');
 		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical', '機械音');
+		trans_setSelectOptionText(sai_id_select_sound, 'Psycho', 'サイコ');
+		trans_setSelectOptionText(sai_id_select_sound, 'MyanMyan', 'みゃんみゃん');
 		trans_setHtmlText(sai_id_text_sound_volume, '音量:');
 		trans_setHtmlText(sai_id_text_auto_play_sound, '音声の自動再生:');
 		trans_setHtmlText(sai_id_text_auto_repeat_sound, '音声の自動繰り返し:');
@@ -1861,7 +1862,6 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_motion_blur, '运动模糊：');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(无)');
 		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', '像猫一样');
-		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', '激发');
 		trans_setSelectOptionText(sai_id_select_sound, 'Horror', '害怕');
 		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', '猎人');
 		trans_setSelectOptionText(sai_id_select_sound, 'Longing', '渴望');
@@ -1874,6 +1874,8 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'Pachi', '弹珠');
 		trans_setSelectOptionText(sai_id_select_sound, 'WahWah', '哇哇');
 		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical', '机械声');
+		trans_setSelectOptionText(sai_id_select_sound, 'Psycho', '惊魂记');
+		trans_setSelectOptionText(sai_id_select_sound, 'MyanMyan', '缅缅');
 		trans_setHtmlText(sai_id_text_sound_volume, '音量：');
 		trans_setHtmlText(sai_id_text_auto_play_sound, '自动播放音频：');
 		trans_setHtmlText(sai_id_text_auto_repeat_sound, '自动重复音频：');
@@ -1962,7 +1964,6 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_motion_blur, '運動模糊：');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(無)');
 		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', '像貓一樣');
-		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', '激發');
 		trans_setSelectOptionText(sai_id_select_sound, 'Horror', '害怕');
 		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', '獵人');
 		trans_setSelectOptionText(sai_id_select_sound, 'Longing', '渴望');
@@ -1975,6 +1976,8 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'Pachi', '彈珠');
 		trans_setSelectOptionText(sai_id_select_sound, 'WahWah', '哇哇');
 		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical', '機械聲');
+		trans_setSelectOptionText(sai_id_select_sound, 'Psycho', '驚魂記');
+		trans_setSelectOptionText(sai_id_select_sound, 'MyanMyan', '緬緬');
 		trans_setHtmlText(sai_id_text_sound_volume, '音量：');
 		trans_setHtmlText(sai_id_text_auto_play_sound, '自動播放音訊：');
 		trans_setHtmlText(sai_id_text_auto_repeat_sound, '自動重複音訊：');
@@ -2063,7 +2066,6 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_motion_blur, '모션 블러:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(없음)');
 		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', '고양이 같은');
-		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', '일으키다');
 		trans_setSelectOptionText(sai_id_select_sound, 'Horror', '공포');
 		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', '사냥꾼');
 		trans_setSelectOptionText(sai_id_select_sound, 'Longing', '동경');
@@ -2076,6 +2078,8 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'Pachi', '파칭');
 		trans_setSelectOptionText(sai_id_select_sound, 'WahWah', '와와');
 		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical', '기계음');
+		trans_setSelectOptionText(sai_id_select_sound, 'Psycho', '사이코');
+		trans_setSelectOptionText(sai_id_select_sound, 'MyanMyan', '미안');
 		trans_setHtmlText(sai_id_text_sound_volume, '사운드 볼륨:');
 		trans_setHtmlText(sai_id_text_auto_play_sound, '오디오 자동 재생:');
 		trans_setHtmlText(sai_id_text_auto_repeat_sound, '음성 자동 반복:');
@@ -2164,7 +2168,6 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_motion_blur, 'Sfocatura movimento:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(Nessuno)');
 		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', 'Simile a un gatto');
-		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', 'Eccitare');
 		trans_setSelectOptionText(sai_id_select_sound, 'Horror', 'Paura');
 		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', 'A caccia');
 		trans_setSelectOptionText(sai_id_select_sound, 'Longing', 'Desiderio');
@@ -2177,6 +2180,8 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'Pachi', 'Pachi');
 		trans_setSelectOptionText(sai_id_select_sound, 'WahWah', 'WahWah');
 		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical', 'Meccanico');
+		trans_setSelectOptionText(sai_id_select_sound, 'Psycho', 'Psicopatico');
+		trans_setSelectOptionText(sai_id_select_sound, 'MyanMyan', 'Myan Myan');
 		trans_setHtmlText(sai_id_text_sound_volume, 'Volume del suono:');
 		trans_setHtmlText(sai_id_text_auto_play_sound, 'Riproduzione automatica dell\'audio:');
 		trans_setHtmlText(sai_id_text_auto_repeat_sound, 'Ripetere l\'audio:');
@@ -2265,7 +2270,6 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_motion_blur, 'Bewegungsunschärfe:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(Kein)');
 		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', 'Katzenartig');
-		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', 'Anregen');
 		trans_setSelectOptionText(sai_id_select_sound, 'Horror', 'Furcht');
 		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', 'Jagd');
 		trans_setSelectOptionText(sai_id_select_sound, 'Longing', 'Sehnsucht');
@@ -2278,6 +2282,8 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'Pachi', 'Pachi');
 		trans_setSelectOptionText(sai_id_select_sound, 'WahWah', 'WahWah');
 		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical', 'Mechanischer');
+		trans_setSelectOptionText(sai_id_select_sound, 'Psycho', 'Psycho');
+		trans_setSelectOptionText(sai_id_select_sound, 'MyanMyan', 'Myan Myan');
 		trans_setHtmlText(sai_id_text_sound_volume, 'Lautstärke:');
 		trans_setHtmlText(sai_id_text_auto_play_sound, 'Audio automatisch abspielen:');
 		trans_setHtmlText(sai_id_text_auto_repeat_sound, 'Sich Wiederholender Ton:');
@@ -2366,7 +2372,6 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_motion_blur, 'Desenfoque de movimiento:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(Ninguno)');
 		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', 'Felino');
-		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', 'Excitación');
 		trans_setSelectOptionText(sai_id_select_sound, 'Horror', 'Miedo');
 		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', 'Cazador');
 		trans_setSelectOptionText(sai_id_select_sound, 'Longing', 'Anhelar');
@@ -2379,6 +2384,8 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'Pachi', 'Pachi');
 		trans_setSelectOptionText(sai_id_select_sound, 'WahWah', 'Wah Wah');
 		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical', 'Mecánico');
+		trans_setSelectOptionText(sai_id_select_sound, 'Psycho', 'Psicópata');
+		trans_setSelectOptionText(sai_id_select_sound, 'MyanMyan', 'Myanmar Myanmar');
 		trans_setHtmlText(sai_id_text_sound_volume, 'Volumen:');
 		trans_setHtmlText(sai_id_text_auto_play_sound, 'Reproducción automática de audio:');
 		trans_setHtmlText(sai_id_text_auto_repeat_sound, 'Audio de repetición automática:');
@@ -2467,7 +2474,6 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_motion_blur, 'Размытость:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(Никто)');
 		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', 'Кошачий');
-		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', 'Возбуждение');
 		trans_setSelectOptionText(sai_id_select_sound, 'Horror', 'Страх');
 		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', 'Охотник');
 		trans_setSelectOptionText(sai_id_select_sound, 'Longing', 'Стремятся к');
@@ -2480,6 +2486,8 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'Pachi', 'Пачи');
 		trans_setSelectOptionText(sai_id_select_sound, 'WahWah', 'ВахВах');
 		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical', 'Механический');
+		trans_setSelectOptionText(sai_id_select_sound, 'Psycho', 'Психо');
+		trans_setSelectOptionText(sai_id_select_sound, 'MyanMyan', 'Мьян Мьян');
 		trans_setHtmlText(sai_id_text_sound_volume, 'Объем:');
 		trans_setHtmlText(sai_id_text_auto_play_sound, 'Автовоспроизведение звука:');
 		trans_setHtmlText(sai_id_text_auto_repeat_sound, 'Автоповтор аудио:');
@@ -2568,7 +2576,6 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_motion_blur, 'Motion Blur:');
 		trans_setSelectOptionText(sai_id_select_sound, '', '(None)');
 		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', 'Cattish');
-		trans_setSelectOptionText(sai_id_select_sound, 'Exciting', 'Exciting');
 		trans_setSelectOptionText(sai_id_select_sound, 'Horror', 'Horror');
 		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', 'Hunting');
 		trans_setSelectOptionText(sai_id_select_sound, 'Longing', 'Longing');
@@ -2581,6 +2588,8 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_sound, 'Pachi', 'Pachi');
 		trans_setSelectOptionText(sai_id_select_sound, 'WahWah', 'WahWah');
 		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical', 'Mechanical');
+		trans_setSelectOptionText(sai_id_select_sound, 'Psycho', 'Psycho');
+		trans_setSelectOptionText(sai_id_select_sound, 'MyanMyan', 'Myan Myan');
 		trans_setHtmlText(sai_id_text_sound_volume, 'Sound volume:');
 		trans_setHtmlText(sai_id_text_auto_play_sound, 'Auto-play audio:');
 		trans_setHtmlText(sai_id_text_auto_repeat_sound, 'Repeating audio:');
