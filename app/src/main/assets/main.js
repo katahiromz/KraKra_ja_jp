@@ -1086,7 +1086,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let androidVersion = SAI_get_android_app_version();
 		let text = sai_id_text_version.textContent;
 		if(androidVersion){
-			text = text.replace('[[VERSION]]', nativeVersion + '(android)');
+			text = text.replace('[[VERSION]]', androidVersion + '(android)');
 		}else{
 			text = text.replace('[[VERSION]]', sai_VERSION + '(web)');
 		}
@@ -3771,6 +3771,11 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_speed_set_type(sai_id_range_speed_type.value);
 		}, false);
 
+		// 振動の強さの設定。
+		sai_id_range_vibrator_strength.addEventListener('input', function(){
+			SAI_vibrator_set_strength(sai_id_range_vibrator_strength.value);
+		}, false);
+
 		// 映像スピードの「不規則」チェックボックス。
 		sai_id_checkbox_speed_irregular.addEventListener('change', function(){
 			if(sai_id_checkbox_speed_irregular.checked){
@@ -4341,6 +4346,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// キーボード操作を実装。
 		SAI_register_key_bindings();
+
+		// 必要なら振動を開始。
+		SAI_vibrator_start();
 	}
 
 	// メイン関数を呼び出す。

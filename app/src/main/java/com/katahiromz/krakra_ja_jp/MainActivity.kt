@@ -271,7 +271,8 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         setBrightness(screenBrightness)
 
         // 振動を再開。
-        startVibrate(-1)
+        if (hasVibrator == 1)
+            startVibrate(-1)
     }
 
     // アクティビティの一時停止時。
@@ -286,7 +287,8 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         stopSpeech()
 
         // 振動を停止。
-        stopVibrate()
+        if (hasVibrator == 1)
+            stopVibrate()
     }
 
     // アクティビティの停止時。
@@ -299,6 +301,10 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
         // スピーチを停止する。
         stopSpeech()
+
+        // 振動を停止。
+        if (hasVibrator == 1)
+            stopVibrate()
     }
 
     // アクティビティの破棄時。
