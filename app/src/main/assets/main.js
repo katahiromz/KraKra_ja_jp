@@ -1,7 +1,7 @@
 // 催眠アプリ「催眠くらくら」のJavaScriptのメインコード。
 // 暗号名はKraKra。
 
-const sai_VERSION = '3.7.6'; // KraKraバージョン番号。
+const sai_VERSION = '3.7.7'; // KraKraバージョン番号。
 const sai_DEBUGGING = false; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
 
@@ -80,14 +80,14 @@ document.addEventListener('DOMContentLoaded', function(){
 	let sai_kaleido_canvas_2 = null; // 万華鏡用の一時的なキャンバス2。
 	let sai_face_getter = null; // 顔認識。
 
-	// このアプリはネイティブアプリか？
-	const SAI_is_native_app = function(){
-		return navigator.userAgent.indexOf('/KraKra-native-app/') != -1;
+	// このアプリはAndroidアプリか？
+	const SAI_is_android_app = function(){
+		return navigator.userAgent.indexOf('/KraKra-android-app/') != -1;
 	}
 
-	// ネイティブアプリならバージョン番号を取得する。
-	const SAI_get_native_app_version = function(){
-		let results = navigator.userAgent.match(/\/KraKra-native-app\/([\d\.]+)\//);
+	// Androidアプリならバージョン番号を取得する。
+	const SAI_get_android_app_version = function(){
+		let results = navigator.userAgent.match(/\/KraKra-android-app\/([\d\.]+)\//);
 		if(results)
 			return results[1];
 		return false;
@@ -513,7 +513,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 効果音の音量。
 	const SAI_sound_set_volume = function(value){
-		value = parseInt(value);
+		value = parseInt(value); // 整数化。
 
 		// 音量をセットする。
 		sai_id_range_sound_volume.value = value;
@@ -524,6 +524,39 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// ローカルストレージに記憶する。
 		localStorage.setItem('saiminSoundVolume', value.toString());
+	}
+
+	// 振動を開始する。
+	const SAI_vibrator_start = function(){
+		try{
+			android.startVibrator(sai_id_range_vibrator_strength.value);
+		}catch(error){ // Androidではない。
+			// 無視。
+		}
+	}
+
+	// 振動を停止する。
+	const SAI_vibrator_stop = function(){
+		try{
+			android.stopVibrator();
+		}catch(error){ // Androidではない。
+			// 無視。
+		}
+	}
+
+	// 振動の強さ。
+	const SAI_vibrator_set_strength = function(value){
+		value = parseInt(value); // 整数化。
+
+		// 振動の強さをセットする。
+		sai_id_range_vibrator_strength.value = value;
+		sai_id_text_vibrator_output.textContent = value.toString();
+
+		// ローカルストレージに記憶する。
+		localStorage.setItem('saiminVibratorStrength', value.toString());
+
+		// 振動を開始。
+		SAI_vibrator_start();
 	}
 
 	// 音声オブジェクトを作成する。
@@ -1050,10 +1083,10 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 「バージョン情報」にバージョン番号をセットする。
 	const SAI_update_version_display = function(){
-		let nativeVersion = SAI_get_native_app_version();
+		let androidVersion = SAI_get_android_app_version();
 		let text = sai_id_text_version.textContent;
-		if(nativeVersion){
-			text = text.replace('[[VERSION]]', nativeVersion + '(native)');
+		if(androidVersion){
+			text = text.replace('[[VERSION]]', nativeVersion + '(android)');
 		}else{
 			text = text.replace('[[VERSION]]', sai_VERSION + '(web)');
 		}
@@ -3258,6 +3291,15 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_sound_set_volume(100);
 		}
 
+		// ローカルストレージに振動の強さの設定があれば読み込む。
+		let saiminVibratorStrength = localStorage.getItem('saiminVibratorStrength');
+		if(saiminVibratorStrength){
+			SAI_vibrator_set_strength(saiminVibratorStrength);
+		}else{
+			SAI_vibrator_set_strength(0);
+		}
+		SAI_vibrator_start();
+
 		// ローカルストレージにスピーチの音量の設定があれば読み込む。
 		let saiminMessageVolume = localStorage.getItem('saiminMessageVolume');
 		if(saiminMessageVolume){
@@ -4218,9 +4260,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		// イベントリスナー群を登録する。
 		SAI_register_event_listeners();
 
-		// ネイティブアプリでなければネイティブオンリーの要素を隠す。
-		if(!SAI_is_native_app()){
-			let items = document.getElementsByClassName('sai_class_native_app_only');
+		// AndroidアプリでなければAndroidオンリーの要素を隠す。
+		if(!SAI_is_android_app()){
+			let items = document.getElementsByClassName('sai_class_android_app_only');
 			for(let item of items){
 				item.classList.add('sai_class_invisible');
 			}

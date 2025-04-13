@@ -247,7 +247,7 @@
 				</select>
 			</div>
 			<!-- 【設定ページの渦の向きの設定】ここまで -->
-			<div class="sai_class_native_app_only"><!-- ネイティブアプリのみ -->
+			<div class="sai_class_android_app_only"><!-- Androidアプリのみ -->
 				<hr />
 				<!-- 【設定ページの明るさの設定】ここから -->
 				<div class="sai_class_ui_line">
@@ -465,6 +465,20 @@
 				<output id="sai_id_select_message_size_output" for="sai_id_select_message_size">Normal</output>
 			</div>
 			<!-- 【設定ページのメッセージの大きさの設定】ここまで -->
+			<div class="sai_class_android_app_only"><!-- Androidアプリのみ -->
+				<hr />
+  			<!-- 【設定ページの振動の設定】ここから -->
+  			<div class="sai_class_ui_line">
+  				<span id="sai_id_text_vibrator" class="sai_config_label">Vibrator:</span>
+  			</div>
+  			<div class="sai_class_ui_line">
+  				<span class="sai_class_nobr">
+  					<input type="range" id="sai_id_range_vibrator_strength" name="sai_id_range_vibrator_strength" min="0" max="5" value="0" step="1" title="Vibrator" />
+  				</span><br />
+  				<output id="sai_id_text_vibrator_output" name="sai_id_text_vibrator_output" for="sai_id_range_vibrator_strength">0</output>
+  			</div>
+  			<!-- 【設定ページの振動の設定】ここまで -->
+  		</div>
 		</div>
 		<!-- 【設定ページのフッター】ここから -->
 		<div class="sai_class_config_navi_line">
