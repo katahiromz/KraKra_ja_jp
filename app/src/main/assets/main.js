@@ -1238,21 +1238,42 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_line(ctx, x1, y1, x1 - comp3.re, y1 - comp3.im, lineWidth);
 	}
 
+	const SAI_draw_heart_0 = function(ctx, centerX, centerY, size, color = 'red') {
+		ctx.beginPath();
+		centerY -= size * 0.15;
+		ctx.moveTo(centerX, centerY);
+		size *= 0.5;
+		ctx.bezierCurveTo(
+			centerX, centerY - size * 0.7,
+			centerX - size * 0.8, centerY - size * 0.7,
+			centerX - size, centerY
+		);
+		ctx.bezierCurveTo(
+			centerX - size, centerY + size,
+			centerX, centerY + size * 0.80,
+			centerX, centerY + size * 1.20
+		);
+		ctx.bezierCurveTo(
+			centerX, centerY + size * 0.80,
+			centerX + size, centerY + size,
+			centerX + size, centerY
+		);
+		ctx.bezierCurveTo(
+			centerX + size * 0.8, centerY - size * 0.7,
+			centerX, centerY - size * 0.7,
+			centerX, centerY
+		);
+		ctx.closePath();
+		ctx.fillStyle = color;
+		ctx.fill();
+	}
+
 	// ハート形の描画。
 	const SAI_draw_heart = function(ctx, x0, y0, x1, y1){
-		let x2 = (0.6 * x0 + 0.4 * x1);
-		let y2 = (0.6 * y0 + 0.4 * y1);
-		let comp = new Complex({re:x1 - x0, im:y1 - y0});
-		let comp0 = new Complex({abs:1.0, arg:Math.PI * 0.5});
-		let p0 = comp.mul(comp0.div(16)).add({re:x0, im:y0});
-		let p1 = comp.div(comp0.mul(16)).add({re:x0, im:y0});
-		let p2 = comp.mul(comp0).add({re:x0, im:y0});
-		let p3 = comp.div(comp0).add({re:x0, im:y0});
-		ctx.beginPath();
-		ctx.moveTo(x2, y2);
-		ctx.bezierCurveTo(p0.re, p0.im, p2.re, p2.im, x1, y1);
-		ctx.bezierCurveTo(p3.re, p3.im, p1.re, p1.im, x2, y2);
-		ctx.fill();
+		let centerX = (x0 + x1) / 2;
+		let centerY = (y0 + y1) / 2;
+		let size = y1 - y0;
+		SAI_draw_heart_0(ctx, centerX, centerY, size);
 	}
 
 	// 目の描画。
