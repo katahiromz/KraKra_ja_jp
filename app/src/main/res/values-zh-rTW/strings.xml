@@ -9,6 +9,8 @@
     <string name="cant_use_microphone">此應用程式未經許可不能使用麥克風。</string>
     <string name="needs_camera">此應用程式需要存取相機的權限。</string>
     <string name="cant_use_camera">此應用程式未經許可不能使用相機。</string>
+    <string name="needs_vibe">此應用程式需要存取振動器的權限。</string>
+    <string name="cant_use_vibe">未經許可，此應用程式不能使用振動器。</string>
 
     <!-- main -->
     <string name="app_name">催眠克拉克拉</string>

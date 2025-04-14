@@ -9,6 +9,8 @@
     <string name="cant_use_microphone">Это приложение не может использовать микрофон без разрешения.</string>
     <string name="needs_camera">Этому приложению требуется разрешение на доступ к камере.</string>
     <string name="cant_use_camera">Это приложение не может использовать камеру без разрешения.</string>
+    <string name="needs_vibe">Этому приложению требуется разрешение на доступ к вибратору.</string>
+    <string name="cant_use_vibe">Это приложение не может использовать вибратор без разрешения.</string>
 
     <!-- main -->
     <string name="app_name">KraKra</string>

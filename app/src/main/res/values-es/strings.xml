@@ -9,6 +9,8 @@
     <string name="cant_use_microphone">Esta aplicación no puede usar el micrófono sin permiso.</string>
     <string name="needs_camera">Esta aplicación necesita permiso para acceder a la cámara.</string>
     <string name="cant_use_camera">Esta aplicación no puede usar la cámara sin permiso.</string>
+    <string name="needs_vibe">Esta aplicación necesita permiso para acceder al vibrador.</string>
+    <string name="cant_use_vibe">Esta aplicación no puede utilizar el vibrador sin permiso.</string>
 
     <!-- main -->
     <string name="app_name">KraKra</string>

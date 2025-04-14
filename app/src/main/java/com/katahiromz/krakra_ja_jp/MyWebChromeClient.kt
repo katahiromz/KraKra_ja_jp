@@ -27,7 +27,7 @@ class MyWebChromeClient(private var activity: MainActivity?, private val listene
         fun onShowSnackbar(text: String, typeOfSnack: Int)
         fun onProgressChanged(view: WebView?, newProgress: Int)
         fun onBrightness(value: String)
-        fun onStartVibrator(strength: Float)
+        fun onStartVibrator(strength: Int)
         fun onStopVibrator()
     }
 
@@ -83,8 +83,8 @@ class MyWebChromeClient(private var activity: MainActivity?, private val listene
 
     // 振動を開始する。
     @JavascriptInterface
-    fun startVibrator(strength: Float) {
-        listener.onStartVibrator(strength)
+    fun startVibrator(strength: String) {
+        listener.onStartVibrator(strength.toInt())
     }
 
     // 振動を停止する。

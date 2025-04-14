@@ -9,6 +9,8 @@
     <string name="cant_use_microphone">이 앱은 허가 없이 마이크를 사용할 수 없습니다.</string>
     <string name="needs_camera">이 앱은 카메라에 접근하기 위한 권한이 필요합니다.</string>
     <string name="cant_use_camera">이 앱은 허가 없이 카메라를 사용할 수 없습니다.</string>
+    <string name="needs_vibe">이 앱은 진동기에 접근하기 위한 권한이 필요합니다.</string>
+    <string name="cant_use_vibe">이 앱은 허가 없이 진동기를 사용할 수 없습니다.</string>
 
     <!-- main -->
     <string name="app_name">최면 크라크라</string>

@@ -3,6 +3,7 @@
 
 package com.katahiromz.krakra_ja_jp
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageInfo
@@ -12,6 +13,7 @@ import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
+import android.os.VibrationEffect.DEFAULT_AMPLITUDE
 import android.os.Vibrator
 import android.os.VibratorManager
 import android.speech.tts.TextToSpeech
@@ -152,7 +154,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     private val audioRecordingPermissionChecker =
         PermissionChecker(
             this,
-            android.Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.RECORD_AUDIO,
             onDenied = {
                 showToast(getLocString(R.string.cant_use_microphone), LONG_TOAST)
                 requestCamera()
@@ -169,8 +171,28 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             }
         )
 
+    private val vibePermissionChecker =
+        PermissionChecker(
+            this,
+            Manifest.permission.VIBRATE,
+            onDenied = {
+                showToast(getLocString(R.string.cant_use_vibe), LONG_TOAST)
+                requestVibe()
+            },
+            onShowRationale = { onRequest ->
+                val title = getLocString(R.string.app_name)
+                val message = getLocString(R.string.needs_vibe)
+                MaterialAlertDialogBuilder(this, R.style.AlertDialogTheme)
+                    .setTitle(title)
+                    .setMessage(message)
+                    .setPositiveButton(getLocString(R.string.ok)) { _, _ -> onRequest() }
+                    .setCancelable(false)
+                    .show()
+            }
+        )
+
     private fun requestAudioRecoding() {
-        val audioCheck = ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO)
+        val audioCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
         if (audioCheck != PackageManager.PERMISSION_GRANTED) {
             audioRecordingPermissionChecker.runWithPermission {
                 requestCamera()
@@ -183,7 +205,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     private val cameraPermissionChecker =
         PermissionChecker(
             this,
-            android.Manifest.permission.CAMERA,
+            Manifest.permission.CAMERA,
             onDenied = {
                 showToast(getLocString(R.string.cant_use_camera), LONG_TOAST)
             },
@@ -200,9 +222,16 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         )
 
     private fun requestCamera() {
-        val cameraCheck = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
+        val cameraCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
         if (cameraCheck != PackageManager.PERMISSION_GRANTED) {
             cameraPermissionChecker.runWithPermission {}
+        }
+    }
+
+    private fun requestVibe() {
+        val vibeCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.VIBRATE)
+        if (vibeCheck != PackageManager.PERMISSION_GRANTED) {
+            vibePermissionChecker.runWithPermission {}
         }
     }
 
@@ -228,10 +257,15 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         // ロケールをセットする。
         setCurLocale(Locale.getDefault())
 
-        // 権限を確認する。
-        val granted = ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO)
-        if (granted != PackageManager.PERMISSION_GRANTED) {
+        // 録音の権限を取得する。
+        val audioCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+        if (audioCheck != PackageManager.PERMISSION_GRANTED) {
             requestAudioRecoding()
+        }
+        // 振動の権限を取得する。
+        val vibeCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.VIBRATE)
+        if (vibeCheck != PackageManager.PERMISSION_GRANTED) {
+            requestVibe()
         }
 
         // WebViewを初期化。
@@ -253,9 +287,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             //webView?.evaluateJavascript(str) {} // 現在、無効。
             WindowInsetsCompat.toWindowInsetsCompat(view.onApplyWindowInsets(insets.toWindowInsets()))
         }
-
-        // 振動の許可を取得する。
-        ContextCompat.checkSelfPermission(this, android.Manifest.permission.VIBRATE)
     }
 
     // アクティビティの開始時。
@@ -284,7 +315,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
         // 振動を再開。
         if (hasVibrator == 1)
-            startVibrator(-1f)
+            startVibrator(-1)
     }
 
     // アクティビティの一時停止時。
@@ -434,7 +465,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
                 setBrightness(value) // 明るさを指定する。
             }
 
-            override fun onStartVibrator(strength: Float) {
+            override fun onStartVibrator(strength: Int) {
                 startVibrator(strength)
             }
 
@@ -570,17 +601,17 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     private var hasVibrator: Int = -1
     private lateinit var vibratorManager: VibratorManager
     private lateinit var vibrator: Vibrator
-    private var vibratorStrength: Float = 0f
+    private var oldVibratorStrength: Int = 0
 
     // 振動を開始する。
     @Suppress("DEPRECATION")
-    fun startVibrator(strength: Float) {
+    fun startVibrator(strength: Int) {
         Timber.i("startVibrator")
         // 振動が使えるかどうか判定する。
         if (hasVibrator == -1) {
             // 振動を初期化。
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                val vm = getSystemService(Context.VIBRATOR_MANAGER_SERVICE)
+                val vm = getSystemService(VIBRATOR_MANAGER_SERVICE)
                 if (vm == null) {
                     Timber.i("startVibrator: vm == null")
                     hasVibrator = 0
@@ -589,7 +620,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
                 vibratorManager = vm as VibratorManager
                 vibrator = vibratorManager.defaultVibrator
             } else {
-                val v = getSystemService(Context.VIBRATOR_SERVICE)
+                val v = getSystemService(VIBRATOR_SERVICE)
                 if (v == null) {
                     Timber.i("startVibrator: v == null")
                     hasVibrator = 0
@@ -613,55 +644,43 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         vibrator.cancel()
 
         // 強さが-1だったら、直前に指定した強さを使う。強さを覚えておく。
-        val strengthVar = if (strength == -1f) vibratorStrength else strength
-        vibratorStrength = strengthVar
+        val strengthVar: Int = if (strength == -1) oldVibratorStrength else strength
+        oldVibratorStrength = strengthVar
 
-        val repeat = 32767 // 32767回繰り返し
+        var amplitude: Int
         Timber.i("strengthVar: $strengthVar")
         when (strengthVar) { // 0から5まで選べる。
-            0f -> { // 音なし。
+            0 -> { // 音なし。
                 return
             }
-            1f -> { // 弱い。
-                val timings = longArrayOf(400, 600) // タイミング(OFFから始まる)
-                val amplitudes = intArrayOf(0, 170) // 強さ
-                val vibrationEffect =
-                    VibrationEffect.createWaveform(timings, amplitudes, repeat)
-                vibrator.vibrate(vibrationEffect)
+            1 -> { // 弱い。
+                amplitude = 170
             }
-            2f -> { // 少し弱い。
-                val timings = longArrayOf(300, 700) // タイミング(OFFから始まる)
-                val amplitudes = intArrayOf(0, 180) // 強さ
-                val vibrationEffect =
-                    VibrationEffect.createWaveform(timings, amplitudes, repeat)
-                vibrator.vibrate(vibrationEffect)
+            2 -> { // 少し弱い。
+                amplitude = 180
             }
-            3f -> { // 普通。
-                val timings = longArrayOf(200, 800) // タイミング(OFFから始まる)
-                val amplitudes = intArrayOf(0, 190) // 強さ
-                val vibrationEffect =
-                    VibrationEffect.createWaveform(timings, amplitudes, repeat)
-                vibrator.vibrate(vibrationEffect)
+            3 -> { // 普通。
+                amplitude = 200
             }
-            4f -> { // 少し強い。
-                val timings = longArrayOf(100, 900) // タイミング(OFFから始まる)
-                val amplitudes = intArrayOf(0, 200) // 強さ
-                val vibrationEffect =
-                    VibrationEffect.createWaveform(timings, amplitudes, repeat)
-                vibrator.vibrate(vibrationEffect)
+            4 -> { // 少し強い。
+                amplitude = 230
             }
-            5f -> { // 強い。
-                val timings = longArrayOf(0, 1000) // タイミング(OFFから始まる)
-                val amplitudes = intArrayOf(0, 255) // 強さ
-                val vibrationEffect =
-                    VibrationEffect.createWaveform(timings, amplitudes, repeat)
-                vibrator.vibrate(vibrationEffect)
+            5 -> { // 強い。
+                amplitude = 255
             }
             else -> {
                 Timber.w("invalid strength")
-                vibratorStrength = 0f
                 return
             }
+        }
+
+        val timeout: Long = 20 * 60 * 1000 // 20分間
+        if (vibrator.hasAmplitudeControl()) {
+            val effect = VibrationEffect.createOneShot(timeout, amplitude)
+            vibrator.vibrate(effect)
+        } else {
+            val effect = VibrationEffect.createOneShot(timeout, DEFAULT_AMPLITUDE)
+            vibrator.vibrate(effect)
         }
     }
 

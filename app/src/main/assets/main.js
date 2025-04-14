@@ -529,7 +529,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 振動を開始する。
 	const SAI_vibrator_start = function(){
 		try{
-			android.startVibrator(sai_id_range_vibrator_strength.value);
+			android.startVibrator(sai_id_range_vibrator_strength.value.toString());
 			console.log("SAI_vibrator_start: " + sai_id_range_vibrator_strength.value);
 		}catch(error){ // Androidではない。
 			console.log("SAI_vibrator_start: failed");
@@ -1240,31 +1240,19 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_line(ctx, x1, y1, x1 - comp3.re, y1 - comp3.im, lineWidth);
 	}
 
-	const SAI_draw_heart_0 = function(ctx, centerX, centerY, size, color = 'red') {
+	// ハート形の描画。
+	const SAI_draw_heart_0 = function(ctx, cx, cy, size, color = 'red') {
 		ctx.beginPath();
-		centerY -= size * 0.15;
-		ctx.moveTo(centerX, centerY);
-		size *= 0.5;
-		ctx.bezierCurveTo(
-			centerX, centerY - size * 0.7,
-			centerX - size * 0.8, centerY - size * 0.7,
-			centerX - size, centerY
-		);
-		ctx.bezierCurveTo(
-			centerX - size, centerY + size,
-			centerX, centerY + size * 0.80,
-			centerX, centerY + size * 1.20
-		);
-		ctx.bezierCurveTo(
-			centerX, centerY + size * 0.80,
-			centerX + size, centerY + size,
-			centerX + size, centerY
-		);
-		ctx.bezierCurveTo(
-			centerX + size * 0.8, centerY - size * 0.7,
-			centerX, centerY - size * 0.7,
-			centerX, centerY
-		);
+		cy -= size * 0.15;
+		size *= 0.007;
+		// https://www.asobou.co.jp/blog/web/canvas-curve
+		ctx.moveTo(cx, cy);
+		ctx.bezierCurveTo(cx - 10 * size, cy - 25 * size, cx - 30 * size, cy - 40 * size, cx - 50 * size, cy - 40 * size);
+		ctx.bezierCurveTo(cx - 60 * size, cy - 40 * size, cx - 100 * size, cy - 40 * size, cx - 100 * size, cy + 10 * size);
+		ctx.bezierCurveTo(cx - 100 * size, cy + 80 * size, cx - 10 * size, cy + 105 * size, cx, cy + 125 * size);
+		ctx.bezierCurveTo(cx + 10 * size, cy + 105 * size, cx + 100 * size, cy + 80 * size, cx + 100 * size, cy + 10 * size);
+		ctx.bezierCurveTo(cx + 100 * size, cy - 40 * size, cx + 60 * size, cy - 40 * size, cx + 50 * size, cy - 40 * size);
+		ctx.bezierCurveTo(cx + 30 * size, cy - 40 * size, cx + 10 * size, cy - 25 * size, cx, cy);
 		ctx.closePath();
 		ctx.fillStyle = color;
 		ctx.fill();

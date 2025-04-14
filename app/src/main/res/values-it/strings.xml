@@ -9,6 +9,8 @@
     <string name="cant_use_microphone">Questa app non può utilizzare il microfono senza autorizzazione.</string>
     <string name="needs_camera">Questa app necessita dell\'autorizzazione per accedere alla fotocamera.</string>
     <string name="cant_use_camera">Questa app non può utilizzare la fotocamera senza autorizzazione.</string>
+    <string name="needs_vibe">Questa app necessita dell\'autorizzazione per accedere al vibratore.</string>
+    <string name="cant_use_vibe">Questa app non può utilizzare il vibratore senza autorizzazione.</string>
 
     <!-- main -->
     <string name="app_name">KraKra</string>

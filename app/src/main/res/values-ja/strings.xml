@@ -9,6 +9,8 @@
     <string name="cant_use_microphone">このアプリは権限なくマイクを使うことはできません。</string>
     <string name="needs_camera">このアプリはカメラにアクセスするために権限が必要です。</string>
     <string name="cant_use_camera">このアプリは権限なくカメラを使うことはできません。</string>
+    <string name="needs_vibe">このアプリはバイブレーターにアクセスするために権限が必要です。</string>
+    <string name="cant_use_vibe">このアプリは権限なくバイブレーターを使うことはできません。</string>
 
     <!-- main -->
     <string name="app_name">催眠くらくら</string>
