@@ -125,7 +125,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
 
     // 画面の明るさを調整する。
-    var screenBrightness: String = "normal"
+    private var screenBrightness: String = "normal"
     fun setBrightness(value: String) {
         runOnUiThread {
             val params: WindowManager.LayoutParams = window.attributes
@@ -141,6 +141,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
+        Timber.i("onWindowFocusChanged")
         super.onWindowFocusChanged(hasFocus)
     }
 
@@ -168,7 +169,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             }
         )
 
-    fun requestAudioRecoding() {
+    private fun requestAudioRecoding() {
         val audioCheck = ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO)
         if (audioCheck != PackageManager.PERMISSION_GRANTED) {
             audioRecordingPermissionChecker.runWithPermission {
@@ -198,7 +199,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             }
         )
 
-    fun requestCamera() {
+    private fun requestCamera() {
         val cameraCheck = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
         if (cameraCheck != PackageManager.PERMISSION_GRANTED) {
             cameraPermissionChecker.runWithPermission {}
@@ -228,7 +229,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         setCurLocale(Locale.getDefault())
 
         // 権限を確認する。
-        var granted = ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO)
+        val granted = ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO)
         if (granted != PackageManager.PERMISSION_GRANTED) {
             requestAudioRecoding()
         }
@@ -263,7 +264,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         super.onStart() // 親にも伝える。
     }
 
-    var speech_voice_volume: Float = 1.0f;
+    private var speechVoiceVolume: Float = 1.0f
 
     // アクティビティの復帰時。
     override fun onResume() {
@@ -275,7 +276,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
         // テキストがあればスピーチを再開。
         if (theText != "") {
-            speechText(theText, speech_voice_volume)
+            speechText(theText, speechVoiceVolume)
         }
 
         // 明るさを復帰。
@@ -438,7 +439,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             }
 
             override fun onStopVibrator() {
-                stopVibrator();
+                stopVibrator()
             }
         })
         webView?.webChromeClient = chromeClient
@@ -457,9 +458,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         webView?.setBackgroundColor(0)
 
         // 設定を取得する。
-        val settings = webView?.settings
-        if (settings == null)
-            return
+        val settings = webView?.settings ?: return
 
         settings.javaScriptEnabled = true // JavaScriptを有効化。
         settings.domStorageEnabled = true // localStorageを有効化。
@@ -469,7 +468,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             WebView.setWebContentsDebuggingEnabled(true) // デバッギングを有効にする。
         }
 
-        // JavaSciprt側からKraKraのバージョン情報を取得できるようにする。
+        // JavaScript側からKraKraのバージョン情報を取得できるようにする。
         val versionName = getVersionName()
         settings.userAgentString += "/KraKra-android-app/$versionName/"
     }
@@ -489,7 +488,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     /////////////////////////////////////////////////////////////////////
     // ロケール関連
     //
-    var currLocale: Locale = Locale.ENGLISH
+    private var currLocale: Locale = Locale.ENGLISH
     var currLocaleContext: Context? = null
 
     // 現在のロケールをセットする。
@@ -506,7 +505,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
 
     // ローカライズされた文字列を取得する。複数ロケール対応のため、特殊な実装が必要。
-    fun getLocString(id: Int, locale: Locale): String {
+    private fun getLocString(id: Int, locale: Locale): String {
         if (currLocaleContext == null) {
             currLocaleContext = applicationContext.createLocalizedContext(locale)
         }
@@ -549,8 +548,8 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             val speed = 0.3f
             val pitch = 0.8f
             if (volume >= 0)
-                speech_voice_volume = volume
-            params.putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME, speech_voice_volume)
+                speechVoiceVolume = volume
+            params.putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME, speechVoiceVolume)
             tts?.setPitch(pitch)
             tts?.setSpeechRate(speed)
             tts?.speak(text, TextToSpeech.QUEUE_FLUSH, params, "utteranceId")
@@ -614,69 +613,49 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         vibrator.cancel()
 
         // 強さが-1だったら、直前に指定した強さを使う。強さを覚えておく。
-        var strengthVar = if (strength == -1f) vibratorStrength else strength
+        val strengthVar = if (strength == -1f) vibratorStrength else strength
         vibratorStrength = strengthVar
 
         val repeat = 32767 // 32767回繰り返し
-        Timber.i("strengthVar: " + strengthVar.toString())
+        Timber.i("strengthVar: $strengthVar")
         when (strengthVar) { // 0から5まで選べる。
             0f -> { // 音なし。
                 return
             }
             1f -> { // 弱い。
                 val timings = longArrayOf(400, 600) // タイミング(OFFから始まる)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    val amplitudes = intArrayOf(0, 170) // 強さ
-                    val vibrationEffect =
-                        VibrationEffect.createWaveform(timings, amplitudes, repeat)
-                    vibrator.vibrate(vibrationEffect)
-                } else {
-                    vibrator.vibrate(timings, repeat)
-                }
+                val amplitudes = intArrayOf(0, 170) // 強さ
+                val vibrationEffect =
+                    VibrationEffect.createWaveform(timings, amplitudes, repeat)
+                vibrator.vibrate(vibrationEffect)
             }
             2f -> { // 少し弱い。
                 val timings = longArrayOf(300, 700) // タイミング(OFFから始まる)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    val amplitudes = intArrayOf(0, 180) // 強さ
-                    val vibrationEffect =
-                        VibrationEffect.createWaveform(timings, amplitudes, repeat)
-                    vibrator.vibrate(vibrationEffect)
-                } else {
-                    vibrator.vibrate(timings, repeat)
-                }
+                val amplitudes = intArrayOf(0, 180) // 強さ
+                val vibrationEffect =
+                    VibrationEffect.createWaveform(timings, amplitudes, repeat)
+                vibrator.vibrate(vibrationEffect)
             }
             3f -> { // 普通。
                 val timings = longArrayOf(200, 800) // タイミング(OFFから始まる)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    val amplitudes = intArrayOf(0, 190) // 強さ
-                    val vibrationEffect =
-                        VibrationEffect.createWaveform(timings, amplitudes, repeat)
-                    vibrator.vibrate(vibrationEffect)
-                } else {
-                    vibrator.vibrate(timings, repeat)
-                }
+                val amplitudes = intArrayOf(0, 190) // 強さ
+                val vibrationEffect =
+                    VibrationEffect.createWaveform(timings, amplitudes, repeat)
+                vibrator.vibrate(vibrationEffect)
             }
             4f -> { // 少し強い。
                 val timings = longArrayOf(100, 900) // タイミング(OFFから始まる)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    val amplitudes = intArrayOf(0, 200) // 強さ
-                    val vibrationEffect =
-                        VibrationEffect.createWaveform(timings, amplitudes, repeat)
-                    vibrator.vibrate(vibrationEffect)
-                } else {
-                    vibrator.vibrate(timings, repeat)
-                }
+                val amplitudes = intArrayOf(0, 200) // 強さ
+                val vibrationEffect =
+                    VibrationEffect.createWaveform(timings, amplitudes, repeat)
+                vibrator.vibrate(vibrationEffect)
             }
             5f -> { // 強い。
                 val timings = longArrayOf(0, 1000) // タイミング(OFFから始まる)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    val amplitudes = intArrayOf(0, 255) // 強さ
-                    val vibrationEffect =
-                        VibrationEffect.createWaveform(timings, amplitudes, repeat)
-                    vibrator.vibrate(vibrationEffect)
-                } else {
-                    vibrator.vibrate(timings, repeat)
-                }
+                val amplitudes = intArrayOf(0, 255) // 強さ
+                val vibrationEffect =
+                    VibrationEffect.createWaveform(timings, amplitudes, repeat)
+                vibrator.vibrate(vibrationEffect)
             }
             else -> {
                 Timber.w("invalid strength")
