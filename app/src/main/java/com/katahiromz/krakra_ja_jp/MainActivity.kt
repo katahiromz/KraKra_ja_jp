@@ -7,9 +7,13 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
+import android.os.VibratorManager
 import android.speech.tts.TextToSpeech
 import android.view.View
 import android.view.WindowManager
@@ -24,13 +28,17 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
-import createLocalizedContext
 import timber.log.Timber
 import java.util.*
-import android.os.VibrationEffect
-import android.os.VibrationEffect.DEFAULT_AMPLITUDE
-import android.os.Vibrator
-import android.os.VibratorManager
+
+// 複数の翻訳版を有効にするために、任意の翻訳版のコンテキストを作成できるようにする。
+// https://qiita.com/tarumzu/items/b076c4635b38366cddee
+fun Context.createLocalizedContext(locale: Locale): Context {
+    val res = resources
+    val config = Configuration(res.configuration)
+    config.setLocale(locale)
+    return createConfigurationContext(config)
+}
 
 /////////////////////////////////////////////////////////////////////
 // 定数。
@@ -166,7 +174,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             audioRecordingPermissionChecker.runWithPermission {
                 requestCamera()
             }
-        }else{
+        } else {
             requestCamera()
         }
     }
@@ -244,6 +252,9 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             //webView?.evaluateJavascript(str) {} // 現在、無効。
             WindowInsetsCompat.toWindowInsetsCompat(view.onApplyWindowInsets(insets.toWindowInsets()))
         }
+
+        // 振動の許可を取得する。
+        ContextCompat.checkSelfPermission(this, android.Manifest.permission.VIBRATE)
     }
 
     // アクティビティの開始時。
@@ -272,7 +283,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
         // 振動を再開。
         if (hasVibrator == 1)
-            startVibrate(-1)
+            startVibrator(-1f)
     }
 
     // アクティビティの一時停止時。
@@ -288,7 +299,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
         // 振動を停止。
         if (hasVibrator == 1)
-            stopVibrate()
+            stopVibrator()
     }
 
     // アクティビティの停止時。
@@ -304,7 +315,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
         // 振動を停止。
         if (hasVibrator == 1)
-            stopVibrate()
+            stopVibrator()
     }
 
     // アクティビティの破棄時。
@@ -422,12 +433,12 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
                 setBrightness(value) // 明るさを指定する。
             }
 
-            override fun onStartVibrate(strength: Int) {
-                startVibrate(strength)
+            override fun onStartVibrator(strength: Float) {
+                startVibrator(strength)
             }
 
-            override fun onStopVibrate() {
-                stopVibrate();
+            override fun onStopVibrator() {
+                stopVibrator();
             }
         })
         webView?.webChromeClient = chromeClient
@@ -560,21 +571,40 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     private var hasVibrator: Int = -1
     private lateinit var vibratorManager: VibratorManager
     private lateinit var vibrator: Vibrator
-    private var vibratorStrength: Int = 0
+    private var vibratorStrength: Float = 0f
 
     // 振動を開始する。
-    fun startVibrate(strength: Int) {
+    @Suppress("DEPRECATION")
+    fun startVibrator(strength: Float) {
+        Timber.i("startVibrator")
         // 振動が使えるかどうか判定する。
         if (hasVibrator == -1) {
             // 振動を初期化。
-            vibratorManager =
-                getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
-            vibrator = vibratorManager.defaultVibrator
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                val vm = getSystemService(Context.VIBRATOR_MANAGER_SERVICE)
+                if (vm == null) {
+                    Timber.i("startVibrator: vm == null")
+                    hasVibrator = 0
+                    return
+                }
+                vibratorManager = vm as VibratorManager
+                vibrator = vibratorManager.defaultVibrator
+            } else {
+                val v = getSystemService(Context.VIBRATOR_SERVICE)
+                if (v == null) {
+                    Timber.i("startVibrator: v == null")
+                    hasVibrator = 0
+                    return
+                }
+                vibrator = v as Vibrator
+            }
             if (!vibrator.hasVibrator()) {
                 hasVibrator = 0 // 振動が使えない場合。
+                Timber.i("hasVibrator = 0")
                 return
             }
             hasVibrator = 1 // 振動が使える場合。
+            Timber.i("hasVibrator = 1")
         }
 
         if (hasVibrator == 0)
@@ -585,56 +615,85 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
         // 強さが-1だったら、直前に指定した強さを使う。強さを覚えておく。
         var strengthVar = strength
-        if (strengthVar == -1)
+        if (strengthVar == -1f)
             strengthVar = vibratorStrength
         vibratorStrength = strengthVar
 
-        val repeat = -1 // ずっと繰り返し
+        val repeat = 0 // ずっと繰り返し
+        Timber.i("strengthVar" + strengthVar.toString())
         when (strengthVar) { // 0から5まで選べる。
-            0 -> { // 音なし。
+            0f -> { // 音なし。
                 return
             }
-            1 -> { // 弱い。
+            1f -> { // 弱い。
                 val timings = longArrayOf(400, 600) // タイミング(OFFから始まる)
-                val amplitudes = intArrayOf(0, 170) // 強さ
-                val vibrationEffect = VibrationEffect.createWaveform( timings, amplitudes, repeat)
-                vibrator.vibrate((vibrationEffect))
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    val amplitudes = intArrayOf(0, 170) // 強さ
+                    val vibrationEffect =
+                        VibrationEffect.createWaveform(timings, amplitudes, repeat)
+                    vibrator.vibrate(vibrationEffect)
+                } else {
+                    vibrator.vibrate(timings, repeat)
+                }
             }
-            2 -> { // 少し弱い。
+            2f -> { // 少し弱い。
                 val timings = longArrayOf(300, 700) // タイミング(OFFから始まる)
-                val amplitudes = intArrayOf(0, 180) // 強さ
-                val vibrationEffect = VibrationEffect.createWaveform( timings, amplitudes, repeat)
-                vibrator.vibrate((vibrationEffect))
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    val amplitudes = intArrayOf(0, 180) // 強さ
+                    val vibrationEffect =
+                        VibrationEffect.createWaveform(timings, amplitudes, repeat)
+                    vibrator.vibrate(vibrationEffect)
+                } else {
+                    vibrator.vibrate(timings, repeat)
+                }
             }
-            3 -> { // 普通。
+            3f -> { // 普通。
                 val timings = longArrayOf(200, 800) // タイミング(OFFから始まる)
-                val amplitudes = intArrayOf(0, 190) // 強さ
-                val vibrationEffect = VibrationEffect.createWaveform( timings, amplitudes, repeat)
-                vibrator.vibrate((vibrationEffect))
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    val amplitudes = intArrayOf(0, 190) // 強さ
+                    val vibrationEffect =
+                        VibrationEffect.createWaveform(timings, amplitudes, repeat)
+                    vibrator.vibrate(vibrationEffect)
+                } else {
+                    vibrator.vibrate(timings, repeat)
+                }
             }
-            4 -> { // 少し強い。
+            4f -> { // 少し強い。
                 val timings = longArrayOf(100, 900) // タイミング(OFFから始まる)
-                val amplitudes = intArrayOf(0, 200) // 強さ
-                val vibrationEffect = VibrationEffect.createWaveform( timings, amplitudes, repeat)
-                vibrator.vibrate((vibrationEffect))
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    val amplitudes = intArrayOf(0, 200) // 強さ
+                    val vibrationEffect =
+                        VibrationEffect.createWaveform(timings, amplitudes, repeat)
+                    vibrator.vibrate(vibrationEffect)
+                } else {
+                    vibrator.vibrate(timings, repeat)
+                }
             }
-            5 -> { // 強い。
+            5f -> { // 強い。
                 val timings = longArrayOf(0, 1000) // タイミング(OFFから始まる)
-                val amplitudes = intArrayOf(0, 255) // 強さ
-                val vibrationEffect = VibrationEffect.createWaveform( timings, amplitudes, repeat)
-                vibrator.vibrate((vibrationEffect))
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    val amplitudes = intArrayOf(0, 255) // 強さ
+                    val vibrationEffect =
+                        VibrationEffect.createWaveform(timings, amplitudes, repeat)
+                    vibrator.vibrate(vibrationEffect)
+                } else {
+                    vibrator.vibrate(timings, repeat)
+                }
             }
             else -> {
                 Timber.w("invalid strength")
+                vibratorStrength = 0f
                 return
             }
         }
     }
 
     // 振動を停止する。
-    fun stopVibrate() {
+    fun stopVibrator() {
+        Timber.i("stopVibrator")
         if (hasVibrator != 1)
             return
         vibrator.cancel()
+        Timber.i("stopVibrator: canceled")
     }
 }

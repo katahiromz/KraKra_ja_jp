@@ -27,8 +27,8 @@ class MyWebChromeClient(private var activity: MainActivity?, private val listene
         fun onShowSnackbar(text: String, typeOfSnack: Int)
         fun onProgressChanged(view: WebView?, newProgress: Int)
         fun onBrightness(value: String)
-        fun onStartVibrate(strength: Int)
-        fun onStopVibrate()
+        fun onStartVibrator(strength: Float)
+        fun onStopVibrator()
     }
 
     // ローカライズされた文字列を取得する。
@@ -83,14 +83,14 @@ class MyWebChromeClient(private var activity: MainActivity?, private val listene
 
     // 振動を開始する。
     @JavascriptInterface
-    fun startVibrate(strength: Int) {
-        listener.onStartVibrate(strength)
+    fun startVibrator(strength: Float) {
+        listener.onStartVibrator(strength)
     }
 
     // 振動を停止する。
     @JavascriptInterface
-    fun stopVibrate() {
-        listener.onStopVibrate()
+    fun stopVibrator() {
+        listener.onStopVibrator()
     }
 
     // 現在の映像の種類を表す整数値。

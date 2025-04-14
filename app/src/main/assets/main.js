@@ -530,8 +530,9 @@ document.addEventListener('DOMContentLoaded', function(){
 	const SAI_vibrator_start = function(){
 		try{
 			android.startVibrator(sai_id_range_vibrator_strength.value);
+			console.log("SAI_vibrator_start: " + sai_id_range_vibrator_strength.value);
 		}catch(error){ // Androidではない。
-			// 無視。
+			console.log("SAI_vibrator_start: failed");
 		}
 	}
 
@@ -539,8 +540,9 @@ document.addEventListener('DOMContentLoaded', function(){
 	const SAI_vibrator_stop = function(){
 		try{
 			android.stopVibrator();
+			console.log("SAI_vibrator_stop: stopped");
 		}catch(error){ // Androidではない。
-			// 無視。
+			console.log("SAI_vibrator_stop: failed");
 		}
 	}
 
@@ -3319,7 +3321,6 @@ document.addEventListener('DOMContentLoaded', function(){
 		}else{
 			SAI_vibrator_set_strength(0);
 		}
-		SAI_vibrator_start();
 
 		// ローカルストレージにスピーチの音量の設定があれば読み込む。
 		let saiminMessageVolume = localStorage.getItem('saiminMessageVolume');
@@ -4367,9 +4368,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// キーボード操作を実装。
 		SAI_register_key_bindings();
-
-		// 必要なら振動を開始。
-		SAI_vibrator_start();
 	}
 
 	// メイン関数を呼び出す。
