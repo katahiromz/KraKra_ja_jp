@@ -614,13 +614,11 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         vibrator.cancel()
 
         // 強さが-1だったら、直前に指定した強さを使う。強さを覚えておく。
-        var strengthVar = strength
-        if (strengthVar == -1f)
-            strengthVar = vibratorStrength
+        var strengthVar = if (strength == -1f) vibratorStrength else strength
         vibratorStrength = strengthVar
 
-        val repeat = 0 // ずっと繰り返し
-        Timber.i("strengthVar" + strengthVar.toString())
+        val repeat = 32767 // 32767回繰り返し
+        Timber.i("strengthVar: " + strengthVar.toString())
         when (strengthVar) { // 0から5まで選べる。
             0f -> { // 音なし。
                 return
