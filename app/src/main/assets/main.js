@@ -4356,6 +4356,19 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// キーボード操作を実装。
 		SAI_register_key_bindings();
+
+		// スマホ・タブレットでのズームを禁止する。
+		document.addEventListener('touchmove', function(e){
+			if(e.scale !== 1){
+				e.preventDefault();
+			}
+		},{ passive: false });
+		// Ctrl+ホイールでのズームを禁止する。
+		document.addEventListener('wheel', function(e){
+			if(e.ctrlKey){
+				e.preventDefault();
+			}
+		},{ passive: false });
 	}
 
 	// メイン関数を呼び出す。
