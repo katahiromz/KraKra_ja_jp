@@ -533,7 +533,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			console.log("SAI_vibrator_start: " + sai_id_range_vibrator_strength.value);
 		}catch(error){ // Androidではない。
 			if('vibrate' in navigator){
-				navigator.vibrate(0); // 振動を停止。
+				navigator.vibrate([0]); // 振動を停止。
 				if(sai_id_range_vibrator_strength.value > 0){
 					navigator.vibrate([20 * 60 * 1000]); // 20分間振動。
 				}
@@ -548,7 +548,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			console.log("SAI_vibrator_stop: stopped");
 		}catch(error){ // Androidではない。
 			if('vibrate' in navigator){
-				navigator.vibrate(0); // 振動を停止。
+				navigator.vibrate([0]); // 振動を停止。
 			}
 		}
 	}
