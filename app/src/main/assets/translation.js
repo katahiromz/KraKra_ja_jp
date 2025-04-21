@@ -1798,6 +1798,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_label_message_volume, "メッセージボイスの音量:");
 		trans_setHtmlText(sai_id_text_skin, "スキン:");
 		trans_setHtmlText(sai_id_text_vibrator, "振動:");
+		trans_setHtmlText(sai_id_button_vibrator_start_stop, "開始 / 停止");
 		trans_setSelectOptionText(sai_id_select_skin, 'golden', '金色');
 		trans_setSelectOptionText(sai_id_select_skin, 'purple', '紫色');
 		trans_setSelectOptionText(sai_id_select_skin, 'blue', '青色');
@@ -1901,6 +1902,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_label_message_volume, "留言音量：");
 		trans_setHtmlText(sai_id_text_skin, "皮肤：");
 		trans_setHtmlText(sai_id_text_vibrator, "振动器：");
+		trans_setHtmlText(sai_id_button_vibrator_start_stop, "开始 / 停止");
 		trans_setSelectOptionText(sai_id_select_skin, 'golden', '金的');
 		trans_setSelectOptionText(sai_id_select_skin, 'purple', '紫色的');
 		trans_setSelectOptionText(sai_id_select_skin, 'blue', '蓝色的');
@@ -2004,6 +2006,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_label_message_volume, "留言音量：");
 		trans_setHtmlText(sai_id_text_skin, "皮膚：");
 		trans_setHtmlText(sai_id_text_vibrator, "振動器：");
+		trans_setHtmlText(sai_id_button_vibrator_start_stop, "開始 / 停止");
 		trans_setSelectOptionText(sai_id_select_skin, 'golden', '金的');
 		trans_setSelectOptionText(sai_id_select_skin, 'purple', '紫色的');
 		trans_setSelectOptionText(sai_id_select_skin, 'blue', '藍色的');
@@ -2107,6 +2110,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_label_message_volume, "메시지 음성 음량:");
 		trans_setHtmlText(sai_id_text_skin, "스킨:");
 		trans_setHtmlText(sai_id_text_vibrator, "진동기:");
+		trans_setHtmlText(sai_id_button_vibrator_start_stop, "시작 / 정지");
 		trans_setSelectOptionText(sai_id_select_skin, 'golden', '황금');
 		trans_setSelectOptionText(sai_id_select_skin, 'purple', '보라색');
 		trans_setSelectOptionText(sai_id_select_skin, 'blue', '청색');
@@ -2210,6 +2214,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_label_message_volume, "Volume della voce:");
 		trans_setHtmlText(sai_id_text_skin, "Pelle:");
 		trans_setHtmlText(sai_id_text_vibrator, "Vibratore:");
+		trans_setHtmlText(sai_id_button_vibrator_start_stop, "Avvio / Arresto");
 		trans_setSelectOptionText(sai_id_select_skin, 'golden', 'd\'Oro');
 		trans_setSelectOptionText(sai_id_select_skin, 'purple', 'Viola');
 		trans_setSelectOptionText(sai_id_select_skin, 'blue', 'Blu');
@@ -2313,6 +2318,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_label_message_volume, "Stimmen Lautstärke:");
 		trans_setHtmlText(sai_id_text_skin, "Haut:");
 		trans_setHtmlText(sai_id_text_vibrator, "Vibrator:");
+		trans_setHtmlText(sai_id_button_vibrator_start_stop, "Start / Stop");
 		trans_setSelectOptionText(sai_id_select_skin, 'golden', 'Golden');
 		trans_setSelectOptionText(sai_id_select_skin, 'purple', 'Lila');
 		trans_setSelectOptionText(sai_id_select_skin, 'blue', 'Blau');
@@ -2416,6 +2422,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_label_message_volume, "Volumen de voz del mensaje:");
 		trans_setHtmlText(sai_id_text_skin, "Piel:");
 		trans_setHtmlText(sai_id_text_vibrator, "Vibrador:");
+		trans_setHtmlText(sai_id_button_vibrator_start_stop, "Iniciar / Detener");
 		trans_setSelectOptionText(sai_id_select_skin, 'golden', 'Dorado');
 		trans_setSelectOptionText(sai_id_select_skin, 'purple', 'Púrpura');
 		trans_setSelectOptionText(sai_id_select_skin, 'blue', 'Azul');
@@ -2519,6 +2526,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_label_message_volume, "Громкость голоса сообщения:");
 		trans_setHtmlText(sai_id_text_skin, "Кожа:");
 		trans_setHtmlText(sai_id_text_vibrator, "Вибратор:");
+		trans_setHtmlText(sai_id_button_vibrator_start_stop, "Старт / Стоп");
 		trans_setSelectOptionText(sai_id_select_skin, 'golden', 'Золотой');
 		trans_setSelectOptionText(sai_id_select_skin, 'purple', 'Фиолетовый');
 		trans_setSelectOptionText(sai_id_select_skin, 'blue', 'Синий');
@@ -2622,6 +2630,7 @@ const trans_localize = function(lang){
 		trans_setHtmlText(sai_id_text_label_message_volume, "Message voice volume:");
 		trans_setHtmlText(sai_id_text_skin, "Skin:");
 		trans_setHtmlText(sai_id_text_vibrator, "Vibrator:");
+		trans_setHtmlText(sai_id_button_vibrator_start_stop, "Start / Stop");
 		trans_setSelectOptionText(sai_id_select_skin, 'golden', 'Golden');
 		trans_setSelectOptionText(sai_id_select_skin, 'purple', 'Purple');
 		trans_setSelectOptionText(sai_id_select_skin, 'blue', 'Blue');
