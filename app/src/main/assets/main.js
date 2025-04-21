@@ -527,12 +527,12 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 振動を開始する。
-	const SAI_vibrator_start = function(){
+	const SAI_vibrator_start = function(had_action){
 		try{
 			android.startVibrator(sai_id_range_vibrator_strength.value.toString());
 			console.log("SAI_vibrator_start: " + sai_id_range_vibrator_strength.value);
 		}catch(error){ // Androidではない。
-			if('vibrate' in navigator){
+			if(had_action && 'vibrate' in navigator){
 				navigator.vibrate([0]); // 振動を停止。
 				if(sai_id_range_vibrator_strength.value > 0){
 					navigator.vibrate([20 * 60 * 1000]); // 20分間振動。
@@ -547,14 +547,14 @@ document.addEventListener('DOMContentLoaded', function(){
 			android.stopVibrator();
 			console.log("SAI_vibrator_stop: stopped");
 		}catch(error){ // Androidではない。
-			if('vibrate' in navigator){
+			if(had_action && 'vibrate' in navigator){
 				navigator.vibrate([0]); // 振動を停止。
 			}
 		}
 	}
 
 	// 振動の強さ。
-	const SAI_vibrator_set_strength = function(value){
+	const SAI_vibrator_set_strength = function(value, had_action){
 		value = parseInt(value); // 整数化。
 
 		// 振動の強さをセットする。
@@ -565,7 +565,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		localStorage.setItem('saiminVibratorStrength', value.toString());
 
 		// 振動を開始。
-		SAI_vibrator_start();
+		SAI_vibrator_start(had_action);
 	}
 
 	// 音声オブジェクトを作成する。
@@ -3312,9 +3312,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		// ローカルストレージに振動の強さの設定があれば読み込む。
 		let saiminVibratorStrength = localStorage.getItem('saiminVibratorStrength');
 		if(saiminVibratorStrength){
-			SAI_vibrator_set_strength(saiminVibratorStrength);
+			SAI_vibrator_set_strength(saiminVibratorStrength, false);
 		}else{
-			SAI_vibrator_set_strength(0);
+			SAI_vibrator_set_strength(0, false);
 		}
 
 		// ローカルストレージにスピーチの音量の設定があれば読み込む。
@@ -3790,7 +3790,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 振動の強さの設定。
 		sai_id_range_vibrator_strength.addEventListener('input', function(){
-			SAI_vibrator_set_strength(sai_id_range_vibrator_strength.value);
+			SAI_vibrator_set_strength(sai_id_range_vibrator_strength.value, true);
 		}, false);
 
 		// 映像スピードの「不規則」チェックボックス。
