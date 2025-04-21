@@ -534,7 +534,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		}catch(error){ // Androidではない。
 			if('vibrate' in navigator){
 				navigator.vibrate(0); // 振動を停止。
-				navigator.vibrate([20 * 60 * 1000]); // 20分間振動。
+				if(sai_id_range_vibrator_strength.value > 0){
+					navigator.vibrate([20 * 60 * 1000]); // 20分間振動。
+				}
 			}
 		}
 	}
