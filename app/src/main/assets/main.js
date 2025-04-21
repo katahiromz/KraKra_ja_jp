@@ -4,6 +4,7 @@
 const sai_VERSION = '3.7.8'; // KraKraバージョン番号。
 const sai_DEBUGGING = false; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
+let sai_vibrating = false; // 振動中か？
 
 // 【KraKra JavaScript 命名規則】
 // - 関数名の頭に SAI_ を付ける。
@@ -528,44 +529,39 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 振動を開始する。
 	const SAI_vibrator_start = function(had_action){
+		const length = 20 * 60 * 1000; // 20分間。
 		try{
-			android.startVibrator(sai_id_range_vibrator_strength.value.toString());
-			console.log("SAI_vibrator_start: " + sai_id_range_vibrator_strength.value);
+			android.startVibrator(length.toString());
 		}catch(error){ // Androidではない。
 			if(had_action && 'vibrate' in navigator){
-				navigator.vibrate([0]); // 振動を停止。
-				if(sai_id_range_vibrator_strength.value > 0){
-					navigator.vibrate([20 * 60 * 1000]); // 20分間振動。
-				}
+				navigator.vibrate([length]);
 			}
 		}
 	}
 
 	// 振動を停止する。
-	const SAI_vibrator_stop = function(){
+	const SAI_vibrator_stop = function(had_action){
 		try{
 			android.stopVibrator();
-			console.log("SAI_vibrator_stop: stopped");
 		}catch(error){ // Androidではない。
 			if(had_action && 'vibrate' in navigator){
-				navigator.vibrate([0]); // 振動を停止。
+				navigator.vibrate([]); // 振動を停止。
 			}
 		}
 	}
 
-	// 振動の強さ。
-	const SAI_vibrator_set_strength = function(value, had_action){
-		value = parseInt(value); // 整数化。
-
-		// 振動の強さをセットする。
-		sai_id_range_vibrator_strength.value = value;
-		sai_id_text_vibrator_output.textContent = value.toString();
-
+	// 振動を開始または停止する。
+	const SAI_vibrator_start_stop = function(value, had_action){
 		// ローカルストレージに記憶する。
-		localStorage.setItem('saiminVibratorStrength', value.toString());
+		localStorage.setItem('saiminVibratorOn', value ? 'yes' : 'no');
 
-		// 振動を開始。
-		SAI_vibrator_start(had_action);
+		// 振動を開始または停止。
+		if(value)
+			SAI_vibrator_start(had_action);
+		else
+			SAI_vibrator_stop(had_action);
+
+		sai_vibrating = value;
 	}
 
 	// 音声オブジェクトを作成する。
@@ -3310,11 +3306,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		// ローカルストレージに振動の強さの設定があれば読み込む。
-		let saiminVibratorStrength = localStorage.getItem('saiminVibratorStrength');
-		if(saiminVibratorStrength){
-			SAI_vibrator_set_strength(saiminVibratorStrength, false);
-		}else{
-			SAI_vibrator_set_strength(0, false);
+		let saiminVibratorOn = localStorage.getItem('saiminVibratorOn');
+		if(saiminVibratorOn == 'yes'){
+			SAI_vibrator_start_stop(true, false);
 		}
 
 		// ローカルストレージにスピーチの音量の設定があれば読み込む。
@@ -3788,9 +3782,9 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_speed_set_type(sai_id_range_speed_type.value);
 		}, false);
 
-		// 振動の強さの設定。
-		sai_id_range_vibrator_strength.addEventListener('input', function(){
-			SAI_vibrator_set_strength(sai_id_range_vibrator_strength.value, true);
+		// 振動の開始／停止。
+		sai_id_button_vibrator_start_stop.addEventListener('click', function(){
+			SAI_vibrator_start_stop(!sai_vibrating, true);
 		}, false);
 
 		// 映像スピードの「不規則」チェックボックス。

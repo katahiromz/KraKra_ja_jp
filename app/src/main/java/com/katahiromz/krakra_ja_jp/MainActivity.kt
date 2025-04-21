@@ -465,8 +465,8 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
                 setBrightness(value) // 明るさを指定する。
             }
 
-            override fun onStartVibrator(strength: Int) {
-                startVibrator(strength)
+            override fun onStartVibrator(length: Int) {
+                startVibrator(length)
             }
 
             override fun onStopVibrator() {
@@ -599,13 +599,13 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     // 振動関連
 
     private var hasVibrator: Int = -1
+    private var oldVibratorLength: Int = 0
     private lateinit var vibratorManager: VibratorManager
     private lateinit var vibrator: Vibrator
-    private var oldVibratorStrength: Int = 0
 
     // 振動を開始する。
     @Suppress("DEPRECATION")
-    fun startVibrator(strength: Int) {
+    fun startVibrator(length: Int) {
         Timber.i("startVibrator")
         // 振動が使えるかどうか判定する。
         if (hasVibrator == -1) {
@@ -643,45 +643,22 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         // いったん、振動を止める。
         vibrator.cancel()
 
-        // 強さが-1だったら、直前に指定した強さを使う。強さを覚えておく。
-        val strengthVar: Int = if (strength == -1) oldVibratorStrength else strength
-        oldVibratorStrength = strengthVar
+        // -1だった場合は古い値を使う。
+        var len = length
+        if (len == -1)
+            len = oldVibratorLength
 
-        var amplitude: Int
-        Timber.i("strengthVar: $strengthVar")
-        when (strengthVar) { // 0から5まで選べる。
-            0 -> { // 音なし。
-                return
-            }
-            1 -> { // 弱い。
-                amplitude = 170
-            }
-            2 -> { // 少し弱い。
-                amplitude = 180
-            }
-            3 -> { // 普通。
-                amplitude = 200
-            }
-            4 -> { // 少し強い。
-                amplitude = 230
-            }
-            5 -> { // 強い。
-                amplitude = 255
-            }
-            else -> {
-                Timber.w("invalid strength")
-                return
-            }
-        }
-
-        val timeout: Long = 20 * 60 * 1000 // 20分間
+        val timeout: Long = len.toLong()
         if (vibrator.hasAmplitudeControl()) {
-            val effect = VibrationEffect.createOneShot(timeout, amplitude)
+            val effect = VibrationEffect.createOneShot(timeout, 255)
             vibrator.vibrate(effect)
         } else {
             val effect = VibrationEffect.createOneShot(timeout, DEFAULT_AMPLITUDE)
             vibrator.vibrate(effect)
         }
+
+        // 値を覚えておく。
+        oldVibratorLength = len
     }
 
     // 振動を停止する。
@@ -691,5 +668,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             return
         vibrator.cancel()
         Timber.i("stopVibrator: canceled")
+        oldVibratorLength = 0
     }
 }
