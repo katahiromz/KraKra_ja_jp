@@ -314,7 +314,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         setBrightness(screenBrightness)
 
         // 振動を再開。
-        if (hasVibrator == 1)
+        if (hasVibrator == 1 && oldVibratorLength > 0)
             startVibrator(-1)
     }
 
@@ -346,7 +346,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         stopSpeech()
 
         // 振動を停止。
-        if (hasVibrator == 1)
+        if (hasVibrator == 1 && oldVibratorLength > 0)
             stopVibrator()
     }
 
@@ -667,7 +667,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         if (hasVibrator != 1)
             return
         vibrator.cancel()
-        Timber.i("stopVibrator: canceled")
         oldVibratorLength = 0
     }
 }
