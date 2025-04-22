@@ -81,13 +81,23 @@ document.addEventListener('DOMContentLoaded', function(){
 	let sai_kaleido_canvas_2 = null; // 万華鏡用の一時的なキャンバス2。
 	let sai_face_getter = null; // 顔認識。
 
-	// このアプリはAndroidアプリか？
+	// Androidか？
 	const SAI_is_android_app = function(){
+		return navigator.userAgent.indexOf('/Android/') != -1;
+	}
+
+	// Androidのネイティブアプリか？
+	const SAI_is_android_native_app = function(){
 		return navigator.userAgent.indexOf('/KraKra-android-app/') != -1;
 	}
 
-	// Androidアプリならバージョン番号を取得する。
-	const SAI_get_android_app_version = function(){
+	// Androidのブラウザアプリか？
+	const SAI_is_android_browser_app = function(){
+		return SAI_is_android_app() && !SAI_is_android_native_app();
+	}
+
+	// Androidネイティブアプリならバージョン番号を取得する。
+	const SAI_get_android_native_app_version = function(){
 		let results = navigator.userAgent.match(/\/KraKra-android-app\/([\d\.]+)\//);
 		if(results)
 			return results[1];
@@ -1088,7 +1098,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 「バージョン情報」にバージョン番号をセットする。
 	const SAI_update_version_display = function(){
-		let androidVersion = SAI_get_android_app_version();
+		let androidVersion = SAI_get_android_native_app_version();
 		let text = sai_id_text_version.textContent;
 		if(androidVersion){
 			text = text.replace('[[VERSION]]', androidVersion + '(android)');
@@ -4277,14 +4287,14 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_register_event_listeners();
 
 		// AndroidアプリでなければAndroidオンリーの要素を隠す。
-		if(!SAI_is_android_app()){
+		if(!SAI_is_android_native_app()){
 			let items = document.getElementsByClassName('sai_class_android_app_only');
 			for(let item of items){
 				item.classList.add('sai_class_invisible');
 			}
 		}
 		// バイブレーターが有効でなければバイブレーターのみの要素を隠す。
-		if(!SAI_is_android_app() && !('vibrate' in navigator)){
+		if(SAI_is_android_browser_app() || !('vibrate' in navigator)){
 			let items = document.getElementsByClassName('sai_class_vibrator_only');
 			for(let item of items){
 				item.classList.add('sai_class_invisible');
