@@ -8,3 +8,4 @@ rm -fr ./app/src/main/assets/service-worker.js
 rm -fr ./app/src/main/assets/sw.js
 rm -fr ./app/src/main/assets/icons/
 rm -fr ./app/src/main/assets/manifest.json
+rm -fr ./app/src/main/assets/screenshots
