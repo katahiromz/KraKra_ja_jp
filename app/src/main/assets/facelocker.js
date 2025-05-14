@@ -18,6 +18,25 @@ const facelocker = function(canvas, on_lock){
 	const face_aspect = 1.3; // 一般的な顔の縦横比。
 	let error_message = null; // エラーメッセ－ジ（もしあれば）。
 	let self = this;
+	let attacked_time = null; // 攻撃時刻。
+
+	// ハート形の描画。
+	const SAI_draw_heart_2 = function(ctx, cx, cy, size, color = 'red') {
+		ctx.beginPath();
+		cy -= size * 0.15;
+		size *= 0.007;
+		// https://www.asobou.co.jp/blog/web/canvas-curve
+		ctx.moveTo(cx, cy);
+		ctx.bezierCurveTo(cx - 10 * size, cy - 25 * size, cx - 30 * size, cy - 40 * size, cx - 50 * size, cy - 40 * size);
+		ctx.bezierCurveTo(cx - 60 * size, cy - 40 * size, cx - 100 * size, cy - 40 * size, cx - 100 * size, cy + 10 * size);
+		ctx.bezierCurveTo(cx - 100 * size, cy + 80 * size, cx - 10 * size, cy + 105 * size, cx, cy + 125 * size);
+		ctx.bezierCurveTo(cx + 10 * size, cy + 105 * size, cx + 100 * size, cy + 80 * size, cx + 100 * size, cy + 10 * size);
+		ctx.bezierCurveTo(cx + 100 * size, cy - 40 * size, cx + 60 * size, cy - 40 * size, cx + 50 * size, cy - 40 * size);
+		ctx.bezierCurveTo(cx + 30 * size, cy - 40 * size, cx + 10 * size, cy - 25 * size, cx, cy);
+		ctx.closePath();
+		ctx.fillStyle = color;
+		ctx.fill();
+	}
 
 	// RGBAデータをグレースケールに変換する関数。
 	const rgba_to_grayscale = function(rgba, nrows, ncols){
@@ -92,12 +111,25 @@ const facelocker = function(canvas, on_lock){
 				}
 			}
 
+			// 目の部分にハートを描画する。
+			{
+				let value = Math.sin(new Date().getTime() * 0.01) * radius * 0.1;
+				let color = "rgba(255, 0, 0, 0.6)";
+				SAI_draw_heart_2(ctx, x - radius * 0.5, y, radius * 0.5 + value, color);
+				SAI_draw_heart_2(ctx, x + radius * 0.5, y, radius * 0.5 + value, color);
+			}
+
 			// 中央から離れるにつれ黄色を深めるグラデーション。
 			let dxy = (ctx.canvas.width + ctx.canvas.height) / 2;
 			let grd = ctx.createRadialGradient(x, y, dxy * 0.25, x, y, dxy * 0.5);
-			let value2 = (new Date().getTime() % 400) / 400;
+			let nowTime = new Date().getTime();
+			let value2 = (nowTime % 400) / 400;
+			let value3 = 0;
+			if(attacked_time && attacked_time + 200 > nowTime){
+				value3 = nowTime - attacked_time;
+			}
 			grd.addColorStop(0, 'rgba(255, 255, 255, 0.0)');
-			grd.addColorStop(1, `rgba(255, 255, 0, ${0.65 + 0.20 * Math.sin(value2 * 2 * Math.PI)})`);
+			grd.addColorStop(1, `rgba(255, 255, 0, ${0.35 + value3 * 0.07 + 0.05 * Math.sin(value2 * 2 * Math.PI)})`);
 			ctx.fillStyle = grd;
 			ctx.beginPath();
 			ctx.arc(x, y, dxy, 0, 2 * Math.PI);
@@ -253,8 +285,13 @@ const facelocker = function(canvas, on_lock){
 
 	// 顔認識のキャンバスがクリックされた。
 	this.on_click = function(e){
-		if(self.target)
+		if(self.target){
+			if (self.on_lock){
+				self.on_lock(3);
+				attacked_time = (new Date()).getTime();
+			}
 			return;
+		}
 
 		let dets = self.dets;
 		if(!dets)

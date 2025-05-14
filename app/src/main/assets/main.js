@@ -1,7 +1,7 @@
 // 催眠アプリ「催眠くらくら」のJavaScriptのメインコード。
 // 暗号名はKraKra。
 
-const sai_VERSION = '3.7.9'; // KraKraバージョン番号。
+const sai_VERSION = '3.8.0'; // KraKraバージョン番号。
 const sai_DEBUGGING = false; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
 let sai_vibrating = false; // 振動中か？
@@ -199,8 +199,17 @@ document.addEventListener('DOMContentLoaded', function(){
 					}
 				}
 				break;
+			case 3: // Attack
+				if(sai_id_checkbox_auto_play_sound.checked){
+					let sound = new Audio('sn/Attack.mp3');
+					if(sound){
+						sound.volume = sai_id_range_sound_volume.value / 100.0;
+						sound.play();
+					}
+				}
+				break;
 			}
-			sai_id_button_close.innerText = trans_getText('TEXT_CLOSE');
+			sai_id_button_face_go_back.innerText = trans_getText('TEXT_GO_BACK');
 		};
 
 		// 顔認識のページか？
@@ -3030,10 +3039,10 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	const SAI_strained_line = function(ctx, x0, y0, x1, y1){
-		let max_i = 20;
+		let max_i = 30;
 		let counter = SAI_get_tick_count() * 0.02;
 		for(let i = 0; i <= max_i; ++i){
-			let strain = Math.sin(i / max_i * Math.PI) * Math.abs(1.5 + 1.0 * Math.sin(counter));
+			let strain = Math.sin(i / max_i * Math.PI) * Math.abs(1.3 + 0.5 * Math.sin(counter));
 			let x = x0 * i / max_i + x1 * (max_i - i) / max_i;
 			let y = y0 * i / max_i + y1 * (max_i - i) / max_i;
 			ctx.rotate(strain);
@@ -3086,7 +3095,10 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		let counter = SAI_get_tick_count();
 		ctx.translate(qx, qy);
-		ctx.rotate(counter * 0.05);
+		ctx.rotate(counter * 0.07);
+
+		let scale = Math.abs(3.4 + 1.2 * Math.sin(counter * 0.05)) * 0.8;
+		ctx.scale(scale, scale);
 
 		let dr = mxy * 0.1;
 		let max_i = 10;
@@ -3097,7 +3109,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		// フォーカス矢印を描画する。
-		ctx.rotate(-counter * 0.05);
+		ctx.scale(1/scale, 1/scale);
+		ctx.rotate(-counter * 0.07);
 		ctx.translate(-qx, -qy);
 		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 
@@ -4326,7 +4339,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		});
 
 		// 顔認識のページの「閉じる」ボタン。
-		sai_id_button_close.addEventListener('click', function(){
+		sai_id_button_face_go_back.addEventListener('click', function(){
 			localStorage.removeItem('saiminFaceGetterShowing');
 			SAI_choose_page(sai_id_page_main);
 		});

@@ -349,7 +349,7 @@ input[type='color'] { /* 色選択ボタン */
 	top: calc(70dvh - 1cm / 2);
 	font-size: 0.6cm;
 }
-#sai_id_button_close { /* 顔認識を閉じるボタン */
+#sai_id_button_face_go_back { /* 顔認識から戻るボタン */
 	position: absolute;
 	width: 50vw;
 	width: 50dvw;
@@ -366,7 +366,7 @@ input[type='color'] { /* 色選択ボタン */
 		top: calc(75vh - 1.5cm / 2);
 		top: calc(75dvh - 1.5cm / 2);
 	}
-	#sai_id_button_close { /* 顔認識を閉じるボタン */
+	#sai_id_button_face_go_back { /* 顔認識から戻るボタン */
 		height: 1.5cm;
 	}
 }
@@ -379,7 +379,7 @@ input[type='color'] { /* 色選択ボタン */
 		top: calc(80vh - 1cm / 2);
 		top: calc(80dvh - 1cm / 2);
 	}
-	#sai_id_button_close { /* 顔認識を閉じるボタン */
+	#sai_id_button_face_go_back { /* 顔認識から戻るボタン */
 		width: 20vw;
 		width: 20dvw;
 		left: calc(70vw - 20vw / 2);

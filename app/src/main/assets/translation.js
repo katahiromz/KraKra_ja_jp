@@ -128,7 +128,7 @@ const trans_DEFAULT_MESSAGE_LIST_EN = [
 	"I need help.",
 	"I'm injured. Call an ambulance.",
 	"They are unconscious. Call an ambulance.",
-	"It's a molester.",
+	"He's a pervert. Help me!",
 	"Please take a bath",
 	"Let's smell your armpits",
 	"Let's go shopping",
@@ -191,7 +191,7 @@ const trans_DEFAULT_MESSAGE_LIST_KO_KR = [
 	"도움이 필요합니다.",
 	"부상입니다. 구급차를 부르십시오.",
 	"의식 불명입니다. 구급차를 부르십시오.",
-	"치한.",
+	"그는 변태야. 도와줘!",
 	"목욕을 해주세요.",
 	"당신의 겨드랑이의 냄새를 맡겨 보자.",
 	"쇼핑하러 가자",
@@ -254,7 +254,7 @@ const trans_DEFAULT_MESSAGE_LIST_JA = [
 	"助けが必要です。",
 	"怪我人がいます。救急車を呼んで下さい。",
 	"意識不明の人がいます。救急車を呼んで下さい",
-	"痴漢です。",
+	"痴漢です。助けてください。",
 	"お風呂に入って下さい",
 	"あなたの脇の臭いを嗅いでみましょう",
 	"買い物に行きましょう",
@@ -317,7 +317,7 @@ const trans_DEFAULT_MESSAGE_LIST_ZH_CN = [
 	"我需要帮助。",
 	"有受伤人员。打电话叫救护车。",
 	"有人失去了知觉。打电话叫救护车。",
-	"这是一个猥亵者。",
+	"是色狼，快来救救我！",
 	"请洗澡",
 	"让我们闻闻你的腋窝",
 	"一起去购物吧",
@@ -380,7 +380,7 @@ const trans_DEFAULT_MESSAGE_LIST_ZH_TW = [
 	"我需要幫助。",
 	"有受傷人員。打電話叫救護車。",
 	"有人失去了知覺。打電話叫救護車。",
-	"這是一個猥褻者。",
+	"這是一名性騷擾者。幫我！",
 	"請洗澡",
 	"讓我們聞聞你的腋窩",
 	"一起去購物吧",
@@ -443,7 +443,7 @@ const trans_DEFAULT_MESSAGE_LIST_IT = [
 	"Ho bisogno di aiuto.",
 	"Ci sono persone ferite. Chiami un'ambulanza.",
 	"Qualcuno è incosciente. Chiami un'ambulanza.",
-	"E' un molestatore.",
+	"È un molestatore. Aiutatemi!",
 	"Per favore, fai un bagno",
 	"Annusiamo le tue ascelle",
 	"Andiamo a fare shopping",
@@ -506,7 +506,7 @@ const trans_DEFAULT_MESSAGE_LIST_DE = [
 	"Ich brauche Hilfe.",
 	"Es gibt Verletzte. Rufen Sie einen Krankenwagen.",
 	"Jemand ist bewusstlos. Rufen Sie einen Krankenwagen.",
-	"Es ist ein Perverser.",
+	"Er ist ein Kinderschänder. Hilf mir!",
 	"Bitte nimm ein Bad",
 	"Lass uns an deinen Achseln riechen",
 	"Gehen wir einkaufen",
@@ -569,7 +569,7 @@ const trans_DEFAULT_MESSAGE_LIST_ES = [
 	"Necesito ayuda.",
 	"Hay gente herida. Llame una ambulancia.",
 	"Hay una persona inconsciente. Llame una ambulancia.",
-	"Es un pervertido.",
+	"Es un abusador. ¡Ayúdenme!",
 	"Por favor toma un baño",
 	"Olemos tus axilas",
 	"Vamos de compras",
@@ -632,7 +632,7 @@ const trans_DEFAULT_MESSAGE_LIST_RU = [
 	"Мне нужна помощь.",
 	"Есть пострадавшие. Вызовите скорую.",
 	"Есть человек без сознания. Вызовите скорую",
-	"Это извращенец.",
+	"Это коррупция. Помоги мне!",
 	"Пожалуйста, прими ванну",
 	"Давай понюхаем твои подмышки",
 	"Пойдем по магазинам",
@@ -718,7 +718,7 @@ const trans_NOTICE_EN = `=========================
 Hypnosis KraKra
 =========================
 
-"Hypnosis KraKra" is a full-fledged joke app equipped with 16 types of videos, 20 types of audio, microphone input, and face recognition.
+"Hypnosis KraKra" is a full-fledged joke app equipped with 18 types of videos, 20 types of audio, microphone input, and face recognition.
 We provide real entertainment where you can enjoy hypnotic images and sounds.
 
 - It displays captivating images to fill the entire screen. There are no annoying ads.
@@ -768,7 +768,7 @@ const trans_NOTICE_KO_KR = `=========================
 Hypnosis KraKra
 =========================
 
-"최면 크라크라" 는 16종의 동영상, 20종의 오디오, 마이크 입력, 얼굴 인식 기능을 갖춘 본격적인 농담 앱입니다.
+"최면 크라크라" 는 18종의 동영상, 20종의 오디오, 마이크 입력, 얼굴 인식 기능을 갖춘 본격적인 농담 앱입니다.
 최면에 걸린 영상과 사운드를 즐길 수 있는 리얼 엔터테인먼트를 제공합니다.
 
 - 전체 화면이 가득한 매력적인 이미지를 표시합니다. 성가신 광고는 없습니다.
@@ -819,7 +819,7 @@ const trans_NOTICE_JA = `=========================
 Hypnosis KraKra
 =========================
 
-「催眠くらくら」は、16種類の映像と20種類の音声、マイク入力、顔認証を搭載した本格的なジョークアプリです。
+「催眠くらくら」は、18種類の映像と20種類の音声、マイク入力、顔認証を搭載した本格的なジョークアプリです。
 催眠っぽい映像や音声を楽しめる本物のエンターテインメントを提供します。
 
 - 画面いっぱいに魅惑の映像を表示します。邪魔な広告はありません。
@@ -869,7 +869,7 @@ const trans_NOTICE_ZH_CN = `=========================
 Hypnosis KraKra
 =========================
 
-《催眠克拉克拉》是一款成熟的笑话应用程序，配备16种视频、20种音频、麦克风输入和面部识别。
+《催眠克拉克拉》是一款成熟的笑话应用程序，配备18种视频、20种音频、麦克风输入和面部识别。
 我们提供真正的娱乐，您可以享受催眠的图像和声音。
 
 - 它显示迷人的图像以填满整个屏幕。 没有烦人的广告。
@@ -919,7 +919,7 @@ const trans_NOTICE_ZH_TW = `=========================
 Hypnosis KraKra
 =========================
 
-《催眠克拉克拉》是一款成熟的笑話應用程序，配備16種視頻、20種音頻、麥克風輸入和麵部識別。
+《催眠克拉克拉》是一款成熟的笑話應用程序，配備18種視頻、20種音頻、麥克風輸入和麵部識別。
 我們提供真正的娛樂，您可以享受催眠的圖像和聲音。
 
 - 它顯示迷人的圖像以填滿整個螢幕。 沒有煩人的廣告。
@@ -969,7 +969,7 @@ Ipnosi KraKra
 Hypnosis KraKra
 =========================
 
-"Ipnosi KraKra" è un'app per scherzi completa dotata di 16 tipi di video, 20 tipi di audio, ingresso microfono e riconoscimento facciale.
+"Ipnosi KraKra" è un'app per scherzi completa dotata di 18 tipi di video, 20 tipi di audio, ingresso microfono e riconoscimento facciale.
 Forniamo un vero intrattenimento in cui puoi goderti immagini e suoni ipnotici.
 
 - Visualizza immagini accattivanti per riempire l'intero schermo. Non ci sono annunci fastidiosi.
@@ -1019,7 +1019,7 @@ Hypnose KraKra
 Hypnosis KraKra
 =========================
 
-„Hypnose KraKra“ ist eine vollwertige Scherz-App, die mit 16 Arten von Videos, 20 Arten von Audio, Mikrofoneingang und Gesichtserkennung ausgestattet ist.
+„Hypnose KraKra“ ist eine vollwertige Scherz-App, die mit 18 Arten von Videos, 20 Arten von Audio, Mikrofoneingang und Gesichtserkennung ausgestattet ist.
 Wir bieten echte Unterhaltung, bei der Sie hypnotische Bilder und Töne genießen können.
 
 - Es zeigt fesselnde Bilder an, die den gesamten Bildschirm ausfüllen. Es gibt keine störende Werbung.
@@ -1069,7 +1069,7 @@ Hipnótico KraKra
 Hypnosis KraKra
 =========================
 
-"Hipnótico KraKra" es una aplicación de broma completa equipada con 16 tipos de vídeos, 20 tipos de audio, entrada de micrófono y reconocimiento facial.
+"Hipnótico KraKra" es una aplicación de broma completa equipada con 18 tipos de vídeos, 20 tipos de audio, entrada de micrófono y reconocimiento facial.
 Brindamos entretenimiento real donde podrás disfrutar de imágenes y sonidos hipnóticos.
 
 - Muestra imágenes cautivadoras para llenar toda la pantalla. No hay anuncios molestos.
@@ -1119,7 +1119,7 @@ const trans_NOTICE_RU = `=========================
 Hypnosis KraKra
 =========================
 
-«Гипнотическая КраКра» — полноценное приложение-шутка, оснащенное 16 типами видео, 20 типами звука, микрофонным входом и распознаванием лиц.
+«Гипнотическая КраКра» — полноценное приложение-шутка, оснащенное 18 типами видео, 20 типами звука, микрофонным входом и распознаванием лиц.
 Мы предоставляем настоящее развлечение, где вы сможете насладиться гипнотическими изображениями и звуками.
 
 - Отображение захватывающих изображений на весь экран. Назойливой рекламы нет.
@@ -1170,7 +1170,6 @@ const trans_getText = function(str_id){
 		lang = 'en';
 	if(lang == 'ja' || lang == 'jp'){ // Japanese
 		switch(str_id){
-		case 'TEXT_PIC': return '画';
 		case 'TEXT_OK': return 'OK';
 		case 'TEXT_CANCEL': return 'キャンセル';
 		case 'TEXT_YES': return 'はい';
@@ -1179,9 +1178,7 @@ const trans_getText = function(str_id){
 		case 'TEXT_ABOUT_APP': return 'バージョン情報';
 		case 'TEXT_INIT_APP': return 'このアプリを初期化しますか？';
 		case 'TEXT_INITTED_APP': return 'アプリを初期化しました。';
-		case 'TEXT_CONFIGURATION': return '全般設定';
-		case 'TEXT_APPEARANCE': return '見た目の設定';
-		case 'TEXT_INPUT_MESSAGE': return 'メッセージ文字列を入力して下さい。';
+		case 'TEXT_INPUT_MESSAGE': return 'メッセージ文字列を入力してください。';
 		case 'TEXT_FULLWIDTH_SPACE': return '　';
 		case 'TEXT_PERIOD': return '。';
 		case 'TEXT_PERIOD_SPACE': return '。';
@@ -1207,18 +1204,17 @@ const trans_getText = function(str_id){
 		case 'TEXT_SPEED_IRREGULAR': return '不規則';
 		case 'TEXT_RAINBOW': return '虹色';
 		case 'TEXT_FACE_GETTER': return '顔認識';
-		case 'TEXT_TAP_ON_TARGET': return 'ターゲットをタップして下さい';
+		case 'TEXT_TAP_ON_TARGET': return 'ターゲットをタップしてください';
 		case 'TEXT_CAN_LOCK_ON': return 'ロックオンできます';
 		case 'TEXT_CANT_FIND_FACE': return '顔が見つかりません';
 		case 'TEXT_LOCK_ON': return 'ロックオン';
 		case 'TEXT_UNLOCK': return 'ロック解除';
-		case 'TEXT_CLOSE': return '閉じる';
-		case 'TEXT_NO_WEBCONNECT': return 'ネット接続が利用できません。';
+		case 'TEXT_GO_BACK': return '戻る';
+		case 'TEXT_NO_WEBCONNECT': return 'ネット接続が利用できません';
 		case 'TEXT_INPUTMESSAGE': return "メッセージを入力";
 		}
 	}else if(lang == 'zh-CN' || lang == 'cn'){ // Chinese (Simplified)
 		switch(str_id){
-		case 'TEXT_PIC': return '图';
 		case 'TEXT_OK': return '確定';
 		case 'TEXT_CANCEL': return '取消';
 		case 'TEXT_YES': return '是';
@@ -1227,8 +1223,6 @@ const trans_getText = function(str_id){
 		case 'TEXT_ABOUT_APP': return '关于这个应用程序';
 		case 'TEXT_INIT_APP': return '您想初始化这个应用程序吗？';
 		case 'TEXT_INITTED_APP': return '初始化了应用程序。';
-		case 'TEXT_CONFIGURATION': return '配置';
-		case 'TEXT_APPEARANCE': return '外貌';
 		case 'TEXT_INPUT_MESSAGE': return '请输入消息文本。';
 		case 'TEXT_FULLWIDTH_SPACE': return '　';
 		case 'TEXT_PERIOD': return '。';
@@ -1260,13 +1254,12 @@ const trans_getText = function(str_id){
 		case 'TEXT_CANT_FIND_FACE': return '未找到面孔';
 		case 'TEXT_LOCK_ON': return '锁上';
 		case 'TEXT_UNLOCK': return '开锁';
-		case 'TEXT_CLOSE': return '关闭';
+		case 'TEXT_GO_BACK': return '返回';
 		case 'TEXT_NO_WEBCONNECT': return '无法连接互联网。';
 		case 'TEXT_INPUTMESSAGE': return "输入您的留言";
 		}
 	}else if(lang == 'zh-TW'){ // Chinese (Traditional)
 		switch(str_id){
-		case 'TEXT_PIC': return '圖';
 		case 'TEXT_OK': return '確定';
 		case 'TEXT_CANCEL': return '取消';
 		case 'TEXT_YES': return '是';
@@ -1275,8 +1268,6 @@ const trans_getText = function(str_id){
 		case 'TEXT_ABOUT_APP': return '版本信息';
 		case 'TEXT_INIT_APP': return '您想初始化這個應用程式嗎？';
 		case 'TEXT_INITTED_APP': return '初始化了應用程序。';
-		case 'TEXT_CONFIGURATION': return '常規設置';
-		case 'TEXT_APPEARANCE': return '外觀設置';
 		case 'TEXT_INPUT_MESSAGE': return '請輸入消息字符串。';
 		case 'TEXT_FULLWIDTH_SPACE': return '　';
 		case 'TEXT_PERIOD': return '。';
@@ -1308,13 +1299,12 @@ const trans_getText = function(str_id){
 		case 'TEXT_CANT_FIND_FACE': return '未找到臉孔';
 		case 'TEXT_LOCK_ON': return '鎖上';
 		case 'TEXT_UNLOCK': return '開鎖';
-		case 'TEXT_CLOSE': return '關閉';
+		case 'TEXT_GO_BACK': return '返回';
 		case 'TEXT_NO_WEBCONNECT': return '無法連接網路。';
 		case 'TEXT_INPUTMESSAGE': return "輸入您的留言";
 		}
 	}else if(lang == 'ko' || lang == 'kr' || lang == 'ko-KR'){ // Korean
 		switch(str_id){
-		case 'TEXT_PIC': return 'Pic';
 		case 'TEXT_OK': return 'OK';
 		case 'TEXT_CANCEL': return '취소';
 		case 'TEXT_YES': return '예';
@@ -1323,8 +1313,6 @@ const trans_getText = function(str_id){
 		case 'TEXT_ABOUT_APP': return '버전 정보';
 		case 'TEXT_INIT_APP': return '이 앱을 초기화하시겠습니까?';
 		case 'TEXT_INITTED_APP': return '앱을 초기화했습니다.';
-		case 'TEXT_CONFIGURATION': return '구성';
-		case 'TEXT_APPEARANCE': return '모습';
 		case 'TEXT_INPUT_MESSAGE': return '메시지 문자열을 입력하십시오.';
 		case 'TEXT_FULLWIDTH_SPACE': return '　';
 		case 'TEXT_PERIOD': return '. ';
@@ -1356,13 +1344,12 @@ const trans_getText = function(str_id){
 		case 'TEXT_CANT_FIND_FACE': return '얼굴을 찾을 수 없음';
 		case 'TEXT_LOCK_ON': return '잠금';
 		case 'TEXT_UNLOCK': return '잠금 해제';
-		case 'TEXT_CLOSE': return '닫다';
+		case 'TEXT_GO_BACK': return '뒤로';
 		case 'TEXT_NO_WEBCONNECT': return '인터넷 연결을 사용할 수 없습니다.';
 		case 'TEXT_INPUTMESSAGE': return "메시지 입력";
 		}
 	}else if(lang == 'it' || lang == 'it-IT'){ // Italian
 		switch(str_id){
-		case 'TEXT_PIC': return 'Pic';
 		case 'TEXT_OK': return 'OK';
 		case 'TEXT_CANCEL': return 'Annulla';
 		case 'TEXT_YES': return 'SÌ';
@@ -1371,8 +1358,6 @@ const trans_getText = function(str_id){
 		case 'TEXT_ABOUT_APP': return 'Informazioni sull\'app';
 		case 'TEXT_INIT_APP': return 'Vuoi inizializzare questa app?';
 		case 'TEXT_INITTED_APP': return 'Inizializzata l\'app.';
-		case 'TEXT_CONFIGURATION': return 'Configurazione';
-		case 'TEXT_APPEARANCE': return 'Aspetto';
 		case 'TEXT_INPUT_MESSAGE': return 'Inserisci il testo del messaggio.';
 		case 'TEXT_FULLWIDTH_SPACE': return '　';
 		case 'TEXT_PERIOD': return '.';
@@ -1404,13 +1389,12 @@ const trans_getText = function(str_id){
 		case 'TEXT_CANT_FIND_FACE': return 'Volto non trovato';
 		case 'TEXT_LOCK_ON': return 'Blocco su';
 		case 'TEXT_UNLOCK': return 'Sbloccare';
-		case 'TEXT_CLOSE': return 'Vicino';
+		case 'TEXT_GO_BACK': return 'Ritorno';
 		case 'TEXT_NO_WEBCONNECT': return 'La connessione Internet non è disponibile.';
 		case 'TEXT_INPUTMESSAGE': return "Inserisci il tuo messaggio";
 		}
 	}else if(lang == 'de' || lang == 'de-DE'){ // German
 		switch(str_id){
-		case 'TEXT_PIC': return 'Pic';
 		case 'TEXT_OK': return 'OK';
 		case 'TEXT_CANCEL': return 'Abbrechen';
 		case 'TEXT_YES': return 'Ja';
@@ -1419,8 +1403,6 @@ const trans_getText = function(str_id){
 		case 'TEXT_ABOUT_APP': return 'Über diese App';
 		case 'TEXT_INIT_APP': return 'Möchten Sie diese App initialisieren?';
 		case 'TEXT_INITTED_APP': return 'Initialisierte die App.';
-		case 'TEXT_CONFIGURATION': return 'Aufbau';
-		case 'TEXT_APPEARANCE': return 'Aussehen';
 		case 'TEXT_INPUT_MESSAGE': return 'Bitte geben Sie einen Nachrichtentext ein.';
 		case 'TEXT_FULLWIDTH_SPACE': return '　';
 		case 'TEXT_PERIOD': return '.';
@@ -1452,13 +1434,12 @@ const trans_getText = function(str_id){
 		case 'TEXT_CANT_FIND_FACE': return 'Gesicht nicht gefunden';
 		case 'TEXT_LOCK_ON': return 'Sperren';
 		case 'TEXT_UNLOCK': return 'Freischalten';
-		case 'TEXT_CLOSE': return 'Schließen';
+		case 'TEXT_GO_BACK': return 'Zurückkehren';
 		case 'TEXT_NO_WEBCONNECT': return 'Die Internetverbindung ist nicht verfügbar.';
 		case 'TEXT_INPUTMESSAGE': return "Gib deine Nachricht ein";
 		}
 	}else if(lang == 'es' || lang == 'es-ES'){ // Spanish
 		switch(str_id){
-		case 'TEXT_PIC': return 'Imagen';
 		case 'TEXT_OK': return 'OK';
 		case 'TEXT_CANCEL': return 'Cancelar';
 		case 'TEXT_YES': return 'Sí';
@@ -1467,8 +1448,6 @@ const trans_getText = function(str_id){
 		case 'TEXT_ABOUT_APP': return 'Información de versión';
 		case 'TEXT_INIT_APP': return '¿Quieres inicializar esta aplicación?';
 		case 'TEXT_INITTED_APP': return 'La aplicación se ha inicializado.';
-		case 'TEXT_CONFIGURATION': return 'Configuración general';
-		case 'TEXT_APPEARANCE': return 'Configuración de la apariencia';
 		case 'TEXT_INPUT_MESSAGE': return 'Por favor ingrese la cadena del mensaje.';
 		case 'TEXT_FULLWIDTH_SPACE': return '　';
 		case 'TEXT_PERIOD': return '. ';
@@ -1500,13 +1479,12 @@ const trans_getText = function(str_id){
 		case 'TEXT_CANT_FIND_FACE': return 'Cara no encontrada';
 		case 'TEXT_LOCK_ON': return 'Bloqueo';
 		case 'TEXT_UNLOCK': return 'Desbloquear';
-		case 'TEXT_CLOSE': return 'Cerca';
+		case 'TEXT_GO_BACK': return 'Devolver';
 		case 'TEXT_NO_WEBCONNECT': return 'La conexión a Internet no está disponible.';
 		case 'TEXT_INPUTMESSAGE': return "Ingrese su mensaje";
 		}
 	}else if(lang == 'ru' || lang == 'ru-RU'){ // Russian
 		switch(str_id){
-		case 'TEXT_PIC': return 'Картина';
 		case 'TEXT_OK': return 'Хорошо';
 		case 'TEXT_CANCEL': return 'Отмена';
 		case 'TEXT_YES': return 'Да';
@@ -1515,8 +1493,6 @@ const trans_getText = function(str_id){
 		case 'TEXT_ABOUT_APP': return 'Информация о версии';
 		case 'TEXT_INIT_APP': return 'Вы хотите инициализировать это приложение?';
 		case 'TEXT_INITTED_APP': return 'Приложение инициализировано.';
-		case 'TEXT_CONFIGURATION': return 'Общие настройки';
-		case 'TEXT_APPEARANCE': return 'Настройки внешнего вида';
 		case 'TEXT_INPUT_MESSAGE': return 'Пожалуйста, введите строку сообщения.';
 		case 'TEXT_FULLWIDTH_SPACE': return '　';
 		case 'TEXT_PERIOD': return '.';
@@ -1548,13 +1524,12 @@ const trans_getText = function(str_id){
 		case 'TEXT_CANT_FIND_FACE': return 'Лицо не найдено';
 		case 'TEXT_LOCK_ON': return 'Блокировка';
 		case 'TEXT_UNLOCK': return 'Разблокировать';
-		case 'TEXT_CLOSE': return 'Закрывать';
+		case 'TEXT_GO_BACK': return 'Возвращаться';
 		case 'TEXT_NO_WEBCONNECT': return 'Подключение к Интернету недоступно.';
 		case 'TEXT_INPUTMESSAGE': return "Введите ваше сообщение";
 		}
 	}else{ // English is default
 		switch(str_id){
-		case 'TEXT_PIC': return 'Pic';
 		case 'TEXT_OK': return 'OK';
 		case 'TEXT_CANCEL': return 'Cancel';
 		case 'TEXT_YES': return 'Yes';
@@ -1563,8 +1538,6 @@ const trans_getText = function(str_id){
 		case 'TEXT_ABOUT_APP': return 'About this app';
 		case 'TEXT_INIT_APP': return 'Do you want to initialize this app?';
 		case 'TEXT_INITTED_APP': return 'Initialized the app.';
-		case 'TEXT_CONFIGURATION': return 'Configuration';
-		case 'TEXT_APPEARANCE': return 'Appearance';
 		case 'TEXT_INPUT_MESSAGE': return 'Please enter a message text.';
 		case 'TEXT_FULLWIDTH_SPACE': return '　';
 		case 'TEXT_PERIOD': return '.';
@@ -1596,7 +1569,7 @@ const trans_getText = function(str_id){
 		case 'TEXT_CANT_FIND_FACE': return 'Face not found';
 		case 'TEXT_LOCK_ON': return 'Lock on';
 		case 'TEXT_UNLOCK': return 'Unlock';
-		case 'TEXT_CLOSE': return 'Close';
+		case 'TEXT_GO_BACK': return 'Go back';
 		case 'TEXT_NO_WEBCONNECT': return 'Internet connection is unavailable.';
 		case 'TEXT_INPUTMESSAGE': return "Input message";
 		}
@@ -1725,25 +1698,25 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Korean (한국어)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'ru', 'Russian (Русский)');
 		trans_setHtmlText(sai_id_pic_type, '映像の種類:');
-		trans_setSelectOptionText(sai_id_select_pic_type, '0', '画0: ダミー画面（練習用）');
-		trans_setSelectOptionText(sai_id_select_pic_type, '1', '画1: 対数らせん');
-		trans_setSelectOptionText(sai_id_select_pic_type, '2', '画2: 同心円状');
-		trans_setSelectOptionText(sai_id_select_pic_type, '3', '画3: 目が回る');
-		trans_setSelectOptionText(sai_id_select_pic_type, '4', '画4: アルキメデスのらせん');
-		trans_setSelectOptionText(sai_id_select_pic_type, '5', '画5: 広がるハート');
-		trans_setSelectOptionText(sai_id_select_pic_type, '6', '画6: 五円玉');
-		trans_setSelectOptionText(sai_id_select_pic_type, '7', '画7: 奇妙な渦巻き');
-		trans_setSelectOptionText(sai_id_select_pic_type, '8', '画8: クレージーな色');
-		trans_setSelectOptionText(sai_id_select_pic_type, '9', '画9: 対数らせん 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '10', '画10: アナログディスク');
-		trans_setSelectOptionText(sai_id_select_pic_type, '11', '画11: 奇妙な渦巻き 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '12', '画12: 万華鏡');
-		trans_setSelectOptionText(sai_id_select_pic_type, '13', '画13: 1番目の色の画面');
-		trans_setSelectOptionText(sai_id_select_pic_type, '14', '画14: 2番目の色の画面');
-		trans_setSelectOptionText(sai_id_select_pic_type, '15', '画15: ただの黒い画面');
-		trans_setSelectOptionText(sai_id_select_pic_type, '16', '画16: ただの白い画面');
-		trans_setSelectOptionText(sai_id_select_pic_type, '17', '画17: ヘビの回転');
-		trans_setSelectOptionText(sai_id_select_pic_type, '18', '画18: ひずみ放射');
+		trans_setSelectOptionText(sai_id_select_pic_type, '0', '動画 0：ダミー画面（練習用）');
+		trans_setSelectOptionText(sai_id_select_pic_type, '1', '動画 1：対数らせん');
+		trans_setSelectOptionText(sai_id_select_pic_type, '2', '動画 2：同心円状');
+		trans_setSelectOptionText(sai_id_select_pic_type, '3', '動画 3：目が回る');
+		trans_setSelectOptionText(sai_id_select_pic_type, '4', '動画 4：アルキメデスのらせん');
+		trans_setSelectOptionText(sai_id_select_pic_type, '5', '動画 5：広がるハート');
+		trans_setSelectOptionText(sai_id_select_pic_type, '6', '動画 6：五円玉');
+		trans_setSelectOptionText(sai_id_select_pic_type, '7', '動画 7：奇妙な渦巻き');
+		trans_setSelectOptionText(sai_id_select_pic_type, '8', '動画 8：クレージーな色');
+		trans_setSelectOptionText(sai_id_select_pic_type, '9', '動画 9：対数らせん 2');
+		trans_setSelectOptionText(sai_id_select_pic_type, '10', '動画 10：アナログディスク');
+		trans_setSelectOptionText(sai_id_select_pic_type, '11', '動画 11：奇妙な渦巻き 2');
+		trans_setSelectOptionText(sai_id_select_pic_type, '12', '動画 12：万華鏡');
+		trans_setSelectOptionText(sai_id_select_pic_type, '13', '動画 13：1番目の色の画面');
+		trans_setSelectOptionText(sai_id_select_pic_type, '14', '動画 14：2番目の色の画面');
+		trans_setSelectOptionText(sai_id_select_pic_type, '15', '動画 15：ただの黒い画面');
+		trans_setSelectOptionText(sai_id_select_pic_type, '16', '動画 16：ただの白い画面');
+		trans_setSelectOptionText(sai_id_select_pic_type, '17', '動画 17：ヘビの回転');
+		trans_setSelectOptionText(sai_id_select_pic_type, '18', '動画 18：ひずみ放射');
 		trans_setHtmlText(sai_id_text_split, '画面分割:');
 		trans_setHtmlText(sai_id_text_speed, 'スピード:');
 		trans_setHtmlText(speed_irregular_label, '不規則');
@@ -1831,25 +1804,25 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Korean (한국어)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'ru', 'Russian (Русский)');
 		trans_setHtmlText(sai_id_pic_type, '视频类型：');
-		trans_setSelectOptionText(sai_id_select_pic_type, '0', '图0: 虚拟屏幕（用于练习）');
-		trans_setSelectOptionText(sai_id_select_pic_type, '1', '图1: 对数螺线');
-		trans_setSelectOptionText(sai_id_select_pic_type, '2', '图2: 同心圆');
-		trans_setSelectOptionText(sai_id_select_pic_type, '3', '图3: 旋转的眼');
-		trans_setSelectOptionText(sai_id_select_pic_type, '4', '图4: 阿基米德螺旋线');
-		trans_setSelectOptionText(sai_id_select_pic_type, '5', '图5: 扩展的心');
-		trans_setSelectOptionText(sai_id_select_pic_type, '6', '图6: 5日元硬币');
-		trans_setSelectOptionText(sai_id_select_pic_type, '7', '图7: 奇怪的漩涡');
-		trans_setSelectOptionText(sai_id_select_pic_type, '8', '图8: 疯狂的颜色');
-		trans_setSelectOptionText(sai_id_select_pic_type, '9', '图9: 对数螺线 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '10', '图10: 模拟光盘');
-		trans_setSelectOptionText(sai_id_select_pic_type, '11', '图11: 奇怪的漩涡 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '12', '图12: 万花筒');
-		trans_setSelectOptionText(sai_id_select_pic_type, '13', '图13: 第一个彩色屏幕');
-		trans_setSelectOptionText(sai_id_select_pic_type, '14', '图14: 第二个彩色屏幕');
-		trans_setSelectOptionText(sai_id_select_pic_type, '15', '图15：只是黑屏');
-		trans_setSelectOptionText(sai_id_select_pic_type, '16', '图16：只是白屏');
-		trans_setSelectOptionText(sai_id_select_pic_type, '17', '图17: 旋转蛇');
-		trans_setSelectOptionText(sai_id_select_pic_type, '18', '图18: 畸变辐射');
+		trans_setSelectOptionText(sai_id_select_pic_type, '0', '电影0：虚拟屏幕（用于练习）');
+		trans_setSelectOptionText(sai_id_select_pic_type, '1', '电影1：对数螺线');
+		trans_setSelectOptionText(sai_id_select_pic_type, '2', '电影2：同心圆');
+		trans_setSelectOptionText(sai_id_select_pic_type, '3', '电影3：旋转的眼');
+		trans_setSelectOptionText(sai_id_select_pic_type, '4', '电影4：阿基米德螺旋线');
+		trans_setSelectOptionText(sai_id_select_pic_type, '5', '电影5：扩展的心');
+		trans_setSelectOptionText(sai_id_select_pic_type, '6', '电影6：5日元硬币');
+		trans_setSelectOptionText(sai_id_select_pic_type, '7', '电影7：奇怪的漩涡');
+		trans_setSelectOptionText(sai_id_select_pic_type, '8', '电影8：疯狂的颜色');
+		trans_setSelectOptionText(sai_id_select_pic_type, '9', '电影9：对数螺线 2');
+		trans_setSelectOptionText(sai_id_select_pic_type, '10', '电影10：模拟光盘');
+		trans_setSelectOptionText(sai_id_select_pic_type, '11', '电影11：奇怪的漩涡 2');
+		trans_setSelectOptionText(sai_id_select_pic_type, '12', '电影12：万花筒');
+		trans_setSelectOptionText(sai_id_select_pic_type, '13', '电影13：第一个彩色屏幕');
+		trans_setSelectOptionText(sai_id_select_pic_type, '14', '电影14：第二个彩色屏幕');
+		trans_setSelectOptionText(sai_id_select_pic_type, '15', '电影15：只是黑屏');
+		trans_setSelectOptionText(sai_id_select_pic_type, '16', '电影16：只是白屏');
+		trans_setSelectOptionText(sai_id_select_pic_type, '17', '电影17：旋转蛇');
+		trans_setSelectOptionText(sai_id_select_pic_type, '18', '电影18：畸变辐射');
 		trans_setHtmlText(sai_id_text_split, '分屏：');
 		trans_setHtmlText(sai_id_text_speed, '速度：');
 		trans_setHtmlText(speed_irregular_label, '不规律的');
@@ -1937,25 +1910,25 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Korean (한국어)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'ru', 'Russian (Русский)');
 		trans_setHtmlText(sai_id_pic_type, '視頻類型：');
-		trans_setSelectOptionText(sai_id_select_pic_type, '0', '圖0: 虛擬螢幕（用於練習）');
-		trans_setSelectOptionText(sai_id_select_pic_type, '1', '圖1: 對數螺線');
-		trans_setSelectOptionText(sai_id_select_pic_type, '2', '圖2: 同心圆');
-		trans_setSelectOptionText(sai_id_select_pic_type, '3', '圖3: 旋轉的眼');
-		trans_setSelectOptionText(sai_id_select_pic_type, '4', '圖4: 阿基米德螺旋線');
-		trans_setSelectOptionText(sai_id_select_pic_type, '5', '圖5: 擴展的心');
-		trans_setSelectOptionText(sai_id_select_pic_type, '6', '圖6: 5日元硬幣');
-		trans_setSelectOptionText(sai_id_select_pic_type, '7', '画7: 奇怪的漩渦');
-		trans_setSelectOptionText(sai_id_select_pic_type, '8', '圖8: 瘋狂的顏色');
-		trans_setSelectOptionText(sai_id_select_pic_type, '9', '圖9: 對數螺線 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '10', '圖10: 類比光碟');
-		trans_setSelectOptionText(sai_id_select_pic_type, '11', '圖11: 奇怪的漩渦 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '12', '圖12: 萬花筒');
-		trans_setSelectOptionText(sai_id_select_pic_type, '13', '圖13: 第一个彩色屏幕');
-		trans_setSelectOptionText(sai_id_select_pic_type, '14', '圖14: 第二个彩色屏幕');
-		trans_setSelectOptionText(sai_id_select_pic_type, '15', '圖15: 只是黑屏');
-		trans_setSelectOptionText(sai_id_select_pic_type, '16', '圖16: 只是白屏');
-		trans_setSelectOptionText(sai_id_select_pic_type, '17', '圖17: 旋轉蛇');
-		trans_setSelectOptionText(sai_id_select_pic_type, '18', '圖18: 畸變輻射');
+		trans_setSelectOptionText(sai_id_select_pic_type, '0', '電影0：虛擬螢幕（用於練習）');
+		trans_setSelectOptionText(sai_id_select_pic_type, '1', '電影1：對數螺線');
+		trans_setSelectOptionText(sai_id_select_pic_type, '2', '電影2：同心圆');
+		trans_setSelectOptionText(sai_id_select_pic_type, '3', '電影3：旋轉的眼');
+		trans_setSelectOptionText(sai_id_select_pic_type, '4', '電影4：阿基米德螺旋線');
+		trans_setSelectOptionText(sai_id_select_pic_type, '5', '電影5：擴展的心');
+		trans_setSelectOptionText(sai_id_select_pic_type, '6', '電影6：5日元硬幣');
+		trans_setSelectOptionText(sai_id_select_pic_type, '7', '電影7：奇怪的漩渦');
+		trans_setSelectOptionText(sai_id_select_pic_type, '8', '電影8：瘋狂的顏色');
+		trans_setSelectOptionText(sai_id_select_pic_type, '9', '電影9：對數螺線 2');
+		trans_setSelectOptionText(sai_id_select_pic_type, '10', '電影10：類比光碟');
+		trans_setSelectOptionText(sai_id_select_pic_type, '11', '電影11：奇怪的漩渦 2');
+		trans_setSelectOptionText(sai_id_select_pic_type, '12', '電影12：萬花筒');
+		trans_setSelectOptionText(sai_id_select_pic_type, '13', '電影13：第一个彩色屏幕');
+		trans_setSelectOptionText(sai_id_select_pic_type, '14', '電影14：第二个彩色屏幕');
+		trans_setSelectOptionText(sai_id_select_pic_type, '15', '電影15：只是黑屏');
+		trans_setSelectOptionText(sai_id_select_pic_type, '16', '電影16：只是白屏');
+		trans_setSelectOptionText(sai_id_select_pic_type, '17', '電影17：旋轉蛇');
+		trans_setSelectOptionText(sai_id_select_pic_type, '18', '電影18：畸變輻射');
 		trans_setHtmlText(sai_id_text_split, '分屏：');
 		trans_setHtmlText(sai_id_text_speed, '速度：');
 		trans_setHtmlText(speed_irregular_label, '不規律的');
@@ -2043,25 +2016,25 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Korean (한국어)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'ru', 'Russian (Русский)');
 		trans_setHtmlText(sai_id_pic_type, '그림 유형:');
-		trans_setSelectOptionText(sai_id_select_pic_type, '0', 'Pic0: 더미 화면 (연습용)');
-		trans_setSelectOptionText(sai_id_select_pic_type, '1', 'Pic1: 로그 나선');
-		trans_setSelectOptionText(sai_id_select_pic_type, '2', 'Pic2: 동심원형');
-		trans_setSelectOptionText(sai_id_select_pic_type, '3', 'Pic3: 회전하는 눈');
-		trans_setSelectOptionText(sai_id_select_pic_type, '4', 'Pic4: 아르키메데스의 나선');
-		trans_setSelectOptionText(sai_id_select_pic_type, '5', 'Pic5: 퍼지는 하트들');
-		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'Pic6: 오엔 구슬');
-		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'Pic7: 이상한 소용돌이');
-		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'Pic8: 미친 색');
-		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'Pic9: 로그 나선 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'Pic10: 아날로그 디스크');
-		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'Pic11: 이상한 소용돌이 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'Pic12: 만화경');
-		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'Pic13: 첫 번째 컬러 화면');
-		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'Pic14: 두 번째 색상 화면');
-		trans_setSelectOptionText(sai_id_select_pic_type, '15', 'Pic15: 그냥 검은 화면');
-		trans_setSelectOptionText(sai_id_select_pic_type, '16', 'Pic16: 그냥 흰색 화면');
-		trans_setSelectOptionText(sai_id_select_pic_type, '17', 'Pic17: 뱀 회전');
-		trans_setSelectOptionText(sai_id_select_pic_type, '18', 'Pic18: 스트레인 방사');
+		trans_setSelectOptionText(sai_id_select_pic_type, '0', '동영상 0：더미 화면 (연습용)');
+		trans_setSelectOptionText(sai_id_select_pic_type, '1', '동영상 1：로그 나선');
+		trans_setSelectOptionText(sai_id_select_pic_type, '2', '동영상 2：동심원형');
+		trans_setSelectOptionText(sai_id_select_pic_type, '3', '동영상 3：회전하는 눈');
+		trans_setSelectOptionText(sai_id_select_pic_type, '4', '동영상 4：아르키메데스의 나선');
+		trans_setSelectOptionText(sai_id_select_pic_type, '5', '동영상 5：퍼지는 하트들');
+		trans_setSelectOptionText(sai_id_select_pic_type, '6', '동영상 6：오엔 구슬');
+		trans_setSelectOptionText(sai_id_select_pic_type, '7', '동영상 7：이상한 소용돌이');
+		trans_setSelectOptionText(sai_id_select_pic_type, '8', '동영상 8：미친 색');
+		trans_setSelectOptionText(sai_id_select_pic_type, '9', '동영상 9：로그 나선 2');
+		trans_setSelectOptionText(sai_id_select_pic_type, '10', '동영상 10：아날로그 디스크');
+		trans_setSelectOptionText(sai_id_select_pic_type, '11', '동영상 11：이상한 소용돌이 2');
+		trans_setSelectOptionText(sai_id_select_pic_type, '12', '동영상 12：만화경');
+		trans_setSelectOptionText(sai_id_select_pic_type, '13', '동영상 13：첫 번째 컬러 화면');
+		trans_setSelectOptionText(sai_id_select_pic_type, '14', '동영상 14：두 번째 색상 화면');
+		trans_setSelectOptionText(sai_id_select_pic_type, '15', '동영상 15：그냥 검은 화면');
+		trans_setSelectOptionText(sai_id_select_pic_type, '16', '동영상 16：그냥 흰색 화면');
+		trans_setSelectOptionText(sai_id_select_pic_type, '17', '동영상 17：뱀 회전');
+		trans_setSelectOptionText(sai_id_select_pic_type, '18', '동영상 18：스트레인 방사');
 		trans_setHtmlText(sai_id_text_split, '화면 분할:');
 		trans_setHtmlText(sai_id_text_speed, '속도:');
 		trans_setHtmlText(speed_irregular_label, '불규칙');
@@ -2149,25 +2122,25 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Korean (한국어)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'ru', 'Russian (Русский)');
 		trans_setHtmlText(sai_id_pic_type, 'Il tipo di immagine:');
-		trans_setSelectOptionText(sai_id_select_pic_type, '0', 'Pic0: Schermata fittizia (per esercitarsi)');
-		trans_setSelectOptionText(sai_id_select_pic_type, '1', 'Pic1: Spirale Logaritmica');
-		trans_setSelectOptionText(sai_id_select_pic_type, '2', 'Pic2: Cerchi concentrici');
-		trans_setSelectOptionText(sai_id_select_pic_type, '3', 'Pic3: Gli occhi');
-		trans_setSelectOptionText(sai_id_select_pic_type, '4', 'Pic4: Spirale di Archimede');
-		trans_setSelectOptionText(sai_id_select_pic_type, '5', 'Pic5: Cuori che si diffondono');
-		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'Pic6: Moneta da 5 Yen');
-		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'Pic7: Strano Turbinio');
-		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'Pic8: Colori Pazzi');
-		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'Pic9: Spirale Logaritmica 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'Pic10: Disco Analogico');
-		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'Pic11: Strano Turbinio 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'Pic12: Caleidoscopio');
-		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'Pic13: 1° schermo a colori');
-		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'Pic14: 2° schermo a colori');
-		trans_setSelectOptionText(sai_id_select_pic_type, '15', 'Pic15: Solo uno schermo nero');
-		trans_setSelectOptionText(sai_id_select_pic_type, '16', 'Pic16: Solo uno schermo bianco');
-		trans_setSelectOptionText(sai_id_select_pic_type, '17', 'Pic17: Serpente rotante');
-		trans_setSelectOptionText(sai_id_select_pic_type, '18', 'Pic18: Radiazione di distorsione');
+		trans_setSelectOptionText(sai_id_select_pic_type, '0', 'Film 0: Schermata fittizia (per esercitarsi)');
+		trans_setSelectOptionText(sai_id_select_pic_type, '1', 'Film 1: Spirale Logaritmica');
+		trans_setSelectOptionText(sai_id_select_pic_type, '2', 'Film 2: Cerchi concentrici');
+		trans_setSelectOptionText(sai_id_select_pic_type, '3', 'Film 3: Gli occhi');
+		trans_setSelectOptionText(sai_id_select_pic_type, '4', 'Film 4: Spirale di Archimede');
+		trans_setSelectOptionText(sai_id_select_pic_type, '5', 'Film 5: Cuori che si diffondono');
+		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'Film 6: Moneta da 5 Yen');
+		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'Film 7: Strano Turbinio');
+		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'Film 8: Colori Pazzi');
+		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'Film 9: Spirale Logaritmica 2');
+		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'Film 10: Disco Analogico');
+		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'Film 11: Strano Turbinio 2');
+		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'Film 12: Caleidoscopio');
+		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'Film 13: 1° schermo a colori');
+		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'Film 14: 2° schermo a colori');
+		trans_setSelectOptionText(sai_id_select_pic_type, '15', 'Film 15: Solo uno schermo nero');
+		trans_setSelectOptionText(sai_id_select_pic_type, '16', 'Film 16: Solo uno schermo bianco');
+		trans_setSelectOptionText(sai_id_select_pic_type, '17', 'Film 17: Serpente rotante');
+		trans_setSelectOptionText(sai_id_select_pic_type, '18', 'Film 18: Radiazione di distorsione');
 		trans_setHtmlText(sai_id_text_split, 'Divisione dello schermo:');
 		trans_setHtmlText(sai_id_text_speed, 'Velocità:');
 		trans_setHtmlText(speed_irregular_label, 'Irregolare');
@@ -2255,25 +2228,25 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Korean (한국어)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'ru', 'Russian (Русский)');
 		trans_setHtmlText(sai_id_pic_type, 'Die Art des Bildes:');
-		trans_setSelectOptionText(sai_id_select_pic_type, '0', 'Pic0: Dummy-Bildschirm (zum Üben)');
-		trans_setSelectOptionText(sai_id_select_pic_type, '1', 'Pic1: Logarithmische Spirale');
-		trans_setSelectOptionText(sai_id_select_pic_type, '2', 'Pic2: Konzentrische Kreise');
-		trans_setSelectOptionText(sai_id_select_pic_type, '3', 'Pic3: Die Augen');
-		trans_setSelectOptionText(sai_id_select_pic_type, '4', 'Pic4: Die Spirale des Archimedes');
-		trans_setSelectOptionText(sai_id_select_pic_type, '5', 'Pic5: Herzen verbreiten');
-		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'Pic6: 5-Yen-Münze');
-		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'Pic7: Seltsamer Wirbel');
-		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'Pic8: Verrückte Farben');
-		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'Pic9: Logarithmische Spirale 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'Pic10: Analoge Scheibe');
-		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'Pic11: Seltsamer Wirbel 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'Pic12: Kaleidoskop');
-		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'Pic13: 1. Farbbildschirm');
-		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'Pic14: Zweiter Farbbildschirm');
-		trans_setSelectOptionText(sai_id_select_pic_type, '15', 'Pic15: Nur ein schwarzer Bildschirm');
-		trans_setSelectOptionText(sai_id_select_pic_type, '16', 'Pic16: Nur ein weißer Bildschirm');
-		trans_setSelectOptionText(sai_id_select_pic_type, '17', 'Pic17: Rotierende Schlange');
-		trans_setSelectOptionText(sai_id_select_pic_type, '18', 'Pic18: Verzerrungsstrahlung');
+		trans_setSelectOptionText(sai_id_select_pic_type, '0', 'Film 0: Dummy-Bildschirm (zum Üben)');
+		trans_setSelectOptionText(sai_id_select_pic_type, '1', 'Film 1: Logarithmische Spirale');
+		trans_setSelectOptionText(sai_id_select_pic_type, '2', 'Film 2: Konzentrische Kreise');
+		trans_setSelectOptionText(sai_id_select_pic_type, '3', 'Film 3: Die Augen');
+		trans_setSelectOptionText(sai_id_select_pic_type, '4', 'Film 4: Die Spirale des Archimedes');
+		trans_setSelectOptionText(sai_id_select_pic_type, '5', 'Film 5: Herzen verbreiten');
+		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'Film 6: 5-Yen-Münze');
+		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'Film 7: Seltsamer Wirbel');
+		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'Film 8: Verrückte Farben');
+		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'Film 9: Logarithmische Spirale 2');
+		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'Film 10: Analoge Scheibe');
+		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'Film 11: Seltsamer Wirbel 2');
+		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'Film 12: Kaleidoskop');
+		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'Film 13: Erster Farbbildschirm');
+		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'Film 14: Zweiter Farbbildschirm');
+		trans_setSelectOptionText(sai_id_select_pic_type, '15', 'Film 15: Nur ein schwarzer Bildschirm');
+		trans_setSelectOptionText(sai_id_select_pic_type, '16', 'Film 16: Nur ein weißer Bildschirm');
+		trans_setSelectOptionText(sai_id_select_pic_type, '17', 'Film 17: Rotierende Schlange');
+		trans_setSelectOptionText(sai_id_select_pic_type, '18', 'Film 18: Verzerrungsstrahlung');
 		trans_setHtmlText(sai_id_text_split, 'Bildschirmaufteilung:');
 		trans_setHtmlText(sai_id_text_speed, 'Geschwindigkeit:');
 		trans_setHtmlText(speed_irregular_label, 'Irregulär');
@@ -2361,25 +2334,25 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Coreano (한국어)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'ru', 'Russian (Русский)');
 		trans_setHtmlText(sai_id_pic_type, 'Tipo de vídeo:');
-		trans_setSelectOptionText(sai_id_select_pic_type, '0', 'Imagen 0: Pantalla ficticia (para practicar)');
-		trans_setSelectOptionText(sai_id_select_pic_type, '1', 'Imagen 1: Espiral logarítmica');
-		trans_setSelectOptionText(sai_id_select_pic_type, '2', 'Imagen 2: Círculos concéntricos');
-		trans_setSelectOptionText(sai_id_select_pic_type, '3', 'Imagen 3: Ojos giratorios');
-		trans_setSelectOptionText(sai_id_select_pic_type, '4', 'Imagen 4: Espiral de Arquímedes');
-		trans_setSelectOptionText(sai_id_select_pic_type, '5', 'Imagen 5: Corazón en expansión');
-		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'Imagen 6: Moneda de cinco yenes');
-		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'Imagen 7: Extraño Remolino');
-		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'Imagen 8: Colores locos');
-		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'Imagen 9: Espiral logarítmica 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'Imagen 10: Disco analógico');
-		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'Imagen 11: Extraño Remolino 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'Imagen 12: Caleidoscopio');
-		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'Imagen 13: Primera pantalla a color');
-		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'Imagen 14: Segunda pantalla a color');
-		trans_setSelectOptionText(sai_id_select_pic_type, '15', 'Imagen 15: Sólo una pantalla negra');
-		trans_setSelectOptionText(sai_id_select_pic_type, '16', 'Imagen 16: Sólo una pantalla blanca');
-		trans_setSelectOptionText(sai_id_select_pic_type, '17', 'Imagen 17: Serpiente giratoria');
-		trans_setSelectOptionText(sai_id_select_pic_type, '18', 'Imagen 18: Radiación de distorsión');
+		trans_setSelectOptionText(sai_id_select_pic_type, '0', 'Película 0: Pantalla ficticia (para practicar)');
+		trans_setSelectOptionText(sai_id_select_pic_type, '1', 'Película 1: Espiral logarítmica');
+		trans_setSelectOptionText(sai_id_select_pic_type, '2', 'Película 2: Círculos concéntricos');
+		trans_setSelectOptionText(sai_id_select_pic_type, '3', 'Película 3: Ojos giratorios');
+		trans_setSelectOptionText(sai_id_select_pic_type, '4', 'Película 4: Espiral de Arquímedes');
+		trans_setSelectOptionText(sai_id_select_pic_type, '5', 'Película 5: Corazón en expansión');
+		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'Película 6: Moneda de cinco yenes');
+		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'Película 7: Extraño Remolino');
+		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'Película 8: Colores locos');
+		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'Película 9: Espiral logarítmica 2');
+		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'Película 10: Disco analógico');
+		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'Película 11: Extraño Remolino 2');
+		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'Película 12: Caleidoscopio');
+		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'Película 13: Primera pantalla a color');
+		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'Película 14: Segunda pantalla a color');
+		trans_setSelectOptionText(sai_id_select_pic_type, '15', 'Película 15: Sólo una pantalla negra');
+		trans_setSelectOptionText(sai_id_select_pic_type, '16', 'Película 16: Sólo una pantalla blanca');
+		trans_setSelectOptionText(sai_id_select_pic_type, '17', 'Película 17: Serpiente giratoria');
+		trans_setSelectOptionText(sai_id_select_pic_type, '18', 'Película 18: Radiación de distorsión');
 		trans_setHtmlText(sai_id_text_split, 'Pantalla dividida:');
 		trans_setHtmlText(sai_id_text_speed, 'Velocidad:');
 		trans_setHtmlText(speed_irregular_label, 'Irregular');
@@ -2467,25 +2440,25 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Korean (한국어)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'ru', 'Russian (Русский)');
 		trans_setHtmlText(sai_id_pic_type, 'Тип видео:');
-		trans_setSelectOptionText(sai_id_select_pic_type, '0', 'Рисунок 0: Пустой экран (для практики)');
-		trans_setSelectOptionText(sai_id_select_pic_type, '1', 'Рисунок 1: Логарифмическая спираль');
-		trans_setSelectOptionText(sai_id_select_pic_type, '2', 'Рисунок 2: Концентрические круги');
-		trans_setSelectOptionText(sai_id_select_pic_type, '3', 'Рисунок 3: Вращающиеся глаза');
-		trans_setSelectOptionText(sai_id_select_pic_type, '4', 'Рисунок 4: Спираль Архимеда');
-		trans_setSelectOptionText(sai_id_select_pic_type, '5', 'Рисунок 5: Расширяющееся сердце');
-		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'Рисунок 6: Монета пять иен');
-		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'Рисунок 7: Странный Водоворот');
-		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'Рисунок 8: Сумасшедшие цвета');
-		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'Рисунок 9: Логарифмическая спираль 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'Рисунок 10: Аналоговый диск');
-		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'Рисунок 11: Странный Водоворот 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'Рисунок 12: Калейдоскоп');
-		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'Рисунок 13: Первый цветной экран');
-		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'Рисунок 14: Второй цветной экран');
-		trans_setSelectOptionText(sai_id_select_pic_type, '15', 'Рисунок 15: Просто черный экран');
-		trans_setSelectOptionText(sai_id_select_pic_type, '16', 'Рисунок 16: Просто белый экран');
-		trans_setSelectOptionText(sai_id_select_pic_type, '17', 'Рисунок 17: Вращающаяся змея');
-		trans_setSelectOptionText(sai_id_select_pic_type, '18', 'Рисунок 18: Искажающее излучение');
+		trans_setSelectOptionText(sai_id_select_pic_type, '0', 'Фильм 0: Пустой экран (для практики)');
+		trans_setSelectOptionText(sai_id_select_pic_type, '1', 'Фильм 1: Логарифмическая спираль');
+		trans_setSelectOptionText(sai_id_select_pic_type, '2', 'Фильм 2: Концентрические круги');
+		trans_setSelectOptionText(sai_id_select_pic_type, '3', 'Фильм 3: Вращающиеся глаза');
+		trans_setSelectOptionText(sai_id_select_pic_type, '4', 'Фильм 4: Спираль Архимеда');
+		trans_setSelectOptionText(sai_id_select_pic_type, '5', 'Фильм 5: Расширяющееся сердце');
+		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'Фильм 6: Монета пять иен');
+		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'Фильм 7: Странный Водоворот');
+		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'Фильм 8: Сумасшедшие цвета');
+		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'Фильм 9: Логарифмическая спираль 2');
+		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'Фильм 10: Аналоговый диск');
+		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'Фильм 11: Странный Водоворот 2');
+		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'Фильм 12: Калейдоскоп');
+		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'Фильм 13: Первый цветной экран');
+		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'Фильм 14: Второй цветной экран');
+		trans_setSelectOptionText(sai_id_select_pic_type, '15', 'Фильм 15: Просто черный экран');
+		trans_setSelectOptionText(sai_id_select_pic_type, '16', 'Фильм 16: Просто белый экран');
+		trans_setSelectOptionText(sai_id_select_pic_type, '17', 'Фильм 17: Вращающаяся змея');
+		trans_setSelectOptionText(sai_id_select_pic_type, '18', 'Фильм 18: Искажающее излучение');
 		trans_setHtmlText(sai_id_text_split, 'Разделенный экран:');
 		trans_setHtmlText(sai_id_text_speed, 'Скорость:');
 		trans_setHtmlText(speed_irregular_label, 'Нерегулярный');
@@ -2573,25 +2546,25 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Korean (한국어)');
 		trans_setSelectOptionText(sai_id_select_language_2, 'ru', 'Russian (Русский)');
 		trans_setHtmlText(sai_id_pic_type, 'The type of picture:');
-		trans_setSelectOptionText(sai_id_select_pic_type, '0', 'Pic0: Dummy Screen (for practice)');
-		trans_setSelectOptionText(sai_id_select_pic_type, '1', 'Pic1: Logarithmic Spiral');
-		trans_setSelectOptionText(sai_id_select_pic_type, '2', 'Pic2: Concentric Circles');
-		trans_setSelectOptionText(sai_id_select_pic_type, '3', 'Pic3: The Eyes');
-		trans_setSelectOptionText(sai_id_select_pic_type, '4', 'Pic4: Archimedes\' Spiral');
-		trans_setSelectOptionText(sai_id_select_pic_type, '5', 'Pic5: Spreading Hearts');
-		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'Pic6: 5-Yen Coin');
-		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'Pic7: Strange Swirl');
-		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'Pic8: Crazy Colors');
-		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'Pic9: Logarithmic Spiral 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'Pic10: Analog Disc');
-		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'Pic11: Strange Swirl 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'Pic12: Kaleidoscope');
-		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'Pic13: 1st color screen');
-		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'Pic14: 2st color screen');
-		trans_setSelectOptionText(sai_id_select_pic_type, '15', 'Pic15: Just a black screen');
-		trans_setSelectOptionText(sai_id_select_pic_type, '16', 'Pic16: Just a white screen');
-		trans_setSelectOptionText(sai_id_select_pic_type, '17', 'Pic17: Rotating snake');
-		trans_setSelectOptionText(sai_id_select_pic_type, '18', 'Pic18: Distortion Radiation');
+		trans_setSelectOptionText(sai_id_select_pic_type, '0', 'Movie 0: Dummy Screen (for practice)');
+		trans_setSelectOptionText(sai_id_select_pic_type, '1', 'Movie 1: Logarithmic Spiral');
+		trans_setSelectOptionText(sai_id_select_pic_type, '2', 'Movie 2: Concentric Circles');
+		trans_setSelectOptionText(sai_id_select_pic_type, '3', 'Movie 3: The Eyes');
+		trans_setSelectOptionText(sai_id_select_pic_type, '4', 'Movie 4: Archimedes\' Spiral');
+		trans_setSelectOptionText(sai_id_select_pic_type, '5', 'Movie 5: Spreading Hearts');
+		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'Movie 6: 5-Yen Coin');
+		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'Movie 7: Strange Swirl');
+		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'Movie 8: Crazy Colors');
+		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'Movie 9: Logarithmic Spiral 2');
+		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'Movie 10: Analog Disc');
+		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'Movie 11: Strange Swirl 2');
+		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'Movie 12: Kaleidoscope');
+		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'Movie 13: 1st color screen');
+		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'Movie 14: 2st color screen');
+		trans_setSelectOptionText(sai_id_select_pic_type, '15', 'Movie 15: Just a black screen');
+		trans_setSelectOptionText(sai_id_select_pic_type, '16', 'Movie 16: Just a white screen');
+		trans_setSelectOptionText(sai_id_select_pic_type, '17', 'Movie 17: Rotating snake');
+		trans_setSelectOptionText(sai_id_select_pic_type, '18', 'Movie 18: Distortion Radiation');
 		trans_setHtmlText(sai_id_text_split, 'Screen splitting:');
 		trans_setHtmlText(sai_id_text_speed, 'Speed:');
 		trans_setHtmlText(speed_irregular_label, 'Irregular');

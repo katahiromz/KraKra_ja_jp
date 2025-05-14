@@ -98,7 +98,8 @@ button { /* 通常のボタン */
 	background-color: #222;
 }
 .sai_class_face_button { /* 顔認識のアクションボタン */
-	background: rgba(255, 255, 255, 50%);
+	color: black;
+	background: rgba(255, 255, 255, 75%);
 }
 .sai_class_face_button:disabled { /* 顔認識の無効のアクションボタン */
 	color: rgb(191, 191, 191);
