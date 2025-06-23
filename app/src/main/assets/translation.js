@@ -252,10 +252,10 @@ const trans_DEFAULT_MESSAGE_LIST_JA = [
 	"危険です。早く逃げて。",
 	"津波です。高い場所に逃げろ。",
 	"助けが必要です。",
-	"怪我人がいます。救急車を呼んで下さい。",
-	"意識不明の人がいます。救急車を呼んで下さい",
+	"怪我人がいます。救急車を呼んでください。",
+	"意識不明の人がいます。救急車を呼んでください",
 	"痴漢です。助けてください。",
-	"お風呂に入って下さい",
+	"お風呂に入ってください",
 	"あなたの脇の臭いを嗅いでみましょう",
 	"買い物に行きましょう",
 	"ゴミを捨てに行ってくれませんか",
@@ -277,17 +277,17 @@ const trans_DEFAULT_MESSAGE_LIST_JA = [
 	"それは失礼しました",
 	"何かお困りでも？",
 	"何か不安でもありますか？",
-	"無理をしないで下さい",
-	"緊張しないで下さい",
+	"無理をしないでください",
+	"緊張しないでください",
 	"恥ずかしがらないで",
 	"いじめたりしないよ",
 	"怖がらないで",
-	"落ち着いて下さい",
+	"落ち着いてください",
 	"私と話し合おうよ",
 	"その件は一緒に考えましょう",
 	"何かご不満でもありますか？",
-	"私を助けて下さい",
-	"私の願いを叶えて下さい",
+	"私を助けてください",
+	"私の願いを叶えてください",
 	"私のことが好きになーる",
 	"なんでもないよ",
 	"今から食事に行こうよ",
@@ -306,7 +306,7 @@ const trans_DEFAULT_MESSAGE_LIST_JA = [
 	"今日は楽しもうぜ",
 	"テーブルに料理があるよ",
 	"冷蔵庫に料理があるよ",
-	"家事を手伝って下さい",
+	"家事を手伝ってください",
 	"疲れたので休みます",
 	"今からベッドで寝ます",
 	"今夜はどうですか",
@@ -718,7 +718,7 @@ const trans_NOTICE_EN = `=========================
 Hypnosis KraKra
 =========================
 
-"Hypnosis KraKra" is a full-fledged joke app equipped with 18 types of videos, 20 types of audio, microphone input, and face recognition.
+"Hypnosis KraKra" is a full-fledged joke app equipped with 19 types of videos, 20 types of audio, microphone input, and face recognition.
 We provide real entertainment where you can enjoy hypnotic images and sounds.
 
 - It displays captivating images to fill the entire screen. There are no annoying ads.
@@ -768,7 +768,7 @@ const trans_NOTICE_KO_KR = `=========================
 Hypnosis KraKra
 =========================
 
-"최면 크라크라" 는 18종의 동영상, 20종의 오디오, 마이크 입력, 얼굴 인식 기능을 갖춘 본격적인 농담 앱입니다.
+"최면 크라크라" 는 19종의 동영상, 20종의 오디오, 마이크 입력, 얼굴 인식 기능을 갖춘 본격적인 농담 앱입니다.
 최면에 걸린 영상과 사운드를 즐길 수 있는 리얼 엔터테인먼트를 제공합니다.
 
 - 전체 화면이 가득한 매력적인 이미지를 표시합니다. 성가신 광고는 없습니다.
@@ -819,7 +819,7 @@ const trans_NOTICE_JA = `=========================
 Hypnosis KraKra
 =========================
 
-「催眠くらくら」は、18種類の映像と20種類の音声、マイク入力、顔認証を搭載した本格的なジョークアプリです。
+「催眠くらくら」は、19種類の映像と20種類の音声、マイク入力、顔認証を搭載した本格的なジョークアプリです。
 催眠っぽい映像や音声を楽しめる本物のエンターテインメントを提供します。
 
 - 画面いっぱいに魅惑の映像を表示します。邪魔な広告はありません。
@@ -834,17 +834,17 @@ Hypnosis KraKra
 
 【使用上の注意】
 
-- 本ソフトウェアはジョークアプリであり、動作は無保証です。
-- 本ソフトウェアは、てんかんを引き起こす映像を含むかもしれません。てんかんとは、脳の電気信号の異常によって起こる病気であり、最悪の場合、死に至ります。幼児、思春期の若者、高齢者はてんかんを発症しやすいと考えられています。よって、これらの年齢層に本ソフトウェアを使用することは絶対にしないでください。
-- あなたの国・学校・宗教・地域が催眠を禁じている場合は、本アプリを使用しないで下さい。
-- 急性期の統合失調症患者は使用禁止です。
-- 使用直後は、自動車の運転や、危険の伴う機械の操作などを避けて下さい。
-- 集合体恐怖症の人は使用しないで下さい。
-- 頭痛、めまい、過呼吸、吐き気、胃腸の不具合、異常な感情などの症状が生じた場合は、速やかに使用を中止し、専門医の診断を受けて下さい。
-- 運営者は、本サービスの継続が困難となる事由が生じた場合、いつでも本サービスを終了することができるものとします。
-- 他人に同意なく催眠を掛けないで下さい。
-- このアプリは医療用ではありません。病気の人には医学的に効果のある標準医療を推奨します。
-- このアプリは睡眠用ではありません。体調がすぐれない人はご利用をひかえて下さい。
+- このアプリ『催眠くらくら』（以下「本アプリ」と呼称します）はジョークアプリであり、動作は無保証です。
+- 本アプリは、てんかんを引き起こす映像を含むかもしれません。てんかんとは、脳の電気信号の異常によって起こる病気であり、最悪の場合、死に至ります。幼児、思春期の若者、高齢者はてんかんを発症しやすいと考えられています。よって、これらの年齢層に本アプリを使用することは絶対にしないでください。
+- あなたの国・学校・宗教・地域が催眠を禁じている場合は、本アプリを使用しないでください。
+- 急性期の統合失調症患者は本アプリを使用してはいけません。
+- 本アプリの使用中と使用直後は、自動車の運転や、危険の伴う機械の操作などを避けてください。
+- 集合体恐怖症の人は本アプリを使用しないでください。
+- 本アプリの使用に伴って、頭痛、めまい、過呼吸、吐き気、胃腸の不具合、異常な感情などの症状が生じた場合は、速やかに本アプリの使用を中止し、専門医の診断を受けてください。
+- 運営者は、本アプリのサービスの継続が困難となる事由が生じた場合、いつでも本アプリのサービスを終了することができるものとします。
+- 他人に同意なく催眠を掛けないでください。
+- 本アプリは医療用ではありません。病気の人には医学的に効果のある標準医療を推奨します。
+- 本アプリは睡眠用ではありません。体調がすぐれない人はご利用をひかえてください。
 - 被験者が意味または方法を知らないこと、実行の不可能なことをさせようとする催眠は効果がありません。
 
 【使い方】
@@ -869,7 +869,7 @@ const trans_NOTICE_ZH_CN = `=========================
 Hypnosis KraKra
 =========================
 
-《催眠克拉克拉》是一款成熟的笑话应用程序，配备18种视频、20种音频、麦克风输入和面部识别。
+《催眠克拉克拉》是一款成熟的笑话应用程序，配备19种视频、20种音频、麦克风输入和面部识别。
 我们提供真正的娱乐，您可以享受催眠的图像和声音。
 
 - 它显示迷人的图像以填满整个屏幕。 没有烦人的广告。
@@ -919,7 +919,7 @@ const trans_NOTICE_ZH_TW = `=========================
 Hypnosis KraKra
 =========================
 
-《催眠克拉克拉》是一款成熟的笑話應用程序，配備18種視頻、20種音頻、麥克風輸入和麵部識別。
+《催眠克拉克拉》是一款成熟的笑話應用程序，配備19種視頻、20種音頻、麥克風輸入和麵部識別。
 我們提供真正的娛樂，您可以享受催眠的圖像和聲音。
 
 - 它顯示迷人的圖像以填滿整個螢幕。 沒有煩人的廣告。
@@ -969,7 +969,7 @@ Ipnosi KraKra
 Hypnosis KraKra
 =========================
 
-"Ipnosi KraKra" è un'app per scherzi completa dotata di 18 tipi di video, 20 tipi di audio, ingresso microfono e riconoscimento facciale.
+"Ipnosi KraKra" è un'app per scherzi completa dotata di 19 tipi di video, 20 tipi di audio, ingresso microfono e riconoscimento facciale.
 Forniamo un vero intrattenimento in cui puoi goderti immagini e suoni ipnotici.
 
 - Visualizza immagini accattivanti per riempire l'intero schermo. Non ci sono annunci fastidiosi.
@@ -1019,7 +1019,7 @@ Hypnose KraKra
 Hypnosis KraKra
 =========================
 
-„Hypnose KraKra“ ist eine vollwertige Scherz-App, die mit 18 Arten von Videos, 20 Arten von Audio, Mikrofoneingang und Gesichtserkennung ausgestattet ist.
+„Hypnose KraKra“ ist eine vollwertige Scherz-App, die mit 19 Arten von Videos, 20 Arten von Audio, Mikrofoneingang und Gesichtserkennung ausgestattet ist.
 Wir bieten echte Unterhaltung, bei der Sie hypnotische Bilder und Töne genießen können.
 
 - Es zeigt fesselnde Bilder an, die den gesamten Bildschirm ausfüllen. Es gibt keine störende Werbung.
@@ -1069,7 +1069,7 @@ Hipnótico KraKra
 Hypnosis KraKra
 =========================
 
-"Hipnótico KraKra" es una aplicación de broma completa equipada con 18 tipos de vídeos, 20 tipos de audio, entrada de micrófono y reconocimiento facial.
+"Hipnótico KraKra" es una aplicación de broma completa equipada con 19 tipos de vídeos, 20 tipos de audio, entrada de micrófono y reconocimiento facial.
 Brindamos entretenimiento real donde podrás disfrutar de imágenes y sonidos hipnóticos.
 
 - Muestra imágenes cautivadoras para llenar toda la pantalla. No hay anuncios molestos.
@@ -1119,7 +1119,7 @@ const trans_NOTICE_RU = `=========================
 Hypnosis KraKra
 =========================
 
-«Гипнотическая КраКра» — полноценное приложение-шутка, оснащенное 18 типами видео, 20 типами звука, микрофонным входом и распознаванием лиц.
+«Гипнотическая КраКра» — полноценное приложение-шутка, оснащенное 19 типами видео, 20 типами звука, микрофонным входом и распознаванием лиц.
 Мы предоставляем настоящее развлечение, где вы сможете насладиться гипнотическими изображениями и звуками.
 
 - Отображение захватывающих изображений на весь экран. Назойливой рекламы нет.
@@ -1717,6 +1717,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '16', '動画 16：ただの白い画面');
 		trans_setSelectOptionText(sai_id_select_pic_type, '17', '動画 17：ヘビの回転');
 		trans_setSelectOptionText(sai_id_select_pic_type, '18', '動画 18：ひずみ放射');
+		trans_setSelectOptionText(sai_id_select_pic_type, '19', '動画 19：ランダムな波');
 		trans_setHtmlText(sai_id_text_split, '画面分割:');
 		trans_setHtmlText(sai_id_text_speed, 'スピード:');
 		trans_setHtmlText(speed_irregular_label, '不規則');
@@ -1823,6 +1824,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '16', '电影16：只是白屏');
 		trans_setSelectOptionText(sai_id_select_pic_type, '17', '电影17：旋转蛇');
 		trans_setSelectOptionText(sai_id_select_pic_type, '18', '电影18：畸变辐射');
+		trans_setSelectOptionText(sai_id_select_pic_type, '19', '电影19：随机波');
 		trans_setHtmlText(sai_id_text_split, '分屏：');
 		trans_setHtmlText(sai_id_text_speed, '速度：');
 		trans_setHtmlText(speed_irregular_label, '不规律的');
@@ -1929,6 +1931,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '16', '電影16：只是白屏');
 		trans_setSelectOptionText(sai_id_select_pic_type, '17', '電影17：旋轉蛇');
 		trans_setSelectOptionText(sai_id_select_pic_type, '18', '電影18：畸變輻射');
+		trans_setSelectOptionText(sai_id_select_pic_type, '19', '電影19：隨機波');
 		trans_setHtmlText(sai_id_text_split, '分屏：');
 		trans_setHtmlText(sai_id_text_speed, '速度：');
 		trans_setHtmlText(speed_irregular_label, '不規律的');
@@ -2035,6 +2038,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '16', '동영상 16：그냥 흰색 화면');
 		trans_setSelectOptionText(sai_id_select_pic_type, '17', '동영상 17：뱀 회전');
 		trans_setSelectOptionText(sai_id_select_pic_type, '18', '동영상 18：스트레인 방사');
+		trans_setSelectOptionText(sai_id_select_pic_type, '19', '동영상 19：무작위 파동');
 		trans_setHtmlText(sai_id_text_split, '화면 분할:');
 		trans_setHtmlText(sai_id_text_speed, '속도:');
 		trans_setHtmlText(speed_irregular_label, '불규칙');
@@ -2141,6 +2145,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '16', 'Film 16: Solo uno schermo bianco');
 		trans_setSelectOptionText(sai_id_select_pic_type, '17', 'Film 17: Serpente rotante');
 		trans_setSelectOptionText(sai_id_select_pic_type, '18', 'Film 18: Radiazione di distorsione');
+		trans_setSelectOptionText(sai_id_select_pic_type, '19', 'Film 19：Onde Casuali');
 		trans_setHtmlText(sai_id_text_split, 'Divisione dello schermo:');
 		trans_setHtmlText(sai_id_text_speed, 'Velocità:');
 		trans_setHtmlText(speed_irregular_label, 'Irregolare');
@@ -2247,6 +2252,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '16', 'Film 16: Nur ein weißer Bildschirm');
 		trans_setSelectOptionText(sai_id_select_pic_type, '17', 'Film 17: Rotierende Schlange');
 		trans_setSelectOptionText(sai_id_select_pic_type, '18', 'Film 18: Verzerrungsstrahlung');
+		trans_setSelectOptionText(sai_id_select_pic_type, '19', 'Film 19：Zufällige Wellen');
 		trans_setHtmlText(sai_id_text_split, 'Bildschirmaufteilung:');
 		trans_setHtmlText(sai_id_text_speed, 'Geschwindigkeit:');
 		trans_setHtmlText(speed_irregular_label, 'Irregulär');
@@ -2353,6 +2359,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '16', 'Película 16: Sólo una pantalla blanca');
 		trans_setSelectOptionText(sai_id_select_pic_type, '17', 'Película 17: Serpiente giratoria');
 		trans_setSelectOptionText(sai_id_select_pic_type, '18', 'Película 18: Radiación de distorsión');
+		trans_setSelectOptionText(sai_id_select_pic_type, '19', 'Película 19：Ondas Aleatorias');
 		trans_setHtmlText(sai_id_text_split, 'Pantalla dividida:');
 		trans_setHtmlText(sai_id_text_speed, 'Velocidad:');
 		trans_setHtmlText(speed_irregular_label, 'Irregular');
@@ -2459,6 +2466,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '16', 'Фильм 16: Просто белый экран');
 		trans_setSelectOptionText(sai_id_select_pic_type, '17', 'Фильм 17: Вращающаяся змея');
 		trans_setSelectOptionText(sai_id_select_pic_type, '18', 'Фильм 18: Искажающее излучение');
+		trans_setSelectOptionText(sai_id_select_pic_type, '19', 'Фильм 19：Случайные Волны');
 		trans_setHtmlText(sai_id_text_split, 'Разделенный экран:');
 		trans_setHtmlText(sai_id_text_speed, 'Скорость:');
 		trans_setHtmlText(speed_irregular_label, 'Нерегулярный');
@@ -2565,6 +2573,7 @@ const trans_localize = function(lang){
 		trans_setSelectOptionText(sai_id_select_pic_type, '16', 'Movie 16: Just a white screen');
 		trans_setSelectOptionText(sai_id_select_pic_type, '17', 'Movie 17: Rotating snake');
 		trans_setSelectOptionText(sai_id_select_pic_type, '18', 'Movie 18: Distortion Radiation');
+		trans_setSelectOptionText(sai_id_select_pic_type, '19', 'Movie 19：Random Waves');
 		trans_setHtmlText(sai_id_text_split, 'Screen splitting:');
 		trans_setHtmlText(sai_id_text_speed, 'Speed:');
 		trans_setHtmlText(speed_irregular_label, 'Irregular');

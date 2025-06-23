@@ -215,6 +215,7 @@ const facelocker = function(canvas, on_lock){
 			return;
 
 		self.camvas.cancelAnimation();
+		self.camvas.disconnect();
 	};
 
 	// 顔認識を再開する。

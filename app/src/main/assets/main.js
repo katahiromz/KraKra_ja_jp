@@ -1,7 +1,7 @@
 // 催眠アプリ「催眠くらくら」のJavaScriptのメインコード。
 // 暗号名はKraKra。
 
-const sai_VERSION = '3.8.0'; // KraKraバージョン番号。
+const sai_VERSION = '3.8.1'; // KraKraバージョン番号。
 const sai_DEBUGGING = false; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
 let sai_vibrating = false; // 振動中か？
@@ -35,7 +35,7 @@ const SAI_on_keydown_message = function(e){
 // ドキュメントの読み込みが完了（DOMContentLoaded）されたら無名関数が呼び出される。
 document.addEventListener('DOMContentLoaded', function(){
 	// 変数を保護するため、関数内部に閉じ込める。
-	const sai_NUM_TYPE = 19; // 「画」の個数。
+	const sai_NUM_TYPE = 20; // 「画」の個数。
 	let sai_screen_width = 0; // スクリーンの幅（ピクセル単位）を覚えておく。
 	let sai_screen_height = 0; // スクリーンの高さ（ピクセル単位）を覚えておく。
 	let sai_pic_type = 0; // 映像の種類を表す整数値。
@@ -224,6 +224,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		}else{
 			if(sai_face_getter){
 				sai_face_getter.stop();
+				sai_face_getter = null;
 			}
 		}
 
@@ -2459,10 +2460,14 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_pic_08_sub(ctx2, 0, 0, dx / 2, dy / 2);
 		ctx2.restore();
 
-		// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
-		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-		ctx.drawImage(sai_id_canvas_02, 0, 0, dx / 2, dy / 2, px, py, dx, dy);
-		ctx.globalAlpha = 1; // 元に戻す。
+		if(0){ // この映像についてはモーションブラーを適用しない。
+			// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
+			ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
+			ctx.drawImage(sai_id_canvas_02, 0, 0, dx / 2, dy / 2, px, py, dx, dy);
+			ctx.globalAlpha = 1; // 元に戻す。
+		}else{
+			ctx.drawImage(sai_id_canvas_02, 0, 0, dx / 2, dy / 2, px, py, dx, dy);
+		}
 
 		// フォーカス矢印を描画する。
 		let qx = px + dx / 2, qy = py + dy / 2;
@@ -3132,6 +3137,95 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.globalAlpha = 1; // 元に戻す。
 	}
 
+	// 「画19」で使用するデータ。
+	let sai_pic_19_dx = 0, sai_pic_19_dy = 0;
+	let sai_pic_19_image_data = null;
+	let sai_pic_19_wave_data = null;
+
+	// 映像「画19: ランダムな波」の描画。
+	const SAI_draw_pic_19_sub = function(ctx, px, py, dx, dy){
+		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
+
+		let dxy = (dx + dy) / 2; // 画面の辺の平均の長さ。
+		let qx = px + dx / 2, qy = py + dy / 2; // 画面中央の座標。
+
+		// イメージデータを作成。
+		if(!sai_pic_19_image_data || dx != sai_pic_19_dx || dy != sai_pic_19_dy){
+			sai_pic_19_image_data = new ImageData(dx, dy);
+			sai_pic_19_dx = dx;
+			sai_pic_19_dy = dy;
+		}
+
+		const ci = 3; // 波の個数。
+
+		// 波形データを作成。
+		let counter = SAI_get_tick_count();
+		if(!sai_pic_19_wave_data){
+			sai_pic_19_wave_data = [];
+			for (let i = 0; i < ci; ++i){
+				let wave_data = { x: 0, y: 0, radius: dxy * 0.3 }; // x, yは後で計算する。
+				sai_pic_19_wave_data.push(wave_data);
+			}
+		}
+
+		// 各波形の中央点のx, yを計算。
+		let i = 0;
+		for (let wave_data of sai_pic_19_wave_data){
+			wave_data.x = qx + Math.cos(counter * 0.0005 + i * 2 * Math.PI / ci) * wave_data.radius;
+			wave_data.y = qy + Math.sin(counter * 0.02 + i * 2 * Math.PI / ci) * wave_data.radius;
+			++i;
+		}
+
+		// 波形データを元にイメージデータを作成。
+		let image_data = sai_pic_19_image_data.data;
+		let strength = 6, ib = 0;
+		for(let y = 0; y < sai_pic_19_image_data.height; ++y){
+			for(let x = 0; x < sai_pic_19_image_data.width; ++x){
+				// 各ピクセル位置(x, y)に対して波の高さを計算する。
+				let wave_height = 0;
+				for(let wave_data of sai_pic_19_wave_data){
+					// 距離。
+					let distance = Math.sqrt((x - wave_data.x)**2 + (y - wave_data.y)**2);
+					// 距離に応じて波の高さを決定し、加算する。
+					wave_height += Math.cos(distance / wave_data.radius * strength - counter * 0.03);
+				}
+				// 波の高さに応じてピクセル値を決定する。各ピクセルは4バイトデータ。
+				image_data[ib++] = 255 + Math.cos(wave_height * strength + Math.PI) * 127;
+				image_data[ib++] = 127 + Math.sin(wave_height * strength * 1.2) * 127;
+				image_data[ib++] = Math.abs(Math.cos(wave_height + counter * 0.5) * 255 - 200, 255);
+				image_data[ib++] = 0xFF;
+			}
+		}
+		// イメージデータをセット。
+		ctx.putImageData(sai_pic_19_image_data, px, py);
+
+		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
+	}
+
+	// 映像「画19: ランダムな波」の描画。
+	const SAI_draw_pic_19 = function(ctx, px, py, dx, dy){
+		// 別のキャンバスに普通に描画する。
+		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		ctx2.save();
+		let dx3 = dx / 3, dy3 = dy / 3;
+		SAI_draw_pic_19_sub(ctx2, 0, 0, dx3, dy3);
+		ctx2.restore();
+
+		if(0){ // この映像についてはモーションブラーを適用しない。
+			// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
+			ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
+			ctx.drawImage(sai_id_canvas_02, 0, 0, dx3, dy3, px, py, dx, dy);
+			ctx.globalAlpha = 1; // 元に戻す。
+		}else{
+			ctx.drawImage(sai_id_canvas_02, 0, 0, dx3, dy3, px, py, dx, dy);
+		}
+
+		// 画面中央の座標を計算する。
+		let qx = px + dx / 2, qy = py + dy / 2;
+		// フォーカス矢印を描画する。
+		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
+	}
+
 	// カウントダウン映像の描画。
 	const SAI_draw_pic_count_down = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
@@ -3258,6 +3352,9 @@ document.addEventListener('DOMContentLoaded', function(){
 			break;
 		case 18:
 			SAI_draw_pic_18(ctx, px, py, dx, dy);
+			break;
+		case 19:
+			SAI_draw_pic_19(ctx, px, py, dx, dy);
 			break;
 		}
 	}
