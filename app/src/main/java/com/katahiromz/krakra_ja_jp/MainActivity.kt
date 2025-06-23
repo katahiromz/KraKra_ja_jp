@@ -23,6 +23,7 @@ import android.webkit.*
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -286,6 +287,17 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             Timber.i(str)
             //webView?.evaluateJavascript(str) {} // 現在、無効。
             WindowInsetsCompat.toWindowInsetsCompat(view.onApplyWindowInsets(insets.toWindowInsets()))
+        }
+
+        // 「戻る」ボタンのコールバックを登録。
+        onBackPressedDispatcher.addCallback(this@MainActivity, onBackPressedCallback)
+    }
+
+    // 「戻る」ボタンをサポートするコールバック関数。
+    private val onBackPressedCallback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            // 'go_back' メッセージを投函する。おそらく'message'イベントリスナが受け取るはず。
+            webView?.evaluateJavascript("postMessage('go_back');", { })
         }
     }
 

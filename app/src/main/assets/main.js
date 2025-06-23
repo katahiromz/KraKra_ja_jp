@@ -1,7 +1,7 @@
 // 催眠アプリ「催眠くらくら」のJavaScriptのメインコード。
 // 暗号名はKraKra。
 
-const sai_VERSION = '3.8.2'; // KraKraバージョン番号。
+const sai_VERSION = '3.8.3'; // KraKraバージョン番号。
 const sai_DEBUGGING = false; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
 let sai_vibrating = false; // 振動中か？
@@ -21,7 +21,7 @@ let sai_vibrating = false; // 振動中か？
 const SAI_on_click_message = function(id){
 	sai_id_text_message.value = id.textContent;
 	sai_id_text_message.focus();
-}
+};
 
 // メッセージ項目でキーが入力された。
 const SAI_on_keydown_message = function(e){
@@ -30,7 +30,7 @@ const SAI_on_keydown_message = function(e){
 		return false;
 	}
 	return true;
-}
+};
 
 // ドキュメントの読み込みが完了（DOMContentLoaded）されたら無名関数が呼び出される。
 document.addEventListener('DOMContentLoaded', function(){
@@ -189,7 +189,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			}else if(page_id === sai_id_page_message){
 				localStorage.setItem('saiminMessageListShowing', 1);
 			}
-			history.pushState('back', null, '?'); // 「戻る」ボタンを有効にするためのおまじない。
+			if(!SAI_is_android_native_app())
+				history.pushState('back', null, '?'); // 「戻る」ボタンを有効にするためのおまじない。
 		}
 
 		if(page_id === sai_id_page_main || page_id === sai_id_page_config){ // メインページか設定ページなら
@@ -3935,6 +3936,16 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_kaleido_radius = (sai_screen_width + sai_screen_height) * 0.1;
 	}
 
+	// 戻る。
+	const SAI_go_back = function(){
+		if (!localStorage.getItem('saiminUserAccepted'))
+			return; // 合意が取れていない場合は何もしない。
+		if (sai_current_page === sai_id_page_main)
+			return; // メインページなら何もしない。
+		// メインページに移動。
+		SAI_choose_page(sai_id_page_main);
+	};
+
 	// イベントリスナー群を登録する。
 	const SAI_register_event_listeners = function(){
 		// 「メッセージ」ボタン。
@@ -4463,16 +4474,23 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// ブラウザの「戻る」ボタン。
 		window.addEventListener('popstate', function(e){
-			if (!localStorage.getItem('saiminUserAccepted'))
-				return; // 合意が取れていない場合は何もしない。
-			if (sai_current_page === sai_id_page_main)
-				return; // メインページなら何もしない。
+			if (SAI_is_android_native_app())
+				return; // Androidネイティブアプリのときは何もしない。
 			// イベントのデフォルトの処理をスキップ。
 			e.preventDefault();
-			// メインページに移動。
-			SAI_choose_page(sai_id_page_main);
+			// 戻る。
+			SAI_go_back();
 		});
-		history.pushState('back', null, '?'); // 「戻る」ボタンを有効にするためのおまじない。
+
+		// 「戻る」ボタン用のメッセージリスナー。
+		window.addEventListener('message', function(e){
+			if(e.data == "go_back"){
+				// イベントのデフォルトの処理をスキップ。
+				e.preventDefault();
+				// 戻る。
+				SAI_go_back();
+			}
+		});
 	}
 
 	// キーボード操作を実装。
@@ -4643,6 +4661,10 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// イベントリスナー群を登録する。
 		SAI_register_event_listeners();
+
+		// Androidアプリでなければ戻るボタンを有効にする。
+		if(!SAI_is_android_native_app())
+			history.pushState('back', null, '?'); // 「戻る」ボタンを有効にするためのおまじない。
 
 		// AndroidアプリでなければAndroidオンリーの要素を隠す。
 		if(!SAI_is_android_native_app()){
