@@ -143,6 +143,11 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         screenBrightness = value
     }
 
+    // アプリを終了する。
+    fun finishApp() {
+        finish(); // 完全には終了しない（タスクリストに残る）。
+    }
+
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         Timber.i("onWindowFocusChanged")
         super.onWindowFocusChanged(hasFocus)
@@ -290,7 +295,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         }
 
         // 「戻る」ボタンのコールバックを登録。
-        onBackPressedDispatcher.addCallback(this@MainActivity, onBackPressedCallback)
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
     }
 
     // 「戻る」ボタンをサポートするコールバック関数。
@@ -475,6 +480,10 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
             override fun onBrightness(value: String) {
                 setBrightness(value) // 明るさを指定する。
+            }
+
+            override fun onFinishApp() {
+                finishApp(); // アプリを終了する。
             }
 
             override fun onStartVibrator(length: Int) {

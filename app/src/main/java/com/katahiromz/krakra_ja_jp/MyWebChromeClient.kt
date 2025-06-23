@@ -27,6 +27,7 @@ class MyWebChromeClient(private var activity: MainActivity?, private val listene
         fun onShowSnackbar(text: String, typeOfSnack: Int)
         fun onProgressChanged(view: WebView?, newProgress: Int)
         fun onBrightness(value: String)
+        fun onFinishApp()
         fun onStartVibrator(length: Int)
         fun onStopVibrator()
     }
@@ -61,6 +62,12 @@ class MyWebChromeClient(private var activity: MainActivity?, private val listene
     @JavascriptInterface
     fun setBrightness(brightness: String) {
         listener.onBrightness(brightness)
+    }
+
+    // アプリを終了する。
+    @JavascriptInterface
+    fun finishApp() {
+        listener.onFinishApp()
     }
 
     // スピーチをキャンセルする。

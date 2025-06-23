@@ -3940,6 +3940,15 @@ document.addEventListener('DOMContentLoaded', function(){
 	const SAI_go_back = function(){
 		if (!localStorage.getItem('saiminUserAccepted'))
 			return; // 合意が取れていない場合は何もしない。
+		if (SAI_is_android_native_app()){ // Androidネイティブアプリの場合
+			if (sai_current_page === sai_id_page_main) {
+				android.finishApp(); // アプリ終了。
+				return;
+			}
+			// メインページに移動。
+			SAI_choose_page(sai_id_page_main);
+			return;
+		}
 		if (sai_current_page === sai_id_page_main)
 			return; // メインページなら何もしない。
 		// メインページに移動。
