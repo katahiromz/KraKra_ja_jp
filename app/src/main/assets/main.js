@@ -1,7 +1,7 @@
 // 催眠アプリ「催眠くらくら」のJavaScriptのメインコード。
 // 暗号名はKraKra。
 
-const sai_VERSION = '3.8.1'; // KraKraバージョン番号。
+const sai_VERSION = '3.8.2'; // KraKraバージョン番号。
 const sai_DEBUGGING = false; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
 let sai_vibrating = false; // 振動中か？
@@ -80,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	let sai_kaleido_canvas_1 = null; // 万華鏡用の一時的なキャンバス1。
 	let sai_kaleido_canvas_2 = null; // 万華鏡用の一時的なキャンバス2。
 	let sai_face_getter = null; // 顔認識。
+	let sai_current_page = null; // 現在のページ。
 
 	// Androidか？
 	const SAI_is_android_app = function(){
@@ -161,7 +162,37 @@ document.addEventListener('DOMContentLoaded', function(){
 			page_id = document.getElementById(page_id);
 		page_id.classList.remove('sai_class_invisible');
 
-		if(page_id == sai_id_page_main || page_id == sai_id_page_config){ // メインページか設定ページなら
+		// 開いている状態を削除。
+		if(sai_current_page !== sai_id_page_main){ // メインページでなければ
+			if(sai_current_page === sai_id_page_agreement){
+				localStorage.removeItem('saiminHelpShowing');
+			}else if(sai_current_page === sai_id_page_config){
+				localStorage.removeItem('saiminConfigShowing');
+			}else if(sai_current_page === sai_id_page_face_getter){
+				localStorage.removeItem('saiminFaceGetterShowing');
+			}else if(sai_current_page === sai_id_page_message){
+				localStorage.removeItem('saiminMessageListShowing');
+			}
+		}
+
+		// 現在のページをセット。
+		sai_current_page = page_id;
+
+		// 開いている状態を設定。
+		if(page_id !== sai_id_page_main){ // メインページでなければ
+			if(page_id === sai_id_page_agreement){
+				localStorage.setItem('saiminHelpShowing', 1);
+			}else if(page_id === sai_id_page_config){
+				localStorage.setItem('saiminConfigShowing', 1);
+			}else if(page_id === sai_id_page_face_getter){
+				localStorage.setItem('saiminFaceGetterShowing', 1);
+			}else if(page_id === sai_id_page_message){
+				localStorage.setItem('saiminMessageListShowing', 1);
+			}
+			history.pushState('back', null, '?'); // 「戻る」ボタンを有効にするためのおまじない。
+		}
+
+		if(page_id === sai_id_page_main || page_id === sai_id_page_config){ // メインページか設定ページなら
 			// 必要ならアニメーションを要求する。
 			if(!sai_request_anime){
 				sai_request_anime = window.requestAnimationFrame(SAI_draw_all);
@@ -1172,8 +1203,6 @@ document.addEventListener('DOMContentLoaded', function(){
 			sai_id_button_init_app.classList.add('sai_class_invisible');
 		}
 
-		// ローカルストレージに表示状態を記憶。
-		localStorage.setItem('saiminHelpShowing', '1');
 		// 画面遷移前に音声の停止。
 		SAI_sound_pause();
 		// 同意ページに移動。
@@ -1182,8 +1211,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 「設定」ダイアログ。
 	const SAI_config = function(){
-		// ローカルストレージに表示状態を記憶。
-		localStorage.setItem('saiminConfigShowing', '1');
 		// 画面遷移前に音声の停止。
 		SAI_sound_pause();
 		// 「設定」ページに飛ばす。
@@ -3138,7 +3165,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 「画19」で使用するデータ。
-	let sai_pic_19_dx = 0, sai_pic_19_dy = 0;
+	let sai_pic_19_dx = null, sai_pic_19_dy = null;
 	let sai_pic_19_image_data = null;
 	let sai_pic_19_wave_data = null;
 
@@ -3150,10 +3177,11 @@ document.addEventListener('DOMContentLoaded', function(){
 		let qx = px + dx / 2, qy = py + dy / 2; // 画面中央の座標。
 
 		// イメージデータを作成。
-		if(!sai_pic_19_image_data || dx != sai_pic_19_dx || dy != sai_pic_19_dy){
+		if(!sai_pic_19_image_data || dx !== sai_pic_19_dx || dy !== sai_pic_19_dy){
 			sai_pic_19_image_data = new ImageData(dx, dy);
 			sai_pic_19_dx = dx;
 			sai_pic_19_dy = dy;
+			sai_pic_19_wave_data = null;
 		}
 
 		const ci = 3; // 波の個数。
@@ -3931,8 +3959,6 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_id_button_config_ok.addEventListener('click', function(e){
 			// 画面遷移前に音声を停止。
 			SAI_sound_pause();
-			// 設定を閉じたことを覚えておく。
-			localStorage.removeItem('saiminConfigShowing');
 			// 画面遷移。
 			SAI_choose_page(sai_id_page_main);
 			// 必要ならば切り替え音を再生する。
@@ -4039,7 +4065,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 「私は合意します」ボタン。
 		sai_id_button_agree.addEventListener('click', function(e){
-			localStorage.removeItem('saiminHelpShowing');
 			localStorage.setItem('saiminUserAccepted', '1');
 			SAI_choose_page(sai_id_page_main);
 			sai_first_time = false;
@@ -4301,15 +4326,12 @@ document.addEventListener('DOMContentLoaded', function(){
 				SAI_speech_set(false);
 				SAI_speech_cancel();
 			}
-			// 現在のページが閉じたことをローカルストレージに設定。
-			localStorage.removeItem('saiminMessageListShowing');
 			// メインページに移動。
 			SAI_choose_page(sai_id_page_main);
 		});
 
 		// メッセージをキャンセル。
 		sai_id_button_mesage_cancel.addEventListener('click', function(e){
-			localStorage.removeItem('saiminMessageListShowing');
 			SAI_choose_page(sai_id_page_main);
 		});
 
@@ -4318,7 +4340,6 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_message_set_text('');
 			sai_user_message_list = [];
 			SAI_save_message_list();
-			localStorage.removeItem('saiminMessageListShowing');
 			SAI_choose_page(sai_id_page_main);
 		});
 
@@ -4329,13 +4350,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_id_button_config_back.addEventListener('click', function(e){
 			// 画面遷移前に音声を停止。
 			SAI_sound_pause();
-			// 設定を閉じたことを覚えておく。
-			localStorage.removeItem('saiminConfigShowing');
 			// 画面遷移。
 			SAI_choose_page(sai_id_page_main);
 		});
 		sai_id_button_agreement_back.addEventListener('click', function(e){
-			localStorage.removeItem('saiminHelpShowing');
 			SAI_choose_page(sai_id_page_main);
 		});
 
@@ -4407,7 +4425,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 顔認識のページに移動するボタン。
 		sai_id_button_target.addEventListener('click', function(e){
-			localStorage.setItem('saiminFaceGetterShowing', "1");
 			SAI_choose_page(sai_id_page_face_getter);
 		});
 
@@ -4431,13 +4448,11 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 顔認識のページの「戻る」ボタン。
 		sai_id_button_face_getter_back.addEventListener('click', function(){
-			localStorage.removeItem('saiminFaceGetterShowing');
 			SAI_choose_page(sai_id_page_main);
 		});
 
 		// 顔認識のページの「閉じる」ボタン。
 		sai_id_button_face_go_back.addEventListener('click', function(){
-			localStorage.removeItem('saiminFaceGetterShowing');
 			SAI_choose_page(sai_id_page_main);
 		});
 
@@ -4445,6 +4460,19 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_id_select_skin.addEventListener('change', function(){
 			SAI_set_skin(sai_id_select_skin.value, true);
 		});
+
+		// ブラウザの「戻る」ボタン。
+		window.addEventListener('popstate', function(e){
+			if (!localStorage.getItem('saiminUserAccepted'))
+				return; // 合意が取れていない場合は何もしない。
+			if (sai_current_page === sai_id_page_main)
+				return; // メインページなら何もしない。
+			// イベントのデフォルトの処理をスキップ。
+			e.preventDefault();
+			// メインページに移動。
+			SAI_choose_page(sai_id_page_main);
+		});
+		history.pushState('back', null, '?'); // 「戻る」ボタンを有効にするためのおまじない。
 	}
 
 	// キーボード操作を実装。
