@@ -1,7 +1,33 @@
 // translation.js --- Hypnosis KraKra tranlation
 
-let trans_currentLanguage = 'en';
+let trans_currentLanguage = 'en-US';
 let trans_skin = 'purple';
+
+// {{LANGUAGE_SPECIFIC}}
+const trans_standardizeLanguage = function(language){
+	switch (language){
+	case 'zh': case 'zh-CN': case 'zh-SG': case 'zh-cn': case 'zh-sg':
+		return 'zh-CN'; // Chinese (Simplified)
+	case 'zh-TW': case 'zh-HK': case 'zh-MO': case 'zh-tw': case 'zh-hk': case 'zh-mo':
+		return 'zh-TW'; // Chinese (Traditional)
+	case 'de': case 'de-DE': case 'de-de':
+		return 'de-DE'; // German
+	case 'it': case 'it-IT': case 'it-it':
+		return 'it-IT'; // Italian
+	case 'ja': case 'ja-JP': case 'ja-jp':
+		return 'ja-JP'; // Japanese
+	case 'ko': case 'kr': case 'ko-KR': case 'ko-kr':
+		return 'ko-KR'; // Korean
+	case 'es': case 'es-ES': case 'es-es':
+		return 'es-ES'; // Spanish
+	case 'ru': case 'ru-RU': case 'ru-ru': case 'os-RU': case 'os-ru': case 'ru-KZ':
+	case 'ru-kz': case 'ru-UA': case 'ru-ua': case 'ru-BY': case 'ru-by': case 'ru-KG':
+	case 'ru-kg': case 'ru-MD': case 'ru-md':
+		return 'ru-RU'; // Russian
+	default:
+		return 'en-US'; // English
+	}
+};
 
 // {{LANGUAGE_SPECIFIC}} {{COLOR_SPECIFIC}}
 const trans_getDefaultSkin = function(){
@@ -9,18 +35,18 @@ const trans_getDefaultSkin = function(){
 	case 'zh-CN':
 	case 'zh-TW':
 		return 'golden';
-	case 'en':
+	case 'en-US':
 		return 'blue';
-	case 'de':
-	case 'ru':
+	case 'de-DE':
+	case 'ru-RU':
 	default:
 		return 'purple';
-	case 'it':
+	case 'it-IT':
 	case 'ko-KR':
 		return 'red';
-	case 'ja':
+	case 'ja-JP':
 		return 'pink';
-	case 'es':
+	case 'es-ES':
 		return 'darkgreen';
 	}
 };
@@ -182,6 +208,11 @@ const trans_DEFAULT_MESSAGE_LIST_EN = [
 	"There's food in the fridge.",
 	"Help me with the housework.",
 	"I'm tired, so I'm going to rest.",
+	"That hairstyle suits you",
+	"I like that about you",
+	"Time flies when you're having fun",
+	"I feel at ease when I'm with you",
+	"You did a great job today, too, XX-chan",
 	"I'm going to bed now.",
 	"How about tonight?",
 ];
@@ -245,6 +276,11 @@ const trans_DEFAULT_MESSAGE_LIST_KO_KR = [
 	"냉장고에 요리가 있습니다",
 	"가사를 도와주세요",
 	"피곤해서 쉬고",
+	"그 헤어스타일, 어울리네", 
+	"너의 그런 곳을 좋아해", 
+	"즐거운 시간은 순식간이네", 
+	"너와 있으면 진정해", 
+	"오늘도 ○○짱 노력했어",
 	"지금부터 침대에서 자고",
 	"오늘 밤은 어때?",
 ];
@@ -308,6 +344,11 @@ const trans_DEFAULT_MESSAGE_LIST_JA = [
 	"冷蔵庫に料理があるよ",
 	"家事を手伝ってください",
 	"疲れたので休みます",
+		"その髪型、似合ってるね",
+		"君のそんなところが好きだな",
+		"楽しい時間ってあっという間だね",
+		"君と居ると落ち着くよ",
+		"今日も○○ちゃん頑張ったね",
 	"今からベッドで寝ます",
 	"今夜はどうですか",
 ];
@@ -371,6 +412,11 @@ const trans_DEFAULT_MESSAGE_LIST_ZH_CN = [
 	"冰箱里有食物。",
 	"帮我做家务。",
 	"我很累了，所以我要休息了。",
+	"那个发型很适合你",
+	"我喜欢你这一点",
+	"你玩得开心的时候时间过得真快",
+	"和你在一起我很安心",
+	"你今天也表现得很棒啊，XX酱",
 	"我现在要去睡觉了。",
 	"今晚怎么样？",
 ];
@@ -434,6 +480,11 @@ const trans_DEFAULT_MESSAGE_LIST_ZH_TW = [
 	"我冰箱裡有食物",
 	"幫我做家務",
 	"我累了所以我要休息",
+	"那個髮型很適合你",
+	"我喜歡你這一點",
+	"你玩得開心的時候時間過得真快",
+	"和你在一起我很安心",
+	"你今天也表現得很棒啊，XX醬",
 	"我現在就上床睡覺",
 	"你今晚怎麼樣",
 ];
@@ -497,6 +548,11 @@ const trans_DEFAULT_MESSAGE_LIST_IT = [
 	"C'è del cibo in frigo.",
 	"Aiutami con le faccende domestiche.",
 	"Sono stanco, quindi vado a riposare.",
+	"Quella pettinatura ti dona",
+	"Mi piace questo di te",
+	"Il tempo vola quando ti diverti",
+	"Mi sento a mio agio quando sono con te",
+	"Anche oggi hai fatto un ottimo lavoro, XX-chan",
 	"Sto andando a letto ora.",
 	"Che ne dici di stasera?",
 ];
@@ -560,6 +616,11 @@ const trans_DEFAULT_MESSAGE_LIST_DE = [
 	"Es gibt Essen im Kühlschrank.",
 	"Hilf mir bei der Hausarbeit.",
 	"Ich bin müde, also werde ich mich ausruhen.",
+	"Die Frisur steht dir",
+	"Das mag ich an dir",
+	"Die Zeit vergeht wie im Flug, wenn man Spaß hat",
+	"Ich fühle mich wohl, wenn ich mit dir zusammen bin",
+	"Du hast heute auch tolle Arbeit geleistet, XX-chan",
 	"Ich gehe jetzt ins Bett.",
 	"Wie wäre es mit heute Nacht?",
 ];
@@ -623,6 +684,11 @@ const trans_DEFAULT_MESSAGE_LIST_ES = [
 	"Hay comida en la nevera.",
 	"Por favor ayúdame con las tareas del hogar",
 	"Estoy cansado así que voy a descansar",
+	"Ese peinado te queda bien",
+	"Me gusta eso de ti",
+	"El tiempo vuela cuando te diviertes",
+	"Me siento a gusto contigo",
+	"Tú también lo hiciste muy bien hoy, XX-chan",
 	"Voy a dormir en la cama ahora",
 	"Que tal esta noche",
 ];
@@ -686,30 +752,37 @@ const trans_DEFAULT_MESSAGE_LIST_RU = [
 	"В холодильнике есть еда",
 	"Пожалуйста, помогите мне с работой по дому",
 	"Я устал, поэтому собираюсь отдохнуть",
+	"Тебе идет эта прическа",
+	"Мне это в тебе нравится",
+	"Время летит, когда тебе весело",
+	"Мне легко, когда я с тобой",
+	"Ты тоже отлично поработала сегодня, XX-тян",
 	"Я сейчас пойду спать в кровати",
 	"Как насчет сегодняшнего вечера",
 ];
 
 const trans_message_list = function(){
 	// {{LANGUAGE_SPECIFIC}}
-	if(trans_currentLanguage == 'ja' || trans_currentLanguage == 'ja-JP') // Japanese
+	switch (trans_currentLanguage){
+	case 'ja-JP': // Japanese
 		return trans_DEFAULT_MESSAGE_LIST_JA;
-	else if(trans_currentLanguage == 'zh-CN') // Chinese (Simplified)
+	case 'zh-CN': // Chinese (Simplified)
 		return trans_DEFAULT_MESSAGE_LIST_ZH_CN;
-	else if(trans_currentLanguage == 'zh-TW') // Chinese (Traditional)
+	case 'zh-TW': // Chinese (Traditional)
 		return trans_DEFAULT_MESSAGE_LIST_ZH_TW;
-	else if(trans_currentLanguage == 'ko-KR') // Korean
+	case 'ko-KR': // Korean
 		return trans_DEFAULT_MESSAGE_LIST_KO_KR;
-	else if(trans_currentLanguage == 'it' || trans_currentLanguage == 'it-IT') // Italian
+	case 'it-IT': // Italian
 		return trans_DEFAULT_MESSAGE_LIST_IT;
-	else if(trans_currentLanguage == 'de' || trans_currentLanguage == 'de-DE') // German
+	case 'de-DE': // German
 		return trans_DEFAULT_MESSAGE_LIST_DE;
-	else if(trans_currentLanguage == 'es' || trans_currentLanguage == 'es-ES') // Spanish
+	case 'es-ES': // Spanish
 		return trans_DEFAULT_MESSAGE_LIST_ES;
-	else if(trans_currentLanguage == 'ru' || trans_currentLanguage == 'ru-RU') // Russian
+	case 'ru-RU': // Russian
 		return trans_DEFAULT_MESSAGE_LIST_RU;
-	else // English is default
+	default: // English is default
 		return trans_DEFAULT_MESSAGE_LIST_EN;
+	}
 }
 
 // {{LANGUAGE_SPECIFIC}}
@@ -1162,418 +1235,1239 @@ Copyright (c) 2023 TT
 Copyright (c) 2021 Nenad Markuš
 Copyright (c) 2018 Robert Eisele
 `
-
 // {{LANGUAGE_SPECIFIC}}
+trans_trans = {
+	'ja-JP': { // Japanese
+		'TEXT_OK': 'OK',
+		'TEXT_CANCEL': 'キャンセル',
+		'TEXT_YES': 'はい',
+		'TEXT_NO': 'いいえ',
+		'TEXT_CHOOSE_LANGUAGE': '言語選択 (Choose a language)',
+		'TEXT_ABOUT_APP': 'バージョン情報',
+		'TEXT_INIT_APP': 'このアプリを初期化しますか？',
+		'TEXT_INITTED_APP': 'アプリを初期化しました。',
+		'TEXT_INPUT_MESSAGE': 'メッセージ文字列を入力してください。',
+		'TEXT_FULLWIDTH_SPACE': '　',
+		'TEXT_PERIOD': '。',
+		'TEXT_PERIOD_SPACE': '。',
+		'TEXT_RELEASE_HYPNOSIS': '催眠解除',
+		'TEXT_HYPNOSIS_RELEASED': '催眠解除。',
+		'TEXT_KILLING_HYPNOSIS_IMG': 'img/killing-hypnosis_ja.svg',
+		'TEXT_HYPNOSIS_RELEASED_IMG': 'img/hypnosis-released_ja.svg',
+		'TEXT_ALL_RELEASED_IMG': 'img/all-released_ja.svg',
+		'TEXT_NO_BLINKING': '点滅なし',
+		'TEXT_LOGO': 'img/logo_ja.svg',
+		'TEXT_TAP_HERE': 'img/please-tap-here_ja.svg',
+		'TEXT_MP3_RELEASED_HYPNOSIS': 'sn/ReleasedHypnosis_ja.mp3',
+		'TEXT_I_AGREE': '私は同意します',
+		'TEXT_SIZE_SMALL': '小さい',
+		'TEXT_SIZE_NORMAL': '普通',
+		'TEXT_SIZE_LARGE': '大きい',
+		'TEXT_SIZE_HUGE': '巨大',
+		'TEXT_SPEED_ZERO': '停止',
+		'TEXT_SPEED_SLOW': '遅い',
+		'TEXT_SPEED_NORMAL': '普通',
+		'TEXT_SPEED_FAST': '速い',
+		'TEXT_SPEED_SUPER_FAST': '超速い',
+		'TEXT_SPEED_IRREGULAR': '不規則',
+		'TEXT_RAINBOW': '虹色',
+		'TEXT_FACE_GETTER': '顔認識',
+		'TEXT_TAP_ON_TARGET': 'ターゲットをタップしてください',
+		'TEXT_CAN_LOCK_ON': 'ロックオンできます',
+		'TEXT_CANT_FIND_FACE': '顔が見つかりません',
+		'TEXT_LOCK_ON': 'ロックオン',
+		'TEXT_UNLOCK': 'ロック解除',
+		'TEXT_GO_BACK': '戻る',
+		'TEXT_NO_WEBCONNECT': 'ネット接続が利用できません',
+		'TEXT_INPUTMESSAGE': 'メッセージを入力',
+		'TEXT_NOTICE': trans_NOTICE_JA,
+		'TEXT_LANGUAGE': '言語 (Language):',
+		'TEXT_LANGUAGE_ZH_CN': 'Chinese (Simplified) (简体中文)',
+		'TEXT_LANGUAGE_ZH_TW': 'Chinese (Traditional) (繁體中文)',
+		'TEXT_LANGUAGE_EN': 'English (英語)',
+		'TEXT_LANGUAGE_ES': 'Spanish (Español)',
+		'TEXT_LANGUAGE_DE': 'German (Deutsch)',
+		'TEXT_LANGUAGE_IT': 'Italian (Italiano)',
+		'TEXT_LANGUAGE_JA_JP': 'Japanese (日本語)',
+		'TEXT_LANGUAGE_KO_KR': 'Korean (한국어)',
+		'TEXT_LANGUAGE_RU': 'Russian (Русский)',
+		'TEXT_PIC_TYPE': '映像の種類:',
+		'TEXT_PIC_0': '動画 0：ダミー画面（練習用）',
+		'TEXT_PIC_1': '動画 1：対数らせん',
+		'TEXT_PIC_2': '動画 2：同心円状',
+		'TEXT_PIC_3': '動画 3：目が回る',
+		'TEXT_PIC_4': '動画 4：アルキメデスのらせん',
+		'TEXT_PIC_5': '動画 5：広がるハート',
+		'TEXT_PIC_6': '動画 6：五円玉',
+		'TEXT_PIC_7': '動画 7：奇妙な渦巻き',
+		'TEXT_PIC_8': '動画 8：クレージーな色',
+		'TEXT_PIC_9': '動画 9：対数らせん 2',
+		'TEXT_PIC_10': '動画 10：アナログディスク',
+		'TEXT_PIC_11': '動画 11：奇妙な渦巻き 2',
+		'TEXT_PIC_12': '動画 12：万華鏡',
+		'TEXT_PIC_13': '動画 13：1番目の色の画面',
+		'TEXT_PIC_14': '動画 14：2番目の色の画面',
+		'TEXT_PIC_15': '動画 15：ただの黒い画面',
+		'TEXT_PIC_16': '動画 16：ただの白い画面',
+		'TEXT_PIC_17': '動画 17：ヘビの回転',
+		'TEXT_PIC_18': '動画 18：ひずみ放射',
+		'TEXT_PIC_19': '動画 19：ランダムな波',
+		'TEXT_SPLIT': '画面分割:',
+		'TEXT_SPEED': 'スピード:',
+		'TEXT_ROTATION': '逆再生:',
+		'TEXT_VORTEX_DIRECTION': '渦の向き:',
+		'TEXT_BLINKING': '画面点滅:',
+		'TEXT_FULLSCREN_MODE': 'フルスクリーン モード:',
+		'TEXT_MESSAGE': 'メッセージ',
+		'TEXT_RESET': 'リセット',
+		'TEXT_MESSAGE_SIZE': 'メッセージの大きさ:',
+		'TEXT_NOTE': '音符ボタン:',
+		'TEXT_MOTION_BLUR': 'モーション ブラー:',
+		'TEXT_NONE': '(なし)',
+		'TEXT_SOUND_CATTISH': 'ネコっぽい',
+		'TEXT_SOUND_HORROR': '恐怖',
+		'TEXT_SOUND_HUNTING': '狩人',
+		'TEXT_SOUND_LONGING': 'あこがれ',
+		'TEXT_SOUND_LOVELY': '愛らしい',
+		'TEXT_SOUND_MAGIC': '魔術',
+		'TEXT_SOUND_ORA_SAIMIN': 'おら! 催眠!',
+		'TEXT_SOUND_NOISE': '雑音',
+		'TEXT_SOUND_432HZ': '432Hz',
+		'TEXT_SOUND_HELI': 'ヘリコプター',
+		'TEXT_SOUND_PACHI': 'パチ',
+		'TEXT_SOUND_WAHWAH': 'ワウワウ',
+		'TEXT_SOUND_MECHANICAL': '機械音',
+		'TEXT_SOUND_PSYCHO': '猟奇',
+		'TEXT_SOUND_MYANMYAN': 'みゃんみゃん',
+		'TEXT_SOUND_VOLUME': '音量:',
+		'TEXT_SOUND_AUTO_PLAY': '音声の自動再生:',
+		'TEXT_SOUND_AUTO_REPEAT': '音声の自動繰り返し:',
+		'TEXT_SOUND_SWITCH': '切り替え音:',
+		'TEXT_BRIGHTNESS': '画面の明るさ:',
+		'TEXT_BRIGHTNESS_NORMAL': '普通',
+		'TEXT_BRIGHTNESS_BRIGHTER': '明るくする',
+		'TEXT_CLOCKWISE': '時計回り',
+		'TEXT_COUNTERCLOCKWISE': '反時計回り',
+		'TEXT_CONFIG': '設定',
+		'TEXT_MESSAGE_TEXT': 'メッセージ テキスト:',
+		'TEXT_MESSAGE_BUTTON': 'メッセージ...',
+		'TEXT_START_HYPNOSIS': '<nobr>催眠</nobr><nobr>スタート</nobr>',
+		'TEXT_RELEASE_HYPNOSIS_BUTTON': '催眠解除',
+		'TEXT_COUNT_DOWN': 'カウントダウン:',
+		'TEXT_ARROWS': '矢印:',
+		'TEXT_MESSAGE_SPEECH_LABEL': 'メッセージをしゃべる:',
+		'TEXT_MESSAGE_SPEECH': 'メッセージをしゃべる',
+		'TEXT_COLOR_1ST': '1番目の色:',
+		'TEXT_COLOR_2ND': '2番目の色:',
+		'TEXT_INIT_APP_BUTTON': '初期化',
+		'TEXT_MESSAGE_VOLUME': 'メッセージボイスの音量:',
+		'TEXT_MESSAGE_SKIN': 'スキン:',
+		'TEXT_VIBRATOR': '振動:',
+		'TEXT_VIBRATOR_START_STOP': '開始 / 停止',
+		'TEXT_GOLDEN': '金色',
+		'TEXT_PURPLE': '紫色',
+		'TEXT_BLUE': '青色',
+		'TEXT_PINK': 'ピンク色',
+		'TEXT_DARKGREEN': '深緑色',
+		'TEXT_RED': '赤色',
+		'TEXT_BLACK': '黒色',
+		'TEXT_WHITE': '白色',
+	},
+	'zh-CN': { // Chinese (Simplified)
+		'TEXT_OK': '確定',
+		'TEXT_CANCEL': '取消',
+		'TEXT_YES': '是',
+		'TEXT_NO': '否',
+		'TEXT_CHOOSE_LANGUAGE': '语言选择 (Choose a language)',
+		'TEXT_ABOUT_APP': '关于这个应用程序',
+		'TEXT_INIT_APP': '您想初始化这个应用程序吗？',
+		'TEXT_INITTED_APP': '初始化了应用程序。',
+		'TEXT_INPUT_MESSAGE': '请输入消息文本。',
+		'TEXT_FULLWIDTH_SPACE': '　',
+		'TEXT_PERIOD': '。',
+		'TEXT_PERIOD_SPACE': '。',
+		'TEXT_RELEASE_HYPNOSIS': '去催眠',
+		'TEXT_HYPNOSIS_RELEASED': '我取消了催眠。',
+		'TEXT_KILLING_HYPNOSIS_IMG': 'img/killing-hypnosis_zh-CN.svg',
+		'TEXT_HYPNOSIS_RELEASED_IMG': 'img/hypnosis-released_zh-CN.svg',
+		'TEXT_ALL_RELEASED_IMG': 'img/all-released_zh-CN.svg',
+		'TEXT_NO_BLINKING': '无闪光灯',
+		'TEXT_LOGO': 'img/logo_zh-CN.svg',
+		'TEXT_TAP_HERE': 'img/please-tap-here_zh-CN.svg',
+		'TEXT_MP3_RELEASED_HYPNOSIS': 'sn/ReleasedHypnosis_zh-CN.mp3',
+		'TEXT_I_AGREE': '我同意',
+		'TEXT_SIZE_SMALL': '小的',
+		'TEXT_SIZE_NORMAL': '普通的',
+		'TEXT_SIZE_LARGE': '大的',
+		'TEXT_SIZE_HUGE': '巨大的',
+		'TEXT_SPEED_ZERO': '停止',
+		'TEXT_SPEED_SLOW': '慢的',
+		'TEXT_SPEED_NORMAL': '普通的',
+		'TEXT_SPEED_FAST': '快速地',
+		'TEXT_SPEED_SUPER_FAST': '超级快',
+		'TEXT_SPEED_IRREGULAR': '不规律的',
+		'TEXT_RAINBOW': '彩虹色',
+		'TEXT_FACE_GETTER': '人脸识别',
+		'TEXT_TAP_ON_TARGET': '请点击目标',
+		'TEXT_CAN_LOCK_ON': '可以锁定',
+		'TEXT_CANT_FIND_FACE': '未找到面孔',
+		'TEXT_LOCK_ON': '锁上',
+		'TEXT_UNLOCK': '开锁',
+		'TEXT_GO_BACK': '返回',
+		'TEXT_NO_WEBCONNECT': '无法连接互联网。',
+		'TEXT_INPUTMESSAGE': '输入您的留言',
+		'TEXT_NOTICE': trans_NOTICE_ZH_CN,
+		'TEXT_LANGUAGE': '语言 (Language):',
+		'TEXT_LANGUAGE_ZH_CN': 'Chinese (Simplified) (简体中文)',
+		'TEXT_LANGUAGE_ZH_TW': 'Chinese (Traditional) (繁體中文)',
+		'TEXT_LANGUAGE_EN': 'English (英语)',
+		'TEXT_LANGUAGE_ES': 'Spanish (Español)',
+		'TEXT_LANGUAGE_DE': 'German (Deutsch)',
+		'TEXT_LANGUAGE_IT': 'Italian (Italiano)',
+		'TEXT_LANGUAGE_JA_JP': 'Japanese (日本語)',
+		'TEXT_LANGUAGE_KO_KR': 'Korean (한국어)',
+		'TEXT_LANGUAGE_RU': 'Russian (Русский)',
+		'TEXT_PIC_TYPE': '视频类型：',
+		'TEXT_PIC_0': '电影0：虚拟屏幕（用于练习）',
+		'TEXT_PIC_1': '电影1：对数螺线',
+		'TEXT_PIC_2': '电影2：同心圆',
+		'TEXT_PIC_3': '电影3：旋转的眼',
+		'TEXT_PIC_4': '电影4：阿基米德螺旋线',
+		'TEXT_PIC_5': '电影5：扩展的心',
+		'TEXT_PIC_6': '电影6：5日元硬币',
+		'TEXT_PIC_7': '电影7：奇怪的漩涡',
+		'TEXT_PIC_8': '电影8：疯狂的颜色',
+		'TEXT_PIC_9': '电影9：对数螺线 2',
+		'TEXT_PIC_10': '电影10：模拟光盘',
+		'TEXT_PIC_11': '电影11：奇怪的漩涡 2',
+		'TEXT_PIC_12': '电影12：万花筒',
+		'TEXT_PIC_13': '电影13：第一个彩色屏幕',
+		'TEXT_PIC_14': '电影14：第二个彩色屏幕',
+		'TEXT_PIC_15': '电影15：只是黑屏',
+		'TEXT_PIC_16': '电影16：只是白屏',
+		'TEXT_PIC_17': '电影17：旋转蛇',
+		'TEXT_PIC_18': '电影18：畸变辐射',
+		'TEXT_PIC_19': '电影19：随机波',
+		'TEXT_SPLIT': '分屏：',
+		'TEXT_SPEED': '速度：',
+		'TEXT_ROTATION': '倒放：',
+		'TEXT_VORTEX_DIRECTION': '涡流方向：',
+		'TEXT_BLINKING': '屏幕闪烁：',
+		'TEXT_FULLSCREN_MODE': '全屏模式：',
+		'TEXT_MESSAGE': '信息',
+		'TEXT_RESET': '重置',
+		'TEXT_MESSAGE_SIZE': '消息大小：',
+		'TEXT_NOTE': '声音按钮：',
+		'TEXT_MOTION_BLUR': '运动模糊：',
+		'TEXT_NONE': '(无)',
+		'TEXT_SOUND_CATTISH': '像猫一样',
+		'TEXT_SOUND_HORROR': '害怕',
+		'TEXT_SOUND_HUNTING': '猎人',
+		'TEXT_SOUND_LONGING': '渴望',
+		'TEXT_SOUND_LOVELY': '可爱的',
+		'TEXT_SOUND_MAGIC': '巫术',
+		'TEXT_SOUND_ORA_SAIMIN': '天啊！ 催眠！',
+		'TEXT_SOUND_NOISE': '噪音',
+		'TEXT_SOUND_432HZ': '432Hz',
+		'TEXT_SOUND_HELI': '直升机',
+		'TEXT_SOUND_PACHI': '弹珠',
+		'TEXT_SOUND_WAHWAH': '哇哇',
+		'TEXT_SOUND_MECHANICAL': '机械声',
+		'TEXT_SOUND_PSYCHO': '惊魂记',
+		'TEXT_SOUND_MYANMYAN': '缅缅',
+		'TEXT_SOUND_VOLUME': '音量：',
+		'TEXT_SOUND_AUTO_PLAY': '自动播放音频：',
+		'TEXT_SOUND_AUTO_REPEAT': '自动重复音频：',
+		'TEXT_SOUND_SWITCH': '切换声音：',
+		'TEXT_BRIGHTNESS': '屏幕亮度：',
+		'TEXT_BRIGHTNESS_NORMAL': '通常',
+		'TEXT_BRIGHTNESS_BRIGHTER': '明亮',
+		'TEXT_CLOCKWISE': '顺时针',
+		'TEXT_COUNTERCLOCKWISE': '逆时针',
+		'TEXT_CONFIG': '配置',
+		'TEXT_MESSAGE_TEXT': '留言内容：',
+		'TEXT_MESSAGE_BUTTON': '信息...',
+		'TEXT_START_HYPNOSIS': '<nobr>开始</nobr><nobr>催眠</nobr>',
+		'TEXT_RELEASE_HYPNOSIS_BUTTON': '释放催眠',
+		'TEXT_COUNT_DOWN': '倒数：',
+		'TEXT_ARROWS': '箭：',
+		'TEXT_MESSAGE_SPEECH_LABEL': '留言演讲：',
+		'TEXT_MESSAGE_SPEECH': '留言演讲',
+		'TEXT_COLOR_1ST': '第一种颜色：',
+		'TEXT_COLOR_2ND': '第二种颜色：',
+		'TEXT_INIT_APP_BUTTON': '初始化',
+		'TEXT_MESSAGE_VOLUME': '留言音量：',
+		'TEXT_MESSAGE_SKIN': '皮肤：',
+		'TEXT_VIBRATOR': '振动器：',
+		'TEXT_VIBRATOR_START_STOP': '开始 / 停止',
+		'TEXT_GOLDEN': '金的',
+		'TEXT_PURPLE': '紫色的',
+		'TEXT_BLUE': '蓝色的',
+		'TEXT_PINK': '粉色',
+		'TEXT_DARKGREEN': '深绿色',
+		'TEXT_RED': '红色的',
+		'TEXT_BLACK': '黑色',
+		'TEXT_WHITE': '白色的',
+	},
+	'zh-TW': { // Chinese (Traditional)
+		'TEXT_OK': '確定',
+		'TEXT_CANCEL': '取消',
+		'TEXT_YES': '是',
+		'TEXT_NO': '否',
+		'TEXT_CHOOSE_LANGUAGE': '語言選擇 (Choose a language)',
+		'TEXT_ABOUT_APP': '版本信息',
+		'TEXT_INIT_APP': '您想初始化這個應用程式嗎？',
+		'TEXT_INITTED_APP': '初始化了應用程序。',
+		'TEXT_INPUT_MESSAGE': '請輸入消息字符串。',
+		'TEXT_FULLWIDTH_SPACE': '　',
+		'TEXT_PERIOD': '。',
+		'TEXT_PERIOD_SPACE': '。',
+		'TEXT_RELEASE_HYPNOSIS': '催眠釋放',
+		'TEXT_HYPNOSIS_RELEASED': '催眠釋放。',
+		'TEXT_KILLING_HYPNOSIS_IMG': 'img/killing-hypnosis_zh-TW.svg',
+		'TEXT_HYPNOSIS_RELEASED_IMG': 'img/hypnosis-released_zh-TW.svg',
+		'TEXT_ALL_RELEASED_IMG': 'img/all-released_zh-TW.svg',
+		'TEXT_NO_BLINKING': '無閃光燈',
+		'TEXT_LOGO': 'img/logo_zh-TW.svg',
+		'TEXT_TAP_HERE': 'img/please-tap-here_zh-TW.svg',
+		'TEXT_MP3_RELEASED_HYPNOSIS': 'sn/ReleasedHypnosis_zh-TW.mp3',
+		'TEXT_I_AGREE': '我同意',
+		'TEXT_SIZE_SMALL': '小的',
+		'TEXT_SIZE_NORMAL': '普通的',
+		'TEXT_SIZE_LARGE': '大的',
+		'TEXT_SIZE_HUGE': '巨大的',
+		'TEXT_SPEED_ZERO': '停止',
+		'TEXT_SPEED_SLOW': '慢的',
+		'TEXT_SPEED_NORMAL': '普通的',
+		'TEXT_SPEED_FAST': '快速地',
+		'TEXT_SPEED_SUPER_FAST': '超快',
+		'TEXT_SPEED_IRREGULAR': '不規律的',
+		'TEXT_RAINBOW': '彩虹色',
+		'TEXT_FACE_GETTER': '人臉辨識',
+		'TEXT_TAP_ON_TARGET': '請點選目標',
+		'TEXT_CAN_LOCK_ON': '可以鎖定',
+		'TEXT_CANT_FIND_FACE': '未找到臉孔',
+		'TEXT_LOCK_ON': '鎖上',
+		'TEXT_UNLOCK': '開鎖',
+		'TEXT_GO_BACK': '返回',
+		'TEXT_NO_WEBCONNECT': '無法連接網路。',
+		'TEXT_INPUTMESSAGE': '輸入您的留言',
+		'TEXT_NOTICE': trans_NOTICE_ZH_TW,
+		'TEXT_LANGUAGE': '語言 (Language):',
+		'TEXT_LANGUAGE_ZH_CN': 'Chinese (Simplified) (简体中文)',
+		'TEXT_LANGUAGE_ZH_TW': 'Chinese (Traditional) (繁體中文)',
+		'TEXT_LANGUAGE_EN': 'English (英語)',
+		'TEXT_LANGUAGE_ES': 'Spanish (Español)',
+		'TEXT_LANGUAGE_DE': 'German (Deutsch)',
+		'TEXT_LANGUAGE_IT': 'Italian (Italiano)',
+		'TEXT_LANGUAGE_JA_JP': 'Japanese (日本語)',
+		'TEXT_LANGUAGE_KO_KR': 'Korean (한국어)',
+		'TEXT_LANGUAGE_RU': 'Russian (Русский)',
+		'TEXT_PIC_TYPE': '視頻類型：',
+		'TEXT_PIC_0': '電影0：虛擬螢幕（用於練習）',
+		'TEXT_PIC_1': '電影1：對數螺線',
+		'TEXT_PIC_2': '電影2：同心圆',
+		'TEXT_PIC_3': '電影3：旋轉的眼',
+		'TEXT_PIC_4': '電影4：阿基米德螺旋線',
+		'TEXT_PIC_5': '電影5：擴展的心',
+		'TEXT_PIC_6': '電影6：5日元硬幣',
+		'TEXT_PIC_7': '電影7：奇怪的漩渦',
+		'TEXT_PIC_8': '電影8：瘋狂的顏色',
+		'TEXT_PIC_9': '電影9：對數螺線 2',
+		'TEXT_PIC_10': '電影10：類比光碟',
+		'TEXT_PIC_11': '電影11：奇怪的漩渦 2',
+		'TEXT_PIC_12': '電影12：萬花筒',
+		'TEXT_PIC_13': '電影13：第一个彩色屏幕',
+		'TEXT_PIC_14': '電影14：第二个彩色屏幕',
+		'TEXT_PIC_15': '電影15：只是黑屏',
+		'TEXT_PIC_16': '電影16：只是白屏',
+		'TEXT_PIC_17': '電影17：旋轉蛇',
+		'TEXT_PIC_18': '電影18：畸變輻射',
+		'TEXT_PIC_19': '電影19：隨機波',
+		'TEXT_SPLIT': '分屏：',
+		'TEXT_SPEED': '速度：',
+		'TEXT_ROTATION': '倒放：',
+		'TEXT_VORTEX_DIRECTION': '渦流方向：',
+		'TEXT_BLINKING': '螢幕閃爍：',
+		'TEXT_FULLSCREN_MODE': '全螢幕模式：',
+		'TEXT_MESSAGE': '資訊',
+		'TEXT_RESET': '重置',
+		'TEXT_MESSAGE_SIZE': '消息大小：',
+		'TEXT_NOTE': '聲音按鈕：',
+		'TEXT_MOTION_BLUR': '運動模糊：',
+		'TEXT_NONE': '(無)',
+		'TEXT_SOUND_CATTISH': '像貓一樣',
+		'TEXT_SOUND_HORROR': '害怕',
+		'TEXT_SOUND_HUNTING': '獵人',
+		'TEXT_SOUND_LONGING': '渴望',
+		'TEXT_SOUND_LOVELY': '可愛的',
+		'TEXT_SOUND_MAGIC': '巫術',
+		'TEXT_SOUND_ORA_SAIMIN': '天啊！ 催眠！',
+		'TEXT_SOUND_NOISE': '噪音',
+		'TEXT_SOUND_432HZ': '432Hz',
+		'TEXT_SOUND_HELI': '直升機',
+		'TEXT_SOUND_PACHI': '彈珠',
+		'TEXT_SOUND_WAHWAH': '哇哇',
+		'TEXT_SOUND_MECHANICAL': '機械聲',
+		'TEXT_SOUND_PSYCHO': '驚魂記',
+		'TEXT_SOUND_MYANMYAN': '緬緬',
+		'TEXT_SOUND_VOLUME': '音量：',
+		'TEXT_SOUND_AUTO_PLAY': '自動播放音訊：',
+		'TEXT_SOUND_AUTO_REPEAT': '自動重複音訊：',
+		'TEXT_SOUND_SWITCH': '切換聲音：',
+		'TEXT_BRIGHTNESS': '屏幕亮度：',
+		'TEXT_BRIGHTNESS_NORMAL': '正常亮度',
+		'TEXT_BRIGHTNESS_BRIGHTER': '提亮',
+		'TEXT_CLOCKWISE': '順時針',
+		'TEXT_COUNTERCLOCKWISE': '逆時針',
+		'TEXT_CONFIG': '配置',
+		'TEXT_MESSAGE_TEXT': '留言內容：',
+		'TEXT_MESSAGE_BUTTON': '訊息...',
+		'TEXT_START_HYPNOSIS': '<nobr>開始</nobr><nobr>催眠</nobr>',
+		'TEXT_RELEASE_HYPNOSIS_BUTTON': '釋放催眠',
+		'TEXT_COUNT_DOWN': '倒數：',
+		'TEXT_ARROWS': '箭頭：',
+		'TEXT_MESSAGE_SPEECH_LABEL': '留言演講：',
+		'TEXT_MESSAGE_SPEECH': '留言演講',
+		'TEXT_COLOR_1ST': '第一種顏色：',
+		'TEXT_COLOR_2ND': '第二種顏色：',
+		'TEXT_INIT_APP_BUTTON': '初始化',
+		'TEXT_MESSAGE_VOLUME': '留言音量：',
+		'TEXT_MESSAGE_SKIN': '皮膚：',
+		'TEXT_VIBRATOR': '振動器：',
+		'TEXT_VIBRATOR_START_STOP': '開始 / 停止',
+		'TEXT_GOLDEN': '金的',
+		'TEXT_PURPLE': '紫色的',
+		'TEXT_BLUE': '藍色的',
+		'TEXT_PINK': '粉紅色',
+		'TEXT_DARKGREEN': '深綠色',
+		'TEXT_RED': '紅色的',
+		'TEXT_BLACK': '黑色',
+		'TEXT_WHITE': '白色的',
+	},
+	'ko-KR': { // Korean
+		'TEXT_OK': 'OK',
+		'TEXT_CANCEL': '취소',
+		'TEXT_YES': '예',
+		'TEXT_NO': '아니오',
+		'TEXT_CHOOSE_LANGUAGE': '언어 선택 (Choose a language)',
+		'TEXT_ABOUT_APP': '버전 정보',
+		'TEXT_INIT_APP': '이 앱을 초기화하시겠습니까?',
+		'TEXT_INITTED_APP': '앱을 초기화했습니다.',
+		'TEXT_INPUT_MESSAGE': '메시지 문자열을 입력하십시오.',
+		'TEXT_FULLWIDTH_SPACE': '　',
+		'TEXT_PERIOD': '. ',
+		'TEXT_PERIOD_SPACE': '. ',
+		'TEXT_RELEASE_HYPNOSIS': '최면 해제',
+		'TEXT_HYPNOSIS_RELEASED': '최면 해제.',
+		'TEXT_KILLING_HYPNOSIS_IMG': 'img/killing-hypnosis_ko-KR.svg',
+		'TEXT_HYPNOSIS_RELEASED_IMG': 'img/hypnosis-released_ko-KR.svg',
+		'TEXT_ALL_RELEASED_IMG': 'img/all-released_ko-KR.svg',
+		'TEXT_NO_BLINKING': '깜박임 없음',
+		'TEXT_LOGO': 'img/logo_ko-KR.svg',
+		'TEXT_TAP_HERE': 'img/please-tap-here_ko-KR.svg',
+		'TEXT_MP3_RELEASED_HYPNOSIS': 'sn/ReleasedHypnosis_ko-KR.mp3',
+		'TEXT_I_AGREE': '동의합니다',
+		'TEXT_SIZE_SMALL': '작은',
+		'TEXT_SIZE_NORMAL': '정상',
+		'TEXT_SIZE_LARGE': '크기가 큰',
+		'TEXT_SIZE_HUGE': '거대한',
+		'TEXT_SPEED_ZERO': '정지중',
+		'TEXT_SPEED_SLOW': '느린',
+		'TEXT_SPEED_NORMAL': '정상',
+		'TEXT_SPEED_FAST': '빠른',
+		'TEXT_SPEED_SUPER_FAST': '매우 빠른',
+		'TEXT_SPEED_IRREGULAR': '불규칙한',
+		'TEXT_RAINBOW': '무지개 색',
+		'TEXT_FACE_GETTER': '얼굴 인식',
+		'TEXT_TAP_ON_TARGET': '타겟을 탭해주세요',
+		'TEXT_CAN_LOCK_ON': '잠글 수 있습니다',
+		'TEXT_CANT_FIND_FACE': '얼굴을 찾을 수 없음',
+		'TEXT_LOCK_ON': '잠금',
+		'TEXT_UNLOCK': '잠금 해제',
+		'TEXT_GO_BACK': '뒤로',
+		'TEXT_NO_WEBCONNECT': '인터넷 연결을 사용할 수 없습니다.',
+		'TEXT_INPUTMESSAGE': '메시지 입력',
+		'TEXT_NOTICE': trans_NOTICE_KO_KR,
+		'TEXT_LANGUAGE': '언어 (Language):',
+		'TEXT_LANGUAGE_ZH_CN': 'Chinese (Simplified) (简体中文)',
+		'TEXT_LANGUAGE_ZH_TW': 'Chinese (Traditional) (繁體中文)',
+		'TEXT_LANGUAGE_EN': 'English (영어)',
+		'TEXT_LANGUAGE_ES': 'Spanish (Español)',
+		'TEXT_LANGUAGE_DE': 'German (Deutsch)',
+		'TEXT_LANGUAGE_IT': 'Italian (Italiano)',
+		'TEXT_LANGUAGE_JA_JP': 'Japanese (日本語)',
+		'TEXT_LANGUAGE_KO_KR': 'Korean (한국어)',
+		'TEXT_LANGUAGE_RU': 'Russian (Русский)',
+		'TEXT_PIC_TYPE': '그림 유형:',
+		'TEXT_PIC_0': '동영상 0：더미 화면 (연습용)',
+		'TEXT_PIC_1': '동영상 1：로그 나선',
+		'TEXT_PIC_2': '동영상 2：동심원형',
+		'TEXT_PIC_3': '동영상 3：회전하는 눈',
+		'TEXT_PIC_4': '동영상 4：아르키메데스의 나선',
+		'TEXT_PIC_5': '동영상 5：퍼지는 하트들',
+		'TEXT_PIC_6': '동영상 6：오엔 구슬',
+		'TEXT_PIC_7': '동영상 7：이상한 소용돌이',
+		'TEXT_PIC_8': '동영상 8：미친 색',
+		'TEXT_PIC_9': '동영상 9：로그 나선 2',
+		'TEXT_PIC_10': '동영상 10：아날로그 디스크',
+		'TEXT_PIC_11': '동영상 11：이상한 소용돌이 2',
+		'TEXT_PIC_12': '동영상 12：만화경',
+		'TEXT_PIC_13': '동영상 13：첫 번째 컬러 화면',
+		'TEXT_PIC_14': '동영상 14：두 번째 색상 화면',
+		'TEXT_PIC_15': '동영상 15：그냥 검은 화면',
+		'TEXT_PIC_16': '동영상 16：그냥 흰색 화면',
+		'TEXT_PIC_17': '동영상 17：뱀 회전',
+		'TEXT_PIC_18': '동영상 18：스트레인 방사',
+		'TEXT_PIC_19': '동영상 19：무작위 파동',
+		'TEXT_SPLIT': '화면 분할:',
+		'TEXT_SPEED': '속도:',
+		'TEXT_ROTATION': '역 재생:',
+		'TEXT_VORTEX_DIRECTION': '소용돌이 방향:',
+		'TEXT_BLINKING': '화면 깜박임:',
+		'TEXT_FULLSCREN_MODE': '전체 화면 모드:',
+		'TEXT_MESSAGE': '메시지',
+		'TEXT_RESET': '초기화',
+		'TEXT_MESSAGE_SIZE': '메시지 크기:',
+		'TEXT_NOTE': '사운드 버튼:',
+		'TEXT_MOTION_BLUR': '모션 블러:',
+		'TEXT_NONE': '(없음)',
+		'TEXT_SOUND_CATTISH': '고양이 같은',
+		'TEXT_SOUND_HORROR': '공포',
+		'TEXT_SOUND_HUNTING': '사냥꾼',
+		'TEXT_SOUND_LONGING': '동경',
+		'TEXT_SOUND_LOVELY': '사랑스러운',
+		'TEXT_SOUND_MAGIC': '마술',
+		'TEXT_SOUND_ORA_SAIMIN': '오! 최면!',
+		'TEXT_SOUND_NOISE': '소음',
+		'TEXT_SOUND_432HZ': '432Hz',
+		'TEXT_SOUND_HELI': '헬리콥터',
+		'TEXT_SOUND_PACHI': '파칭',
+		'TEXT_SOUND_WAHWAH': '와와',
+		'TEXT_SOUND_MECHANICAL': '기계음',
+		'TEXT_SOUND_PSYCHO': '사이코',
+		'TEXT_SOUND_MYANMYAN': '미안',
+		'TEXT_SOUND_VOLUME': '사운드 볼륨:',
+		'TEXT_SOUND_AUTO_PLAY': '오디오 자동 재생:',
+		'TEXT_SOUND_AUTO_REPEAT': '음성 자동 반복:',
+		'TEXT_SOUND_SWITCH': '전환음:',
+		'TEXT_BRIGHTNESS': '화면 밝기:',
+		'TEXT_BRIGHTNESS_NORMAL': '일반 밝기',
+		'TEXT_BRIGHTNESS_BRIGHTER': '밝게 하다',
+		'TEXT_CLOCKWISE': '시계 방향',
+		'TEXT_COUNTERCLOCKWISE': '반시계 방향',
+		'TEXT_CONFIG': '구성',
+		'TEXT_MESSAGE_TEXT': '메시지 텍스트:',
+		'TEXT_MESSAGE_BUTTON': '메시지...',
+		'TEXT_START_HYPNOSIS': '<nobr>최면</nobr><nobr>시작</nobr>',
+		'TEXT_RELEASE_HYPNOSIS_BUTTON': '최면 해제',
+		'TEXT_COUNT_DOWN': '카운트다운:',
+		'TEXT_ARROWS': '화살표:',
+		'TEXT_MESSAGE_SPEECH_LABEL': '메시지 연설:',
+		'TEXT_MESSAGE_SPEECH': '메시지 연설',
+		'TEXT_COLOR_1ST': '첫 번째 색상:',
+		'TEXT_COLOR_2ND': '두 번째 색상:',
+		'TEXT_INIT_APP_BUTTON': '앱 재설정',
+		'TEXT_MESSAGE_VOLUME': '메시지 음성 음량:',
+		'TEXT_MESSAGE_SKIN': '스킨:',
+		'TEXT_VIBRATOR': '진동기:',
+		'TEXT_VIBRATOR_START_STOP': '시작 / 정지',
+		'TEXT_GOLDEN': '황금',
+		'TEXT_PURPLE': '보라색',
+		'TEXT_BLUE': '청색',
+		'TEXT_PINK': '핑크색',
+		'TEXT_DARKGREEN': '다크 그린',
+		'TEXT_RED': '빨간색',
+		'TEXT_BLACK': '검은색',
+		'TEXT_WHITE': '백색',
+	},
+	'it-IT': { // Italian
+		'TEXT_OK': 'OK',
+		'TEXT_CANCEL': 'Annulla',
+		'TEXT_YES': 'SÌ',
+		'TEXT_NO': 'No',
+		'TEXT_CHOOSE_LANGUAGE': 'Scegli una lingua (Choose a language)',
+		'TEXT_ABOUT_APP': 'Informazioni sull\'app',
+		'TEXT_INIT_APP': 'Vuoi inizializzare questa app?',
+		'TEXT_INITTED_APP': 'Inizializzata l\'app.',
+		'TEXT_INPUT_MESSAGE': 'Inserisci il testo del messaggio.',
+		'TEXT_FULLWIDTH_SPACE': '　',
+		'TEXT_PERIOD': '.',
+		'TEXT_PERIOD_SPACE': '. ',
+		'TEXT_RELEASE_HYPNOSIS': 'Uccidi l\'ipnosi',
+		'TEXT_HYPNOSIS_RELEASED': 'Ipnosi liberata.',
+		'TEXT_KILLING_HYPNOSIS_IMG': 'img/killing-hypnosis_it.svg',
+		'TEXT_HYPNOSIS_RELEASED_IMG': 'img/hypnosis-released_it.svg',
+		'TEXT_ALL_RELEASED_IMG': 'img/all-released_it.svg',
+		'TEXT_NO_BLINKING': 'Senza il flash',
+		'TEXT_LOGO': 'img/logo_it.svg',
+		'TEXT_TAP_HERE': 'img/please-tap-here_it.svg',
+		'TEXT_MP3_RELEASED_HYPNOSIS': 'sn/ReleasedHypnosis_it.mp3',
+		'TEXT_I_AGREE': 'Sono d\'accordo',
+		'TEXT_SIZE_SMALL': 'Piccola',
+		'TEXT_SIZE_NORMAL': 'Normale',
+		'TEXT_SIZE_LARGE': 'Grande',
+		'TEXT_SIZE_HUGE': 'Enorme',
+		'TEXT_SPEED_ZERO': 'Fermato',
+		'TEXT_SPEED_SLOW': 'Lento',
+		'TEXT_SPEED_NORMAL': 'Normale',
+		'TEXT_SPEED_FAST': 'Veloce',
+		'TEXT_SPEED_SUPER_FAST': 'Super Veloce',
+		'TEXT_SPEED_IRREGULAR': 'Irregolare',
+		'TEXT_RAINBOW': 'Arcobaleno',
+		'TEXT_FACE_GETTER': 'Riconoscimento Facciale',
+		'TEXT_TAP_ON_TARGET': 'Per favore tocca il bersaglio',
+		'TEXT_CAN_LOCK_ON': 'Può essere bloccato',
+		'TEXT_CANT_FIND_FACE': 'Volto non trovato',
+		'TEXT_LOCK_ON': 'Blocco su',
+		'TEXT_UNLOCK': 'Sbloccare',
+		'TEXT_GO_BACK': 'Ritorno',
+		'TEXT_NO_WEBCONNECT': 'La connessione Internet non è disponibile.',
+		'TEXT_INPUTMESSAGE': 'Inserisci il tuo messaggio',
+		'TEXT_NOTICE': trans_NOTICE_IT,
+		'TEXT_LANGUAGE': 'Lingua (Language):',
+		'TEXT_LANGUAGE_ZH_CN': 'Chinese (Simplified) (简体中文)',
+		'TEXT_LANGUAGE_ZH_TW': 'Chinese (Traditional) (繁體中文)',
+		'TEXT_LANGUAGE_EN': 'English (Inglese)',
+		'TEXT_LANGUAGE_ES': 'Spanish (Español)',
+		'TEXT_LANGUAGE_DE': 'German (Deutsch)',
+		'TEXT_LANGUAGE_IT': 'Italian (Italiano)',
+		'TEXT_LANGUAGE_JA_JP': 'Japanese (日本語)',
+		'TEXT_LANGUAGE_KO_KR': 'Korean (한국어)',
+		'TEXT_LANGUAGE_RU': 'Russian (Русский)',
+		'TEXT_PIC_TYPE': 'Il tipo di immagine:',
+		'TEXT_PIC_0': 'Film 0: Schermata fittizia (per esercitarsi)',
+		'TEXT_PIC_1': 'Film 1: Spirale Logaritmica',
+		'TEXT_PIC_2': 'Film 2: Cerchi concentrici',
+		'TEXT_PIC_3': 'Film 3: Gli occhi',
+		'TEXT_PIC_4': 'Film 4: Spirale di Archimede',
+		'TEXT_PIC_5': 'Film 5: Cuori che si diffondono',
+		'TEXT_PIC_6': 'Film 6: Moneta da 5 Yen',
+		'TEXT_PIC_7': 'Film 7: Strano Turbinio',
+		'TEXT_PIC_8': 'Film 8: Colori Pazzi',
+		'TEXT_PIC_9': 'Film 9: Spirale Logaritmica 2',
+		'TEXT_PIC_10': 'Film 10: Disco Analogico',
+		'TEXT_PIC_11': 'Film 11: Strano Turbinio 2',
+		'TEXT_PIC_12': 'Film 12: Caleidoscopio',
+		'TEXT_PIC_13': 'Film 13: 1° schermo a colori',
+		'TEXT_PIC_14': 'Film 14: 2° schermo a colori',
+		'TEXT_PIC_15': 'Film 15: Solo uno schermo nero',
+		'TEXT_PIC_16': 'Film 16: Solo uno schermo bianco',
+		'TEXT_PIC_17': 'Film 17: Serpente rotante',
+		'TEXT_PIC_18': 'Film 18: Radiazione di distorsione',
+		'TEXT_PIC_19': 'Film 19：Onde Casuali',
+		'TEXT_SPLIT': 'Divisione dello schermo:',
+		'TEXT_SPEED': 'Velocità:',
+		'TEXT_ROTATION': 'Riproduzione inversa:',
+		'TEXT_VORTEX_DIRECTION': 'Direzione del vortice:',
+		'TEXT_BLINKING': 'Schermo lampeggiante:',
+		'TEXT_FULLSCREN_MODE': 'Modalità schermo intero:',
+		'TEXT_MESSAGE': 'Messaggio',
+		'TEXT_RESET': 'Ripristina',
+		'TEXT_MESSAGE_SIZE': 'Dimensione del messaggio:',
+		'TEXT_NOTE': 'Pulsante audio:',
+		'TEXT_MOTION_BLUR': 'Sfocatura movimento:',
+		'TEXT_NONE': '(Nessuno)',
+		'TEXT_SOUND_CATTISH': 'Simile a un gatto',
+		'TEXT_SOUND_HORROR': 'Paura',
+		'TEXT_SOUND_HUNTING': 'A caccia',
+		'TEXT_SOUND_LONGING': 'Desiderio',
+		'TEXT_SOUND_LOVELY': 'Adorabile',
+		'TEXT_SOUND_MAGIC': 'Stregoneria',
+		'TEXT_SOUND_ORA_SAIMIN': 'Ora! Saimin!',
+		'TEXT_SOUND_NOISE': 'Rumore',
+		'TEXT_SOUND_432HZ': '432Hz',
+		'TEXT_SOUND_HELI': 'Elicottero',
+		'TEXT_SOUND_PACHI': 'Pachi',
+		'TEXT_SOUND_WAHWAH': 'WahWah',
+		'TEXT_SOUND_MECHANICAL': 'Meccanico',
+		'TEXT_SOUND_PSYCHO': 'Psicopatico',
+		'TEXT_SOUND_MYANMYAN': 'Myan Myan',
+		'TEXT_SOUND_VOLUME': 'Volume del suono:',
+		'TEXT_SOUND_AUTO_PLAY': 'Riproduzione automatica dell\'audio:',
+		'TEXT_SOUND_AUTO_REPEAT': 'Ripetere l\'audio:',
+		'TEXT_SOUND_SWITCH': 'Suono di commutazione:',
+		'TEXT_BRIGHTNESS': 'Luminosità:',
+		'TEXT_BRIGHTNESS_NORMAL': 'Normale',
+		'TEXT_BRIGHTNESS_BRIGHTER': 'Più luminoso',
+		'TEXT_CLOCKWISE': 'Senso Orario',
+		'TEXT_COUNTERCLOCKWISE': 'Antiorario',
+		'TEXT_CONFIG': 'Configurazione',
+		'TEXT_MESSAGE_TEXT': 'Messaggio di testo:',
+		'TEXT_MESSAGE_BUTTON': 'Messaggio...',
+		'TEXT_START_HYPNOSIS': 'Inizia l\'ipnosi',
+		'TEXT_RELEASE_HYPNOSIS_BUTTON': 'Rilascia l\'ipnosi',
+		'TEXT_COUNT_DOWN': 'Conto alla rovescia:',
+		'TEXT_ARROWS': 'Frecce:',
+		'TEXT_MESSAGE_SPEECH_LABEL': 'Discorso del messaggio:',
+		'TEXT_MESSAGE_SPEECH': 'Discorso del messaggio',
+		'TEXT_COLOR_1ST': '1° colore:',
+		'TEXT_COLOR_2ND': '2° colore:',
+		'TEXT_INIT_APP_BUTTON': 'Inizializzare',
+		'TEXT_MESSAGE_VOLUME': 'Volume della voce:',
+		'TEXT_MESSAGE_SKIN': 'Pelle:',
+		'TEXT_VIBRATOR': 'Vibratore:',
+		'TEXT_VIBRATOR_START_STOP': 'Avvio / Arresto',
+		'TEXT_GOLDEN': 'd\'Oro',
+		'TEXT_PURPLE': 'Viola',
+		'TEXT_BLUE': 'Blu',
+		'TEXT_PINK': 'Colore Rosa',
+		'TEXT_DARKGREEN': 'Verde Scuro',
+		'TEXT_RED': 'Rosso',
+		'TEXT_BLACK': 'Colore nero',
+		'TEXT_WHITE': 'Bianco',
+	},
+	'de-DE': { // German
+		'TEXT_OK': 'OK',
+		'TEXT_CANCEL': 'Abbrechen',
+		'TEXT_YES': 'Ja',
+		'TEXT_NO': 'Nein',
+		'TEXT_CHOOSE_LANGUAGE': 'Wähle eine Sprache (Choose a language)',
+		'TEXT_ABOUT_APP': 'Über diese App',
+		'TEXT_INIT_APP': 'Möchten Sie diese App initialisieren?',
+		'TEXT_INITTED_APP': 'Initialisierte die App.',
+		'TEXT_INPUT_MESSAGE': 'Bitte geben Sie einen Nachrichtentext ein.',
+		'TEXT_FULLWIDTH_SPACE': '　',
+		'TEXT_PERIOD': '.',
+		'TEXT_PERIOD_SPACE': '. ',
+		'TEXT_RELEASE_HYPNOSIS': 'Töte Hypnose',
+		'TEXT_HYPNOSIS_RELEASED': 'Hypnose freigegeben.',
+		'TEXT_KILLING_HYPNOSIS_IMG': 'img/killing-hypnosis_de.svg',
+		'TEXT_HYPNOSIS_RELEASED_IMG': 'img/hypnosis-released_de.svg',
+		'TEXT_ALL_RELEASED_IMG': 'img/all-released_de.svg',
+		'TEXT_NO_BLINKING': 'Kein Blitz',
+		'TEXT_LOGO': 'img/logo_de.svg',
+		'TEXT_TAP_HERE': 'img/please-tap-here_de.svg',
+		'TEXT_MP3_RELEASED_HYPNOSIS': 'sn/ReleasedHypnosis_de.mp3',
+		'TEXT_I_AGREE': 'Ich stimme zu',
+		'TEXT_SIZE_SMALL': 'Klein',
+		'TEXT_SIZE_NORMAL': 'Normal',
+		'TEXT_SIZE_LARGE': 'Groß',
+		'TEXT_SIZE_HUGE': 'Riesig',
+		'TEXT_SPEED_ZERO': 'Gestoppt',
+		'TEXT_SPEED_SLOW': 'Langsam',
+		'TEXT_SPEED_NORMAL': 'Normal',
+		'TEXT_SPEED_FAST': 'Schnell',
+		'TEXT_SPEED_SUPER_FAST': 'Super Schnell',
+		'TEXT_SPEED_IRREGULAR': 'Irregulär',
+		'TEXT_RAINBOW': 'Regenbogen',
+		'TEXT_FACE_GETTER': 'Gesichtserkennung',
+		'TEXT_TAP_ON_TARGET': 'Bitte tippen Sie auf das Ziel',
+		'TEXT_CAN_LOCK_ON': 'Abschließbar',
+		'TEXT_CANT_FIND_FACE': 'Gesicht nicht gefunden',
+		'TEXT_LOCK_ON': 'Sperren',
+		'TEXT_UNLOCK': 'Freischalten',
+		'TEXT_GO_BACK': 'Zurückkehren',
+		'TEXT_NO_WEBCONNECT': 'Die Internetverbindung ist nicht verfügbar.',
+		'TEXT_INPUTMESSAGE': 'Gib deine Nachricht ein',
+		'TEXT_NOTICE': trans_NOTICE_DE,
+		'TEXT_LANGUAGE': 'Sprache (Language):',
+		'TEXT_LANGUAGE_ZH_CN': 'Chinese (Simplified) (简体中文)',
+		'TEXT_LANGUAGE_ZH_TW': 'Chinese (Traditional) (繁體中文)',
+		'TEXT_LANGUAGE_EN': 'English (Englisch)',
+		'TEXT_LANGUAGE_ES': 'Spanish (Español)',
+		'TEXT_LANGUAGE_DE': 'German (Deutsch)',
+		'TEXT_LANGUAGE_IT': 'Italian (Italiano)',
+		'TEXT_LANGUAGE_JA_JP': 'Japanese (日本語)',
+		'TEXT_LANGUAGE_KO_KR': 'Korean (한국어)',
+		'TEXT_LANGUAGE_RU': 'Russian (Русский)',
+		'TEXT_PIC_TYPE': 'Die Art des Bildes:',
+		'TEXT_PIC_0': 'Film 0: Dummy-Bildschirm (zum Üben)',
+		'TEXT_PIC_1': 'Film 1: Logarithmische Spirale',
+		'TEXT_PIC_2': 'Film 2: Konzentrische Kreise',
+		'TEXT_PIC_3': 'Film 3: Die Augen',
+		'TEXT_PIC_4': 'Film 4: Die Spirale des Archimedes',
+		'TEXT_PIC_5': 'Film 5: Herzen verbreiten',
+		'TEXT_PIC_6': 'Film 6: 5-Yen-Münze',
+		'TEXT_PIC_7': 'Film 7: Seltsamer Wirbel',
+		'TEXT_PIC_8': 'Film 8: Verrückte Farben',
+		'TEXT_PIC_9': 'Film 9: Logarithmische Spirale 2',
+		'TEXT_PIC_10': 'Film 10: Analoge Scheibe',
+		'TEXT_PIC_11': 'Film 11: Seltsamer Wirbel 2',
+		'TEXT_PIC_12': 'Film 12: Kaleidoskop',
+		'TEXT_PIC_13': 'Film 13: Erster Farbbildschirm',
+		'TEXT_PIC_14': 'Film 14: Zweiter Farbbildschirm',
+		'TEXT_PIC_15': 'Film 15: Nur ein schwarzer Bildschirm',
+		'TEXT_PIC_16': 'Film 16: Nur ein weißer Bildschirm',
+		'TEXT_PIC_17': 'Film 17: Rotierende Schlange',
+		'TEXT_PIC_18': 'Film 18: Verzerrungsstrahlung',
+		'TEXT_PIC_19': 'Film 19：Zufällige Wellen',
+		'TEXT_SPLIT': 'Bildschirmaufteilung:',
+		'TEXT_SPEED': 'Geschwindigkeit:',
+		'TEXT_ROTATION': 'Rückwärtswiedergabe:',
+		'TEXT_VORTEX_DIRECTION': 'Wirbelrichtung:',
+		'TEXT_BLINKING': 'Bildschirm blinkt:',
+		'TEXT_FULLSCREN_MODE': 'Vollbildmodus:',
+		'TEXT_MESSAGE': 'Nachricht',
+		'TEXT_RESET': 'Zurücksetzen',
+		'TEXT_MESSAGE_SIZE': 'Größe der Nachricht:',
+		'TEXT_NOTE': 'Sound-Taste:',
+		'TEXT_MOTION_BLUR': 'Bewegungsunschärfe:',
+		'TEXT_NONE': '(Kein)',
+		'TEXT_SOUND_CATTISH': 'Katzenartig',
+		'TEXT_SOUND_HORROR': 'Furcht',
+		'TEXT_SOUND_HUNTING': 'Jagd',
+		'TEXT_SOUND_LONGING': 'Sehnsucht',
+		'TEXT_SOUND_LOVELY': 'Liebenswert',
+		'TEXT_SOUND_MAGIC': 'Hexerei',
+		'TEXT_SOUND_ORA_SAIMIN': 'Ora! Saimin!',
+		'TEXT_SOUND_NOISE': 'Lärm',
+		'TEXT_SOUND_432HZ': '432Hz',
+		'TEXT_SOUND_HELI': 'Hubschrauber',
+		'TEXT_SOUND_PACHI': 'Pachi',
+		'TEXT_SOUND_WAHWAH': 'WahWah',
+		'TEXT_SOUND_MECHANICAL': 'Mechanischer',
+		'TEXT_SOUND_PSYCHO': 'Psycho',
+		'TEXT_SOUND_MYANMYAN': 'Myan Myan',
+		'TEXT_SOUND_VOLUME': 'Lautstärke:',
+		'TEXT_SOUND_AUTO_PLAY': 'Audio automatisch abspielen:',
+		'TEXT_SOUND_AUTO_REPEAT': 'Sich Wiederholender Ton:',
+		'TEXT_SOUND_SWITCH': 'Schaltgeräusch:',
+		'TEXT_BRIGHTNESS': 'Helligkeit:',
+		'TEXT_BRIGHTNESS_NORMAL': 'Normal',
+		'TEXT_BRIGHTNESS_BRIGHTER': 'Heller',
+		'TEXT_CLOCKWISE': 'im Uhrzeigersinn',
+		'TEXT_COUNTERCLOCKWISE': 'Gegen den Uhrzeigersinn',
+		'TEXT_CONFIG': 'Aufbau',
+		'TEXT_MESSAGE_TEXT': 'Nachrichtentext:',
+		'TEXT_MESSAGE_BUTTON': 'Nachricht...',
+		'TEXT_START_HYPNOSIS': 'Hypnose beginnen',
+		'TEXT_RELEASE_HYPNOSIS_BUTTON': 'Hypnose loslassen',
+		'TEXT_COUNT_DOWN': 'Countdown:',
+		'TEXT_ARROWS': 'Pfeile:',
+		'TEXT_MESSAGE_SPEECH_LABEL': 'Nachrichtenansprache:',
+		'TEXT_MESSAGE_SPEECH': 'Nachrichtenansprache',
+		'TEXT_COLOR_1ST': '1. Farbe:',
+		'TEXT_COLOR_2ND': '2. Farbe:',
+		'TEXT_INIT_APP_BUTTON': 'Initialisieren',
+		'TEXT_MESSAGE_VOLUME': 'Stimmen Lautstärke:',
+		'TEXT_MESSAGE_SKIN': 'Haut:',
+		'TEXT_VIBRATOR': 'Vibrator:',
+		'TEXT_VIBRATOR_START_STOP': 'Start / Stop',
+		'TEXT_GOLDEN': 'Golden',
+		'TEXT_PURPLE': 'Lila',
+		'TEXT_BLUE': 'Blau',
+		'TEXT_PINK': 'Pinke Farbe',
+		'TEXT_DARKGREEN': 'Dunkelgrün',
+		'TEXT_RED': 'Rot',
+		'TEXT_BLACK': 'Schwarz',
+		'TEXT_WHITE': 'Weiß',
+	},
+	'es-ES': { // Spanish
+		'TEXT_OK': 'OK',
+		'TEXT_CANCEL': 'Cancelar',
+		'TEXT_YES': 'Sí',
+		'TEXT_NO': 'No',
+		'TEXT_CHOOSE_LANGUAGE': 'Elige un idioma (Choose a language)',
+		'TEXT_ABOUT_APP': 'Información de versión',
+		'TEXT_INIT_APP': '¿Quieres inicializar esta aplicación?',
+		'TEXT_INITTED_APP': 'La aplicación se ha inicializado.',
+		'TEXT_INPUT_MESSAGE': 'Por favor ingrese la cadena del mensaje.',
+		'TEXT_FULLWIDTH_SPACE': '　',
+		'TEXT_PERIOD': '. ',
+		'TEXT_PERIOD_SPACE': '。',
+		'TEXT_RELEASE_HYPNOSIS': 'Dehipnosis',
+		'TEXT_HYPNOSIS_RELEASED': 'Liberé la hipnosis.',
+		'TEXT_KILLING_HYPNOSIS_IMG': 'img/killing-hypnosis_es.svg',
+		'TEXT_HYPNOSIS_RELEASED_IMG': 'img/hypnosis-released_es.svg',
+		'TEXT_ALL_RELEASED_IMG': 'img/all-released_es.svg',
+		'TEXT_NO_BLINKING': 'Sin parpadeo',
+		'TEXT_LOGO': 'img/logo_es.svg',
+		'TEXT_TAP_HERE': 'img/please-tap-here_es.svg',
+		'TEXT_MP3_RELEASED_HYPNOSIS': 'sn/ReleasedHypnosis_es.mp3',
+		'TEXT_I_AGREE': 'Estoy de acuerdo',
+		'TEXT_SIZE_SMALL': 'Pequeño',
+		'TEXT_SIZE_NORMAL': 'Talla normal',
+		'TEXT_SIZE_LARGE': 'Grande',
+		'TEXT_SIZE_HUGE': 'Enorme',
+		'TEXT_SPEED_ZERO': 'Detener',
+		'TEXT_SPEED_SLOW': 'Lento',
+		'TEXT_SPEED_NORMAL': 'Velocidad normal',
+		'TEXT_SPEED_FAST': 'Rápido',
+		'TEXT_SPEED_SUPER_FAST': 'Súper rápido',
+		'TEXT_SPEED_IRREGULAR': 'Irregular',
+		'TEXT_RAINBOW': 'Color del arco iris',
+		'TEXT_FACE_GETTER': 'Reconocimiento facial',
+		'TEXT_TAP_ON_TARGET': 'Toca el objetivo',
+		'TEXT_CAN_LOCK_ON': 'Se puede bloquear',
+		'TEXT_CANT_FIND_FACE': 'Cara no encontrada',
+		'TEXT_LOCK_ON': 'Bloqueo',
+		'TEXT_UNLOCK': 'Desbloquear',
+		'TEXT_GO_BACK': 'Devolver',
+		'TEXT_NO_WEBCONNECT': 'La conexión a Internet no está disponible.',
+		'TEXT_INPUTMESSAGE': 'Ingrese su mensaje',
+		'TEXT_NOTICE': trans_NOTICE_ES,
+		'TEXT_LANGUAGE': '言語 (Language):',
+		'TEXT_LANGUAGE_ZH_CN': 'Chinese (Simplified) (简体中文)',
+		'TEXT_LANGUAGE_ZH_TW': 'Chinese (Traditional) (繁體中文)',
+		'TEXT_LANGUAGE_EN': 'Inglés (English)',
+		'TEXT_LANGUAGE_ES': 'Spanish (Español)',
+		'TEXT_LANGUAGE_DE': 'German (Deutsch)',
+		'TEXT_LANGUAGE_IT': 'Italian (Italiano)',
+		'TEXT_LANGUAGE_JA_JP': 'Japanese (日本語)',
+		'TEXT_LANGUAGE_KO_KR': 'Korean (한국어)',
+		'TEXT_LANGUAGE_RU': 'Russian (Русский)',
+		'TEXT_PIC_TYPE': 'Tipo de vídeo:',
+		'TEXT_PIC_0': 'Película 0: Pantalla ficticia (para practicar)',
+		'TEXT_PIC_1': 'Película 1: Espiral logarítmica',
+		'TEXT_PIC_2': 'Película 2: Círculos concéntricos',
+		'TEXT_PIC_3': 'Película 3: Ojos giratorios',
+		'TEXT_PIC_4': 'Película 4: Espiral de Arquímedes',
+		'TEXT_PIC_5': 'Película 5: Corazón en expansión',
+		'TEXT_PIC_6': 'Película 6: Moneda de cinco yenes',
+		'TEXT_PIC_7': 'Película 7: Extraño Remolino',
+		'TEXT_PIC_8': 'Película 8: Colores locos',
+		'TEXT_PIC_9': 'Película 9: Espiral logarítmica 2',
+		'TEXT_PIC_10': 'Película 10: Disco analógico',
+		'TEXT_PIC_11': 'Película 11: Extraño Remolino 2',
+		'TEXT_PIC_12': 'Película 12: Caleidoscopio',
+		'TEXT_PIC_13': 'Película 13: Primera pantalla a color',
+		'TEXT_PIC_14': 'Película 14: Segunda pantalla a color',
+		'TEXT_PIC_15': 'Película 15: Sólo una pantalla negra',
+		'TEXT_PIC_16': 'Película 16: Sólo una pantalla blanca',
+		'TEXT_PIC_17': 'Película 17: Serpiente giratoria',
+		'TEXT_PIC_18': 'Película 18: Radiación de distorsión',
+		'TEXT_PIC_19': 'Película 19：Ondas Aleatorias',
+		'TEXT_SPLIT': 'Pantalla dividida:',
+		'TEXT_SPEED': 'Velocidad:',
+		'TEXT_ROTATION': 'Reproducción inversa:',
+		'TEXT_VORTEX_DIRECTION': 'Dirección del vórtice:',
+		'TEXT_BLINKING': 'Pantalla parpadeando:',
+		'TEXT_FULLSCREN_MODE': 'Modo de pantalla completa:',
+		'TEXT_MESSAGE': 'Mensaje',
+		'TEXT_RESET': 'Reiniciar',
+		'TEXT_MESSAGE_SIZE': 'Tamaño del mensaje:',
+		'TEXT_NOTE': 'Botón de nota musical:',
+		'TEXT_MOTION_BLUR': 'Desenfoque de movimiento:',
+		'TEXT_NONE': '(Ninguno)',
+		'TEXT_SOUND_CATTISH': 'Felino',
+		'TEXT_SOUND_HORROR': 'Miedo',
+		'TEXT_SOUND_HUNTING': 'Cazador',
+		'TEXT_SOUND_LONGING': 'Anhelar',
+		'TEXT_SOUND_LOVELY': 'Adorable',
+		'TEXT_SOUND_MAGIC': 'Magia',
+		'TEXT_SOUND_ORA_SAIMIN': 'Ora! Saimin!',
+		'TEXT_SOUND_NOISE': 'Ruido',
+		'TEXT_SOUND_432HZ': '432Hz',
+		'TEXT_SOUND_HELI': 'Helicóptero',
+		'TEXT_SOUND_PACHI': 'Pachi',
+		'TEXT_SOUND_WAHWAH': 'Wah Wah',
+		'TEXT_SOUND_MECHANICAL': 'Mecánico',
+		'TEXT_SOUND_PSYCHO': 'Psicópata',
+		'TEXT_SOUND_MYANMYAN': 'Myanmar Myanmar',
+		'TEXT_SOUND_VOLUME': 'Volumen:',
+		'TEXT_SOUND_AUTO_PLAY': 'Reproducción automática de audio:',
+		'TEXT_SOUND_AUTO_REPEAT': 'Audio de repetición automática:',
+		'TEXT_SOUND_SWITCH': 'Sonido de conmutación:',
+		'TEXT_BRIGHTNESS': 'Brillo de la pantalla:',
+		'TEXT_BRIGHTNESS_NORMAL': 'Brillo normal',
+		'TEXT_BRIGHTNESS_BRIGHTER': 'Aclarar',
+		'TEXT_CLOCKWISE': 'Agujas del reloj',
+		'TEXT_COUNTERCLOCKWISE': 'Sinistrórsum',
+		'TEXT_CONFIG': 'Configuración',
+		'TEXT_MESSAGE_TEXT': 'Mensaje de texto:',
+		'TEXT_MESSAGE_BUTTON': 'Mensaje...',
+		'TEXT_START_HYPNOSIS': 'Iniciar la hipnosis',
+		'TEXT_RELEASE_HYPNOSIS_BUTTON': 'Iiberar hipnosis',
+		'TEXT_COUNT_DOWN': 'Cuenta regresiva:',
+		'TEXT_ARROWS': 'Flechas:',
+		'TEXT_MESSAGE_SPEECH_LABEL': 'Di el mensaje:',
+		'TEXT_MESSAGE_SPEECH': 'Di el mensaje',
+		'TEXT_COLOR_1ST': '1er color:',
+		'TEXT_COLOR_2ND': 'Segundo color:',
+		'TEXT_INIT_APP_BUTTON': 'Inicialización',
+		'TEXT_MESSAGE_VOLUME': 'Volumen de voz del mensaje:',
+		'TEXT_MESSAGE_SKIN': 'Piel:',
+		'TEXT_VIBRATOR': 'Vibrador:',
+		'TEXT_VIBRATOR_START_STOP': 'Iniciar / Detener',
+		'TEXT_GOLDEN': 'Dorado',
+		'TEXT_PURPLE': 'Púrpura',
+		'TEXT_BLUE': 'Azul',
+		'TEXT_PINK': 'Color rosa',
+		'TEXT_DARKGREEN': 'Verde oscuro',
+		'TEXT_RED': 'Rojo',
+		'TEXT_BLACK': 'Negro',
+		'TEXT_WHITE': 'Blanco',
+	},
+	'ru-RU': {
+		'TEXT_OK': 'Хорошо',
+		'TEXT_CANCEL': 'Отмена',
+		'TEXT_YES': 'Да',
+		'TEXT_NO': 'Нет',
+		'TEXT_CHOOSE_LANGUAGE': '言語選択 (Choose a language)',
+		'TEXT_ABOUT_APP': 'Информация о версии',
+		'TEXT_INIT_APP': 'Вы хотите инициализировать это приложение?',
+		'TEXT_INITTED_APP': 'Приложение инициализировано.',
+		'TEXT_INPUT_MESSAGE': 'Пожалуйста, введите строку сообщения.',
+		'TEXT_FULLWIDTH_SPACE': '　',
+		'TEXT_PERIOD': '.',
+		'TEXT_PERIOD_SPACE': '. ',
+		'TEXT_RELEASE_HYPNOSIS': 'Освободиться от гипноза',
+		'TEXT_HYPNOSIS_RELEASED': 'Я выпустил гипноз.',
+		'TEXT_KILLING_HYPNOSIS_IMG': 'img/killing-hypnosis_ru.svg',
+		'TEXT_HYPNOSIS_RELEASED_IMG': 'img/hypnosis-released_ru.svg',
+		'TEXT_ALL_RELEASED_IMG': 'img/all-released_ru.svg',
+		'TEXT_NO_BLINKING': 'Нет мигания',
+		'TEXT_LOGO': 'img/logo_ru.svg',
+		'TEXT_TAP_HERE': 'img/please-tap-here_ru.svg',
+		'TEXT_MP3_RELEASED_HYPNOSIS': 'sn/ReleasedHypnosis_ru.mp3',
+		'TEXT_I_AGREE': 'Я согласен',
+		'TEXT_SIZE_SMALL': 'Маленький',
+		'TEXT_SIZE_NORMAL': 'Нормальный размер',
+		'TEXT_SIZE_LARGE': 'Большой',
+		'TEXT_SIZE_HUGE': 'Огромный',
+		'TEXT_SPEED_ZERO': 'Остановлено',
+		'TEXT_SPEED_SLOW': 'Медленный',
+		'TEXT_SPEED_NORMAL': 'Нормальная скорость',
+		'TEXT_SPEED_FAST': 'Быстрый',
+		'TEXT_SPEED_SUPER_FAST': 'Сверх быстрый',
+		'TEXT_SPEED_IRREGULAR': 'Нерегулярный',
+		'TEXT_RAINBOW': 'Радужный',
+		'TEXT_FACE_GETTER': 'Распознавание лица',
+		'TEXT_TAP_ON_TARGET': 'Коснитесь цели',
+		'TEXT_CAN_LOCK_ON': 'Можно заблокировать',
+		'TEXT_CANT_FIND_FACE': 'Лицо не найдено',
+		'TEXT_LOCK_ON': 'Блокировка',
+		'TEXT_UNLOCK': 'Разблокировать',
+		'TEXT_GO_BACK': 'Возвращаться',
+		'TEXT_NO_WEBCONNECT': 'Подключение к Интернету недоступно.',
+		'TEXT_INPUTMESSAGE': 'Введите ваше сообщение',
+		'TEXT_NOTICE': trans_NOTICE_RU,
+		'TEXT_LANGUAGE': '言語 (Language):',
+		'TEXT_LANGUAGE_ZH_CN': 'Chinese (Simplified) (简体中文)',
+		'TEXT_LANGUAGE_ZH_TW': 'Chinese (Traditional) (繁體中文)',
+		'TEXT_LANGUAGE_EN': 'English (英語)',
+		'TEXT_LANGUAGE_ES': 'Spanish (Español)',
+		'TEXT_LANGUAGE_DE': 'German (Deutsch)',
+		'TEXT_LANGUAGE_IT': 'Italian (Italiano)',
+		'TEXT_LANGUAGE_JA_JP': 'Japanese (日本語)',
+		'TEXT_LANGUAGE_KO_KR': 'Korean (한국어)',
+		'TEXT_LANGUAGE_RU': 'Russian (Русский)',
+		'TEXT_PIC_TYPE': 'Тип видео:',
+		'TEXT_PIC_0': 'Фильм 0: Пустой экран (для практики)',
+		'TEXT_PIC_1': 'Фильм 1: Логарифмическая спираль',
+		'TEXT_PIC_2': 'Фильм 2: Концентрические круги',
+		'TEXT_PIC_3': 'Фильм 3: Вращающиеся глаза',
+		'TEXT_PIC_4': 'Фильм 4: Спираль Архимеда',
+		'TEXT_PIC_5': 'Фильм 5: Расширяющееся сердце',
+		'TEXT_PIC_6': 'Фильм 6: Монета пять иен',
+		'TEXT_PIC_7': 'Фильм 7: Странный Водоворот',
+		'TEXT_PIC_8': 'Фильм 8: Сумасшедшие цвета',
+		'TEXT_PIC_9': 'Фильм 9: Логарифмическая спираль 2',
+		'TEXT_PIC_10': 'Фильм 10: Аналоговый диск',
+		'TEXT_PIC_11': 'Фильм 11: Странный Водоворот 2',
+		'TEXT_PIC_12': 'Фильм 12: Калейдоскоп',
+		'TEXT_PIC_13': 'Фильм 13: Первый цветной экран',
+		'TEXT_PIC_14': 'Фильм 14: Второй цветной экран',
+		'TEXT_PIC_15': 'Фильм 15: Просто черный экран',
+		'TEXT_PIC_16': 'Фильм 16: Просто белый экран',
+		'TEXT_PIC_17': 'Фильм 17: Вращающаяся змея',
+		'TEXT_PIC_18': 'Фильм 18: Искажающее излучение',
+		'TEXT_PIC_19': 'Фильм 19：Случайные Волны',
+		'TEXT_SPLIT': 'Разделенный экран:',
+		'TEXT_SPEED': 'Скорость:',
+		'TEXT_ROTATION': 'Обратное воспроизведение:',
+		'TEXT_VORTEX_DIRECTION': 'Направление вихря:',
+		'TEXT_BLINKING': 'Мигание экрана:',
+		'TEXT_FULLSCREN_MODE': 'Полноэкранный режим:',
+		'TEXT_MESSAGE': 'Сообщение',
+		'TEXT_RESET': 'Перезагрузить',
+		'TEXT_MESSAGE_SIZE': 'Размер сообщения:',
+		'TEXT_NOTE': 'Кнопка музыкальной ноты:',
+		'TEXT_MOTION_BLUR': 'Размытость:',
+		'TEXT_NONE': '(Никто)',
+		'TEXT_SOUND_CATTISH': 'Кошачий',
+		'TEXT_SOUND_HORROR': 'Страх',
+		'TEXT_SOUND_HUNTING': 'Охотник',
+		'TEXT_SOUND_LONGING': 'Стремятся к',
+		'TEXT_SOUND_LOVELY': 'Восхитительный',
+		'TEXT_SOUND_MAGIC': 'Магия',
+		'TEXT_SOUND_ORA_SAIMIN': 'Ora! Saimin!',
+		'TEXT_SOUND_NOISE': 'Шум',
+		'TEXT_SOUND_432HZ': '432Hz',
+		'TEXT_SOUND_HELI': 'Вертолет',
+		'TEXT_SOUND_PACHI': 'Пачи',
+		'TEXT_SOUND_WAHWAH': 'ВахВах',
+		'TEXT_SOUND_MECHANICAL': 'Механический',
+		'TEXT_SOUND_PSYCHO': 'Психо',
+		'TEXT_SOUND_MYANMYAN': 'Мьян Мьян',
+		'TEXT_SOUND_VOLUME': 'Объем:',
+		'TEXT_SOUND_AUTO_PLAY': 'Автовоспроизведение звука:',
+		'TEXT_SOUND_AUTO_REPEAT': 'Автоповтор аудио:',
+		'TEXT_SOUND_SWITCH': 'Переключение звука:',
+		'TEXT_BRIGHTNESS': 'Яркость экрана:',
+		'TEXT_BRIGHTNESS_NORMAL': 'Нормальная яркость',
+		'TEXT_BRIGHTNESS_BRIGHTER': 'Украсить',
+		'TEXT_CLOCKWISE': 'По часовой стрелке',
+		'TEXT_COUNTERCLOCKWISE': 'Против часовой',
+		'TEXT_CONFIG': 'Параметр',
+		'TEXT_MESSAGE_TEXT': 'Текст сообщения:',
+		'TEXT_MESSAGE_BUTTON': 'Сообщение...',
+		'TEXT_START_HYPNOSIS': 'Начать гипноз',
+		'TEXT_RELEASE_HYPNOSIS_BUTTON': 'Освободиться от гипноза',
+		'TEXT_COUNT_DOWN': 'Обратный отсчет:',
+		'TEXT_ARROWS': 'Стрелки:',
+		'TEXT_MESSAGE_SPEECH_LABEL': 'Произнесите сообщение:',
+		'TEXT_MESSAGE_SPEECH': 'Произнесите сообщение',
+		'TEXT_COLOR_1ST': '1-й цвет:',
+		'TEXT_COLOR_2ND': 'Второй цвет:',
+		'TEXT_INIT_APP_BUTTON': 'Инициализация',
+		'TEXT_MESSAGE_VOLUME': 'Громкость голоса сообщения:',
+		'TEXT_MESSAGE_SKIN': 'Кожа:',
+		'TEXT_VIBRATOR': 'Вибратор:',
+		'TEXT_VIBRATOR_START_STOP': 'Старт / Стоп',
+		'TEXT_GOLDEN': 'Золотой',
+		'TEXT_PURPLE': 'Фиолетовый',
+		'TEXT_BLUE': 'Синий',
+		'TEXT_PINK': 'Розовый цвет',
+		'TEXT_DARKGREEN': 'Темно-зеленый',
+		'TEXT_RED': 'Красный',
+		'TEXT_BLACK': 'Черный',
+		'TEXT_WHITE': 'Blanco',
+	},
+	'en-US': {
+		'TEXT_OK': 'OK',
+		'TEXT_CANCEL': 'Cancel',
+		'TEXT_YES': 'Yes',
+		'TEXT_NO': 'No',
+		'TEXT_CHOOSE_LANGUAGE': 'Choose a language (言語選択)',
+		'TEXT_ABOUT_APP': 'About this app',
+		'TEXT_INIT_APP': 'Do you want to initialize this app?',
+		'TEXT_INITTED_APP': 'Initialized the app.',
+		'TEXT_INPUT_MESSAGE': 'Please enter a message text.',
+		'TEXT_FULLWIDTH_SPACE': '　',
+		'TEXT_PERIOD': '.',
+		'TEXT_PERIOD_SPACE': '. ',
+		'TEXT_RELEASE_HYPNOSIS': 'Kill hypnosis',
+		'TEXT_HYPNOSIS_RELEASED': 'Hypnosis released.',
+		'TEXT_KILLING_HYPNOSIS_IMG': 'img/killing-hypnosis_en.svg',
+		'TEXT_HYPNOSIS_RELEASED_IMG': 'img/hypnosis-released_en.svg',
+		'TEXT_ALL_RELEASED_IMG': 'img/all-released_en.svg',
+		'TEXT_NO_BLINKING': 'No blinking',
+		'TEXT_LOGO': 'img/logo_en.svg',
+		'TEXT_TAP_HERE': 'img/please-tap-here_en.svg',
+		'TEXT_MP3_RELEASED_HYPNOSIS': 'sn/ReleasedHypnosis_en.mp3',
+		'TEXT_I_AGREE': 'I agree',
+		'TEXT_SIZE_SMALL': 'Small',
+		'TEXT_SIZE_NORMAL': 'Normal',
+		'TEXT_SIZE_LARGE': 'Large',
+		'TEXT_SIZE_HUGE': 'Huge',
+		'TEXT_SPEED_ZERO': 'Stopped',
+		'TEXT_SPEED_SLOW': 'Slow',
+		'TEXT_SPEED_NORMAL': 'Normal',
+		'TEXT_SPEED_FAST': 'Fast',
+		'TEXT_SPEED_SUPER_FAST': 'Super Fast',
+		'TEXT_SPEED_IRREGULAR': 'Irregular',
+		'TEXT_RAINBOW': 'Rainbow',
+		'TEXT_FACE_GETTER': 'Face Recognition',
+		'TEXT_TAP_ON_TARGET': 'Please tap on the target',
+		'TEXT_CAN_LOCK_ON': 'Ready to lock on',
+		'TEXT_CANT_FIND_FACE': 'Face not found',
+		'TEXT_LOCK_ON': 'Lock on',
+		'TEXT_UNLOCK': 'Unlock',
+		'TEXT_GO_BACK': 'Go back',
+		'TEXT_NO_WEBCONNECT': 'Internet connection is unavailable.',
+		'TEXT_INPUTMESSAGE': 'Input message',
+		'TEXT_NOTICE': trans_NOTICE_EN,
+		'TEXT_LANGUAGE': 'Language (言語):',
+		'TEXT_LANGUAGE_ZH_CN': 'Chinese (Simplified) (简体中文)',
+		'TEXT_LANGUAGE_ZH_TW': 'Chinese (Traditional) (繁體中文)',
+		'TEXT_LANGUAGE_EN': 'English (英語)',
+		'TEXT_LANGUAGE_ES': 'Spanish (Español)',
+		'TEXT_LANGUAGE_DE': 'German (Deutsch)',
+		'TEXT_LANGUAGE_IT': 'Italian (Italiano)',
+		'TEXT_LANGUAGE_JA_JP': 'Japanese (日本語)',
+		'TEXT_LANGUAGE_KO_KR': 'Korean (한국어)',
+		'TEXT_LANGUAGE_RU': 'Russian (Русский)',
+		'TEXT_PIC_TYPE': 'The type of picture:',
+		'TEXT_PIC_0': 'Movie 0: Dummy Screen (for practice)',
+		'TEXT_PIC_1': 'Movie 1: Logarithmic Spiral',
+		'TEXT_PIC_2': 'Movie 2: Concentric Circles',
+		'TEXT_PIC_3': 'Movie 3: The Eyes',
+		'TEXT_PIC_4': 'Movie 4: Archimedes\' Spiral',
+		'TEXT_PIC_5': 'Movie 5: Spreading Hearts',
+		'TEXT_PIC_6': 'Movie 6: 5-Yen Coin',
+		'TEXT_PIC_7': 'Movie 7: Strange Swirl',
+		'TEXT_PIC_8': 'Movie 8: Crazy Colors',
+		'TEXT_PIC_9': 'Movie 9: Logarithmic Spiral 2',
+		'TEXT_PIC_10': 'Movie 10: Analog Disc',
+		'TEXT_PIC_11': 'Movie 11: Strange Swirl 2',
+		'TEXT_PIC_12': 'Movie 12: Kaleidoscope',
+		'TEXT_PIC_13': 'Movie 13: 1st color screen',
+		'TEXT_PIC_14': 'Movie 14: 2st color screen',
+		'TEXT_PIC_15': 'Movie 15: Just a black screen',
+		'TEXT_PIC_16': 'Movie 16: Just a white screen',
+		'TEXT_PIC_17': 'Movie 17: Rotating snake',
+		'TEXT_PIC_18': 'Movie 18: Distortion Radiation',
+		'TEXT_PIC_19': 'Movie 19：Random Waves',
+		'TEXT_SPLIT': 'Screen splitting:',
+		'TEXT_SPEED': 'Speed:',
+		'TEXT_ROTATION': 'Reverse playback:',
+		'TEXT_VORTEX_DIRECTION': 'Direction of vortex:',
+		'TEXT_BLINKING': 'Screen flashing:',
+		'TEXT_FULLSCREN_MODE': 'Fullscreen mode:',
+		'TEXT_MESSAGE': 'Message',
+		'TEXT_RESET': 'Reset',
+		'TEXT_MESSAGE_SIZE': 'Size of message:',
+		'TEXT_NOTE': 'Sound button:',
+		'TEXT_MOTION_BLUR': 'Motion Blur:',
+		'TEXT_NONE': '(None)',
+		'TEXT_SOUND_CATTISH': 'Cattish',
+		'TEXT_SOUND_HORROR': 'Horror',
+		'TEXT_SOUND_HUNTING': 'Hunting',
+		'TEXT_SOUND_LONGING': 'Longing',
+		'TEXT_SOUND_LOVELY': 'Lovely',
+		'TEXT_SOUND_MAGIC': 'Magic',
+		'TEXT_SOUND_ORA_SAIMIN': 'Ora! Saimin!',
+		'TEXT_SOUND_NOISE': 'Noise',
+		'TEXT_SOUND_432HZ': '432Hz',
+		'TEXT_SOUND_HELI': 'Helicopter',
+		'TEXT_SOUND_PACHI': 'Pachi',
+		'TEXT_SOUND_WAHWAH': 'WahWah',
+		'TEXT_SOUND_MECHANICAL': 'Mechanical',
+		'TEXT_SOUND_PSYCHO': 'Psycho',
+		'TEXT_SOUND_MYANMYAN': 'Myan Myan',
+		'TEXT_SOUND_VOLUME': 'Sound volume:',
+		'TEXT_SOUND_AUTO_PLAY': 'Auto-play audio:',
+		'TEXT_SOUND_AUTO_REPEAT': 'Repeating audio:',
+		'TEXT_SOUND_SWITCH': 'Switching sound:',
+		'TEXT_BRIGHTNESS': 'Brightness:',
+		'TEXT_BRIGHTNESS_NORMAL': 'Normal',
+		'TEXT_BRIGHTNESS_BRIGHTER': 'Brighter',
+		'TEXT_CLOCKWISE': 'Clockwise',
+		'TEXT_COUNTERCLOCKWISE': 'Counterclockwise',
+		'TEXT_CONFIG': 'Configuration',
+		'TEXT_MESSAGE_TEXT': 'Message Text:',
+		'TEXT_MESSAGE_BUTTON': 'Message...',
+		'TEXT_START_HYPNOSIS': 'Start Hypnosis',
+		'TEXT_RELEASE_HYPNOSIS_BUTTON': 'Release Hypnosis',
+		'TEXT_COUNT_DOWN': 'Count Down:',
+		'TEXT_ARROWS': 'Arrows:',
+		'TEXT_MESSAGE_SPEECH_LABEL': 'Message Speech:',
+		'TEXT_MESSAGE_SPEECH': 'Message Speech',
+		'TEXT_COLOR_1ST': '1st color:',
+		'TEXT_COLOR_2ND': '2nd color:',
+		'TEXT_INIT_APP_BUTTON': 'Initialize',
+		'TEXT_MESSAGE_VOLUME': 'Message voice volume:',
+		'TEXT_MESSAGE_SKIN': 'Skin:',
+		'TEXT_VIBRATOR': 'Vibrator:',
+		'TEXT_VIBRATOR_START_STOP': 'Start / Stop',
+		'TEXT_GOLDEN': 'Golden',
+		'TEXT_PURPLE': 'Purple',
+		'TEXT_BLUE': 'Blue',
+		'TEXT_PINK': 'Pink',
+		'TEXT_DARKGREEN': 'Darkgreen',
+		'TEXT_RED': 'Red',
+		'TEXT_BLACK': 'Black',
+		'TEXT_WHITE': 'White',
+	},
+};
+
 const trans_getText = function(str_id){
 	let lang = localStorage.getItem('saiminLanguage3');
-	if(!lang)
-		lang = 'en';
-	if(lang == 'ja' || lang == 'jp'){ // Japanese
-		switch(str_id){
-		case 'TEXT_OK': return 'OK';
-		case 'TEXT_CANCEL': return 'キャンセル';
-		case 'TEXT_YES': return 'はい';
-		case 'TEXT_NO': return 'いいえ';
-		case 'TEXT_CHOOSE_LANGUAGE': return '言語選択 (Choose a language)';
-		case 'TEXT_ABOUT_APP': return 'バージョン情報';
-		case 'TEXT_INIT_APP': return 'このアプリを初期化しますか？';
-		case 'TEXT_INITTED_APP': return 'アプリを初期化しました。';
-		case 'TEXT_INPUT_MESSAGE': return 'メッセージ文字列を入力してください。';
-		case 'TEXT_FULLWIDTH_SPACE': return '　';
-		case 'TEXT_PERIOD': return '。';
-		case 'TEXT_PERIOD_SPACE': return '。';
-		case 'TEXT_RELEASE_HYPNOSIS': return '催眠解除';
-		case 'TEXT_HYPNOSIS_RELEASED': return '催眠解除。';
-		case 'TEXT_KILLING_HYPNOSIS_IMG': return 'img/killing-hypnosis_ja.svg';
-		case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'img/hypnosis-released_ja.svg';
-		case 'TEXT_ALL_RELEASED_IMG': return 'img/all-released_ja.svg';
-		case 'TEXT_NO_BLINKING': return '点滅なし';
-		case 'TEXT_LOGO': return 'img/logo_ja.svg';
-		case 'TEXT_TAP_HERE': return 'img/please-tap-here_ja.svg';
-		case 'TEXT_MP3_RELEASED_HYPNOSIS': return 'sn/ReleasedHypnosis_ja.mp3';
-		case 'TEXT_I_AGREE': return '私は同意します';
-		case 'TEXT_SIZE_SMALL': return '小さい';
-		case 'TEXT_SIZE_NORMAL': return '普通';
-		case 'TEXT_SIZE_LARGE': return '大きい';
-		case 'TEXT_SIZE_HUGE': return '巨大';
-		case 'TEXT_SPEED_ZERO': return '停止';
-		case 'TEXT_SPEED_SLOW': return '遅い';
-		case 'TEXT_SPEED_NORMAL': return '普通';
-		case 'TEXT_SPEED_FAST': return '速い';
-		case 'TEXT_SPEED_SUPER_FAST': return '超速い';
-		case 'TEXT_SPEED_IRREGULAR': return '不規則';
-		case 'TEXT_RAINBOW': return '虹色';
-		case 'TEXT_FACE_GETTER': return '顔認識';
-		case 'TEXT_TAP_ON_TARGET': return 'ターゲットをタップしてください';
-		case 'TEXT_CAN_LOCK_ON': return 'ロックオンできます';
-		case 'TEXT_CANT_FIND_FACE': return '顔が見つかりません';
-		case 'TEXT_LOCK_ON': return 'ロックオン';
-		case 'TEXT_UNLOCK': return 'ロック解除';
-		case 'TEXT_GO_BACK': return '戻る';
-		case 'TEXT_NO_WEBCONNECT': return 'ネット接続が利用できません';
-		case 'TEXT_INPUTMESSAGE': return "メッセージを入力";
-		}
-	}else if(lang == 'zh-CN' || lang == 'cn'){ // Chinese (Simplified)
-		switch(str_id){
-		case 'TEXT_OK': return '確定';
-		case 'TEXT_CANCEL': return '取消';
-		case 'TEXT_YES': return '是';
-		case 'TEXT_NO': return '否';
-		case 'TEXT_CHOOSE_LANGUAGE': return '语言选择 (Choose a language)';
-		case 'TEXT_ABOUT_APP': return '关于这个应用程序';
-		case 'TEXT_INIT_APP': return '您想初始化这个应用程序吗？';
-		case 'TEXT_INITTED_APP': return '初始化了应用程序。';
-		case 'TEXT_INPUT_MESSAGE': return '请输入消息文本。';
-		case 'TEXT_FULLWIDTH_SPACE': return '　';
-		case 'TEXT_PERIOD': return '。';
-		case 'TEXT_PERIOD_SPACE': return '。';
-		case 'TEXT_RELEASE_HYPNOSIS': return '去催眠';
-		case 'TEXT_HYPNOSIS_RELEASED': return '我取消了催眠。';
-		case 'TEXT_KILLING_HYPNOSIS_IMG': return 'img/killing-hypnosis_zh-CN.svg';
-		case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'img/hypnosis-released_zh-CN.svg';
-		case 'TEXT_ALL_RELEASED_IMG': return 'img/all-released_zh-CN.svg';
-		case 'TEXT_NO_BLINKING': return '无闪光灯';
-		case 'TEXT_LOGO': return 'img/logo_zh-CN.svg';
-		case 'TEXT_TAP_HERE': return 'img/please-tap-here_zh-CN.svg';
-		case 'TEXT_MP3_RELEASED_HYPNOSIS': return 'sn/ReleasedHypnosis_zh-CN.mp3';
-		case 'TEXT_I_AGREE': return '我同意';
-		case 'TEXT_SIZE_SMALL': return '小的';
-		case 'TEXT_SIZE_NORMAL': return '普通的';
-		case 'TEXT_SIZE_LARGE': return '大的';
-		case 'TEXT_SIZE_HUGE': return '巨大的';
-		case 'TEXT_SPEED_ZERO': return '停止';
-		case 'TEXT_SPEED_SLOW': return '慢的';
-		case 'TEXT_SPEED_NORMAL': return '普通的';
-		case 'TEXT_SPEED_FAST': return '快速地';
-		case 'TEXT_SPEED_SUPER_FAST': return '超级快';
-		case 'TEXT_SPEED_IRREGULAR': return '不规律的';
-		case 'TEXT_RAINBOW': return '彩虹色';
-		case 'TEXT_FACE_GETTER': return '人脸识别';
-		case 'TEXT_TAP_ON_TARGET': return '请点击目标';
-		case 'TEXT_CAN_LOCK_ON': return '可以锁定';
-		case 'TEXT_CANT_FIND_FACE': return '未找到面孔';
-		case 'TEXT_LOCK_ON': return '锁上';
-		case 'TEXT_UNLOCK': return '开锁';
-		case 'TEXT_GO_BACK': return '返回';
-		case 'TEXT_NO_WEBCONNECT': return '无法连接互联网。';
-		case 'TEXT_INPUTMESSAGE': return "输入您的留言";
-		}
-	}else if(lang == 'zh-TW'){ // Chinese (Traditional)
-		switch(str_id){
-		case 'TEXT_OK': return '確定';
-		case 'TEXT_CANCEL': return '取消';
-		case 'TEXT_YES': return '是';
-		case 'TEXT_NO': return '否';
-		case 'TEXT_CHOOSE_LANGUAGE': return '語言選擇 (Choose a language)';
-		case 'TEXT_ABOUT_APP': return '版本信息';
-		case 'TEXT_INIT_APP': return '您想初始化這個應用程式嗎？';
-		case 'TEXT_INITTED_APP': return '初始化了應用程序。';
-		case 'TEXT_INPUT_MESSAGE': return '請輸入消息字符串。';
-		case 'TEXT_FULLWIDTH_SPACE': return '　';
-		case 'TEXT_PERIOD': return '。';
-		case 'TEXT_PERIOD_SPACE': return '。';
-		case 'TEXT_RELEASE_HYPNOSIS': return '催眠釋放';
-		case 'TEXT_HYPNOSIS_RELEASED': return '催眠釋放。';
-		case 'TEXT_KILLING_HYPNOSIS_IMG': return 'img/killing-hypnosis_zh-TW.svg';
-		case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'img/hypnosis-released_zh-TW.svg';
-		case 'TEXT_ALL_RELEASED_IMG': return 'img/all-released_zh-TW.svg';
-		case 'TEXT_NO_BLINKING': return '無閃光燈';
-		case 'TEXT_LOGO': return 'img/logo_zh-TW.svg';
-		case 'TEXT_TAP_HERE': return 'img/please-tap-here_zh-TW.svg';
-		case 'TEXT_MP3_RELEASED_HYPNOSIS': return 'sn/ReleasedHypnosis_zh-TW.mp3';
-		case 'TEXT_I_AGREE': return '我同意';
-		case 'TEXT_SIZE_SMALL': return '小的';
-		case 'TEXT_SIZE_NORMAL': return '普通的';
-		case 'TEXT_SIZE_LARGE': return '大的';
-		case 'TEXT_SIZE_HUGE': return '巨大的';
-		case 'TEXT_SPEED_ZERO': return '停止';
-		case 'TEXT_SPEED_SLOW': return '慢的';
-		case 'TEXT_SPEED_NORMAL': return '普通的';
-		case 'TEXT_SPEED_FAST': return '快速地';
-		case 'TEXT_SPEED_SUPER_FAST': return '超快';
-		case 'TEXT_SPEED_IRREGULAR': return '不規律的';
-		case 'TEXT_RAINBOW': return '彩虹色';
-		case 'TEXT_FACE_GETTER': return '人臉辨識';
-		case 'TEXT_TAP_ON_TARGET': return '請點選目標';
-		case 'TEXT_CAN_LOCK_ON': return '可以鎖定';
-		case 'TEXT_CANT_FIND_FACE': return '未找到臉孔';
-		case 'TEXT_LOCK_ON': return '鎖上';
-		case 'TEXT_UNLOCK': return '開鎖';
-		case 'TEXT_GO_BACK': return '返回';
-		case 'TEXT_NO_WEBCONNECT': return '無法連接網路。';
-		case 'TEXT_INPUTMESSAGE': return "輸入您的留言";
-		}
-	}else if(lang == 'ko' || lang == 'kr' || lang == 'ko-KR'){ // Korean
-		switch(str_id){
-		case 'TEXT_OK': return 'OK';
-		case 'TEXT_CANCEL': return '취소';
-		case 'TEXT_YES': return '예';
-		case 'TEXT_NO': return '아니오';
-		case 'TEXT_CHOOSE_LANGUAGE': return '언어 선택 (Choose a language)';
-		case 'TEXT_ABOUT_APP': return '버전 정보';
-		case 'TEXT_INIT_APP': return '이 앱을 초기화하시겠습니까?';
-		case 'TEXT_INITTED_APP': return '앱을 초기화했습니다.';
-		case 'TEXT_INPUT_MESSAGE': return '메시지 문자열을 입력하십시오.';
-		case 'TEXT_FULLWIDTH_SPACE': return '　';
-		case 'TEXT_PERIOD': return '. ';
-		case 'TEXT_PERIOD_SPACE': return '. ';
-		case 'TEXT_RELEASE_HYPNOSIS': return '최면 해제';
-		case 'TEXT_HYPNOSIS_RELEASED': return '최면 해제.';
-		case 'TEXT_KILLING_HYPNOSIS_IMG': return 'img/killing-hypnosis_ko-KR.svg';
-		case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'img/hypnosis-released_ko-KR.svg';
-		case 'TEXT_ALL_RELEASED_IMG': return 'img/all-released_ko-KR.svg';
-		case 'TEXT_NO_BLINKING': return '깜박임 없음';
-		case 'TEXT_LOGO': return 'img/logo_ko-KR.svg';
-		case 'TEXT_TAP_HERE': return 'img/please-tap-here_ko-KR.svg';
-		case 'TEXT_MP3_RELEASED_HYPNOSIS': return 'sn/ReleasedHypnosis_ko-KR.mp3';
-		case 'TEXT_I_AGREE': return '동의합니다';
-		case 'TEXT_SIZE_SMALL': return '작은';
-		case 'TEXT_SIZE_NORMAL': return '정상';
-		case 'TEXT_SIZE_LARGE': return '크기가 큰';
-		case 'TEXT_SIZE_HUGE': return '거대한';
-		case 'TEXT_SPEED_ZERO': return '정지중';
-		case 'TEXT_SPEED_SLOW': return '느린';
-		case 'TEXT_SPEED_NORMAL': return '정상';
-		case 'TEXT_SPEED_FAST': return '빠른';
-		case 'TEXT_SPEED_SUPER_FAST': return '매우 빠른';
-		case 'TEXT_SPEED_IRREGULAR': return '불규칙한';
-		case 'TEXT_RAINBOW': return '무지개 색';
-		case 'TEXT_FACE_GETTER': return '얼굴 인식';
-		case 'TEXT_TAP_ON_TARGET': return '타겟을 탭해주세요';
-		case 'TEXT_CAN_LOCK_ON': return '잠글 수 있습니다';
-		case 'TEXT_CANT_FIND_FACE': return '얼굴을 찾을 수 없음';
-		case 'TEXT_LOCK_ON': return '잠금';
-		case 'TEXT_UNLOCK': return '잠금 해제';
-		case 'TEXT_GO_BACK': return '뒤로';
-		case 'TEXT_NO_WEBCONNECT': return '인터넷 연결을 사용할 수 없습니다.';
-		case 'TEXT_INPUTMESSAGE': return "메시지 입력";
-		}
-	}else if(lang == 'it' || lang == 'it-IT'){ // Italian
-		switch(str_id){
-		case 'TEXT_OK': return 'OK';
-		case 'TEXT_CANCEL': return 'Annulla';
-		case 'TEXT_YES': return 'SÌ';
-		case 'TEXT_NO': return 'No';
-		case 'TEXT_CHOOSE_LANGUAGE': return 'Scegli una lingua (Choose a language)';
-		case 'TEXT_ABOUT_APP': return 'Informazioni sull\'app';
-		case 'TEXT_INIT_APP': return 'Vuoi inizializzare questa app?';
-		case 'TEXT_INITTED_APP': return 'Inizializzata l\'app.';
-		case 'TEXT_INPUT_MESSAGE': return 'Inserisci il testo del messaggio.';
-		case 'TEXT_FULLWIDTH_SPACE': return '　';
-		case 'TEXT_PERIOD': return '.';
-		case 'TEXT_PERIOD_SPACE': return '. ';
-		case 'TEXT_RELEASE_HYPNOSIS': return 'Uccidi l\'ipnosi';
-		case 'TEXT_HYPNOSIS_RELEASED': return 'Ipnosi liberata.';
-		case 'TEXT_KILLING_HYPNOSIS_IMG': return 'img/killing-hypnosis_it.svg';
-		case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'img/hypnosis-released_it.svg';
-		case 'TEXT_ALL_RELEASED_IMG': return 'img/all-released_it.svg';
-		case 'TEXT_NO_BLINKING': return 'Senza il flash';
-		case 'TEXT_LOGO': return 'img/logo_it.svg';
-		case 'TEXT_TAP_HERE': return 'img/please-tap-here_it.svg';
-		case 'TEXT_MP3_RELEASED_HYPNOSIS': return 'sn/ReleasedHypnosis_it.mp3';
-		case 'TEXT_I_AGREE': return 'Sono d\'accordo';
-		case 'TEXT_SIZE_SMALL': return 'Piccola';
-		case 'TEXT_SIZE_NORMAL': return 'Normale';
-		case 'TEXT_SIZE_LARGE': return 'Grande';
-		case 'TEXT_SIZE_HUGE': return 'Enorme';
-		case 'TEXT_SPEED_ZERO': return 'Fermato';
-		case 'TEXT_SPEED_SLOW': return 'Lento';
-		case 'TEXT_SPEED_NORMAL': return 'Normale';
-		case 'TEXT_SPEED_FAST': return 'Veloce';
-		case 'TEXT_SPEED_SUPER_FAST': return 'Super Veloce';
-		case 'TEXT_SPEED_IRREGULAR': return 'Irregolare';
-		case 'TEXT_RAINBOW': return 'Arcobaleno';
-		case 'TEXT_FACE_GETTER': return 'Riconoscimento Facciale';
-		case 'TEXT_TAP_ON_TARGET': return 'Per favore tocca il bersaglio';
-		case 'TEXT_CAN_LOCK_ON': return 'Può essere bloccato';
-		case 'TEXT_CANT_FIND_FACE': return 'Volto non trovato';
-		case 'TEXT_LOCK_ON': return 'Blocco su';
-		case 'TEXT_UNLOCK': return 'Sbloccare';
-		case 'TEXT_GO_BACK': return 'Ritorno';
-		case 'TEXT_NO_WEBCONNECT': return 'La connessione Internet non è disponibile.';
-		case 'TEXT_INPUTMESSAGE': return "Inserisci il tuo messaggio";
-		}
-	}else if(lang == 'de' || lang == 'de-DE'){ // German
-		switch(str_id){
-		case 'TEXT_OK': return 'OK';
-		case 'TEXT_CANCEL': return 'Abbrechen';
-		case 'TEXT_YES': return 'Ja';
-		case 'TEXT_NO': return 'Nein';
-		case 'TEXT_CHOOSE_LANGUAGE': return 'Wähle eine Sprache (Choose a language)';
-		case 'TEXT_ABOUT_APP': return 'Über diese App';
-		case 'TEXT_INIT_APP': return 'Möchten Sie diese App initialisieren?';
-		case 'TEXT_INITTED_APP': return 'Initialisierte die App.';
-		case 'TEXT_INPUT_MESSAGE': return 'Bitte geben Sie einen Nachrichtentext ein.';
-		case 'TEXT_FULLWIDTH_SPACE': return '　';
-		case 'TEXT_PERIOD': return '.';
-		case 'TEXT_PERIOD_SPACE': return '. ';
-		case 'TEXT_RELEASE_HYPNOSIS': return 'Töte Hypnose';
-		case 'TEXT_HYPNOSIS_RELEASED': return 'Hypnose freigegeben.';
-		case 'TEXT_KILLING_HYPNOSIS_IMG': return 'img/killing-hypnosis_de.svg';
-		case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'img/hypnosis-released_de.svg';
-		case 'TEXT_ALL_RELEASED_IMG': return 'img/all-released_de.svg';
-		case 'TEXT_NO_BLINKING': return 'Kein Blitz';
-		case 'TEXT_LOGO': return 'img/logo_de.svg';
-		case 'TEXT_TAP_HERE': return 'img/please-tap-here_de.svg';
-		case 'TEXT_MP3_RELEASED_HYPNOSIS': return 'sn/ReleasedHypnosis_de.mp3';
-		case 'TEXT_I_AGREE': return 'Ich stimme zu';
-		case 'TEXT_SIZE_SMALL': return 'Klein';
-		case 'TEXT_SIZE_NORMAL': return 'Normal';
-		case 'TEXT_SIZE_LARGE': return 'Groß';
-		case 'TEXT_SIZE_HUGE': return 'Riesig';
-		case 'TEXT_SPEED_ZERO': return 'Gestoppt';
-		case 'TEXT_SPEED_SLOW': return 'Langsam';
-		case 'TEXT_SPEED_NORMAL': return 'Normal';
-		case 'TEXT_SPEED_FAST': return 'Schnell';
-		case 'TEXT_SPEED_SUPER_FAST': return 'Super Schnell';
-		case 'TEXT_SPEED_IRREGULAR': return 'Irregulär';
-		case 'TEXT_RAINBOW': return 'Regenbogen';
-		case 'TEXT_FACE_GETTER': return 'Gesichtserkennung';
-		case 'TEXT_TAP_ON_TARGET': return 'Bitte tippen Sie auf das Ziel';
-		case 'TEXT_CAN_LOCK_ON': return 'Abschließbar';
-		case 'TEXT_CANT_FIND_FACE': return 'Gesicht nicht gefunden';
-		case 'TEXT_LOCK_ON': return 'Sperren';
-		case 'TEXT_UNLOCK': return 'Freischalten';
-		case 'TEXT_GO_BACK': return 'Zurückkehren';
-		case 'TEXT_NO_WEBCONNECT': return 'Die Internetverbindung ist nicht verfügbar.';
-		case 'TEXT_INPUTMESSAGE': return "Gib deine Nachricht ein";
-		}
-	}else if(lang == 'es' || lang == 'es-ES'){ // Spanish
-		switch(str_id){
-		case 'TEXT_OK': return 'OK';
-		case 'TEXT_CANCEL': return 'Cancelar';
-		case 'TEXT_YES': return 'Sí';
-		case 'TEXT_NO': return 'No';
-		case 'TEXT_CHOOSE_LANGUAGE': return 'Elige un idioma (Choose a language)';
-		case 'TEXT_ABOUT_APP': return 'Información de versión';
-		case 'TEXT_INIT_APP': return '¿Quieres inicializar esta aplicación?';
-		case 'TEXT_INITTED_APP': return 'La aplicación se ha inicializado.';
-		case 'TEXT_INPUT_MESSAGE': return 'Por favor ingrese la cadena del mensaje.';
-		case 'TEXT_FULLWIDTH_SPACE': return '　';
-		case 'TEXT_PERIOD': return '. ';
-		case 'TEXT_PERIOD_SPACE': return '。';
-		case 'TEXT_RELEASE_HYPNOSIS': return 'Dehipnosis';
-		case 'TEXT_HYPNOSIS_RELEASED': return 'Liberé la hipnosis.';
-		case 'TEXT_KILLING_HYPNOSIS_IMG': return 'img/killing-hypnosis_es.svg';
-		case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'img/hypnosis-released_es.svg';
-		case 'TEXT_ALL_RELEASED_IMG': return 'img/all-released_es.svg';
-		case 'TEXT_NO_BLINKING': return 'Sin parpadeo';
-		case 'TEXT_LOGO': return 'img/logo_es.svg';
-		case 'TEXT_TAP_HERE': return 'img/please-tap-here_es.svg';
-		case 'TEXT_MP3_RELEASED_HYPNOSIS': return 'sn/ReleasedHypnosis_es.mp3';
-		case 'TEXT_I_AGREE': return 'Estoy de acuerdo';
-		case 'TEXT_SIZE_SMALL': return 'Pequeño';
-		case 'TEXT_SIZE_NORMAL': return 'Talla normal';
-		case 'TEXT_SIZE_LARGE': return 'Grande';
-		case 'TEXT_SIZE_HUGE': return 'Enorme';
-		case 'TEXT_SPEED_ZERO': return 'Detener';
-		case 'TEXT_SPEED_SLOW': return 'Lento';
-		case 'TEXT_SPEED_NORMAL': return 'Velocidad normal';
-		case 'TEXT_SPEED_FAST': return 'Rápido';
-		case 'TEXT_SPEED_SUPER_FAST': return 'Súper rápido';
-		case 'TEXT_SPEED_IRREGULAR': return 'Irregular';
-		case 'TEXT_RAINBOW': return 'Color del arco iris';
-		case 'TEXT_FACE_GETTER': return 'Reconocimiento facial';
-		case 'TEXT_TAP_ON_TARGET': return 'Toca el objetivo';
-		case 'TEXT_CAN_LOCK_ON': return 'Se puede bloquear';
-		case 'TEXT_CANT_FIND_FACE': return 'Cara no encontrada';
-		case 'TEXT_LOCK_ON': return 'Bloqueo';
-		case 'TEXT_UNLOCK': return 'Desbloquear';
-		case 'TEXT_GO_BACK': return 'Devolver';
-		case 'TEXT_NO_WEBCONNECT': return 'La conexión a Internet no está disponible.';
-		case 'TEXT_INPUTMESSAGE': return "Ingrese su mensaje";
-		}
-	}else if(lang == 'ru' || lang == 'ru-RU'){ // Russian
-		switch(str_id){
-		case 'TEXT_OK': return 'Хорошо';
-		case 'TEXT_CANCEL': return 'Отмена';
-		case 'TEXT_YES': return 'Да';
-		case 'TEXT_NO': return 'Нет';
-		case 'TEXT_CHOOSE_LANGUAGE': return '言語選択 (Choose a language)';
-		case 'TEXT_ABOUT_APP': return 'Информация о версии';
-		case 'TEXT_INIT_APP': return 'Вы хотите инициализировать это приложение?';
-		case 'TEXT_INITTED_APP': return 'Приложение инициализировано.';
-		case 'TEXT_INPUT_MESSAGE': return 'Пожалуйста, введите строку сообщения.';
-		case 'TEXT_FULLWIDTH_SPACE': return '　';
-		case 'TEXT_PERIOD': return '.';
-		case 'TEXT_PERIOD_SPACE': return '. ';
-		case 'TEXT_RELEASE_HYPNOSIS': return 'Освободиться от гипноза';
-		case 'TEXT_HYPNOSIS_RELEASED': return 'Я выпустил гипноз.';
-		case 'TEXT_KILLING_HYPNOSIS_IMG': return 'img/killing-hypnosis_ru.svg';
-		case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'img/hypnosis-released_ru.svg';
-		case 'TEXT_ALL_RELEASED_IMG': return 'img/all-released_ru.svg';
-		case 'TEXT_NO_BLINKING': return 'Нет мигания';
-		case 'TEXT_LOGO': return 'img/logo_ru.svg';
-		case 'TEXT_TAP_HERE': return 'img/please-tap-here_ru.svg';
-		case 'TEXT_MP3_RELEASED_HYPNOSIS': return 'sn/ReleasedHypnosis_ru.mp3';
-		case 'TEXT_I_AGREE': return 'Я согласен';
-		case 'TEXT_SIZE_SMALL': return 'Маленький';
-		case 'TEXT_SIZE_NORMAL': return 'Нормальный размер';
-		case 'TEXT_SIZE_LARGE': return 'Большой';
-		case 'TEXT_SIZE_HUGE': return 'Огромный';
-		case 'TEXT_SPEED_ZERO': return 'Остановлено';
-		case 'TEXT_SPEED_SLOW': return 'Медленный';
-		case 'TEXT_SPEED_NORMAL': return 'Нормальная скорость';
-		case 'TEXT_SPEED_FAST': return 'Быстрый';
-		case 'TEXT_SPEED_SUPER_FAST': return 'Сверх быстрый';
-		case 'TEXT_SPEED_IRREGULAR': return 'Нерегулярный';
-		case 'TEXT_RAINBOW': return 'Радужный';
-		case 'TEXT_FACE_GETTER': return 'Распознавание лица';
-		case 'TEXT_TAP_ON_TARGET': return 'Коснитесь цели';
-		case 'TEXT_CAN_LOCK_ON': return 'Можно заблокировать';
-		case 'TEXT_CANT_FIND_FACE': return 'Лицо не найдено';
-		case 'TEXT_LOCK_ON': return 'Блокировка';
-		case 'TEXT_UNLOCK': return 'Разблокировать';
-		case 'TEXT_GO_BACK': return 'Возвращаться';
-		case 'TEXT_NO_WEBCONNECT': return 'Подключение к Интернету недоступно.';
-		case 'TEXT_INPUTMESSAGE': return "Введите ваше сообщение";
-		}
-	}else{ // English is default
-		switch(str_id){
-		case 'TEXT_OK': return 'OK';
-		case 'TEXT_CANCEL': return 'Cancel';
-		case 'TEXT_YES': return 'Yes';
-		case 'TEXT_NO': return 'No';
-		case 'TEXT_CHOOSE_LANGUAGE': return 'Choose a language (言語選択)';
-		case 'TEXT_ABOUT_APP': return 'About this app';
-		case 'TEXT_INIT_APP': return 'Do you want to initialize this app?';
-		case 'TEXT_INITTED_APP': return 'Initialized the app.';
-		case 'TEXT_INPUT_MESSAGE': return 'Please enter a message text.';
-		case 'TEXT_FULLWIDTH_SPACE': return '　';
-		case 'TEXT_PERIOD': return '.';
-		case 'TEXT_PERIOD_SPACE': return '. ';
-		case 'TEXT_RELEASE_HYPNOSIS': return 'Kill hypnosis';
-		case 'TEXT_HYPNOSIS_RELEASED': return 'Hypnosis released.';
-		case 'TEXT_KILLING_HYPNOSIS_IMG': return 'img/killing-hypnosis_en.svg';
-		case 'TEXT_HYPNOSIS_RELEASED_IMG': return 'img/hypnosis-released_en.svg';
-		case 'TEXT_ALL_RELEASED_IMG': return 'img/all-released_en.svg';
-		case 'TEXT_NO_BLINKING': return 'No blinking';
-		case 'TEXT_LOGO': return 'img/logo_en.svg';
-		case 'TEXT_TAP_HERE': return 'img/please-tap-here_en.svg';
-		case 'TEXT_MP3_RELEASED_HYPNOSIS': return 'sn/ReleasedHypnosis_en.mp3';
-		case 'TEXT_I_AGREE': return 'I agree';
-		case 'TEXT_SIZE_SMALL': return 'Small';
-		case 'TEXT_SIZE_NORMAL': return 'Normal';
-		case 'TEXT_SIZE_LARGE': return 'Large';
-		case 'TEXT_SIZE_HUGE': return 'Huge';
-		case 'TEXT_SPEED_ZERO': return 'Stopped';
-		case 'TEXT_SPEED_SLOW': return 'Slow';
-		case 'TEXT_SPEED_NORMAL': return 'Normal';
-		case 'TEXT_SPEED_FAST': return 'Fast';
-		case 'TEXT_SPEED_SUPER_FAST': return 'Super Fast';
-		case 'TEXT_SPEED_IRREGULAR': return 'Irregular';
-		case 'TEXT_RAINBOW': return 'Rainbow';
-		case 'TEXT_FACE_GETTER': return 'Face Recognition';
-		case 'TEXT_TAP_ON_TARGET': return 'Please tap on the target';
-		case 'TEXT_CAN_LOCK_ON': return 'Ready to lock on';
-		case 'TEXT_CANT_FIND_FACE': return 'Face not found';
-		case 'TEXT_LOCK_ON': return 'Lock on';
-		case 'TEXT_UNLOCK': return 'Unlock';
-		case 'TEXT_GO_BACK': return 'Go back';
-		case 'TEXT_NO_WEBCONNECT': return 'Internet connection is unavailable.';
-		case 'TEXT_INPUTMESSAGE': return "Input message";
-		}
-	}
+	if(!lang || !trans_trans[lang])
+		lang = 'en-US';
+	return trans_trans[lang][str_id] || trans_trans['en-US'][str_id];
 }
 
 const trans_setHtmlText = function(id, text){
@@ -1605,7 +2499,7 @@ const trans_getSelectOptionText = function(id, value){
 			return options[i].text;
 		}
 	}
-	return "";
+	return '';
 }
 
 const trans_setImageSrc = function(id, src){
@@ -1614,1032 +2508,129 @@ const trans_setImageSrc = function(id, src){
 	id.src = src;
 }
 
-// {{LANGUAGE_SPECIFIC}}
 const trans_getDefaultLanguage = function(){
-	switch (navigator.language){
-	case 'zh':
-	case 'zh-CN':
-	case 'zh-SG':
-	case 'zh-cn':
-	case 'zh-sg':
-		return 'zh-CN'; // Chinese (Simplified)
-	case 'zh-TW':
-	case 'zh-HK':
-	case 'zh-MO':
-	case 'zh-tw':
-	case 'zh-hk':
-	case 'zh-mo':
-		return 'zh-TW'; // Chinese (Traditional)
-	case 'de':
-	case 'de-DE':
-	case 'de-de':
-		return 'de-DE'; // German
-	case 'it':
-	case 'it-IT':
-	case 'it-it':
-		return 'it-IT'; // Italian
-	case 'ja':
-	case 'ja-JP':
-	case 'ja-jp':
-		return 'ja'; // Japanese
-	case 'ko':
-	case 'kr':
-	case 'ko-KR':
-	case 'ko-kr':
-		return 'ko-KR'; // Korean
-	case 'es':
-	case 'es-ES':
-	case 'es-es':
-		return 'es'; // Spanish
-	case 'ru':
-	case 'ru-RU':
-	case 'ru-ru':
-	case 'os-RU':
-	case 'os-ru':
-	case 'ru-KZ':
-	case 'ru-kz':
-	case 'ru-UA':
-	case 'ru-ua':
-	case 'ru-BY':
-	case 'ru-by':
-	case 'ru-KG':
-	case 'ru-kg':
-	case 'ru-MD':
-	case 'ru-md':
-		return 'ru'; // Russian
-	default:
-		return 'en'; // English
-	}
+	return trans_standardizeLanguage(navigator.language);
 }
 
 // {{LANGUAGE_SPECIFIC}}
 const trans_localize = function(lang){
-	localStorage.setItem('saiminLanguage3', lang);
-	trans_currentLanguage = lang;
-	if(lang == 'ja' || lang == 'jp'){ // Japanese
-		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_JA);
-		trans_setHtmlText(sai_id_text_language, '言語 (Language):');
-		trans_setSelectOptionText(sai_id_select_language_1, 'zh-CN', 'Chinese (Simplified) (简体中文)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'en', 'English (英語)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'es', 'Spanish (Español)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'de', 'German (Deutsch)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'it', 'Italian (Italiano)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'ja', 'Japanese (日本語)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'ko-KR', 'Korean (한국어)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'ru', 'Russian (Русский)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'zh-CN', 'Chinese (Simplified) (简体中文)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'en', 'English (英語)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'es', 'Spanish (Español)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'de', 'German (Deutsch)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'it', 'Italian (Italiano)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'ja', 'Japanese (日本語)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Korean (한국어)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'ru', 'Russian (Русский)');
-		trans_setHtmlText(sai_id_pic_type, '映像の種類:');
-		trans_setSelectOptionText(sai_id_select_pic_type, '0', '動画 0：ダミー画面（練習用）');
-		trans_setSelectOptionText(sai_id_select_pic_type, '1', '動画 1：対数らせん');
-		trans_setSelectOptionText(sai_id_select_pic_type, '2', '動画 2：同心円状');
-		trans_setSelectOptionText(sai_id_select_pic_type, '3', '動画 3：目が回る');
-		trans_setSelectOptionText(sai_id_select_pic_type, '4', '動画 4：アルキメデスのらせん');
-		trans_setSelectOptionText(sai_id_select_pic_type, '5', '動画 5：広がるハート');
-		trans_setSelectOptionText(sai_id_select_pic_type, '6', '動画 6：五円玉');
-		trans_setSelectOptionText(sai_id_select_pic_type, '7', '動画 7：奇妙な渦巻き');
-		trans_setSelectOptionText(sai_id_select_pic_type, '8', '動画 8：クレージーな色');
-		trans_setSelectOptionText(sai_id_select_pic_type, '9', '動画 9：対数らせん 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '10', '動画 10：アナログディスク');
-		trans_setSelectOptionText(sai_id_select_pic_type, '11', '動画 11：奇妙な渦巻き 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '12', '動画 12：万華鏡');
-		trans_setSelectOptionText(sai_id_select_pic_type, '13', '動画 13：1番目の色の画面');
-		trans_setSelectOptionText(sai_id_select_pic_type, '14', '動画 14：2番目の色の画面');
-		trans_setSelectOptionText(sai_id_select_pic_type, '15', '動画 15：ただの黒い画面');
-		trans_setSelectOptionText(sai_id_select_pic_type, '16', '動画 16：ただの白い画面');
-		trans_setSelectOptionText(sai_id_select_pic_type, '17', '動画 17：ヘビの回転');
-		trans_setSelectOptionText(sai_id_select_pic_type, '18', '動画 18：ひずみ放射');
-		trans_setSelectOptionText(sai_id_select_pic_type, '19', '動画 19：ランダムな波');
-		trans_setHtmlText(sai_id_text_split, '画面分割:');
-		trans_setHtmlText(sai_id_text_speed, 'スピード:');
-		trans_setHtmlText(speed_irregular_label, '不規則');
-		trans_setHtmlText(sai_id_text_rotation, '逆再生:');
-		trans_setHtmlText(sai_id_text_vortex_direction, '渦の向き:');
-		trans_setHtmlText(sai_id_text_blinking, '画面点滅:');
-		trans_setHtmlText(sai_id_text_fullscreen_mode, 'フルスクリーン モード:');
-		trans_setHtmlText(sai_id_page_message_header, 'メッセージ');
-		trans_setHtmlText(sai_id_button_mesage_reset, 'リセット');
-		trans_setHtmlText(sai_id_color_1st_reset, 'リセット');
-		trans_setHtmlText(sai_id_color_2nd_reset, 'リセット');
-		trans_setHtmlText(sai_id_button_mesage_cancel, 'キャンセル');
-		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
-		trans_setHtmlText(sai_id_text_message_size, 'メッセージの大きさ:');
-		trans_setHtmlText(sai_id_text_note, '音符ボタン:');
-		trans_setHtmlText(sai_id_text_motion_blur, 'モーション ブラー:');
-		trans_setSelectOptionText(sai_id_select_sound, '', '(なし)');
-		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', 'ネコっぽい');
-		trans_setSelectOptionText(sai_id_select_sound, 'Horror', '恐怖');
-		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', '狩人');
-		trans_setSelectOptionText(sai_id_select_sound, 'Longing', 'あこがれ');
-		trans_setSelectOptionText(sai_id_select_sound, 'Lovely', '愛らしい');
-		trans_setSelectOptionText(sai_id_select_sound, 'Magic', '魔術');
-		trans_setSelectOptionText(sai_id_select_sound, 'OraSaimin', 'おら! 催眠!');
-		trans_setSelectOptionText(sai_id_select_sound, 'Noise', '雑音');
-		trans_setSelectOptionText(sai_id_select_sound, '432Hz', '432Hz');
-		trans_setSelectOptionText(sai_id_select_sound, 'Heli', 'ヘリコプター');
-		trans_setSelectOptionText(sai_id_select_sound, 'Pachi', 'パチ');
-		trans_setSelectOptionText(sai_id_select_sound, 'WahWah', 'ワウワウ');
-		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical', '機械音');
-		trans_setSelectOptionText(sai_id_select_sound, 'Psycho', 'サイコ');
-		trans_setSelectOptionText(sai_id_select_sound, 'MyanMyan', 'みゃんみゃん');
-		trans_setHtmlText(sai_id_text_sound_volume, '音量:');
-		trans_setHtmlText(sai_id_text_auto_play_sound, '音声の自動再生:');
-		trans_setHtmlText(sai_id_text_auto_repeat_sound, '音声の自動繰り返し:');
-		trans_setHtmlText(sai_id_text_switch_sound, '切り替え音:');
-		trans_setHtmlText(sai_id_text_brightness, '画面の明るさ:');
-		trans_setSelectOptionText(sai_id_select_brightness, 'normal', '普通');
-		trans_setSelectOptionText(sai_id_select_brightness, 'brighter', '明るくする');
-		trans_setSelectOptionText(sai_id_select_vortex_direction, 'clockwise', '時計回り');
-		trans_setSelectOptionText(sai_id_select_vortex_direction, 'counterclockwise', '反時計回り');
-		trans_setHtmlText(sai_id_page_config_header, '設定');
-		trans_setHtmlText(sai_id_text_label_message_text, 'メッセージ テキスト:');
-		trans_setHtmlText(sai_id_button_message, 'メッセージ...');
-		sai_id_button_start_hypnosis.innerHTML = '<nobr>催眠</nobr><nobr>スタート</nobr>';
-		trans_setHtmlText(sai_id_button_release_hypnosis, '催眠解除');
-		trans_setHtmlText(sai_id_text_count_down, 'カウントダウン:');
-		trans_setHtmlText(sai_id_text_arrows, '矢印:');
-		trans_setHtmlText(sai_id_text_label_message_speech, 'メッセージをしゃべる:');
-		trans_setHtmlText(sai_id_text_message_speech, 'メッセージをしゃべる');
-		trans_setHtmlText(sai_id_text_color_1st, "1番目の色:");
-		trans_setHtmlText(sai_id_text_color_2nd, "2番目の色:");
-		trans_setHtmlText(sai_id_button_init_app, "初期化");
-		trans_setHtmlText(sai_id_text_label_message_volume, "メッセージボイスの音量:");
-		trans_setHtmlText(sai_id_text_skin, "スキン:");
-		trans_setHtmlText(sai_id_text_vibrator, "振動:");
-		trans_setHtmlText(sai_id_button_vibrator_start_stop, "開始 / 停止");
-		trans_setSelectOptionText(sai_id_select_skin, 'golden', '金色');
-		trans_setSelectOptionText(sai_id_select_skin, 'purple', '紫色');
-		trans_setSelectOptionText(sai_id_select_skin, 'blue', '青色');
-		trans_setSelectOptionText(sai_id_select_skin, 'pink', 'ピンク色');
-		trans_setSelectOptionText(sai_id_select_skin, 'darkgreen', '深緑色');
-		trans_setSelectOptionText(sai_id_select_skin, 'red', '赤色');
-		trans_setSelectOptionText(sai_id_select_skin, 'black', '黒色');
-		trans_setSelectOptionText(sai_id_select_skin, 'white', '白色');
-	}else if(lang == 'zh-CN' || lang == 'cn'){ // Chinese (Simplified)
-		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_ZH_CN);
-		trans_setHtmlText(sai_id_text_language, '语言 (Language):');
-		trans_setSelectOptionText(sai_id_select_language_1, 'zh-CN', 'Chinese (Simplified) (简体中文)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'en', 'English (英语)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'es', 'Spanish (Español)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'de', 'German (Deutsch)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'it', 'Italian (Italiano)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'ja', 'Japanese (日本語)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'ko-KR', 'Korean (한국어)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'ru', 'Russian (Русский)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'zh-CN', 'Chinese (Simplified) (简体中文)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'en', 'English (英语)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'es', 'Spanish (Español)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'de', 'German (Deutsch)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'it', 'Italian (Italiano)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'ja', 'Japanese (日本語)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Korean (한국어)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'ru', 'Russian (Русский)');
-		trans_setHtmlText(sai_id_pic_type, '视频类型：');
-		trans_setSelectOptionText(sai_id_select_pic_type, '0', '电影0：虚拟屏幕（用于练习）');
-		trans_setSelectOptionText(sai_id_select_pic_type, '1', '电影1：对数螺线');
-		trans_setSelectOptionText(sai_id_select_pic_type, '2', '电影2：同心圆');
-		trans_setSelectOptionText(sai_id_select_pic_type, '3', '电影3：旋转的眼');
-		trans_setSelectOptionText(sai_id_select_pic_type, '4', '电影4：阿基米德螺旋线');
-		trans_setSelectOptionText(sai_id_select_pic_type, '5', '电影5：扩展的心');
-		trans_setSelectOptionText(sai_id_select_pic_type, '6', '电影6：5日元硬币');
-		trans_setSelectOptionText(sai_id_select_pic_type, '7', '电影7：奇怪的漩涡');
-		trans_setSelectOptionText(sai_id_select_pic_type, '8', '电影8：疯狂的颜色');
-		trans_setSelectOptionText(sai_id_select_pic_type, '9', '电影9：对数螺线 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '10', '电影10：模拟光盘');
-		trans_setSelectOptionText(sai_id_select_pic_type, '11', '电影11：奇怪的漩涡 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '12', '电影12：万花筒');
-		trans_setSelectOptionText(sai_id_select_pic_type, '13', '电影13：第一个彩色屏幕');
-		trans_setSelectOptionText(sai_id_select_pic_type, '14', '电影14：第二个彩色屏幕');
-		trans_setSelectOptionText(sai_id_select_pic_type, '15', '电影15：只是黑屏');
-		trans_setSelectOptionText(sai_id_select_pic_type, '16', '电影16：只是白屏');
-		trans_setSelectOptionText(sai_id_select_pic_type, '17', '电影17：旋转蛇');
-		trans_setSelectOptionText(sai_id_select_pic_type, '18', '电影18：畸变辐射');
-		trans_setSelectOptionText(sai_id_select_pic_type, '19', '电影19：随机波');
-		trans_setHtmlText(sai_id_text_split, '分屏：');
-		trans_setHtmlText(sai_id_text_speed, '速度：');
-		trans_setHtmlText(speed_irregular_label, '不规律的');
-		trans_setHtmlText(sai_id_text_rotation, '倒放：');
-		trans_setHtmlText(sai_id_text_vortex_direction, '涡流方向：');
-		trans_setHtmlText(sai_id_text_blinking, '屏幕闪烁：');
-		trans_setHtmlText(sai_id_text_fullscreen_mode, '全屏模式：');
-		trans_setHtmlText(sai_id_page_message_header, '信息');
-		trans_setHtmlText(sai_id_button_mesage_reset, '重置');
-		trans_setHtmlText(sai_id_color_1st_reset, '重置');
-		trans_setHtmlText(sai_id_color_2nd_reset, '重置');
-		trans_setHtmlText(sai_id_button_mesage_cancel, '取消');
-		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
-		trans_setHtmlText(sai_id_text_message_size, '消息大小：');
-		trans_setHtmlText(sai_id_text_note, '声音按钮：');
-		trans_setHtmlText(sai_id_text_motion_blur, '运动模糊：');
-		trans_setSelectOptionText(sai_id_select_sound, '', '(无)');
-		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', '像猫一样');
-		trans_setSelectOptionText(sai_id_select_sound, 'Horror', '害怕');
-		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', '猎人');
-		trans_setSelectOptionText(sai_id_select_sound, 'Longing', '渴望');
-		trans_setSelectOptionText(sai_id_select_sound, 'Lovely', '可爱的');
-		trans_setSelectOptionText(sai_id_select_sound, 'Magic', '巫术');
-		trans_setSelectOptionText(sai_id_select_sound, 'OraSaimin', '天啊！ 催眠！');
-		trans_setSelectOptionText(sai_id_select_sound, 'Noise', '噪音');
-		trans_setSelectOptionText(sai_id_select_sound, '432Hz', '432Hz');
-		trans_setSelectOptionText(sai_id_select_sound, 'Heli', '直升机');
-		trans_setSelectOptionText(sai_id_select_sound, 'Pachi', '弹珠');
-		trans_setSelectOptionText(sai_id_select_sound, 'WahWah', '哇哇');
-		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical', '机械声');
-		trans_setSelectOptionText(sai_id_select_sound, 'Psycho', '惊魂记');
-		trans_setSelectOptionText(sai_id_select_sound, 'MyanMyan', '缅缅');
-		trans_setHtmlText(sai_id_text_sound_volume, '音量：');
-		trans_setHtmlText(sai_id_text_auto_play_sound, '自动播放音频：');
-		trans_setHtmlText(sai_id_text_auto_repeat_sound, '自动重复音频：');
-		trans_setHtmlText(sai_id_text_switch_sound, '切换声音');
-		trans_setHtmlText(sai_id_text_brightness, '屏幕亮度：');
-		trans_setSelectOptionText(sai_id_select_brightness, 'normal', '通常');
-		trans_setSelectOptionText(sai_id_select_brightness, 'brighter', '明亮');
-		trans_setSelectOptionText(sai_id_select_vortex_direction, 'clockwise', '顺时针');
-		trans_setSelectOptionText(sai_id_select_vortex_direction, 'counterclockwise', '逆时针');
-		trans_setHtmlText(sai_id_page_config_header, '配置');
-		trans_setHtmlText(sai_id_text_label_message_text, '留言内容：');
-		trans_setHtmlText(sai_id_button_message, '信息...');
-		sai_id_button_start_hypnosis.innerHTML = '<nobr>开始</nobr><nobr>催眠</nobr>';
-		trans_setHtmlText(sai_id_button_release_hypnosis, '释放催眠');
-		trans_setHtmlText(sai_id_text_count_down, '倒数：');
-		trans_setHtmlText(sai_id_text_arrows, '箭：');
-		trans_setHtmlText(sai_id_text_label_message_speech, '留言演讲：');
-		trans_setHtmlText(sai_id_text_message_speech, '留言演讲');
-		trans_setHtmlText(sai_id_text_color_1st, "第一种颜色：");
-		trans_setHtmlText(sai_id_text_color_2nd, "第二种颜色：");
-		trans_setHtmlText(sai_id_button_init_app, "初始化");
-		trans_setHtmlText(sai_id_text_label_message_volume, "留言音量：");
-		trans_setHtmlText(sai_id_text_skin, "皮肤：");
-		trans_setHtmlText(sai_id_text_vibrator, "振动器：");
-		trans_setHtmlText(sai_id_button_vibrator_start_stop, "开始 / 停止");
-		trans_setSelectOptionText(sai_id_select_skin, 'golden', '金的');
-		trans_setSelectOptionText(sai_id_select_skin, 'purple', '紫色的');
-		trans_setSelectOptionText(sai_id_select_skin, 'blue', '蓝色的');
-		trans_setSelectOptionText(sai_id_select_skin, 'pink', '粉色');
-		trans_setSelectOptionText(sai_id_select_skin, 'darkgreen', '深绿色');
-		trans_setSelectOptionText(sai_id_select_skin, 'red', '红色的');
-		trans_setSelectOptionText(sai_id_select_skin, 'black', '黑色');
-		trans_setSelectOptionText(sai_id_select_skin, 'white', '白色的');
-	}else if(lang == 'zh-TW'){ // Chinese (Traditional)
-		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_ZH_TW);
-		trans_setHtmlText(sai_id_text_language, '語言 (Language):');
-		trans_setSelectOptionText(sai_id_select_language_1, 'zh-CN', 'Chinese (Simplified) (简体中文)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'en', 'English (英語)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'es', 'Spanish (Español)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'de', 'German (Deutsch)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'it', 'Italian (Italiano)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'ja', 'Japanese (日本語)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'ko-KR', 'Korean (한국어)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'ru', 'Russian (Русский)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'zh-CN', 'Chinese (Simplified) (简体中文)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'en', 'English (英語)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'es', 'Spanish (Español)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'de', 'German (Deutsch)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'it', 'Italian (Italiano)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'ja', 'Japanese (日本語)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Korean (한국어)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'ru', 'Russian (Русский)');
-		trans_setHtmlText(sai_id_pic_type, '視頻類型：');
-		trans_setSelectOptionText(sai_id_select_pic_type, '0', '電影0：虛擬螢幕（用於練習）');
-		trans_setSelectOptionText(sai_id_select_pic_type, '1', '電影1：對數螺線');
-		trans_setSelectOptionText(sai_id_select_pic_type, '2', '電影2：同心圆');
-		trans_setSelectOptionText(sai_id_select_pic_type, '3', '電影3：旋轉的眼');
-		trans_setSelectOptionText(sai_id_select_pic_type, '4', '電影4：阿基米德螺旋線');
-		trans_setSelectOptionText(sai_id_select_pic_type, '5', '電影5：擴展的心');
-		trans_setSelectOptionText(sai_id_select_pic_type, '6', '電影6：5日元硬幣');
-		trans_setSelectOptionText(sai_id_select_pic_type, '7', '電影7：奇怪的漩渦');
-		trans_setSelectOptionText(sai_id_select_pic_type, '8', '電影8：瘋狂的顏色');
-		trans_setSelectOptionText(sai_id_select_pic_type, '9', '電影9：對數螺線 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '10', '電影10：類比光碟');
-		trans_setSelectOptionText(sai_id_select_pic_type, '11', '電影11：奇怪的漩渦 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '12', '電影12：萬花筒');
-		trans_setSelectOptionText(sai_id_select_pic_type, '13', '電影13：第一个彩色屏幕');
-		trans_setSelectOptionText(sai_id_select_pic_type, '14', '電影14：第二个彩色屏幕');
-		trans_setSelectOptionText(sai_id_select_pic_type, '15', '電影15：只是黑屏');
-		trans_setSelectOptionText(sai_id_select_pic_type, '16', '電影16：只是白屏');
-		trans_setSelectOptionText(sai_id_select_pic_type, '17', '電影17：旋轉蛇');
-		trans_setSelectOptionText(sai_id_select_pic_type, '18', '電影18：畸變輻射');
-		trans_setSelectOptionText(sai_id_select_pic_type, '19', '電影19：隨機波');
-		trans_setHtmlText(sai_id_text_split, '分屏：');
-		trans_setHtmlText(sai_id_text_speed, '速度：');
-		trans_setHtmlText(speed_irregular_label, '不規律的');
-		trans_setHtmlText(sai_id_text_rotation, '倒放：');
-		trans_setHtmlText(sai_id_text_vortex_direction, '渦流方向：');
-		trans_setHtmlText(sai_id_text_blinking, '螢幕閃爍：');
-		trans_setHtmlText(sai_id_text_fullscreen_mode, '全螢幕模式：');
-		trans_setHtmlText(sai_id_page_message_header, '資訊');
-		trans_setHtmlText(sai_id_button_mesage_reset, '重置');
-		trans_setHtmlText(sai_id_color_1st_reset, '重置');
-		trans_setHtmlText(sai_id_color_2nd_reset, '重置');
-		trans_setHtmlText(sai_id_button_mesage_cancel, '取消');
-		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
-		trans_setHtmlText(sai_id_text_message_size, '消息大小：');
-		trans_setHtmlText(sai_id_text_note, '聲音按鈕：');
-		trans_setHtmlText(sai_id_text_motion_blur, '運動模糊：');
-		trans_setSelectOptionText(sai_id_select_sound, '', '(無)');
-		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', '像貓一樣');
-		trans_setSelectOptionText(sai_id_select_sound, 'Horror', '害怕');
-		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', '獵人');
-		trans_setSelectOptionText(sai_id_select_sound, 'Longing', '渴望');
-		trans_setSelectOptionText(sai_id_select_sound, 'Lovely', '可愛的');
-		trans_setSelectOptionText(sai_id_select_sound, 'Magic', '巫術');
-		trans_setSelectOptionText(sai_id_select_sound, 'OraSaimin', '天啊！ 催眠！');
-		trans_setSelectOptionText(sai_id_select_sound, 'Noise', '噪音');
-		trans_setSelectOptionText(sai_id_select_sound, '432Hz', '432Hz');
-		trans_setSelectOptionText(sai_id_select_sound, 'Heli', '直升機');
-		trans_setSelectOptionText(sai_id_select_sound, 'Pachi', '彈珠');
-		trans_setSelectOptionText(sai_id_select_sound, 'WahWah', '哇哇');
-		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical', '機械聲');
-		trans_setSelectOptionText(sai_id_select_sound, 'Psycho', '驚魂記');
-		trans_setSelectOptionText(sai_id_select_sound, 'MyanMyan', '緬緬');
-		trans_setHtmlText(sai_id_text_sound_volume, '音量：');
-		trans_setHtmlText(sai_id_text_auto_play_sound, '自動播放音訊：');
-		trans_setHtmlText(sai_id_text_auto_repeat_sound, '自動重複音訊：');
-		trans_setHtmlText(sai_id_text_switch_sound, '切換聲音：');
-		trans_setHtmlText(sai_id_text_brightness, '屏幕亮度：');
-		trans_setSelectOptionText(sai_id_select_brightness, 'normal', '正常亮度');
-		trans_setSelectOptionText(sai_id_select_brightness, 'brighter', '提亮');
-		trans_setSelectOptionText(sai_id_select_vortex_direction, 'clockwise', '順時針');
-		trans_setSelectOptionText(sai_id_select_vortex_direction, 'counterclockwise', '逆時針');
-		trans_setHtmlText(sai_id_page_config_header, '配置');
-		trans_setHtmlText(sai_id_text_label_message_text, '留言內容：');
-		trans_setHtmlText(sai_id_button_message, '訊息...');
-		sai_id_button_start_hypnosis.innerHTML = '<nobr>開始</nobr><nobr>催眠</nobr>';
-		trans_setHtmlText(sai_id_button_release_hypnosis, '釋放催眠');
-		trans_setHtmlText(sai_id_text_count_down, '倒數：');
-		trans_setHtmlText(sai_id_text_arrows, '箭頭：');
-		trans_setHtmlText(sai_id_text_label_message_speech, '留言演講：');
-		trans_setHtmlText(sai_id_text_message_speech, '留言演講');
-		trans_setHtmlText(sai_id_text_color_1st, "第一種顏色：");
-		trans_setHtmlText(sai_id_text_color_2nd, "第二種顏色：");
-		trans_setHtmlText(sai_id_button_init_app, "初始化");
-		trans_setHtmlText(sai_id_text_label_message_volume, "留言音量：");
-		trans_setHtmlText(sai_id_text_skin, "皮膚：");
-		trans_setHtmlText(sai_id_text_vibrator, "振動器：");
-		trans_setHtmlText(sai_id_button_vibrator_start_stop, "開始 / 停止");
-		trans_setSelectOptionText(sai_id_select_skin, 'golden', '金的');
-		trans_setSelectOptionText(sai_id_select_skin, 'purple', '紫色的');
-		trans_setSelectOptionText(sai_id_select_skin, 'blue', '藍色的');
-		trans_setSelectOptionText(sai_id_select_skin, 'pink', '粉紅色');
-		trans_setSelectOptionText(sai_id_select_skin, 'darkgreen', '深綠色');
-		trans_setSelectOptionText(sai_id_select_skin, 'red', '紅色的');
-		trans_setSelectOptionText(sai_id_select_skin, 'black', '黑色');
-		trans_setSelectOptionText(sai_id_select_skin, 'white', '白色的');
-	}else if(lang == 'kr' || lang == 'ko' || lang == 'ko-KR'){ // Korean
-		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_KO_KR);
-		trans_setHtmlText(sai_id_text_language, '언어 (Language):');
-		trans_setSelectOptionText(sai_id_select_language_1, 'zh-CN', 'Chinese (Simplified) (简体中文)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'en', 'English (영어)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'es', 'Spanish (Español)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'de', 'German (Deutsch)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'it', 'Italian (Italiano)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'ja', 'Japanese (日本語)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'ko-KR', 'Korean (한국어)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'ru', 'Russian (Русский)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'zh-CN', 'Chinese (Simplified) (简体中文)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'en', 'English (영어)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'es', 'Spanish (Español)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'de', 'German (Deutsch)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'it', 'Italian (Italiano)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'ja', 'Japanese (日本語)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Korean (한국어)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'ru', 'Russian (Русский)');
-		trans_setHtmlText(sai_id_pic_type, '그림 유형:');
-		trans_setSelectOptionText(sai_id_select_pic_type, '0', '동영상 0：더미 화면 (연습용)');
-		trans_setSelectOptionText(sai_id_select_pic_type, '1', '동영상 1：로그 나선');
-		trans_setSelectOptionText(sai_id_select_pic_type, '2', '동영상 2：동심원형');
-		trans_setSelectOptionText(sai_id_select_pic_type, '3', '동영상 3：회전하는 눈');
-		trans_setSelectOptionText(sai_id_select_pic_type, '4', '동영상 4：아르키메데스의 나선');
-		trans_setSelectOptionText(sai_id_select_pic_type, '5', '동영상 5：퍼지는 하트들');
-		trans_setSelectOptionText(sai_id_select_pic_type, '6', '동영상 6：오엔 구슬');
-		trans_setSelectOptionText(sai_id_select_pic_type, '7', '동영상 7：이상한 소용돌이');
-		trans_setSelectOptionText(sai_id_select_pic_type, '8', '동영상 8：미친 색');
-		trans_setSelectOptionText(sai_id_select_pic_type, '9', '동영상 9：로그 나선 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '10', '동영상 10：아날로그 디스크');
-		trans_setSelectOptionText(sai_id_select_pic_type, '11', '동영상 11：이상한 소용돌이 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '12', '동영상 12：만화경');
-		trans_setSelectOptionText(sai_id_select_pic_type, '13', '동영상 13：첫 번째 컬러 화면');
-		trans_setSelectOptionText(sai_id_select_pic_type, '14', '동영상 14：두 번째 색상 화면');
-		trans_setSelectOptionText(sai_id_select_pic_type, '15', '동영상 15：그냥 검은 화면');
-		trans_setSelectOptionText(sai_id_select_pic_type, '16', '동영상 16：그냥 흰색 화면');
-		trans_setSelectOptionText(sai_id_select_pic_type, '17', '동영상 17：뱀 회전');
-		trans_setSelectOptionText(sai_id_select_pic_type, '18', '동영상 18：스트레인 방사');
-		trans_setSelectOptionText(sai_id_select_pic_type, '19', '동영상 19：무작위 파동');
-		trans_setHtmlText(sai_id_text_split, '화면 분할:');
-		trans_setHtmlText(sai_id_text_speed, '속도:');
-		trans_setHtmlText(speed_irregular_label, '불규칙');
-		trans_setHtmlText(sai_id_text_rotation, '역 재생:');
-		trans_setHtmlText(sai_id_text_vortex_direction, '소용돌이 방향:');
-		trans_setHtmlText(sai_id_text_blinking, '화면 깜박임:');
-		trans_setHtmlText(sai_id_text_fullscreen_mode, '전체 화면 모드:');
-		trans_setHtmlText(sai_id_page_message_header, '메시지');
-		trans_setHtmlText(sai_id_button_mesage_reset, '초기화');
-		trans_setHtmlText(sai_id_color_1st_reset, '초기화');
-		trans_setHtmlText(sai_id_color_2nd_reset, '초기화');
-		trans_setHtmlText(sai_id_button_mesage_cancel, '취소');
-		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
-		trans_setHtmlText(sai_id_text_message_size, '메시지 크기:');
-		trans_setHtmlText(sai_id_text_note, '사운드 버튼:');
-		trans_setHtmlText(sai_id_text_motion_blur, '모션 블러:');
-		trans_setSelectOptionText(sai_id_select_sound, '', '(없음)');
-		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', '고양이 같은');
-		trans_setSelectOptionText(sai_id_select_sound, 'Horror', '공포');
-		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', '사냥꾼');
-		trans_setSelectOptionText(sai_id_select_sound, 'Longing', '동경');
-		trans_setSelectOptionText(sai_id_select_sound, 'Lovely', '사랑스러운');
-		trans_setSelectOptionText(sai_id_select_sound, 'Magic', '마술');
-		trans_setSelectOptionText(sai_id_select_sound, 'OraSaimin', '오! 최면!');
-		trans_setSelectOptionText(sai_id_select_sound, 'Noise', '소음');
-		trans_setSelectOptionText(sai_id_select_sound, '432Hz', '432Hz');
-		trans_setSelectOptionText(sai_id_select_sound, 'Heli', '헬리콥터');
-		trans_setSelectOptionText(sai_id_select_sound, 'Pachi', '파칭');
-		trans_setSelectOptionText(sai_id_select_sound, 'WahWah', '와와');
-		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical', '기계음');
-		trans_setSelectOptionText(sai_id_select_sound, 'Psycho', '사이코');
-		trans_setSelectOptionText(sai_id_select_sound, 'MyanMyan', '미안');
-		trans_setHtmlText(sai_id_text_sound_volume, '사운드 볼륨:');
-		trans_setHtmlText(sai_id_text_auto_play_sound, '오디오 자동 재생:');
-		trans_setHtmlText(sai_id_text_auto_repeat_sound, '음성 자동 반복:');
-		trans_setHtmlText(sai_id_text_switch_sound, '전환음:');
-		trans_setHtmlText(sai_id_text_brightness, '화면 밝기:');
-		trans_setSelectOptionText(sai_id_select_brightness, 'normal', '일반 밝기');
-		trans_setSelectOptionText(sai_id_select_brightness, 'brighter', '밝게 하다');
-		trans_setSelectOptionText(sai_id_select_vortex_direction, 'clockwise', '시계 방향');
-		trans_setSelectOptionText(sai_id_select_vortex_direction, 'counterclockwise', '반시계 방향');
-		trans_setHtmlText(sai_id_page_config_header, '구성');
-		trans_setHtmlText(sai_id_text_label_message_text, '메시지 텍스트:');
-		trans_setHtmlText(sai_id_button_message, '메시지...');
-		sai_id_button_start_hypnosis.innerHTML = '<nobr>최면</nobr> <nobr>시작</nobr>';
-		trans_setHtmlText(sai_id_button_release_hypnosis, '최면 해제');
-		trans_setHtmlText(sai_id_text_count_down, '카운트다운:');
-		trans_setHtmlText(sai_id_text_arrows, '화살표:');
-		trans_setHtmlText(sai_id_text_label_message_speech, '메시지 연설:');
-		trans_setHtmlText(sai_id_text_message_speech, '메시지 연설');
-		trans_setHtmlText(sai_id_text_color_1st, "첫 번째 색상:");
-		trans_setHtmlText(sai_id_text_color_2nd, "두 번째 색상:");
-		trans_setHtmlText(sai_id_button_init_app, "앱 재설정");
-		trans_setHtmlText(sai_id_text_label_message_volume, "메시지 음성 음량:");
-		trans_setHtmlText(sai_id_text_skin, "스킨:");
-		trans_setHtmlText(sai_id_text_vibrator, "진동기:");
-		trans_setHtmlText(sai_id_button_vibrator_start_stop, "시작 / 정지");
-		trans_setSelectOptionText(sai_id_select_skin, 'golden', '황금');
-		trans_setSelectOptionText(sai_id_select_skin, 'purple', '보라색');
-		trans_setSelectOptionText(sai_id_select_skin, 'blue', '청색');
-		trans_setSelectOptionText(sai_id_select_skin, 'pink', '핑크색');
-		trans_setSelectOptionText(sai_id_select_skin, 'darkgreen', '다크 그린');
-		trans_setSelectOptionText(sai_id_select_skin, 'red', '빨간색');
-		trans_setSelectOptionText(sai_id_select_skin, 'black', '검은색');
-		trans_setSelectOptionText(sai_id_select_skin, 'white', '백색');
-	}else if(lang == 'it' || lang == 'it-IT'){ // Italian
-		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_IT);
-		trans_setHtmlText(sai_id_text_language, 'Lingua (Language):');
-		trans_setSelectOptionText(sai_id_select_language_1, 'zh-CN', 'Chinese (Simplified) (简体中文)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'en', 'English (Inglese)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'es', 'Spanish (Español)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'de', 'German (Deutsch)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'it', 'Italian (Italiano)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'ja', 'Japanese (日本語)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'ko-KR', 'Korean (한국어)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'ru', 'Russian (Русский)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'zh-CN', 'Chinese (Simplified) (简体中文)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'en', 'English (Inglese)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'es', 'Spanish (Español)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'de', 'German (Deutsch)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'it', 'Italian (Italiano)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'ja', 'Japanese (日本語)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Korean (한국어)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'ru', 'Russian (Русский)');
-		trans_setHtmlText(sai_id_pic_type, 'Il tipo di immagine:');
-		trans_setSelectOptionText(sai_id_select_pic_type, '0', 'Film 0: Schermata fittizia (per esercitarsi)');
-		trans_setSelectOptionText(sai_id_select_pic_type, '1', 'Film 1: Spirale Logaritmica');
-		trans_setSelectOptionText(sai_id_select_pic_type, '2', 'Film 2: Cerchi concentrici');
-		trans_setSelectOptionText(sai_id_select_pic_type, '3', 'Film 3: Gli occhi');
-		trans_setSelectOptionText(sai_id_select_pic_type, '4', 'Film 4: Spirale di Archimede');
-		trans_setSelectOptionText(sai_id_select_pic_type, '5', 'Film 5: Cuori che si diffondono');
-		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'Film 6: Moneta da 5 Yen');
-		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'Film 7: Strano Turbinio');
-		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'Film 8: Colori Pazzi');
-		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'Film 9: Spirale Logaritmica 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'Film 10: Disco Analogico');
-		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'Film 11: Strano Turbinio 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'Film 12: Caleidoscopio');
-		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'Film 13: 1° schermo a colori');
-		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'Film 14: 2° schermo a colori');
-		trans_setSelectOptionText(sai_id_select_pic_type, '15', 'Film 15: Solo uno schermo nero');
-		trans_setSelectOptionText(sai_id_select_pic_type, '16', 'Film 16: Solo uno schermo bianco');
-		trans_setSelectOptionText(sai_id_select_pic_type, '17', 'Film 17: Serpente rotante');
-		trans_setSelectOptionText(sai_id_select_pic_type, '18', 'Film 18: Radiazione di distorsione');
-		trans_setSelectOptionText(sai_id_select_pic_type, '19', 'Film 19：Onde Casuali');
-		trans_setHtmlText(sai_id_text_split, 'Divisione dello schermo:');
-		trans_setHtmlText(sai_id_text_speed, 'Velocità:');
-		trans_setHtmlText(speed_irregular_label, 'Irregolare');
-		trans_setHtmlText(sai_id_text_rotation, 'Riproduzione inversa:');
-		trans_setHtmlText(sai_id_text_vortex_direction, 'Direzione del vortice:');
-		trans_setHtmlText(sai_id_text_blinking, 'Schermo lampeggiante:');
-		trans_setHtmlText(sai_id_text_fullscreen_mode, 'Modalità schermo intero:');
-		trans_setHtmlText(sai_id_page_message_header, 'Messaggio');
-		trans_setHtmlText(sai_id_button_mesage_reset, 'Ripristina');
-		trans_setHtmlText(sai_id_color_1st_reset, 'Ripristina');
-		trans_setHtmlText(sai_id_color_2nd_reset, 'Ripristina');
-		trans_setHtmlText(sai_id_button_mesage_cancel, 'Annulla');
-		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
-		trans_setHtmlText(sai_id_text_message_size, 'Dimensione del messaggio:');
-		trans_setHtmlText(sai_id_text_note, 'Pulsante audio:');
-		trans_setHtmlText(sai_id_text_motion_blur, 'Sfocatura movimento:');
-		trans_setSelectOptionText(sai_id_select_sound, '', '(Nessuno)');
-		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', 'Simile a un gatto');
-		trans_setSelectOptionText(sai_id_select_sound, 'Horror', 'Paura');
-		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', 'A caccia');
-		trans_setSelectOptionText(sai_id_select_sound, 'Longing', 'Desiderio');
-		trans_setSelectOptionText(sai_id_select_sound, 'Lovely', 'Adorabile');
-		trans_setSelectOptionText(sai_id_select_sound, 'Magic', 'Stregoneria');
-		trans_setSelectOptionText(sai_id_select_sound, 'OraSaimin', 'Ora! Saimin!');
-		trans_setSelectOptionText(sai_id_select_sound, 'Noise', 'Rumore');
-		trans_setSelectOptionText(sai_id_select_sound, '432Hz', '432Hz');
-		trans_setSelectOptionText(sai_id_select_sound, 'Heli', 'Elicottero');
-		trans_setSelectOptionText(sai_id_select_sound, 'Pachi', 'Pachi');
-		trans_setSelectOptionText(sai_id_select_sound, 'WahWah', 'WahWah');
-		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical', 'Meccanico');
-		trans_setSelectOptionText(sai_id_select_sound, 'Psycho', 'Psicopatico');
-		trans_setSelectOptionText(sai_id_select_sound, 'MyanMyan', 'Myan Myan');
-		trans_setHtmlText(sai_id_text_sound_volume, 'Volume del suono:');
-		trans_setHtmlText(sai_id_text_auto_play_sound, 'Riproduzione automatica dell\'audio:');
-		trans_setHtmlText(sai_id_text_auto_repeat_sound, 'Ripetere l\'audio:');
-		trans_setHtmlText(sai_id_text_switch_sound, 'Suono di commutazione:');
-		trans_setHtmlText(sai_id_text_brightness, 'Luminosità:');
-		trans_setSelectOptionText(sai_id_select_brightness, 'normal', 'Normale');
-		trans_setSelectOptionText(sai_id_select_brightness, 'brighter', 'Più luminoso');
-		trans_setSelectOptionText(sai_id_select_vortex_direction, 'clockwise', 'Senso Orario');
-		trans_setSelectOptionText(sai_id_select_vortex_direction, 'counterclockwise', 'Antiorario');
-		trans_setHtmlText(sai_id_page_config_header, 'Configurazione');
-		trans_setHtmlText(sai_id_text_label_message_text, 'Messaggio di testo:');
-		trans_setHtmlText(sai_id_button_message, 'Messaggio...');
-		sai_id_button_start_hypnosis.innerHTML = 'Inizia l\'ipnosi';
-		trans_setHtmlText(sai_id_button_release_hypnosis, 'Rilascia l\'ipnosi');
-		trans_setHtmlText(sai_id_text_count_down, 'Conto alla rovescia:');
-		trans_setHtmlText(sai_id_text_arrows, 'Frecce:');
-		trans_setHtmlText(sai_id_text_label_message_speech, 'Discorso del messaggio:');
-		trans_setHtmlText(sai_id_text_message_speech, 'Discorso del messaggio');
-		trans_setHtmlText(sai_id_text_color_1st, "1° colore:");
-		trans_setHtmlText(sai_id_text_color_2nd, "2° colore:");
-		trans_setHtmlText(sai_id_button_init_app, "Inizializzare");
-		trans_setHtmlText(sai_id_text_label_message_volume, "Volume della voce:");
-		trans_setHtmlText(sai_id_text_skin, "Pelle:");
-		trans_setHtmlText(sai_id_text_vibrator, "Vibratore:");
-		trans_setHtmlText(sai_id_button_vibrator_start_stop, "Avvio / Arresto");
-		trans_setSelectOptionText(sai_id_select_skin, 'golden', 'd\'Oro');
-		trans_setSelectOptionText(sai_id_select_skin, 'purple', 'Viola');
-		trans_setSelectOptionText(sai_id_select_skin, 'blue', 'Blu');
-		trans_setSelectOptionText(sai_id_select_skin, 'pink', 'Colore Rosa');
-		trans_setSelectOptionText(sai_id_select_skin, 'darkgreen', 'Verde Scuro');
-		trans_setSelectOptionText(sai_id_select_skin, 'red', 'Rosso');
-		trans_setSelectOptionText(sai_id_select_skin, 'black', 'Colore nero');
-		trans_setSelectOptionText(sai_id_select_skin, 'white', 'Bianco');
-	}else if(lang == 'de' || lang == 'de-DE'){ // German
-		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_DE);
-		trans_setHtmlText(sai_id_text_language, 'Sprache (Language):');
-		trans_setSelectOptionText(sai_id_select_language_1, 'zh-CN', 'Chinese (Simplified) (简体中文)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'en', 'English (Englisch)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'es', 'Spanish (Español)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'de', 'German (Deutsch)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'it', 'Italian (Italiano)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'ja', 'Japanese (日本語)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'ko-KR', 'Korean (한국어)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'ru', 'Russian (Русский)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'zh-CN', 'Chinese (Simplified) (简体中文)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'en', 'English (Englisch)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'es', 'Spanish (Español)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'de', 'German (Deutsch)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'it', 'Italian (Italiano)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'ja', 'Japanese (日本語)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Korean (한국어)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'ru', 'Russian (Русский)');
-		trans_setHtmlText(sai_id_pic_type, 'Die Art des Bildes:');
-		trans_setSelectOptionText(sai_id_select_pic_type, '0', 'Film 0: Dummy-Bildschirm (zum Üben)');
-		trans_setSelectOptionText(sai_id_select_pic_type, '1', 'Film 1: Logarithmische Spirale');
-		trans_setSelectOptionText(sai_id_select_pic_type, '2', 'Film 2: Konzentrische Kreise');
-		trans_setSelectOptionText(sai_id_select_pic_type, '3', 'Film 3: Die Augen');
-		trans_setSelectOptionText(sai_id_select_pic_type, '4', 'Film 4: Die Spirale des Archimedes');
-		trans_setSelectOptionText(sai_id_select_pic_type, '5', 'Film 5: Herzen verbreiten');
-		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'Film 6: 5-Yen-Münze');
-		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'Film 7: Seltsamer Wirbel');
-		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'Film 8: Verrückte Farben');
-		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'Film 9: Logarithmische Spirale 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'Film 10: Analoge Scheibe');
-		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'Film 11: Seltsamer Wirbel 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'Film 12: Kaleidoskop');
-		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'Film 13: Erster Farbbildschirm');
-		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'Film 14: Zweiter Farbbildschirm');
-		trans_setSelectOptionText(sai_id_select_pic_type, '15', 'Film 15: Nur ein schwarzer Bildschirm');
-		trans_setSelectOptionText(sai_id_select_pic_type, '16', 'Film 16: Nur ein weißer Bildschirm');
-		trans_setSelectOptionText(sai_id_select_pic_type, '17', 'Film 17: Rotierende Schlange');
-		trans_setSelectOptionText(sai_id_select_pic_type, '18', 'Film 18: Verzerrungsstrahlung');
-		trans_setSelectOptionText(sai_id_select_pic_type, '19', 'Film 19：Zufällige Wellen');
-		trans_setHtmlText(sai_id_text_split, 'Bildschirmaufteilung:');
-		trans_setHtmlText(sai_id_text_speed, 'Geschwindigkeit:');
-		trans_setHtmlText(speed_irregular_label, 'Irregulär');
-		trans_setHtmlText(sai_id_text_rotation, 'Rückwärtswiedergabe:');
-		trans_setHtmlText(sai_id_text_vortex_direction, 'Wirbelrichtung:');
-		trans_setHtmlText(sai_id_text_blinking, 'Bildschirm blinkt:');
-		trans_setHtmlText(sai_id_text_fullscreen_mode, 'Vollbildmodus:');
-		trans_setHtmlText(sai_id_page_message_header, 'Nachricht');
-		trans_setHtmlText(sai_id_button_mesage_reset, 'Zurücksetzen');
-		trans_setHtmlText(sai_id_color_1st_reset, 'Zurücksetzen');
-		trans_setHtmlText(sai_id_color_2nd_reset, 'Zurücksetzen');
-		trans_setHtmlText(sai_id_button_mesage_cancel, 'Stornieren');
-		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
-		trans_setHtmlText(sai_id_text_message_size, 'Größe der Nachricht:');
-		trans_setHtmlText(sai_id_text_note, 'Sound-Taste:');
-		trans_setHtmlText(sai_id_text_motion_blur, 'Bewegungsunschärfe:');
-		trans_setSelectOptionText(sai_id_select_sound, '', '(Kein)');
-		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', 'Katzenartig');
-		trans_setSelectOptionText(sai_id_select_sound, 'Horror', 'Furcht');
-		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', 'Jagd');
-		trans_setSelectOptionText(sai_id_select_sound, 'Longing', 'Sehnsucht');
-		trans_setSelectOptionText(sai_id_select_sound, 'Lovely', 'Liebenswert');
-		trans_setSelectOptionText(sai_id_select_sound, 'Magic', 'Hexerei');
-		trans_setSelectOptionText(sai_id_select_sound, 'OraSaimin', 'Ora! Saimin!');
-		trans_setSelectOptionText(sai_id_select_sound, 'Noise', 'Lärm');
-		trans_setSelectOptionText(sai_id_select_sound, '432Hz', '432Hz');
-		trans_setSelectOptionText(sai_id_select_sound, 'Heli', 'Hubschrauber');
-		trans_setSelectOptionText(sai_id_select_sound, 'Pachi', 'Pachi');
-		trans_setSelectOptionText(sai_id_select_sound, 'WahWah', 'WahWah');
-		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical', 'Mechanischer');
-		trans_setSelectOptionText(sai_id_select_sound, 'Psycho', 'Psycho');
-		trans_setSelectOptionText(sai_id_select_sound, 'MyanMyan', 'Myan Myan');
-		trans_setHtmlText(sai_id_text_sound_volume, 'Lautstärke:');
-		trans_setHtmlText(sai_id_text_auto_play_sound, 'Audio automatisch abspielen:');
-		trans_setHtmlText(sai_id_text_auto_repeat_sound, 'Sich Wiederholender Ton:');
-		trans_setHtmlText(sai_id_text_switch_sound, 'Schaltgeräusch:');
-		trans_setHtmlText(sai_id_text_brightness, 'Helligkeit:');
-		trans_setSelectOptionText(sai_id_select_brightness, 'normal', 'Normal');
-		trans_setSelectOptionText(sai_id_select_brightness, 'brighter', 'Heller');
-		trans_setSelectOptionText(sai_id_select_vortex_direction, 'clockwise', 'im Uhrzeigersinn');
-		trans_setSelectOptionText(sai_id_select_vortex_direction, 'counterclockwise', '反時計回り');
-		trans_setHtmlText(sai_id_page_config_header, 'Aufbau');
-		trans_setHtmlText(sai_id_text_label_message_text, 'Nachrichtentext:');
-		trans_setHtmlText(sai_id_button_message, 'Nachricht...');
-		sai_id_button_start_hypnosis.innerHTML = 'Hypnose beginnen';
-		trans_setHtmlText(sai_id_button_release_hypnosis, 'Hypnose loslassen');
-		trans_setHtmlText(sai_id_text_count_down, 'Countdown:');
-		trans_setHtmlText(sai_id_text_arrows, 'Pfeile:');
-		trans_setHtmlText(sai_id_text_label_message_speech, 'Nachrichtenansprache:');
-		trans_setHtmlText(sai_id_text_message_speech, 'Nachrichtenansprache');
-		trans_setHtmlText(sai_id_text_color_1st, "1. Farbe:");
-		trans_setHtmlText(sai_id_text_color_2nd, "2. Farbe:");
-		trans_setHtmlText(sai_id_button_init_app, "Initialisieren");
-		trans_setHtmlText(sai_id_text_label_message_volume, "Stimmen Lautstärke:");
-		trans_setHtmlText(sai_id_text_skin, "Haut:");
-		trans_setHtmlText(sai_id_text_vibrator, "Vibrator:");
-		trans_setHtmlText(sai_id_button_vibrator_start_stop, "Start / Stop");
-		trans_setSelectOptionText(sai_id_select_skin, 'golden', 'Golden');
-		trans_setSelectOptionText(sai_id_select_skin, 'purple', 'Lila');
-		trans_setSelectOptionText(sai_id_select_skin, 'blue', 'Blau');
-		trans_setSelectOptionText(sai_id_select_skin, 'pink', 'Pinke Farbe');
-		trans_setSelectOptionText(sai_id_select_skin, 'darkgreen', 'Dunkelgrün');
-		trans_setSelectOptionText(sai_id_select_skin, 'red', 'Rot');
-		trans_setSelectOptionText(sai_id_select_skin, 'black', 'Schwarz');
-		trans_setSelectOptionText(sai_id_select_skin, 'white', 'Weiß');
-	}else if(lang == 'es' || lang == 'es-ES'){ // Spanish
-		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_ES);
-		trans_setHtmlText(sai_id_text_language, '言語 (Language):');
-		trans_setSelectOptionText(sai_id_select_language_1, 'zh-CN', 'Chino (Simplificado) (简体中文)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'zh-TW', 'Chino (Tradicional) (繁體中文)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'en', 'Inglés (English)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'es', 'Spanish (Español)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'de', 'Alemán (Deutsch)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'it', 'Italiano (Italiano)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'ja', 'Japonés (日本語)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'ko-KR', 'Coreano (한국어)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'ru', 'Russian (Русский)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'zh-CN', 'Chino (Simplificado) (简体中文)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'zh-TW', 'Chino (Tradicional) (繁體中文)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'en', 'Inglés (英語)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'es', 'Spanish (Español)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'de', 'Alemán (Deutsch)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'it', 'Italiano (Italiano)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'ja', 'Japonés (日本語)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Coreano (한국어)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'ru', 'Russian (Русский)');
-		trans_setHtmlText(sai_id_pic_type, 'Tipo de vídeo:');
-		trans_setSelectOptionText(sai_id_select_pic_type, '0', 'Película 0: Pantalla ficticia (para practicar)');
-		trans_setSelectOptionText(sai_id_select_pic_type, '1', 'Película 1: Espiral logarítmica');
-		trans_setSelectOptionText(sai_id_select_pic_type, '2', 'Película 2: Círculos concéntricos');
-		trans_setSelectOptionText(sai_id_select_pic_type, '3', 'Película 3: Ojos giratorios');
-		trans_setSelectOptionText(sai_id_select_pic_type, '4', 'Película 4: Espiral de Arquímedes');
-		trans_setSelectOptionText(sai_id_select_pic_type, '5', 'Película 5: Corazón en expansión');
-		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'Película 6: Moneda de cinco yenes');
-		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'Película 7: Extraño Remolino');
-		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'Película 8: Colores locos');
-		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'Película 9: Espiral logarítmica 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'Película 10: Disco analógico');
-		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'Película 11: Extraño Remolino 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'Película 12: Caleidoscopio');
-		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'Película 13: Primera pantalla a color');
-		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'Película 14: Segunda pantalla a color');
-		trans_setSelectOptionText(sai_id_select_pic_type, '15', 'Película 15: Sólo una pantalla negra');
-		trans_setSelectOptionText(sai_id_select_pic_type, '16', 'Película 16: Sólo una pantalla blanca');
-		trans_setSelectOptionText(sai_id_select_pic_type, '17', 'Película 17: Serpiente giratoria');
-		trans_setSelectOptionText(sai_id_select_pic_type, '18', 'Película 18: Radiación de distorsión');
-		trans_setSelectOptionText(sai_id_select_pic_type, '19', 'Película 19：Ondas Aleatorias');
-		trans_setHtmlText(sai_id_text_split, 'Pantalla dividida:');
-		trans_setHtmlText(sai_id_text_speed, 'Velocidad:');
-		trans_setHtmlText(speed_irregular_label, 'Irregular');
-		trans_setHtmlText(sai_id_text_rotation, 'Reproducción inversa:');
-		trans_setHtmlText(sai_id_text_vortex_direction, 'Dirección del vórtice:');
-		trans_setHtmlText(sai_id_text_blinking, 'Pantalla parpadeando:');
-		trans_setHtmlText(sai_id_text_fullscreen_mode, 'Modo de pantalla completa:');
-		trans_setHtmlText(sai_id_page_message_header, 'Mensaje');
-		trans_setHtmlText(sai_id_button_mesage_reset, 'Reiniciar');
-		trans_setHtmlText(sai_id_color_1st_reset, 'Reiniciar');
-		trans_setHtmlText(sai_id_color_2nd_reset, 'Reiniciar');
-		trans_setHtmlText(sai_id_button_mesage_cancel, 'Cancelar');
-		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
-		trans_setHtmlText(sai_id_text_message_size, 'Tamaño del mensaje:');
-		trans_setHtmlText(sai_id_text_note, 'Botón de nota musical:');
-		trans_setHtmlText(sai_id_text_motion_blur, 'Desenfoque de movimiento:');
-		trans_setSelectOptionText(sai_id_select_sound, '', '(Ninguno)');
-		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', 'Felino');
-		trans_setSelectOptionText(sai_id_select_sound, 'Horror', 'Miedo');
-		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', 'Cazador');
-		trans_setSelectOptionText(sai_id_select_sound, 'Longing', 'Anhelar');
-		trans_setSelectOptionText(sai_id_select_sound, 'Lovely', 'Adorable');
-		trans_setSelectOptionText(sai_id_select_sound, 'Magic', 'Magia');
-		trans_setSelectOptionText(sai_id_select_sound, 'OraSaimin', 'Ora! Saimin!');
-		trans_setSelectOptionText(sai_id_select_sound, 'Noise', 'Ruido');
-		trans_setSelectOptionText(sai_id_select_sound, '432Hz', '432Hz');
-		trans_setSelectOptionText(sai_id_select_sound, 'Heli', 'Helicóptero');
-		trans_setSelectOptionText(sai_id_select_sound, 'Pachi', 'Pachi');
-		trans_setSelectOptionText(sai_id_select_sound, 'WahWah', 'Wah Wah');
-		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical', 'Mecánico');
-		trans_setSelectOptionText(sai_id_select_sound, 'Psycho', 'Psicópata');
-		trans_setSelectOptionText(sai_id_select_sound, 'MyanMyan', 'Myanmar Myanmar');
-		trans_setHtmlText(sai_id_text_sound_volume, 'Volumen:');
-		trans_setHtmlText(sai_id_text_auto_play_sound, 'Reproducción automática de audio:');
-		trans_setHtmlText(sai_id_text_auto_repeat_sound, 'Audio de repetición automática:');
-		trans_setHtmlText(sai_id_text_switch_sound, 'Sonido de conmutación:');
-		trans_setHtmlText(sai_id_text_brightness, 'Brillo de la pantalla:');
-		trans_setSelectOptionText(sai_id_select_brightness, 'normal', 'Brillo normal');
-		trans_setSelectOptionText(sai_id_select_brightness, 'brighter', 'Aclarar');
-		trans_setSelectOptionText(sai_id_select_vortex_direction, 'clockwise', 'Agujas del reloj');
-		trans_setSelectOptionText(sai_id_select_vortex_direction, 'counterclockwise', 'Gegen den Uhrzeigersinn');
-		trans_setHtmlText(sai_id_page_config_header, 'Configuración');
-		trans_setHtmlText(sai_id_text_label_message_text, 'Mensaje de texto:');
-		trans_setHtmlText(sai_id_button_message, 'Mensaje...');
-		sai_id_button_start_hypnosis.innerHTML = 'Iniciar la hipnosis';
-		trans_setHtmlText(sai_id_button_release_hypnosis, 'Iiberar hipnosis');
-		trans_setHtmlText(sai_id_text_count_down, 'Cuenta regresiva:');
-		trans_setHtmlText(sai_id_text_arrows, 'Flechas:');
-		trans_setHtmlText(sai_id_text_label_message_speech, 'Di el mensaje:');
-		trans_setHtmlText(sai_id_text_message_speech, 'Di el mensaje');
-		trans_setHtmlText(sai_id_text_color_1st, "1er color:");
-		trans_setHtmlText(sai_id_text_color_2nd, "Segundo color:");
-		trans_setHtmlText(sai_id_button_init_app, "Inicialización");
-		trans_setHtmlText(sai_id_text_label_message_volume, "Volumen de voz del mensaje:");
-		trans_setHtmlText(sai_id_text_skin, "Piel:");
-		trans_setHtmlText(sai_id_text_vibrator, "Vibrador:");
-		trans_setHtmlText(sai_id_button_vibrator_start_stop, "Iniciar / Detener");
-		trans_setSelectOptionText(sai_id_select_skin, 'golden', 'Dorado');
-		trans_setSelectOptionText(sai_id_select_skin, 'purple', 'Púrpura');
-		trans_setSelectOptionText(sai_id_select_skin, 'blue', 'Azul');
-		trans_setSelectOptionText(sai_id_select_skin, 'pink', 'Color rosa');
-		trans_setSelectOptionText(sai_id_select_skin, 'darkgreen', 'Verde oscuro');
-		trans_setSelectOptionText(sai_id_select_skin, 'red', 'Rojo');
-		trans_setSelectOptionText(sai_id_select_skin, 'black', 'Negro');
-		trans_setSelectOptionText(sai_id_select_skin, 'white', 'Blanco');
-	}else if(lang == 'ru' || lang == 'RU'){ // Russian
-		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_RU);
-		trans_setHtmlText(sai_id_text_language, '言語 (Language):');
-		trans_setSelectOptionText(sai_id_select_language_1, 'zh-CN', 'Chinese (Simplified) (简体中文)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'en', 'English (英語)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'es', 'Spanish (Español)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'de', 'German (Deutsch)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'it', 'Italian (Italiano)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'ja', 'Japanese (日本語)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'ko-KR', 'Korean (한국어)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'ru', 'Russian (Русский)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'zh-CN', 'Chinese (Simplified) (简体中文)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'en', 'English (英語)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'es', 'Spanish (Español)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'de', 'German (Deutsch)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'it', 'Italian (Italiano)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'ja', 'Japanese (日本語)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Korean (한국어)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'ru', 'Russian (Русский)');
-		trans_setHtmlText(sai_id_pic_type, 'Тип видео:');
-		trans_setSelectOptionText(sai_id_select_pic_type, '0', 'Фильм 0: Пустой экран (для практики)');
-		trans_setSelectOptionText(sai_id_select_pic_type, '1', 'Фильм 1: Логарифмическая спираль');
-		trans_setSelectOptionText(sai_id_select_pic_type, '2', 'Фильм 2: Концентрические круги');
-		trans_setSelectOptionText(sai_id_select_pic_type, '3', 'Фильм 3: Вращающиеся глаза');
-		trans_setSelectOptionText(sai_id_select_pic_type, '4', 'Фильм 4: Спираль Архимеда');
-		trans_setSelectOptionText(sai_id_select_pic_type, '5', 'Фильм 5: Расширяющееся сердце');
-		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'Фильм 6: Монета пять иен');
-		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'Фильм 7: Странный Водоворот');
-		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'Фильм 8: Сумасшедшие цвета');
-		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'Фильм 9: Логарифмическая спираль 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'Фильм 10: Аналоговый диск');
-		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'Фильм 11: Странный Водоворот 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'Фильм 12: Калейдоскоп');
-		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'Фильм 13: Первый цветной экран');
-		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'Фильм 14: Второй цветной экран');
-		trans_setSelectOptionText(sai_id_select_pic_type, '15', 'Фильм 15: Просто черный экран');
-		trans_setSelectOptionText(sai_id_select_pic_type, '16', 'Фильм 16: Просто белый экран');
-		trans_setSelectOptionText(sai_id_select_pic_type, '17', 'Фильм 17: Вращающаяся змея');
-		trans_setSelectOptionText(sai_id_select_pic_type, '18', 'Фильм 18: Искажающее излучение');
-		trans_setSelectOptionText(sai_id_select_pic_type, '19', 'Фильм 19：Случайные Волны');
-		trans_setHtmlText(sai_id_text_split, 'Разделенный экран:');
-		trans_setHtmlText(sai_id_text_speed, 'Скорость:');
-		trans_setHtmlText(speed_irregular_label, 'Нерегулярный');
-		trans_setHtmlText(sai_id_text_rotation, 'Обратное воспроизведение:');
-		trans_setHtmlText(sai_id_text_vortex_direction, 'Направление вихря:');
-		trans_setHtmlText(sai_id_text_blinking, 'Мигание экрана:');
-		trans_setHtmlText(sai_id_text_fullscreen_mode, 'Полноэкранный режим:');
-		trans_setHtmlText(sai_id_page_message_header, 'Сообщение');
-		trans_setHtmlText(sai_id_button_mesage_reset, 'Перезагрузить');
-		trans_setHtmlText(sai_id_color_1st_reset, 'Перезагрузить');
-		trans_setHtmlText(sai_id_color_2nd_reset, 'Перезагрузить');
-		trans_setHtmlText(sai_id_button_mesage_cancel, 'Отмена');
-		trans_setHtmlText(sai_id_button_mesage_ok, 'Хорошо');
-		trans_setHtmlText(sai_id_text_message_size, 'Размер сообщения:');
-		trans_setHtmlText(sai_id_text_note, 'Кнопка музыкальной ноты:');
-		trans_setHtmlText(sai_id_text_motion_blur, 'Размытость:');
-		trans_setSelectOptionText(sai_id_select_sound, '', '(Никто)');
-		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', 'Кошачий');
-		trans_setSelectOptionText(sai_id_select_sound, 'Horror', 'Страх');
-		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', 'Охотник');
-		trans_setSelectOptionText(sai_id_select_sound, 'Longing', 'Стремятся к');
-		trans_setSelectOptionText(sai_id_select_sound, 'Lovely', 'Восхитительный');
-		trans_setSelectOptionText(sai_id_select_sound, 'Magic', 'Магия');
-		trans_setSelectOptionText(sai_id_select_sound, 'OraSaimin', 'Ora! Saimin!');
-		trans_setSelectOptionText(sai_id_select_sound, 'Noise', 'Шум');
-		trans_setSelectOptionText(sai_id_select_sound, '432Hz', '432Hz');
-		trans_setSelectOptionText(sai_id_select_sound, 'Heli', 'Вертолет');
-		trans_setSelectOptionText(sai_id_select_sound, 'Pachi', 'Пачи');
-		trans_setSelectOptionText(sai_id_select_sound, 'WahWah', 'ВахВах');
-		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical', 'Механический');
-		trans_setSelectOptionText(sai_id_select_sound, 'Psycho', 'Психо');
-		trans_setSelectOptionText(sai_id_select_sound, 'MyanMyan', 'Мьян Мьян');
-		trans_setHtmlText(sai_id_text_sound_volume, 'Объем:');
-		trans_setHtmlText(sai_id_text_auto_play_sound, 'Автовоспроизведение звука:');
-		trans_setHtmlText(sai_id_text_auto_repeat_sound, 'Автоповтор аудио:');
-		trans_setHtmlText(sai_id_text_switch_sound, 'Переключение звука:');
-		trans_setHtmlText(sai_id_text_brightness, 'Яркость экрана:');
-		trans_setSelectOptionText(sai_id_select_brightness, 'normal', 'Нормальная яркость');
-		trans_setSelectOptionText(sai_id_select_brightness, 'brighter', 'Украсить');
-		trans_setSelectOptionText(sai_id_select_vortex_direction, 'clockwise', 'По часовой стрелке');
-		trans_setSelectOptionText(sai_id_select_vortex_direction, 'counterclockwise', 'Против часовой');
-		trans_setHtmlText(sai_id_page_config_header, 'Параметр');
-		trans_setHtmlText(sai_id_text_label_message_text, 'Текст сообщения:');
-		trans_setHtmlText(sai_id_button_message, 'Сообщение...');
-		sai_id_button_start_hypnosis.innerHTML = 'Начать гипноз';
-		trans_setHtmlText(sai_id_button_release_hypnosis, 'Освободиться от гипноза');
-		trans_setHtmlText(sai_id_text_count_down, 'Обратный отсчет:');
-		trans_setHtmlText(sai_id_text_arrows, 'Стрелки:');
-		trans_setHtmlText(sai_id_text_label_message_speech, 'Произнесите сообщение:');
-		trans_setHtmlText(sai_id_text_message_speech, 'Произнесите сообщение');
-		trans_setHtmlText(sai_id_text_color_1st, "1-й цвет:");
-		trans_setHtmlText(sai_id_text_color_2nd, "Второй цвет:");
-		trans_setHtmlText(sai_id_button_init_app, "Инициализация");
-		trans_setHtmlText(sai_id_text_label_message_volume, "Громкость голоса сообщения:");
-		trans_setHtmlText(sai_id_text_skin, "Кожа:");
-		trans_setHtmlText(sai_id_text_vibrator, "Вибратор:");
-		trans_setHtmlText(sai_id_button_vibrator_start_stop, "Старт / Стоп");
-		trans_setSelectOptionText(sai_id_select_skin, 'golden', 'Золотой');
-		trans_setSelectOptionText(sai_id_select_skin, 'purple', 'Фиолетовый');
-		trans_setSelectOptionText(sai_id_select_skin, 'blue', 'Синий');
-		trans_setSelectOptionText(sai_id_select_skin, 'pink', 'Розовый цвет');
-		trans_setSelectOptionText(sai_id_select_skin, 'darkgreen', 'Темно-зеленый');
-		trans_setSelectOptionText(sai_id_select_skin, 'red', 'Красный');
-		trans_setSelectOptionText(sai_id_select_skin, 'black', 'Черный');
-		trans_setSelectOptionText(sai_id_select_skin, 'white', 'Белый');
-	}else{ // English is default
-		trans_setHtmlText(sai_id_text_notice, trans_NOTICE_EN);
-		trans_setHtmlText(sai_id_text_language, 'Language (言語):');
-		trans_setSelectOptionText(sai_id_select_language_1, 'zh-CN', 'Chinese (Simplified) (简体中文)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'en', 'English (英語)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'es', 'Spanish (Español)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'de', 'German (Deutsch)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'it', 'Italian (Italiano)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'ja', 'Japanese (日本語)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'ko-KR', 'Korean (한국어)');
-		trans_setSelectOptionText(sai_id_select_language_1, 'ru', 'Russian (Русский)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'zh-CN', 'Chinese (Simplified) (简体中文)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'zh-TW', 'Chinese (Traditional) (繁體中文)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'en', 'English');
-		trans_setSelectOptionText(sai_id_select_language_2, 'es', 'Spanish (Español)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'de', 'German (Deutsch)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'it', 'Italian (Italiano)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'ja', 'Japanese (日本語)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', 'Korean (한국어)');
-		trans_setSelectOptionText(sai_id_select_language_2, 'ru', 'Russian (Русский)');
-		trans_setHtmlText(sai_id_pic_type, 'The type of picture:');
-		trans_setSelectOptionText(sai_id_select_pic_type, '0', 'Movie 0: Dummy Screen (for practice)');
-		trans_setSelectOptionText(sai_id_select_pic_type, '1', 'Movie 1: Logarithmic Spiral');
-		trans_setSelectOptionText(sai_id_select_pic_type, '2', 'Movie 2: Concentric Circles');
-		trans_setSelectOptionText(sai_id_select_pic_type, '3', 'Movie 3: The Eyes');
-		trans_setSelectOptionText(sai_id_select_pic_type, '4', 'Movie 4: Archimedes\' Spiral');
-		trans_setSelectOptionText(sai_id_select_pic_type, '5', 'Movie 5: Spreading Hearts');
-		trans_setSelectOptionText(sai_id_select_pic_type, '6', 'Movie 6: 5-Yen Coin');
-		trans_setSelectOptionText(sai_id_select_pic_type, '7', 'Movie 7: Strange Swirl');
-		trans_setSelectOptionText(sai_id_select_pic_type, '8', 'Movie 8: Crazy Colors');
-		trans_setSelectOptionText(sai_id_select_pic_type, '9', 'Movie 9: Logarithmic Spiral 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '10', 'Movie 10: Analog Disc');
-		trans_setSelectOptionText(sai_id_select_pic_type, '11', 'Movie 11: Strange Swirl 2');
-		trans_setSelectOptionText(sai_id_select_pic_type, '12', 'Movie 12: Kaleidoscope');
-		trans_setSelectOptionText(sai_id_select_pic_type, '13', 'Movie 13: 1st color screen');
-		trans_setSelectOptionText(sai_id_select_pic_type, '14', 'Movie 14: 2st color screen');
-		trans_setSelectOptionText(sai_id_select_pic_type, '15', 'Movie 15: Just a black screen');
-		trans_setSelectOptionText(sai_id_select_pic_type, '16', 'Movie 16: Just a white screen');
-		trans_setSelectOptionText(sai_id_select_pic_type, '17', 'Movie 17: Rotating snake');
-		trans_setSelectOptionText(sai_id_select_pic_type, '18', 'Movie 18: Distortion Radiation');
-		trans_setSelectOptionText(sai_id_select_pic_type, '19', 'Movie 19：Random Waves');
-		trans_setHtmlText(sai_id_text_split, 'Screen splitting:');
-		trans_setHtmlText(sai_id_text_speed, 'Speed:');
-		trans_setHtmlText(speed_irregular_label, 'Irregular');
-		trans_setHtmlText(sai_id_text_rotation, 'Reverse playback:');
-		trans_setHtmlText(sai_id_text_vortex_direction, 'Direction of vortex:');
-		trans_setHtmlText(sai_id_text_blinking, 'Screen flashing:');
-		trans_setHtmlText(sai_id_text_fullscreen_mode, 'Fullscreen mode:');
-		trans_setHtmlText(sai_id_page_message_header, 'Message');
-		trans_setHtmlText(sai_id_button_mesage_reset, 'Reset');
-		trans_setHtmlText(sai_id_color_1st_reset, 'Reset');
-		trans_setHtmlText(sai_id_color_2nd_reset, 'Reset');
-		trans_setHtmlText(sai_id_button_mesage_cancel, 'Cancel');
-		trans_setHtmlText(sai_id_button_mesage_ok, 'OK');
-		trans_setHtmlText(sai_id_text_message_size, 'Size of message:');
-		trans_setHtmlText(sai_id_text_note, 'Sound button:');
-		trans_setHtmlText(sai_id_text_motion_blur, 'Motion Blur:');
-		trans_setSelectOptionText(sai_id_select_sound, '', '(None)');
-		trans_setSelectOptionText(sai_id_select_sound, 'Cattish', 'Cattish');
-		trans_setSelectOptionText(sai_id_select_sound, 'Horror', 'Horror');
-		trans_setSelectOptionText(sai_id_select_sound, 'Hunting', 'Hunting');
-		trans_setSelectOptionText(sai_id_select_sound, 'Longing', 'Longing');
-		trans_setSelectOptionText(sai_id_select_sound, 'Lovely', 'Lovely');
-		trans_setSelectOptionText(sai_id_select_sound, 'Magic', 'Magic');
-		trans_setSelectOptionText(sai_id_select_sound, 'OraSaimin', 'Ora! Saimin!');
-		trans_setSelectOptionText(sai_id_select_sound, 'Noise', 'Noise');
-		trans_setSelectOptionText(sai_id_select_sound, '432Hz', '432Hz');
-		trans_setSelectOptionText(sai_id_select_sound, 'Heli', 'Helicopter');
-		trans_setSelectOptionText(sai_id_select_sound, 'Pachi', 'Pachi');
-		trans_setSelectOptionText(sai_id_select_sound, 'WahWah', 'WahWah');
-		trans_setSelectOptionText(sai_id_select_sound, 'Mechanical', 'Mechanical');
-		trans_setSelectOptionText(sai_id_select_sound, 'Psycho', 'Psycho');
-		trans_setSelectOptionText(sai_id_select_sound, 'MyanMyan', 'Myan Myan');
-		trans_setHtmlText(sai_id_text_sound_volume, 'Sound volume:');
-		trans_setHtmlText(sai_id_text_auto_play_sound, 'Auto-play audio:');
-		trans_setHtmlText(sai_id_text_auto_repeat_sound, 'Repeating audio:');
-		trans_setHtmlText(sai_id_text_switch_sound, 'Switching sound:');
-		trans_setHtmlText(sai_id_text_brightness, 'Brightness:');
-		trans_setSelectOptionText(sai_id_select_brightness, 'normal', 'Normal');
-		trans_setSelectOptionText(sai_id_select_brightness, 'brighter', 'Brighter');
-		trans_setSelectOptionText(sai_id_select_vortex_direction, 'clockwise', 'Clockwise');
-		trans_setSelectOptionText(sai_id_select_vortex_direction, 'counterclockwise', 'Counterclockwise');
-		trans_setHtmlText(sai_id_page_config_header, 'Configuration');
-		trans_setHtmlText(sai_id_text_label_message_text, 'Message Text:');
-		trans_setHtmlText(sai_id_button_message, 'Message...');
-		sai_id_button_start_hypnosis.innerHTML = 'Start Hypnosis';
-		trans_setHtmlText(sai_id_button_release_hypnosis, 'Release Hypnosis');
-		trans_setHtmlText(sai_id_text_count_down, 'Count Down:');
-		trans_setHtmlText(sai_id_text_arrows, 'Arrows:');
-		trans_setHtmlText(sai_id_text_label_message_speech, 'Message Speech:');
-		trans_setHtmlText(sai_id_text_message_speech, 'Message Speech');
-		trans_setHtmlText(sai_id_text_color_1st, "1st color:");
-		trans_setHtmlText(sai_id_text_color_2nd, "2nd color:");
-		trans_setHtmlText(sai_id_button_init_app, "Initialize");
-		trans_setHtmlText(sai_id_text_label_message_volume, "Message voice volume:");
-		trans_setHtmlText(sai_id_text_skin, "Skin:");
-		trans_setHtmlText(sai_id_text_vibrator, "Vibrator:");
-		trans_setHtmlText(sai_id_button_vibrator_start_stop, "Start / Stop");
-		trans_setSelectOptionText(sai_id_select_skin, 'golden', 'Golden');
-		trans_setSelectOptionText(sai_id_select_skin, 'purple', 'Purple');
-		trans_setSelectOptionText(sai_id_select_skin, 'blue', 'Blue');
-		trans_setSelectOptionText(sai_id_select_skin, 'pink', 'Pink');
-		trans_setSelectOptionText(sai_id_select_skin, 'darkgreen', 'Darkgreen');
-		trans_setSelectOptionText(sai_id_select_skin, 'red', 'Red');
-		trans_setSelectOptionText(sai_id_select_skin, 'black', 'Black');
-		trans_setSelectOptionText(sai_id_select_skin, 'white', 'White');
-	}
+	trans_currentLanguage = trans_standardizeLanguage(lang);
+	localStorage.setItem('saiminLanguage3', trans_currentLanguage);
+
+	trans_setHtmlText(sai_id_text_notice, trans_getText('TEXT_NOTICE'));
+	trans_setHtmlText(sai_id_text_language, trans_getText('TEXT_LANGUAGE'));
+
+	trans_setSelectOptionText(sai_id_select_language_1, 'zh-CN', trans_getText('TEXT_LANGUAGE_ZH_CN'));
+	trans_setSelectOptionText(sai_id_select_language_1, 'zh-TW', trans_getText('TEXT_LANGUAGE_ZH_TW'));
+	trans_setSelectOptionText(sai_id_select_language_1, 'en-US', trans_getText('TEXT_LANGUAGE_EN'));
+	trans_setSelectOptionText(sai_id_select_language_1, 'es-ES', trans_getText('TEXT_LANGUAGE_ES'));
+	trans_setSelectOptionText(sai_id_select_language_1, 'de-DE', trans_getText('TEXT_LANGUAGE_DE'));
+	trans_setSelectOptionText(sai_id_select_language_1, 'it-IT', trans_getText('TEXT_LANGUAGE_IT'));
+	trans_setSelectOptionText(sai_id_select_language_1, 'ja-JP', trans_getText('TEXT_LANGUAGE_JA_JP'));
+	trans_setSelectOptionText(sai_id_select_language_1, 'ko-KR', trans_getText('TEXT_LANGUAGE_KO_KR'));
+	trans_setSelectOptionText(sai_id_select_language_1, 'ru-RU', trans_getText('TEXT_LANGUAGE_RU'));
+
+	trans_setSelectOptionText(sai_id_select_language_2, 'zh-CN', trans_getText('TEXT_LANGUAGE_ZH_CN'));
+	trans_setSelectOptionText(sai_id_select_language_2, 'zh-TW', trans_getText('TEXT_LANGUAGE_ZH_TW'));
+	trans_setSelectOptionText(sai_id_select_language_2, 'en-US', trans_getText('TEXT_LANGUAGE_EN'));
+	trans_setSelectOptionText(sai_id_select_language_2, 'es-ES', trans_getText('TEXT_LANGUAGE_ES'));
+	trans_setSelectOptionText(sai_id_select_language_2, 'de-DE', trans_getText('TEXT_LANGUAGE_DE'));
+	trans_setSelectOptionText(sai_id_select_language_2, 'it-IT', trans_getText('TEXT_LANGUAGE_IT'));
+	trans_setSelectOptionText(sai_id_select_language_2, 'ja-JP', trans_getText('TEXT_LANGUAGE_JA_JP'));
+	trans_setSelectOptionText(sai_id_select_language_2, 'ko-KR', trans_getText('TEXT_LANGUAGE_KO_KR'));
+	trans_setSelectOptionText(sai_id_select_language_2, 'ru-RU', trans_getText('TEXT_LANGUAGE_RU'));
+
+	trans_setHtmlText(sai_id_pic_type, trans_getText('TEXT_PIC_TYPE'));
+	trans_setSelectOptionText(sai_id_select_pic_type, '0', trans_getText('TEXT_PIC_0'));
+	trans_setSelectOptionText(sai_id_select_pic_type, '1', trans_getText('TEXT_PIC_1'));
+	trans_setSelectOptionText(sai_id_select_pic_type, '2', trans_getText('TEXT_PIC_2'));
+	trans_setSelectOptionText(sai_id_select_pic_type, '3', trans_getText('TEXT_PIC_3'));
+	trans_setSelectOptionText(sai_id_select_pic_type, '4', trans_getText('TEXT_PIC_4'));
+	trans_setSelectOptionText(sai_id_select_pic_type, '5', trans_getText('TEXT_PIC_5'));
+	trans_setSelectOptionText(sai_id_select_pic_type, '6', trans_getText('TEXT_PIC_6'));
+	trans_setSelectOptionText(sai_id_select_pic_type, '7', trans_getText('TEXT_PIC_7'));
+	trans_setSelectOptionText(sai_id_select_pic_type, '8', trans_getText('TEXT_PIC_8'));
+	trans_setSelectOptionText(sai_id_select_pic_type, '9', trans_getText('TEXT_PIC_9'));
+	trans_setSelectOptionText(sai_id_select_pic_type, '10', trans_getText('TEXT_PIC_10'));
+	trans_setSelectOptionText(sai_id_select_pic_type, '11', trans_getText('TEXT_PIC_11'));
+	trans_setSelectOptionText(sai_id_select_pic_type, '12', trans_getText('TEXT_PIC_12'));
+	trans_setSelectOptionText(sai_id_select_pic_type, '13', trans_getText('TEXT_PIC_13'));
+	trans_setSelectOptionText(sai_id_select_pic_type, '14', trans_getText('TEXT_PIC_14'));
+	trans_setSelectOptionText(sai_id_select_pic_type, '15', trans_getText('TEXT_PIC_15'));
+	trans_setSelectOptionText(sai_id_select_pic_type, '16', trans_getText('TEXT_PIC_16'));
+	trans_setSelectOptionText(sai_id_select_pic_type, '17', trans_getText('TEXT_PIC_17'));
+	trans_setSelectOptionText(sai_id_select_pic_type, '18', trans_getText('TEXT_PIC_18'));
+	trans_setSelectOptionText(sai_id_select_pic_type, '19', trans_getText('TEXT_PIC_19'));
+
+	trans_setHtmlText(sai_id_text_split, trans_getText('TEXT_SPLIT'));
+	trans_setHtmlText(sai_id_text_speed, trans_getText('TEXT_SPEED'));
+	trans_setHtmlText(speed_irregular_label, trans_getText('TEXT_SPEED_IRREGULAR'));
+	trans_setHtmlText(sai_id_text_rotation, trans_getText('TEXT_ROTATION'));
+	trans_setHtmlText(sai_id_text_vortex_direction, trans_getText('TEXT_VORTEX_DIRECTION'));
+	trans_setHtmlText(sai_id_text_blinking, trans_getText('TEXT_BLINKING'));
+	trans_setHtmlText(sai_id_text_fullscreen_mode, trans_getText('TEXT_FULLSCREN_MODE'));
+	trans_setHtmlText(sai_id_page_message_header, trans_getText('TEXT_MESSAGE'));
+	trans_setHtmlText(sai_id_button_mesage_reset, trans_getText('TEXT_RESET'));
+	trans_setHtmlText(sai_id_color_1st_reset, trans_getText('TEXT_RESET'));
+	trans_setHtmlText(sai_id_color_2nd_reset, trans_getText('TEXT_RESET'));
+	trans_setHtmlText(sai_id_button_mesage_cancel, trans_getText('TEXT_CANCEL'));
+	trans_setHtmlText(sai_id_button_mesage_ok, trans_getText('TEXT_OK'));
+	trans_setHtmlText(sai_id_text_message_size, trans_getText('TEXT_MESSAGE_SIZE'));
+	trans_setHtmlText(sai_id_text_note, trans_getText('TEXT_NOTE'));
+	trans_setHtmlText(sai_id_text_motion_blur, trans_getText('TEXT_MOTION_BLUR'));
+
+	trans_setSelectOptionText(sai_id_select_sound, '', trans_getText('TEXT_NONE'));
+	trans_setSelectOptionText(sai_id_select_sound, 'Cattish', trans_getText('TEXT_SOUND_CATTISH'));
+	trans_setSelectOptionText(sai_id_select_sound, 'Horror', trans_getText('TEXT_SOUND_HORROR'));
+	trans_setSelectOptionText(sai_id_select_sound, 'Hunting', trans_getText('TEXT_SOUND_HUNTING'));
+	trans_setSelectOptionText(sai_id_select_sound, 'Longing', trans_getText('TEXT_SOUND_LONGING'));
+	trans_setSelectOptionText(sai_id_select_sound, 'Lovely', trans_getText('TEXT_SOUND_LOVELY'));
+	trans_setSelectOptionText(sai_id_select_sound, 'Magic', trans_getText('TEXT_SOUND_MAGIC'));
+	trans_setSelectOptionText(sai_id_select_sound, 'OraSaimin', trans_getText('TEXT_SOUND_ORA_SAIMIN'));
+	trans_setSelectOptionText(sai_id_select_sound, 'Noise', trans_getText('TEXT_SOUND_NOISE'));
+	trans_setSelectOptionText(sai_id_select_sound, '432Hz', trans_getText('TEXT_SOUND_432HZ'));
+	trans_setSelectOptionText(sai_id_select_sound, 'Heli', trans_getText('TEXT_SOUND_HELI'));
+	trans_setSelectOptionText(sai_id_select_sound, 'Pachi', trans_getText('TEXT_SOUND_PACHI'));
+	trans_setSelectOptionText(sai_id_select_sound, 'WahWah', trans_getText('TEXT_SOUND_WAHWAH'));
+	trans_setSelectOptionText(sai_id_select_sound, 'Mechanical', trans_getText('TEXT_SOUND_MECHANICAL'));
+	trans_setSelectOptionText(sai_id_select_sound, 'Psycho', trans_getText('TEXT_SOUND_PSYCHO'));
+	trans_setSelectOptionText(sai_id_select_sound, 'MyanMyan', trans_getText('TEXT_SOUND_MYANMYAN'));
+
+	trans_setHtmlText(sai_id_text_sound_volume, trans_getText('TEXT_SOUND_VOLUME'));
+	trans_setHtmlText(sai_id_text_auto_play_sound, trans_getText('TEXT_SOUND_AUTO_PLAY'));
+	trans_setHtmlText(sai_id_text_auto_repeat_sound, trans_getText('TEXT_SOUND_AUTO_REPEAT'));
+	trans_setHtmlText(sai_id_text_switch_sound, trans_getText('TEXT_SOUND_SWITCH'));
+	trans_setHtmlText(sai_id_text_brightness, trans_getText('TEXT_BRIGHTNESS'));
+	trans_setSelectOptionText(sai_id_select_brightness, 'normal', trans_getText('TEXT_BRIGHTNESS_NORMAL'));
+	trans_setSelectOptionText(sai_id_select_brightness, 'brighter', trans_getText('TEXT_BRIGHTNESS_BRIGHTER'));
+	trans_setSelectOptionText(sai_id_select_vortex_direction, 'clockwise', trans_getText('TEXT_CLOCKWISE'));
+	trans_setSelectOptionText(sai_id_select_vortex_direction, 'counterclockwise', trans_getText('TEXT_COUNTERCLOCKWISE'));
+	trans_setHtmlText(sai_id_page_config_header, trans_getText('TEXT_CONFIG'));
+	trans_setHtmlText(sai_id_text_label_message_text, trans_getText('TEXT_MESSAGE_TEXT'));
+	trans_setHtmlText(sai_id_button_message, trans_getText('TEXT_MESSAGE_BUTTON'));
+
+	sai_id_button_start_hypnosis.innerHTML = trans_getText('TEXT_START_HYPNOSIS');
+	trans_setHtmlText(sai_id_button_release_hypnosis, trans_getText('TEXT_RELEASE_HYPNOSIS_BUTTON'));
+	trans_setHtmlText(sai_id_text_count_down, trans_getText('TEXT_COUNT_DOWN'));
+	trans_setHtmlText(sai_id_text_arrows, trans_getText('TEXT_ARROWS'));
+	trans_setHtmlText(sai_id_text_label_message_speech, trans_getText('TEXT_MESSAGE_SPEECH_LABEL'));
+	trans_setHtmlText(sai_id_text_message_speech, trans_getText('TEXT_MESSAGE_SPEECH'));
+	trans_setHtmlText(sai_id_text_color_1st, trans_getText('TEXT_COLOR_1ST'));
+	trans_setHtmlText(sai_id_text_color_2nd, trans_getText('TEXT_COLOR_2ND'));
+	trans_setHtmlText(sai_id_button_init_app, trans_getText('TEXT_INIT_APP_BUTTON'));
+	trans_setHtmlText(sai_id_text_label_message_volume, trans_getText('TEXT_MESSAGE_VOLUME'));
+	trans_setHtmlText(sai_id_text_skin, trans_getText('TEXT_MESSAGE_SKIN'));
+	trans_setHtmlText(sai_id_text_vibrator, trans_getText('TEXT_VIBRATOR'));
+	trans_setHtmlText(sai_id_button_vibrator_start_stop, trans_getText('TEXT_VIBRATOR_START_STOP'));
+
+	trans_setSelectOptionText(sai_id_select_skin, 'golden', trans_getText('TEXT_GOLDEN'));
+	trans_setSelectOptionText(sai_id_select_skin, 'purple', trans_getText('TEXT_PURPLE'));
+	trans_setSelectOptionText(sai_id_select_skin, 'blue', trans_getText('TEXT_BLUE'));
+	trans_setSelectOptionText(sai_id_select_skin, 'pink', trans_getText('TEXT_PINK'));
+	trans_setSelectOptionText(sai_id_select_skin, 'darkgreen', trans_getText('TEXT_DARKGREEN'));
+	trans_setSelectOptionText(sai_id_select_skin, 'red', trans_getText('TEXT_RED'));
+	trans_setSelectOptionText(sai_id_select_skin, 'black', trans_getText('TEXT_BLACK'));
+	trans_setSelectOptionText(sai_id_select_skin, 'white', trans_getText('TEXT_WHITE'));
 
 	trans_setHtmlText(sai_id_page_agreement_header_1, trans_getText('TEXT_ABOUT_APP'));
 	trans_setHtmlText(sai_id_button_agree, trans_getText('TEXT_I_AGREE'));
