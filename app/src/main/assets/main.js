@@ -3929,15 +3929,23 @@ document.addEventListener('DOMContentLoaded', function(){
 			return; // 合意が取れていない場合は何もしない。
 		if (SAI_is_android_native_app()){ // Androidネイティブアプリの場合
 			if (sai_current_page === sai_id_page_main) {
-				android.finishApp(); // アプリ終了。
+				if (!sai_stopping){
+					SAI_canvas_click(); // キャンバスクリック。
+				}else{
+					android.finishApp(); // アプリ終了。
+				}
 				return;
 			}
 			// メインページに移動。
 			SAI_choose_page(sai_id_page_main);
 			return;
 		}
-		if (sai_current_page === sai_id_page_main)
-			return; // メインページなら何もしない。
+		if (sai_current_page === sai_id_page_main){
+			if (!sai_stopping){
+				SAI_canvas_click(); // キャンバスクリック。
+			}
+			return; 
+		}
 		// メインページに移動。
 		SAI_choose_page(sai_id_page_main);
 	};
@@ -3993,6 +4001,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_id_button_start_hypnosis.addEventListener('click', function(e){
 			// 映像を再開する。
 			sai_stopping = false;
+			// 「戻る」ボタンを有効にするためのおまじない。
+			history.pushState('back', null, '?');
 			// メインコントロール群を非表示にする。
 			SAI_show_main_controls(false);
 			// 必要ならカウントダウンを開始する。
@@ -4016,10 +4026,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		sai_id_button_release_hypnosis.addEventListener('click', function(e){
 			// 解除映像に切り替える。
 			SAI_pic_set_type(-1);
-
 			// 映像を再開する。
 			sai_stopping = false;
-
+			// 「戻る」ボタンを有効にするためのおまじない。
+			history.pushState('back', null, '?');
 			// メインコントロール群を非表示にする。
 			SAI_show_main_controls(false);
 		});
