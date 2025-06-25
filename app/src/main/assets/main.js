@@ -3394,7 +3394,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// 映像のキャプションを描画する。
-	const draw_caption = function(ctx){
+	const SAI_draw_caption = function(ctx){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 映像の種類のテキストを取得。
@@ -3421,11 +3421,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 半透明の長方形を描く。
 		ctx.beginPath();
-		ctx.moveTo(x - width, y - height);
-		ctx.lineTo(x + width, y - height);
-		ctx.lineTo(x + width, y + height);
-		ctx.lineTo(x - width, y + height);
-		ctx.closePath();
+		ctx.rect(x - width, y - height, 2 * width, 2 * height);
 		ctx.strokeStyle = '#fff';
 		ctx.lineWidth = 2;
 		ctx.stroke();
@@ -3596,7 +3592,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 停止中なら映像のキャプションを表示する。
 		if(sai_stopping && drawing_main){
-			draw_caption(ctx);
+			SAI_draw_caption(ctx);
 		}
 
 		// 時が過ぎたら催眠解除を完了する。
