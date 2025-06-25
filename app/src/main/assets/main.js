@@ -1404,12 +1404,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	// 長方形領域(px, py, dx, dy)をクリッピングする。
 	const SAI_clip_rect = function(ctx, px, py, dx, dy){
-		ctx.beginPath();
-		ctx.moveTo(px, py);
-		ctx.lineTo(px + dx, py);
-		ctx.lineTo(px + dx, py + dy);
-		ctx.lineTo(px, py + dy);
-		ctx.closePath();
+		ctx.rect(px, py, dx, dy);
 		ctx.clip();
 	}
 
