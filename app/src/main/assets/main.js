@@ -2216,10 +2216,12 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// ヒモのついた五円玉を回転させて描画する。
 		if(sai_coin_img.complete){
-			ctx.translate(qx - sai_coin_img.width * 0.5, qy - sai_coin_img.height * 0.7);
+			ctx.translate(qx, qy - sai_coin_img.height * 0.7);
 
 			let angle = Math.PI * Math.sin(count2 * 0.1 - 0.05) * 0.078;
 			ctx.rotate(angle);
+
+			ctx.translate(-sai_coin_img.width * 0.5, 0);
 
 			let ratio = 1;
 			ctx.drawImage(sai_coin_img, 0, 0, sai_coin_img.width * ratio, sai_coin_img.height * ratio);
