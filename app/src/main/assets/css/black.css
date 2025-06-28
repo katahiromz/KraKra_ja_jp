@@ -7,7 +7,7 @@ button { /* 通常のボタン */
 	font-weight: bold;
 	background-color: #333;
 	color: #fff;
-	border-radius: 10%;
+	border-radius: 8px;
 }
 .sai_class_page { /* ページ */
 	background-color: #222;

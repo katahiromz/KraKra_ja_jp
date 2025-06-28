@@ -191,7 +191,7 @@ input[type='color'] { /* 色選択ボタン */
 .sai_class_button_arrow { /* 映像を切り替えるボタン */
 	vertical-align: middle;
 	outline: 1px solid white;
-	border-radius: 10%;
+	border-radius: 8px;
 	text-align: center;
 	background-color: rgba(255, 90, 90, 50%);
 	top: calc(50vh - 2.5rem / 2);
@@ -214,7 +214,7 @@ input[type='color'] { /* 色選択ボタン */
 	top: calc(50vh - 15vh / 2);
 	top: calc(50dvh - 15dvh / 2);
 	font-size: 6vmin;
-	border-radius: 5%;
+	border-radius: 8px;
 }
 #sai_id_button_release_hypnosis { /* 催眠解除ボタン */
 	position: absolute;
@@ -227,7 +227,7 @@ input[type='color'] { /* 色選択ボタン */
 	top: calc(70vh - 15vh / 2);
 	top: calc(70dvh - 15dvh / 2);
 	font-size: 6vmin;
-	border-radius: 5%;
+	border-radius: 8px;
 }
 @media screen and (orientation: landscape) { /* 端末が横向きの場合 */
 	#sai_id_button_start_hypnosis {
@@ -261,7 +261,7 @@ input[type='color'] { /* 色選択ボタン */
 }
 .sai_class_navi_button { /* ナビゲーションボタン */
 	outline: 1px solid white;
-	border-radius: 10%;
+	border-radius: 8px;
 	padding: 4px;
 	z-index: 2;
 	font-size: 0.5cm;
@@ -409,7 +409,7 @@ input[type='color'] { /* 色選択ボタン */
 	height: 100dvh;
 }
 .sai_class_face_button { /* 顔認識のアクションボタン */
-	border-radius: 10%;
+	border-radius: 8px;
 }
 /* 【顔認識のページ】ここまで */
 .sai_class_floating_text { /* 浮遊するテキスト */
