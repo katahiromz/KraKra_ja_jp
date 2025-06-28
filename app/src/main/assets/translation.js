@@ -818,6 +818,7 @@ We provide real entertainment where you can enjoy hypnotic images and sounds.
 - This app is not for medical use. For sick people, we recommend standard medical treatment that is medically effective.
 - This app is not for sleeping. If you are not feeling well, please refrain from using it.
 - Hypnosis that tries to make the subject do things that they do not know the meaning or method of, or that are impossible to perform, is ineffective.
+- If you use this app continuously for a long period of time, your device may become overheated.
 
 [(How to use)]
 
@@ -868,6 +869,7 @@ Hypnosis KraKra
 - 이 앱은 의료용이 아닙니다. 아픈 사람에게는 의학적으로 효과가 있는 표준 의료를 권장합니다.
 - 이 앱은 수면용이 아닙니다.
 - 피험자가 의미나 방법을 모르는 것, 실행의 불가능한 일을 하려고 하는 최면은 효과가 없습니다.
+- 본 앱을 장시간 연속 사용하면 단말기가 고열이 될 수 있습니다.
 
 【사용법】
 
@@ -919,6 +921,7 @@ Hypnosis KraKra
 - 本アプリは医療用ではありません。病気の人には医学的に効果のある標準医療を推奨します。
 - 本アプリは睡眠用ではありません。体調がすぐれない人はご利用をひかえてください。
 - 被験者が意味または方法を知らないこと、実行の不可能なことをさせようとする催眠は効果がありません。
+- 本アプリを長時間連続して使用すると、端末が高熱になることがあります。
 
 【使い方】
 
@@ -969,6 +972,7 @@ Hypnosis KraKra
 - 此应用程序不可用于医疗用途。为患病者推荐医学上有效的标准护理。
 - 此应用程序不适用于睡觉。如果您感觉不适，请不要使用该设施。
 - 如果催眠试图让受试者做一些他不知道其意义或如何做，或不可能做的事情，那么催眠是不会起作用的。
+- 如果您长时间连续使用此应用程序，您的设备可能会过热。
 
 【如何使用】
 
@@ -1019,6 +1023,7 @@ Hypnosis KraKra
 - 此應用程式不可用於醫療用途。為患病者推薦醫學上有效的標準護理。
 - 此應用程式不適用於睡覺。如果您感覺不適，請不要使用該設施。
 - 如果催眠試圖讓受試者做一些他不知道其意義或如何做，或不可能做的事情，那麼催眠是不會起作用的。
+- 如果您長時間連續使用此應用程序，您的裝置可能會過熱。
 
 【用法】
 
@@ -1069,6 +1074,7 @@ Forniamo un vero intrattenimento in cui puoi goderti immagini e suoni ipnotici.
 - Questa app non è destinata all'uso medico. Consigliare cure standard efficaci dal punto di vista medico ai malati.
 - Questa app non è adatta per dormire. Se non vi sentite bene, vi preghiamo di astenervi dall'utilizzare la struttura.
 - L'ipnosi non funziona se cerca di indurre il soggetto a fare qualcosa di cui non sa il significato o come fare, oppure che è impossibile da realizzare.
+- Se utilizzi questa app ininterrottamente per un lungo periodo di tempo, il tuo dispositivo potrebbe surriscaldarsi.
 
 [(Come usare)]
 
@@ -1119,6 +1125,7 @@ Wir bieten echte Unterhaltung, bei der Sie hypnotische Bilder und Töne genieße
 - Diese App ist nicht für medizinische Zwecke bestimmt. Empfehlen Sie medizinisch wirksame Standardbehandlungen für Kranke.
 - Diese App ist nicht zum Schlafen gedacht. Sollten Sie sich unwohl fühlen, bitten wir Sie, von der Nutzung der Anlage abzusehen.
 - Hypnose funktioniert nicht, wenn sie versucht, den Probanden dazu zu bringen, etwas zu tun, dessen Bedeutung oder Vorgehensweise er nicht kennt oder was unmöglich auszuführen ist.
+- Wenn Sie diese App über einen längeren Zeitraum ununterbrochen verwenden, kann Ihr Gerät überhitzen.
 
 [(Wie benutzt man)]
 
@@ -1169,6 +1176,7 @@ Brindamos entretenimiento real donde podrás disfrutar de imágenes y sonidos hi
 - Esta aplicación no es para uso médico. Recomendar cuidados estándar médicamente efectivos para aquellos que están enfermos.
 - Esta aplicación no es para dormir. Si no se siente bien, absténgase de utilizar las instalaciones.
 - La hipnosis no funciona si intenta que el sujeto haga algo que no sabe el significado o cómo hacer, o que es imposible de realizar.
+- Si utiliza esta aplicación continuamente durante un largo periodo de tiempo, su dispositivo podría sobrecalentarse.
 
 [(Cómo utilizar)]
 
@@ -1219,6 +1227,7 @@ Hypnosis KraKra
 - Это приложение не предназначено для медицинского использования. Рекомендовать эффективные с медицинской точки зрения стандартные методы лечения для больных.
 - Это приложение не для сна. Если вы плохо себя чувствуете, пожалуйста, воздержитесь от посещения учреждения.
 - Гипноз не работает, если он пытается заставить субъекта сделать что-то, смысла или способа сделать что-то, что он не знает, или что невозможно выполнить.
+- Если вы используете это приложение непрерывно в течение длительного периода времени, ваше устройство может перегреться.
 
 [(Как использовать)]
 

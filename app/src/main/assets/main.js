@@ -1282,13 +1282,13 @@ document.addEventListener('DOMContentLoaded', function(){
 		cy -= size * 0.15;
 		size *= 0.007;
 		// https://www.asobou.co.jp/blog/web/canvas-curve
-		ctx.moveTo(cx, cy);
+		ctx.moveTo(cx, cy - 12 * size);
 		ctx.bezierCurveTo(cx - 10 * size, cy - 25 * size, cx - 30 * size, cy - 40 * size, cx - 50 * size, cy - 40 * size);
 		ctx.bezierCurveTo(cx - 60 * size, cy - 40 * size, cx - 100 * size, cy - 40 * size, cx - 100 * size, cy + 10 * size);
 		ctx.bezierCurveTo(cx - 100 * size, cy + 80 * size, cx - 10 * size, cy + 105 * size, cx, cy + 125 * size);
 		ctx.bezierCurveTo(cx + 10 * size, cy + 105 * size, cx + 100 * size, cy + 80 * size, cx + 100 * size, cy + 10 * size);
 		ctx.bezierCurveTo(cx + 100 * size, cy - 40 * size, cx + 60 * size, cy - 40 * size, cx + 50 * size, cy - 40 * size);
-		ctx.bezierCurveTo(cx + 30 * size, cy - 40 * size, cx + 10 * size, cy - 25 * size, cx, cy);
+		ctx.bezierCurveTo(cx + 30 * size, cy - 40 * size, cx + 10 * size, cy - 25 * size, cx, cy - 12 * size);
 		ctx.closePath();
 		ctx.fillStyle = color;
 		ctx.fill();
@@ -2016,6 +2016,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 長方形領域(px, py, dx, dy)をクリッピングする。
 		SAI_clip_rect(ctx, px, py, dx, dy);
 
+		// 白で塗りつぶす。
+		ctx.fillStyle = "white";
+		ctx.fillRect(px, py, dx, dy);
+
 		// 映像の進行を表す変数。
 		let count2 = SAI_get_tick_count();
 		let factor = count2 * 0.16;
@@ -2032,43 +2036,13 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 画面中央を原点とする。
 		ctx.translate(qx, qy);
 
-		// 星形のレインボーを描画する。外側から順番に。
+		// ハート型を描画する。外側から順番に。
 		let isLarge = SAI_screen_is_large(ctx);
-		for(let radius = isLarge ? ((dx + dy) * 0.2) : ((dx + dy) * 0.4); radius >= 10; radius *= 0.92){
+		for(let radius = isLarge ? ((dx + dy) * 0.3) : ((dx + dy) * 0.5); radius >= 10; radius *= 0.90){
 			// 虹色の指定はHSL色空間で。
-			ctx.fillStyle = `hsl(${((dxy + factor * 0.3 - radius * 0.015) * 360) % 360}deg, 100%, 50%)`;
-
-			let N0 = 20, N1 = 5;
-			let i = 0;
-			let oldx = null, oldy = null;
-			for(let angle = 0; angle <= 360; angle += 360 / N0){
-				// 角度を計算する。
-				let radian = (angle + count2 * 2) * (Math.PI / 180.0);
-
-				// 星形の一点を計算する。
-				let factor2 = radius * (1 + 0.7 * Math.abs(Math.sin(N1 * i * Math.PI / N0)));
-				if(isLarge)
-					factor2 *= 2;
-				let x = factor2 * Math.cos(radian), y = factor2 * Math.sin(radian);
-
-				if(angle == 0){ // 角度がゼロならパスを開始する。
-					ctx.beginPath();
-					ctx.moveTo(x, y);
-				}else{ // さもなければパスにベジエ曲線を追加する。
-					if((i % 2) == 0){
-						ctx.bezierCurveTo(oldx, oldy, (x + oldx) / 2, (y + oldy) / 2, x, y);
-					}
-				}
-
-				// 古い座標を保存する。
-				oldx = x;
-				oldy = y;
-
-				++i;
-			}
-
-			// できたパスを塗りつぶす。
-			ctx.fill();
+			let color = `hsl(${((dxy + factor * 0.3 - radius * 0.015) * 360) % 360}deg, 100%, 50%)`;
+			// ハート形を描画する。
+			SAI_draw_heart_0(ctx, 0, 0, radius * 3, color);
 		}
 
 		// 画面の辺の最大値。
@@ -2109,10 +2083,14 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_pic_05_sub(ctx2, 0, 0, dx, dy);
 		ctx2.restore();
 
-		// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
-		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
-		ctx.globalAlpha = 1; // 元に戻す。
+		if(0){ // 画5にはモーションブラーを適用しない。
+			// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
+			ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
+			ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
+			ctx.globalAlpha = 1; // 元に戻す。
+		}else{
+			ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
+		}
 
 		// フォーカス矢印を描画する。
 		let count2 = SAI_get_tick_count();
