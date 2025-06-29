@@ -95,7 +95,7 @@ const facelocker = function(canvas, on_lock){
 			ctx.font = "bold 20px san-serif";
 			ctx.fillStyle = "#f99";
 			ctx.textAlign = "center";
-			myFillText(ctx, "LOCKED ON", x, y - radius);
+			myFillText(ctx, "TARGET LOCKED", x, y - radius);
 
 			// 回転するハート群を描画する。
 			if (self.heart_img.complete){
