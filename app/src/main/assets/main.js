@@ -1310,18 +1310,18 @@ document.addEventListener('DOMContentLoaded', function(){
 		if (SAI_mod(sai_counter, 200) > 150){
 			if (right){
 				if (sai_eye_right_img.complete){
-					r *= 2;
-					r05 *= 2;
-					ctx.globalAlpha = 0.8;
+					r *= 1.7;
+					r05 *= 1.7;
+					ctx.globalAlpha = 0.65;
 					ctx.drawImage(sai_eye_right_img, x0 - r, y0 - r05, 2 * r, 2 * r05);
 					ctx.globalAlpha = 1.0;
 					return;
 				}
 			}else{
 				if (sai_eye_left_img.complete){
-					r *= 2;
-					r05 *= 2;
-					ctx.globalAlpha = 0.8;
+					r *= 1.7;
+					r05 *= 1.7;
+					ctx.globalAlpha = 0.65;
 					ctx.drawImage(sai_eye_left_img, x0 - r, y0 - r05, 2 * r, 2 * r05);
 					ctx.globalAlpha = 1.0;
 					return;
@@ -1863,7 +1863,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		for(i = 0; i < N; ++i){
 			let x = cxy * Math.cos(radian) * 0.3;
 			let y = cxy * Math.sin(radian) * 0.3;
-			SAI_draw_eye(ctx, x, y, cxy / 10, opened, 1.0, x >= 0); // 透過しない。
+			ctx.globalAlpha = 0.6;
+			SAI_draw_eye(ctx, x, y, cxy / 10, opened, 1.0, x >= 0);
+			ctx.globalAlpha = 1.0;
 
 			radian += (2 * Math.PI) / N;
 		}
@@ -1872,7 +1874,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		for(i = 0; i < 9; ++i){
 			let x = 2 * cxy * Math.cos(1.5 * radian) * 0.3;
 			let y = 2 * cxy * Math.sin(1.5 * radian) * 0.3;
-			SAI_draw_eye(ctx, x, y, cxy / 10, opened, 1.0, x >= 0); // 透過しない。
+			ctx.globalAlpha = 0.8;
+			SAI_draw_eye(ctx, x, y, cxy / 10, opened, 1.0, x >= 0);
+			ctx.globalAlpha = 1.0;
 
 			radian += (2 * Math.PI) / 9;
 		}
