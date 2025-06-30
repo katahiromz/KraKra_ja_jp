@@ -213,6 +213,7 @@ const trans_DEFAULT_MESSAGE_LIST_EN = [
 	"Time flies when you're having fun",
 	"I feel at ease when I'm with you",
 	"You did a great job today, too, XX-chan",
+	"It looks like a game, but it's not a game.",
 	"I'm going to bed now.",
 	"How about tonight?",
 ];
@@ -281,6 +282,7 @@ const trans_DEFAULT_MESSAGE_LIST_KO_KR = [
 	"즐거운 시간은 순식간이네", 
 	"너와 있으면 진정해", 
 	"오늘도 ○○짱 노력했어",
+	"놀이처럼 놀지 마라.",
 	"지금부터 침대에서 자고",
 	"오늘 밤은 어때?",
 ];
@@ -349,6 +351,7 @@ const trans_DEFAULT_MESSAGE_LIST_JA = [
 	"楽しい時間ってあっという間だね",
 	"君と居ると落ち着くよ",
 	"今日も○○ちゃん頑張ったね",
+	"遊びのようで遊びじゃねーんだよ",
 	"今からベッドで寝ます",
 	"今夜はどうですか",
 ];
@@ -417,6 +420,7 @@ const trans_DEFAULT_MESSAGE_LIST_ZH_CN = [
 	"你玩得开心的时候时间过得真快",
 	"和你在一起我很安心",
 	"你今天也表现得很棒啊，XX酱",
+	"它看起来像一个游戏，但它不是游戏。",
 	"我现在要去睡觉了。",
 	"今晚怎么样？",
 ];
@@ -485,6 +489,7 @@ const trans_DEFAULT_MESSAGE_LIST_ZH_TW = [
 	"你玩得開心的時候時間過得真快",
 	"和你在一起我很安心",
 	"你今天也表現得很棒啊，XX醬",
+	"它看起來像一個遊戲，但它不是遊戲。",
 	"我現在就上床睡覺",
 	"你今晚怎麼樣",
 ];
@@ -553,6 +558,7 @@ const trans_DEFAULT_MESSAGE_LIST_IT = [
 	"Il tempo vola quando ti diverti",
 	"Mi sento a mio agio quando sono con te",
 	"Anche oggi hai fatto un ottimo lavoro, XX-chan",
+	"Sembra un gioco, ma non lo è.",
 	"Sto andando a letto ora.",
 	"Che ne dici di stasera?",
 ];
@@ -621,6 +627,7 @@ const trans_DEFAULT_MESSAGE_LIST_DE = [
 	"Die Zeit vergeht wie im Flug, wenn man Spaß hat",
 	"Ich fühle mich wohl, wenn ich mit dir zusammen bin",
 	"Du hast heute auch tolle Arbeit geleistet, XX-chan",
+	"Es sieht aus wie ein Spiel, ist aber keins.",
 	"Ich gehe jetzt ins Bett.",
 	"Wie wäre es mit heute Nacht?",
 ];
@@ -689,6 +696,7 @@ const trans_DEFAULT_MESSAGE_LIST_ES = [
 	"El tiempo vuela cuando te diviertes",
 	"Me siento a gusto contigo",
 	"Tú también lo hiciste muy bien hoy, XX-chan",
+	"Parece un juego, pero no lo es.",
 	"Voy a dormir en la cama ahora",
 	"Que tal esta noche",
 ];
@@ -757,6 +765,7 @@ const trans_DEFAULT_MESSAGE_LIST_RU = [
 	"Время летит, когда тебе весело",
 	"Мне легко, когда я с тобой",
 	"Ты тоже отлично поработала сегодня, XX-тян",
+	"Это похоже на игру, но это не игра.",
 	"Я сейчас пойду спать в кровати",
 	"Как насчет сегодняшнего вечера",
 ];
