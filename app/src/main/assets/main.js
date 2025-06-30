@@ -4628,8 +4628,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			sai_spiral_img.src = 'img/spiral.svg';
 
 		// 両目の画像を読み込む。
-		sai_eye_left_img.src = 'img/eye-left.svg'
-		sai_eye_right_img.src = 'img/eye-right.svg'
+		sai_eye_left_img.src = 'img/eye-left.png'
+		sai_eye_right_img.src = 'img/eye-right.png'
 
 		// 設定をローカルストレージから読み込む。
 		SAI_load_local_storage();
