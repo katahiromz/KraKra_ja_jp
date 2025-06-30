@@ -1307,63 +1307,19 @@ document.addEventListener('DOMContentLoaded', function(){
 		let r025 = r * 0.25;
 		let r05 = r025 * 2 * opened;
 
-		if (SAI_mod(sai_counter, 350) > 200){
-			if (right){
-				if (sai_eye_right_img.complete){
-					r *= 1.7;
-					r05 *= 1.7;
-					ctx.globalAlpha = 0.65;
-					ctx.drawImage(sai_eye_right_img, x0 - r, y0 - r05, 2 * r, 2 * r05);
-					ctx.globalAlpha = 1.0;
-					return;
-				}
-			}else{
-				if (sai_eye_left_img.complete){
-					r *= 1.7;
-					r05 *= 1.7;
-					ctx.globalAlpha = 0.65;
-					ctx.drawImage(sai_eye_left_img, x0 - r, y0 - r05, 2 * r, 2 * r05);
-					ctx.globalAlpha = 1.0;
-					return;
-				}
+		if (right){
+			if (sai_eye_right_img.complete){
+				r *= 1.8;
+				r05 *= 1.8;
+				ctx.drawImage(sai_eye_right_img, x0 - r, y0 - r05, 2 * r, 2 * r05);
+			}
+		}else{
+			if (sai_eye_left_img.complete){
+				r *= 1.8;
+				r05 *= 1.8;
+				ctx.drawImage(sai_eye_left_img, x0 - r, y0 - r05, 2 * r, 2 * r05);
 			}
 		}
-
-		ctx.strokeStyle = `rgba(0, 0, 0, ${alpha * 100.0}%)`;
-		ctx.lineWidth = r * 0.10;
-
-		ctx.beginPath();
-		ctx.moveTo(x0, y0 - r * 0.75);
-		ctx.lineTo(x0, y0 + r * 0.75);
-		ctx.stroke();
-
-		ctx.beginPath();
-		ctx.moveTo(x0 - r05, y0 - r05);
-		ctx.lineTo(x0 + r05, y0 + r05);
-		ctx.stroke();
-
-		ctx.beginPath();
-		ctx.moveTo(x0 + r05, y0 - r05);
-		ctx.lineTo(x0 - r05, y0 + r05);
-		ctx.stroke();
-
-		ctx.beginPath();
-		ctx.moveTo(x0 - r, y0);
-		ctx.bezierCurveTo(x0 - r025, y0 - r05, x0 + r025, y0 - r05, x0 + r, y0);
-		ctx.bezierCurveTo(x0 + r025, y0 + r05, x0 - r025, y0 + r05, x0 - r, y0);
-		ctx.closePath();
-
-		ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 100.0}%)`;
-		ctx.fill();
-
-		ctx.strokeStyle = `rgba(0, 0, 0, ${alpha * 100.0}%)`;
-		ctx.lineWidth = r * 0.10;
-		ctx.stroke();
-
-		ctx.fillStyle = `rgba(50, 0, 220, ${alpha * 100.0}%)`;
-		SAI_draw_circle(ctx, x0, y0, r / 3 * opened, true);
-		ctx.fillStyle = `rgba(20, 0, 90, ${alpha * 100.0}%)`;
-		SAI_draw_circle(ctx, x0, y0, r / 5 * opened, true);
 	}
 
 	// 目の描画２。
@@ -1850,7 +1806,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			opened = 0.6 + 0.4 * Math.abs(Math.sin(f * Math.PI));
 		}
 
-		// 中央の大きな目を描画する。
+		// 中央の縦向きの大きな目立つ目を描画する。ここがフォーカスとなる。
 		let factor3 = (0.3 + Math.sin(count2 * 0.05) * 0.3);
 		SAI_draw_eye_2(ctx, 0, 0, cxy / 8, (1.0 + factor3));
 		ctx.fillStyle = '#f00';
@@ -1858,28 +1814,29 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_heart(ctx, 0, 0 - cxy / 25 * factor3, 0, cxy / 25 * factor3);
 
 		// 周りの回転する４つの目を描画する。
+		// 人間は、透過して回転する複数の目に弱いらしい。
 		const N = 4;
 		let radian = factor * 1.3;
+		ctx.globalAlpha = 0.55; // 透過する。
 		for(i = 0; i < N; ++i){
 			let x = cxy * Math.cos(radian) * 0.3;
 			let y = cxy * Math.sin(radian) * 0.3;
-			ctx.globalAlpha = 0.6;
 			SAI_draw_eye(ctx, x, y, cxy / 10, opened, 1.0, x >= 0);
-			ctx.globalAlpha = 1.0;
 
 			radian += (2 * Math.PI) / N;
 		}
+		ctx.globalAlpha = 1; // 透過しない。
 
 		// その外側に９つの目を描画する。
+		ctx.globalAlpha = 0.55; // 透過する。
 		for(i = 0; i < 9; ++i){
 			let x = 2 * cxy * Math.cos(1.5 * radian) * 0.3;
 			let y = 2 * cxy * Math.sin(1.5 * radian) * 0.3;
-			ctx.globalAlpha = 0.8;
 			SAI_draw_eye(ctx, x, y, cxy / 10, opened, 1.0, x >= 0);
-			ctx.globalAlpha = 1.0;
 
 			radian += (2 * Math.PI) / 9;
 		}
+		ctx.globalAlpha = 1; // 透過しない。
 
 		// 中央から離れるにつれ黄色を深めるグラデーション。
 		let grd = ctx.createRadialGradient(0, 0, dxy * 0.25, 0, 0, dxy * 0.5);
