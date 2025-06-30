@@ -35,7 +35,7 @@ const SAI_on_keydown_message = function(e){
 // ドキュメントの読み込みが完了（DOMContentLoaded）されたら無名関数が呼び出される。
 document.addEventListener('DOMContentLoaded', function(){
 	// 変数を保護するため、関数内部に閉じ込める。
-	const sai_NUM_TYPE = 20; // 「画」の個数。
+	const sai_NUM_TYPE = 20; // 「動画」の個数。
 	let sai_screen_width = 0; // スクリーンの幅（ピクセル単位）を覚えておく。
 	let sai_screen_height = 0; // スクリーンの高さ（ピクセル単位）を覚えておく。
 	let sai_pic_type = 0; // 映像の種類を表す整数値。
@@ -1393,7 +1393,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
-	// 映像「画-1: 催眠解除」の描画。
+	// 映像「動画-1: 催眠解除」の描画。
 	// pic-1: Release Hyponosis
 	const SAI_draw_pic_minus_1 = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
@@ -1486,7 +1486,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_arrow(ctx, qx - rx0, qy - ry0, qx - rx1, qy - ry1, 5);
 	};
 
-	// 映像「画0: ダミー画面（練習用）」の描画。
+	// 映像「動画0: ダミー画面（練習用）」の描画。
 	// pic0: Dummy Screen (for practice)
 	const SAI_draw_pic_00 = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
@@ -1540,7 +1540,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
-	// 映像「画1: 対数らせん」の描画。
+	// 映像「動画1: 対数らせん」の描画。
 	// pic1: Logarithmic Spiral
 	const SAI_draw_pic_1_sub = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
@@ -1612,7 +1612,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
-	// 映像「画1: 対数らせん」の描画。
+	// 映像「動画1: 対数らせん」の描画。
 	// pic1: Logarithmic Spiral
 	const SAI_draw_pic_01 = function(ctx, px, py, dx, dy){
 		// 別のキャンバスに普通に描画する。
@@ -1637,7 +1637,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	}
 
-	// 映像「画2: 同心円状」の描画。
+	// 映像「動画2: 同心円状」の描画。
 	// pic2: Concentric Circles
 	const SAI_draw_pic_2_sub = function(ctx, px, py, dx, dy, outside=true){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
@@ -1695,7 +1695,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
-	// 映像「画2: 同心円状」の描画。
+	// 映像「動画2: 同心円状」の描画。
 	// pic2: Concentric Circles
 	const SAI_draw_pic_02 = function(ctx, px, py, dx, dy){
 		// 別のキャンバスに描画する。必要に応じてクリッピングを掛ける。
@@ -1715,7 +1715,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	}
 
-	// 映像「画3: 目が回る」の描画。
+	// 映像「動画3: 目が回る」の描画。
 	// pic3: The Eyes
 	const SAI_draw_pic_03_sub = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
@@ -1848,7 +1848,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
-	// 映像「画3: 目が回る」の描画。
+	// 映像「動画3: 目が回る」の描画。
 	// pic3: The Eyes
 	const SAI_draw_pic_03 = function(ctx, px, py, dx, dy){
 		// 別のキャンバスに普通に描画する。
@@ -1867,7 +1867,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	}
 
-	// 映像「画4: アルキメデスのらせん」の描画。
+	// 映像「動画4: アルキメデスのらせん」の描画。
 	// pic4: Archimedes' Spiral
 	const SAI_draw_pic_04_sub = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
@@ -1942,7 +1942,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
-	// 映像「画4: アルキメデスのらせん」の描画。
+	// 映像「動画4: アルキメデスのらせん」の描画。
 	// pic4: Archimedes' Spiral
 	const SAI_draw_pic_04 = function(ctx, px, py, dx, dy){
 		// 別のキャンバスに普通に描画する。
@@ -1967,7 +1967,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	}
 
-	// 映像「画5: 広がるハート」の描画。
+	// 映像「動画5: 広がるハート」の描画。
 	// pic5: Spreading Rainbow
 	const SAI_draw_pic_05_sub = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
@@ -2039,23 +2039,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
-	// 映像「画5: 広がるハート」の描画。
+	// 映像「動画5: 広がるハート」の描画。
 	// pic5: Spreading Rainbow
 	const SAI_draw_pic_05 = function(ctx, px, py, dx, dy){
-		// 別のキャンバスに普通に描画する。
-		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
-		ctx2.save();
-		SAI_draw_pic_05_sub(ctx2, 0, 0, dx, dy);
-		ctx2.restore();
-
-		if(0){ // 画5にはモーションブラーを適用しない。
-			// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
-			ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-			ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
-			ctx.globalAlpha = 1; // 元に戻す。
-		}else{
-			ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
-		}
+		SAI_draw_pic_05_sub(ctx, px, py, dx, dy);
 
 		// フォーカス矢印を描画する。
 		let count2 = SAI_get_tick_count();
@@ -2071,7 +2058,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	}
 
-	// 映像「画6: 五円玉」の描画。
+	// 映像「動画6: 五円玉」の描画。
 	// pic6: 5-yen coin
 	const SAI_draw_pic_06_sub = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
@@ -2168,7 +2155,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
-	// 映像「画6: 五円玉」の描画。
+	// 映像「動画6: 五円玉」の描画。
 	// pic6: 5-yen coin
 	const SAI_draw_pic_06 = function(ctx, px, py, dx, dy){
 		// 別のキャンバスに普通に描画する。
@@ -2245,7 +2232,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 	}
 
-	// 映像「画7: 奇妙な渦巻き」の描画。
+	// 映像「動画7: 奇妙な渦巻き」の描画。
 	// pic7: Strange Swirl
 	const SAI_draw_pic_07_sub = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
@@ -2312,7 +2299,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
-	// 映像「画7: 奇妙な渦巻き」の描画。
+	// 映像「動画7: 奇妙な渦巻き」の描画。
 	// pic7: Strange Swirl
 	const SAI_draw_pic_07 = function(ctx, px, py, dx, dy){
 		// 別のキャンバスに普通に描画する。
@@ -2331,7 +2318,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	}
 
-	// 映像「画8: クレージーな色」の描画。
+	// 映像「動画8: クレージーな色」の描画。
 	// pic8: Crazy Colors
 	const SAI_draw_pic_08_sub = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
@@ -2404,23 +2391,11 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
-	// 映像「画8: クレージーな色」の描画。
+	// 映像「動画8: クレージーな色」の描画。
 	// pic8: Crazy Colors
 	const SAI_draw_pic_08 = function(ctx, px, py, dx, dy){
-		// 別のキャンバスに普通に描画する。
-		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
-		ctx2.save();
-		SAI_draw_pic_08_sub(ctx2, 0, 0, dx / 2, dy / 2);
-		ctx2.restore();
-
-		if(0){ // この映像についてはモーションブラーを適用しない。
-			// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
-			ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-			ctx.drawImage(sai_id_canvas_02, 0, 0, dx / 2, dy / 2, px, py, dx, dy);
-			ctx.globalAlpha = 1; // 元に戻す。
-		}else{
-			ctx.drawImage(sai_id_canvas_02, 0, 0, dx / 2, dy / 2, px, py, dx, dy);
-		}
+		// この動画については、モーションブラーを適用しない。
+		SAI_draw_pic_08_sub(ctx, px, py, dx, dy);
 
 		// フォーカス矢印を描画する。
 		let qx = px + dx / 2, qy = py + dy / 2;
@@ -2431,7 +2406,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	}
 
-	// 映像「画9: 対数らせん 2」の描画。
+	// 映像「動画9: 対数らせん 2」の描画。
 	// pic9: Logarithmic Spiral 2
 	const SAI_draw_pic_09_sub = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
@@ -2500,7 +2475,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
-	// 映像「画9: 対数らせん 2」の描画。
+	// 映像「動画9: 対数らせん 2」の描画。
 	// pic9: Logarithmic Spiral 2
 	const SAI_draw_pic_09 = function(ctx, px, py, dx, dy){
 		// 別のキャンバスに普通に描画する。
@@ -2524,7 +2499,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	}
 
-	// 映像「画10: アナログディスク」の描画。
+	// 映像「動画10: アナログディスク」の描画。
 	// pic10: Analog Disc
 	const SAI_draw_pic_10_sub = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
@@ -2562,7 +2537,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
-	// 映像「画10: アナログディスク」の描画。
+	// 映像「動画10: アナログディスク」の描画。
 	// pic10: Analog Disc
 	const SAI_draw_pic_10 = function(ctx, px, py, dx, dy){
 		// 別のキャンバスに普通に描画する。
@@ -2589,7 +2564,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		return radius * Math.sin(x * Math.PI / radius / 2);
 	}
 
-	// 映像「画11: 奇妙な渦巻き 2」の描画。
+	// 映像「動画11: 奇妙な渦巻き 2」の描画。
 	// pic11: Strange Swirl 2
 	const SAI_draw_pic_11_sub = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
@@ -2659,7 +2634,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
-	// 映像「画11: 奇妙な渦巻き 2」の描画。
+	// 映像「動画11: 奇妙な渦巻き 2」の描画。
 	// pic11: Strange Swirl 2
 	const SAI_draw_pic_11 = function(ctx, px, py, dx, dy){
 		// 別のキャンバスに普通に描画する。
@@ -2780,7 +2755,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore();
 	}
 
-	// 映像「画12: 万華鏡」の描画。
+	// 映像「動画12: 万華鏡」の描画。
 	// pic12: Kaleidoscope
 	const SAI_draw_pic_12_sub = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
@@ -2821,7 +2796,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
-	// 映像「画12: 万華鏡」の描画。
+	// 映像「動画12: 万華鏡」の描画。
 	// pic12: Kaleidoscope
 	const SAI_draw_pic_12 = function(ctx, px, py, dx, dy){
 		// 別のキャンバスに普通に描画する。
@@ -2840,7 +2815,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	}
 
-	// 映像「画13: 1番目の色の画面」の描画。
+	// 映像「動画13: 1番目の色の画面」の描画。
 	// pic13: 1st color screen
 	const SAI_draw_pic_13 = function(ctx, px, py, dx, dy){
 		// 1番目の色で長方形領域を塗りつぶす。
@@ -2848,7 +2823,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.fillRect(px, py, dx, dy);
 	}
 
-	// 映像「画14: 2番目の色の画面」の描画。
+	// 映像「動画14: 2番目の色の画面」の描画。
 	// pic14: 2st color screen
 	const SAI_draw_pic_14 = function(ctx, px, py, dx, dy){
 		// 2番目の色で長方形領域を塗りつぶす。
@@ -2856,7 +2831,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.fillRect(px, py, dx, dy);
 	}
 
-	// 映像「画15: ただの黒い画面」の描画。
+	// 映像「動画15: ただの黒い画面」の描画。
 	// pic15: Black screen
 	const SAI_draw_pic_15 = function(ctx, px, py, dx, dy){
 		// 黒で長方形領域を塗りつぶす。
@@ -2864,7 +2839,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.fillRect(px, py, dx, dy);
 	}
 
-	// 映像「画16: ただの白い画面」の描画。
+	// 映像「動画16: ただの白い画面」の描画。
 	// pic16: White screen
 	const SAI_draw_pic_16 = function(ctx, px, py, dx, dy){
 		// 白で長方形領域を塗りつぶす。
@@ -2940,7 +2915,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 	}
 
-	// 映像「画17: ヘビの回転」の描画。
+	// 映像「動画17: ヘビの回転」の描画。
 	const SAI_draw_pic_17_sub = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
@@ -2981,7 +2956,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
-	// 映像「画17: ヘビの回転」の描画。
+	// 映像「動画17: ヘビの回転」の描画。
 	const SAI_draw_pic_17 = function(ctx, px, py, dx, dy){
 		// 別のキャンバスに普通に描画する。
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
@@ -3039,7 +3014,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	};
 
-	// 映像「画18: ひずみ放射」の描画。
+	// 映像「動画18: ひずみ放射」の描画。
 	const SAI_draw_pic_18_sub = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
@@ -3075,7 +3050,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
-	// 映像「画18: ひずみ放射」の描画。
+	// 映像「動画18: ひずみ放射」の描画。
 	const SAI_draw_pic_18 = function(ctx, px, py, dx, dy){
 		// 別のキャンバスに普通に描画する。
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
@@ -3090,12 +3065,12 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.globalAlpha = 1; // 元に戻す。
 	}
 
-	// 「画19」で使用するデータ。
+	// 「動画19」で使用するデータ。
 	let sai_pic_19_dx = null, sai_pic_19_dy = null;
 	let sai_pic_19_image_data = null;
 	let sai_pic_19_wave_data = null;
 
-	// 映像「画19: ランダムな波」の描画。
+	// 映像「動画19: ランダムな波」の描画。
 	const SAI_draw_pic_19_sub = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
@@ -3156,7 +3131,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
 	}
 
-	// 映像「画19: ランダムな波」の描画。
+	// 映像「動画19: ランダムな波」の描画。
 	const SAI_draw_pic_19 = function(ctx, px, py, dx, dy){
 		// 別のキャンバスに普通に描画する。
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
