@@ -1307,7 +1307,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let r025 = r * 0.25;
 		let r05 = r025 * 2 * opened;
 
-		if (SAI_mod(sai_counter, 200) > 150){
+		if (SAI_mod(sai_counter, 350) > 200){
 			if (right){
 				if (sai_eye_right_img.complete){
 					r *= 1.7;
