@@ -1346,6 +1346,7 @@ trans_trans = {
 		'TEXT_SOUND_PACHI': 'パチ',
 		'TEXT_SOUND_WAHWAH': 'ワウワウ',
 		'TEXT_SOUND_MECHANICAL': '機械音',
+		'TEXT_SOUND_WATER_DROP': '水の音',
 		'TEXT_SOUND_PSYCHO': '猟奇',
 		'TEXT_SOUND_MYANMYAN': 'みゃんみゃん',
 		'TEXT_SOUND_VOLUME': '音量:',
@@ -1482,6 +1483,7 @@ trans_trans = {
 		'TEXT_SOUND_PACHI': '弹珠',
 		'TEXT_SOUND_WAHWAH': '哇哇',
 		'TEXT_SOUND_MECHANICAL': '机械声',
+		'TEXT_SOUND_WATER_DROP': '水声',
 		'TEXT_SOUND_PSYCHO': '惊魂记',
 		'TEXT_SOUND_MYANMYAN': '缅缅',
 		'TEXT_SOUND_VOLUME': '音量：',
@@ -1618,6 +1620,7 @@ trans_trans = {
 		'TEXT_SOUND_PACHI': '彈珠',
 		'TEXT_SOUND_WAHWAH': '哇哇',
 		'TEXT_SOUND_MECHANICAL': '機械聲',
+		'TEXT_SOUND_WATER_DROP': '水聲',
 		'TEXT_SOUND_PSYCHO': '驚魂記',
 		'TEXT_SOUND_MYANMYAN': '緬緬',
 		'TEXT_SOUND_VOLUME': '音量：',
@@ -1754,6 +1757,7 @@ trans_trans = {
 		'TEXT_SOUND_PACHI': '파칭',
 		'TEXT_SOUND_WAHWAH': '와와',
 		'TEXT_SOUND_MECHANICAL': '기계음',
+		'TEXT_SOUND_WATER_DROP': '물 소리',
 		'TEXT_SOUND_PSYCHO': '사이코',
 		'TEXT_SOUND_MYANMYAN': '미안',
 		'TEXT_SOUND_VOLUME': '사운드 볼륨:',
@@ -1890,6 +1894,7 @@ trans_trans = {
 		'TEXT_SOUND_PACHI': 'Pachi',
 		'TEXT_SOUND_WAHWAH': 'WahWah',
 		'TEXT_SOUND_MECHANICAL': 'Meccanico',
+		'TEXT_SOUND_WATER_DROP': '水の音',
 		'TEXT_SOUND_PSYCHO': 'Psicopatico',
 		'TEXT_SOUND_MYANMYAN': 'Myan Myan',
 		'TEXT_SOUND_VOLUME': 'Volume del suono:',
@@ -2026,6 +2031,7 @@ trans_trans = {
 		'TEXT_SOUND_PACHI': 'Pachi',
 		'TEXT_SOUND_WAHWAH': 'WahWah',
 		'TEXT_SOUND_MECHANICAL': 'Mechanischer',
+		'TEXT_SOUND_WATER_DROP': 'Il suono dell\'acqua',
 		'TEXT_SOUND_PSYCHO': 'Psycho',
 		'TEXT_SOUND_MYANMYAN': 'Myan Myan',
 		'TEXT_SOUND_VOLUME': 'Lautstärke:',
@@ -2162,6 +2168,7 @@ trans_trans = {
 		'TEXT_SOUND_PACHI': 'Pachi',
 		'TEXT_SOUND_WAHWAH': 'Wah Wah',
 		'TEXT_SOUND_MECHANICAL': 'Mecánico',
+		'TEXT_SOUND_WATER_DROP': 'El sonido del agua',
 		'TEXT_SOUND_PSYCHO': 'Psicópata',
 		'TEXT_SOUND_MYANMYAN': 'Myanmar Myanmar',
 		'TEXT_SOUND_VOLUME': 'Volumen:',
@@ -2298,6 +2305,7 @@ trans_trans = {
 		'TEXT_SOUND_PACHI': 'Пачи',
 		'TEXT_SOUND_WAHWAH': 'ВахВах',
 		'TEXT_SOUND_MECHANICAL': 'Механический',
+		'TEXT_SOUND_WATER_DROP': 'Шум воды',
 		'TEXT_SOUND_PSYCHO': 'Психо',
 		'TEXT_SOUND_MYANMYAN': 'Мьян Мьян',
 		'TEXT_SOUND_VOLUME': 'Объем:',
@@ -2434,6 +2442,7 @@ trans_trans = {
 		'TEXT_SOUND_PACHI': 'Pachi',
 		'TEXT_SOUND_WAHWAH': 'WahWah',
 		'TEXT_SOUND_MECHANICAL': 'Mechanical',
+		'TEXT_SOUND_WATER_DROP': 'The sound of water',
 		'TEXT_SOUND_PSYCHO': 'Psycho',
 		'TEXT_SOUND_MYANMYAN': 'Myan Myan',
 		'TEXT_SOUND_VOLUME': 'Sound volume:',
@@ -2602,6 +2611,7 @@ const trans_localize = function(lang){
 	trans_setSelectOptionText(sai_id_select_sound, 'Pachi', trans_getText('TEXT_SOUND_PACHI'));
 	trans_setSelectOptionText(sai_id_select_sound, 'WahWah', trans_getText('TEXT_SOUND_WAHWAH'));
 	trans_setSelectOptionText(sai_id_select_sound, 'Mechanical', trans_getText('TEXT_SOUND_MECHANICAL'));
+	trans_setSelectOptionText(sai_id_select_sound, 'WaterDrop', trans_getText('TEXT_SOUND_WATER_DROP'));
 	trans_setSelectOptionText(sai_id_select_sound, 'Psycho', trans_getText('TEXT_SOUND_PSYCHO'));
 	trans_setSelectOptionText(sai_id_select_sound, 'MyanMyan', trans_getText('TEXT_SOUND_MYANMYAN'));
 
