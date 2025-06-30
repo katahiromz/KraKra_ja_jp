@@ -1814,7 +1814,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_heart(ctx, 0, 0 - cxy / 25 * factor3, 0, cxy / 25 * factor3);
 
 		// 周りの回転する４つの目を描画する。
-		// 人間は、透過して回転する複数の目に弱いらしい。
+		// 人間は、透過して回転する複数の目に弱いらしい。目はたれ目がいいだろう。
 		const N = 4;
 		let radian = factor * 1.3;
 		ctx.globalAlpha = 0.55; // 透過する。
