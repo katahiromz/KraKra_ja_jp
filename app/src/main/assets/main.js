@@ -1310,16 +1310,20 @@ document.addEventListener('DOMContentLoaded', function(){
 		if (SAI_mod(sai_counter, 200) > 150){
 			if (right){
 				if (sai_eye_right_img.complete){
-					r *= 1.5;
-					r05 *= 1.5;
+					r *= 2;
+					r05 *= 2;
+					ctx.globalAlpha = 0.8;
 					ctx.drawImage(sai_eye_right_img, x0 - r, y0 - r05, 2 * r, 2 * r05);
+					ctx.globalAlpha = 1.0;
 					return;
 				}
 			}else{
 				if (sai_eye_left_img.complete){
-					r *= 1.5;
-					r05 *= 1.5;
+					r *= 2;
+					r05 *= 2;
+					ctx.globalAlpha = 0.8;
 					ctx.drawImage(sai_eye_left_img, x0 - r, y0 - r05, 2 * r, 2 * r05);
+					ctx.globalAlpha = 1.0;
 					return;
 				}
 			}
