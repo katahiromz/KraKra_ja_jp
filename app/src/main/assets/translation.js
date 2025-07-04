@@ -1350,7 +1350,7 @@ trans_trans = {
 		'TEXT_SOUND_MAGIC': '魔術',
 		'TEXT_SOUND_ORA_SAIMIN': 'おら! 催眠!',
 		'TEXT_SOUND_NOISE': '雑音',
-		'TEXT_SOUND_432HZ': '432Hz',
+		'TEXT_SOUND_432HZ': '432Hz±4Hz',
 		'TEXT_SOUND_HELI': 'ヘリコプター',
 		'TEXT_SOUND_PACHI': 'パチ',
 		'TEXT_SOUND_WAHWAH': 'ワウワウ',
@@ -1487,7 +1487,7 @@ trans_trans = {
 		'TEXT_SOUND_MAGIC': '巫术',
 		'TEXT_SOUND_ORA_SAIMIN': '天啊！ 催眠！',
 		'TEXT_SOUND_NOISE': '噪音',
-		'TEXT_SOUND_432HZ': '432Hz',
+		'TEXT_SOUND_432HZ': '432Hz±4Hz',
 		'TEXT_SOUND_HELI': '直升机',
 		'TEXT_SOUND_PACHI': '弹珠',
 		'TEXT_SOUND_WAHWAH': '哇哇',
@@ -1624,7 +1624,7 @@ trans_trans = {
 		'TEXT_SOUND_MAGIC': '巫術',
 		'TEXT_SOUND_ORA_SAIMIN': '天啊！ 催眠！',
 		'TEXT_SOUND_NOISE': '噪音',
-		'TEXT_SOUND_432HZ': '432Hz',
+		'TEXT_SOUND_432HZ': '432Hz±4Hz',
 		'TEXT_SOUND_HELI': '直升機',
 		'TEXT_SOUND_PACHI': '彈珠',
 		'TEXT_SOUND_WAHWAH': '哇哇',
@@ -1761,7 +1761,7 @@ trans_trans = {
 		'TEXT_SOUND_MAGIC': '마술',
 		'TEXT_SOUND_ORA_SAIMIN': '오! 최면!',
 		'TEXT_SOUND_NOISE': '소음',
-		'TEXT_SOUND_432HZ': '432Hz',
+		'TEXT_SOUND_432HZ': '432Hz±4Hz',
 		'TEXT_SOUND_HELI': '헬리콥터',
 		'TEXT_SOUND_PACHI': '파칭',
 		'TEXT_SOUND_WAHWAH': '와와',
@@ -1898,7 +1898,7 @@ trans_trans = {
 		'TEXT_SOUND_MAGIC': 'Stregoneria',
 		'TEXT_SOUND_ORA_SAIMIN': 'Ora! Saimin!',
 		'TEXT_SOUND_NOISE': 'Rumore',
-		'TEXT_SOUND_432HZ': '432Hz',
+		'TEXT_SOUND_432HZ': '432Hz±4Hz',
 		'TEXT_SOUND_HELI': 'Elicottero',
 		'TEXT_SOUND_PACHI': 'Pachi',
 		'TEXT_SOUND_WAHWAH': 'WahWah',
@@ -2035,7 +2035,7 @@ trans_trans = {
 		'TEXT_SOUND_MAGIC': 'Hexerei',
 		'TEXT_SOUND_ORA_SAIMIN': 'Ora! Saimin!',
 		'TEXT_SOUND_NOISE': 'Lärm',
-		'TEXT_SOUND_432HZ': '432Hz',
+		'TEXT_SOUND_432HZ': '432Hz±4Hz',
 		'TEXT_SOUND_HELI': 'Hubschrauber',
 		'TEXT_SOUND_PACHI': 'Pachi',
 		'TEXT_SOUND_WAHWAH': 'WahWah',
@@ -2172,7 +2172,7 @@ trans_trans = {
 		'TEXT_SOUND_MAGIC': 'Magia',
 		'TEXT_SOUND_ORA_SAIMIN': 'Ora! Saimin!',
 		'TEXT_SOUND_NOISE': 'Ruido',
-		'TEXT_SOUND_432HZ': '432Hz',
+		'TEXT_SOUND_432HZ': '432Hz±4Hz',
 		'TEXT_SOUND_HELI': 'Helicóptero',
 		'TEXT_SOUND_PACHI': 'Pachi',
 		'TEXT_SOUND_WAHWAH': 'Wah Wah',
@@ -2309,7 +2309,7 @@ trans_trans = {
 		'TEXT_SOUND_MAGIC': 'Магия',
 		'TEXT_SOUND_ORA_SAIMIN': 'Ora! Saimin!',
 		'TEXT_SOUND_NOISE': 'Шум',
-		'TEXT_SOUND_432HZ': '432Hz',
+		'TEXT_SOUND_432HZ': '432Hz±4Hz',
 		'TEXT_SOUND_HELI': 'Вертолет',
 		'TEXT_SOUND_PACHI': 'Пачи',
 		'TEXT_SOUND_WAHWAH': 'ВахВах',
@@ -2446,7 +2446,7 @@ trans_trans = {
 		'TEXT_SOUND_MAGIC': 'Magic',
 		'TEXT_SOUND_ORA_SAIMIN': 'Ora! Saimin!',
 		'TEXT_SOUND_NOISE': 'Noise',
-		'TEXT_SOUND_432HZ': '432Hz',
+		'TEXT_SOUND_432HZ': '432Hz±4Hz',
 		'TEXT_SOUND_HELI': 'Helicopter',
 		'TEXT_SOUND_PACHI': 'Pachi',
 		'TEXT_SOUND_WAHWAH': 'WahWah',
@@ -2615,7 +2615,7 @@ const trans_localize = function(lang){
 	trans_setSelectOptionText(sai_id_select_sound, 'Magic', trans_getText('TEXT_SOUND_MAGIC'));
 	trans_setSelectOptionText(sai_id_select_sound, 'OraSaimin', trans_getText('TEXT_SOUND_ORA_SAIMIN'));
 	trans_setSelectOptionText(sai_id_select_sound, 'Noise', trans_getText('TEXT_SOUND_NOISE'));
-	trans_setSelectOptionText(sai_id_select_sound, '432Hz', trans_getText('TEXT_SOUND_432HZ'));
+	trans_setSelectOptionText(sai_id_select_sound, '432Hz±4Hz', trans_getText('TEXT_SOUND_432HZ'));
 	trans_setSelectOptionText(sai_id_select_sound, 'Heli', trans_getText('TEXT_SOUND_HELI'));
 	trans_setSelectOptionText(sai_id_select_sound, 'Pachi', trans_getText('TEXT_SOUND_PACHI'));
 	trans_setSelectOptionText(sai_id_select_sound, 'WahWah', trans_getText('TEXT_SOUND_WAHWAH'));
