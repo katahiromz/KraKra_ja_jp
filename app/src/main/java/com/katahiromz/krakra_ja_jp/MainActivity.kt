@@ -19,7 +19,12 @@ import android.os.VibratorManager
 import android.speech.tts.TextToSpeech
 import android.view.View
 import android.view.WindowManager
-import android.webkit.*
+import android.webkit.ValueCallback
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
+import android.webkit.WebSettings
+import android.webkit.WebView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -28,11 +33,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
-import java.util.*
+import java.util.Locale
 
 // 複数の翻訳版を有効にするために、任意の翻訳版のコンテキストを作成できるようにする。
 // https://qiita.com/tarumzu/items/b076c4635b38366cddee
@@ -257,8 +263,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         setContentView(R.layout.activity_main)
 
         // アクションバーを隠す。
-        // Theme.MaterialComponents.DayNight.NoActionBarで指定できるので省略。
-        //supportActionBar?.hide()
+        supportActionBar?.hide()
 
         // ロケールをセットする。
         setCurLocale(Locale.getDefault())
@@ -283,15 +288,17 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         // Timberを初期化。
         initTimber()
 
-        // システムバーが変更された場合を検出し、Web側に渡す。
-        ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { view, insets ->
-            val sysBarsVisible = insets.isVisible(WindowInsetsCompat.Type.systemBars())
-            var str = "SAI_OnAndroidSystemBarsChanged("
-            str += sysBarsVisible.toString()
-            str += ")"
-            Timber.i(str)
-            //webView?.evaluateJavascript(str) {} // 現在、無効。
-            WindowInsetsCompat.toWindowInsetsCompat(view.onApplyWindowInsets(insets.toWindowInsets()))
+        // インセットの処理。
+        val view = findViewById<View>(android.R.id.content)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        ViewCompat.setOnApplyWindowInsetsListener(view) { view, insets ->
+            val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.setPadding(
+                view.paddingLeft,
+                systemBarsInsets.top,
+                view.paddingRight,
+                systemBarsInsets.bottom)
+            insets
         }
 
         // 「戻る」ボタンのコールバックを登録。
@@ -534,7 +541,9 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         } else {
             pm.getPackageInfo(appName, PackageManager.GET_META_DATA)
         }
-        return pi.versionName
+        if (pi.versionName != null)
+            return pi.versionName!!
+        return ""
     }
 
     /////////////////////////////////////////////////////////////////////
