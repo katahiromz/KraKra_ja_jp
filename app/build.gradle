@@ -4,18 +4,20 @@ plugins {
 }
 
 android {
-    compileSdkVersion 34
+    compileSdkVersion 35
 
     defaultConfig {
         applicationId "com.katahiromz.krakra_ja_jp"
         minSdkVersion 28
-        targetSdkVersion 34
-        versionCode 383
-        versionName "3.8.3"
+        targetSdkVersion 35
+        versionCode 384
+        versionName "3.8.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    buildFeatures {
+        buildConfig = true
+    }
     buildTypes {
         release {
             minifyEnabled true
@@ -29,16 +31,16 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '17'
-    }
-    lintOptions {
-        disable "Instantiatable"
+        jvmTarget = '1.8'
     }
     namespace 'com.katahiromz.krakra_ja_jp'
+    lint {
+        disable 'Instantiatable'
+    }
 }
 
 dependencies {
