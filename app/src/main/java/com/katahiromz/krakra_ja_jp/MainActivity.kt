@@ -19,7 +19,12 @@ import android.os.VibratorManager
 import android.speech.tts.TextToSpeech
 import android.view.View
 import android.view.WindowManager
-import android.webkit.*
+import android.webkit.ValueCallback
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
+import android.webkit.WebSettings
+import android.webkit.WebView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -32,7 +37,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
-import java.util.*
+import java.util.Locale
 
 // 複数の翻訳版を有効にするために、任意の翻訳版のコンテキストを作成できるようにする。
 // https://qiita.com/tarumzu/items/b076c4635b38366cddee
@@ -438,7 +443,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         webView?.webViewClient = MyWebViewClient(object : MyWebViewClient.Listener {
             override fun onReceivedError(view: WebView?, request: WebResourceRequest?,
                                          error: WebResourceError?) {
-                Timber.i("onReceivedError")
+                Timber.i("onReceivedError: " + error?.toString())
             }
 
             override fun onReceivedHttpError(view: WebView?, request: WebResourceRequest?,
@@ -534,7 +539,9 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         } else {
             pm.getPackageInfo(appName, PackageManager.GET_META_DATA)
         }
-        return pi.versionName
+        if (pi.versionName != null)
+            return pi.versionName!!
+        return "(unknown version)"
     }
 
     /////////////////////////////////////////////////////////////////////
