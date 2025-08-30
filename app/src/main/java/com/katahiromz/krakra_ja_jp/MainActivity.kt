@@ -256,11 +256,13 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         StrictMode.setThreadPolicy(
             StrictMode.ThreadPolicy.Builder()
                 .detectAll()
+                .penaltyLog()
                 .build()
         )
         StrictMode.setVmPolicy(
             StrictMode.VmPolicy.Builder()
                 .detectAll()
+                .penaltyLog()
                 .build()
         )
 
