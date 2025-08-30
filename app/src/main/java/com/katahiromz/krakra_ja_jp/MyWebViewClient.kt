@@ -29,7 +29,7 @@ class MyWebViewClient(private val listener: Listener) : WebViewClient() {
             val index:Int = url.indexOf("file:///android_asset/")
             if (index == 0) {
                 view.loadUrl(url)
-                return true;
+                return true
             }
         }
         return true

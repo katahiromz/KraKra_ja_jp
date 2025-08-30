@@ -9,11 +9,9 @@ import android.content.Context
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.res.Configuration
-import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
-import android.os.VibrationEffect.DEFAULT_AMPLITUDE
 import android.os.Vibrator
 import android.os.VibratorManager
 import android.speech.tts.TextToSpeech
@@ -84,7 +82,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
                 lastToast?.show()
             }
             else -> {
-                require(false) { "typeOfToast: $typeOfToast" }
+                Timber.w("showToast: Unknown typeOfToast: $typeOfToast. Displaying short toast as default.")
             }
         }
     }
@@ -119,7 +117,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             }
             // TODO: Add more Snack
             else -> {
-                require(false) { "typeOfSnack: $typeOfSnack" }
+                Timber.w("showSnackbar: Unknown typeOfSnack: $typeOfSnack. Snackbar not shown.")
             }
         }
     }
@@ -150,7 +148,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
     // アプリを終了する。
     fun finishApp() {
-        finish(); // 完全には終了しない（タスクリストに残る）。
+        finish() // 完全には終了しない（タスクリストに残る）。
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -265,11 +263,9 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         // Theme.MaterialComponents.DayNight.NoActionBarで指定できるので省略。
         //supportActionBar?.hide()
 
-        // ロケールをセットする。
-        setCurLocale(Locale.getDefault())
-
         // 録音の権限を取得する。
-        val audioCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+        val audioCheck =
+            ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
         if (audioCheck != PackageManager.PERMISSION_GRANTED) {
             requestAudioRecoding()
         }
@@ -284,6 +280,9 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
         // TextToSpeechを初期化。
         initTextToSpeech()
+
+        // ロケールをセットする。
+        setCurLocale(Locale.getDefault())
 
         // Timberを初期化。
         initTimber()
@@ -307,7 +306,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     private val onBackPressedCallback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
             // 'go_back' メッセージを投函する。おそらく'message'イベントリスナが受け取るはず。
-            webView?.evaluateJavascript("postMessage('go_back');", { })
+            webView?.evaluateJavascript("postMessage('go_back');") { }
         }
     }
 
@@ -336,7 +335,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         setBrightness(screenBrightness)
 
         // 振動を再開。
-        if (hasVibrator == 1 && oldVibratorLength > 0)
+        if (hasVibratorInitialized && oldVibratorLength > 0)
             startVibrator(-1)
     }
 
@@ -352,7 +351,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         stopSpeech()
 
         // 振動を停止。
-        if (hasVibrator == 1)
+        if (hasVibratorInitialized)
             stopVibrator()
     }
 
@@ -368,7 +367,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         stopSpeech()
 
         // 振動を停止。
-        if (hasVibrator == 1 && oldVibratorLength > 0)
+        if (hasVibratorInitialized && oldVibratorLength > 0)
             stopVibrator()
     }
 
@@ -391,20 +390,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
     private var resultString = ""
 
-    fun getScreenWidth(): Int {
-        val outRect = Rect()
-        window.decorView.getWindowVisibleDisplayFrame(outRect)
-        return outRect.width()
-    }
-    fun getScreenHeight(): Int {
-        val outRect = Rect()
-        window.decorView.getWindowVisibleDisplayFrame(outRect)
-        return outRect.height()
-    }
-    fun getDisplayDensity(): Float {
-        return resources!!.displayMetrics!!.density
-    }
-
     /////////////////////////////////////////////////////////////////////
     // WebView関連
 
@@ -426,16 +411,19 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         // ウェブビューのビューを取得する。
         webView = findViewById(R.id.web_view)
 
-        // この処理は別スレッドかもしれないので、postを活用。
-        webView?.post {
-            initWebSettings()
-        }
-        webView?.post {
-            initWebViewClient()
-        }
-        webView?.post {
-            initChromeClient()
-        }
+        // webViewがnullの場合、以降の処理は行わない
+        webView?.let { webViewInstance ->
+            // この処理は別スレッドかもしれないので、postを活用。
+            webViewInstance.post {
+                initWebSettings(webViewInstance) // webViewインスタンスを渡す
+            }
+            webViewInstance.post {
+                initWebViewClient()
+            }
+            webViewInstance.post {
+                initChromeClient(webViewInstance) // webViewインスタンスを渡す
+            }
+        } ?: Timber.e("WebView (R.id.web_view) not found in layout.")
     }
 
     // ウェブビュー クライアントを初期化する。
@@ -443,7 +431,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         webView?.webViewClient = MyWebViewClient(object : MyWebViewClient.Listener {
             override fun onReceivedError(view: WebView?, request: WebResourceRequest?,
                                          error: WebResourceError?) {
-                Timber.i("onReceivedError: " + error?.toString())
+                Timber.i("onReceivedError: %s", error?.toString())
             }
 
             override fun onReceivedHttpError(view: WebView?, request: WebResourceRequest?,
@@ -459,7 +447,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
 
     // クロームクライアントを初期化する。
-    private fun initChromeClient() {
+    private fun initChromeClient(currentWebView: WebView) {
         // まず、クロームクライアントを作成する。
         chromeClient = MyWebChromeClient(this, object : MyWebChromeClient.Listener {
             override fun onSpeech(text: String, volume: Float) {
@@ -488,7 +476,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             }
 
             override fun onFinishApp() {
-                finishApp(); // アプリを終了する。
+                finishApp() // アプリを終了する。
             }
 
             override fun onStartVibrator(length: Int) {
@@ -499,23 +487,23 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
                 stopVibrator()
             }
         })
-        webView?.webChromeClient = chromeClient
+        currentWebView.webChromeClient = chromeClient
 
         // JavaScript側からメソッドを呼び出せるインターフェイスを提供する。
-        webView?.addJavascriptInterface(chromeClient!!, "android")
+        currentWebView.addJavascriptInterface(chromeClient!!, "android")
 
         // URLを指定してウェブページを読み込む。
-        webView?.loadUrl(getLocString(R.string.url))
+        currentWebView.loadUrl(getLocString(R.string.url))
     }
 
     // ウェブ設定を初期化する。
     @SuppressLint("SetJavaScriptEnabled")
-    private fun initWebSettings() {
+    private fun initWebSettings(currentWebView: WebView) {
         // 背景色は黒。
-        webView?.setBackgroundColor(0)
+        currentWebView.setBackgroundColor(0)
 
         // 設定を取得する。
-        val settings = webView?.settings ?: return
+        val settings = currentWebView.settings
 
         settings.javaScriptEnabled = true // JavaScriptを有効化。
         settings.domStorageEnabled = true // localStorageを有効化。
@@ -556,10 +544,16 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         currLocaleContext = null
 
         // TextToSpeechにもロケールをセットする。
-        if (tts != null) {
+        if (isSpeechReady && tts != null) {
             if (tts!!.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
                 tts!!.language = locale
+            } else {
+                Timber.w("Locale $locale not available for TTS.")
             }
+        } else {
+            // TTSが準備できていない場合は、onInitで再度ロケール設定を試みるか、
+            // 準備完了後に明示的に設定するロジックが必要になることがあります。
+            // 現状では、準備完了時にデフォルトロケールが設定されます。
         }
     }
 
@@ -583,13 +577,11 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
     // TextToSpeechを初期化する。
     private fun initTextToSpeech() {
-        run {
-            tts = TextToSpeech(this, this)
-            val locale = currLocale
-            if (tts!!.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE) {
-                tts!!.language = locale
-            }
-        }
+        // 既存のttsインスタンスがあればシャットダウンする。
+        tts?.stop()
+        tts?.shutdown()
+        // 初期化。
+        tts = TextToSpeech(this, this)
     }
 
     // TextToSpeechのために用意された初期化完了ルーチン。
@@ -602,7 +594,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
     // スピーチを開始する。
     fun speechText(text: String, volume: Float) {
-        if (isSpeechReady) {
+        if (isSpeechReady && tts != null) {
             val params = Bundle()
             val speed = 0.3f
             val pitch = 0.8f
@@ -611,90 +603,97 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
             params.putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME, speechVoiceVolume)
             tts?.setPitch(pitch)
             tts?.setSpeechRate(speed)
-            tts?.speak(text, TextToSpeech.QUEUE_FLUSH, params, "utteranceId")
+            tts?.speak(text, TextToSpeech.QUEUE_FLUSH, params, "utteranceId_speech")
+        } else {
+            Timber.w("tts is not ready")
         }
     }
 
     // スピーチを停止する。
     private fun stopSpeech() {
         if (isSpeechReady) {
-            val params = Bundle()
-            tts?.speak("", TextToSpeech.QUEUE_FLUSH, params, "utteranceId")
+            tts?.stop()
         }
     }
 
     /////////////////////////////////////////////////////////////////////
     // 振動関連
 
-    private var hasVibrator: Int = -1
+    private var hasVibratorInitialized: Boolean = false // 初期化成功フラグ
     private var oldVibratorLength: Int = 0
-    private lateinit var vibratorManager: VibratorManager
-    private lateinit var vibrator: Vibrator
+    private var vibratorManager: VibratorManager? = null
+    private var vibrator: Vibrator? = null
 
-    // 振動を開始する。
     @Suppress("DEPRECATION")
     fun startVibrator(length: Int) {
         Timber.i("startVibrator")
-        // 振動が使えるかどうか判定する。
-        if (hasVibrator == -1) {
-            // 振動を初期化。
+
+        if (!hasVibratorInitialized) { // まだ初期化試行していない場合
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                val vm = getSystemService(VIBRATOR_MANAGER_SERVICE)
+                val vm = getSystemService(VIBRATOR_MANAGER_SERVICE) as? VibratorManager // 安全キャスト
                 if (vm == null) {
-                    Timber.i("startVibrator: vm == null")
-                    hasVibrator = 0
-                    return
+                    Timber.i("startVibrator: VibratorManager service not available.")
+                    return // 初期化失敗
                 }
-                vibratorManager = vm as VibratorManager
-                vibrator = vibratorManager.defaultVibrator
+                vibratorManager = vm
+                vibrator = vibratorManager?.defaultVibrator
             } else {
-                val v = getSystemService(VIBRATOR_SERVICE)
+                val v = getSystemService(VIBRATOR_SERVICE) as? Vibrator // 安全キャスト
                 if (v == null) {
-                    Timber.i("startVibrator: v == null")
-                    hasVibrator = 0
-                    return
+                    Timber.i("startVibrator: Vibrator service not available.")
+                    return // 初期化失敗
                 }
-                vibrator = v as Vibrator
+                vibrator = v
             }
-            if (!vibrator.hasVibrator()) {
-                hasVibrator = 0 // 振動が使えない場合。
-                Timber.i("hasVibrator = 0")
-                return
+
+            if (vibrator?.hasVibrator() != true) { // hasVibrator() も null 安全に呼び出す
+                Timber.i("Device does not have a vibrator.")
+                vibrator = null // 実際に振動機能がない場合は null に戻す
+                return // 初期化失敗（振動機能なし）
             }
-            hasVibrator = 1 // 振動が使える場合。
-            Timber.i("hasVibrator = 1")
+            hasVibratorInitialized = true // 初期化成功
+            Timber.i("Vibrator initialized successfully.")
         }
 
-        if (hasVibrator == 0)
-            return // 振動が使えない場合。
+        // vibrator が null であれば何もしない
+        val currentVibrator = vibrator ?: return
+        Timber.i("Has vibrator and initialized.")
 
         // いったん、振動を止める。
-        vibrator.cancel()
+        currentVibrator.cancel()
 
         // -1だった場合は古い値を使う。
         var len = length
         if (len == -1)
             len = oldVibratorLength
 
+        if (len <= 0) { // 長さが0以下なら何もしない
+            oldVibratorLength = 0 // 停止扱いにする
+            return
+        }
+
         val timeout: Long = len.toLong()
-        if (vibrator.hasAmplitudeControl()) {
-            val effect = VibrationEffect.createOneShot(timeout, 255)
-            vibrator.vibrate(effect)
+        // createOneShot は API 26 以上
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val effect = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && currentVibrator.hasAmplitudeControl()) {
+                VibrationEffect.createOneShot(timeout, VibrationEffect.DEFAULT_AMPLITUDE) // API 29から DEFAULT_AMPLITUDE が public
+            } else {
+                VibrationEffect.createOneShot(timeout, VibrationEffect.DEFAULT_AMPLITUDE) // 古いAPIでは振幅制御不可の場合がある
+            }
+            currentVibrator.vibrate(effect)
         } else {
-            val effect = VibrationEffect.createOneShot(timeout, DEFAULT_AMPLITUDE)
-            vibrator.vibrate(effect)
+            // API 26 未満では vibrate(long) を使用
+            currentVibrator.vibrate(timeout)
         }
 
         // 値を覚えておく。
         oldVibratorLength = len
     }
 
-    // 振動を停止する。
     fun stopVibrator() {
         Timber.i("stopVibrator")
-        if (hasVibrator != 1)
-            return
-        vibrator.cancel()
+        // vibrator が null であれば何もしない
+        vibrator?.cancel()
         oldVibratorLength = 0
     }
 }
