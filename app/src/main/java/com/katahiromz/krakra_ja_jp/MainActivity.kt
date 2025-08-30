@@ -11,6 +11,7 @@ import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
+import android.os.StrictMode
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
@@ -251,6 +252,22 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     override fun onCreate(savedInstanceState: Bundle?) {
         Timber.i("onCreate")
 
+        // 様々なチェックを追加。
+        StrictMode.setThreadPolicy(
+            StrictMode.ThreadPolicy.Builder()
+                .detectAll()
+                .build()
+        )
+        StrictMode.setVmPolicy(
+            StrictMode.VmPolicy.Builder()
+                .detectAll()
+                .build()
+        )
+
+        // おまじない。
+        window.attributes.layoutInDisplayCutoutMode =
+            WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS
+
         // 最初の画面を表示する。
         installSplashScreen()
 
@@ -421,7 +438,8 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         webView?.webViewClient = MyWebViewClient(object : MyWebViewClient.Listener {
             override fun onReceivedError(view: WebView?, request: WebResourceRequest?,
                                          error: WebResourceError?) {
-                Timber.i("onReceivedError: %s", error?.toString())
+                val description = error?.description?.toString()
+                Timber.i("onReceivedError: %s", description)
             }
 
             override fun onReceivedHttpError(view: WebView?, request: WebResourceRequest?,

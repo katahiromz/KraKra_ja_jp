@@ -1,0 +1,83 @@
+{
+	"id": "saimin",
+	"lang": "en-US",
+	"short_name": "Hypnosis KraKra",
+	"name": "Hypnotic app 'Hypnosis KraKra'",
+	"start_url": "https://katahiromz.github.io/saimin/index.html",
+	"background_color": "#FFB5E6",
+	"theme_color": "#FFB5E6",
+	"display": "standalone",
+	"description": "Hypnotic app",
+	"shortcuts": [],
+	"orientation": "any",
+	"icons": [
+		{
+			"src": "https://katahiromz.github.io/saimin/icons/icon-48.png",
+			"sizes": "48x48",
+			"type": "image/png"
+		},
+		{
+			"src": "https://katahiromz.github.io/saimin/icons/icon-72.png",
+			"sizes": "72x72",
+			"type": "image/png"
+		},
+		{
+			"src": "https://katahiromz.github.io/saimin/icons/icon-96.png",
+			"sizes": "96x96",
+			"type": "image/png"
+		},
+		{
+			"src": "https://katahiromz.github.io/saimin/icons/icon-114.png",
+			"sizes": "114x114",
+			"type": "image/png"
+		},
+		{
+			"src": "https://katahiromz.github.io/saimin/icons/icon-120.png",
+			"sizes": "120x120",
+			"type": "image/png"
+		},
+		{
+			"src": "https://katahiromz.github.io/saimin/icons/icon-144.png",
+			"sizes": "144x144",
+			"type": "image/png"
+		},
+		{
+			"src": "https://katahiromz.github.io/saimin/icons/icon-192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "https://katahiromz.github.io/saimin/icons/icon-256.png",
+			"sizes": "256x256",
+			"type": "image/png"
+		},
+		{
+			"src": "https://katahiromz.github.io/saimin/icons/icon-maskable-256.png",
+			"sizes": "256x256",
+			"type": "image/png",
+			"purpose": "maskable"
+		}
+	],
+	"screenshots": [
+		{
+			"src": "https://katahiromz.github.io/saimin/screenshots/screenshot-750x1334.png",
+			"sizes": "750x1334",
+			"type": "image/png",
+			"form_factor": "narrow"
+		},
+		{
+			"src": "https://katahiromz.github.io/saimin/screenshots/screenshot-1334x750.png",
+			"sizes": "1334x750",
+			"type": "image/png",
+			"form_factor": "wide"
+		}
+	],
+	"related_applications": [
+		{
+			"platform": "play",
+			"url": "https://play.google.com/store/apps/details?id=com.katahiromz.krakra_ja_jp",
+			"id": "com.katahiromz.krakra_ja_jp"
+		}
+	],
+	"prefer_related_applications": true
+}

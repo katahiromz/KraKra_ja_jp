@@ -51,7 +51,7 @@ dependencies {
     implementation 'androidx.activity:activity-ktx:1.8.0'
 
     // 起動画面表示用。
-    implementation 'androidx.core:core-splashscreen:1.0.1'
+    implementation 'androidx.core:core-splashscreen:1.2.0-alpha01'
 
     // レイアウト管理用。
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
