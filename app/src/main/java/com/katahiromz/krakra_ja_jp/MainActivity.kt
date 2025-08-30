@@ -360,9 +360,6 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         Timber.i("onStop")
         super.onStop() // 親にも伝える。
 
-        // ウェブビューを一時停止。
-        webView?.onPause()
-
         // スピーチを停止する。
         stopSpeech()
 
@@ -413,16 +410,9 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
 
         // webViewがnullの場合、以降の処理は行わない
         webView?.let { webViewInstance ->
-            // この処理は別スレッドかもしれないので、postを活用。
-            webViewInstance.post {
-                initWebSettings(webViewInstance) // webViewインスタンスを渡す
-            }
-            webViewInstance.post {
-                initWebViewClient()
-            }
-            webViewInstance.post {
-                initChromeClient(webViewInstance) // webViewインスタンスを渡す
-            }
+            initWebSettings(webViewInstance) // webViewインスタンスを渡す
+            initWebViewClient()
+            initChromeClient(webViewInstance) // webViewインスタンスを渡す
         } ?: Timber.e("WebView (R.id.web_view) not found in layout.")
     }
 
