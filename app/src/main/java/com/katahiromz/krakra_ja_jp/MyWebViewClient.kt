@@ -26,13 +26,12 @@ class MyWebViewClient(private val listener: Listener) : WebViewClient() {
         if (view != null && request != null) {
             // アセット内部に制限する。
             val url: String = request.url.toString()
-            val index:Int = url.indexOf("file:///android_asset/")
-            if (index == 0) {
+            if (url.startsWith("file:///android_asset/")) {
                 view.loadUrl(url)
                 return true
             }
         }
-        return true
+        return false // それ以外はWebViewに任せる
     }
 
     // ウェブビューからのエラーをリスナーに渡す。
