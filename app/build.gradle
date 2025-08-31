@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.katahiromz.krakra_ja_jp"
-        minSdkVersion 28
+        minSdkVersion 29
         targetSdkVersion 35
         versionCode 384
         versionName "3.8.4"

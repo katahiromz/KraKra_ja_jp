@@ -28,12 +28,12 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 import java.util.Locale
@@ -161,87 +161,33 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     // パーミッション関連
     // 参考：https://qiita.com/sokume2106/items/46bd286569a6e7fac43d
 
-    private val audioRecordingPermissionChecker =
-        PermissionChecker(
-            this,
-            Manifest.permission.RECORD_AUDIO,
-            onDenied = {
-                showToast(getLocString(R.string.cant_use_microphone), LONG_TOAST)
-                requestCamera()
-            },
-            onShowRationale = { onRequest ->
-                val title = getLocString(R.string.app_name)
-                val message = getLocString(R.string.needs_microphone)
-                MaterialAlertDialogBuilder(this, R.style.AlertDialogTheme)
-                    .setTitle(title)
-                    .setMessage(message)
-                    .setPositiveButton(getLocString(R.string.ok)) { _, _ -> onRequest() }
-                    .setCancelable(false)
-                    .show()
-            }
-        )
+    // パーミッションリクエスト（カメラ＋マイク両方）
+    private val mediaPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            val cameraGranted = permissions[Manifest.permission.CAMERA] ?: false
+            val audioGranted = permissions[Manifest.permission.RECORD_AUDIO] ?: false
 
-    private val vibePermissionChecker =
-        PermissionChecker(
-            this,
-            Manifest.permission.VIBRATE,
-            onDenied = {
-                showToast(getLocString(R.string.cant_use_vibe), LONG_TOAST)
-                requestVibe()
-            },
-            onShowRationale = { onRequest ->
-                val title = getLocString(R.string.app_name)
-                val message = getLocString(R.string.needs_vibe)
-                MaterialAlertDialogBuilder(this, R.style.AlertDialogTheme)
-                    .setTitle(title)
-                    .setMessage(message)
-                    .setPositiveButton(getLocString(R.string.ok)) { _, _ -> onRequest() }
-                    .setCancelable(false)
-                    .show()
-            }
-        )
-
-    private fun requestAudioRecoding() {
-        val audioCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
-        if (audioCheck != PackageManager.PERMISSION_GRANTED) {
-            audioRecordingPermissionChecker.runWithPermission {
-                requestCamera()
-            }
-        } else {
-            requestCamera()
-        }
-    }
-
-    private val cameraPermissionChecker =
-        PermissionChecker(
-            this,
-            Manifest.permission.CAMERA,
-            onDenied = {
+            if (!cameraGranted) {
                 showToast(getLocString(R.string.cant_use_camera), LONG_TOAST)
-            },
-            onShowRationale = { onRequest ->
-                val title = getLocString(R.string.app_name)
-                val message = getLocString(R.string.needs_camera)
-                MaterialAlertDialogBuilder(this, R.style.AlertDialogTheme)
-                    .setTitle(title)
-                    .setMessage(message)
-                    .setPositiveButton(getLocString(R.string.ok)) { _, _ -> onRequest() }
-                    .setCancelable(false)
-                    .show()
             }
-        )
-
-    private fun requestCamera() {
-        val cameraCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-        if (cameraCheck != PackageManager.PERMISSION_GRANTED) {
-            cameraPermissionChecker.runWithPermission {}
+            if (!audioGranted) {
+                showToast(getLocString(R.string.cant_use_microphone), LONG_TOAST)
+            }
         }
-    }
 
-    private fun requestVibe() {
-        val vibeCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.VIBRATE)
-        if (vibeCheck != PackageManager.PERMISSION_GRANTED) {
-            vibePermissionChecker.runWithPermission {}
+    // パーミッション要求
+    private fun requestMediaPermissions() {
+        val neededPermissions = mutableListOf<String>()
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            neededPermissions.add(Manifest.permission.CAMERA)
+        }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            neededPermissions.add(Manifest.permission.RECORD_AUDIO)
+        }
+
+        if (neededPermissions.isNotEmpty()) {
+            mediaPermissionLauncher.launch(neededPermissions.toTypedArray())
         }
     }
 
@@ -282,17 +228,8 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         // Theme.MaterialComponents.DayNight.NoActionBarで指定できるので省略。
         //supportActionBar?.hide()
 
-        // 録音の権限を取得する。
-        val audioCheck =
-            ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
-        if (audioCheck != PackageManager.PERMISSION_GRANTED) {
-            requestAudioRecoding()
-        }
-        // 振動の権限を取得する。
-        val vibeCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.VIBRATE)
-        if (vibeCheck != PackageManager.PERMISSION_GRANTED) {
-            requestVibe()
-        }
+        // カメラとマイクの権限をリクエスト
+        requestMediaPermissions()
 
         // WebViewを初期化。
         initWebView(savedInstanceState)
