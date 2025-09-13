@@ -48,7 +48,7 @@ fun Context.createLocalizedContext(locale: Locale): Context {
 }
 
 /////////////////////////////////////////////////////////////////////
-// 定数。
+// region 定数
 
 // トーストの種類 (showToast用)
 const val SHORT_TOAST = 0
@@ -60,9 +60,11 @@ const val LONG_SNACK = 1
 const val ACTION_SNACK_OK = 2
 // TODO: Add more snack
 
+// endregion
+
 class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.OnInitListener {
     /////////////////////////////////////////////////////////////////////
-    // 共通
+    // region 共通
 
     // デバッグログにTimberを使用する。
     private fun initTimber() {
@@ -157,8 +159,10 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         super.onWindowFocusChanged(hasFocus)
     }
 
+    // endregion
+
     /////////////////////////////////////////////////////////////////////
-    // パーミッション関連
+    // region パーミッション関連
     // 参考：https://qiita.com/sokume2106/items/46bd286569a6e7fac43d
 
     // パーミッションリクエスト（カメラ＋マイク両方）
@@ -191,26 +195,16 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         }
     }
 
+    // endregion
+
     /////////////////////////////////////////////////////////////////////
-    // イベントハンドラ関連
+    // region イベントハンドラ関連
 
     // アクティビティの作成時。
     override fun onCreate(savedInstanceState: Bundle?) {
         Timber.i("onCreate")
 
-        // 様々なチェックを追加。
-        StrictMode.setThreadPolicy(
-            StrictMode.ThreadPolicy.Builder()
-                .detectAll()
-                .penaltyLog()
-                .build()
-        )
-        StrictMode.setVmPolicy(
-            StrictMode.VmPolicy.Builder()
-                .detectAll()
-                .penaltyLog()
-                .build()
-        )
+        setStrictMode()
 
         // おまじない。
         window.attributes.layoutInDisplayCutoutMode =
@@ -343,8 +337,10 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     }
     private var resultString = ""
 
+    // endregion
+
     /////////////////////////////////////////////////////////////////////
-    // WebView関連
+    // region WebView関連
 
     // ウェブビュー オブジェクト。
     private var webView: WebView? = null
@@ -479,9 +475,11 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         return "(unknown version)"
     }
 
+    // endregion
+
     /////////////////////////////////////////////////////////////////////
-    // ロケール関連
-    //
+    // region ロケール関連
+
     private var currLocale: Locale = Locale.ENGLISH
     var currLocaleContext: Context? = null
 
@@ -515,9 +513,11 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         return getLocString(id, currLocale)
     }
 
+    // endregion
+
     /////////////////////////////////////////////////////////////////////
-    // TextToSpeech関連
-    //
+    // region TextToSpeech関連
+
     private var tts: TextToSpeech? = null // TextToSpeechオブジェクト。
     private var isSpeechReady = false // スピーチの準備が完了したか？
     private var theText = "" // スピーチテキスト。
@@ -563,8 +563,10 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         }
     }
 
+    // endregion
+
     /////////////////////////////////////////////////////////////////////
-    // 振動関連
+    // region 振動関連
 
     private var hasVibratorInitialized: Boolean = false // 初期化成功フラグ
     private var oldVibratorLength: Int = 0
@@ -643,4 +645,26 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         vibrator?.cancel()
         oldVibratorLength = 0
     }
+
+    // endregion
+
+    /////////////////////////////////////////////////////////////////////
+    // region その他の設定
+
+    private fun setStrictMode() {
+        if (BuildConfig.DEBUG) {
+            StrictMode.setThreadPolicy(
+                StrictMode.ThreadPolicy.Builder()
+                    .detectAll()
+                    .build()
+            )
+            StrictMode.setVmPolicy(
+                StrictMode.VmPolicy.Builder()
+                    .detectAll()
+                    .build()
+            )
+        }
+    }
+
+    // endregion
 }
