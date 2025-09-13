@@ -252,17 +252,7 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
     override fun onCreate(savedInstanceState: Bundle?) {
         Timber.i("onCreate")
 
-        // 様々なチェックを追加。
-        StrictMode.setThreadPolicy(
-            StrictMode.ThreadPolicy.Builder()
-                .detectAll()
-                .build()
-        )
-        StrictMode.setVmPolicy(
-            StrictMode.VmPolicy.Builder()
-                .detectAll()
-                .build()
-        )
+        setStrictMode()
 
         // おまじない。
         window.attributes.layoutInDisplayCutoutMode =
@@ -703,5 +693,23 @@ class MainActivity : AppCompatActivity(), ValueCallback<String>, TextToSpeech.On
         // vibrator が null であれば何もしない
         vibrator?.cancel()
         oldVibratorLength = 0
+    }
+
+    /////////////////////////////////////////////////////////////////////
+    // その他の設定
+
+    private fun setStrictMode() {
+        if (BuildConfig.DEBUG) {
+            StrictMode.setThreadPolicy(
+                StrictMode.ThreadPolicy.Builder()
+                    .detectAll()
+                    .build()
+            )
+            StrictMode.setVmPolicy(
+                StrictMode.VmPolicy.Builder()
+                    .detectAll()
+                    .build()
+            )
+        }
     }
 }
