@@ -15,7 +15,7 @@ let sai_vibrating = false; // 振動中か？
 // 【KraKra コーディング ルール】
 // - インデントはTabを使うこと。
 // - 言語特有の記述が必要な個所は「{{LANGUAGE_SPECIFIC}}」というコメントを付けること。
-// - 関数はすべてconst変数にすること。
+// - 関数はすべてconst変数にすること。functionキーワードは省略しないこと。
 
 // メッセージ項目がクリックされた。
 const SAI_on_click_message = function(id){
