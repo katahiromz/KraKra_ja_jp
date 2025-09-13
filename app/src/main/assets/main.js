@@ -1,7 +1,7 @@
 // 催眠アプリ「催眠くらくら」のJavaScriptのメインコード。
 // 暗号名はKraKra。
 
-const sai_VERSION = '3.8.3'; // KraKraバージョン番号。
+const sai_VERSION = '3.8.4'; // KraKraバージョン番号。
 const sai_DEBUGGING = false; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
 let sai_vibrating = false; // 振動中か？
@@ -15,7 +15,7 @@ let sai_vibrating = false; // 振動中か？
 // 【KraKra コーディング ルール】
 // - インデントはTabを使うこと。
 // - 言語特有の記述が必要な個所は「{{LANGUAGE_SPECIFIC}}」というコメントを付けること。
-// - 関数はすべてconst変数にすること。functionキーワードは省略しないこと。
+// - 関数はすべてconst変数にすること。
 
 // メッセージ項目がクリックされた。
 const SAI_on_click_message = function(id){
