@@ -48,7 +48,7 @@ fun Context.createLocalizedContext(locale: Locale): Context {
 }
 
 /////////////////////////////////////////////////////////////////////
-// region 定数。
+// region 定数
 
 // トーストの種類 (showToast用)
 const val SHORT_TOAST = 0
