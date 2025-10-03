@@ -828,6 +828,7 @@ We provide real entertainment where you can enjoy hypnotic images and sounds.
 - This app is not for sleeping. If you are not feeling well, please refrain from using it.
 - Hypnosis that tries to make the subject do things that they do not know the meaning or method of, or that are impossible to perform, is ineffective.
 - If you use this app continuously for a long period of time, your device may become overheated.
+- Listening to loud sounds using headphone or earphone may cause hearing loss.
 
 [(How to use)]
 
@@ -879,6 +880,7 @@ Hypnosis KraKra
 - 이 앱은 수면용이 아닙니다.
 - 피험자가 의미나 방법을 모르는 것, 실행의 불가능한 일을 하려고 하는 최면은 효과가 없습니다.
 - 본 앱을 장시간 연속 사용하면 단말기가 고열이 될 수 있습니다.
+- 헤드폰이나 이어폰을 사용하여 큰 소리를 들으면 청력이 손상될 수 있습니다.
 
 【사용법】
 
@@ -931,6 +933,7 @@ Hypnosis KraKra
 - 本アプリは睡眠用ではありません。体調がすぐれない人はご利用をひかえてください。
 - 被験者が意味または方法を知らないこと、実行の不可能なことをさせようとする催眠は効果がありません。
 - 本アプリを長時間連続して使用すると、端末が高熱になることがあります。
+- ヘッドホンやイヤホンを使用して大きな音を聞くと、聴力が低下する恐れがあります。
 
 【使い方】
 
@@ -982,6 +985,7 @@ Hypnosis KraKra
 - 此应用程序不适用于睡觉。如果您感觉不适，请不要使用该设施。
 - 如果催眠试图让受试者做一些他不知道其意义或如何做，或不可能做的事情，那么催眠是不会起作用的。
 - 如果您长时间连续使用此应用程序，您的设备可能会过热。
+- 使用耳机或耳塞聆听大声的声音可能会导致听力损失。
 
 【如何使用】
 
@@ -1033,6 +1037,7 @@ Hypnosis KraKra
 - 此應用程式不適用於睡覺。如果您感覺不適，請不要使用該設施。
 - 如果催眠試圖讓受試者做一些他不知道其意義或如何做，或不可能做的事情，那麼催眠是不會起作用的。
 - 如果您長時間連續使用此應用程序，您的裝置可能會過熱。
+- 使用耳機或耳塞聆聽大聲的聲音可能會導致聽力損失。
 
 【用法】
 
@@ -1084,6 +1089,7 @@ Forniamo un vero intrattenimento in cui puoi goderti immagini e suoni ipnotici.
 - Questa app non è adatta per dormire. Se non vi sentite bene, vi preghiamo di astenervi dall'utilizzare la struttura.
 - L'ipnosi non funziona se cerca di indurre il soggetto a fare qualcosa di cui non sa il significato o come fare, oppure che è impossibile da realizzare.
 - Se utilizzi questa app ininterrottamente per un lungo periodo di tempo, il tuo dispositivo potrebbe surriscaldarsi.
+- Ascoltare suoni forti con cuffie o auricolari può causare la perdita dell'udito.
 
 [(Come usare)]
 
@@ -1135,6 +1141,7 @@ Wir bieten echte Unterhaltung, bei der Sie hypnotische Bilder und Töne genieße
 - Diese App ist nicht zum Schlafen gedacht. Sollten Sie sich unwohl fühlen, bitten wir Sie, von der Nutzung der Anlage abzusehen.
 - Hypnose funktioniert nicht, wenn sie versucht, den Probanden dazu zu bringen, etwas zu tun, dessen Bedeutung oder Vorgehensweise er nicht kennt oder was unmöglich auszuführen ist.
 - Wenn Sie diese App über einen längeren Zeitraum ununterbrochen verwenden, kann Ihr Gerät überhitzen.
+- Das Hören lauter Geräusche über Kopf- oder Ohrhörer kann zu Hörverlust führen.
 
 [(Wie benutzt man)]
 
@@ -1186,6 +1193,7 @@ Brindamos entretenimiento real donde podrás disfrutar de imágenes y sonidos hi
 - Esta aplicación no es para dormir. Si no se siente bien, absténgase de utilizar las instalaciones.
 - La hipnosis no funciona si intenta que el sujeto haga algo que no sabe el significado o cómo hacer, o que es imposible de realizar.
 - Si utiliza esta aplicación continuamente durante un largo periodo de tiempo, su dispositivo podría sobrecalentarse.
+- Escuchar sonidos fuertes con auriculares o audífonos puede provocar pérdida de audición.
 
 [(Cómo utilizar)]
 
@@ -1237,6 +1245,7 @@ Hypnosis KraKra
 - Это приложение не для сна. Если вы плохо себя чувствуете, пожалуйста, воздержитесь от посещения учреждения.
 - Гипноз не работает, если он пытается заставить субъекта сделать что-то, смысла или способа сделать что-то, что он не знает, или что невозможно выполнить.
 - Если вы используете это приложение непрерывно в течение длительного периода времени, ваше устройство может перегреться.
+- Прослушивание громких звуков через наушники или гарнитуру может привести к потере слуха.
 
 [(Как использовать)]
 

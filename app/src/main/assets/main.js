@@ -1,7 +1,7 @@
 // 催眠アプリ「催眠くらくら」のJavaScriptのメインコード。
 // 暗号名はKraKra。
 
-const sai_VERSION = '3.8.7'; // KraKraバージョン番号。
+const sai_VERSION = '3.8.8'; // KraKraバージョン番号。
 const sai_DEBUGGING = false; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
 let sai_vibrating = false; // 振動中か？
@@ -2847,52 +2847,54 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.fillRect(px, py, dx, dy);
 	}
 
-	function SAI_draw_snake_wheel(ctx, centerX, centerY, radius, numSegments, counter, startAngleOffset) {
-		// 描画するセクターの角度 (ラジアン)
-		const segmentAngle = (Math.PI * 2) / numSegments;
-		// 錯視の核となる色パターン
-		// 「黒 - 黄 - 白 - 青」などの非対称な輝度ステップが回転錯視を生む
-		const colors = ['#000000', '#FFD700', '#FFFFFF', '#1E90FF']; // 黒, 金/黄, 白, 青
+	// 錯視の核となる色パターン。「黒 - 黄 - 白 - 青」などの非対称な輝度ステップが回転錯視を生む。
+	const sai_snake_colors = ['#000000', '#FFFF00', '#FFFFFF', '#0000FF'];
 
+	// ヘビの回転錯視を描画する。
+	function SAI_draw_snake(ctx, centerX, centerY, radius, numSegments, counter, startAngleOffset){
+		// 描画するセクターの角度 (ラジアン)。
+		const segmentAngle = (Math.PI * 2) / numSegments;
+		// 回転速度。
 		let cnt = counter * 0.5;
 
-		// 各セクターを描画
-		for (let i = 0; i < numSegments; ++i) {
-			// 現在のセクターの色を非対称なパターンから取得
-			ctx.fillStyle = colors[i % colors.length];
-			// 描画するセクターの開始角度と終了角度
+		// 各セクターを描画。
+		for (let i = 0; i < numSegments; ++i){
+			// 現在のセクターの色をパターンから取得。
+			ctx.fillStyle = sai_snake_colors[i % sai_snake_colors.length];
+			// 描画するセクターの開始角度と終了角度。
 			const startAngle = i * segmentAngle + startAngleOffset;
 			const endAngle = (i + 1) * segmentAngle + startAngleOffset;
-			// パスを開始
+			// パスを開始。
 			ctx.beginPath();
-			// 円の中心に移動
+			// 円の中心に移動。
 			ctx.moveTo(centerX, centerY);
-			// 弧を描く
+			// 弧を描く。
 			ctx.arc(centerX, centerY, radius, startAngle + cnt, endAngle + cnt);
-			// パスを閉じる（中心と弧の端点を結ぶ）
+			// パスを閉じる（中心と弧の端点を結ぶ）。
 			ctx.closePath();
-			// 塗りつぶし
+			// 塗りつぶし。
 			ctx.fill();
 		}
 	}
 
-	let sai_pic_17_canvas = null;
-	let sai_pic_17_ctx = null;
+	// 動画17用のキャンバスとコンテキスト。
+	let sai_pic_17_canvas = null, sai_pic_17_ctx = null;
 
 	// 映像「動画17: ヘビの回転」の描画。
 	const SAI_draw_pic_17 = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
 		// 映像の進行をつかさどる変数。
-		const counter = SAI_get_tick_count() * 0.04;
+		const counter = SAI_get_tick_count() * 0.08;
 
 		let qx = px + dx / 2, qy = py + dy / 2;
 		let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
-		let mxy = (maxxy + minxy) * 0.5;
+		let mxy = (maxxy + minxy) * 0.6;
 		let radius = mxy * 0.2;
 		let dr = mxy * 0.015;
-		const S = 4 * 15; // セクターの数 (4色の4倍)
+		const S = 4 * 12; // セクターの数 (4色の4倍)
 
+		// キャンバスを用意する。
 		if(!sai_pic_17_canvas || sai_pic_17_canvas.width < radius || sai_pic_17_canvas.height < radius){
 			sai_pic_17_canvas = document.createElement('canvas');
 			sai_pic_17_canvas.width = parseInt(radius) + 1;
@@ -2903,18 +2905,26 @@ document.addEventListener('DOMContentLoaded', function(){
 		const offsetCW = 0; // 順方向のオフセット（時計回り）
 		const offsetCCW = 4 * Math.PI / S; // 逆方向のオフセット（反時計回り）
 
+		// キャンバス上でヘビを描画する。
 		let ctx2 = sai_pic_17_ctx;
 		let i = 0;
 		for (let r = radius; r >= 0; r -= dr){
-			SAI_draw_snake_wheel(ctx2, radius / 2, radius / 2, r, S, counter, (i % 2) ? offsetCW : offsetCCW);
+			let offset = (i % 2) ? offsetCW : offsetCCW;
+			SAI_draw_snake(ctx2, radius / 2, radius / 2, r, S, counter, offset);
+			SAI_draw_snake(ctx2, 0, 0, r * 0.75, S, -counter * 0.7, offset);
+			SAI_draw_snake(ctx2, radius, 0, r * 0.75, S, -counter * 0.7, offset);
+			SAI_draw_snake(ctx2, radius, radius, r * 0.75, S, -counter * 0.7, offset);
+			SAI_draw_snake(ctx2, 0, radius, r * 0.75, S, -counter * 0.7, offset);
 			++i;
 		}
 
-		// ヘビを描画する。
+		// キャンバスのイメージをタイル状にならべる。
 		let IX = Math.floor(dx / radius), IY = Math.floor(dy / radius);
 		let m = 0;
-		for (let iy = 0; iy <= IY + 1; ++iy){
-			for (let ix = 0; ix <= IX + 1; ++ix){
+		let cnt = counter * 0.1;
+		let ix0 = (Math.floor(cnt) - cnt), iy0 = (Math.floor(cnt) - cnt);
+		for (let iy = iy0; iy <= IY + 1; ++iy){
+			for (let ix = ix0; ix <= IX + 1; ++ix){
 				let x = ix * radius, y = iy * radius;
 				ctx.drawImage(sai_pic_17_canvas, 0, 0, radius, radius, x, y, radius, radius);
 			}
