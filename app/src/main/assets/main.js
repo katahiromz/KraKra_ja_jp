@@ -1,7 +1,7 @@
 // 催眠アプリ「催眠くらくら」のJavaScriptのメインコード。
 // 暗号名はKraKra。
 
-const sai_VERSION = '3.8.6'; // KraKraバージョン番号。
+const sai_VERSION = '3.8.7'; // KraKraバージョン番号。
 const sai_DEBUGGING = false; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
 let sai_vibrating = false; // 振動中か？
@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 顔認識のページか？
 		if(page_id == sai_id_page_face_getter){
-			if (!sai_face_getter) {
+			if (!sai_face_getter){
 				sai_face_getter = new facelocker(sai_id_canvas_face, function(status){
 					face_update_status(status);
 				});
@@ -1277,7 +1277,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// ハート形の描画。
-	const SAI_draw_heart_0 = function(ctx, cx, cy, size, color = 'red') {
+	const SAI_draw_heart_0 = function(ctx, cx, cy, size, color = 'red'){
 		ctx.beginPath();
 		cy -= size * 0.15;
 		size *= 0.007;
@@ -2847,128 +2847,84 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.fillRect(px, py, dx, dy);
 	}
 
-	// ヘビの描画。
-	const SAI_draw_snake = function(ctx, px, py, dx, dy, radius, radius2, direction, di, ei){
-		// 画面の寸法を使って計算する。
-		let qx = px + dx / 2, qy = py + dy / 2;
-		let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
-		let mxy = (maxxy + minxy) * 0.5;
+	function SAI_draw_snake_wheel(ctx, centerX, centerY, radius, numSegments, counter, startAngleOffset) {
+		// 描画するセクターの角度 (ラジアン)
+		const segmentAngle = (Math.PI * 2) / numSegments;
+		// 錯視の核となる色パターン
+		// 「黒 - 黄 - 白 - 青」などの非対称な輝度ステップが回転錯視を生む
+		const colors = ['#000000', '#FFD700', '#FFFFFF', '#1E90FF']; // 黒, 金/黄, 白, 青
 
-		// 映像の進行を表す変数。
-		let count2 = -SAI_get_tick_count() * 0.09 * (direction ? -1 : 1);
+		let cnt = counter * 0.5;
 
-		const num_colors = 3;
-		let i, ci = Math.ceil(radius / num_colors * 0.15) * num_colors * 2;
-		let count3 = -count2 * 0.25 * Math.pow(1.02, di);
-		const ratio = 1.5;
-		const value1 = SAI_mod(SAI_get_tick_count() * 0.005, 1);
-		const value2 = SAI_mod(SAI_get_tick_count() * 0.005 + 0.5, 1);
-		const color1 = SAI_color_get_1st();
-		const color2 = SAI_color_get_2nd();
-		let cnt1 = -SAI_get_tick_count() * 0.02;
-		let cnt2 = Math.sin(cnt1 * 4.0) * 0.3;
-		let cnt3 = Math.sin(cnt1 * 8.0) * 0.3;
-		for(let i = 0; i < ci; ++i){
-			ctx.save(); // 現在の座標系やクリッピングなどを保存する。
-			let old_x, old_y, old_radian;
-			{
-				let radian = 2 * Math.PI * i / ci;
-				let x = radius * Math.cos(radian + count3);
-				let y = radius * Math.sin(radian + count3);
-				// パスの開始。
-				ctx.beginPath();
-				// 座標変換。
-				ctx.translate((ei - di) * cnt2 * mxy * 0.1, (ei - di) * cnt3 * mxy * 0.02);
-				ctx.translate(qx, qy);
-				ctx.translate(x, y);
-				ctx.rotate(radian + count3);
-				ctx.scale(1, ratio);
-				// 円弧を描画。
-				ctx.arc(0, 0, radius2, 0, 1 * Math.PI, true);
-				old_x = x;
-				old_y = y;
-				old_radian = radian;
-			}
-			{
-				let radian = 2 * Math.PI * (i + (direction ? +1 : -1)) / ci;
-				let x = radius * Math.cos(radian + count3);
-				let y = radius * Math.sin(radian + count3);
-				// 一部、変換を元に戻すため、一部逆変換。
-				ctx.scale(1, 1/ratio);
-				ctx.rotate(-(old_radian + count3));
-				ctx.translate(-old_x, -old_y);
-				// さらに変換。
-				ctx.translate(x, y);
-				ctx.rotate(radian + count3);
-				ctx.scale(1, ratio);
-				// 円弧を描画。
-				ctx.arc(0, 0, radius2, 1 * Math.PI, 0);
-				// 色を選んで塗りつぶし。
-				switch(i % num_colors){
-				case 0: ctx.fillStyle = color1; break;
-				case 1: ctx.fillStyle = color2; break;
-				case 2: ctx.fillStyle = "black"; break;
-				}
-				ctx.fill();
-			}
-			ctx.restore(); // ctx.saveで保存した情報で元に戻す。
+		// 各セクターを描画
+		for (let i = 0; i < numSegments; ++i) {
+			// 現在のセクターの色を非対称なパターンから取得
+			ctx.fillStyle = colors[i % colors.length];
+			// 描画するセクターの開始角度と終了角度
+			const startAngle = i * segmentAngle + startAngleOffset;
+			const endAngle = (i + 1) * segmentAngle + startAngleOffset;
+			// パスを開始
+			ctx.beginPath();
+			// 円の中心に移動
+			ctx.moveTo(centerX, centerY);
+			// 弧を描く
+			ctx.arc(centerX, centerY, radius, startAngle + cnt, endAngle + cnt);
+			// パスを閉じる（中心と弧の端点を結ぶ）
+			ctx.closePath();
+			// 塗りつぶし
+			ctx.fill();
 		}
 	}
 
+	let sai_pic_17_canvas = null;
+	let sai_pic_17_ctx = null;
+
 	// 映像「動画17: ヘビの回転」の描画。
-	const SAI_draw_pic_17_sub = function(ctx, px, py, dx, dy){
+	const SAI_draw_pic_17 = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
 
-		// 黒で長方形領域を塗りつぶす。
-		ctx.clearRect(px, py, dx, dy);
+		// 映像の進行をつかさどる変数。
+		const counter = SAI_get_tick_count() * 0.04;
 
 		let qx = px + dx / 2, qy = py + dy / 2;
 		let maxxy = Math.max(dx, dy), minxy = Math.min(dx, dy);
 		let mxy = (maxxy + minxy) * 0.5;
+		let radius = mxy * 0.2;
+		let dr = mxy * 0.015;
+		const S = 4 * 15; // セクターの数 (4色の4倍)
 
-		// ヘビを描画。
-		let flag = sai_id_select_vortex_direction.value == "counterclockwise";
-		let unit = mxy * 0.05;
-		let factor = 0.8;
-		let ei = 8;
-		for(let i = 0; i < 20; ++i){
-			SAI_draw_snake(ctx, px, py, dx, dy, unit * (i - 0.25), unit * factor / 2, flag, i, ei);
+		if(!sai_pic_17_canvas || sai_pic_17_canvas.width < radius || sai_pic_17_canvas.height < radius){
+			sai_pic_17_canvas = document.createElement('canvas');
+			sai_pic_17_canvas.width = parseInt(radius) + 1;
+			sai_pic_17_canvas.height = parseInt(radius) + 1;
+			sai_pic_17_ctx = sai_pic_17_canvas.getContext('2d', { alpha: false });
 		}
 
-		// 真ん中に赤い円盤をいくつか描く。
-		ctx.fillStyle = "red";
-		let cnt = SAI_get_tick_count() * 0.02;
-		unit *= (3 + Math.sin(cnt * 4.0)) * 0.2;
-		let cnt1 = SAI_get_tick_count() * 0.02;
-		let cnt2 = Math.sin(cnt1 * 4.0) * 0.3;
-		let cnt3 = Math.sin(cnt1 * 8.0) * 0.3;
-		ctx.translate(ei * cnt2 * mxy * 0.1, ei * cnt3 * mxy * 0.02);
-		ctx.lineWidth = unit * 0.5;
-		ctx.strokeStyle = "red";
-		SAI_draw_circle(ctx, qx - mxy * 0.1, qy, mxy * 0.08, false);
-		SAI_draw_circle(ctx, qx + mxy * 0.1, qy, mxy * 0.08, false);
-		SAI_draw_circle(ctx, qx, qy - mxy * 0.1, mxy * 0.08, false);
-		SAI_draw_circle(ctx, qx, qy + mxy * 0.1, mxy * 0.08, false);
+		const offsetCW = 0; // 順方向のオフセット（時計回り）
+		const offsetCCW = 4 * Math.PI / S; // 逆方向のオフセット（反時計回り）
+
+		let ctx2 = sai_pic_17_ctx;
+		let i = 0;
+		for (let r = radius; r >= 0; r -= dr){
+			SAI_draw_snake_wheel(ctx2, radius / 2, radius / 2, r, S, counter, (i % 2) ? offsetCW : offsetCCW);
+			++i;
+		}
+
+		// ヘビを描画する。
+		let IX = Math.floor(dx / radius), IY = Math.floor(dy / radius);
+		let m = 0;
+		for (let iy = 0; iy <= IY + 1; ++iy){
+			for (let ix = 0; ix <= IX + 1; ++ix){
+				let x = ix * radius, y = iy * radius;
+				ctx.drawImage(sai_pic_17_canvas, 0, 0, radius, radius, x, y, radius, radius);
+			}
+			++m;
+		}
 
 		// フォーカス矢印を描画する。
 		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 
 		ctx.restore(); // ctx.saveで保存した情報で元に戻す。
-	}
-
-	// 映像「動画17: ヘビの回転」の描画。
-	const SAI_draw_pic_17 = function(ctx, px, py, dx, dy){
-		// 別のキャンバスに普通に描画する。
-		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
-		ctx2.save();
-		let dx3 = dx, dy3 = dy;
-		SAI_draw_pic_17_sub(ctx2, 0, 0, dx3, dy3);
-		ctx2.restore();
-
-		// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
-		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-		ctx.drawImage(sai_id_canvas_02, 0, 0, dx3, dy3, px, py, dx, dy);
-		ctx.globalAlpha = 1; // 元に戻す。
 	}
 
 	const SAI_strained_line = function(ctx, x0, y0, x1, y1){
@@ -3837,7 +3793,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		if (!localStorage.getItem('saiminUserAccepted'))
 			return; // 合意が取れていない場合は何もしない。
 		if (SAI_is_android_native_app()){ // Androidネイティブアプリの場合
-			if (sai_current_page === sai_id_page_main) {
+			if (sai_current_page === sai_id_page_main){
 				if (!sai_stopping){
 					SAI_canvas_click(); // キャンバスクリック。
 				}else{
