@@ -35,7 +35,7 @@ const SAI_on_keydown_message = function(e){
 // ドキュメントの読み込みが完了（DOMContentLoaded）されたら無名関数が呼び出される。
 document.addEventListener('DOMContentLoaded', function(){
 	// 変数を保護するため、関数内部に閉じ込める。
-	const sai_NUM_TYPE = 20; // 「動画」の個数。
+	const sai_NUM_TYPE = 21; // 「動画」の個数。
 	let sai_screen_width = 0; // スクリーンの幅（ピクセル単位）を覚えておく。
 	let sai_screen_height = 0; // スクリーンの高さ（ピクセル単位）を覚えておく。
 	let sai_pic_type = 0; // 映像の種類を表す整数値。
@@ -1202,6 +1202,37 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 「設定」ページに飛ばす。
 		SAI_choose_page(sai_id_page_config);
 	}
+
+		/**
+		 * 点列を結んで折れ線パスを作成します。
+		 *
+		 * 注意: この関数はパスを作るだけで ctx.beginPath()/ctx.stroke()/ctx.fill() は行いません。
+		 * 呼び出し元で beginPath() を呼び、必要に応じて stroke() / fill() を行ってください。
+		 *
+		 * @param {CanvasRenderingContext2D} ctx - 描画先の 2D コンテキスト
+		 * @param {Array<{x:number,y:number}>} points - 頂点配列（各要素は {x, y}）
+		 * @param {boolean} [reverse=false] - true の場合は点列を逆順にたどる（パスの開始点は逆順での最初の点となる）
+		 */
+		const SAI_draw_polygon = (ctx, points, reverse = false) => {
+			if (reverse) { // 逆順？
+				let i = points.length;
+				while (--i >= 0) {
+					let pt = points[i];
+					if (i == 0)
+						ctx.moveTo(pt.x, pt.y);
+					else
+						ctx.lineTo(pt.x, pt.y);
+				}
+			} else {
+				for (let i = 0; i < points.length; ++i) {
+					let pt = points[i];
+					if (i == 0)
+						ctx.moveTo(pt.x, pt.y);
+					else
+						ctx.lineTo(pt.x, pt.y);
+				}
+			}
+		};
 
 	// 円の描画。
 	const SAI_draw_circle = function(ctx, x, y, radius, is_fill = true){
@@ -3121,6 +3152,147 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	}
 
+	const SAI_draw_pic_20_sub_sub = (ctx, px, py, dx, dy, flag) => {
+		// 画面の大きさを考慮する。
+		let minxy = Math.min(dx, dy), maxxy = Math.max(dx, dy);
+
+		const a = 10, b = 0.5, delta_theta = 0.2, count = 8;
+		const rotation = SAI_get_tick_count_2() * (flag ? -1 : 1) * 0.004;
+		const foreColor = SAI_color_get_2nd(), bgColor = SAI_color_get_1st();
+
+		ctx.save();
+
+		// 背景を塗りつぶす
+		ctx.beginPath();
+		ctx.fillStyle = bgColor;
+		ctx.fillRect(px, py, dx, dy);
+
+		// 中心点に座標変換する
+		let cx = px + dx / 2, cy = py + dy / 2;
+		ctx.translate(cx, cy);
+
+		// 対数らせんの曲線を線分で近似し頂点を配列に格納する。
+		let points = []
+		if (flag) {
+			for (let theta = 0; ; theta += delta_theta) {
+				// 公式通り計算する
+				let r = a * Math.exp(b * theta);
+				if (r >= maxxy * Math.sqrt(2)) {
+					break; // 半径が大きすぎる場合は打ち切る
+				}
+				// 頂点を計算する
+				let x0 = r * Math.cos(-theta + rotation), y0 = r * Math.sin(-theta + rotation);
+				points.push({x: x0, y: y0});
+			}
+		}else{
+			for (let theta = 0; ; theta += delta_theta) {
+				// 公式通り計算する
+				let r = a * Math.exp(b * theta);
+				if (r >= maxxy * Math.sqrt(2)) {
+					break; // 半径が大きすぎる場合は打ち切る
+				}
+				// 頂点を計算する
+				let x0 = r * Math.cos(theta + rotation), y0 = r * Math.sin(theta + rotation);
+				points.push({x: x0, y: y0});
+			}
+		}
+
+		// 実際にポリゴンを描く
+		ctx.fillStyle = foreColor;
+		ctx.strokeStyle = "white";
+		ctx.lineWidth = minxy * 0.005;
+		ctx.beginPath();
+		const delta_angle = (2 * Math.PI) / count / 2;
+		for (let i = 0; i < count; ++i) {
+			let angle = (i / count) * (2 * Math.PI);
+			ctx.save();
+			ctx.beginPath();
+			ctx.rotate(angle);
+			SAI_draw_polygon(ctx, points, false); // 正順
+			ctx.rotate(delta_angle);
+			SAI_draw_polygon(ctx, points, true); // 逆順
+			ctx.closePath();
+			ctx.fill();
+			ctx.stroke();
+			ctx.restore();
+		}
+
+		ctx.restore();
+	}
+
+	// 映像「動画20: フレイザー錯視」の描画。
+	const SAI_draw_pic_20_sub = (ctx, px, py, dx, dy) => {
+		ctx.save();
+
+		// クリッピングする
+		ctx.beginPath();
+		ctx.rect(px, py, dx, dy);
+		ctx.clip();
+
+		// 画面の大きさを考慮する。
+		let minxy = Math.min(dx, dy), maxxy = Math.max(dx, dy);
+
+		// 中心点に座標変換する
+		let cx = px + dx / 2, cy = py + dy / 2;
+
+		const num = 10;
+
+		ctx.save();
+		ctx.beginPath();
+		for (let i = 0; i < num; i += 2) {
+			ctx.arc(cx, cy, maxxy * i / num, 0, 2 * Math.PI, true);
+			ctx.arc(cx, cy, maxxy * (i + 1) / num, 0, 2 * Math.PI, false);
+		}
+		ctx.clip();
+		SAI_draw_pic_20_sub_sub(ctx, px, py, dx, dy, false);
+		ctx.restore();
+
+		ctx.save();
+		ctx.beginPath();
+		for (let i = 1; i < num; i += 2) {
+			ctx.arc(cx, cy, maxxy * i / num, 0, 2 * Math.PI, false);
+			ctx.arc(cx, cy, maxxy * (i + 1) / num, 0, 2 * Math.PI, true);
+		}
+		ctx.clip();
+		SAI_draw_pic_20_sub_sub(ctx, px, py, dx, dy, true);
+		ctx.restore();
+
+		ctx.strokeStyle = "white";
+		ctx.lineWidth = minxy * 0.01;
+		for (let i = 1; i < num; ++i) {
+			ctx.beginPath();
+			ctx.arc(cx, cy, maxxy * i / num, 0, 2 * Math.PI);
+			ctx.stroke();
+		}
+
+		ctx.restore();
+	};
+
+	// 映像「動画20: フレイザー錯視」の描画。
+	const SAI_draw_pic_20 = (ctx, px, py, dx, dy) => {
+		// 別のキャンバスに普通に描画する。
+		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		ctx2.save();
+		let dx2 = dx / 2, dy2 = dy / 2;
+		SAI_draw_pic_20_sub(ctx2, 0, 0, dx2, dy2);
+		ctx2.restore();
+
+		if(0){ // この映像についてはモーションブラーを適用しない。
+			// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
+			ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
+			ctx.drawImage(sai_id_canvas_02, 0, 0, dx2, dy2, px, py, dx, dy);
+			ctx.globalAlpha = 1; // 元に戻す。
+		}else{
+			ctx.drawImage(sai_id_canvas_02, 0, 0, dx2, dy2, px, py, dx, dy);
+		}
+
+		// 画面中央の座標を計算する。
+		let qx = px + dx / 2, qy = py + dy / 2;
+		// フォーカス矢印を描画する。
+		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
+
+	}
+
 	// カウントダウン映像の描画。
 	const SAI_draw_pic_count_down = function(ctx, px, py, dx, dy){
 		ctx.save(); // 現在の座標系やクリッピングなどを保存する。
@@ -3250,6 +3422,9 @@ document.addEventListener('DOMContentLoaded', function(){
 			break;
 		case 19:
 			SAI_draw_pic_19(ctx, px, py, dx, dy);
+			break;
+		case 20:
+			SAI_draw_pic_20(ctx, px, py, dx, dy);
 			break;
 		}
 	}
