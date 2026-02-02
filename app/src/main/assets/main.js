@@ -3268,7 +3268,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore();
 	};
 
-	// 映像「動画20: フレイザー錯視」の描画。
+	// 映像「動画20: 二重らせん」の描画。
 	const SAI_draw_pic_20 = (ctx, px, py, dx, dy) => {
 		// 別のキャンバスに普通に描画する。
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
