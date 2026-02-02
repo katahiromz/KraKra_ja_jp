@@ -3157,7 +3157,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let minxy = Math.min(dx, dy), maxxy = Math.max(dx, dy);
 
 		const a = 10, b = 0.5, delta_theta = 0.2, count = 8;
-		const rotation = SAI_get_tick_count_2() * (flag ? -1 : 1) * 0.004;
+		const rotation = SAI_get_tick_count_2() * (flag ? -1 : 1) * minxy * 0.00002;
 		const foreColor = SAI_color_get_2nd(), bgColor = SAI_color_get_1st();
 
 		ctx.save();
@@ -3199,8 +3199,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 実際にポリゴンを描く
 		ctx.fillStyle = foreColor;
-		ctx.strokeStyle = "white";
-		ctx.lineWidth = minxy * 0.005;
 		ctx.beginPath();
 		const delta_angle = (2 * Math.PI) / count / 2;
 		for (let i = 0; i < count; ++i) {
@@ -3213,14 +3211,13 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_draw_polygon(ctx, points, true); // 逆順
 			ctx.closePath();
 			ctx.fill();
-			ctx.stroke();
 			ctx.restore();
 		}
 
 		ctx.restore();
 	}
 
-	// 映像「動画20: フレイザー錯視」の描画。
+	// 映像「動画20: 二重らせん」の描画。
 	const SAI_draw_pic_20_sub = (ctx, px, py, dx, dy) => {
 		ctx.save();
 
@@ -3235,7 +3232,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 中心点に座標変換する
 		let cx = px + dx / 2, cy = py + dy / 2;
 
-		const num = 10;
+		const num = 16;
 
 		ctx.save();
 		ctx.beginPath();
@@ -3256,14 +3253,6 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.clip();
 		SAI_draw_pic_20_sub_sub(ctx, px, py, dx, dy, true);
 		ctx.restore();
-
-		ctx.strokeStyle = "white";
-		ctx.lineWidth = minxy * 0.01;
-		for (let i = 1; i < num; ++i) {
-			ctx.beginPath();
-			ctx.arc(cx, cy, maxxy * i / num, 0, 2 * Math.PI);
-			ctx.stroke();
-		}
 
 		ctx.restore();
 	};
