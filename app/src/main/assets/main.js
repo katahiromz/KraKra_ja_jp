@@ -3522,7 +3522,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// ローカルストレージに音声の名前があれば読み込む。
 		let saiminSoundName = localStorage.getItem('saiminSoundName');
-		if(saiminSoundName){
+		if(saiminSoundName || saiminSoundName === ''){
 			SAI_sound_set_name(saiminSoundName);
 		}else{
 			SAI_sound_set_name('Magic');
