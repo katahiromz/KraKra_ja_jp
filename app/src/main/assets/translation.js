@@ -839,7 +839,7 @@ We provide real entertainment where you can enjoy hypnotic images and sounds.
 - The 'gear' button will open Configuration.
 - When you run your finger on the screen, the screen sparks to attract their attention.
 
-Copyright (c) 2022-2025 Katayama Hirofumi MZ
+Copyright (c) 2022-2026 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
 Copyright (c) 2021 Nenad Markuš
@@ -892,7 +892,7 @@ Hypnosis KraKra
 - '기어' 버튼으로 일반 설정을 할 수 있습니다.
 - 화면을 손가락으로 추적하면 반짝임이 표시되어 상대방의 주의를 끌 수 있습니다.
 
-Copyright (c) 2022-2025 Katayama Hirofumi MZ
+Copyright (c) 2022-2026 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
 Copyright (c) 2021 Nenad Markuš
@@ -944,7 +944,7 @@ Hypnosis KraKra
 - 「歯車」ボタンで全般設定ができます。
 - 画面を指でなぞると、きらめきが表示され、相手の注意を引くことができます。
 
-Copyright (c) 2022-2025 Katayama Hirofumi MZ
+Copyright (c) 2022-2026 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
 Copyright (c) 2021 Nenad Markuš
@@ -996,7 +996,7 @@ Hypnosis KraKra
 - “齿轮”按钮将打开配置。
 - 当你的手指在屏幕上运行时，屏幕会产生火花，吸引他们的注意力。
 
-Copyright (c) 2022-2025 片山博文MZ
+Copyright (c) 2022-2026 片山博文MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
 Copyright (c) 2021 Nenad Markuš
@@ -1048,7 +1048,7 @@ Hypnosis KraKra
 - 用於常規設置的“齒輪”按鈕。
 - 在屏幕上滑動手指即可顯示閃爍的光芒，吸引對手的注意力。
 
-Copyright (c) 2022-2025 片山博文MZ
+Copyright (c) 2022-2026 片山博文MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
 Copyright (c) 2021 Nenad Markuš
@@ -1100,7 +1100,7 @@ Forniamo un vero intrattenimento in cui puoi goderti immagini e suoni ipnotici.
 - Il pulsante "ingranaggio" aprirà Configurazione.
 - Quando fai scorrere il dito sullo schermo, lo schermo si illumina per attirare la loro attenzione.
 
-Copyright (c) 2022-2025 Katayama Hirofumi MZ
+Copyright (c) 2022-2026 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
 Copyright (c) 2021 Nenad Markuš
@@ -1152,7 +1152,7 @@ Wir bieten echte Unterhaltung, bei der Sie hypnotische Bilder und Töne genieße
 - Die Schaltfläche „Zahnrad“ öffnet die Konfiguration.
 - Wenn Sie mit dem Finger über den Bildschirm fahren, erzeugt der Bildschirm Funken, um ihre Aufmerksamkeit zu erregen.
 
-Copyright (c) 2022-2025 Katayama Hirofumi MZ
+Copyright (c) 2022-2026 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
 Copyright (c) 2021 Nenad Markuš
@@ -1204,7 +1204,7 @@ Brindamos entretenimiento real donde podrás disfrutar de imágenes y sonidos hi
 - Los ajustes generales se pueden realizar utilizando el botón "engranaje".
 - Pasa el dedo por la pantalla y aparecerá un brillo para atraer la atención de la otra persona.
 
-Copyright (c) 2022-2025 Katayama Hirofumi MZ
+Copyright (c) 2022-2026 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
 Copyright (c) 2021 Nenad Markuš
@@ -1256,7 +1256,7 @@ Hypnosis KraKra
 - Общие настройки можно произвести с помощью кнопки «шестеренка».
 - Проведите пальцем по экрану, и появится искорка, привлекающая внимание собеседника.
 
-Copyright (c) 2022-2025 Katayama Hirofumi MZ
+Copyright (c) 2022-2026 Katayama Hirofumi MZ
 Copyright (c) 2023 Murayama Akira
 Copyright (c) 2023 TT
 Copyright (c) 2021 Nenad Markuš
@@ -1339,7 +1339,7 @@ trans_trans = {
 		'TEXT_PIC_17': '動画 17：ヘビの回転',
 		'TEXT_PIC_18': '動画 18：ひずみ放射',
 		'TEXT_PIC_19': '動画 19：ランダムな波',
-		'TEXT_PIC_20': '動画 20：二重らせん',
+		'TEXT_PIC_20': '動画 20：二重スパイラル',
 		'TEXT_SPLIT': '画面分割:',
 		'TEXT_SPEED': 'スピード:',
 		'TEXT_ROTATION': '逆再生:',
@@ -1765,7 +1765,7 @@ trans_trans = {
 		'TEXT_PIC_17': '동영상 17：뱀 회전',
 		'TEXT_PIC_18': '동영상 18：스트레인 방사',
 		'TEXT_PIC_19': '동영상 19：무작위 파동',
-		'TEXT_PIC_20': '동영상 20：이중 나선',
+		'TEXT_PIC_20': '동영상 20：이중 나선형',
 		'TEXT_SPLIT': '화면 분할:',
 		'TEXT_SPEED': '속도:',
 		'TEXT_ROTATION': '역 재생:',
@@ -1907,7 +1907,7 @@ trans_trans = {
 		'TEXT_PIC_17': 'Film 17: Serpente rotante',
 		'TEXT_PIC_18': 'Film 18: Radiazione di distorsione',
 		'TEXT_PIC_19': 'Film 19：Onde Casuali',
-		'TEXT_PIC_20': 'Film 20：Doppia elica',
+		'TEXT_PIC_20': 'Film 20：Doppia spirale',
 		'TEXT_SPLIT': 'Divisione dello schermo:',
 		'TEXT_SPEED': 'Velocità:',
 		'TEXT_ROTATION': 'Riproduzione inversa:',
@@ -2049,7 +2049,7 @@ trans_trans = {
 		'TEXT_PIC_17': 'Film 17: Rotierende Schlange',
 		'TEXT_PIC_18': 'Film 18: Verzerrungsstrahlung',
 		'TEXT_PIC_19': 'Film 19：Zufällige Wellen',
-		'TEXT_PIC_20': 'Film 20：Doppelhelix',
+		'TEXT_PIC_20': 'Film 20：Doppelspirale',
 		'TEXT_SPLIT': 'Bildschirmaufteilung:',
 		'TEXT_SPEED': 'Geschwindigkeit:',
 		'TEXT_ROTATION': 'Rückwärtswiedergabe:',
@@ -2191,7 +2191,7 @@ trans_trans = {
 		'TEXT_PIC_17': 'Película 17: Serpiente giratoria',
 		'TEXT_PIC_18': 'Película 18: Radiación de distorsión',
 		'TEXT_PIC_19': 'Película 19：Ondas Aleatorias',
-		'TEXT_PIC_20': 'Película 20：Doble hélice',
+		'TEXT_PIC_20': 'Película 20：Doble espiral',
 		'TEXT_SPLIT': 'Pantalla dividida:',
 		'TEXT_SPEED': 'Velocidad:',
 		'TEXT_ROTATION': 'Reproducción inversa:',
@@ -2475,7 +2475,7 @@ trans_trans = {
 		'TEXT_PIC_17': 'Movie 17: Rotating snake',
 		'TEXT_PIC_18': 'Movie 18: Distortion Radiation',
 		'TEXT_PIC_19': 'Movie 19：Random Waves',
-		'TEXT_PIC_20': 'Movie 20：Double helix',
+		'TEXT_PIC_20': 'Movie 20：Double Spiral',
 		'TEXT_SPLIT': 'Screen splitting:',
 		'TEXT_SPEED': 'Speed:',
 		'TEXT_ROTATION': 'Reverse playback:',

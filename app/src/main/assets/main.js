@@ -1,7 +1,7 @@
 // 催眠アプリ「催眠くらくら」のJavaScriptのメインコード。
 // 暗号名はKraKra。
 
-const sai_VERSION = '3.8.9'; // KraKraバージョン番号。
+const sai_VERSION = '3.9.0'; // KraKraバージョン番号。
 const sai_DEBUGGING = false; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
 let sai_vibrating = false; // 振動中か？
@@ -3152,6 +3152,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	}
 
+	// 映像「動画20: 二重スパイラル」の描画。
 	const SAI_draw_pic_20_sub_sub = (ctx, px, py, dx, dy, flag) => {
 		// 画面の大きさを考慮する。
 		let minxy = Math.min(dx, dy), maxxy = Math.max(dx, dy);
@@ -3217,7 +3218,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		ctx.restore();
 	}
 
-	// 映像「動画20: 二重らせん」の描画。
+	// 映像「動画20: 二重スパイラル」の描画。
 	const SAI_draw_pic_20_sub = (ctx, px, py, dx, dy) => {
 		ctx.save();
 
@@ -3233,12 +3234,20 @@ document.addEventListener('DOMContentLoaded', function(){
 		let cx = px + dx / 2, cy = py + dy / 2;
 
 		const num = 16;
+		const r = maxxy * 1 / num;
+		const counter = SAI_get_tick_count();
+		const shift_radius = (Math.sin(counter * 0.13) * r) - r;
+
+		const adjust = (x) => {
+			return x < 0 ? 0.001 : x;
+		}
 
 		ctx.save();
 		ctx.beginPath();
+		ctx.arc(cx, cy, 1, 0, 2 * Math.PI, false);
 		for (let i = 0; i < num; i += 2) {
-			ctx.arc(cx, cy, maxxy * i / num, 0, 2 * Math.PI, true);
-			ctx.arc(cx, cy, maxxy * (i + 1) / num, 0, 2 * Math.PI, false);
+			ctx.arc(cx, cy, adjust(shift_radius + maxxy * i / num), 0, 2 * Math.PI, true);
+			ctx.arc(cx, cy, adjust(shift_radius + maxxy * (i + 1) / num), 0, 2 * Math.PI, false);
 		}
 		ctx.clip();
 		SAI_draw_pic_20_sub_sub(ctx, px, py, dx, dy, false);
@@ -3246,18 +3255,25 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		ctx.save();
 		ctx.beginPath();
+		ctx.arc(cx, cy, 1, 0, 2 * Math.PI, true);
 		for (let i = 1; i < num; i += 2) {
-			ctx.arc(cx, cy, maxxy * i / num, 0, 2 * Math.PI, false);
-			ctx.arc(cx, cy, maxxy * (i + 1) / num, 0, 2 * Math.PI, true);
+			ctx.arc(cx, cy, adjust(shift_radius + maxxy * i / num), 0, 2 * Math.PI, false);
+			ctx.arc(cx, cy, adjust(shift_radius + maxxy * (i + 1) / num), 0, 2 * Math.PI, true);
 		}
 		ctx.clip();
 		SAI_draw_pic_20_sub_sub(ctx, px, py, dx, dy, true);
 		ctx.restore();
 
+		// 画像を使って目玉を描く
+		const ex = cx + minxy * Math.cos(counter * 0.1) * 0.05;
+		const ey = cy + minxy * Math.sin(counter * 0.1) * 0.05;
+		const size = maxxy * 0.007 * (4 + Math.cos(counter * 0.03));
+		SAI_draw_eye(ctx, ex, ey, size);
+
 		ctx.restore();
 	};
 
-	// 映像「動画20: 二重らせん」の描画。
+	// 映像「動画20: 二重スパイラル」の描画。
 	const SAI_draw_pic_20 = (ctx, px, py, dx, dy) => {
 		// 別のキャンバスに普通に描画する。
 		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
@@ -3279,7 +3295,6 @@ document.addEventListener('DOMContentLoaded', function(){
 		let qx = px + dx / 2, qy = py + dy / 2;
 		// フォーカス矢印を描画する。
 		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
-
 	}
 
 	// カウントダウン映像の描画。
