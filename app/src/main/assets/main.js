@@ -1,7 +1,7 @@
 // 催眠アプリ「催眠くらくら」のJavaScriptのメインコード。
 // 暗号名はKraKra。
 
-const sai_VERSION = '3.9.1'; // KraKraバージョン番号。
+const sai_VERSION = '3.9.2'; // KraKraバージョン番号。
 const sai_DEBUGGING = false; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
 let sai_vibrating = false; // 振動中か？
@@ -3236,32 +3236,33 @@ document.addEventListener('DOMContentLoaded', function(){
 		const num = 16;
 		const r = maxxy * 1 / num;
 		const counter = SAI_get_tick_count();
-		const shift_radius = -2 * ((counter * 0.8) % r);
-
-		const adjust = (x) => {
-			return x < 0 ? 0.001 : x;
-		}
+		const factor = 2;
+		const shift_radius = SAI_mod(factor * counter, r);
+		const flag2 = SAI_mod(factor * counter, 2*r) < r;
+		const adjust = (x) => { return x < 0 ? 0 : x; };
 
 		ctx.save();
+		// 同心円状にクリップする
 		ctx.beginPath();
-		ctx.arc(cx, cy, 1, 0, 2 * Math.PI, false);
+		for (let i = -1; i < num; i += 2) {
+			ctx.arc(cx, cy, adjust(shift_radius + maxxy * i / num), 0, 2 * Math.PI, false);
+			ctx.arc(cx, cy, adjust(shift_radius + maxxy * (i + 1) / num), 0, 2 * Math.PI, true);
+		}
+		ctx.clip();
+		// らせんを描画
+		SAI_draw_pic_20_sub_sub(ctx, px, py, dx, dy, flag2);
+		ctx.restore();
+
+		ctx.save();
+		// 同心円状にクリップする
+		ctx.beginPath();
 		for (let i = 0; i < num; i += 2) {
 			ctx.arc(cx, cy, adjust(shift_radius + maxxy * i / num), 0, 2 * Math.PI, true);
 			ctx.arc(cx, cy, adjust(shift_radius + maxxy * (i + 1) / num), 0, 2 * Math.PI, false);
 		}
 		ctx.clip();
-		SAI_draw_pic_20_sub_sub(ctx, px, py, dx, dy, false);
-		ctx.restore();
-
-		ctx.save();
-		ctx.beginPath();
-		ctx.arc(cx, cy, 1, 0, 2 * Math.PI, true);
-		for (let i = 1; i < num; i += 2) {
-			ctx.arc(cx, cy, adjust(shift_radius + maxxy * i / num), 0, 2 * Math.PI, false);
-			ctx.arc(cx, cy, adjust(shift_radius + maxxy * (i + 1) / num), 0, 2 * Math.PI, true);
-		}
-		ctx.clip();
-		SAI_draw_pic_20_sub_sub(ctx, px, py, dx, dy, true);
+		// らせんを描画(逆向き)
+		SAI_draw_pic_20_sub_sub(ctx, px, py, dx, dy, !flag2);
 		ctx.restore();
 
 		// 画像を使って目玉を描く
