@@ -1,7 +1,7 @@
 // 催眠アプリ「催眠くらくら」のJavaScriptのメインコード。
 // 暗号名はKraKra。
 
-const sai_VERSION = '3.9.0'; // KraKraバージョン番号。
+const sai_VERSION = '3.9.1'; // KraKraバージョン番号。
 const sai_DEBUGGING = false; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
 let sai_vibrating = false; // 振動中か？
@@ -3236,7 +3236,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		const num = 16;
 		const r = maxxy * 1 / num;
 		const counter = SAI_get_tick_count();
-		const shift_radius = (Math.sin(counter * 0.13) * r) - r;
+		const shift_radius = -2 * ((counter * 0.8) % r);
 
 		const adjust = (x) => {
 			return x < 0 ? 0.001 : x;
