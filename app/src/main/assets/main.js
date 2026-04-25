@@ -35,7 +35,7 @@ const SAI_on_keydown_message = function(e){
 // ドキュメントの読み込みが完了（DOMContentLoaded）されたら無名関数が呼び出される。
 document.addEventListener('DOMContentLoaded', function(){
 	// 変数を保護するため、関数内部に閉じ込める。
-	const sai_NUM_TYPE = 21; // 「動画」の個数。
+	const sai_NUM_TYPE = 22; // 「動画」の個数。
 	let sai_screen_width = 0; // スクリーンの幅（ピクセル単位）を覚えておく。
 	let sai_screen_height = 0; // スクリーンの高さ（ピクセル単位）を覚えておく。
 	let sai_pic_type = 0; // 映像の種類を表す整数値。
@@ -81,6 +81,8 @@ document.addEventListener('DOMContentLoaded', function(){
 	let sai_kaleido_canvas_2 = null; // 万華鏡用の一時的なキャンバス2。
 	let sai_face_getter = null; // 顔認識。
 	let sai_current_page = null; // 現在のページ。
+	let sai_psychedelic_img = new Image(); // サイケデリック画像。
+	let sai_offscreen_canvas = null; // オフスクリーンキャンバス。
 
 	// Androidか？
 	const SAI_is_android_app = function(){
@@ -3296,7 +3298,71 @@ document.addEventListener('DOMContentLoaded', function(){
 		let qx = px + dx / 2, qy = py + dy / 2;
 		// フォーカス矢印を描画する。
 		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
-	}
+	};
+
+	// 映像「動画21: サイケデリック タイダイ」の描画。
+	const SAI_draw_pic_21 = (ctx, px, py, dx, dy) => {
+		ctx.save();
+
+		// クリッピングする
+		ctx.beginPath();
+		ctx.rect(px, py, dx, dy);
+		ctx.clip();
+
+		// 背景をクリア
+		ctx.clearRect(px, py, dx, dy);
+
+		// 画面の大きさを考慮する。
+		let minxy = Math.min(dx, dy), maxxy = Math.max(dx, dy);
+
+		// 画面の中心
+		let cx = px + dx / 2, cy = px + dy / 2;
+
+		// 映像の進行を司る変数
+		let counter = SAI_get_tick_count() * 1;
+
+		const ci = 16;
+		let img = sai_psychedelic_img;
+		if (img.complete) {
+			// 画像側の三角形
+			let tri2 = [
+				[img.width, 0],
+				[0, img.height],
+				[img.width, img.height],
+			];
+
+			// オフスクリーンキャンバスを用意する
+			if (!sai_offscreen_canvas ||
+				sai_offscreen_canvas.width < img.width ||
+				sai_offscreen_canvas.height < img.height)
+			{
+				sai_offscreen_canvas = new OffscreenCanvas(img.width, img.height);
+			}
+
+			// オフスクリーンキャンバスに画像を少しずらして描画する。
+			let ctx2 = sai_offscreen_canvas.getContext('2d', { alpha: false });
+			let offset = 4 * counter + 8 * Math.sin(counter);
+			ctx2.save();
+			ctx2.drawImage(img, 0, (offset % img.height) - img.height);
+			ctx2.drawImage(img, 0, (offset % img.height));
+			ctx2.restore();
+
+			// アフィン変換を使って三角形群を転送する。
+			let angle_base = counter * 0.05;
+			for (let i = 0; i < ci; ++i) {
+				let angle0 = angle_base + (i / ci) * 2 * Math.PI;
+				let angle1 = angle_base + ((i + 1) / ci) * 2 * Math.PI;
+				let tri1 = [
+					[cx, cy],
+					[cx + maxxy * Math.cos(angle0), cy + maxxy * Math.sin(angle0)],
+					[cx + maxxy * Math.cos(angle1), cy + maxxy * Math.sin(angle1)],
+				];
+				transferWithAffineTransform(ctx, tri1, ctx2, tri2);
+			}
+		}
+
+		ctx.restore();
+	};
 
 	// カウントダウン映像の描画。
 	const SAI_draw_pic_count_down = function(ctx, px, py, dx, dy){
@@ -3430,6 +3496,9 @@ document.addEventListener('DOMContentLoaded', function(){
 			break;
 		case 20:
 			SAI_draw_pic_20(ctx, px, py, dx, dy);
+			break;
+		case 21:
+			SAI_draw_pic_21(ctx, px, py, dx, dy);
 			break;
 		}
 	}
@@ -4714,8 +4783,11 @@ document.addEventListener('DOMContentLoaded', function(){
 			sai_spiral_img.src = 'img/spiral.svg';
 
 		// 両目の画像を読み込む。
-		sai_eye_left_img.src = 'img/eye-left.png'
-		sai_eye_right_img.src = 'img/eye-right.png'
+		sai_eye_left_img.src = 'img/eye-left.png';
+		sai_eye_right_img.src = 'img/eye-right.png';
+
+		// サイケデリック画像を読み込む。
+		sai_psychedelic_img.src = 'img/psychedelic.png';
 
 		// 設定をローカルストレージから読み込む。
 		SAI_load_local_storage();
