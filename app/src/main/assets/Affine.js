@@ -48,10 +48,10 @@ const getAffineTransform = (srcTri, destTri) => {
  * アフィン変換を伴うイメージ転送。
  * @param ctx 描画先のコンテキスト。
  * @param tri 転送先の三角形。
- * @param ctxSrc 描画元のコンテキスト。
+ * @param src 描画元のキャンバスまたはイメージ。
  * @param triSrc 転送元の三角形。
  */
-const transferWithAffineTransform = (ctx, tri, ctxSrc, triSrc) => {
+const transferWithAffineTransform = (ctx, tri, src, triSrc) => {
   // アフィン変換を計算
   const t = getAffineTransform(triSrc, tri);
   if (!t) return; // 無効な変換
@@ -71,7 +71,7 @@ const transferWithAffineTransform = (ctx, tri, ctxSrc, triSrc) => {
   ctx.setTransform(t[0], t[3], t[1], t[4], t[2], t[5]);
 
   // イメージを転送
-  ctx.drawImage(ctxSrc.canvas, 0, 0);
+  ctx.drawImage(src, 0, 0);
 
   // クリッピング状態を復元
   ctx.restore();

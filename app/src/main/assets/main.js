@@ -84,6 +84,17 @@ document.addEventListener('DOMContentLoaded', function(){
 	let sai_psychedelic_img = new Image(); // サイケデリック画像。
 	let sai_offscreen_canvas = null; // オフスクリーンキャンバス。
 
+	// オフスクリーンキャンバスを取得する。
+	const SAI_get_offscreen_canvas = (width, height) => {
+		if (!sai_offscreen_canvas ||
+			sai_offscreen_canvas.width < width ||
+			sai_offscreen_canvas.height < height)
+		{
+			sai_offscreen_canvas = new OffscreenCanvas(width, height);
+		}
+		return sai_offscreen_canvas;
+	};
+
 	// Androidか？
 	const SAI_is_android_app = function(){
 		return navigator.userAgent.indexOf('Android') != -1;
@@ -1109,8 +1120,8 @@ document.addEventListener('DOMContentLoaded', function(){
 	// スクリーンのサイズをセットする。必要ならキャンバスのサイズも変更する。
 	const SAI_screen_fit_canvas = function(){
 		console.log('SAI_screen_fit_canvas');
-		sai_screen_width = sai_id_canvas_01.width = sai_id_canvas_02.width = window.innerWidth;
-		sai_screen_height = sai_id_canvas_01.height = sai_id_canvas_02.height = window.innerHeight;
+		sai_screen_width = sai_id_canvas_01.width = window.innerWidth;
+		sai_screen_height = sai_id_canvas_01.height = window.innerHeight;
 		// 万華鏡の半径。
 		sai_kaleido_radius = (sai_screen_width + sai_screen_height) * 0.1;
 	}
@@ -1649,14 +1660,14 @@ document.addEventListener('DOMContentLoaded', function(){
 	// pic1: Logarithmic Spiral
 	const SAI_draw_pic_01 = function(ctx, px, py, dx, dy){
 		// 別のキャンバスに普通に描画する。
-		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		let ctx2 = SAI_get_offscreen_canvas(dx, dy).getContext('2d', { alpha: false });
 		ctx2.save();
 		SAI_draw_pic_1_sub(ctx2, 0, 0, dx, dy);
 		ctx2.restore();
 
 		// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
+		ctx.drawImage(ctx2.canvas, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 
 		// フォーカス矢印を描画する。
@@ -1732,7 +1743,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	// pic2: Concentric Circles
 	const SAI_draw_pic_02 = function(ctx, px, py, dx, dy){
 		// 別のキャンバスに描画する。必要に応じてクリッピングを掛ける。
-		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		let ctx2 = SAI_get_offscreen_canvas(dx, dy).getContext('2d', { alpha: false });
 		ctx2.save();
 		SAI_draw_pic_2_sub(ctx2, 0, 0, dx, dy, true); // 外側を描画。
 		SAI_draw_pic_2_sub(ctx2, 0, 0, dx, dy, false); // 内側を描画。
@@ -1740,7 +1751,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
+		ctx.drawImage(ctx2.canvas, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 
 		// フォーカス矢印を描画する。
@@ -1885,14 +1896,14 @@ document.addEventListener('DOMContentLoaded', function(){
 	// pic3: The Eyes
 	const SAI_draw_pic_03 = function(ctx, px, py, dx, dy){
 		// 別のキャンバスに普通に描画する。
-		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		let ctx2 = SAI_get_offscreen_canvas(dx, dy).getContext('2d', { alpha: false });
 		ctx2.save();
 		SAI_draw_pic_03_sub(ctx2, 0, 0, dx, dy);
 		ctx2.restore();
 
 		// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
+		ctx.drawImage(ctx2.canvas, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 
 		// フォーカス矢印を描画する。
@@ -1979,7 +1990,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	// pic4: Archimedes' Spiral
 	const SAI_draw_pic_04 = function(ctx, px, py, dx, dy){
 		// 別のキャンバスに普通に描画する。
-		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		let ctx2 = SAI_get_offscreen_canvas(dx, dy).getContext('2d', { alpha: false });
 		ctx2.save();
 		let shrink = 0.75;
 		SAI_draw_pic_04_sub(ctx2, 0, 0, dx * shrink, dy * shrink);
@@ -1987,7 +1998,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-		ctx.drawImage(sai_id_canvas_02, 0, 0, dx * shrink, dy * shrink, px, py, dx, dy);
+		ctx.drawImage(ctx2.canvas, 0, 0, dx * shrink, dy * shrink, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 
 		// フォーカス矢印を描画する。
@@ -2192,14 +2203,14 @@ document.addEventListener('DOMContentLoaded', function(){
 	// pic6: 5-yen coin
 	const SAI_draw_pic_06 = function(ctx, px, py, dx, dy){
 		// 別のキャンバスに普通に描画する。
-		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		let ctx2 = SAI_get_offscreen_canvas(dx, dy).getContext('2d', { alpha: false });
 		ctx2.save();
 		SAI_draw_pic_06_sub(ctx2, 0, 0, dx, dy);
 		ctx2.restore();
 
 		// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
+		ctx.drawImage(ctx2.canvas, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 
 		// コインの位置を計算する。
@@ -2336,14 +2347,14 @@ document.addEventListener('DOMContentLoaded', function(){
 	// pic7: Strange Swirl
 	const SAI_draw_pic_07 = function(ctx, px, py, dx, dy){
 		// 別のキャンバスに普通に描画する。
-		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		let ctx2 = SAI_get_offscreen_canvas(dx, dy).getContext('2d', { alpha: false });
 		ctx2.save();
 		SAI_draw_pic_07_sub(ctx2, 0, 0, dx, dy);
 		ctx2.restore();
 
 		// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
+		ctx.drawImage(ctx2.canvas, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 
 		// フォーカス矢印を描画する。
@@ -2512,14 +2523,14 @@ document.addEventListener('DOMContentLoaded', function(){
 	// pic9: Logarithmic Spiral 2
 	const SAI_draw_pic_09 = function(ctx, px, py, dx, dy){
 		// 別のキャンバスに普通に描画する。
-		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		let ctx2 = SAI_get_offscreen_canvas(dx, dy).getContext('2d', { alpha: false });
 		ctx2.save();
 		SAI_draw_pic_09_sub(ctx2, 0, 0, dx, dy);
 		ctx2.restore();
 
 		// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
+		ctx.drawImage(ctx2.canvas, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 
 		// フォーカス矢印を描画する。
@@ -2574,14 +2585,14 @@ document.addEventListener('DOMContentLoaded', function(){
 	// pic10: Analog Disc
 	const SAI_draw_pic_10 = function(ctx, px, py, dx, dy){
 		// 別のキャンバスに普通に描画する。
-		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		let ctx2 = SAI_get_offscreen_canvas(dx, dy).getContext('2d', { alpha: false });
 		ctx2.save();
 		SAI_draw_pic_10_sub(ctx2, 0, 0, dx, dy);
 		ctx2.restore();
 
 		// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
+		ctx.drawImage(ctx2.canvas, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 
 		// フォーカス矢印を描画する。
@@ -2671,14 +2682,14 @@ document.addEventListener('DOMContentLoaded', function(){
 	// pic11: Strange Swirl 2
 	const SAI_draw_pic_11 = function(ctx, px, py, dx, dy){
 		// 別のキャンバスに普通に描画する。
-		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		let ctx2 = SAI_get_offscreen_canvas(dx, dy).getContext('2d', { alpha: false });
 		ctx2.save();
 		SAI_draw_pic_11_sub(ctx2, 0, 0, dx, dy);
 		ctx2.restore();
 
 		// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
+		ctx.drawImage(ctx2.canvas, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 
 		// フォーカス矢印を描画する。
@@ -2833,14 +2844,14 @@ document.addEventListener('DOMContentLoaded', function(){
 	// pic12: Kaleidoscope
 	const SAI_draw_pic_12 = function(ctx, px, py, dx, dy){
 		// 別のキャンバスに普通に描画する。
-		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		let ctx2 = SAI_get_offscreen_canvas(dx, dy).getContext('2d', { alpha: false });
 		ctx2.save();
 		SAI_draw_pic_12_sub(ctx2, 0, 0, dx, dy);
 		ctx2.restore();
 
 		// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-		ctx.drawImage(sai_id_canvas_02, 0, 0, dx, dy, px, py, dx, dy);
+		ctx.drawImage(ctx2.canvas, 0, 0, dx, dy, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 
 		// フォーカス矢印を描画する。
@@ -3052,7 +3063,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 映像「動画18: ひずみ放射」の描画。
 	const SAI_draw_pic_18 = function(ctx, px, py, dx, dy){
 		// 別のキャンバスに普通に描画する。
-		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		let ctx2 = SAI_get_offscreen_canvas(dx, dy).getContext('2d', { alpha: false });
 		ctx2.save();
 		let dx3 = dx, dy3 = dy;
 		SAI_draw_pic_18_sub(ctx2, 0, 0, dx3, dy3);
@@ -3060,7 +3071,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
 		ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-		ctx.drawImage(sai_id_canvas_02, 0, 0, dx3, dy3, px, py, dx, dy);
+		ctx.drawImage(ctx2.canvas, 0, 0, dx3, dy3, px, py, dx, dy);
 		ctx.globalAlpha = 1; // 元に戻す。
 	}
 
@@ -3133,7 +3144,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 映像「動画19: ランダムな波」の描画。
 	const SAI_draw_pic_19 = function(ctx, px, py, dx, dy){
 		// 別のキャンバスに普通に描画する。
-		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		let ctx2 = SAI_get_offscreen_canvas(dx, dy).getContext('2d', { alpha: false });
 		ctx2.save();
 		let dx3 = dx / 3, dy3 = dy / 3;
 		SAI_draw_pic_19_sub(ctx2, 0, 0, dx3, dy3);
@@ -3142,10 +3153,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		if(0){ // この映像についてはモーションブラーを適用しない。
 			// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
 			ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-			ctx.drawImage(sai_id_canvas_02, 0, 0, dx3, dy3, px, py, dx, dy);
+			ctx.drawImage(ctx2.canvas, 0, 0, dx3, dy3, px, py, dx, dy);
 			ctx.globalAlpha = 1; // 元に戻す。
 		}else{
-			ctx.drawImage(sai_id_canvas_02, 0, 0, dx3, dy3, px, py, dx, dy);
+			ctx.drawImage(ctx2.canvas, 0, 0, dx3, dy3, px, py, dx, dy);
 		}
 
 		// 画面中央の座標を計算する。
@@ -3279,7 +3290,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	// 映像「動画20: 二重スパイラル」の描画。
 	const SAI_draw_pic_20 = (ctx, px, py, dx, dy) => {
 		// 別のキャンバスに普通に描画する。
-		let ctx2 = sai_id_canvas_02.getContext('2d', { alpha: false });
+		let ctx2 = SAI_get_offscreen_canvas(dx, dy).getContext('2d', { alpha: false });
 		ctx2.save();
 		let dx2 = dx / 2, dy2 = dy / 2;
 		SAI_draw_pic_20_sub(ctx2, 0, 0, dx2, dy2);
@@ -3288,10 +3299,10 @@ document.addEventListener('DOMContentLoaded', function(){
 		if(0){ // この映像についてはモーションブラーを適用しない。
 			// 透明度を適用したイメージを転送する。これでモーションブラーが適用される。
 			ctx.globalAlpha = 1 - sai_id_range_motion_blur.value * 0.1; // モーションブラーを掛ける。
-			ctx.drawImage(sai_id_canvas_02, 0, 0, dx2, dy2, px, py, dx, dy);
+			ctx.drawImage(ctx2.canvas, 0, 0, dx2, dy2, px, py, dx, dy);
 			ctx.globalAlpha = 1; // 元に戻す。
 		}else{
-			ctx.drawImage(sai_id_canvas_02, 0, 0, dx2, dy2, px, py, dx, dy);
+			ctx.drawImage(ctx2.canvas, 0, 0, dx2, dy2, px, py, dx, dy);
 		}
 
 		// 画面中央の座標を計算する。
@@ -3300,7 +3311,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 	};
 
-	// 映像「動画21: サイケデリック タイダイ」の描画。
+	// 映像「動画21: サイケデリックな絞り染め」の描画。
 	const SAI_draw_pic_21 = (ctx, px, py, dx, dy) => {
 		ctx.save();
 
@@ -3331,16 +3342,8 @@ document.addEventListener('DOMContentLoaded', function(){
 				[img.width, img.height],
 			];
 
-			// オフスクリーンキャンバスを用意する
-			if (!sai_offscreen_canvas ||
-				sai_offscreen_canvas.width < img.width ||
-				sai_offscreen_canvas.height < img.height)
-			{
-				sai_offscreen_canvas = new OffscreenCanvas(img.width, img.height);
-			}
-
 			// オフスクリーンキャンバスに画像を少しずらして描画する。
-			let ctx2 = sai_offscreen_canvas.getContext('2d', { alpha: false });
+			let ctx2 = SAI_get_offscreen_canvas(img.width, img.height).getContext('2d', { alpha: false });
 			let offset = 4 * counter + 8 * Math.sin(counter);
 			ctx2.save();
 			ctx2.drawImage(img, 0, (offset % img.height) - img.height);
@@ -3357,7 +3360,7 @@ document.addEventListener('DOMContentLoaded', function(){
 					[qx + maxxy * Math.cos(angle0), qy + maxxy * Math.sin(angle0)],
 					[qx + maxxy * Math.cos(angle1), qy + maxxy * Math.sin(angle1)],
 				];
-				transferWithAffineTransform(ctx, tri1, ctx2, tri2);
+				transferWithAffineTransform(ctx, tri1, ctx2.canvas, tri2);
 			}
 		}
 
