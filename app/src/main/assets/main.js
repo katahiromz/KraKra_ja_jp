@@ -3321,12 +3321,12 @@ document.addEventListener('DOMContentLoaded', function(){
 		// 映像の進行を司る変数
 		let counter = SAI_get_tick_count() * 1;
 
-		const ci = 16;
+		const ci = 12;
 		let img = sai_psychedelic_img;
 		if (img.complete) {
 			// 画像側の三角形
 			let tri2 = [
-				[img.width, 0],
+				[0.5 * img.width + 0.5 * img.width * Math.sin(counter * 0.02), 0],
 				[0, img.height],
 				[img.width, img.height],
 			];
