@@ -3316,7 +3316,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		let minxy = Math.min(dx, dy), maxxy = Math.max(dx, dy);
 
 		// 画面の中心
-		let cx = px + dx / 2, cy = px + dy / 2;
+		let qx = px + dx / 2, qy = px + dy / 2;
 
 		// 映像の進行を司る変数
 		let counter = SAI_get_tick_count() * 1;
@@ -3353,13 +3353,16 @@ document.addEventListener('DOMContentLoaded', function(){
 				let angle0 = angle_base + (i / ci) * 2 * Math.PI;
 				let angle1 = angle_base + ((i + 1) / ci) * 2 * Math.PI;
 				let tri1 = [
-					[cx, cy],
-					[cx + maxxy * Math.cos(angle0), cy + maxxy * Math.sin(angle0)],
-					[cx + maxxy * Math.cos(angle1), cy + maxxy * Math.sin(angle1)],
+					[qx, qy],
+					[qx + maxxy * Math.cos(angle0), qy + maxxy * Math.sin(angle0)],
+					[qx + maxxy * Math.cos(angle1), qy + maxxy * Math.sin(angle1)],
 				];
 				transferWithAffineTransform(ctx, tri1, ctx2, tri2);
 			}
 		}
+
+		// フォーカス矢印を描画する。
+		SAI_draw_focus_arrows(ctx, qx, qy, dx, dy);
 
 		ctx.restore();
 	};
