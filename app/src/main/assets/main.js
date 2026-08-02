@@ -1,7 +1,7 @@
 // 催眠アプリ「催眠くらくら」のJavaScriptのメインコード。
 // 暗号名はKraKra。
 
-const sai_VERSION = '3.9.3'; // KraKraバージョン番号。
+const sai_VERSION = '3.9.4'; // KraKraバージョン番号。
 const sai_DEBUGGING = false; // デバッグ中か？
 let sai_FPS = 0; // 実測フレームレート。
 let sai_vibrating = false; // 振動中か？
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	let sai_pic_type = 0; // 映像の種類を表す整数値。
 	let sai_stopping = true; // 停止中か？
 	let sai_hypnosis_releasing_time = null; // 催眠解除中ならば時刻。さもなければnull。
-	let sai_old_time = (new Date()).getTime(); // 処理フレームの時刻を覚えておく。
+	let sai_old_time = performance.now(); // 処理フレームの時刻を覚えておく。
 	let sai_counter = 0; // 映像を動かす変数。
 	let sai_clock = 0; // スピードが不規則のときに映像の速さを変化させる変数。
 	let sai_message_text = ''; // メッセージテキスト。
@@ -425,7 +425,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	const SAI_is_hypno_released = function(){
 		if(!sai_hypnosis_releasing_time)
 			return false;
-		return ((new Date().getTime()) - sai_hypnosis_releasing_time) >= 3000;
+		return (performance.now() - sai_hypnosis_releasing_time) >= 3000;
 	}
 
 	// KraKraの言語をセットして、UIをローカライズする。
@@ -966,7 +966,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			sai_hypnosis_releasing_time = null;
 			sai_pic_type = value;
 		}else{
-			sai_hypnosis_releasing_time = (new Date()).getTime();
+			sai_hypnosis_releasing_time = performance.now();
 		}
 
 		if(sai_hypnosis_releasing_time){ // 「催眠解除」の場合。
@@ -3388,7 +3388,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		SAI_clip_rect(ctx, px, py, dx, dy);
 
 		if(sai_count_down){ // カウントダウン変数が有効なら
-			let new_time = (new Date()).getTime();
+			let new_time = performance.now();
 			let diff_time = (new_time - sai_count_down) / 1000.0;
 			if(diff_time >= 3){ // 3秒経過したら
 				// カウントダウンを終了する。
@@ -3701,7 +3701,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 
 		// 時間の経過を計算。
-		let new_time = (new Date()).getTime();
+		let new_time = performance.now();
 		let diff_time = (new_time - sai_old_time) / 1000.0;
 		if(sai_rotation_type == 'counter')
 			diff_time = -diff_time;
@@ -4137,7 +4137,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			SAI_show_main_controls(false);
 			// 必要ならカウントダウンを開始する。
 			if(sai_id_checkbox_count_down.checked){
-				sai_count_down = new Date().getTime();
+				sai_count_down = performance.now();
 				// 音声をミュートする。
 				SAI_sound_mute();
 			}else{
@@ -4330,7 +4330,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		// キャンバスのクリック。
 		sai_id_canvas_01.addEventListener('click', function(e){
-			if(!sai_not_click && sai_touch_time && ((new Date()).getTime() - sai_touch_time) < 500)
+			if(!sai_not_click && sai_touch_time && (performance.now() - sai_touch_time) < 500)
 				SAI_canvas_click(e);
 			sai_not_click = false;
 			sai_touch_position = null;
@@ -4350,7 +4350,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			sai_touchmoving = true;
 			sai_not_click = false;
 			sai_touch_position = [e.clientX, e.clientY];
-			sai_touch_time = new Date().getTime();
+			sai_touch_time = performance.now();
 		}, false);
 		// キャンバスでマウスボタンが離された。
 		sai_id_canvas_01.addEventListener('mouseup', function(e){
@@ -4362,7 +4362,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		// キャンバスでタッチ操作。きらめきを表示。
 		sai_id_canvas_01.addEventListener('touchstart', function(e){
 			sai_touchmoving = true;
-			sai_touch_time = new Date().getTime();
+			sai_touch_time = performance.now();
 			let touches = e.touches;
 			if(touches && touches.length == 1){
 				sai_touch_position = [touches[0].clientX, touches[0].clientY];
